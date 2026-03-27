@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pakistan Investment Advisor — Free Analysis for Pakistani Investors</title>
+<meta name="description" content="Free investment analysis for Pakistani investors. Get personalised recommendations for National Savings, Mutual Funds, and PSX stocks based on your budget.">
+
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+
+<style>
+/* ── Reset & Base ───────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:100vh}
+img{max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ── Variables ──────────────────────────────────────────── */
+:root{
+  --green:#1b5e20;--green2:#2e7d32;--green3:#43a047;--green-light:#e8f5e9;
+  --gold:#c8a415;--gold-light:#fffde7;
+  --navy:#0d47a1;--red:#c62828;
+  --bg:#f0f4f0;--card:#fff;--border:#e0e0e0;--muted:#666;
+  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
+.container{max-width:900px;margin:0 auto;padding:0 16px}
+.container-wide{max-width:1100px;margin:0 auto;padding:0 16px}
+
+/* ── Header ─────────────────────────────────────────────── */
+header{background:var(--green);color:#fff;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.1rem;font-weight:700;letter-spacing:-.3px}
+.logo span{color:#a5d6a7}
+.data-age{font-size:.75rem;opacity:.75}
+
+/* ── Progress bar ───────────────────────────────────────── */
+#progress-wrap{background:rgba(255,255,255,.15);height:4px;margin-top:10px}
+#progress-bar{height:4px;background:#a5d6a7;width:20%;transition:width .4s ease}
+
+/* ── Step nav ───────────────────────────────────────────── */
+.step-nav{display:flex;gap:6px;padding:16px 0 0;overflow-x:auto;scrollbar-width:none}
+.step-nav::-webkit-scrollbar{display:none}
+.step-pill{flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;border:2px solid var(--border);background:#fff;color:var(--muted);transition:all .2s}
+.step-pill.active{background:var(--green);color:#fff;border-color:var(--green)}
+.step-pill.done{background:var(--green-light);color:var(--green);border-color:var(--green3)}
+
+/* ── Page sections ──────────────────────────────────────── */
+.page{display:none;animation:fadeUp .35s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Cards ──────────────────────────────────────────────── */
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:16px}
+.card-sm{padding:16px}
+
+/* ── Section headers ────────────────────────────────────── */
+.section-title{font-size:1.4rem;font-weight:700;color:var(--green);margin-bottom:4px}
+.section-sub{color:var(--muted);font-size:.9rem;margin-bottom:20px}
+
+/* ── Input page ─────────────────────────────────────────── */
+.hero{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:40px 0 32px;text-align:center}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:10px}
+.hero p{opacity:.85;font-size:1rem;max-width:520px;margin:0 auto 28px}
+.amount-wrap{background:rgba(255,255,255,.12);border-radius:16px;padding:24px;max-width:420px;margin:0 auto}
+.amount-label{font-size:.85rem;font-weight:600;margin-bottom:8px;opacity:.9}
+.amount-input-row{display:flex;align-items:center;background:#fff;border-radius:10px;overflow:hidden}
+.pkr-prefix{padding:0 14px;font-weight:700;color:var(--green);font-size:1.1rem;white-space:nowrap}
+#amount-input{border:none;outline:none;font-size:1.3rem;font-weight:700;padding:14px 8px;width:100%;color:var(--green);background:transparent}
+.btn-analyze{display:block;width:100%;margin-top:14px;padding:14px;background:var(--gold);color:#1a1a1a;font-size:1rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:background .2s}
+.btn-analyze:hover{background:#e6b800}
+
+/* ── Macro pills ────────────────────────────────────────── */
+.macro-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+@media(min-width:600px){.macro-grid{grid-template-columns:repeat(4,1fr)}}
+.macro-pill{background:var(--card);border-radius:10px;padding:14px;text-align:center;box-shadow:var(--shadow)}
+.macro-val{font-size:1.3rem;font-weight:800;color:var(--green)}
+.macro-lbl{font-size:.72rem;color:var(--muted);margin-top:2px}
+
+/* ── Tables ─────────────────────────────────────────────── */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{background:var(--green);color:#fff;padding:10px 12px;text-align:left;font-weight:600;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:hover td{background:#f9fdf9}
+tr.rec-row td{background:var(--green-light)}
+.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.yield-hi{color:var(--green);font-weight:700}
+.chg-up{color:var(--green2)}
+.chg-dn{color:var(--red)}
+
+/* ── Badges ─────────────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:.72rem;font-weight:600}
+.badge-green{background:#c8e6c9;color:#1b5e20}
+.badge-gold{background:#fff9c4;color:#856404}
+.badge-blue{background:#e3f2fd;color:#0d47a1}
+.badge-grey{background:#f5f5f5;color:#555}
+.badge-red{background:#ffebee;color:#c62828}
+
+/* ── Fund cards ─────────────────────────────────────────── */
+.funds-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:600px){.funds-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.funds-grid{grid-template-columns:repeat(3,1fr)}}
+.fund-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;border:2px solid var(--border);transition:box-shadow .2s}
+.fund-card:hover{box-shadow:var(--shadow-lg)}
+.fund-card.rec{border-color:var(--green3)}
+.fund-name{font-weight:700;font-size:.95rem;margin-bottom:6px}
+.fund-mgr{font-size:.78rem;color:var(--muted);margin-bottom:10px}
+.fund-returns{display:flex;gap:8px;margin:12px 0}
+.ret-box{flex:1;text-align:center;background:#f5f5f5;border-radius:8px;padding:8px 4px}
+.ret-box.best{background:var(--green-light)}
+.ret-val{font-size:1rem;font-weight:800;color:var(--green)}
+.ret-lbl{font-size:.65rem;color:var(--muted);margin-top:2px}
+.fund-verdict{font-size:.8rem;color:#444;margin:8px 0}
+.fund-earn{font-size:.85rem;font-weight:700;color:var(--navy);background:#e3f2fd;padding:6px 10px;border-radius:6px;margin-top:8px}
+
+/* ── Portfolio allocation ────────────────────────────────── */
+.alloc-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:700px){.alloc-grid{grid-template-columns:1fr 1fr}}
+.alloc-item{display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border-radius:10px;box-shadow:var(--shadow)}
+.alloc-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.alloc-label{font-weight:600;font-size:.9rem}
+.alloc-sub{font-size:.78rem;color:var(--muted)}
+.alloc-amount{margin-left:auto;text-align:right;font-weight:700;color:var(--green);white-space:nowrap}
+.alloc-pct{font-size:.78rem;color:var(--muted)}
+
+/* ── Summary stats ───────────────────────────────────────── */
+.summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+@media(min-width:600px){.summary-grid{grid-template-columns:repeat(4,1fr)}}
+.stat-card{background:var(--card);border-radius:10px;padding:16px;box-shadow:var(--shadow);text-align:center}
+.stat-val{font-size:1.4rem;font-weight:800;color:var(--green)}
+.stat-lbl{font-size:.75rem;color:var(--muted);margin-top:3px}
+
+/* ── Chart containers ────────────────────────────────────── */
+.chart-wrap{position:relative;height:260px;margin:16px 0}
+.chart-wrap-sm{position:relative;height:200px;margin:12px 0}
+
+/* ── CTAs / Affiliate buttons ────────────────────────────── */
+.cta-block{background:var(--green-light);border:1px solid #a5d6a7;border-radius:12px;padding:16px;margin:16px 0}
+.cta-title{font-weight:700;color:var(--green);margin-bottom:10px;font-size:.9rem}
+.cta-btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn-cta{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:8px;font-size:.83rem;font-weight:700;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green2)}
+.btn-secondary{background:#fff;color:var(--green);border:1.5px solid var(--green)}
+.btn-secondary:hover{background:var(--green-light)}
+.btn-gold{background:var(--gold);color:#1a1a1a}
+.btn-gold:hover{background:#e6b800}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:#1565c0}
+
+/* ── Nav buttons ─────────────────────────────────────────── */
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px}
+.btn-nav{padding:12px 24px;border-radius:10px;font-size:.9rem;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.btn-next{background:var(--green);color:#fff;margin-left:auto}
+.btn-next:hover{background:var(--green2)}
+.btn-back{background:#fff;color:var(--green);border:2px solid var(--green)}
+.btn-back:hover{background:var(--green-light)}
+
+/* ── Ad slots ────────────────────────────────────────────── */
+.ad-slot{text-align:center;margin:20px 0;min-height:90px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:8px;border:1px dashed var(--border)}
+.ad-label{font-size:.65rem;color:#bbb;position:absolute;top:4px;left:50%;transform:translateX(-50%);white-space:nowrap}
+
+/* ── Disclaimer ──────────────────────────────────────────── */
+.disclaimer{font-size:.75rem;color:var(--muted);background:#fff8e1;border-radius:8px;padding:10px 14px;margin-top:16px;border-left:3px solid var(--gold)}
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-top:40px;font-size:.8rem;opacity:.9}
+
+/* ── Responsive tweaks ───────────────────────────────────── */
+@media(max-width:480px){
+  .card{padding:16px}
+  th,td{padding:8px 10px;font-size:.8rem}
+  .section-title{font-size:1.2rem}
+  .stat-val{font-size:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────── -->
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <div class="logo">🇵🇰 <span>Pakistan</span> Investment Advisor</div>
+      <div class="data-age" id="data-age">Loading data…</div>
+    </div>
+    <div id="progress-wrap"><div id="progress-bar"></div></div>
+  </div>
+</header>
+
+<!-- ── Step nav ───────────────────────────────────────── -->
+<div style="background:#fff;border-bottom:1px solid var(--border);position:sticky;top:62px;z-index:99">
+  <div class="container">
+    <div class="step-nav" id="step-nav">
+      <div class="step-pill active" data-step="0">1. Your Amount</div>
+      <div class="step-pill" data-step="1">2. Safe Returns</div>
+      <div class="step-pill" data-step="2">3. Mutual Funds</div>
+      <div class="step-pill" data-step="3">4. Stocks</div>
+      <div class="step-pill" data-step="4">5. Your Portfolio</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 0 — AMOUNT INPUT
+══════════════════════════════════════════════════════ -->
+<div class="page active" id="page-0">
+
+  <div class="hero">
+    <div class="container">
+      <h1>Where Should You Invest in Pakistan?</h1>
+      <p>Enter your available amount and get a personalised analysis of National Savings, Mutual Funds &amp; PSX Stocks — free, in seconds.</p>
+
+      <div class="amount-wrap">
+        <div class="amount-label">Enter your investment amount (PKR)</div>
+        <div class="amount-input-row">
+          <span class="pkr-prefix">PKR</span>
+          <input type="text" id="amount-input" placeholder="5,00,000" inputmode="numeric" autocomplete="off">
+        </div>
+        <button class="btn-analyze" onclick="startAnalysis()">Analyze My Investment →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:24px">
+
+    <!-- Macro snapshot -->
+    <div class="card">
+      <div class="section-title">Pakistan Market Snapshot</div>
+      <div class="section-sub" id="snapshot-date">Live data updated daily</div>
+      <div class="macro-grid">
+        <div class="macro-pill">
+          <div class="macro-val" id="m-kse">—</div>
+          <div class="macro-lbl">KSE-100 Index</div>
+        </div>
+        <div class="macro-pill">
+          <div class="macro-val" id="m-sbp">—</div>
+          <div class="macro-lbl">SBP Policy Rate</div>
+        </div>
+        <div class="macro-pill">
+          <div class="macro-val" id="m-pkr">—</div>
+          <div class="macro-lbl">PKR / USD</div>
+        </div>
+        <div class="macro-pill">
+          <div class="macro-val" id="m-inf">—</div>
+          <div class="macro-lbl">CPI Inflation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KSE-100 history chart -->
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:4px">KSE-100 — 6 Year Journey</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">From 40,000 to 1,70,000 — Pakistan's bull market</div>
+      <div class="chart-wrap"><canvas id="chart-kse"></canvas></div>
+    </div>
+
+    <!-- SBP rate chart -->
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:4px">SBP Policy Rate — Cutting Cycle</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Rate has fallen from 22% peak — good for stocks &amp; funds</div>
+      <div class="chart-wrap-sm"><canvas id="chart-sbp"></canvas></div>
+    </div>
+
+    <!-- Ad slot 1 -->
+    <div style="position:relative" class="ad-slot">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="YOUR_AD_SLOT_1" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-nav btn-next" onclick="startAnalysis()">Analyze My Investment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 1 — NATIONAL SAVINGS
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-1">
+  <div class="container" style="padding-top:24px">
+
+    <div class="section-title">🏦 National Savings — Zero Risk Returns</div>
+    <div class="section-sub">100% backed by the Government of Pakistan. No brokerage account needed — just walk in with your CNIC.</div>
+
+    <div class="card">
+      <div class="tbl-wrap">
+        <table id="ns-table">
+          <thead>
+            <tr>
+              <th>Scheme</th>
+              <th class="num">Rate</th>
+              <th>Tenure</th>
+              <th>Payout</th>
+              <th class="num">Your Annual Earn</th>
+              <th>Eligibility</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="ns-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <div class="cta-title">📍 How to invest in National Savings</div>
+      <div style="font-size:.84rem;color:#333;margin-bottom:10px">Walk into any Pakistan Post Office or CDNS branch with your CNIC. No internet required.</div>
+      <div class="cta-btns">
+        <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" class="btn-cta btn-primary">Open CDNS Account →</a>
+        <a href="https://www.savings.gov.pk/profit-rates/" target="_blank" rel="noopener" class="btn-cta btn-secondary">Latest Profit Rates</a>
+      </div>
+    </div>
+
+    <!-- Ad slot 2 -->
+    <div style="position:relative" class="ad-slot">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="YOUR_AD_SLOT_2" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="disclaimer">⚠ Profit rates change monthly. Always verify at savings.gov.pk before investing.</div>
+
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="goPage(0)">← Back</button>
+      <button class="btn-nav btn-next" onclick="goPage(2)">Mutual Funds →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 2 — MUTUAL FUNDS
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-2">
+  <div class="container" style="padding-top:24px">
+
+    <div class="section-title">📊 Mutual Funds — Managed Growth</div>
+    <div class="section-sub">Professional fund managers invest your money across many assets. Higher returns than savings, slightly higher risk.</div>
+
+    <div class="funds-grid" id="funds-grid"></div>
+
+    <div class="cta-block">
+      <div class="cta-title">🚀 Open a Mutual Fund Account Online</div>
+      <div style="font-size:.84rem;color:#333;margin-bottom:10px">Register online in 15 minutes — CNIC + mobile number is all you need.</div>
+      <div class="cta-btns">
+        <a href="https://www.almeezangroup.com" target="_blank" rel="noopener" class="btn-cta btn-primary">Al Meezan (Islamic) →</a>
+        <a href="https://www.nbpfunds.com" target="_blank" rel="noopener" class="btn-cta btn-navy">NBP Funds →</a>
+        <a href="https://www.jsil.com" target="_blank" rel="noopener" class="btn-cta btn-secondary">JS Investments →</a>
+      </div>
+    </div>
+
+    <!-- Ad slot 3 -->
+    <div style="position:relative" class="ad-slot">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="YOUR_AD_SLOT_3" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="disclaimer">⚠ Mutual fund returns shown are historical. Past performance does not guarantee future results.</div>
+
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="goPage(1)">← Back</button>
+      <button class="btn-nav btn-next" onclick="goPage(3)">PSX Stocks →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 3 — STOCKS
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-3">
+  <div class="container" style="padding-top:24px">
+
+    <div class="section-title">📈 PSX Blue Chips — Dividend Stocks</div>
+    <div class="section-sub">KSE-100's highest dividend-paying companies, sorted by yield. Prices updated daily.</div>
+
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Company</th>
+              <th>Sector</th>
+              <th class="num">Price (PKR)</th>
+              <th class="num">1Y Change</th>
+              <th class="num">Div Yield</th>
+              <th class="num">Annual Div</th>
+              <th class="num">P/E</th>
+            </tr>
+          </thead>
+          <tbody id="stocks-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:8px">Dividend Yield Comparison</div>
+      <div class="chart-wrap"><canvas id="chart-stocks"></canvas></div>
+    </div>
+
+    <div class="cta-block">
+      <div class="cta-title">📋 Open a CDC / Brokerage Account to Buy Stocks</div>
+      <div style="font-size:.84rem;color:#333;margin-bottom:10px">You need a CDC Investor Account to hold shares. Open online with any PSX-licensed broker.</div>
+      <div class="cta-btns">
+        <a href="https://ahsecurities.com" target="_blank" rel="noopener" class="btn-cta btn-primary">Arif Habib Securities →</a>
+        <a href="https://www.mcbfsl.com" target="_blank" rel="noopener" class="btn-cta btn-navy">MCB Financial Services →</a>
+        <a href="https://www.akseerresearch.com" target="_blank" rel="noopener" class="btn-cta btn-secondary">Akseer (Low Fees) →</a>
+      </div>
+    </div>
+
+    <!-- Ad slot 4 -->
+    <div style="position:relative" class="ad-slot">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="YOUR_AD_SLOT_4" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="disclaimer">⚠ Stock prices are indicative. Always verify on PSX (psx.com.pk) before trading. This is not financial advice.</div>
+
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="goPage(2)">← Back</button>
+      <button class="btn-nav btn-next" onclick="goPage(4)">See Your Portfolio →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 4 — YOUR PORTFOLIO
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-4">
+  <div class="container" style="padding-top:24px">
+
+    <div class="section-title">🎯 Your Recommended Portfolio</div>
+    <div class="section-sub" id="port-subtitle">Conservative, dividend-focused allocation for long-term growth.</div>
+
+    <!-- Summary stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="stat-val" id="s-annual">—</div>
+        <div class="stat-lbl">Projected Annual Income</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="s-monthly">—</div>
+        <div class="stat-lbl">Est. Monthly Income</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="s-yield">—</div>
+        <div class="stat-lbl">Blended Return</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="s-5y">—</div>
+        <div class="stat-lbl">5-Year Value</div>
+      </div>
+    </div>
+
+    <!-- Allocation breakdown -->
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:14px">Allocation Breakdown</div>
+      <div class="alloc-grid" id="alloc-grid"></div>
+    </div>
+
+    <!-- Charts row -->
+    <div style="display:grid;grid-template-columns:1fr;gap:16px">
+      <div class="card">
+        <div style="font-weight:700;margin-bottom:8px">Portfolio Distribution</div>
+        <div style="position:relative;height:260px"><canvas id="chart-donut"></canvas></div>
+      </div>
+      <div class="card">
+        <div style="font-weight:700;margin-bottom:8px">5-Year Growth Projection</div>
+        <div class="chart-wrap"><canvas id="chart-proj"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Action steps -->
+    <div class="card">
+      <div style="font-weight:700;font-size:1rem;margin-bottom:14px;color:var(--green)">✅ Action Steps — How to Execute This</div>
+      <div id="action-steps"></div>
+    </div>
+
+    <div class="cta-block" style="background:var(--gold-light);border-color:var(--gold)">
+      <div class="cta-title" style="color:#856404">💰 Ready to Start Investing?</div>
+      <div style="font-size:.84rem;color:#333;margin-bottom:10px">Open your accounts today — the earlier you start, the more compounding works for you.</div>
+      <div class="cta-btns">
+        <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" class="btn-cta btn-primary">CDNS (National Savings) →</a>
+        <a href="https://www.almeezangroup.com" target="_blank" rel="noopener" class="btn-cta btn-gold">Al Meezan Funds →</a>
+        <a href="https://ahsecurities.com" target="_blank" rel="noopener" class="btn-cta btn-navy">Open Brokerage →</a>
+      </div>
+    </div>
+
+    <!-- Ad slot 5 -->
+    <div style="position:relative" class="ad-slot">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="YOUR_AD_SLOT_5" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="disclaimer">⚠ This tool provides general educational information only. Returns are estimates based on current rates and historical data. Always consult a SECP-registered financial advisor before investing. Past performance does not guarantee future results.</div>
+
+    <div class="nav-row">
+      <button class="btn-nav btn-back" onclick="goPage(3)">← Back</button>
+      <button class="btn-nav btn-next" onclick="goPage(0)" style="background:var(--gold);color:#1a1a1a">Start Over</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Data updated daily &nbsp;|&nbsp; Not financial advice — for educational purposes only</div>
+  <div style="margin-top:6px;opacity:.7">Sources: PSX · SBP · CDNS · MUFAP · Yahoo Finance</div>
+</footer>
+
+<script src="app.js" defer></script>
+<script>
+  // Init AdSense
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</body>
+</html>

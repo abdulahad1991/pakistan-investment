@@ -1,26 +1,26 @@
 {
-  "updated": "2026-03-27T06:00:00Z",
+  "updated": "2026-03-28T03:30:30Z",
   "macro": {
-    "pkr_usd": 281.0,
+    "pkr_usd": 277.4,
     "sbp_rate": 10.5,
     "sbp_direction": "Holding",
     "inflation_cpi": 7.0,
     "kse100_level": 170000,
     "fx_reserves_bn_usd": 15.8,
     "gdp_growth_pct": 3.75,
-    "imf_status": "Active — $7B Extended Fund Facility"
+    "imf_status": "Active \u2014 $7B Extended Fund Facility"
   },
   "national_savings": [
     {
       "name": "Special Savings Certificate",
-      "rate": 11.60,
+      "rate": 11.6,
       "tenure": "3 Years",
       "payout": "Every 6 Months",
       "min_pkr": 500,
       "eligible": "All Pakistanis",
       "shariah": false,
       "recommended": true,
-      "verdict": "Best for general public — good yield, 3-year lock-in",
+      "verdict": "Best for general public \u2014 good yield, 3-year lock-in",
       "url": "https://www.savings.gov.pk"
     },
     {
@@ -44,31 +44,31 @@
       "eligible": "Widows & Seniors (60+) only",
       "shariah": false,
       "recommended": true,
-      "verdict": "Highest rate — priority if you are eligible",
+      "verdict": "Highest rate \u2014 priority if you are eligible",
       "url": "https://www.savings.gov.pk"
     },
     {
       "name": "Defence Savings Certificate",
-      "rate": 11.30,
+      "rate": 11.3,
       "tenure": "10 Years",
       "payout": "At Maturity",
       "min_pkr": 500,
       "eligible": "All Pakistanis",
       "shariah": false,
       "recommended": false,
-      "verdict": "Long 10-year lock-in — only for very patient savers",
+      "verdict": "Long 10-year lock-in \u2014 only for very patient savers",
       "url": "https://www.savings.gov.pk"
     },
     {
       "name": "CDNS Savings Account",
-      "rate": 10.50,
+      "rate": 10.5,
       "tenure": "No Lock-in",
       "payout": "Monthly",
       "min_pkr": 100,
       "eligible": "All Pakistanis",
       "shariah": false,
       "recommended": false,
-      "verdict": "Emergency fund only — lower rate but withdraw anytime",
+      "verdict": "Emergency fund only \u2014 lower rate but withdraw anytime",
       "url": "https://www.savings.gov.pk"
     }
   ],
@@ -84,7 +84,7 @@
       "ret_5y": 11.2,
       "min_pkr": 1000,
       "recommended": true,
-      "verdict": "Safest Islamic fund — stable income, minimal risk",
+      "verdict": "Safest Islamic fund \u2014 stable income, minimal risk",
       "url": "https://www.almeezangroup.com"
     },
     {
@@ -112,7 +112,7 @@
       "ret_5y": 13.5,
       "min_pkr": 5000,
       "recommended": true,
-      "verdict": "Excellent recent returns — best for conventional investors",
+      "verdict": "Excellent recent returns \u2014 best for conventional investors",
       "url": "https://www.nbpfunds.com"
     },
     {
@@ -140,30 +140,212 @@
       "ret_5y": 15.1,
       "min_pkr": 5000,
       "recommended": false,
-      "verdict": "Decent — 5-year return lower than Meezan funds",
+      "verdict": "Decent \u2014 5-year return lower than Meezan funds",
       "url": "https://www.jsil.com"
     }
   ],
   "stocks": [
-    { "ticker": "FFC",   "name": "Fauji Fertilizer",   "sector": "Fertilizer",  "price": 102.5,  "chg1y": 12.5, "hi52": 115.0,  "lo52": 85.0,   "div": 8.5,  "yield": 8.3, "pe": 9.2  },
-    { "ticker": "MCB",   "name": "MCB Bank",            "sector": "Banking",     "price": 262.0,  "chg1y": 28.0, "hi52": 292.0,  "lo52": 185.0,  "div": 16.0, "yield": 6.1, "pe": 7.8  },
-    { "ticker": "HUBC",  "name": "Hub Power",           "sector": "Power",       "price": 158.0,  "chg1y": 15.0, "hi52": 178.0,  "lo52": 115.0,  "div": 10.5, "yield": 6.6, "pe": 9.8  },
-    { "ticker": "UBL",   "name": "United Bank",         "sector": "Banking",     "price": 242.0,  "chg1y": 25.0, "hi52": 275.0,  "lo52": 168.0,  "div": 14.0, "yield": 5.8, "pe": 7.2  },
-    { "ticker": "HBL",   "name": "Habib Bank",          "sector": "Banking",     "price": 212.0,  "chg1y": 22.0, "hi52": 245.0,  "lo52": 155.0,  "div": 10.0, "yield": 4.7, "pe": 6.5  },
-    { "ticker": "OGDC",  "name": "OGDCL",               "sector": "Oil & Gas",   "price": 182.0,  "chg1y": 18.0, "hi52": 205.0,  "lo52": 135.0,  "div": 8.0,  "yield": 4.4, "pe": 8.0  },
-    { "ticker": "PPL",   "name": "Pakistan Petroleum",  "sector": "Oil & Gas",   "price": 120.0,  "chg1y": 10.0, "hi52": 142.0,  "lo52": 90.0,   "div": 5.5,  "yield": 4.6, "pe": 7.5  },
-    { "ticker": "MEBL",  "name": "Meezan Bank",         "sector": "Banking",     "price": 195.0,  "chg1y": 35.0, "hi52": 225.0,  "lo52": 130.0,  "div": 7.0,  "yield": 3.6, "pe": 8.2  },
-    { "ticker": "ENGRO", "name": "Engro Corporation",   "sector": "Diversified", "price": 352.0,  "chg1y": 20.0, "hi52": 405.0,  "lo52": 258.0,  "div": 14.0, "yield": 4.0, "pe": 10.5 },
-    { "ticker": "LUCK",  "name": "Lucky Cement",        "sector": "Cement",      "price": 1210.0, "chg1y": 32.0, "hi52": 1420.0, "lo52": 855.0,  "div": 30.0, "yield": 2.5, "pe": 12.0 },
-    { "ticker": "FATIMA","name": "Fatima Fertilizer",   "sector": "Fertilizer",  "price": 42.0,   "chg1y": 8.0,  "hi52": 50.0,   "lo52": 32.0,   "div": 3.5,  "yield": 8.3, "pe": 8.5  },
-    { "ticker": "PSO",   "name": "Pakistan State Oil",  "sector": "Oil & Gas",   "price": 440.0,  "chg1y": 15.0, "hi52": 500.0,  "lo52": 320.0,  "div": 12.0, "yield": 2.7, "pe": 6.8  }
+    {
+      "ticker": "FFC",
+      "name": "Fauji Fertilizer",
+      "sector": "Fertilizer",
+      "price": 498.44,
+      "chg1y": 46.0,
+      "hi52": 674.22,
+      "lo52": 295.41,
+      "div": 37.0,
+      "yield": 7.42,
+      "pe": 2.8
+    },
+    {
+      "ticker": "MCB",
+      "name": "MCB Bank",
+      "sector": "Banking",
+      "price": 366.35,
+      "chg1y": 40.8,
+      "hi52": 440.57,
+      "lo52": 234.58,
+      "div": 36.0,
+      "yield": 9.83,
+      "pe": 4.6
+    },
+    {
+      "ticker": "HUBC",
+      "name": "Hub Power",
+      "sector": "Power",
+      "price": 196.94,
+      "chg1y": 51.3,
+      "hi52": 244.28,
+      "lo52": 104.81,
+      "div": 20.0,
+      "yield": 10.16,
+      "pe": 4.5
+    },
+    {
+      "ticker": "UBL",
+      "name": "United Bank",
+      "sector": "Banking",
+      "price": 344.45,
+      "chg1y": -22.2,
+      "hi52": 538.38,
+      "lo52": 224.17,
+      "div": 29.5,
+      "yield": 8.56,
+      "pe": 5.0
+    },
+    {
+      "ticker": "HBL",
+      "name": "Habib Bank",
+      "sector": "Banking",
+      "price": 252.9,
+      "chg1y": 74.3,
+      "hi52": 361.56,
+      "lo52": 120.43,
+      "div": 20.0,
+      "yield": 7.91,
+      "pe": 3.1
+    },
+    {
+      "ticker": "OGDC",
+      "name": "OGDCL",
+      "sector": "Oil & Gas",
+      "price": 265.62,
+      "chg1y": 25.0,
+      "hi52": 332.08,
+      "lo52": 165.8,
+      "div": 15.75,
+      "yield": 5.93,
+      "pe": 3.5
+    },
+    {
+      "ticker": "PPL",
+      "name": "Pakistan Petroleum",
+      "sector": "Oil & Gas",
+      "price": 204.68,
+      "chg1y": 14.7,
+      "hi52": 281.93,
+      "lo52": 124.3,
+      "div": 7.5,
+      "yield": 3.66,
+      "pe": 3.9
+    },
+    {
+      "ticker": "MEBL",
+      "name": "Meezan Bank",
+      "sector": "Banking",
+      "price": 457.86,
+      "chg1y": 85.9,
+      "hi52": 510.62,
+      "lo52": 223.76,
+      "div": 28.0,
+      "yield": 6.12,
+      "pe": 4.7
+    },
+    {
+      "ticker": "ENGRO",
+      "name": "Engro Corporation",
+      "sector": "Diversified",
+      "price": 485.38,
+      "chg1y": 49.9,
+      "hi52": 496.0,
+      "lo52": 293.06,
+      "div": 0.0,
+      "yield": 0.0,
+      "pe": 8.3
+    },
+    {
+      "ticker": "LUCK",
+      "name": "Lucky Cement",
+      "sector": "Cement",
+      "price": 362.3,
+      "chg1y": -75.7,
+      "hi52": 1608.21,
+      "lo52": 272.13,
+      "div": 4.0,
+      "yield": 1.1,
+      "pe": 16.2
+    },
+    {
+      "ticker": "FATIMA",
+      "name": "Fatima Fertilizer",
+      "sector": "Fertilizer",
+      "price": 134.02,
+      "chg1y": 64.4,
+      "hi52": 192.8,
+      "lo52": 68.09,
+      "div": 7.75,
+      "yield": 5.78,
+      "pe": 2.6
+    },
+    {
+      "ticker": "PSO",
+      "name": "Pakistan State Oil",
+      "sector": "Oil & Gas",
+      "price": 351.57,
+      "chg1y": -12.7,
+      "hi52": 506.75,
+      "lo52": 293.83,
+      "div": 10.0,
+      "yield": 2.84,
+      "pe": 3.5
+    }
   ],
   "kse100_history": {
-    "labels": ["Jan'20","Jul'20","Jan'21","Jul'21","Jan'22","Jul'22","Jan'23","Jul'23","Jan'24","Jul'24","Jan'25","Mar'26"],
-    "values": [41500,40800,44200,47800,45200,37800,40500,53500,67500,79000,115000,170000]
+    "labels": [
+      "Jan'20",
+      "Jul'20",
+      "Jan'21",
+      "Jul'21",
+      "Jan'22",
+      "Jul'22",
+      "Jan'23",
+      "Jul'23",
+      "Jan'24",
+      "Jul'24",
+      "Jan'25",
+      "Mar'26"
+    ],
+    "values": [
+      41500,
+      40800,
+      44200,
+      47800,
+      45200,
+      37800,
+      40500,
+      53500,
+      67500,
+      79000,
+      115000,
+      170000
+    ]
   },
   "sbp_history": {
-    "labels": ["Jan'22","Jun'22","Jan'23","Jun'23","Jan'24","Jun'24","Sep'24","Dec'24","Mar'25","Jun'25","Mar'26"],
-    "values": [9.75,15.0,17.0,22.0,22.0,20.5,17.5,13.0,12.0,11.0,10.5]
+    "labels": [
+      "Jan'22",
+      "Jun'22",
+      "Jan'23",
+      "Jun'23",
+      "Jan'24",
+      "Jun'24",
+      "Sep'24",
+      "Dec'24",
+      "Mar'25",
+      "Jun'25",
+      "Mar'26"
+    ],
+    "values": [
+      9.75,
+      15.0,
+      17.0,
+      22.0,
+      22.0,
+      20.5,
+      17.5,
+      13.0,
+      12.0,
+      11.0,
+      10.5
+    ]
   }
 }

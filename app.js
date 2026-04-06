@@ -110,6 +110,9 @@ function goPage(n) {
   currentPage = n;
   window.scrollTo({ top: 0, behavior: "smooth" });
 
+  // Lazy-init AdSense for the newly visible page (pages 1–4 only)
+  if (n > 0) initPageAd(n);
+
   // Lazy-render page content
   if (n === 1) renderNationalSavings();
   if (n === 2) renderMutualFunds();

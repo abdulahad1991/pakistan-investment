@@ -22,8 +22,8 @@ jobs:
 
       - name: Sync dev with main
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "Abdul Ahad"
+          git config user.email "abdulahad1991@users.noreply.github.com"
           git fetch origin main
           git merge --ff-only origin/main
 
@@ -37,8 +37,8 @@ jobs:
 
       - name: Commit updated data.json to dev
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "Abdul Ahad"
+          git config user.email "abdulahad1991@users.noreply.github.com"
           git diff --quiet data.json || (
             git add data.json &&
             git commit -m "chore: update investment data $(date -u +'%Y-%m-%d')" &&
@@ -61,8 +61,8 @@ jobs:
 
       - name: Merge dev into main
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "Abdul Ahad"
+          git config user.email "abdulahad1991@users.noreply.github.com"
           git fetch origin dev
           git merge --ff-only origin/dev
           git push origin main

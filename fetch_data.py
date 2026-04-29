@@ -42,7 +42,7 @@ except Exception as e:
 
 # ── 2. KSE-100 ────────────────────────────────────────────────────
 try:
-    kse = yf.Ticker("^KSE100")
+    kse = yf.Ticker("^KSE")
     hist = kse.history(period="5d")
     if not hist.empty:
         level = int(hist["Close"].dropna().iloc[-1])
@@ -63,27 +63,52 @@ CDNS_MAP = {
     "defence savings":  "Defence Savings Certificate",
     "savings account":  "CDNS Savings Account",
 }
-try:
-    r = requests.get("https://www.savings.gov.pk/profit-rates/", timeout=12, headers=HEADERS)
-    if r.status_code == 200:
-        soup = BeautifulSoup(r.text, "html.parser")
-        lines = [l.strip() for l in soup.get_text(separator="\n").splitlines() if l.strip()]
-        for i, line in enumerate(lines):
-            ll = line.lower()
-            for kw, scheme in CDNS_MAP.items():
-                if kw in ll:
-                    window = " ".join(lines[i: i + 6])
-                    m = re.search(r"(\d{1,2}\.\d{1,2})\s*%?", window)
-                    if m:
-                        val = float(m.group(1))
-                        if 5.0 <= val <= 25.0:
-                            for s in data["national_savings"]:
-                                if s["name"] == scheme:
-                                    s["rate"] = val
-                                    fetched.append(f"CDNS {scheme[:20]} = {val}%")
-                    break
-except Exception as e:
-    print(f"  CDNS scrape failed: {e}")
+CDNS_URLS = [
+    "https://www.savings.gov.pk/profit-rates/",
+    "http://www.savings.gov.pk/profit-rates/",
+    "https://savings.gov.pk/profit-rates/",
+]
+
+def _parse_cdns(html):
+    soup = BeautifulSoup(html, "html.parser")
+    lines = [l.strip() for l in soup.get_text(separator="\n").splitlines() if l.strip()]
+    found = {}
+    for i, line in enumerate(lines):
+        ll = line.lower()
+        for kw, scheme in CDNS_MAP.items():
+            if kw in ll:
+                window = " ".join(lines[i: i + 6])
+                m = re.search(r"(\d{1,2}\.\d{1,2})\s*%?", window)
+                if m:
+                    val = float(m.group(1))
+                    if 5.0 <= val <= 25.0:
+                        found[scheme] = val
+                break
+    return found
+
+cdns_html = None
+for _url in CDNS_URLS:
+    try:
+        r = requests.get(_url, timeout=20, headers=HEADERS)
+        if r.status_code == 200:
+            cdns_html = r.text
+            break
+    except Exception:
+        pass
+
+if cdns_html:
+    try:
+        rates = _parse_cdns(cdns_html)
+        for s in data["national_savings"]:
+            if s["name"] in rates:
+                s["rate"] = rates[s["name"]]
+                fetched.append(f"CDNS {s['name'][:20]} = {rates[s['name']]}%")
+        if not rates:
+            print("  CDNS scrape: page loaded but no rates matched")
+    except Exception as e:
+        print(f"  CDNS parse failed: {e}")
+else:
+    print("  CDNS scrape failed: all URLs unreachable")
 
 # ── 4. SBP Policy Rate ────────────────────────────────────────────
 try:

@@ -40,18 +40,26 @@ try:
 except Exception as e:
     print(f"  PKR/USD failed: {e}")
 
-# ── 2. KSE-100 ────────────────────────────────────────────────────
+# ── 2. KSE-100 (scraped from PSX website) ─────────────────────────
 try:
-    kse = yf.Ticker("^KSE")
-    hist = kse.history(period="5d")
-    if not hist.empty:
-        level = int(hist["Close"].dropna().iloc[-1])
-        data["macro"]["kse100_level"] = level
-        today_lbl = datetime.now().strftime("%b'%y")
-        if data["kse100_history"]["labels"][-1] != today_lbl:
-            data["kse100_history"]["labels"].append(today_lbl)
-            data["kse100_history"]["values"].append(level)
-        fetched.append(f"KSE-100 = {level:,}")
+    r = requests.get("https://www.psx.com.pk/market-summary/", timeout=20, headers=HEADERS)
+    if r.status_code == 200:
+        lines = [l.strip() for l in BeautifulSoup(r.text, "html.parser")
+                 .get_text(separator="\n").splitlines() if l.strip()]
+        for i, line in enumerate(lines):
+            if "KSE-100" in line or "KSE100" in line:
+                window = " ".join(lines[i:i+6])
+                m = re.search(r"([\d,]{6,}(?:\.\d+)?)", window)
+                if m:
+                    level = int(float(m.group(1).replace(",", "")))
+                    if level > 50000:
+                        data["macro"]["kse100_level"] = level
+                        today_lbl = datetime.now().strftime("%b'%y")
+                        if data["kse100_history"]["labels"][-1] != today_lbl:
+                            data["kse100_history"]["labels"].append(today_lbl)
+                            data["kse100_history"]["values"].append(level)
+                        fetched.append(f"KSE-100 = {level:,}")
+                        break
 except Exception as e:
     print(f"  KSE-100 failed: {e}")
 
@@ -112,7 +120,7 @@ else:
 
 # ── 4. SBP Policy Rate ────────────────────────────────────────────
 try:
-    r = requests.get("https://www.sbp.org.pk/MPC/index.htm", timeout=12, headers=HEADERS)
+    r = requests.get("https://www.sbp.org.pk/m_policy/index.asp", timeout=20, headers=HEADERS)
     if r.status_code == 200:
         text = BeautifulSoup(r.text, "html.parser").get_text()
         for pat in [

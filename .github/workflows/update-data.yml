@@ -7,14 +7,18 @@ on:
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
 
 jobs:
-  update:
+  scrape:
+    name: Scrape data to dev
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: Checkout repo
+      - name: Checkout dev branch
         uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -24,12 +28,34 @@ jobs:
       - name: Fetch live data
         run: python fetch_data.py
 
-      - name: Commit updated data.json
+      - name: Commit updated data.json to dev
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git diff --quiet data.json || (
             git add data.json &&
             git commit -m "chore: update investment data $(date -u +'%Y-%m-%d')" &&
-            git push
+            git push origin dev
           )
+
+  merge-to-main:
+    name: Merge dev into main
+    needs: scrape
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Merge dev into main
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin dev
+          git merge --ff-only origin/dev
+          git push origin main

@@ -27,7 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
       applyData();
     })
     .catch(() => {
-      document.getElementById("data-age").textContent = "Using cached data";
+      document.getElementById("data-age").textContent = "Data unavailable — retrying…";
+      // Retry once after 3 s (handles transient network hiccup on page load)
+      setTimeout(() => {
+        fetch("data.json?v=" + Date.now())
+          .then(r => r.json())
+          .then(d => { DATA = d; applyData(); })
+          .catch(() => {
+            document.getElementById("data-age").textContent = "Data unavailable";
+            if (currentPage === 4) renderPortfolio();
+          });
+      }, 3000);
     });
 });
 
@@ -54,6 +64,13 @@ function applyData() {
   // Charts (page 0)
   renderKSEChart();
   renderSBPChart();
+
+  // Re-render whichever page is already visible so data arrives even if
+  // the user navigated before the fetch completed.
+  if (currentPage === 1) renderNationalSavings();
+  else if (currentPage === 2) renderMutualFunds();
+  else if (currentPage === 3) renderStocks();
+  else if (currentPage === 4) renderPortfolio();
 }
 
 // ── Amount input — Pakistani comma formatting ─────────────────────
@@ -250,7 +267,13 @@ function renderStocks() {
 
 // ── PAGE 4 — Portfolio ────────────────────────────────────────────
 function renderPortfolio() {
-  if (!DATA) return;
+  if (!DATA) {
+    document.getElementById("alloc-grid").innerHTML =
+      '<div style="text-align:center;padding:32px;color:#888">⏳ Loading investment data…</div>';
+    document.getElementById("action-steps").innerHTML = "";
+    return;
+  }
+  document.getElementById("alloc-grid").innerHTML = "";
   wirePortfolioReturns();
 
   document.getElementById("port-subtitle").textContent =

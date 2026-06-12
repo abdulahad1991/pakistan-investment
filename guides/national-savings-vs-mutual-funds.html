@@ -124,8 +124,10 @@ strong{color:#1a1a1a}
 .verdict-ns{background:var(--green-light);border:1px solid #a5d6a7}
 .verdict-mf{background:#e3f2fd;border:1px solid #90caf9}
 .verdict-title{font-weight:800;font-size:1rem;margin-bottom:8px}
-.ad-slot{text-align:center;margin:28px 0;min-height:90px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:8px;border:1px dashed var(--border);position:relative}
-.ad-label{font-size:.65rem;color:#bbb;position:absolute;top:4px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.ad-slot{text-align:center;margin:28px 0;position:relative}
+.ad-label{display:none;font-size:.65rem;color:#bbb;position:absolute;top:-14px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.ad-slot:has(ins[data-ad-status="filled"]) .ad-label{display:block}
+ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important}
 .disclaimer{font-size:.8rem;color:var(--muted);background:#fff8e1;border-radius:8px;padding:12px 16px;margin-top:24px;border-left:3px solid var(--gold);line-height:1.7}
 .related-links{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 24px;margin-top:32px}
 .related-links h3{margin-top:0;margin-bottom:12px;color:#1a1a1a}

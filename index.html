@@ -208,8 +208,10 @@ tr.rec-row td{background:var(--green-light)}
 .btn-back:hover{background:var(--green-light)}
 
 /* ── Ad slots ────────────────────────────────────────────── */
-.ad-slot{text-align:center;margin:20px 0;min-height:90px;display:flex;align-items:center;justify-content:center;background:#fafafa;border-radius:8px;border:1px dashed var(--border)}
-.ad-label{font-size:.65rem;color:#bbb;position:absolute;top:4px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.ad-slot{text-align:center;margin:20px 0;position:relative}
+.ad-label{display:none;font-size:.65rem;color:#bbb;position:absolute;top:-14px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.ad-slot:has(ins[data-ad-status="filled"]) .ad-label{display:block}
+ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important}
 
 /* ── Disclaimer ──────────────────────────────────────────── */
 .disclaimer{font-size:.75rem;color:var(--muted);background:#fff8e1;border-radius:8px;padding:10px 14px;margin-top:16px;border-left:3px solid var(--gold)}
@@ -639,6 +641,19 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
       <h3 style="font-size:1.15rem;font-weight:700;color:#856404;margin-bottom:8px">🌍 Overseas Pakistanis — the Roshan Digital Account</h3>
       <p style="line-height:1.75;color:#333;margin-bottom:12px">Non-resident Pakistanis can invest from abroad through the Roshan Digital Account (RDA), an SBP initiative that opens entirely online and gives access to Naya Pakistan Certificates, the stock market and more in PKR or foreign currency. It is the simplest legal route for the diaspora to participate in everything above without flying home.</p>
       <a href="/guides/roshan-digital-account-guide.html" class="btn-cta btn-gold" style="display:inline-flex">Read: The Roshan Digital Account Guide →</a>
+    </div>
+
+    <!-- More guides -->
+    <div style="margin-bottom:32px">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#1a1a1a;margin-bottom:10px">Go Deeper: More Guides</h2>
+      <ul style="line-height:2.1;color:#333;margin-left:24px">
+        <li><a href="/guides/money-market-funds-vs-bank-savings.html" style="color:var(--green);font-weight:600">Money Market Funds vs Bank Savings Accounts</a> — where idle cash should sit</li>
+        <li><a href="/guides/treasury-bills-pakistan.html" style="color:var(--green);font-weight:600">How to Buy T-Bills &amp; PIBs via an IPS Account</a> — own government paper directly</li>
+        <li><a href="/guides/investment-tax-pakistan.html" style="color:var(--green);font-weight:600">How Investments Are Taxed: Filer vs Non-Filer</a> — the biggest free return boost</li>
+        <li><a href="/guides/open-brokerage-account-psx.html" style="color:var(--green);font-weight:600">How to Open a PSX Brokerage Account</a> — CDC, Sahulat &amp; your first trade</li>
+        <li><a href="/guides/halal-investing-pakistan.html" style="color:var(--green);font-weight:600">Halal Investing in Pakistan</a> — Islamic funds, sukuk &amp; Shariah stocks</li>
+        <li><a href="/guides/gold-investment-pakistan.html" style="color:var(--green);font-weight:600">Gold Investment in Pakistan</a> — physical, digital &amp; gold funds</li>
+      </ul>
     </div>
 
     <!-- How to combine them -->

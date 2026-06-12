@@ -27,7 +27,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
+<body data-listing="posts">
 
 <header>
   <div class="header-inner">
@@ -45,8 +45,17 @@
 <div class="container">
 
   <div class="hero-card">
+    <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:8px">Analysis · refreshed daily</div>
     <h1>Analysis &amp; Blog</h1>
     <p>Timely, data-backed analysis of what's moving Pakistani markets right now — federal budgets, policy rate decisions, and what they mean for your savings. Every post pulls today's live numbers automatically.</p>
+    <div class="ticker-row">
+      <div class="ticker-cell"><span class="tk-val" id="t-kse">—</span><span class="tk-lbl">KSE-100</span></div>
+      <div class="ticker-cell"><span class="tk-val" id="t-sbp">—</span><span class="tk-lbl">SBP Rate</span></div>
+      <div class="ticker-cell"><span class="tk-val" id="t-inf">—</span><span class="tk-lbl">Inflation</span></div>
+      <div class="ticker-cell"><span class="tk-val" id="t-pkr">—</span><span class="tk-lbl">PKR / USD</span></div>
+      <div class="ticker-cell"><span class="tk-val" id="t-date">—</span><span class="tk-lbl">Data Date</span></div>
+    </div>
+    <div id="manifest-stamp" style="font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;opacity:.6;margin-top:10px"></div>
   </div>
 
   <div class="guides-grid">
@@ -114,5 +123,6 @@
   </div>
 </footer>
 
+<script src="/assets/listing.js" defer></script>
 </body>
 </html>

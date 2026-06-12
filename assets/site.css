@@ -418,3 +418,16 @@ summary::-webkit-details-marker{display:none}
 .insight-cell{background:var(--green);color:var(--paper2);border-radius:var(--radius);padding:16px;border:1px solid var(--green2);outline:1px solid rgba(217,184,106,.4);outline-offset:-5px}
 .insight-num{font-family:var(--mono);font-size:1.5rem;font-weight:600;color:var(--gold-pale);font-variant-numeric:tabular-nums}
 .insight-lbl{font-size:.78rem;opacity:.85;line-height:1.5;margin-top:4px}
+
+/* ── Listing pages: ticker, chips, badges ───────────────── */
+.ticker-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin-top:20px}
+.ticker-cell{background:rgba(253,251,244,.08);border:1px solid rgba(217,184,106,.35);border-radius:4px;padding:9px 6px;text-align:center}
+.tk-val{display:block;font-family:var(--mono);font-weight:600;color:var(--gold-pale);font-size:1rem;font-variant-numeric:tabular-nums}
+.tk-lbl{font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;padding:8px 14px;border-radius:3px;border:1px solid var(--border2);background:var(--paper2);color:var(--muted);cursor:pointer;transition:all .15s;font-weight:600}
+.chip:hover{border-color:var(--gold);color:var(--green);transform:translateY(-1px)}
+.chip.active{background:var(--green);color:var(--paper2);border-color:var(--green)}
+.topic-tag.tag-new{background:var(--gold);color:#191D1A;border-color:var(--gold2)}
+.pipeline-step{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--border)}
+.pipeline-step:last-child{border-bottom:none}

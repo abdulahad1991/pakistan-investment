@@ -35,12 +35,16 @@ jobs:
       - name: Fetch live data
         run: python fetch_data.py
 
+      - name: Rebuild guide/blog manifest
+        run: python scripts/build_manifest.py
+
       - name: Commit updated data.json to dev
         run: |
           git config user.name  "Abdul Ahad"
           git config user.email "abdulahad1991@users.noreply.github.com"
-          git diff --quiet data.json || (
-            git add data.json &&
+          git add data.json manifest.json
+          git diff --cached --quiet || (
+            true &&
             git commit -m "chore: update investment data $(date -u +'%Y-%m-%d')" &&
             git push origin dev
           )

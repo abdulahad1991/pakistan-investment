@@ -58,18 +58,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
+<body data-listing="guides">
 
 <header>
   <div class="header-inner">
-    <div class="logo"><a href="/" style="color:#fff;text-decoration:none">🇵🇰 <span>Pakistan</span> Investment Advisor</a></div>
+    <div class="logo"><a href="/">🇵🇰 <span>Pakistan</span> Investment Advisor</a></div>
     <nav>
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
       <a href="/about.html">About</a>
       <a href="/contact.html">Contact</a>
-      <a href="/privacy-policy.html">Privacy</a>
     </nav>
   </div>
 </header>
@@ -77,200 +76,143 @@
 <div class="container">
 
   <div class="hero-card">
-    <h1>Free Investment Guides for Pakistanis</h1>
-    <p>Practical, jargon-free guides written specifically for Pakistani investors. Whether you're putting away your first PKR 10,000 or managing a serious portfolio, these articles will help you make better decisions with your money.</p>
+    <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:8px">The Library · 11 guides · refreshed daily</div>
+    <h1>Investment Guides for Pakistanis</h1>
+    <p>Practical, jargon-free, step-by-step. Pick a topic — every guide pulls today&rsquo;s live rates automatically.</p>
+    <div class="ticker-row">
+      <div class="ticker-cell"><span class="tk-val" id="t-kse">—</span><span class="tk-lbl">KSE-100</span></div>
+      <div class="ticker-cell"><span class="tk-val" id="t-sbp">—</span><span class="tk-lbl">SBP Rate</span></div>
+      <div class="ticker-cell"><span class="tk-val" id="t-inf">—</span><span class="tk-lbl">Inflation</span></div>
+      <div class="ticker-cell"><span class="tk-val" id="t-pkr">—</span><span class="tk-lbl">PKR / USD</span></div>
+      <div class="ticker-cell"><span class="tk-val" id="t-date">—</span><span class="tk-lbl">Data Date</span></div>
+    </div>
+    <div id="manifest-stamp" style="font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;opacity:.6;margin-top:10px"></div>
   </div>
 
-  <div class="hub-intro">
-    <h2>Why Investing Matters More Than Ever for Pakistanis in 2026</h2>
-
-    <p>Pakistan's headline inflation ran at roughly <strong>7% in early 2026</strong>, which means money sitting idle in a zero-interest wallet or an underperforming savings account loses real purchasing power every single month. Even with the <strong>SBP policy rate now at 11.5%</strong> — sharply lower than the 22% peak of 2023 — the environment still rewards investors who understand which instruments to use and when to use them.</p>
-
-    <p>Every investment decision in Pakistan ultimately traces back to three main pillars:</p>
-
-    <div class="hub-pillars">
-      <div class="pillar">
-        <strong>National Savings (CDNS)</strong>
-        Government-backed certificates and accounts that carry zero credit risk. Ideal as the safe anchor of any portfolio, especially for retirees or conservative savers.
-      </div>
-      <div class="pillar">
-        <strong>Mutual Funds (SECP-regulated)</strong>
-        Professionally managed funds spanning money market, fixed income, and equity strategies. SECP oversight means investor protections are in place. Minimum investments start at just PKR 1,000.
-      </div>
-      <div class="pillar">
-        <strong>PSX Dividend Stocks</strong>
-        Blue-chip companies listed on the Pakistan Stock Exchange have paid consistent dividends for decades. A well-chosen dividend portfolio can generate passive income that outpaces inflation over a full market cycle.
-      </div>
-    </div>
-
-    <p>This site is built for a wide range of readers: the salaried professional making their first investment, the overseas Pakistani looking to deploy remittances productively through a Roshan Digital Account, and the experienced investor who wants a quick data-driven reference to benchmark their returns. Every guide is written from first-hand investing experience, not generic financial theory.</p>
-
-    <p>All return figures, policy rates, and National Savings profit rates shown across this site are <strong>updated daily</strong> from official SBP and CDNS sources, so you are always working with current numbers rather than stale textbook examples.</p>
-
-    <div class="author-byline">
-      Written by <strong>Abdul Ahad</strong> — software engineer and personal PSX/mutual fund investor.
-      <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a>
-    </div>
+  <div class="chip-row">
+    <button class="chip active" data-filter="all">All topics</button>
+    <button class="chip" data-filter="start">Getting started</button>
+    <button class="chip" data-filter="safe">Safe income</button>
+    <button class="chip" data-filter="stocks">Stocks</button>
+    <button class="chip" data-filter="funds">Funds</button>
+    <button class="chip" data-filter="tax">Tax</button>
+    <button class="chip" data-filter="islamic">Islamic</button>
+    <button class="chip" data-filter="overseas">Overseas</button>
+    <button class="chip" data-filter="gold">Gold</button>
   </div>
 
   <div class="guides-grid">
 
-    <div class="guide-card">
-      <div class="guide-icon">📊</div>
-      <div class="guide-title">How to Invest in Mutual Funds in Pakistan (2026)</div>
-      <div class="guide-desc">A complete step-by-step guide to opening a mutual fund account online, choosing between Islamic and conventional funds, and starting your first Systematic Investment Plan (SIP) with as little as PKR 1,000. Covers how SECP regulation protects your capital, how to compare fund managers by expense ratio and NAV history, and which fund categories suit different risk appetites — from ultra-safe money market funds to high-growth equity funds.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 9 min read</span>
-        <span class="topic-tag">Step-by-step</span>
-        <span class="topic-tag">Returns</span>
-        <span class="topic-tag">Islamic funds</span>
-      </div>
-      <a href="/guides/how-to-invest-mutual-funds-pakistan.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card">
-      <div class="guide-icon">⚖️</div>
-      <div class="guide-title">National Savings vs Mutual Funds: Which Is Better?</div>
-      <div class="guide-desc">A detailed, side-by-side comparison of CDNS National Savings schemes and SECP-regulated mutual funds — covering current profit rates, risk profiles, liquidity terms, and tax treatment for both resident and non-resident Pakistanis. The guide walks through three investor personas (conservative, balanced, growth-oriented) and maps each to the most suitable product mix so you can see exactly where your own situation fits rather than relying on a one-size-fits-all recommendation.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 10 min read</span>
-        <span class="topic-tag">Comparison</span>
-        <span class="topic-tag">Risk</span>
-        <span class="topic-tag">Tax</span>
-      </div>
-      <a href="/guides/national-savings-vs-mutual-funds.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card">
-      <div class="guide-icon">📈</div>
-      <div class="guide-title">Best Dividend Stocks on PSX for Passive Income</div>
-      <div class="guide-desc">How to build a dividend income portfolio on the Pakistan Stock Exchange — which sectors (energy, banking, fertiliser) have the most reliable payout histories, how to open a CDC investor account in under 30 minutes, and which blue-chip companies have paid dividends without interruption for 20 or more years. The guide also covers how to calculate dividend yield, understand ex-dividend dates, and avoid the common mistake of chasing high-yield stocks that are actually in structural decline.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 9 min read</span>
-        <span class="topic-tag">Passive income</span>
-        <span class="topic-tag">PSX</span>
-        <span class="topic-tag">Dividend yield</span>
-      </div>
-      <a href="/guides/best-dividend-stocks-psx.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card">
-      <div class="guide-icon">🏦</div>
-      <div class="guide-title">SBP Policy Rate Explained: What It Means for Your Savings</div>
-      <div class="guide-desc">Why the State Bank of Pakistan's policy rate is the single most important number for Pakistani investors, and how to position your portfolio as rates rise or fall through the monetary cycle. The guide explains how the Monetary Policy Committee sets the rate, how quickly National Savings profit rates and bank deposit rates respond, and what a 100-basis-point cut actually translates to in rupee terms on a PKR 500,000 savings certificate — so you can make allocation decisions before the market fully prices in each move.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 8 min read</span>
-        <span class="topic-tag">SBP rate</span>
-        <span class="topic-tag">Monetary policy</span>
-        <span class="topic-tag">Fixed income</span>
-      </div>
-      <a href="/guides/sbp-policy-rate-investments.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card">
-      <div class="guide-icon">🌍</div>
-      <div class="guide-title">Roshan Digital Account (RDA) — Complete Guide for Overseas Pakistanis</div>
-      <div class="guide-desc">How Non-Resident Pakistanis can invest in PSX stocks, mutual funds, and government securities from abroad using the State Bank's Roshan Digital Account programme — with no requirement to physically visit Pakistan. The guide covers eligibility, the remote KYC process, how to fund the account in foreign currency, a comparison of which banks offer the best RDA experience, and how profits can be repatriated freely without SBP approval, making it one of the most flexible investment vehicles available to the Pakistani diaspora.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 9 min read</span>
-        <span class="topic-tag">Overseas Pakistanis</span>
-        <span class="topic-tag">Remittances</span>
-        <span class="topic-tag">Step-by-step</span>
-      </div>
-      <a href="/guides/roshan-digital-account-guide.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card">
+    <div class="guide-card" data-cat="gold">
       <div class="guide-icon">🪙</div>
       <div class="guide-title">Gold Investment in Pakistan: Physical, Digital &amp; Gold Funds</div>
-      <div class="guide-desc">Why gold has been the default store of value for Pakistani households as the rupee slid from 160 to 278 per dollar — and how to buy it without getting burned. Covers tola and gram pricing, 24k vs 22k purity, making charges and buy-sell spreads at jewellers, gold-backed mutual funds, PMEX contracts, and how to verify purity before you pay. Includes an honest comparison against National Savings and dividend stocks, plus how much gold actually belongs in a portfolio.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 9 min read</span>
-        <span class="topic-tag">Gold</span>
-        <span class="topic-tag">Inflation hedge</span>
-        <span class="topic-tag">How-to</span>
-      </div>
+      <div class="guide-desc">Why gold has been the default store of value for Pakistani households as the rupee slid from 160 to 278 per dollar — and how to buy it without getting burned. Tola pricing, purity, making charges, gold funds, PMEX.</div>
+      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Inflation hedge</span></div>
       <a href="/guides/gold-investment-pakistan.html" class="guide-link">Read guide →</a>
     </div>
 
-    <div class="guide-card">
+    <div class="guide-card" data-cat="safe macro">
       <div class="guide-icon">🏛️</div>
       <div class="guide-title">How to Buy T-Bills &amp; PIBs Through an IPS Account</div>
-      <div class="guide-desc">Government T-bills and Pakistan Investment Bonds are the same instruments banks and funds earn their returns from — and you can hold them directly through an Investor Portfolio Securities (IPS) account at your own bank. This guide explains how primary auctions work, what documents you need, how yields track the SBP policy rate, and when a money market fund is honestly the smarter route for smaller amounts.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 9 min read</span>
-        <span class="topic-tag">T-Bills</span>
-        <span class="topic-tag">Government-backed</span>
-        <span class="topic-tag">Step-by-step</span>
-      </div>
+      <div class="guide-desc">Hold government T-bills and Pakistan Investment Bonds directly through an Investor Portfolio Securities account at your own bank — auctions, documents, yields, and when a money market fund is honestly the smarter route.</div>
+      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Government-backed</span></div>
       <a href="/guides/treasury-bills-pakistan.html" class="guide-link">Read guide →</a>
     </div>
 
-    <div class="guide-card">
+    <div class="guide-card" data-cat="tax start">
       <div class="guide-icon">🧾</div>
       <div class="guide-title">How Investments Are Taxed: Filer vs Non-Filer</div>
-      <div class="guide-desc">Becoming a tax filer on FBR's Active Taxpayer List is the single biggest "return boost" available to a Pakistani investor — non-filers pay roughly double the withholding tax on dividends, savings profit, and fund returns. This guide explains how each income stream is taxed, how capital gains are collected through NCCPL, how Zakat deduction works, and walks through NTN registration and filing on the IRIS portal step by step.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 9 min read</span>
-        <span class="topic-tag">Tax</span>
-        <span class="topic-tag">FBR filer</span>
-        <span class="topic-tag">CGT</span>
-      </div>
+      <div class="guide-desc">Becoming a filer on FBR&rsquo;s Active Taxpayer List is the single biggest &ldquo;return boost&rdquo; available — non-filers pay roughly double the withholding tax. Every income stream explained, plus step-by-step IRIS filing.</div>
+      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">FBR filer</span></div>
       <a href="/guides/investment-tax-pakistan.html" class="guide-link">Read guide →</a>
     </div>
 
-    <div class="guide-card">
+    <div class="guide-card" data-cat="safe funds start">
       <div class="guide-icon">💵</div>
       <div class="guide-title">Money Market Funds vs Bank Savings Accounts</div>
-      <div class="guide-desc">Most Pakistani bank savings accounts pay well below the SBP policy rate, which means idle cash quietly loses to inflation. This guide explains the minimum deposit rate rules, how SECP-regulated money market funds work, and compares returns, redemption speed, deposit protection, and tax side by side — including a practical emergency-fund split between instant-access bank money and a money market fund.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 9 min read</span>
-        <span class="topic-tag">Cash management</span>
-        <span class="topic-tag">Comparison</span>
-        <span class="topic-tag">Emergency fund</span>
-      </div>
+      <div class="guide-desc">Most bank savings accounts pay well below the SBP policy rate — idle cash quietly loses to inflation. Returns, redemption speed, deposit protection and tax compared side by side, plus a practical emergency-fund split.</div>
+      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Cash management</span></div>
       <a href="/guides/money-market-funds-vs-bank-savings.html" class="guide-link">Read guide →</a>
     </div>
 
-    <div class="guide-card">
+    <div class="guide-card" data-cat="stocks start">
       <div class="guide-icon">📋</div>
       <div class="guide-title">How to Open a PSX Brokerage Account (CDC &amp; Sahulat)</div>
-      <div class="guide-desc">Everything you need to go from zero to your first trade on the Pakistan Stock Exchange: choosing a licensed TREC-holder broker, understanding why your shares actually live in a CDC sub-account in your own name, the simplified Sahulat account for beginners, the full online KYC process, order types, T+2 settlement, and how dividends land in your bank account. Includes an explicit warning section on WhatsApp and Telegram "broker" scams.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 9 min read</span>
-        <span class="topic-tag">PSX</span>
-        <span class="topic-tag">CDC account</span>
-        <span class="topic-tag">Step-by-step</span>
-      </div>
+      <div class="guide-desc">Zero to first trade: choosing a licensed TREC-holder broker, why your shares live in a CDC sub-account in your own name, the Sahulat account for beginners, full online KYC, and the WhatsApp &ldquo;broker&rdquo; scams to avoid.</div>
+      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Step-by-step</span></div>
       <a href="/guides/open-brokerage-account-psx.html" class="guide-link">Read guide →</a>
     </div>
 
-    <div class="guide-card">
+    <div class="guide-card" data-cat="islamic funds stocks">
       <div class="guide-icon">🕌</div>
       <div class="guide-title">Halal Investing: Islamic Funds, Sukuk &amp; Shariah Stocks</div>
-      <div class="guide-desc">A complete map of Pakistan's Shariah-compliant investment universe: how Islamic income and equity funds earn profit without interest, what makes the KMI-30 index a ready-made stock screen, how government Ijara sukuk differ from conventional T-bills, dividend purification, and Islamic savings options at CDNS and Islamic banks. Includes a worked example of a fully halal portfolio built from real funds with their actual published returns.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 9 min read</span>
-        <span class="topic-tag">Shariah-compliant</span>
-        <span class="topic-tag">Islamic funds</span>
-        <span class="topic-tag">Sukuk</span>
-      </div>
+      <div class="guide-desc">Pakistan&rsquo;s full Shariah-compliant universe mapped: how Islamic funds earn profit without interest, the KMI-30 as a ready-made screen, government Ijara sukuk, dividend purification, and a worked halal portfolio.</div>
+      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Shariah-compliant</span></div>
       <a href="/guides/halal-investing-pakistan.html" class="guide-link">Read guide →</a>
     </div>
 
-    <div class="guide-card">
+    <div class="guide-card" data-cat="funds start">
+      <div class="guide-icon">📊</div>
+      <div class="guide-title">How to Invest in Mutual Funds in Pakistan (2026)</div>
+      <div class="guide-desc">Open a fund account online, choose between Islamic and conventional funds, and start a SIP from PKR 1,000 — with SECP protections, expense ratios and NAV history explained for every risk appetite.</div>
+      <div class="guide-meta"><span class="read-time">⏱ 9 min</span><span class="topic-tag">Step-by-step</span><span class="topic-tag">SIP</span></div>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html" class="guide-link">Read guide →</a>
+    </div>
+
+    <div class="guide-card" data-cat="safe funds start">
+      <div class="guide-icon">⚖️</div>
+      <div class="guide-title">National Savings vs Mutual Funds: Which Is Better?</div>
+      <div class="guide-desc">CDNS certificates and SECP-regulated funds compared head-to-head — profit rates, risk, liquidity and tax — mapped to three investor personas so you can see exactly where your situation fits.</div>
+      <div class="guide-meta"><span class="read-time">⏱ 10 min</span><span class="topic-tag">Comparison</span></div>
+      <a href="/guides/national-savings-vs-mutual-funds.html" class="guide-link">Read guide →</a>
+    </div>
+
+    <div class="guide-card" data-cat="stocks">
+      <div class="guide-icon">📈</div>
+      <div class="guide-title">Best Dividend Stocks on PSX for Passive Income</div>
+      <div class="guide-desc">Build a dividend income portfolio on the PSX — which sectors have the most reliable payout histories, how to calculate yield, ex-dividend dates, and how to avoid yield traps in structural decline.</div>
+      <div class="guide-meta"><span class="read-time">⏱ 9 min</span><span class="topic-tag">Passive income</span></div>
+      <a href="/guides/best-dividend-stocks-psx.html" class="guide-link">Read guide →</a>
+    </div>
+
+    <div class="guide-card" data-cat="macro safe">
+      <div class="guide-icon">🏦</div>
+      <div class="guide-title">SBP Policy Rate Explained: What It Means for Your Savings</div>
+      <div class="guide-desc">The single most important number for Pakistani investors — how the Monetary Policy Committee sets it, how fast savings and deposit rates respond, and how to position before the market prices each move.</div>
+      <div class="guide-meta"><span class="read-time">⏱ 8 min</span><span class="topic-tag">Monetary policy</span></div>
+      <a href="/guides/sbp-policy-rate-investments.html" class="guide-link">Read guide →</a>
+    </div>
+
+    <div class="guide-card" data-cat="overseas">
+      <div class="guide-icon">🌍</div>
+      <div class="guide-title">Roshan Digital Account — Complete Guide for Overseas Pakistanis</div>
+      <div class="guide-desc">Invest in PSX stocks, funds and Naya Pakistan Certificates from abroad — remote KYC, funding in foreign currency, which banks do RDA best, and free profit repatriation without SBP approval.</div>
+      <div class="guide-meta"><span class="read-time">⏱ 9 min</span><span class="topic-tag">Remittances</span></div>
+      <a href="/guides/roshan-digital-account-guide.html" class="guide-link">Read guide →</a>
+    </div>
+
+    <div class="guide-card" data-cat="start" style="border-left-color:var(--gold)">
       <div class="guide-icon">🧮</div>
       <div class="guide-title">Try the Free Investment Analyzer</div>
-      <div class="guide-desc">Not sure how to split your savings across National Savings, mutual funds, and PSX dividend stocks? Enter your available amount in the free analyzer on our home page and get an instant, personalised breakdown of projected returns across all three pillars based on today's live rates. The tool updates every day so the comparison always reflects current SBP policy rate, CDNS profit rates, and average dividend yields — giving you a reliable starting point before you make any commitment.</div>
-      <div class="guide-meta">
-        <span class="read-time">⏱ 2 min</span>
-        <span class="topic-tag">Calculator</span>
-        <span class="topic-tag">Returns</span>
-        <span class="topic-tag">Comparison</span>
-      </div>
+      <div class="guide-desc">Enter your amount on the home page and get an instant, personalised split across National Savings, mutual funds and PSX dividend stocks — using today&rsquo;s live rates, refreshed every morning.</div>
+      <div class="guide-meta"><span class="read-time">⏱ 2 min</span><span class="topic-tag">Interactive</span></div>
       <a href="/" class="guide-link">Open the tool →</a>
     </div>
 
+  </div>
+
+  <details style="background:var(--green-light);border:1px solid var(--border2);border-radius:var(--radius);margin-top:30px;padding:0">
+    <summary style="cursor:pointer;list-style:none;padding:16px 22px;font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--green)">Why investing matters more than ever for Pakistanis in 2026 — the 60-second primer ▾</summary>
+    <div style="padding:4px 22px 20px">
+      <p style="font-size:.95rem">Pakistan&rsquo;s headline inflation ran at roughly <strong>7% in early 2026</strong>, which means money sitting idle in a zero-interest wallet or an underperforming savings account loses real purchasing power every single month. Even with the <strong>SBP policy rate now at 11.5%</strong> — sharply lower than the 22% peak of 2023 — the environment still rewards investors who understand which instruments to use and when to use them.</p>
+      <p style="font-size:.95rem">Every investment decision in Pakistan ultimately traces back to three pillars: <strong>National Savings (CDNS)</strong> — government-backed certificates with zero credit risk, the safe anchor of any portfolio; <strong>SECP-regulated mutual funds</strong> — professionally managed money-market, fixed-income and equity strategies from PKR 1,000; and <strong>PSX dividend stocks</strong> — blue chips that have paid consistent dividends for decades and can outpace inflation over a full cycle.</p>
+      <p style="font-size:.95rem;margin-bottom:0">This library serves the salaried professional making a first investment, the overseas Pakistani deploying remittances through a Roshan Digital Account, and the experienced investor benchmarking returns. Every guide is written from first-hand investing experience, and all rates shown across the site are <strong>updated daily</strong> from official SBP and CDNS sources.</p>
+    </div>
+  </details>
+
+  <div class="author-byline">
+    Written by <strong>Abdul Ahad</strong> — software engineer and personal PSX/mutual fund investor.
+    <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a>
   </div>
 
 </div>
@@ -280,12 +222,13 @@
   <div style="margin-top:8px">
     <a href="/">Home</a>
     <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
     <a href="/about.html">About</a>
     <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
     <a href="/privacy-policy.html">Privacy Policy</a>
   </div>
 </footer>
 
+<script src="/assets/listing.js" defer></script>
 </body>
 </html>

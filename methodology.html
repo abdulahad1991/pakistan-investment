@@ -57,6 +57,13 @@
     <p style="margin-top:10px;font-size:1rem">How we source, update, and verify every figure on this site — who writes it, and how we keep our editorial decisions independent of our advertising.</p>
   </div>
 
+  <!-- Live proof: this is the pipeline's actual output, today -->
+  <div class="card" style="border-top:3px solid var(--gold)">
+    <h2 style="margin-top:0">Proof, Not Promises</h2>
+    <p style="font-size:.92rem;color:var(--muted)">These numbers are the live output of the daily pipeline described below — fetched this morning, not typed by hand. If the date stamp ever looks stale, that is exactly the kind of thing we want you to <a href="/contact.html">report</a>.</p>
+    <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:6px;padding:18px;margin:0"></div>
+  </div>
+
   <!-- Intro -->
   <div class="card">
     <p>Money is a serious subject, and trust has to be earned. This page exists so that you never have to take a number on Pakistan Investment Advisor at face value. Below we explain exactly where our data comes from, how often it is refreshed, how we check it for errors, who is behind the site, and how we make money — in plain language, with no spin.</p>
@@ -106,6 +113,30 @@
   <!-- Update cadence -->
   <div class="card">
     <h2>How Often Data Is Updated</h2>
+
+    <div style="margin:14px 0 22px">
+      <div class="pipeline-step">
+        <div class="step-num">1</div>
+        <div><strong style="font-family:var(--display)">06:00 PKT — Fetch</strong>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">A scheduled GitHub Action pulls today's figures from SBP, CDNS, MUFAP and PSX.</div></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">2</div>
+        <div><strong style="font-family:var(--display)">Validate</strong>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">Implausible jumps (a rate that doubles overnight) are flagged for review instead of being published blindly.</div></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">3</div>
+        <div><strong style="font-family:var(--display)">Publish</strong>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">The dataset and the guide/blog index are rebuilt and deployed — every chart, table and widget across the site updates at once.</div></div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">4</div>
+        <div><strong style="font-family:var(--display)">You verify</strong>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">Every figure carries an "as of" date and links to its primary source, so you can always check it yourself.</div></div>
+      </div>
+    </div>
+
     <p>The figures on this site are refreshed automatically <strong>every day</strong>. We run an automated data pipeline — a scheduled GitHub Action — that pulls the latest numbers from the sources listed above and writes them into the site's dataset. Because the process is automated rather than hand-keyed, there is no lag while someone gets around to updating a spreadsheet, and far less room for transcription mistakes.</p>
     <p>Every figure on the site carries an <strong>"as of" date</strong> so you can see exactly how fresh it is. Some data naturally moves faster than others: PSX prices and the PKR–USD rate change on every trading day, while the SBP policy rate only changes when the Monetary Policy Committee meets (roughly every six weeks) and CDNS profit rates change only when the government revises them. When a source has not published anything new, the "as of" date simply reflects the last time that source itself changed.</p>
     <div class="callout callout-green">
@@ -174,5 +205,6 @@
   </div>
 </footer>
 
+<script src="/assets/article.js" defer></script>
 </body>
 </html>

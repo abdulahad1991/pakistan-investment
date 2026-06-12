@@ -404,3 +404,9 @@ details[open] .faq-question::after{transform:rotate(45deg)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
 }
+
+/* ── Declutter: clamp long card descriptions ────────────── */
+.guide-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.guide-card:hover .guide-desc{-webkit-line-clamp:unset}
+summary{cursor:pointer}
+summary::-webkit-details-marker{display:none}

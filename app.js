@@ -5,15 +5,15 @@ let AMOUNT = 0;
 let currentPage = 0;
 
 const PORTFOLIO_ALLOC = [
-  { label: "National Savings Certificate", pct: 30, ret: null, color: "#1b5e20", shariah: false,
+  { label: "National Savings Certificate", pct: 30, ret: null, color: "#0E3B2E", shariah: false,
     type: "Government-backed Fixed Income", where: "Pakistan Post Office / CDNS branch" },
-  { label: "Meezan Islamic Income Fund",   pct: 25, ret: null, color: "#0d47a1", shariah: true,
+  { label: "Meezan Islamic Income Fund",   pct: 25, ret: null, color: "#23415E", shariah: true,
     type: "Islamic Money Market Fund",     where: "almeezangroup.com" },
-  { label: "Al Meezan Mutual Fund",        pct: 20, ret: null, color: "#4a148c", shariah: true,
+  { label: "Al Meezan Mutual Fund",        pct: 20, ret: null, color: "#7A5A1F", shariah: true,
     type: "Islamic Equity Fund",           where: "almeezangroup.com" },
-  { label: "PSX Blue Chips (FFC + MCB)",   pct: 20, ret: 6.5,  color: "#bf360c", shariah: false,
+  { label: "PSX Blue Chips (FFC + MCB)",   pct: 20, ret: 6.5,  color: "#A4452F", shariah: false,
     type: "Dividend Stocks",               where: "CDC account via PSX broker" },
-  { label: "Emergency Buffer (CDNS)",      pct: 5,  ret: null, color: "#37474f", shariah: false,
+  { label: "Emergency Buffer (CDNS)",      pct: 5,  ret: null, color: "#5E5C52", shariah: false,
     type: "CDNS Savings Account",          where: "Pakistan Post Office / CDNS branch" },
 ];
 
@@ -177,7 +177,7 @@ function renderNationalSavings() {
       <td class="num yield-hi">${s.rate}%</td>
       <td>${s.tenure}</td>
       <td>${s.payout}</td>
-      <td class="num" style="color:#0d47a1;font-weight:700">
+      <td class="num" style="color:#23415E;font-weight:700">
         ${earn ? "PKR " + formatPKR(earn) + "/yr" : "—"}
       </td>
       <td>${s.eligible}</td>
@@ -327,10 +327,10 @@ function renderPortfolio() {
 
   // Action steps
   const steps = [
-    { n: 1, title: "Open CDNS / National Savings Account", body: `Visit any Pakistan Post Office with your CNIC. Deposit PKR ${formatPKR(Math.round(AMOUNT * 0.30))} into a Special Savings Certificate.`, color: "#1b5e20" },
-    { n: 2, title: "Register on Al Meezan Online Portal",  body: `Go to almeezangroup.com → Register → upload CNIC → KYC online (~15 mins). Invest PKR ${formatPKR(Math.round(AMOUNT * 0.25))} in Meezan Islamic Income Fund and PKR ${formatPKR(Math.round(AMOUNT * 0.20))} in Al Meezan Mutual Fund.`, color: "#0d47a1" },
-    { n: 3, title: "Open a PSX Brokerage + CDC Account",   body: `Choose a broker (Arif Habib, MCB FSL, or Akseer). Register online. Transfer PKR ${formatPKR(Math.round(AMOUNT * 0.20))} and split: 60% into FFC, 40% into MCB Bank shares.`, color: "#bf360c" },
-    { n: 4, title: "Keep Emergency Buffer Liquid",          body: `At the same CDNS visit, open a Savings Account with PKR ${formatPKR(Math.round(AMOUNT * 0.05))}. No lock-in — withdraw anytime.`, color: "#37474f" },
+    { n: 1, title: "Open CDNS / National Savings Account", body: `Visit any Pakistan Post Office with your CNIC. Deposit PKR ${formatPKR(Math.round(AMOUNT * 0.30))} into a Special Savings Certificate.`, color: "#0E3B2E" },
+    { n: 2, title: "Register on Al Meezan Online Portal",  body: `Go to almeezangroup.com → Register → upload CNIC → KYC online (~15 mins). Invest PKR ${formatPKR(Math.round(AMOUNT * 0.25))} in Meezan Islamic Income Fund and PKR ${formatPKR(Math.round(AMOUNT * 0.20))} in Al Meezan Mutual Fund.`, color: "#23415E" },
+    { n: 3, title: "Open a PSX Brokerage + CDC Account",   body: `Choose a broker (Arif Habib, MCB FSL, or Akseer). Register online. Transfer PKR ${formatPKR(Math.round(AMOUNT * 0.20))} and split: 60% into FFC, 40% into MCB Bank shares.`, color: "#A4452F" },
+    { n: 4, title: "Keep Emergency Buffer Liquid",          body: `At the same CDNS visit, open a Savings Account with PKR ${formatPKR(Math.round(AMOUNT * 0.05))}. No lock-in — withdraw anytime.`, color: "#5E5C52" },
   ];
   const stepsEl = document.getElementById("action-steps");
   stepsEl.innerHTML = steps.map(s => `
@@ -384,8 +384,8 @@ function renderKSEChart() {
       datasets: [{
         label: "KSE-100",
         data: DATA.kse100_history.values,
-        borderColor: "#1b5e20",
-        backgroundColor: "rgba(27,94,32,.08)",
+        borderColor: "#0E3B2E",
+        backgroundColor: "rgba(14,59,46,.08)",
         borderWidth: 2.5,
         pointRadius: 3,
         fill: true,
@@ -414,8 +414,8 @@ function renderSBPChart() {
       datasets: [{
         label: "SBP Rate %",
         data: DATA.sbp_history.values,
-        borderColor: "#c62828",
-        backgroundColor: "rgba(198,40,40,.07)",
+        borderColor: "#A4452F",
+        backgroundColor: "rgba(164,69,47,.07)",
         borderWidth: 2.5,
         fill: true,
         tension: .35,
@@ -443,7 +443,7 @@ function renderStocksChart(stocks) {
       datasets: [{
         label: "Dividend Yield %",
         data: stocks.map(s => s.yield),
-        backgroundColor: stocks.map(s => s.yield >= 6 ? "#1b5e20" : s.yield >= 4 ? "#43a047" : "#a5d6a7"),
+        backgroundColor: stocks.map(s => s.yield >= 6 ? "#0E3B2E" : s.yield >= 4 ? "#1F7A53" : "#C9B27B"),
         borderRadius: 6,
       }]
     },
@@ -468,7 +468,7 @@ function renderDonutChart() {
         data: PORTFOLIO_ALLOC.map(a => a.pct),
         backgroundColor: PORTFOLIO_ALLOC.map(a => a.color),
         borderWidth: 2,
-        borderColor: "#fff",
+        borderColor: "#F6F1E6",
       }]
     },
     options: {
@@ -500,14 +500,14 @@ function renderProjectionChart(projVals) {
         {
           label: "Portfolio Value",
           data: projVals,
-          backgroundColor: ["#a5d6a7","#81c784","#66bb6a","#43a047","#1b5e20"],
+          backgroundColor: ["#D9B86A","#B98A2F","#1F7A53","#23415E","#0E3B2E"],
           borderRadius: 8,
         },
         {
           label: "Starting Amount",
           data: Array(5).fill(AMOUNT),
           type: "line",
-          borderColor: "#c62828",
+          borderColor: "#A4452F",
           borderDash: [5, 4],
           borderWidth: 1.5,
           pointRadius: 0,

@@ -55,178 +55,10 @@
 <!-- Chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
 
-<style>
-/* ── Reset & Base ───────────────────────────────────────── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:100vh}
-img{max-width:100%}
-a{color:inherit;text-decoration:none}
-
-/* ── Variables ──────────────────────────────────────────── */
-:root{
-  --green:#1b5e20;--green2:#2e7d32;--green3:#43a047;--green-light:#e8f5e9;
-  --gold:#c8a415;--gold-light:#fffde7;
-  --navy:#0d47a1;--red:#c62828;
-  --bg:#f0f4f0;--card:#fff;--border:#e0e0e0;--muted:#666;
-  --radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 32px rgba(0,0,0,.12);
-}
-
-/* ── Layout ─────────────────────────────────────────────── */
-.container{max-width:900px;margin:0 auto;padding:0 16px}
-.container-wide{max-width:1100px;margin:0 auto;padding:0 16px}
-
-/* ── Header ─────────────────────────────────────────────── */
-header{background:var(--green);color:#fff;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.header-inner{display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:1.1rem;font-weight:700;letter-spacing:-.3px}
-.logo span{color:#a5d6a7}
-.data-age{font-size:.75rem;opacity:.75}
-
-/* ── Progress bar ───────────────────────────────────────── */
-#progress-wrap{background:rgba(255,255,255,.15);height:4px;margin-top:10px}
-#progress-bar{height:4px;background:#a5d6a7;width:20%;transition:width .4s ease}
-
-/* ── Step nav ───────────────────────────────────────────── */
-.step-nav{display:flex;gap:6px;padding:16px 0 0;overflow-x:auto;scrollbar-width:none}
-.step-nav::-webkit-scrollbar{display:none}
-.step-pill{flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;border:2px solid var(--border);background:#fff;color:var(--muted);transition:all .2s}
-.step-pill.active{background:var(--green);color:#fff;border-color:var(--green)}
-.step-pill.done{background:var(--green-light);color:var(--green);border-color:var(--green3)}
-
-/* ── Page sections ──────────────────────────────────────── */
-.page{display:none;animation:fadeUp .35s ease}
-.page.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── Cards ──────────────────────────────────────────────── */
-.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:16px}
-.card-sm{padding:16px}
-
-/* ── Section headers ────────────────────────────────────── */
-.section-title{font-size:1.4rem;font-weight:700;color:var(--green);margin-bottom:4px}
-.section-sub{color:var(--muted);font-size:.9rem;margin-bottom:20px}
-
-/* ── Input page ─────────────────────────────────────────── */
-.hero{background:linear-gradient(135deg,var(--green) 0%,#2e7d32 100%);color:#fff;padding:40px 0 32px;text-align:center}
-.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:10px}
-.hero p{opacity:.85;font-size:1rem;max-width:520px;margin:0 auto 28px}
-.amount-wrap{background:rgba(255,255,255,.12);border-radius:16px;padding:24px;max-width:420px;margin:0 auto}
-.amount-label{font-size:.85rem;font-weight:600;margin-bottom:8px;opacity:.9}
-.amount-input-row{display:flex;align-items:center;background:#fff;border-radius:10px;overflow:hidden}
-.pkr-prefix{padding:0 14px;font-weight:700;color:var(--green);font-size:1.1rem;white-space:nowrap}
-#amount-input{border:none;outline:none;font-size:1.3rem;font-weight:700;padding:14px 8px;width:100%;color:var(--green);background:transparent}
-.btn-analyze{display:block;width:100%;margin-top:14px;padding:14px;background:var(--gold);color:#1a1a1a;font-size:1rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;transition:background .2s}
-.btn-analyze:hover{background:#e6b800}
-
-/* ── Macro pills ────────────────────────────────────────── */
-.macro-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
-@media(min-width:600px){.macro-grid{grid-template-columns:repeat(4,1fr)}}
-.macro-pill{background:var(--card);border-radius:10px;padding:14px;text-align:center;box-shadow:var(--shadow)}
-.macro-val{font-size:1.3rem;font-weight:800;color:var(--green)}
-.macro-lbl{font-size:.72rem;color:var(--muted);margin-top:2px}
-
-/* ── Tables ─────────────────────────────────────────────── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:.88rem}
-th{background:var(--green);color:#fff;padding:10px 12px;text-align:left;font-weight:600;white-space:nowrap}
-td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
-tr:hover td{background:#f9fdf9}
-tr.rec-row td{background:var(--green-light)}
-.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
-.yield-hi{color:var(--green);font-weight:700}
-.chg-up{color:var(--green2)}
-.chg-dn{color:var(--red)}
-
-/* ── Badges ─────────────────────────────────────────────── */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:.72rem;font-weight:600}
-.badge-green{background:#c8e6c9;color:#1b5e20}
-.badge-gold{background:#fff9c4;color:#856404}
-.badge-blue{background:#e3f2fd;color:#0d47a1}
-.badge-grey{background:#f5f5f5;color:#555}
-.badge-red{background:#ffebee;color:#c62828}
-
-/* ── Fund cards ─────────────────────────────────────────── */
-.funds-grid{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:600px){.funds-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){.funds-grid{grid-template-columns:repeat(3,1fr)}}
-.fund-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;border:2px solid var(--border);transition:box-shadow .2s}
-.fund-card:hover{box-shadow:var(--shadow-lg)}
-.fund-card.rec{border-color:var(--green3)}
-.fund-name{font-weight:700;font-size:.95rem;margin-bottom:6px}
-.fund-mgr{font-size:.78rem;color:var(--muted);margin-bottom:10px}
-.fund-returns{display:flex;gap:8px;margin:12px 0}
-.ret-box{flex:1;text-align:center;background:#f5f5f5;border-radius:8px;padding:8px 4px}
-.ret-box.best{background:var(--green-light)}
-.ret-val{font-size:1rem;font-weight:800;color:var(--green)}
-.ret-lbl{font-size:.65rem;color:var(--muted);margin-top:2px}
-.fund-verdict{font-size:.8rem;color:#444;margin:8px 0}
-.fund-earn{font-size:.85rem;font-weight:700;color:var(--navy);background:#e3f2fd;padding:6px 10px;border-radius:6px;margin-top:8px}
-
-/* ── Portfolio allocation ────────────────────────────────── */
-.alloc-grid{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:700px){.alloc-grid{grid-template-columns:1fr 1fr}}
-.alloc-item{display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border-radius:10px;box-shadow:var(--shadow)}
-.alloc-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
-.alloc-label{font-weight:600;font-size:.9rem}
-.alloc-sub{font-size:.78rem;color:var(--muted)}
-.alloc-amount{margin-left:auto;text-align:right;font-weight:700;color:var(--green);white-space:nowrap}
-.alloc-pct{font-size:.78rem;color:var(--muted)}
-
-/* ── Summary stats ───────────────────────────────────────── */
-.summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
-@media(min-width:600px){.summary-grid{grid-template-columns:repeat(4,1fr)}}
-.stat-card{background:var(--card);border-radius:10px;padding:16px;box-shadow:var(--shadow);text-align:center}
-.stat-val{font-size:1.4rem;font-weight:800;color:var(--green)}
-.stat-lbl{font-size:.75rem;color:var(--muted);margin-top:3px}
-
-/* ── Chart containers ────────────────────────────────────── */
-.chart-wrap{position:relative;height:260px;margin:16px 0}
-.chart-wrap-sm{position:relative;height:200px;margin:12px 0}
-
-/* ── CTAs / Affiliate buttons ────────────────────────────── */
-.cta-block{background:var(--green-light);border:1px solid #a5d6a7;border-radius:12px;padding:16px;margin:16px 0}
-.cta-title{font-weight:700;color:var(--green);margin-bottom:10px;font-size:.9rem}
-.cta-btns{display:flex;flex-wrap:wrap;gap:8px}
-.btn-cta{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:8px;font-size:.83rem;font-weight:700;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
-.btn-primary{background:var(--green);color:#fff}
-.btn-primary:hover{background:var(--green2)}
-.btn-secondary{background:#fff;color:var(--green);border:1.5px solid var(--green)}
-.btn-secondary:hover{background:var(--green-light)}
-.btn-gold{background:var(--gold);color:#1a1a1a}
-.btn-gold:hover{background:#e6b800}
-.btn-navy{background:var(--navy);color:#fff}
-.btn-navy:hover{background:#1565c0}
-
-/* ── Nav buttons ─────────────────────────────────────────── */
-.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px}
-.btn-nav{padding:12px 24px;border-radius:10px;font-size:.9rem;font-weight:700;cursor:pointer;border:none;transition:all .2s}
-.btn-next{background:var(--green);color:#fff;margin-left:auto}
-.btn-next:hover{background:var(--green2)}
-.btn-back{background:#fff;color:var(--green);border:2px solid var(--green)}
-.btn-back:hover{background:var(--green-light)}
-
-/* ── Ad slots ────────────────────────────────────────────── */
-.ad-slot{text-align:center;margin:20px 0;position:relative}
-.ad-label{display:none;font-size:.65rem;color:#bbb;position:absolute;top:-14px;left:50%;transform:translateX(-50%);white-space:nowrap}
-.ad-slot:has(ins[data-ad-status="filled"]) .ad-label{display:block}
-ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important}
-
-/* ── Disclaimer ──────────────────────────────────────────── */
-.disclaimer{font-size:.75rem;color:var(--muted);background:#fff8e1;border-radius:8px;padding:10px 14px;margin-top:16px;border-left:3px solid var(--gold)}
-
-/* ── Footer ──────────────────────────────────────────────── */
-footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-top:40px;font-size:.8rem;opacity:.9}
-
-/* ── Responsive tweaks ───────────────────────────────────── */
-@media(max-width:480px){
-  .card{padding:16px}
-  th,td{padding:8px 10px;font-size:.8rem}
-  .section-title{font-size:1.2rem}
-  .stat-val{font-size:1.2rem}
-}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 
@@ -237,11 +69,11 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
       <div class="logo">🇵🇰 <span>Pakistan</span> Investment Advisor</div>
       <div style="display:flex;align-items:center;gap:16px">
         <nav style="display:flex;gap:14px">
-          <a href="/guides/" style="color:rgba(255,255,255,.85);font-size:.82rem;font-weight:600;text-decoration:none">Guides</a>
-          <a href="/methodology.html" style="color:rgba(255,255,255,.85);font-size:.82rem;font-weight:600;text-decoration:none">Methodology</a>
-          <a href="/about.html" style="color:rgba(255,255,255,.85);font-size:.82rem;font-weight:600;text-decoration:none">About</a>
-          <a href="/contact.html" style="color:rgba(255,255,255,.85);font-size:.82rem;font-weight:600;text-decoration:none">Contact</a>
-          <a href="/privacy-policy.html" style="color:rgba(255,255,255,.85);font-size:.82rem;font-weight:600;text-decoration:none">Privacy</a>
+          <a href="/guides/">Guides</a>
+          <a href="/methodology.html">Methodology</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy</a>
         </nav>
         <div class="data-age" id="data-age">Loading data…</div>
       </div>
@@ -251,7 +83,7 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
 </header>
 
 <!-- ── Step nav ───────────────────────────────────────── -->
-<div style="background:#fff;border-bottom:1px solid var(--border);position:sticky;top:62px;z-index:99">
+<div style="background:#FDFBF4;border-bottom:1px solid var(--border);position:sticky;top:62px;z-index:99">
   <div class="container">
     <div class="step-nav" id="step-nav">
       <div class="step-pill active" data-step="0">1. Your Amount</div>
@@ -368,7 +200,7 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
 
     <div class="cta-block">
       <div class="cta-title">📍 How to invest in National Savings</div>
-      <div style="font-size:.84rem;color:#333;margin-bottom:10px">Walk into any Pakistan Post Office or CDNS branch with your CNIC. No internet required.</div>
+      <div style="font-size:.84rem;color:#2E2C26;margin-bottom:10px">Walk into any Pakistan Post Office or CDNS branch with your CNIC. No internet required.</div>
       <div class="cta-btns">
         <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" class="btn-cta btn-primary">Open CDNS Account →</a>
         <a href="https://www.savings.gov.pk/profit-rates/" target="_blank" rel="noopener" class="btn-cta btn-secondary">Latest Profit Rates</a>
@@ -397,7 +229,7 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
 
     <div class="cta-block">
       <div class="cta-title">🚀 Open a Mutual Fund Account Online</div>
-      <div style="font-size:.84rem;color:#333;margin-bottom:10px">Register online in 15 minutes — CNIC + mobile number is all you need.</div>
+      <div style="font-size:.84rem;color:#2E2C26;margin-bottom:10px">Register online in 15 minutes — CNIC + mobile number is all you need.</div>
       <div class="cta-btns">
         <a href="https://www.almeezangroup.com" target="_blank" rel="noopener" class="btn-cta btn-primary">Al Meezan (Islamic) →</a>
         <a href="https://www.nbpfunds.com" target="_blank" rel="noopener" class="btn-cta btn-navy">NBP Funds →</a>
@@ -450,7 +282,7 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
 
     <div class="cta-block">
       <div class="cta-title">📋 Open a CDC / Brokerage Account to Buy Stocks</div>
-      <div style="font-size:.84rem;color:#333;margin-bottom:10px">You need a CDC Investor Account to hold shares. Open online with any PSX-licensed broker.</div>
+      <div style="font-size:.84rem;color:#2E2C26;margin-bottom:10px">You need a CDC Investor Account to hold shares. Open online with any PSX-licensed broker.</div>
       <div class="cta-btns">
         <a href="https://ahsecurities.com" target="_blank" rel="noopener" class="btn-cta btn-primary">Arif Habib Securities →</a>
         <a href="https://www.mcbfsl.com" target="_blank" rel="noopener" class="btn-cta btn-navy">MCB Financial Services →</a>
@@ -521,8 +353,8 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
     </div>
 
     <div class="cta-block" style="background:var(--gold-light);border-color:var(--gold)">
-      <div class="cta-title" style="color:#856404">💰 Ready to Start Investing?</div>
-      <div style="font-size:.84rem;color:#333;margin-bottom:10px">Open your accounts today — the earlier you start, the more compounding works for you.</div>
+      <div class="cta-title" style="color:#7A5A1F">💰 Ready to Start Investing?</div>
+      <div style="font-size:.84rem;color:#2E2C26;margin-bottom:10px">Open your accounts today — the earlier you start, the more compounding works for you.</div>
       <div class="cta-btns">
         <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" class="btn-cta btn-primary">CDNS (National Savings) →</a>
         <a href="https://www.almeezangroup.com" target="_blank" rel="noopener" class="btn-cta btn-gold">Al Meezan Funds →</a>
@@ -540,7 +372,7 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
 
     <div class="nav-row">
       <button class="btn-nav btn-back" onclick="goPage(3)">← Back</button>
-      <button class="btn-nav btn-next" onclick="goPage(0)" style="background:var(--gold);color:#1a1a1a">Start Over</button>
+      <button class="btn-nav btn-next" onclick="goPage(0)" style="background:var(--gold);color:#191D1A">Start Over</button>
     </div>
   </div>
 </div>
@@ -550,13 +382,13 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
 <!-- ══════════════════════════════════════════════════════
      STATIC EDUCATIONAL CONTENT — always visible to crawlers
 ══════════════════════════════════════════════════════ -->
-<section id="investment-guide" style="background:#fff;border-top:3px solid var(--green);padding:48px 0">
+<section id="investment-guide" style="background:#FDFBF4;border-top:3px solid var(--green);padding:48px 0">
   <div class="container">
 
     <h2 style="font-size:1.6rem;font-weight:800;color:var(--green);margin-bottom:6px">Investing in Pakistan: A 2026 Starting Point</h2>
     <p style="color:var(--muted);margin-bottom:8px">A free orientation for Pakistani investors. This homepage gives you the lay of the land and the latest numbers, then points you to our in-depth, step-by-step guides for each option.</p>
     <div style="font-size:.82rem;color:var(--muted);border-left:3px solid var(--green);padding:6px 0 6px 12px;margin-bottom:32px;line-height:1.7">
-      By <strong style="color:#1a1a1a">Abdul Ahad</strong> — software engineer and active PSX &amp; mutual-fund investor (<a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:var(--green);font-weight:600">LinkedIn</a>). Every figure on this page is verified against primary sources:
+      By <strong style="color:#191D1A">Abdul Ahad</strong> — software engineer and active PSX &amp; mutual-fund investor (<a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:var(--green);font-weight:600">LinkedIn</a>). Every figure on this page is verified against primary sources:
       <a href="https://www.sbp.org.pk" target="_blank" rel="noopener" style="color:var(--green)">SBP</a>,
       <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" style="color:var(--green)">CDNS</a>,
       <a href="https://www.mufap.com.pk" target="_blank" rel="noopener" style="color:var(--green)">MUFAP</a> and
@@ -564,10 +396,10 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
     </div>
 
     <!-- NEW: This Month's Snapshot — original data-driven analysis -->
-    <div style="background:linear-gradient(135deg,#0d2818 0%,#1b5e20 100%);color:#fff;border-radius:var(--radius);padding:26px;margin-bottom:36px">
+    <div style="background:linear-gradient(135deg,#0B2C22 0%,#0E3B2E 100%);color:#fff;border-radius:var(--radius);padding:26px;margin-bottom:36px">
       <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:4px">
         <h2 style="font-size:1.35rem;font-weight:800;color:#fff;margin:0">📊 This Month's Pakistan Investment Snapshot</h2>
-        <span style="font-size:.72rem;background:var(--gold);color:#1a1a1a;font-weight:700;padding:3px 10px;border-radius:20px">UPDATED DAILY</span>
+        <span style="font-size:.72rem;background:var(--gold);color:#191D1A;font-weight:700;padding:3px 10px;border-radius:20px">UPDATED DAILY</span>
       </div>
       <p style="font-size:.85rem;opacity:.85;margin-bottom:18px;line-height:1.6">Original analysis built from the same live dataset that powers the calculator above. These are educational observations about where the numbers sit today — not buy/sell recommendations.</p>
 
@@ -604,49 +436,49 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
 
     <!-- Routing intro -->
     <div style="margin-bottom:32px">
-      <h2 style="font-size:1.25rem;font-weight:700;color:#1a1a1a;margin-bottom:10px">Your Four Main Options — and Where to Learn More</h2>
-      <p style="line-height:1.75;color:#333">Most Pakistani households can build wealth using four core instruments: government-backed National Savings, professionally managed mutual funds, dividend-paying PSX shares, and — for overseas Pakistanis — the Roshan Digital Account. Below is a quick orientation to each. When you want the full mechanics, fees, tax treatment and step-by-step account opening, follow the deep-dive guide linked in each block.</p>
+      <h2 style="font-size:1.25rem;font-weight:700;color:#191D1A;margin-bottom:10px">Your Four Main Options — and Where to Learn More</h2>
+      <p style="line-height:1.75;color:#2E2C26">Most Pakistani households can build wealth using four core instruments: government-backed National Savings, professionally managed mutual funds, dividend-paying PSX shares, and — for overseas Pakistanis — the Roshan Digital Account. Below is a quick orientation to each. When you want the full mechanics, fees, tax treatment and step-by-step account opening, follow the deep-dive guide linked in each block.</p>
     </div>
 
     <!-- National Savings — orientation -->
     <div style="background:var(--green-light);border-radius:var(--radius);padding:24px;margin-bottom:20px">
       <h3 style="font-size:1.15rem;font-weight:700;color:var(--green);margin-bottom:8px">🏦 National Savings — the safe anchor</h3>
-      <p style="line-height:1.75;color:#333;margin-bottom:12px">CDNS certificates are 100% backed by the Government of Pakistan, carry no market risk, and right now pay between roughly 10.5% and 12.72% depending on the scheme and your eligibility. They suit your emergency buffer and the stable core of a portfolio — you open them with just your CNIC at any Pakistan Post Office or savings centre.</p>
+      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">CDNS certificates are 100% backed by the Government of Pakistan, carry no market risk, and right now pay between roughly 10.5% and 12.72% depending on the scheme and your eligibility. They suit your emergency buffer and the stable core of a portfolio — you open them with just your CNIC at any Pakistan Post Office or savings centre.</p>
       <a href="/guides/national-savings-vs-mutual-funds.html" class="btn-cta btn-primary" style="display:inline-flex">Read: National Savings vs Mutual Funds →</a>
     </div>
 
     <!-- Mutual Funds — orientation -->
     <div style="border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px">
-      <h3 style="font-size:1.15rem;font-weight:700;color:#1a1a1a;margin-bottom:8px">📊 Mutual Funds — managed growth from PKR 1,000</h3>
-      <p style="line-height:1.75;color:#333;margin-bottom:12px">SECP-regulated funds let professionals invest your money across money-market, income or equity assets, with both conventional and Islamic (Shariah-compliant) options. Money-market funds sit close to savings returns with high liquidity; equity funds carry more risk but have historically delivered the strongest long-run growth. Most allow online account opening with a CNIC and SIPs from PKR 1,000.</p>
+      <h3 style="font-size:1.15rem;font-weight:700;color:#191D1A;margin-bottom:8px">📊 Mutual Funds — managed growth from PKR 1,000</h3>
+      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">SECP-regulated funds let professionals invest your money across money-market, income or equity assets, with both conventional and Islamic (Shariah-compliant) options. Money-market funds sit close to savings returns with high liquidity; equity funds carry more risk but have historically delivered the strongest long-run growth. Most allow online account opening with a CNIC and SIPs from PKR 1,000.</p>
       <a href="/guides/how-to-invest-mutual-funds-pakistan.html" class="btn-cta btn-primary" style="display:inline-flex">Read: How to Invest in Mutual Funds →</a>
     </div>
 
     <!-- PSX — orientation -->
-    <div style="background:#e3f2fd;border-radius:var(--radius);padding:24px;margin-bottom:20px">
+    <div style="background:#E8EDF3;border-radius:var(--radius);padding:24px;margin-bottom:20px">
       <h3 style="font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:8px">📈 PSX Dividend Stocks — income plus upside</h3>
-      <p style="line-height:1.75;color:#333;margin-bottom:12px">The Pakistan Stock Exchange hosts 500+ listed companies, and its blue chips offer some of the highest dividend yields in Asia — currently up to about 11% on names like Hub Power. Shares are volatile and require a CDC investor account with a licensed broker, so they fit money you can leave invested for several years. Our guide breaks down how to screen for sustainable dividends rather than yield traps.</p>
+      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">The Pakistan Stock Exchange hosts 500+ listed companies, and its blue chips offer some of the highest dividend yields in Asia — currently up to about 11% on names like Hub Power. Shares are volatile and require a CDC investor account with a licensed broker, so they fit money you can leave invested for several years. Our guide breaks down how to screen for sustainable dividends rather than yield traps.</p>
       <a href="/guides/best-dividend-stocks-psx.html" class="btn-cta btn-navy" style="display:inline-flex">Read: Best Dividend Stocks on the PSX →</a>
     </div>
 
     <!-- SBP rate — orientation -->
     <div style="border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px">
-      <h3 style="font-size:1.15rem;font-weight:700;color:#1a1a1a;margin-bottom:8px">🏛️ The SBP Policy Rate — the dial behind every return</h3>
-      <p style="line-height:1.75;color:#333;margin-bottom:12px">The State Bank's policy rate (currently 11.5% and holding) sets the floor under savings rates and ripples through loan costs and share valuations. When it falls, fixed-income returns shrink and equities often rally; when it holds or rises, cash becomes more competitive. Knowing where it is — and where it may head — shapes every allocation decision.</p>
+      <h3 style="font-size:1.15rem;font-weight:700;color:#191D1A;margin-bottom:8px">🏛️ The SBP Policy Rate — the dial behind every return</h3>
+      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">The State Bank's policy rate (currently 11.5% and holding) sets the floor under savings rates and ripples through loan costs and share valuations. When it falls, fixed-income returns shrink and equities often rally; when it holds or rises, cash becomes more competitive. Knowing where it is — and where it may head — shapes every allocation decision.</p>
       <a href="/guides/sbp-policy-rate-investments.html" class="btn-cta btn-primary" style="display:inline-flex">Read: How the SBP Rate Affects Your Investments →</a>
     </div>
 
     <!-- Overseas / RDA — orientation -->
-    <div style="background:var(--gold-light);border:1px solid #f0d060;border-radius:var(--radius);padding:24px;margin-bottom:32px">
-      <h3 style="font-size:1.15rem;font-weight:700;color:#856404;margin-bottom:8px">🌍 Overseas Pakistanis — the Roshan Digital Account</h3>
-      <p style="line-height:1.75;color:#333;margin-bottom:12px">Non-resident Pakistanis can invest from abroad through the Roshan Digital Account (RDA), an SBP initiative that opens entirely online and gives access to Naya Pakistan Certificates, the stock market and more in PKR or foreign currency. It is the simplest legal route for the diaspora to participate in everything above without flying home.</p>
+    <div style="background:var(--gold-light);border:1px solid #E2CD96;border-radius:var(--radius);padding:24px;margin-bottom:32px">
+      <h3 style="font-size:1.15rem;font-weight:700;color:#7A5A1F;margin-bottom:8px">🌍 Overseas Pakistanis — the Roshan Digital Account</h3>
+      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">Non-resident Pakistanis can invest from abroad through the Roshan Digital Account (RDA), an SBP initiative that opens entirely online and gives access to Naya Pakistan Certificates, the stock market and more in PKR or foreign currency. It is the simplest legal route for the diaspora to participate in everything above without flying home.</p>
       <a href="/guides/roshan-digital-account-guide.html" class="btn-cta btn-gold" style="display:inline-flex">Read: The Roshan Digital Account Guide →</a>
     </div>
 
     <!-- More guides -->
     <div style="margin-bottom:32px">
-      <h2 style="font-size:1.2rem;font-weight:700;color:#1a1a1a;margin-bottom:10px">Go Deeper: More Guides</h2>
-      <ul style="line-height:2.1;color:#333;margin-left:24px">
+      <h2 style="font-size:1.2rem;font-weight:700;color:#191D1A;margin-bottom:10px">Go Deeper: More Guides</h2>
+      <ul style="line-height:2.1;color:#2E2C26;margin-left:24px">
         <li><a href="/guides/money-market-funds-vs-bank-savings.html" style="color:var(--green);font-weight:600">Money Market Funds vs Bank Savings Accounts</a> — where idle cash should sit</li>
         <li><a href="/guides/treasury-bills-pakistan.html" style="color:var(--green);font-weight:600">How to Buy T-Bills &amp; PIBs via an IPS Account</a> — own government paper directly</li>
         <li><a href="/guides/investment-tax-pakistan.html" style="color:var(--green);font-weight:600">How Investments Are Taxed: Filer vs Non-Filer</a> — the biggest free return boost</li>
@@ -658,9 +490,9 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
 
     <!-- How to combine them -->
     <div style="margin-bottom:36px">
-      <h2 style="font-size:1.2rem;font-weight:700;color:#1a1a1a;margin-bottom:10px">Putting It Together</h2>
-      <p style="line-height:1.75;color:#333;margin-bottom:12px">There is no single "right" mix — it depends on your time horizon, income needs and tolerance for swings. A common starting framework spreads money across a guaranteed anchor (National Savings), managed growth (mutual funds) and a smaller dividend-stock sleeve, while keeping an instantly accessible emergency buffer. The calculator at the top of this page turns your own amount into one such illustrative split in seconds.</p>
-      <p style="line-height:1.75;color:#333">The value of diversifying this way is that it spreads risk across different instruments, regulators and liquidity profiles at once. For the reasoning behind specific allocations and worked examples, the linked guides go far deeper than this overview is meant to.</p>
+      <h2 style="font-size:1.2rem;font-weight:700;color:#191D1A;margin-bottom:10px">Putting It Together</h2>
+      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">There is no single "right" mix — it depends on your time horizon, income needs and tolerance for swings. A common starting framework spreads money across a guaranteed anchor (National Savings), managed growth (mutual funds) and a smaller dividend-stock sleeve, while keeping an instantly accessible emergency buffer. The calculator at the top of this page turns your own amount into one such illustrative split in seconds.</p>
+      <p style="line-height:1.75;color:#2E2C26">The value of diversifying this way is that it spreads risk across different instruments, regulators and liquidity profiles at once. For the reasoning behind specific allocations and worked examples, the linked guides go far deeper than this overview is meant to.</p>
     </div>
 
     <!-- FAQ -->
@@ -669,38 +501,38 @@ footer{background:var(--green);color:#fff;text-align:center;padding:20px;margin-
 
       <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
         <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">How much money do I need to start?</div>
-        <div style="padding:14px 18px;line-height:1.75;color:#333">Less than most people assume. Some National Savings certificates start at PKR 500, mutual-fund SIPs at around PKR 1,000 a month, and many PSX blue chips are reachable for a few thousand rupees once you hold a CDC account. The practical question is less about the minimum and more about how long you can leave the money invested — that drives which mix makes sense.</div>
+        <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Less than most people assume. Some National Savings certificates start at PKR 500, mutual-fund SIPs at around PKR 1,000 a month, and many PSX blue chips are reachable for a few thousand rupees once you hold a CDC account. The practical question is less about the minimum and more about how long you can leave the money invested — that drives which mix makes sense.</div>
       </div>
 
       <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
         <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Which option is "best" for me?</div>
-        <div style="padding:14px 18px;line-height:1.75;color:#333">It depends on your goal and risk appetite, so there's no universal answer. Need certainty and quick access? Lean toward National Savings. Want hands-off long-term growth? A mutual fund. Comfortable with volatility for income and upside? Dividend stocks. Most people blend all three. The calculator above sketches one illustrative split for your amount, and our <a href="/guides/national-savings-vs-mutual-funds.html" style="color:var(--green);font-weight:600">comparison guide</a> walks through the trade-offs.</div>
+        <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">It depends on your goal and risk appetite, so there's no universal answer. Need certainty and quick access? Lean toward National Savings. Want hands-off long-term growth? A mutual fund. Comfortable with volatility for income and upside? Dividend stocks. Most people blend all three. The calculator above sketches one illustrative split for your amount, and our <a href="/guides/national-savings-vs-mutual-funds.html" style="color:var(--green);font-weight:600">comparison guide</a> walks through the trade-offs.</div>
       </div>
 
       <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
         <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Are there Shariah-compliant choices?</div>
-        <div style="padding:14px 18px;line-height:1.75;color:#333">Yes — the clearest route is the large family of Islamic mutual funds overseen by a Shariah board, plus Shariah-screened equities and sukuk. National Savings products are mostly conventional, though some Islamic instruments exist. The fund guide covers how Islamic and conventional options compare in practice.</div>
+        <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Yes — the clearest route is the large family of Islamic mutual funds overseen by a Shariah board, plus Shariah-screened equities and sukuk. National Savings products are mostly conventional, though some Islamic instruments exist. The fund guide covers how Islamic and conventional options compare in practice.</div>
       </div>
 
       <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
         <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Is the stock market too risky right now?</div>
-        <div style="padding:14px 18px;line-height:1.75;color:#333">PSX is SECP-regulated with transparent electronic trading, but the index can still swing sharply in a single year, and it has already cooled from its recent highs. The honest answer is that equities are only "safe" over multi-year horizons — money you might need within a year or two belongs in something liquid and guaranteed, not in shares.</div>
+        <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">PSX is SECP-regulated with transparent electronic trading, but the index can still swing sharply in a single year, and it has already cooled from its recent highs. The honest answer is that equities are only "safe" over multi-year horizons — money you might need within a year or two belongs in something liquid and guaranteed, not in shares.</div>
       </div>
 
       <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
         <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">I live abroad — can I still invest in Pakistan?</div>
-        <div style="padding:14px 18px;line-height:1.75;color:#333">Yes. The Roshan Digital Account lets non-resident Pakistanis open an account online and access Naya Pakistan Certificates, the stock market and more without visiting Pakistan. Our <a href="/guides/roshan-digital-account-guide.html" style="color:var(--green);font-weight:600">RDA guide</a> covers eligibility, documents and how the returns compare.</div>
+        <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Yes. The Roshan Digital Account lets non-resident Pakistanis open an account online and access Naya Pakistan Certificates, the stock market and more without visiting Pakistan. Our <a href="/guides/roshan-digital-account-guide.html" style="color:var(--green);font-weight:600">RDA guide</a> covers eligibility, documents and how the returns compare.</div>
       </div>
 
       <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
         <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">How often do the numbers on this page change?</div>
-        <div style="padding:14px 18px;line-height:1.75;color:#333">The snapshot, calculator and tables are refreshed daily from primary sources (SBP, CDNS, MUFAP, PSX). Policy rates are set by the SBP every few weeks, National Savings profit rates can be revised periodically, and share prices and dividend yields move constantly. Always confirm a current figure with the source before acting — see our <a href="/methodology.html" style="color:var(--green);font-weight:600">Methodology page</a> for exactly how we gather and check each value.</div>
+        <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">The snapshot, calculator and tables are refreshed daily from primary sources (SBP, CDNS, MUFAP, PSX). Policy rates are set by the SBP every few weeks, National Savings profit rates can be revised periodically, and share prices and dividend yields move constantly. Always confirm a current figure with the source before acting — see our <a href="/methodology.html" style="color:var(--green);font-weight:600">Methodology page</a> for exactly how we gather and check each value.</div>
       </div>
 
     </div>
 
-    <div style="background:var(--gold-light);border:1px solid #f0d060;border-radius:10px;padding:16px;margin-top:20px">
-      <strong style="color:#856404">Disclaimer:</strong> <span style="font-size:.88rem;color:#555;line-height:1.7"> This content is for educational purposes only. It is not financial advice. Investment values can go down as well as up. Always consult a SECP-registered financial advisor before making investment decisions. Profit rates and stock prices change daily — verify all figures directly with the respective institution before investing.</span>
+    <div style="background:var(--gold-light);border:1px solid #E2CD96;border-radius:10px;padding:16px;margin-top:20px">
+      <strong style="color:#7A5A1F">Disclaimer:</strong> <span style="font-size:.88rem;color:#5E5C52;line-height:1.7"> This content is for educational purposes only. It is not financial advice. Investment values can go down as well as up. Always consult a SECP-registered financial advisor before making investment decisions. Profit rates and stock prices change daily — verify all figures directly with the respective institution before investing.</span>
     </div>
 
   </div>

@@ -388,121 +388,81 @@
 <section id="investment-guide" style="background:#FDFBF4;border-top:3px solid var(--green);padding:48px 0">
   <div class="container">
 
-    <h2 style="font-size:1.6rem;font-weight:800;color:var(--green);margin-bottom:6px">Investing in Pakistan: A 2026 Starting Point</h2>
-    <p style="color:var(--muted);margin-bottom:8px">A free orientation for Pakistani investors. This homepage gives you the lay of the land and the latest numbers, then points you to our in-depth, step-by-step guides for each option.</p>
-    <div style="font-size:.82rem;color:var(--muted);border-left:3px solid var(--green);padding:6px 0 6px 12px;margin-bottom:32px;line-height:1.7">
-      By <strong style="color:#191D1A">Abdul Ahad</strong> — software engineer and active PSX &amp; mutual-fund investor (<a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:var(--green);font-weight:600">LinkedIn</a>). Every figure on this page is verified against primary sources:
-      <a href="https://www.sbp.org.pk" target="_blank" rel="noopener" style="color:var(--green)">SBP</a>,
-      <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" style="color:var(--green)">CDNS</a>,
-      <a href="https://www.mufap.com.pk" target="_blank" rel="noopener" style="color:var(--green)">MUFAP</a> and
-      <a href="https://www.psx.com.pk" target="_blank" rel="noopener" style="color:var(--green)">PSX</a>. See how we collect and check the data on our <a href="/methodology.html" style="color:var(--green);font-weight:600">Methodology page</a>. Last reviewed 31 May 2026.
+    <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <h2 style="font-size:1.6rem;font-weight:700;color:var(--green);margin:0 0 4px">The Numbers, At a Glance</h2>
+      <span style="font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:#191D1A;font-weight:600;padding:3px 10px;border-radius:3px">Updated daily</span>
+    </div>
+    <div style="font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:6px 0 26px;line-height:2">
+      By <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:var(--green)">Abdul Ahad</a> — software engineer &amp; active PSX / mutual-fund investor &nbsp;·&nbsp; Sources:
+      <a href="https://www.sbp.org.pk" target="_blank" rel="noopener" style="color:var(--green)">SBP</a> ·
+      <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" style="color:var(--green)">CDNS</a> ·
+      <a href="https://www.mufap.com.pk" target="_blank" rel="noopener" style="color:var(--green)">MUFAP</a> ·
+      <a href="https://www.psx.com.pk" target="_blank" rel="noopener" style="color:var(--green)">PSX</a> &nbsp;·&nbsp;
+      <a href="/methodology.html" style="color:var(--green)">Methodology</a>
     </div>
 
-    <!-- NEW: This Month's Snapshot — original data-driven analysis -->
-    <div style="background:linear-gradient(135deg,#0B2C22 0%,#0E3B2E 100%);color:#fff;border-radius:var(--radius);padding:26px;margin-bottom:36px">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:4px">
-        <h2 style="font-size:1.35rem;font-weight:800;color:#fff;margin:0">📊 This Month's Pakistan Investment Snapshot</h2>
-        <span style="font-size:.72rem;background:var(--gold);color:#191D1A;font-weight:700;padding:3px 10px;border-radius:20px">UPDATED DAILY</span>
-      </div>
-      <p style="font-size:.85rem;opacity:.85;margin-bottom:18px;line-height:1.6">Original analysis built from the same live dataset that powers the calculator above. These are educational observations about where the numbers sit today — not buy/sell recommendations.</p>
+    <!-- Live insight strip — filled by app.js from data.json -->
+    <div id="insight-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:26px"></div>
 
-      <div style="display:grid;grid-template-columns:1fr;gap:14px">
-
-        <details open style="background:rgba(255,255,255,.08);border-left:3px solid var(--gold);border-radius:8px;padding:0"><summary style="cursor:pointer;list-style:none;font-weight:700;font-size:.95rem;padding:14px 16px">1. Savers are finally beating inflation — by a real margin <span style="opacity:.55;font-weight:400">▾</span></summary><p style="font-size:.86rem;line-height:1.7;opacity:.95;margin:0;padding:0 16px 14px">With CPI inflation at <strong>7.0%</strong> and the top general-public National Savings instrument (Special Savings Certificate) paying <strong>11.6%</strong>, a saver currently earns roughly <strong>+4.6 percentage points of real (after-inflation) return</strong>. For eligible seniors and widows, the Behbood Certificate at <strong>12.72%</strong> lifts that real return closer to <strong>+5.7 points</strong> — unusually generous by historical standards, when high inflation often wiped out the entire profit.</p></details>
-
-        <details style="background:rgba(255,255,255,.08);border-left:3px solid var(--gold);border-radius:8px;padding:0"><summary style="cursor:pointer;list-style:none;font-weight:700;font-size:.95rem;padding:14px 16px">2. The best dividend yields now nearly double the policy rate <span style="opacity:.55;font-weight:400">▾</span></summary><p style="font-size:.86rem;line-height:1.7;opacity:.95;margin:0;padding:0 16px 14px">The SBP policy rate is holding at <strong>11.5%</strong>, yet several blue chips out-yield it on dividends alone: <strong>Hub Power (HUBC) at 11.3%</strong>, <strong>MCB Bank at 8.71%</strong> and <strong>UBL at 7.83%</strong>. That said, a savings certificate's profit is government-guaranteed, while a dividend can be cut and the share price can fall — the extra yield is partly compensation for that risk.</p></details>
-
-        <details style="background:rgba(255,255,255,.08);border-left:3px solid var(--gold);border-radius:8px;padding:0"><summary style="cursor:pointer;list-style:none;font-weight:700;font-size:.95rem;padding:14px 16px">3. A "holding" rate is a quieter signal than a cutting cycle <span style="opacity:.55;font-weight:400">▾</span></summary><p style="font-size:.86rem;line-height:1.7;opacity:.95;margin:0;padding:0 16px 14px">After falling from a 22% peak, the policy rate has stabilised at <strong>11.5%</strong> and the SBP is now <strong>holding</strong>. For savers, that removes the urgency to lock in long tenors before the next cut. For equity investors, the powerful tailwind of rapidly falling rates has eased — recent gains lean more on company earnings than on further rate relief.</p></details>
-
-        <details style="background:rgba(255,255,255,.08);border-left:3px solid var(--gold);border-radius:8px;padding:0"><summary style="cursor:pointer;list-style:none;font-weight:700;font-size:.95rem;padding:14px 16px">4. The KSE-100 has cooled off its peak — not crashed <span style="opacity:.55;font-weight:400">▾</span></summary><p style="font-size:.86rem;line-height:1.7;opacity:.95;margin:0;padding:0 16px 14px">The index sits near <strong>173,962</strong>, having pulled back modestly from the ~170,000–175,000 zone it reached after a multi-year climb from 40,000. Many large caps still trade on low single-digit price-to-earnings ratios (FFC near 2.7x, HBL near 3.1x), which is why dividend yields stay high. Low P/E plus high yield can signal value — or markets pricing in risk. Our guides explain how to tell the difference.</p></details>
-
-        <details style="background:rgba(255,255,255,.08);border-left:3px solid var(--gold);border-radius:8px;padding:0"><summary style="cursor:pointer;list-style:none;font-weight:700;font-size:.95rem;padding:14px 16px">5. Top managed funds still out-earn fixed income over five years <span style="opacity:.55;font-weight:400">▾</span></summary><p style="font-size:.86rem;line-height:1.7;opacity:.95;margin:0;padding:0 16px 14px">Over a 5-year window, the strongest equity fund in our dataset (Al Meezan Mutual Fund) shows roughly <strong>19.3% annualised</strong>, versus about <strong>11.6%</strong> from a 3-year savings certificate today. The gap is the reward for taking market risk — funds can have negative years, while the certificate cannot.</p></details>
-
-      </div>
-      <p style="font-size:.78rem;opacity:.7;margin-top:16px">Figures as of 31 May 2026 — updated daily. Rates and prices change; always verify with the source before acting.</p>
+    <!-- Growth comparison -->
+    <div class="card">
+      <div style="font-weight:700;font-size:1.05rem">Where PKR 100,000 Could Grow in 5 Years</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Compounding today&rsquo;s live rates — illustrative, not a guarantee</div>
+      <div class="chart-wrap"><canvas id="chart-grow"></canvas></div>
     </div>
 
-    <!-- Routing intro -->
-    <div style="margin-bottom:32px">
-      <h2 style="font-size:1.25rem;font-weight:700;color:#191D1A;margin-bottom:10px">Your Four Main Options — and Where to Learn More</h2>
-      <p style="line-height:1.75;color:#2E2C26">Most Pakistani households can build wealth using four core instruments: government-backed National Savings, professionally managed mutual funds, dividend-paying PSX shares, and — for overseas Pakistanis — the Roshan Digital Account. Below is a quick orientation to each. When you want the full mechanics, fees, tax treatment and step-by-step account opening, follow the deep-dive guide linked in each block.</p>
+    <!-- Real return after inflation -->
+    <div class="card">
+      <div style="font-weight:700;font-size:1.05rem">What Beats Inflation Right Now</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Each return minus CPI inflation — the bar is what your money <em>really</em> earns</div>
+      <div class="chart-wrap"><canvas id="chart-real"></canvas></div>
     </div>
 
-    <!-- National Savings — orientation -->
-    <div style="background:var(--green-light);border-radius:var(--radius);padding:24px;margin-bottom:20px">
-      <h3 style="font-size:1.15rem;font-weight:700;color:var(--green);margin-bottom:8px">🏦 National Savings — the safe anchor</h3>
-      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">CDNS certificates are 100% backed by the Government of Pakistan, carry no market risk, and right now pay between roughly 10.5% and 12.72% depending on the scheme and your eligibility. They suit your emergency buffer and the stable core of a portfolio — you open them with just your CNIC at any Pakistan Post Office or savings centre.</p>
-      <a href="/guides/national-savings-vs-mutual-funds.html" class="btn-cta btn-primary" style="display:inline-flex">Read: National Savings vs Mutual Funds →</a>
+    <!-- Sample mix -->
+    <div class="card">
+      <div style="font-weight:700;font-size:1.05rem">One Balanced Starting Mix</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Safe anchor + managed growth + a dividend sleeve. Enter your amount at the top for your personalised version.</div>
+      <div style="position:relative;height:240px"><canvas id="chart-mix"></canvas></div>
     </div>
 
-    <!-- Mutual Funds — orientation -->
-    <div style="border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px">
-      <h3 style="font-size:1.15rem;font-weight:700;color:#191D1A;margin-bottom:8px">📊 Mutual Funds — managed growth from PKR 1,000</h3>
-      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">SECP-regulated funds let professionals invest your money across money-market, income or equity assets, with both conventional and Islamic (Shariah-compliant) options. Money-market funds sit close to savings returns with high liquidity; equity funds carry more risk but have historically delivered the strongest long-run growth. Most allow online account opening with a CNIC and SIPs from PKR 1,000.</p>
-      <a href="/guides/how-to-invest-mutual-funds-pakistan.html" class="btn-cta btn-primary" style="display:inline-flex">Read: How to Invest in Mutual Funds →</a>
-    </div>
-
-    <!-- PSX — orientation -->
-    <div style="background:#E8EDF3;border-radius:var(--radius);padding:24px;margin-bottom:20px">
-      <h3 style="font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:8px">📈 PSX Dividend Stocks — income plus upside</h3>
-      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">The Pakistan Stock Exchange hosts 500+ listed companies, and its blue chips offer some of the highest dividend yields in Asia — currently up to about 11% on names like Hub Power. Shares are volatile and require a CDC investor account with a licensed broker, so they fit money you can leave invested for several years. Our guide breaks down how to screen for sustainable dividends rather than yield traps.</p>
-      <a href="/guides/best-dividend-stocks-psx.html" class="btn-cta btn-navy" style="display:inline-flex">Read: Best Dividend Stocks on the PSX →</a>
-    </div>
-
-    <!-- SBP rate — orientation -->
-    <div style="border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px">
-      <h3 style="font-size:1.15rem;font-weight:700;color:#191D1A;margin-bottom:8px">🏛️ The SBP Policy Rate — the dial behind every return</h3>
-      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">The State Bank's policy rate (currently 11.5% and holding) sets the floor under savings rates and ripples through loan costs and share valuations. When it falls, fixed-income returns shrink and equities often rally; when it holds or rises, cash becomes more competitive. Knowing where it is — and where it may head — shapes every allocation decision.</p>
-      <a href="/guides/sbp-policy-rate-investments.html" class="btn-cta btn-primary" style="display:inline-flex">Read: How the SBP Rate Affects Your Investments →</a>
-    </div>
-
-    <!-- Overseas / RDA — orientation -->
-    <div style="background:var(--gold-light);border:1px solid #E2CD96;border-radius:var(--radius);padding:24px;margin-bottom:32px">
-      <h3 style="font-size:1.15rem;font-weight:700;color:#7A5A1F;margin-bottom:8px">🌍 Overseas Pakistanis — the Roshan Digital Account</h3>
-      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">Non-resident Pakistanis can invest from abroad through the Roshan Digital Account (RDA), an SBP initiative that opens entirely online and gives access to Naya Pakistan Certificates, the stock market and more in PKR or foreign currency. It is the simplest legal route for the diaspora to participate in everything above without flying home.</p>
-      <a href="/guides/roshan-digital-account-guide.html" class="btn-cta btn-gold" style="display:inline-flex">Read: The Roshan Digital Account Guide →</a>
-    </div>
-
-    <!-- More guides -->
-    <div style="margin-bottom:32px">
-      <h2 style="font-size:1.2rem;font-weight:700;color:#191D1A;margin-bottom:10px">Go Deeper: More Guides</h2>
-      <ul style="line-height:2.1;color:#2E2C26;margin-left:24px">
-        <li><a href="/guides/money-market-funds-vs-bank-savings.html" style="color:var(--green);font-weight:600">Money Market Funds vs Bank Savings Accounts</a> — where idle cash should sit</li>
-        <li><a href="/guides/treasury-bills-pakistan.html" style="color:var(--green);font-weight:600">How to Buy T-Bills &amp; PIBs via an IPS Account</a> — own government paper directly</li>
-        <li><a href="/guides/investment-tax-pakistan.html" style="color:var(--green);font-weight:600">How Investments Are Taxed: Filer vs Non-Filer</a> — the biggest free return boost</li>
-        <li><a href="/guides/open-brokerage-account-psx.html" style="color:var(--green);font-weight:600">How to Open a PSX Brokerage Account</a> — CDC, Sahulat &amp; your first trade</li>
-        <li><a href="/guides/halal-investing-pakistan.html" style="color:var(--green);font-weight:600">Halal Investing in Pakistan</a> — Islamic funds, sukuk &amp; Shariah stocks</li>
-        <li><a href="/guides/gold-investment-pakistan.html" style="color:var(--green);font-weight:600">Gold Investment in Pakistan</a> — physical, digital &amp; gold funds</li>
-      </ul>
-    </div>
-
-    <!-- How to combine them -->
-    <div style="margin-bottom:36px">
-      <h2 style="font-size:1.2rem;font-weight:700;color:#191D1A;margin-bottom:10px">Putting It Together</h2>
-      <p style="line-height:1.75;color:#2E2C26;margin-bottom:12px">There is no single "right" mix — it depends on your time horizon, income needs and tolerance for swings. A common starting framework spreads money across a guaranteed anchor (National Savings), managed growth (mutual funds) and a smaller dividend-stock sleeve, while keeping an instantly accessible emergency buffer. The calculator at the top of this page turns your own amount into one such illustrative split in seconds.</p>
-      <p style="line-height:1.75;color:#2E2C26">The value of diversifying this way is that it spreads risk across different instruments, regulators and liquidity profiles at once. For the reasoning behind specific allocations and worked examples, the linked guides go far deeper than this overview is meant to.</p>
+    <!-- Compact guide grid -->
+    <h2 style="font-size:1.25rem;font-weight:700;color:#191D1A;margin:34px 0 4px">Learn One Topic at a Time</h2>
+    <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px">Short, step-by-step guides — each refreshed daily with live rates.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:34px">
+      <a class="mini-card" href="/guides/national-savings-vs-mutual-funds.html"><span class="mini-ico">🏦</span>National Savings vs Funds</a>
+      <a class="mini-card" href="/guides/how-to-invest-mutual-funds-pakistan.html"><span class="mini-ico">📊</span>Start a Mutual Fund SIP</a>
+      <a class="mini-card" href="/guides/best-dividend-stocks-psx.html"><span class="mini-ico">📈</span>PSX Dividend Stocks</a>
+      <a class="mini-card" href="/guides/sbp-policy-rate-investments.html"><span class="mini-ico">🏛️</span>The SBP Policy Rate</a>
+      <a class="mini-card" href="/guides/roshan-digital-account-guide.html"><span class="mini-ico">🌍</span>Roshan Digital Account</a>
+      <a class="mini-card" href="/guides/money-market-funds-vs-bank-savings.html"><span class="mini-ico">💵</span>Money Market vs Bank</a>
+      <a class="mini-card" href="/guides/treasury-bills-pakistan.html"><span class="mini-ico">🧾</span>Buy T-Bills Directly</a>
+      <a class="mini-card" href="/guides/investment-tax-pakistan.html"><span class="mini-ico">🪪</span>Filer vs Non-Filer Tax</a>
+      <a class="mini-card" href="/guides/open-brokerage-account-psx.html"><span class="mini-ico">📋</span>Open a Brokerage Account</a>
+      <a class="mini-card" href="/guides/halal-investing-pakistan.html"><span class="mini-ico">🕌</span>Halal Investing</a>
+      <a class="mini-card" href="/guides/gold-investment-pakistan.html"><span class="mini-ico">🪙</span>Gold in Pakistan</a>
+      <a class="mini-card" href="/blog/pakistan-budget-2026-27-investors.html"><span class="mini-ico">📜</span>Budget 2026-27 Breakdown</a>
     </div>
 
     <!-- FAQ -->
     <div style="margin-bottom:8px">
-      <h2 style="font-size:1.3rem;font-weight:700;color:var(--green);margin-bottom:20px">Frequently Asked Questions</h2>
+      <h2 style="font-size:1.25rem;font-weight:700;color:var(--green);margin-bottom:16px">Quick Questions</h2>
 
       <details class="faq-item"><summary class="faq-question">How much money do I need to start?</summary><div class="faq-answer">Less than most people assume. Some National Savings certificates start at PKR 500, mutual-fund SIPs at around PKR 1,000 a month, and many PSX blue chips are reachable for a few thousand rupees once you hold a CDC account. The practical question is less about the minimum and more about how long you can leave the money invested — that drives which mix makes sense.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">Which option is "best" for me?</summary><div class="faq-answer">It depends on your goal and risk appetite, so there's no universal answer. Need certainty and quick access? Lean toward National Savings. Want hands-off long-term growth? A mutual fund. Comfortable with volatility for income and upside? Dividend stocks. Most people blend all three. The calculator above sketches one illustrative split for your amount, and our <a href="/guides/national-savings-vs-mutual-funds.html" style="color:var(--green);font-weight:600">comparison guide</a> walks through the trade-offs.</div></details>
+      <details class="faq-item"><summary class="faq-question">Which option is "best" for me?</summary><div class="faq-answer">It depends on your goal and risk appetite. Need certainty and quick access? Lean toward National Savings. Want hands-off long-term growth? A mutual fund. Comfortable with volatility for income and upside? Dividend stocks. Most people blend all three — the calculator above sketches one illustrative split for your amount, and our <a href="/guides/national-savings-vs-mutual-funds.html" style="color:var(--green);font-weight:600">comparison guide</a> walks through the trade-offs.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">Are there Shariah-compliant choices?</summary><div class="faq-answer">Yes — the clearest route is the large family of Islamic mutual funds overseen by a Shariah board, plus Shariah-screened equities and sukuk. National Savings products are mostly conventional, though some Islamic instruments exist. The fund guide covers how Islamic and conventional options compare in practice.</div></details>
+      <details class="faq-item"><summary class="faq-question">Are there Shariah-compliant choices?</summary><div class="faq-answer">Yes — Islamic mutual funds overseen by a Shariah board, Shariah-screened equities (the KMI-30 index) and sukuk. Our <a href="/guides/halal-investing-pakistan.html" style="color:var(--green);font-weight:600">halal investing guide</a> maps the full universe.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">Is the stock market too risky right now?</summary><div class="faq-answer">PSX is SECP-regulated with transparent electronic trading, but the index can still swing sharply in a single year, and it has already cooled from its recent highs. The honest answer is that equities are only "safe" over multi-year horizons — money you might need within a year or two belongs in something liquid and guaranteed, not in shares.</div></details>
+      <details class="faq-item"><summary class="faq-question">Is the stock market too risky right now?</summary><div class="faq-answer">PSX is SECP-regulated with transparent electronic trading, but the index can swing sharply in a single year. Equities are only "safe" over multi-year horizons — money you might need within a year or two belongs in something liquid and guaranteed, not in shares.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">I live abroad — can I still invest in Pakistan?</summary><div class="faq-answer">Yes. The Roshan Digital Account lets non-resident Pakistanis open an account online and access Naya Pakistan Certificates, the stock market and more without visiting Pakistan. Our <a href="/guides/roshan-digital-account-guide.html" style="color:var(--green);font-weight:600">RDA guide</a> covers eligibility, documents and how the returns compare.</div></details>
+      <details class="faq-item"><summary class="faq-question">I live abroad — can I still invest in Pakistan?</summary><div class="faq-answer">Yes. The Roshan Digital Account lets non-resident Pakistanis open an account online and access Naya Pakistan Certificates, the stock market and more without visiting Pakistan. Our <a href="/guides/roshan-digital-account-guide.html" style="color:var(--green);font-weight:600">RDA guide</a> covers eligibility, documents and returns.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">How often do the numbers on this page change?</summary><div class="faq-answer">The snapshot, calculator and tables are refreshed daily from primary sources (SBP, CDNS, MUFAP, PSX). Policy rates are set by the SBP every few weeks, National Savings profit rates can be revised periodically, and share prices and dividend yields move constantly. Always confirm a current figure with the source before acting — see our <a href="/methodology.html" style="color:var(--green);font-weight:600">Methodology page</a> for exactly how we gather and check each value.</div></details>
+      <details class="faq-item"><summary class="faq-question">How often do these numbers change?</summary><div class="faq-answer">The charts, calculator and tables refresh daily from primary sources (SBP, CDNS, MUFAP, PSX). Always confirm a figure with the source before acting — our <a href="/methodology.html" style="color:var(--green);font-weight:600">Methodology page</a> explains how each value is gathered and checked.</div></details>
 
     </div>
 
-    <div style="background:var(--gold-light);border:1px solid #E2CD96;border-radius:10px;padding:16px;margin-top:20px">
-      <strong style="color:#7A5A1F">Disclaimer:</strong> <span style="font-size:.88rem;color:#5E5C52;line-height:1.7"> This content is for educational purposes only. It is not financial advice. Investment values can go down as well as up. Always consult a SECP-registered financial advisor before making investment decisions. Profit rates and stock prices change daily — verify all figures directly with the respective institution before investing.</span>
+    <div style="background:var(--gold-light);border:1px solid #E2CD96;border-radius:10px;padding:14px 16px;margin-top:18px;font-size:.82rem;color:#5E5C52;line-height:1.7">
+      <strong style="color:#7A5A1F">Disclaimer:</strong> Educational content only — not financial advice. Values can fall as well as rise. Consult a SECP-registered advisor before investing, and verify every rate with the institution. <a href="/methodology.html" style="color:var(--green);font-weight:600">Methodology</a>
     </div>
 
   </div>

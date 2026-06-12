@@ -65,6 +65,12 @@ function applyData() {
   renderKSEChart();
   renderSBPChart();
 
+  // Dashboard section (below the tool)
+  renderInsightStrip();
+  renderGrowChart();
+  renderRealChart();
+  renderMixChart();
+
   // Re-render whichever page is already visible so data arrives even if
   // the user navigated before the fetch completed.
   if (currentPage === 1) renderNationalSavings();
@@ -527,5 +533,104 @@ function renderProjectionChart(projVals) {
         y: { ticks: { callback: v => "₨" + (v/1000).toFixed(0) + "K" } }
       }
     }
+  });
+}
+
+// ── Homepage dashboard (static section) ──────────────────────────
+const LEDGER = { green:"#0E3B2E", green3:"#1F7A53", gold:"#B98A2F", goldPale:"#D9B86A",
+                 navy:"#23415E", red:"#A4452F", ink:"#191D1A", muted:"#6B6A60", paper:"#F6F1E6" };
+const MONO_FONT = { family:"'IBM Plex Mono', monospace", size: 11 };
+
+function bestOf(arr, key) {
+  return arr.reduce((a, b) => (b[key] > a[key] ? b : a), arr[0]);
+}
+function dashboardInputs() {
+  const m = DATA.macro;
+  const nssPublic = DATA.national_savings.filter(s => s.eligible === "All Pakistanis");
+  const ssc = bestOf(nssPublic, "rate");
+  const nssMax = bestOf(DATA.national_savings, "rate");           // e.g. Behbood
+  const mmf = bestOf(DATA.mutual_funds.filter(f => /money|income/i.test(f.type)), "ret_1y");
+  const eq  = bestOf(DATA.mutual_funds.filter(f => /equity|stock|mutual/i.test(f.type) || f.ret_5y > 14), "ret_5y");
+  const topStock = bestOf(DATA.stocks, "yield");
+  return { m, ssc, nssMax, mmf, eq, topStock };
+}
+
+function renderInsightStrip() {
+  const el = document.getElementById("insight-strip");
+  if (!el) return;
+  const { m, ssc, eq, topStock } = dashboardInputs();
+  const real = (ssc.rate - m.inflation_cpi).toFixed(1);
+  el.innerHTML = `
+    <div class="insight-cell"><div class="insight-num">+${real} pts</div>
+      <div class="insight-lbl">Real return on ${ssc.name} (${ssc.rate}%) after ${m.inflation_cpi}% inflation — savers are beating inflation</div></div>
+    <div class="insight-cell"><div class="insight-num">${topStock.yield}%</div>
+      <div class="insight-lbl">${topStock.name} dividend yield vs ${m.sbp_rate}% policy rate — but dividends carry market risk</div></div>
+    <div class="insight-cell"><div class="insight-num">${eq.ret_5y}%/yr</div>
+      <div class="insight-lbl">${eq.name} 5-year average vs ${ssc.rate}% on certificates — the reward for taking equity risk</div></div>`;
+}
+
+function renderGrowChart() {
+  const ctx = document.getElementById("chart-grow");
+  if (!ctx || typeof Chart === "undefined") return;
+  destroyChart("chart-grow");
+  const { m, ssc, mmf, eq } = dashboardInputs();
+  const fv = r => Math.round(100000 * Math.pow(1 + r / 100, 5));
+  const rows = [
+    { lbl: "Kept as cash (inflation-adjusted)", val: Math.round(100000 / Math.pow(1 + m.inflation_cpi / 100, 5)), col: LEDGER.red },
+    { lbl: ssc.name + " " + ssc.rate + "%", val: fv(ssc.rate), col: LEDGER.green },
+    { lbl: mmf.name + " " + mmf.ret_1y + "%", val: fv(mmf.ret_1y), col: LEDGER.navy },
+    { lbl: eq.name + " " + eq.ret_5y + "% (5y avg)", val: fv(eq.ret_5y), col: LEDGER.gold },
+  ];
+  chartInstances["chart-grow"] = new Chart(ctx, {
+    type: "bar",
+    data: { labels: rows.map(r => r.lbl),
+      datasets: [{ data: rows.map(r => r.val), backgroundColor: rows.map(r => r.col), borderRadius: 3 }] },
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: "y",
+      plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: c => "PKR " + c.raw.toLocaleString() } } },
+      scales: { x: { ticks: { font: MONO_FONT, callback: v => (v / 1000) + "K" }, grid: { color: "#EFE8D8" } },
+                y: { ticks: { font: { ...MONO_FONT, size: 10 } }, grid: { display: false } } } }
+  });
+}
+
+function renderRealChart() {
+  const ctx = document.getElementById("chart-real");
+  if (!ctx || typeof Chart === "undefined") return;
+  destroyChart("chart-real");
+  const { m, ssc, nssMax, mmf, eq, topStock } = dashboardInputs();
+  const rows = [
+    { lbl: "Bank current account (0%)", r: 0 },
+    { lbl: topStock.ticker + " dividend yield", r: topStock.yield },
+    { lbl: ssc.name, r: ssc.rate },
+    { lbl: nssMax.name + " (restricted)", r: nssMax.rate },
+    { lbl: mmf.name, r: mmf.ret_1y },
+    { lbl: eq.name + " (5y avg)", r: eq.ret_5y },
+  ].map(x => ({ ...x, real: +(x.r - m.inflation_cpi).toFixed(2) }))
+   .sort((a, b) => a.real - b.real);
+  chartInstances["chart-real"] = new Chart(ctx, {
+    type: "bar",
+    data: { labels: rows.map(x => x.lbl),
+      datasets: [{ data: rows.map(x => x.real),
+        backgroundColor: rows.map(x => x.real >= 0 ? LEDGER.green3 : LEDGER.red), borderRadius: 3 }] },
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: "y",
+      plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: c => (c.raw > 0 ? "+" : "") + c.raw + " pts vs inflation" } } },
+      scales: { x: { ticks: { font: MONO_FONT, callback: v => v + "%" }, grid: { color: "#EFE8D8" } },
+                y: { ticks: { font: { ...MONO_FONT, size: 10 } }, grid: { display: false } } } }
+  });
+}
+
+function renderMixChart() {
+  const ctx = document.getElementById("chart-mix");
+  if (!ctx || typeof Chart === "undefined") return;
+  destroyChart("chart-mix");
+  chartInstances["chart-mix"] = new Chart(ctx, {
+    type: "doughnut",
+    data: { labels: ["National Savings 30%", "Islamic income fund 25%", "Equity fund 20%", "PSX dividend stocks 20%", "Emergency buffer 5%"],
+      datasets: [{ data: [30, 25, 20, 20, 5],
+        backgroundColor: [LEDGER.green, LEDGER.navy, LEDGER.gold, LEDGER.red, LEDGER.muted],
+        borderColor: LEDGER.paper, borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, cutout: "62%",
+      plugins: { legend: { position: "right", labels: { font: { ...MONO_FONT, size: 10 }, boxWidth: 12, color: LEDGER.ink } } } }
   });
 }

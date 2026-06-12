@@ -410,3 +410,11 @@ details[open] .faq-question::after{transform:rotate(45deg)}
 .guide-card:hover .guide-desc{-webkit-line-clamp:unset}
 summary{cursor:pointer}
 summary::-webkit-details-marker{display:none}
+
+/* ── Mini guide cards (homepage dashboard) ──────────────── */
+.mini-card{display:flex;flex-direction:column;gap:6px;background:var(--paper2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 12px;font-family:var(--mono);font-size:.7rem;letter-spacing:.03em;text-transform:uppercase;font-weight:600;color:var(--ink);line-height:1.5;transition:transform .2s,box-shadow .2s,border-color .2s}
+.mini-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--gold);text-decoration:none;color:var(--green)}
+.mini-ico{font-size:1.4rem}
+.insight-cell{background:var(--green);color:var(--paper2);border-radius:var(--radius);padding:16px;border:1px solid var(--green2);outline:1px solid rgba(217,184,106,.4);outline-offset:-5px}
+.insight-num{font-family:var(--mono);font-size:1.5rem;font-weight:600;color:var(--gold-pale);font-variant-numeric:tabular-nums}
+.insight-lbl{font-size:.78rem;opacity:.85;line-height:1.5;margin-top:4px}

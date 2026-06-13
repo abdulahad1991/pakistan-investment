@@ -3,23 +3,37 @@
 let DATA = null;
 let AMOUNT = 0;
 let currentPage = 0;
+let selectedProfile = "balanced";
+
+const PROFILE_MIXES = {
+  balanced: [30, 25, 20, 20, 5],
+  income: [45, 30, 10, 10, 5],
+  growth: [15, 20, 35, 25, 5],
+};
+
+const PROFILE_LABELS = {
+  balanced: "Balanced",
+  income: "Income",
+  growth: "Growth",
+};
 
 const PORTFOLIO_ALLOC = [
-  { label: "National Savings Certificate", pct: 30, ret: null, color: "#0E3B2E", shariah: false,
+  { label: "National Savings Certificate", pct: 30, ret: null, color: "#075E4B", shariah: false,
     type: "Government-backed Fixed Income", where: "Pakistan Post Office / CDNS branch" },
-  { label: "Meezan Islamic Income Fund",   pct: 25, ret: null, color: "#23415E", shariah: true,
+  { label: "Meezan Islamic Income Fund",   pct: 25, ret: null, color: "#2854C5", shariah: true,
     type: "Islamic Money Market Fund",     where: "almeezangroup.com" },
-  { label: "Al Meezan Mutual Fund",        pct: 20, ret: null, color: "#7A5A1F", shariah: true,
+  { label: "Al Meezan Mutual Fund",        pct: 20, ret: null, color: "#F2B94B", shariah: true,
     type: "Islamic Equity Fund",           where: "almeezangroup.com" },
-  { label: "PSX Blue Chips (FFC + MCB)",   pct: 20, ret: 6.5,  color: "#A4452F", shariah: false,
+  { label: "PSX Blue Chips (FFC + MCB)",   pct: 20, ret: 6.5,  color: "#C24132", shariah: false,
     type: "Dividend Stocks",               where: "CDC account via PSX broker" },
-  { label: "Emergency Buffer (CDNS)",      pct: 5,  ret: null, color: "#5E5C52", shariah: false,
+  { label: "Emergency Buffer (CDNS)",      pct: 5,  ret: null, color: "#667085", shariah: false,
     type: "CDNS Savings Account",          where: "Pakistan Post Office / CDNS branch" },
 ];
 
 // ── Load data.json on startup ─────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   formatAmountInput();
+  initProfileToggle();
   fetch("data.json?v=" + Date.now())
     .then(r => r.json())
     .then(d => {
@@ -56,6 +70,10 @@ function applyData() {
   document.getElementById("m-sbp").textContent = m.sbp_rate + "%";
   document.getElementById("m-pkr").textContent = "₨" + m.pkr_usd;
   document.getElementById("m-inf").textContent = m.inflation_cpi + "%";
+  setText("h-kse", (m.kse100_level / 1000).toFixed(0) + "K");
+  setText("h-sbp", m.sbp_rate + "%");
+  setText("h-pkr", "₨" + m.pkr_usd);
+  setText("h-inf", m.inflation_cpi + "%");
 
   const d = new Date(DATA.updated);
   document.getElementById("snapshot-date").textContent =
@@ -86,10 +104,58 @@ function formatAmountInput() {
     let raw = inp.value.replace(/[^0-9]/g, "");
     if (raw) inp.value = formatPKR(parseInt(raw, 10));
     else inp.value = "";
+    clearAmountError();
+    updateHeroScore();
   });
   inp.addEventListener("keydown", e => {
     if (e.key === "Enter") startAnalysis();
   });
+}
+
+function initProfileToggle() {
+  document.querySelectorAll(".profile-option").forEach(btn => {
+    btn.addEventListener("click", () => {
+      selectedProfile = btn.dataset.profile || "balanced";
+      document.querySelectorAll(".profile-option").forEach(el => {
+        el.classList.toggle("active", el === btn);
+      });
+      applyProfileAllocation();
+      updateHeroScore();
+      if (currentPage === 2) renderMutualFunds();
+      if (currentPage === 4) renderPortfolio();
+    });
+  });
+  updateHeroScore();
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function applyProfileAllocation() {
+  const mix = PROFILE_MIXES[selectedProfile] || PROFILE_MIXES.balanced;
+  PORTFOLIO_ALLOC.forEach((a, i) => { a.pct = mix[i]; });
+}
+
+function calculateReadinessScore(amount) {
+  if (!amount) return null;
+  const amountScore = amount >= 1000000 ? 30 : amount >= 500000 ? 24 : amount >= 100000 ? 18 : amount >= 25000 ? 12 : 7;
+  const diversificationScore = 36;
+  const emergencyScore = 14;
+  const dataScore = DATA ? 12 : 6;
+  const profileBonus = selectedProfile === "balanced" ? 8 : 6;
+  return Math.min(100, amountScore + diversificationScore + emergencyScore + dataScore + profileBonus);
+}
+
+function updateHeroScore() {
+  const el = document.getElementById("hero-score");
+  if (!el) return;
+  const amount = parseAmount();
+  const score = calculateReadinessScore(amount);
+  el.innerHTML = score
+    ? `<span>${PROFILE_LABELS[selectedProfile]} readiness</span><strong>${score}/100</strong>`
+    : "<span>Readiness score</span><strong>Enter amount</strong>";
 }
 
 function formatPKR(n) {
@@ -146,10 +212,25 @@ function goPage(n) {
 function startAnalysis() {
   AMOUNT = parseAmount();
   if (AMOUNT < 1000) {
-    alert("Please enter at least PKR 1,000 to analyze.");
+    showAmountError("Enter at least PKR 1,000 to analyze.");
     return;
   }
+  clearAmountError();
   goPage(1);
+}
+
+function showAmountError(message) {
+  const el = document.getElementById("amount-error");
+  if (!el) return;
+  el.textContent = message;
+  el.classList.add("visible");
+}
+
+function clearAmountError() {
+  const el = document.getElementById("amount-error");
+  if (!el) return;
+  el.textContent = "";
+  el.classList.remove("visible");
 }
 
 // Step pill click
@@ -177,8 +258,8 @@ function renderNationalSavings() {
     tr.innerHTML = `
       <td>
         <strong>${s.name}</strong>
-        ${rec ? '<span class="badge badge-gold" style="margin-left:6px">⭐ Rec</span>' : ""}
-        ${s.shariah ? '<span class="badge badge-green" style="margin-left:4px">☪ Islamic</span>' : ""}
+        ${rec ? '<span class="badge badge-gold" style="margin-left:6px">Recommended</span>' : ""}
+        ${s.shariah ? '<span class="badge badge-green" style="margin-left:4px">Shariah</span>' : ""}
       </td>
       <td class="num yield-hi">${s.rate}%</td>
       <td>${s.tenure}</td>
@@ -201,6 +282,7 @@ function renderMutualFunds() {
 
   // Resolve portfolio returns from data
   wirePortfolioReturns();
+  applyProfileAllocation();
 
   DATA.mutual_funds.forEach(f => {
     const alloc = AMOUNT > 0 ? getPortfolioAlloc(f.name) : null;
@@ -211,11 +293,11 @@ function renderMutualFunds() {
     card.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
         <div class="fund-name">${f.name}</div>
-        ${f.recommended ? '<span class="badge badge-gold">⭐ Rec</span>' : ""}
+        ${f.recommended ? '<span class="badge badge-gold">Recommended</span>' : ""}
       </div>
-      <div class="fund-mgr">📁 ${f.manager} &nbsp;·&nbsp; ${f.type}</div>
+      <div class="fund-mgr">${f.manager} &nbsp;·&nbsp; ${f.type}</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
-        ${f.shariah ? '<span class="badge badge-green">☪ Shariah</span>' : '<span class="badge badge-grey">Conventional</span>'}
+        ${f.shariah ? '<span class="badge badge-green">Shariah</span>' : '<span class="badge badge-grey">Conventional</span>'}
         <span class="badge badge-${riskBadge(f.risk)}">${f.risk} Risk</span>
       </div>
       <div class="fund-returns">
@@ -240,8 +322,8 @@ function riskBadge(risk) {
 
 function getPortfolioAlloc(fundName) {
   const name = fundName.toLowerCase();
-  if (name.includes("meezan islamic income")) return Math.round(AMOUNT * 0.25);
-  if (name.includes("al meezan mutual"))      return Math.round(AMOUNT * 0.20);
+  if (name.includes("meezan islamic income")) return Math.round(AMOUNT * PORTFOLIO_ALLOC[1].pct / 100);
+  if (name.includes("al meezan mutual"))      return Math.round(AMOUNT * PORTFOLIO_ALLOC[2].pct / 100);
   return null;
 }
 
@@ -281,9 +363,10 @@ function renderPortfolio() {
   }
   document.getElementById("alloc-grid").innerHTML = "";
   wirePortfolioReturns();
+  applyProfileAllocation();
 
   document.getElementById("port-subtitle").textContent =
-    `Conservative, dividend-focused allocation for PKR ${formatPKR(AMOUNT)}`;
+    `${PROFILE_LABELS[selectedProfile]} allocation for PKR ${formatPKR(AMOUNT)} across savings, funds and PSX dividends.`;
 
   let totalIncome = 0;
   PORTFOLIO_ALLOC.forEach(a => {
@@ -307,6 +390,7 @@ function renderPortfolio() {
   document.getElementById("s-monthly").textContent = "PKR " + formatPKR(monthly);
   document.getElementById("s-yield").textContent   = blended + "%";
   document.getElementById("s-5y").textContent      = "PKR " + formatPKR(projVals[4]);
+  renderPortfolioGamification(totalIncome, blended, monthly);
 
   // Allocation grid
   const grid = document.getElementById("alloc-grid");
@@ -319,7 +403,7 @@ function renderPortfolio() {
         <div class="alloc-dot" style="background:${a.color}"></div>
         <div>
           <div class="alloc-label">${a.label}</div>
-          <div class="alloc-sub">${a.type} &nbsp;·&nbsp; ${a.shariah ? "☪ Shariah" : "🏦 Conv."}</div>
+          <div class="alloc-sub">${a.type} &nbsp;·&nbsp; ${a.shariah ? "Shariah" : "Conventional"}</div>
           <div style="font-size:.75rem;color:var(--muted);margin-top:2px">${a.where}</div>
         </div>
         <div class="alloc-amount">
@@ -353,7 +437,27 @@ function renderPortfolio() {
   setTimeout(() => {
     renderDonutChart();
     renderProjectionChart(projVals);
+    renderRiskChart();
   }, 50);
+}
+
+function renderPortfolioGamification(totalIncome, blended, monthly) {
+  const score = calculateReadinessScore(AMOUNT) || 0;
+  setText("portfolio-score", score);
+  setText("portfolio-score-copy",
+    `${PROFILE_LABELS[selectedProfile]} profile: estimated ${blended}% blended return and PKR ${formatPKR(monthly)} monthly income.`
+  );
+  const badges = [
+    { label: "Diversified", unlocked: true },
+    { label: "Inflation-aware", unlocked: DATA ? parseFloat(blended) > DATA.macro.inflation_cpi : false },
+    { label: "Emergency buffer", unlocked: true },
+    { label: totalIncome > 0 ? "Income mapped" : "Income pending", unlocked: totalIncome > 0 },
+  ];
+  const badgeEl = document.getElementById("portfolio-badges");
+  if (!badgeEl) return;
+  badgeEl.innerHTML = badges.map(b =>
+    `<span class="score-badge ${b.unlocked ? "unlocked" : ""}">${b.label}</span>`
+  ).join("");
 }
 
 function wirePortfolioReturns() {
@@ -390,9 +494,9 @@ function renderKSEChart() {
       datasets: [{
         label: "KSE-100",
         data: DATA.kse100_history.values,
-        borderColor: "#0E3B2E",
-        backgroundColor: "rgba(14,59,46,.08)",
-        borderWidth: 2.5,
+        borderColor: "#12A87D",
+        backgroundColor: "rgba(18,168,125,.12)",
+        borderWidth: 3,
         pointRadius: 3,
         fill: true,
         tension: .35,
@@ -400,10 +504,11 @@ function renderKSEChart() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
       plugins: { legend: { display: false } },
       scales: {
-        y: { ticks: { callback: v => (v/1000).toFixed(0) + "K" } },
-        x: { ticks: { maxRotation: 45 } }
+        y: { ticks: { callback: v => (v/1000).toFixed(0) + "K" }, grid: { color: "#E6EBF1" } },
+        x: { ticks: { maxRotation: 0 }, grid: { display: false } }
       }
     }
   });
@@ -420,9 +525,9 @@ function renderSBPChart() {
       datasets: [{
         label: "SBP Rate %",
         data: DATA.sbp_history.values,
-        borderColor: "#A4452F",
-        backgroundColor: "rgba(164,69,47,.07)",
-        borderWidth: 2.5,
+        borderColor: "#2854C5",
+        backgroundColor: "rgba(40,84,197,.1)",
+        borderWidth: 3,
         fill: true,
         tension: .35,
         pointRadius: 3,
@@ -430,10 +535,11 @@ function renderSBPChart() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
       plugins: { legend: { display: false } },
       scales: {
-        y: { ticks: { callback: v => v + "%" }, min: 0 },
-        x: { ticks: { maxRotation: 45 } }
+        y: { ticks: { callback: v => v + "%" }, min: 0, grid: { color: "#E6EBF1" } },
+        x: { ticks: { maxRotation: 0 }, grid: { display: false } }
       }
     }
   });
@@ -449,7 +555,7 @@ function renderStocksChart(stocks) {
       datasets: [{
         label: "Dividend Yield %",
         data: stocks.map(s => s.yield),
-        backgroundColor: stocks.map(s => s.yield >= 6 ? "#0E3B2E" : s.yield >= 4 ? "#1F7A53" : "#C9B27B"),
+        backgroundColor: stocks.map(s => s.yield >= 6 ? "#075E4B" : s.yield >= 4 ? "#12A87D" : "#F2B94B"),
         borderRadius: 6,
       }]
     },
@@ -457,7 +563,8 @@ function renderStocksChart(stocks) {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        y: { ticks: { callback: v => v + "%" }, beginAtZero: true }
+        y: { ticks: { callback: v => v + "%" }, beginAtZero: true, grid: { color: "#E6EBF1" } },
+        x: { grid: { display: false } }
       }
     }
   });
@@ -474,7 +581,7 @@ function renderDonutChart() {
         data: PORTFOLIO_ALLOC.map(a => a.pct),
         backgroundColor: PORTFOLIO_ALLOC.map(a => a.color),
         borderWidth: 2,
-        borderColor: "#F6F1E6",
+        borderColor: "#FFFFFF",
       }]
     },
     options: {
@@ -483,7 +590,7 @@ function renderDonutChart() {
       plugins: {
         legend: {
           position: "bottom",
-          labels: { font: { size: 11 }, boxWidth: 12, padding: 12 }
+          labels: { font: { size: 11 }, boxWidth: 12, padding: 12, usePointStyle: true }
         },
         tooltip: {
           callbacks: {
@@ -506,14 +613,14 @@ function renderProjectionChart(projVals) {
         {
           label: "Portfolio Value",
           data: projVals,
-          backgroundColor: ["#D9B86A","#B98A2F","#1F7A53","#23415E","#0E3B2E"],
+          backgroundColor: ["#F8D98A","#F2B94B","#12A87D","#2854C5","#075E4B"],
           borderRadius: 8,
         },
         {
           label: "Starting Amount",
           data: Array(5).fill(AMOUNT),
           type: "line",
-          borderColor: "#A4452F",
+          borderColor: "#C24132",
           borderDash: [5, 4],
           borderWidth: 1.5,
           pointRadius: 0,
@@ -530,15 +637,60 @@ function renderProjectionChart(projVals) {
         }
       },
       scales: {
-        y: { ticks: { callback: v => "₨" + (v/1000).toFixed(0) + "K" } }
+        y: { ticks: { callback: v => "₨" + (v/1000).toFixed(0) + "K" }, grid: { color: "#E6EBF1" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderRiskChart() {
+  const ctx = document.getElementById("chart-risk");
+  if (!ctx || typeof Chart === "undefined") return;
+  destroyChart("risk");
+  const profiles = {
+    balanced: [78, 70, 70, 72, 55],
+    income: [90, 76, 44, 88, 48],
+    growth: [54, 64, 92, 58, 62],
+  };
+  chartInstances["risk"] = new Chart(ctx, {
+    type: "radar",
+    data: {
+      labels: ["Stability", "Liquidity", "Growth", "Income", "Shariah sleeve"],
+      datasets: [{
+        label: PROFILE_LABELS[selectedProfile],
+        data: profiles[selectedProfile] || profiles.balanced,
+        borderColor: "#075E4B",
+        backgroundColor: "rgba(18,168,125,.16)",
+        pointBackgroundColor: "#F2B94B",
+        pointBorderColor: "#075E4B",
+        borderWidth: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          min: 0,
+          max: 100,
+          ticks: { display: false, stepSize: 20 },
+          grid: { color: "#DDE3EA" },
+          angleLines: { color: "#DDE3EA" },
+          pointLabels: { font: { size: 11 }, color: "#374151" },
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw}/100` } }
       }
     }
   });
 }
 
 // ── Homepage dashboard (static section) ──────────────────────────
-const LEDGER = { green:"#0E3B2E", green3:"#1F7A53", gold:"#B98A2F", goldPale:"#D9B86A",
-                 navy:"#23415E", red:"#A4452F", ink:"#191D1A", muted:"#6B6A60", paper:"#F6F1E6" };
+const LEDGER = { green:"#075E4B", green3:"#12A87D", gold:"#F2B94B", goldPale:"#F8D98A",
+                 navy:"#2854C5", red:"#C24132", ink:"#111827", muted:"#667085", paper:"#FFFFFF" };
 const MONO_FONT = { family:"'IBM Plex Mono', monospace", size: 11 };
 
 function bestOf(arr, key) {

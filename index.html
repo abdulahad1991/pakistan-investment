@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pakistan Investment Advisor — Free Investment Analysis for Pakistanis (2026)</title>
-<meta name="description" content="Free investment analysis for Pakistani investors. Compare National Savings, Mutual Funds, and PSX stocks side by side — personalised to your budget. Updated daily.">
+<title>Pakistan Investment Calculator 2026 | Mutual Funds, National Savings &amp; PSX</title>
+<meta name="description" content="Free Pakistan investment calculator for 2026. Compare National Savings, mutual funds and PSX dividend stocks with daily data, charts and a personalized portfolio.">
 <link rel="canonical" href="https://pakinvestlysis.com/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Pakistan Investment Advisor — Free Investment Analysis for Pakistanis">
-<meta property="og:description" content="Compare National Savings, Mutual Funds, and PSX dividend stocks personalised to your budget. Free, updated daily, no signup required.">
+<meta property="og:title" content="Pakistan Investment Calculator 2026">
+<meta property="og:description" content="Compare National Savings, mutual funds and PSX dividend stocks with daily data, interactive charts and a personalized portfolio.">
 <meta property="og:url" content="https://pakinvestlysis.com/">
 <meta property="og:site_name" content="Pakistan Investment Advisor">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pakistan Investment Advisor — Free Investment Analysis">
-<meta name="twitter:description" content="Compare National Savings, Mutual Funds, and PSX stocks for your budget. Free, daily updated, no signup.">
+<meta name="twitter:title" content="Pakistan Investment Calculator 2026">
+<meta name="twitter:description" content="Compare National Savings, mutual funds and PSX stocks for your budget. Free, daily updated, no signup.">
 
 <!-- JSON-LD: WebSite + WebApplication -->
 <script type="application/ld+json">
@@ -26,7 +26,7 @@
   "@type": "WebSite",
   "name": "Pakistan Investment Advisor",
   "url": "https://pakinvestlysis.com",
-  "description": "Free daily-updated tool comparing National Savings, Mutual Funds, and PSX dividend stocks for Pakistani investors.",
+  "description": "Free daily-updated Pakistan investment calculator comparing National Savings, mutual funds, and PSX dividend stocks.",
   "author": {"@type": "Person", "name": "Abdul Ahad", "url": "https://www.linkedin.com/in/abdulahad1991/"},
   "potentialAction": {
     "@type": "SearchAction",
@@ -57,7 +57,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
@@ -74,7 +74,7 @@ gtag('config', 'G-4T2H0KH9H7');
 <header>
   <div class="container">
     <div class="header-inner">
-      <div class="logo">🇵🇰 <span>Pakistan</span> Investment Advisor</div>
+      <div class="logo"><span>Pakistan</span> Investment Advisor</div>
       <div style="display:flex;align-items:center;gap:16px">
         <nav style="display:flex;gap:14px">
           <a href="/guides/">Guides</a>
@@ -92,7 +92,7 @@ gtag('config', 'G-4T2H0KH9H7');
 </header>
 
 <!-- ── Step nav ───────────────────────────────────────── -->
-<div style="background:#FDFBF4;border-bottom:1px solid var(--border);position:sticky;top:62px;z-index:99">
+<div class="step-shell">
   <div class="container">
     <div class="step-nav" id="step-nav">
       <div class="step-pill active" data-step="0">1. Your Amount</div>
@@ -104,7 +104,7 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </div>
 
-<a href="/blog/pakistan-budget-2026-27-investors.html" style="display:block;background:var(--gold);color:#191D1A;text-align:center;padding:9px 16px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;text-decoration:none">📜 New &nbsp;·&nbsp; Budget 2026-27: the complete breakdown for investors →</a>
+<a href="/blog/pakistan-budget-2026-27-investors.html" class="news-strip">Budget 2026-27 investor breakdown is live</a>
 
 <main>
 
@@ -115,26 +115,66 @@ gtag('config', 'G-4T2H0KH9H7');
 
   <div class="hero">
     <div class="container">
-      <h1>Where Should You Invest in Pakistan?</h1>
-      <p>Enter your available amount and get a personalised analysis of National Savings, Mutual Funds &amp; PSX Stocks — free, in seconds.</p>
-
-      <div class="amount-wrap">
-        <div class="amount-label">Enter your investment amount (PKR)</div>
-        <div class="amount-input-row">
-          <span class="pkr-prefix">PKR</span>
-          <input type="text" id="amount-input" placeholder="5,00,000" inputmode="numeric" autocomplete="off">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Pakistan investment calculator 2026</div>
+          <h1>Build a smarter Pakistan portfolio in under a minute.</h1>
+          <p>Compare National Savings, mutual funds and PSX dividend stocks using daily market data, real-return charts and a personalized allocation.</p>
+          <div class="hero-proof">
+            <span>Daily data</span>
+            <span>No signup</span>
+            <span>Privacy-first</span>
+          </div>
         </div>
-        <button class="btn-analyze" onclick="startAnalysis()">Analyze My Investment →</button>
+
+        <div class="amount-wrap">
+          <div class="amount-label">Investment amount</div>
+          <div class="amount-input-row">
+            <span class="pkr-prefix">PKR</span>
+            <input type="text" id="amount-input" placeholder="5,00,000" inputmode="numeric" autocomplete="off">
+          </div>
+          <div class="amount-error" id="amount-error" role="status" aria-live="polite"></div>
+          <div class="risk-toggle" aria-label="Portfolio profile">
+            <button type="button" class="profile-option active" data-profile="balanced">Balanced</button>
+            <button type="button" class="profile-option" data-profile="income">Income</button>
+            <button type="button" class="profile-option" data-profile="growth">Growth</button>
+          </div>
+          <button class="btn-analyze" onclick="startAnalysis()">Analyze My Investment</button>
+          <div class="mini-score" id="hero-score">
+            <span>Readiness score</span>
+            <strong>Enter amount</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-dashboard" aria-label="Market dashboard">
+        <div class="hero-metric">
+          <span>KSE-100</span>
+          <strong id="h-kse">—</strong>
+        </div>
+        <div class="hero-metric">
+          <span>Policy rate</span>
+          <strong id="h-sbp">—</strong>
+        </div>
+        <div class="hero-metric">
+          <span>Inflation</span>
+          <strong id="h-inf">—</strong>
+        </div>
+        <div class="hero-metric">
+          <span>PKR / USD</span>
+          <strong id="h-pkr">—</strong>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="container" style="padding-top:24px">
+  <div class="container" style="padding-top:28px">
 
     <!-- Macro snapshot -->
-    <div class="card">
+    <div class="card dashboard-card">
+      <div class="section-kicker">Live market context</div>
       <div class="section-title">Pakistan Market Snapshot</div>
-      <div class="section-sub" id="snapshot-date">Live data updated daily</div>
+      <div class="section-sub" id="snapshot-date">Daily data refresh</div>
       <div class="macro-grid">
         <div class="macro-pill">
           <div class="macro-val" id="m-kse">—</div>
@@ -156,17 +196,30 @@ gtag('config', 'G-4T2H0KH9H7');
     </div>
 
     <!-- KSE-100 history chart -->
-    <div class="card">
-      <div style="font-weight:700;margin-bottom:4px">KSE-100 — 6 Year Journey</div>
-      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">From 40,000 to 1,70,000 — Pakistan's bull market</div>
-      <div class="chart-wrap"><canvas id="chart-kse"></canvas></div>
-    </div>
+    <div class="chart-grid">
+      <div class="card chart-card">
+        <div class="chart-head">
+          <div>
+            <div class="section-kicker">Interactive chart</div>
+            <div class="chart-title">KSE-100: 6-year market cycle</div>
+            <div class="chart-copy">Hover for values and compare the post-2023 re-rating.</div>
+          </div>
+          <span class="chart-badge">Index</span>
+        </div>
+        <div class="chart-wrap"><canvas id="chart-kse"></canvas></div>
+      </div>
 
-    <!-- SBP rate chart -->
-    <div class="card">
-      <div style="font-weight:700;margin-bottom:4px">SBP Policy Rate — Cutting Cycle</div>
-      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Rate has fallen from 22% peak — good for stocks &amp; funds</div>
-      <div class="chart-wrap-sm"><canvas id="chart-sbp"></canvas></div>
+      <div class="card chart-card">
+        <div class="chart-head">
+          <div>
+            <div class="section-kicker">Rate cycle</div>
+            <div class="chart-title">SBP policy rate trend</div>
+            <div class="chart-copy">Track the rate path that drives savings, fund and stock valuations.</div>
+          </div>
+          <span class="chart-badge">Rates</span>
+        </div>
+        <div class="chart-wrap-sm"><canvas id="chart-sbp"></canvas></div>
+      </div>
     </div>
 
     <!-- Ad slot 1 -->
@@ -176,7 +229,7 @@ gtag('config', 'G-4T2H0KH9H7');
     </div>
 
     <div class="nav-row">
-      <button class="btn-nav btn-next" onclick="startAnalysis()">Analyze My Investment →</button>
+      <button class="btn-nav btn-next" onclick="startAnalysis()">Analyze My Investment</button>
     </div>
   </div>
 </div>
@@ -187,8 +240,9 @@ gtag('config', 'G-4T2H0KH9H7');
 <div class="page" id="page-1">
   <div class="container" style="padding-top:24px">
 
-    <div class="section-title">🏦 National Savings — Zero Risk Returns</div>
-    <div class="section-sub">100% backed by the Government of Pakistan. No brokerage account needed — just walk in with your CNIC.</div>
+    <div class="section-kicker">Step 2</div>
+    <div class="section-title">National Savings: government-backed income</div>
+    <div class="section-sub">Compare CDNS schemes by rate, lock-in and estimated annual income for your amount.</div>
 
     <div class="card">
       <div class="tbl-wrap">
@@ -210,19 +264,19 @@ gtag('config', 'G-4T2H0KH9H7');
     </div>
 
     <div class="cta-block">
-      <div class="cta-title">📍 How to invest in National Savings</div>
-      <div style="font-size:.84rem;color:#2E2C26;margin-bottom:10px">Walk into any Pakistan Post Office or CDNS branch with your CNIC. No internet required.</div>
+      <div class="cta-title">How to invest in National Savings</div>
+      <div style="font-size:.9rem;color:var(--muted);margin-bottom:10px">Visit any Pakistan Post Office or CDNS branch with your CNIC. Verify rates before you deposit.</div>
       <div class="cta-btns">
         <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" class="btn-cta btn-primary">Open CDNS Account →</a>
         <a href="https://www.savings.gov.pk/profit-rates/" target="_blank" rel="noopener" class="btn-cta btn-secondary">Latest Profit Rates</a>
       </div>
     </div>
 
-    <div class="disclaimer">⚠ Profit rates change monthly. Always verify at savings.gov.pk before investing.</div>
+    <div class="disclaimer">Profit rates change monthly. Always verify at savings.gov.pk before investing.</div>
 
     <div class="nav-row">
-      <button class="btn-nav btn-back" onclick="goPage(0)">← Back</button>
-      <button class="btn-nav btn-next" onclick="goPage(2)">Mutual Funds →</button>
+      <button class="btn-nav btn-back" onclick="goPage(0)">Back</button>
+      <button class="btn-nav btn-next" onclick="goPage(2)">Mutual Funds</button>
     </div>
   </div>
 </div>
@@ -233,14 +287,15 @@ gtag('config', 'G-4T2H0KH9H7');
 <div class="page" id="page-2">
   <div class="container" style="padding-top:24px">
 
-    <div class="section-title">📊 Mutual Funds — Managed Growth</div>
-    <div class="section-sub">Professional fund managers invest your money across many assets. Higher returns than savings, slightly higher risk.</div>
+    <div class="section-kicker">Step 3</div>
+    <div class="section-title">Mutual funds: managed growth and liquidity</div>
+    <div class="section-sub">Screen SECP-regulated funds by risk, Shariah status, track record and minimum investment.</div>
 
     <div class="funds-grid" id="funds-grid"></div>
 
     <div class="cta-block">
-      <div class="cta-title">🚀 Open a Mutual Fund Account Online</div>
-      <div style="font-size:.84rem;color:#2E2C26;margin-bottom:10px">Register online in 15 minutes — CNIC + mobile number is all you need.</div>
+      <div class="cta-title">Open a mutual fund account online</div>
+      <div style="font-size:.9rem;color:var(--muted);margin-bottom:10px">Most AMCs support digital onboarding with CNIC, mobile number and KYC checks.</div>
       <div class="cta-btns">
         <a href="https://www.almeezangroup.com" target="_blank" rel="noopener" class="btn-cta btn-primary">Al Meezan (Islamic) →</a>
         <a href="https://www.nbpfunds.com" target="_blank" rel="noopener" class="btn-cta btn-navy">NBP Funds →</a>
@@ -248,11 +303,11 @@ gtag('config', 'G-4T2H0KH9H7');
       </div>
     </div>
 
-    <div class="disclaimer">⚠ Mutual fund returns shown are historical. Past performance does not guarantee future results.</div>
+    <div class="disclaimer">Mutual fund returns are historical. Past performance does not guarantee future results.</div>
 
     <div class="nav-row">
-      <button class="btn-nav btn-back" onclick="goPage(1)">← Back</button>
-      <button class="btn-nav btn-next" onclick="goPage(3)">PSX Stocks →</button>
+      <button class="btn-nav btn-back" onclick="goPage(1)">Back</button>
+      <button class="btn-nav btn-next" onclick="goPage(3)">PSX Stocks</button>
     </div>
   </div>
 </div>
@@ -263,8 +318,9 @@ gtag('config', 'G-4T2H0KH9H7');
 <div class="page" id="page-3">
   <div class="container" style="padding-top:24px">
 
-    <div class="section-title">📈 PSX Blue Chips — Dividend Stocks</div>
-    <div class="section-sub">KSE-100's highest dividend-paying companies, sorted by yield. Prices updated daily.</div>
+    <div class="section-kicker">Step 4</div>
+    <div class="section-title">PSX blue chips: dividend and valuation screen</div>
+    <div class="section-sub">Sort dividend stocks by yield, price momentum and valuation. Market risk applies.</div>
 
     <div class="card">
       <div class="tbl-wrap">
@@ -287,13 +343,13 @@ gtag('config', 'G-4T2H0KH9H7');
     </div>
 
     <div class="card">
-      <div style="font-weight:700;margin-bottom:8px">Dividend Yield Comparison</div>
+      <div class="chart-title">Dividend yield comparison</div>
       <div class="chart-wrap"><canvas id="chart-stocks"></canvas></div>
     </div>
 
     <div class="cta-block">
-      <div class="cta-title">📋 Open a CDC / Brokerage Account to Buy Stocks</div>
-      <div style="font-size:.84rem;color:#2E2C26;margin-bottom:10px">You need a CDC Investor Account to hold shares. Open online with any PSX-licensed broker.</div>
+      <div class="cta-title">Open a CDC / brokerage account</div>
+      <div style="font-size:.9rem;color:var(--muted);margin-bottom:10px">Use a PSX-licensed broker. Shares should sit in a CDC account under your name.</div>
       <div class="cta-btns">
         <a href="https://ahsecurities.com" target="_blank" rel="noopener" class="btn-cta btn-primary">Arif Habib Securities →</a>
         <a href="https://www.mcbfsl.com" target="_blank" rel="noopener" class="btn-cta btn-navy">MCB Financial Services →</a>
@@ -301,11 +357,11 @@ gtag('config', 'G-4T2H0KH9H7');
       </div>
     </div>
 
-    <div class="disclaimer">⚠ Stock prices are indicative. Always verify on PSX (psx.com.pk) before trading. This is not financial advice.</div>
+    <div class="disclaimer">Stock prices are indicative. Always verify on PSX before trading. This is not financial advice.</div>
 
     <div class="nav-row">
-      <button class="btn-nav btn-back" onclick="goPage(2)">← Back</button>
-      <button class="btn-nav btn-next" onclick="goPage(4)">See Your Portfolio →</button>
+      <button class="btn-nav btn-back" onclick="goPage(2)">Back</button>
+      <button class="btn-nav btn-next" onclick="goPage(4)">See Portfolio</button>
     </div>
   </div>
 </div>
@@ -316,8 +372,18 @@ gtag('config', 'G-4T2H0KH9H7');
 <div class="page" id="page-4">
   <div class="container" style="padding-top:24px">
 
-    <div class="section-title">🎯 Your Recommended Portfolio</div>
-    <div class="section-sub" id="port-subtitle">Conservative, dividend-focused allocation for long-term growth.</div>
+    <div class="section-kicker">Step 5</div>
+    <div class="section-title">Your recommended portfolio</div>
+    <div class="section-sub" id="port-subtitle">Balanced allocation for income, liquidity and long-term growth.</div>
+
+    <div class="gamify-card" id="portfolio-score-card">
+      <div>
+        <div class="section-kicker">Portfolio readiness</div>
+        <div class="score-title"><span id="portfolio-score">—</span>/100</div>
+        <p id="portfolio-score-copy">Analyze an amount to unlock your portfolio score.</p>
+      </div>
+      <div class="badge-row" id="portfolio-badges"></div>
+    </div>
 
     <!-- Summary stats -->
     <div class="summary-grid">
@@ -341,31 +407,35 @@ gtag('config', 'G-4T2H0KH9H7');
 
     <!-- Allocation breakdown -->
     <div class="card">
-      <div style="font-weight:700;margin-bottom:14px">Allocation Breakdown</div>
+      <div class="chart-title">Allocation breakdown</div>
       <div class="alloc-grid" id="alloc-grid"></div>
     </div>
 
     <!-- Charts row -->
-    <div style="display:grid;grid-template-columns:1fr;gap:16px">
+    <div class="chart-grid">
       <div class="card">
-        <div style="font-weight:700;margin-bottom:8px">Portfolio Distribution</div>
+        <div class="chart-title">Portfolio pie chart</div>
         <div style="position:relative;height:260px"><canvas id="chart-donut"></canvas></div>
       </div>
       <div class="card">
-        <div style="font-weight:700;margin-bottom:8px">5-Year Growth Projection</div>
+        <div class="chart-title">5-year growth projection</div>
         <div class="chart-wrap"><canvas id="chart-proj"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="chart-title">Risk and liquidity profile</div>
+        <div class="chart-wrap"><canvas id="chart-risk"></canvas></div>
       </div>
     </div>
 
     <!-- Action steps -->
     <div class="card">
-      <div style="font-weight:700;font-size:1rem;margin-bottom:14px;color:var(--green)">✅ Action Steps — How to Execute This</div>
+      <div class="chart-title">Action steps</div>
       <div id="action-steps"></div>
     </div>
 
-    <div class="cta-block" style="background:var(--gold-light);border-color:var(--gold)">
-      <div class="cta-title" style="color:#7A5A1F">💰 Ready to Start Investing?</div>
-      <div style="font-size:.84rem;color:#2E2C26;margin-bottom:10px">Open your accounts today — the earlier you start, the more compounding works for you.</div>
+    <div class="cta-block cta-strong">
+      <div class="cta-title">Ready to start investing?</div>
+      <div style="font-size:.9rem;color:var(--muted);margin-bottom:10px">Start with verified accounts, then automate monthly investing where possible.</div>
       <div class="cta-btns">
         <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" class="btn-cta btn-primary">CDNS (National Savings) →</a>
         <a href="https://www.almeezangroup.com" target="_blank" rel="noopener" class="btn-cta btn-gold">Al Meezan Funds →</a>
@@ -379,10 +449,10 @@ gtag('config', 'G-4T2H0KH9H7');
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="4791529033" data-ad-format="auto" data-full-width-responsive="true"></ins>
     </div>
 
-    <div class="disclaimer">⚠ This tool provides general educational information only. Returns are estimates based on current rates and historical data. Always consult a SECP-registered financial advisor before investing. Past performance does not guarantee future results.</div>
+    <div class="disclaimer">Educational information only. Returns are estimates based on current rates and historical data. Consult a SECP-registered financial advisor before investing.</div>
 
     <div class="nav-row">
-      <button class="btn-nav btn-back" onclick="goPage(3)">← Back</button>
+      <button class="btn-nav btn-back" onclick="goPage(3)">Back</button>
       <button class="btn-nav btn-next" onclick="goPage(0)" style="background:var(--gold);color:#191D1A">Start Over</button>
     </div>
   </div>
@@ -393,84 +463,85 @@ gtag('config', 'G-4T2H0KH9H7');
 <!-- ══════════════════════════════════════════════════════
      STATIC EDUCATIONAL CONTENT — always visible to crawlers
 ══════════════════════════════════════════════════════ -->
-<section id="investment-guide" style="background:#FDFBF4;border-top:3px solid var(--green);padding:48px 0">
+<section id="investment-guide" class="seo-section">
   <div class="container">
 
-    <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <h2 style="font-size:1.6rem;font-weight:700;color:var(--green);margin:0 0 4px">The Numbers, At a Glance</h2>
-      <span style="font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:#191D1A;font-weight:600;padding:3px 10px;border-radius:3px">Updated daily</span>
+    <div class="section-heading">
+      <div>
+        <div class="section-kicker">Daily Pakistan investing data</div>
+        <h2>Compare returns before you commit money</h2>
+      </div>
+      <span class="status-pill">Updated daily</span>
     </div>
-    <div style="font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:6px 0 26px;line-height:2">
-      By <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:var(--green)">Abdul Ahad</a> — software engineer &amp; active PSX / mutual-fund investor &nbsp;·&nbsp; Sources:
-      <a href="https://www.sbp.org.pk" target="_blank" rel="noopener" style="color:var(--green)">SBP</a> ·
-      <a href="https://www.savings.gov.pk" target="_blank" rel="noopener" style="color:var(--green)">CDNS</a> ·
-      <a href="https://www.mufap.com.pk" target="_blank" rel="noopener" style="color:var(--green)">MUFAP</a> ·
-      <a href="https://www.psx.com.pk" target="_blank" rel="noopener" style="color:var(--green)">PSX</a> &nbsp;·&nbsp;
-      <a href="/methodology.html" style="color:var(--green)">Methodology</a>
+    <div class="source-line">
+      Sources: <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">SBP</a>,
+      <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">CDNS</a>,
+      <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">MUFAP</a>,
+      <a href="https://www.psx.com.pk" target="_blank" rel="noopener">PSX</a>.
+      Methodology reviewed on the <a href="/methodology.html">data page</a>.
     </div>
 
     <!-- Live insight strip — filled by app.js from data.json -->
-    <div id="insight-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:26px"></div>
+    <div id="insight-strip" class="insight-grid"></div>
 
-    <!-- Growth comparison -->
-    <div class="card">
-      <div style="font-weight:700;font-size:1.05rem">Where PKR 100,000 Could Grow in 5 Years</div>
-      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Compounding today&rsquo;s live rates — illustrative, not a guarantee</div>
-      <div class="chart-wrap"><canvas id="chart-grow"></canvas></div>
-    </div>
+    <div class="chart-grid">
+      <div class="card chart-card">
+        <div class="chart-title">PKR 100,000: 5-year projection</div>
+        <div class="chart-copy">Illustrative compounding using current or historical rates.</div>
+        <div class="chart-wrap"><canvas id="chart-grow"></canvas></div>
+      </div>
 
-    <!-- Real return after inflation -->
-    <div class="card">
-      <div style="font-weight:700;font-size:1.05rem">What Beats Inflation Right Now</div>
-      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Each return minus CPI inflation — the bar is what your money <em>really</em> earns</div>
-      <div class="chart-wrap"><canvas id="chart-real"></canvas></div>
-    </div>
+      <div class="card chart-card">
+        <div class="chart-title">Real return after inflation</div>
+        <div class="chart-copy">Nominal return minus CPI inflation. Positive bars preserve purchasing power.</div>
+        <div class="chart-wrap"><canvas id="chart-real"></canvas></div>
+      </div>
 
-    <!-- Sample mix -->
-    <div class="card">
-      <div style="font-weight:700;font-size:1.05rem">One Balanced Starting Mix</div>
-      <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Safe anchor + managed growth + a dividend sleeve. Enter your amount at the top for your personalised version.</div>
-      <div style="position:relative;height:240px"><canvas id="chart-mix"></canvas></div>
+      <div class="card chart-card">
+        <div class="chart-title">Balanced starter mix</div>
+        <div class="chart-copy">A diversified template. Use the calculator above for your amount.</div>
+        <div style="position:relative;height:260px"><canvas id="chart-mix"></canvas></div>
+      </div>
     </div>
 
     <!-- Compact guide grid -->
-    <h2 style="font-size:1.25rem;font-weight:700;color:#191D1A;margin:34px 0 4px">Learn One Topic at a Time</h2>
-    <p style="font-size:.88rem;color:var(--muted);margin-bottom:16px">Short, step-by-step guides — each refreshed daily with live rates.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:34px">
-      <a class="mini-card" href="/guides/national-savings-vs-mutual-funds.html"><span class="mini-ico">🏦</span>National Savings vs Funds</a>
-      <a class="mini-card" href="/guides/how-to-invest-mutual-funds-pakistan.html"><span class="mini-ico">📊</span>Start a Mutual Fund SIP</a>
-      <a class="mini-card" href="/guides/best-dividend-stocks-psx.html"><span class="mini-ico">📈</span>PSX Dividend Stocks</a>
-      <a class="mini-card" href="/guides/sbp-policy-rate-investments.html"><span class="mini-ico">🏛️</span>The SBP Policy Rate</a>
-      <a class="mini-card" href="/guides/roshan-digital-account-guide.html"><span class="mini-ico">🌍</span>Roshan Digital Account</a>
-      <a class="mini-card" href="/guides/money-market-funds-vs-bank-savings.html"><span class="mini-ico">💵</span>Money Market vs Bank</a>
-      <a class="mini-card" href="/guides/treasury-bills-pakistan.html"><span class="mini-ico">🧾</span>Buy T-Bills Directly</a>
-      <a class="mini-card" href="/guides/investment-tax-pakistan.html"><span class="mini-ico">🪪</span>Filer vs Non-Filer Tax</a>
-      <a class="mini-card" href="/guides/open-brokerage-account-psx.html"><span class="mini-ico">📋</span>Open a Brokerage Account</a>
-      <a class="mini-card" href="/guides/halal-investing-pakistan.html"><span class="mini-ico">🕌</span>Halal Investing</a>
-      <a class="mini-card" href="/guides/gold-investment-pakistan.html"><span class="mini-ico">🪙</span>Gold in Pakistan</a>
-      <a class="mini-card" href="/blog/pakistan-budget-2026-27-investors.html"><span class="mini-ico">📜</span>Budget 2026-27 Breakdown</a>
+    <div class="section-heading compact">
+      <div>
+        <div class="section-kicker">Investment guides</div>
+        <h2>Learn one decision at a time</h2>
+      </div>
+      <a class="text-link" href="/guides/">View all guides</a>
+    </div>
+    <div class="mini-grid">
+      <a class="mini-card" href="/guides/national-savings-vs-mutual-funds.html"><span class="mini-ico">NS</span>National Savings vs Funds</a>
+      <a class="mini-card" href="/guides/how-to-invest-mutual-funds-pakistan.html"><span class="mini-ico">MF</span>Start a Mutual Fund SIP</a>
+      <a class="mini-card" href="/guides/best-dividend-stocks-psx.html"><span class="mini-ico">PSX</span>Dividend Stocks</a>
+      <a class="mini-card" href="/guides/sbp-policy-rate-investments.html"><span class="mini-ico">SBP</span>Policy Rate Guide</a>
+      <a class="mini-card" href="/guides/halal-investing-pakistan.html"><span class="mini-ico">HL</span>Halal Investing</a>
+      <a class="mini-card" href="/guides/investment-tax-pakistan.html"><span class="mini-ico">TAX</span>Filer vs Non-Filer Tax</a>
     </div>
 
     <!-- FAQ -->
-    <div style="margin-bottom:8px">
-      <h2 style="font-size:1.25rem;font-weight:700;color:var(--green);margin-bottom:16px">Quick Questions</h2>
+    <div class="faq-section">
+      <div class="section-kicker">FAQ</div>
+      <h2>Pakistan investing questions</h2>
 
-      <details class="faq-item"><summary class="faq-question">How much money do I need to start?</summary><div class="faq-answer">Less than most people assume. Some National Savings certificates start at PKR 500, mutual-fund SIPs at around PKR 1,000 a month, and many PSX blue chips are reachable for a few thousand rupees once you hold a CDC account. The practical question is less about the minimum and more about how long you can leave the money invested — that drives which mix makes sense.</div></details>
+      <details class="faq-item"><summary class="faq-question">How much money do I need to start investing in Pakistan?</summary><div class="faq-answer">Some National Savings products start near PKR 500, while many mutual fund SIPs start around PKR 1,000. Your time horizon matters more than the minimum.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">Which option is "best" for me?</summary><div class="faq-answer">It depends on your goal and risk appetite. Need certainty and quick access? Lean toward National Savings. Want hands-off long-term growth? A mutual fund. Comfortable with volatility for income and upside? Dividend stocks. Most people blend all three — the calculator above sketches one illustrative split for your amount, and our <a href="/guides/national-savings-vs-mutual-funds.html" style="color:var(--green);font-weight:600">comparison guide</a> walks through the trade-offs.</div></details>
+      <details class="faq-item"><summary class="faq-question">Are National Savings better than mutual funds?</summary><div class="faq-answer">National Savings offers government-backed income. Mutual funds offer liquidity and growth potential. Most balanced portfolios use both.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">Are there Shariah-compliant choices?</summary><div class="faq-answer">Yes — Islamic mutual funds overseen by a Shariah board, Shariah-screened equities (the KMI-30 index) and sukuk. Our <a href="/guides/halal-investing-pakistan.html" style="color:var(--green);font-weight:600">halal investing guide</a> maps the full universe.</div></details>
+      <details class="faq-item"><summary class="faq-question">Can I invest in Shariah-compliant products?</summary><div class="faq-answer">Yes. Islamic mutual funds, sukuk and Shariah-screened stocks are available. Start with the <a href="/guides/halal-investing-pakistan.html">halal investing guide</a>.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">Is the stock market too risky right now?</summary><div class="faq-answer">PSX is SECP-regulated with transparent electronic trading, but the index can swing sharply in a single year. Equities are only "safe" over multi-year horizons — money you might need within a year or two belongs in something liquid and guaranteed, not in shares.</div></details>
+      <details class="faq-item"><summary class="faq-question">Is PSX investing risky?</summary><div class="faq-answer">Yes. PSX stocks can fall sharply in the short term. Use equities only for money you can leave invested through a market cycle.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">I live abroad — can I still invest in Pakistan?</summary><div class="faq-answer">Yes. The Roshan Digital Account lets non-resident Pakistanis open an account online and access Naya Pakistan Certificates, the stock market and more without visiting Pakistan. Our <a href="/guides/roshan-digital-account-guide.html" style="color:var(--green);font-weight:600">RDA guide</a> covers eligibility, documents and returns.</div></details>
+      <details class="faq-item"><summary class="faq-question">Can overseas Pakistanis invest?</summary><div class="faq-answer">Yes. Roshan Digital Account supports remote access to Naya Pakistan Certificates, PSX stocks and funds. Read the <a href="/guides/roshan-digital-account-guide.html">RDA guide</a>.</div></details>
 
-      <details class="faq-item"><summary class="faq-question">How often do these numbers change?</summary><div class="faq-answer">The charts, calculator and tables refresh daily from primary sources (SBP, CDNS, MUFAP, PSX). Always confirm a figure with the source before acting — our <a href="/methodology.html" style="color:var(--green);font-weight:600">Methodology page</a> explains how each value is gathered and checked.</div></details>
+      <details class="faq-item"><summary class="faq-question">How often are rates updated?</summary><div class="faq-answer">The site refreshes daily from SBP, CDNS, MUFAP and PSX sources. Verify final rates with the institution before acting.</div></details>
 
     </div>
 
-    <div style="background:var(--gold-light);border:1px solid #E2CD96;border-radius:10px;padding:14px 16px;margin-top:18px;font-size:.82rem;color:#5E5C52;line-height:1.7">
-      <strong style="color:#7A5A1F">Disclaimer:</strong> Educational content only — not financial advice. Values can fall as well as rise. Consult a SECP-registered advisor before investing, and verify every rate with the institution. <a href="/methodology.html" style="color:var(--green);font-weight:600">Methodology</a>
+    <div class="disclaimer">
+      Educational content only. Values can fall as well as rise. Consult a SECP-registered advisor before investing and verify every rate with the institution.
     </div>
 
   </div>

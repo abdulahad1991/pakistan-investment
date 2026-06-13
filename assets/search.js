@@ -151,22 +151,47 @@
     return btn;
   }
 
+  function markActiveNav() {
+    var path = location.pathname.replace(/index\.html$/, '') || '/';
+    var best = null, bestLen = -1;
+    Array.prototype.forEach.call(document.querySelectorAll('.site-nav a'), function (a) {
+      var hp = (a.getAttribute('href') || '').replace(/index\.html$/, '');
+      if (hp === '/') { if (path === '/') a.classList.add('active'); return; }
+      if (path === hp || path.indexOf(hp) === 0) { if (hp.length > bestLen) { best = a; bestLen = hp.length; } }
+    });
+    if (best) best.classList.add('active');
+  }
+
   function init() {
     document.body.appendChild(ov);
-    var navs = document.querySelectorAll('header nav');
-    var placed = false;
-    Array.prototype.forEach.call(navs, function (nav) {
-      if (nav.querySelector('.nav-search-btn')) { placed = true; return; }
-      nav.appendChild(makeBtn());
-      placed = true;
-    });
-    if (!placed) {
-      var hi = document.querySelector('header .header-inner') || document.querySelector('header');
-      if (hi && !hi.querySelector('.nav-search-btn')) hi.appendChild(makeBtn());
+
+    /* Search triggers declared in the header markup take priority. */
+    var triggers = document.querySelectorAll('[data-search-open]');
+    if (triggers.length) {
+      Array.prototype.forEach.call(triggers, function (el) {
+        el.addEventListener('click', function (e) { e.preventDefault(); open(el.getAttribute('data-search-prefill') || ''); });
+      });
+    } else {
+      /* Fallback for any page without an explicit trigger. */
+      var nav = document.querySelector('header nav');
+      var host = nav || document.querySelector('header .header-inner') || document.querySelector('header');
+      if (host && !host.querySelector('.nav-search-btn')) host.appendChild(makeBtn());
     }
-    Array.prototype.forEach.call(document.querySelectorAll('[data-search-open]'), function (el) {
-      el.addEventListener('click', function (e) { e.preventDefault(); open(el.getAttribute('data-search-prefill') || ''); });
-    });
+
+    /* Mobile menu toggle. */
+    var toggle = document.querySelector('.nav-toggle');
+    var snav = document.getElementById('site-nav');
+    if (toggle && snav) {
+      toggle.addEventListener('click', function () {
+        var on = snav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', on ? 'true' : 'false');
+      });
+      Array.prototype.forEach.call(snav.querySelectorAll('a'), function (a) {
+        a.addEventListener('click', function () { snav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+      });
+    }
+
+    markActiveNav();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

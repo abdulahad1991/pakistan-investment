@@ -100,16 +100,21 @@ gtag('config', 'G-4T2H0KH9H7');
 </head>
 <body>
 
-<header>
+<header class="site-header">
   <div class="header-inner">
-    <div class="logo"><a href="/" style="color:#fff;text-decoration:none">🇵🇰 <span>Pakistan</span> Investment Advisor</a></div>
-    <nav>
+    <a class="brand" href="/">
+      <span class="brand-flag">🇵🇰</span>
+      <span class="brand-name">Pakistan <span>Investment Advisor</span></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="site-nav">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
       <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
       <a href="/contact.html">Contact</a>
-      <a href="/privacy-policy.html">Privacy</a>
+      <button class="nav-search" type="button" data-search-open aria-label="Search (press slash)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
     </nav>
   </div>
 </header>

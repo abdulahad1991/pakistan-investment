@@ -71,29 +71,32 @@ gtag('config', 'G-4T2H0KH9H7');
 <body>
 
 <!-- ── Header ─────────────────────────────────────────── -->
-<header>
-  <div class="container">
-    <div class="header-inner">
-      <div class="logo"><span>Pakistan</span> Investment Advisor</div>
-      <div style="display:flex;align-items:center;gap:16px">
-        <nav style="display:flex;gap:14px">
-          <a href="/guides/">Guides</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/">
+      <span class="brand-flag">🇵🇰</span>
+      <span class="brand-name">Pakistan <span>Investment Advisor</span></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="site-nav">
+      <a href="/">Home</a>
+      <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-          <a href="/methodology.html">Methodology</a>
-          <a href="/about.html">About</a>
-          <a href="/contact.html">Contact</a>
-          <a href="/privacy-policy.html">Privacy</a>
-        </nav>
-        <div class="data-age" id="data-age">Loading data…</div>
-      </div>
-    </div>
-    <div id="progress-wrap"><div id="progress-bar"></div></div>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/contact.html">Contact</a>
+      <button class="nav-search" type="button" data-search-open aria-label="Search (press slash)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
+    </nav>
   </div>
 </header>
+
+<!-- thin wizard progress bar (driven by app.js) -->
+<div id="progress-wrap"><div id="progress-bar"></div></div>
 
 <!-- ── Step nav ───────────────────────────────────────── -->
 <div class="step-shell">
   <div class="container">
+    <div class="data-age" id="data-age" style="text-align:right;margin-bottom:6px">Loading data…</div>
     <div class="step-nav" id="step-nav">
       <div class="step-pill active" data-step="0">1. Your Amount</div>
       <div class="step-pill" data-step="1">2. Safe Returns</div>

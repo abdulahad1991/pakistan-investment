@@ -109,6 +109,11 @@ gtag('config', 'G-4T2H0KH9H7');
     <button class="chip" data-filter="gold">Gold</button>
   </div>
 
+  <div class="list-search">
+    <span class="ls-ic" aria-hidden="true">🔍</span>
+    <input type="text" id="card-filter" placeholder="Search guides — e.g. mutual funds, tax, gold, T-bills…" autocomplete="off" aria-label="Search guides">
+  </div>
+
   <div class="guides-grid">
 
     <div class="guide-card" data-cat="gold">
@@ -209,6 +214,8 @@ gtag('config', 'G-4T2H0KH9H7');
 
   </div>
 
+  <div class="filter-empty" id="filter-empty">No guides match your search. Try a broader term, or <a href="/blog/">check the blog</a>.</div>
+
   <details style="background:var(--green-light);border:1px solid var(--border2);border-radius:var(--radius);margin-top:30px;padding:0">
     <summary style="cursor:pointer;list-style:none;padding:16px 22px;font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--green)">Why investing matters more than ever for Pakistanis in 2026 — the 60-second primer ▾</summary>
     <div style="padding:4px 22px 20px">
@@ -238,5 +245,6 @@ gtag('config', 'G-4T2H0KH9H7');
 </footer>
 
 <script src="/assets/listing.js" defer></script>
+<script src="/assets/search.js" defer></script>
 </body>
 </html>

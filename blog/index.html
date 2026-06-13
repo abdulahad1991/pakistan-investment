@@ -66,6 +66,11 @@ gtag('config', 'G-4T2H0KH9H7');
     <div id="manifest-stamp" style="font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;opacity:.6;margin-top:10px"></div>
   </div>
 
+  <div class="list-search">
+    <span class="ls-ic" aria-hidden="true">🔍</span>
+    <input type="text" id="card-filter" placeholder="Search blog posts — e.g. budget, tax, housing…" autocomplete="off" aria-label="Search blog posts">
+  </div>
+
   <div class="guides-grid">
 
     <div class="guide-card">
@@ -141,6 +146,8 @@ gtag('config', 'G-4T2H0KH9H7');
 
   </div>
 
+  <div class="filter-empty" id="filter-empty">No posts match your search. Try a broader term, or <a href="/guides/">browse the guides</a>.</div>
+
 </div>
 
 <footer>
@@ -156,5 +163,6 @@ gtag('config', 'G-4T2H0KH9H7');
 </footer>
 
 <script src="/assets/listing.js" defer></script>
+<script src="/assets/search.js" defer></script>
 </body>
 </html>

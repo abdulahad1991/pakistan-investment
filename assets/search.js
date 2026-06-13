@@ -1,0 +1,174 @@
+/* Global site search — command palette.
+   Index is built from manifest.json (guides + posts, rebuilt every morning
+   by the GitHub Action) plus a small static list of top-level pages, so new
+   guides and blog posts become searchable automatically without editing this
+   file. Open with the header Search button, the "/" key, or Ctrl/Cmd-K. */
+(function () {
+  'use strict';
+
+  var STATIC = [
+    { url: '/',                    title: 'Investment Comparison Tool',  description: 'Compare National Savings, mutual funds and PSX stocks side by side with live daily data.', type: 'Tool' },
+    { url: '/guides/',             title: 'All Investment Guides',       description: 'Step-by-step guides to every major investment route in Pakistan.', type: 'Guide' },
+    { url: '/blog/',               title: 'Analysis & Blog',             description: 'Budget breakdowns, policy-rate analysis and salaried-class money moves.', type: 'Blog' },
+    { url: '/about.html',          title: 'About',                       description: 'Who runs Pakistan Investment Advisor and why.', type: 'Page' },
+    { url: '/methodology.html',    title: 'Methodology',                 description: 'How the figures, returns and rankings on this site are produced.', type: 'Page' },
+    { url: '/contact.html',        title: 'Contact',                     description: 'Get in touch with Pakistan Investment Advisor.', type: 'Page' },
+    { url: '/privacy-policy.html', title: 'Privacy Policy',              description: 'How this site handles your data (it does not store any).', type: 'Page' }
+  ];
+
+  var index = STATIC.slice();
+  var decoder = document.createElement('textarea');
+  function decode(s) { decoder.innerHTML = s || ''; return decoder.value; }
+
+  fetch('/manifest.json').then(function (r) { return r.json(); }).then(function (m) {
+    (m.guides || []).forEach(function (g) { index.push({ url: g.url, title: decode(g.title), description: decode(g.description), type: 'Guide' }); });
+    (m.posts  || []).forEach(function (p) { index.push({ url: p.url, title: decode(p.title), description: decode(p.description), type: 'Blog'  }); });
+  }).catch(function () { /* static list still works */ });
+
+  /* ── Overlay DOM ──────────────────────────────────────── */
+  var ov = document.createElement('div');
+  ov.className = 'search-overlay';
+  ov.innerHTML =
+    '<div class="search-modal" role="dialog" aria-modal="true" aria-label="Search the site">' +
+      '<div class="search-box">' +
+        '<span class="s-ic" aria-hidden="true">🔍</span>' +
+        '<input type="text" id="gs-input" placeholder="Search guides, blog posts, tools…" autocomplete="off" spellcheck="false" aria-label="Search">' +
+        '<span class="s-esc">ESC</span>' +
+      '</div>' +
+      '<div class="search-results" id="gs-results"></div>' +
+      '<div class="search-foot"><span><b>↑↓</b> navigate</span><span><b>↵</b> open</span><span><b>esc</b> close</span></div>' +
+    '</div>';
+
+  var input, results, active = -1, current = [];
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function hl(text, tokens) {
+    var out = esc(text);
+    tokens.filter(Boolean).sort(function (a, b) { return b.length - a.length; }).forEach(function (tok) {
+      var re = new RegExp('(' + tok.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+      out = out.replace(re, '<mark>$1</mark>');
+    });
+    return out;
+  }
+
+  function score(item, q, tokens) {
+    var t = item.title.toLowerCase(), d = (item.description || '').toLowerCase(), u = item.url.toLowerCase();
+    var s = 0;
+    if (t === q) s += 100;
+    if (t.indexOf(q) === 0) s += 50;
+    if (t.indexOf(q) >= 0) s += 30;
+    if (u.indexOf(q) >= 0) s += 15;
+    if (d.indexOf(q) >= 0) s += 10;
+    tokens.forEach(function (tok) {
+      if (!tok) return;
+      if (t.indexOf(tok) >= 0) s += 8;
+      if (d.indexOf(tok) >= 0) s += 3;
+      if (u.indexOf(tok) >= 0) s += 2;
+    });
+    if (item.type === 'Guide' || item.type === 'Blog') s += 1;
+    return s;
+  }
+
+  function render(q) {
+    q = (q || '').trim().toLowerCase();
+    var tokens = q.split(/\s+/).filter(Boolean);
+    var list;
+    if (!q) {
+      list = index.filter(function (i) { return i.type === 'Guide' || i.type === 'Blog'; }).slice(0, 7);
+    } else {
+      list = index.map(function (i) { return { i: i, s: score(i, q, tokens) }; })
+                  .filter(function (x) { return x.s > 0; })
+                  .sort(function (a, b) { return b.s - a.s; })
+                  .slice(0, 8)
+                  .map(function (x) { return x.i; });
+    }
+    current = list;
+    active = list.length ? 0 : -1;
+
+    if (!list.length) {
+      results.innerHTML = '<div class="search-empty">No matches for “' + esc(q) + '”.<br><br>Browse <a href="/guides/">all guides</a> or <a href="/blog/">the blog</a> instead.</div>';
+      return;
+    }
+    results.innerHTML = list.map(function (it, idx) {
+      return '<a class="search-item' + (idx === active ? ' active' : '') + '" href="' + it.url + '" data-idx="' + idx + '">' +
+        '<span class="si-body">' +
+          '<span class="si-title">' + hl(it.title, tokens) + '</span>' +
+          '<span class="si-desc">' + hl(it.description || '', tokens) + '</span>' +
+        '</span>' +
+        '<span class="s-badge ' + it.type + '">' + it.type + '</span>' +
+      '</a>';
+    }).join('');
+    Array.prototype.forEach.call(results.querySelectorAll('.search-item'), function (el) {
+      el.addEventListener('mousemove', function () { setActive(+el.getAttribute('data-idx')); });
+    });
+  }
+
+  function setActive(i) {
+    active = i;
+    Array.prototype.forEach.call(results.querySelectorAll('.search-item'), function (el) {
+      el.classList.toggle('active', +el.getAttribute('data-idx') === active);
+    });
+  }
+
+  function scrollActive() { var el = results.querySelector('.search-item.active'); if (el) el.scrollIntoView({ block: 'nearest' }); }
+  function go() { if (active >= 0 && current[active]) window.location.href = current[active].url; }
+
+  function open(prefill) {
+    if (!ov.parentNode) document.body.appendChild(ov);
+    input = document.getElementById('gs-input');
+    results = document.getElementById('gs-results');
+    ov.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    input.value = prefill || '';
+    render(input.value);
+    setTimeout(function () { input.focus(); }, 0);
+  }
+  function close() { ov.classList.remove('open'); document.body.style.overflow = ''; }
+
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  ov.addEventListener('input', function (e) { if (e.target.id === 'gs-input') render(e.target.value); });
+
+  document.addEventListener('keydown', function (e) {
+    if (!ov.classList.contains('open')) {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
+      else if (e.key === '/' && !/^(input|textarea|select)$/i.test(e.target.tagName || '') && !e.target.isContentEditable) { e.preventDefault(); open(); }
+      return;
+    }
+    if (e.key === 'Escape') { close(); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); if (current.length) { setActive((active + 1) % current.length); scrollActive(); } }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); if (current.length) { setActive((active - 1 + current.length) % current.length); scrollActive(); } }
+    else if (e.key === 'Enter') { e.preventDefault(); go(); }
+  });
+
+  function makeBtn() {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'nav-search-btn';
+    btn.setAttribute('aria-label', 'Search the site');
+    btn.innerHTML = '<span class="s-ic" aria-hidden="true">🔍</span><span class="nss-label">Search</span><span class="kbd">/</span>';
+    btn.addEventListener('click', function () { open(); });
+    return btn;
+  }
+
+  function init() {
+    document.body.appendChild(ov);
+    var navs = document.querySelectorAll('header nav');
+    var placed = false;
+    Array.prototype.forEach.call(navs, function (nav) {
+      if (nav.querySelector('.nav-search-btn')) { placed = true; return; }
+      nav.appendChild(makeBtn());
+      placed = true;
+    });
+    if (!placed) {
+      var hi = document.querySelector('header .header-inner') || document.querySelector('header');
+      if (hi && !hi.querySelector('.nav-search-btn')) hi.appendChild(makeBtn());
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-search-open]'), function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); open(el.getAttribute('data-search-prefill') || ''); });
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();

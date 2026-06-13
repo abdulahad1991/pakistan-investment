@@ -620,3 +620,45 @@ tr.rec-row td{background:#F0FBF6}
   .nav-row{flex-direction:column;align-items:stretch}
   .btn-next{margin-left:0}
 }
+
+/* ── Global search: header trigger ─────────────────────── */
+.nav-search-btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:var(--ink2);background:var(--paper2);border:1px solid rgba(0,0,0,.12);border-radius:8px;padding:7px 11px;cursor:pointer;transition:border-color .15s,box-shadow .15s;white-space:nowrap;line-height:1}
+.nav-search-btn:hover{border-color:var(--green);box-shadow:0 1px 7px rgba(0,0,0,.12)}
+.nav-search-btn .s-ic{font-size:.85rem}
+.nav-search-btn .kbd{font-size:.62rem;border:1px solid rgba(0,0,0,.18);border-radius:4px;padding:1px 5px;color:var(--muted);background:rgba(0,0,0,.03)}
+@media(max-width:640px){.nav-search-btn .nss-label,.nav-search-btn .kbd{display:none}.nav-search-btn{padding:7px 9px}}
+
+/* ── Global search: command-palette overlay ────────────── */
+.search-overlay{position:fixed;inset:0;background:rgba(17,24,39,.45);z-index:9999;display:none;align-items:flex-start;justify-content:center;padding:11vh 16px 16px}
+.search-overlay.open{display:flex}
+@supports(backdrop-filter:blur(3px)){.search-overlay{backdrop-filter:blur(3px)}}
+.search-modal{width:100%;max-width:600px;background:var(--paper2);border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.4);overflow:hidden;border:1px solid rgba(0,0,0,.08);animation:s-pop .14s ease-out}
+@keyframes s-pop{from{transform:translateY(-8px);opacity:.4}to{transform:none;opacity:1}}
+.search-box{display:flex;align-items:center;gap:11px;padding:15px 18px;border-bottom:1px solid var(--paper3)}
+.search-box .s-ic{font-size:1.05rem;opacity:.55}
+.search-box input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:1.06rem;color:var(--ink);font-family:var(--display)}
+.search-box .s-esc{font-family:var(--mono);font-size:.58rem;color:var(--muted);border:1px solid rgba(0,0,0,.15);border-radius:4px;padding:2px 6px;flex-shrink:0}
+.search-results{max-height:56vh;overflow:auto;padding:6px}
+.search-item{display:flex;align-items:flex-start;gap:11px;padding:10px 12px;border-radius:9px;cursor:pointer;text-decoration:none}
+.search-item.active{background:var(--green-light)}
+.search-item .si-body{min-width:0;flex:1}
+.search-item .si-title{display:block;font-family:var(--display);font-weight:700;color:var(--ink);font-size:.95rem;line-height:1.3}
+.search-item .si-desc{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;color:var(--muted);font-size:.8rem;line-height:1.45;margin-top:2px}
+.search-item mark{background:var(--gold-pale);color:inherit;padding:0 1px;border-radius:2px}
+.s-badge{flex-shrink:0;font-family:var(--mono);font-size:.55rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:5px;margin-top:3px;font-weight:600}
+.s-badge.Guide{background:var(--green-light);color:var(--green)}
+.s-badge.Blog{background:var(--gold-light);color:var(--gold2)}
+.s-badge.Tool{background:#E8EDF3;color:#23415E}
+.s-badge.Page{background:var(--paper3);color:var(--muted)}
+.search-empty{padding:30px 18px;text-align:center;color:var(--muted);font-size:.92rem;line-height:1.6}
+.search-foot{display:flex;gap:16px;padding:9px 16px;border-top:1px solid var(--paper3);font-family:var(--mono);font-size:.58rem;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+.search-foot b{color:var(--ink2);font-weight:600}
+@media(max-width:520px){.search-foot{display:none}.search-overlay{padding:7vh 10px 10px}}
+
+/* ── Inline listing filter (guides / blog) ─────────────── */
+.list-search{position:relative;margin:0 0 22px}
+.list-search input{width:100%;box-sizing:border-box;padding:13px 16px 13px 44px;border:1px solid var(--border);border-radius:10px;font-size:1rem;font-family:var(--display);color:var(--ink);background:var(--paper2)}
+.list-search input:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 3px var(--green-light)}
+.list-search input::placeholder{color:var(--muted)}
+.list-search .ls-ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.45;font-size:1.02rem;pointer-events:none}
+.filter-empty{display:none;padding:26px 18px;text-align:center;color:var(--muted);font-size:.95rem}

@@ -64,4 +64,26 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
+
+  /* ── Inline text filter (live search within this listing) ── */
+  var lf = document.getElementById('card-filter');
+  if (lf) {
+    var emptyMsg = document.getElementById('filter-empty');
+    lf.addEventListener('input', function () {
+      var q = lf.value.trim().toLowerCase();
+      var shown = 0;
+      document.querySelectorAll('.guides-grid .guide-card').forEach(function (card) {
+        var hit = !q || card.textContent.toLowerCase().indexOf(q) >= 0;
+        card.style.display = hit ? '' : 'none';
+        if (hit) shown++;
+      });
+      /* typing in the text box overrides any active topic chip */
+      if (q) {
+        document.querySelectorAll('.chip[data-filter]').forEach(function (c) {
+          c.classList.toggle('active', c.getAttribute('data-filter') === 'all');
+        });
+      }
+      if (emptyMsg) emptyMsg.style.display = shown ? 'none' : 'block';
+    });
+  }
 });

@@ -144,9 +144,10 @@
   function makeBtn() {
     var btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'nav-search-btn';
+    btn.className = 'nav-search';
+    btn.setAttribute('data-search-open', '');
     btn.setAttribute('aria-label', 'Search the site');
-    btn.innerHTML = '<span class="s-ic" aria-hidden="true">🔍</span><span class="nss-label">Search</span><span class="kbd">/</span>';
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd>';
     btn.addEventListener('click', function () { open(); });
     return btn;
   }
@@ -166,17 +167,31 @@
     document.body.appendChild(ov);
 
     /* Search triggers declared in the header markup take priority. */
-    var triggers = document.querySelectorAll('[data-search-open]');
-    if (triggers.length) {
-      Array.prototype.forEach.call(triggers, function (el) {
-        el.addEventListener('click', function (e) { e.preventDefault(); open(el.getAttribute('data-search-prefill') || ''); });
-      });
-    } else {
-      /* Fallback for any page without an explicit trigger. */
-      var nav = document.querySelector('header nav');
-      var host = nav || document.querySelector('header .header-inner') || document.querySelector('header');
-      if (host && !host.querySelector('.nav-search-btn')) host.appendChild(makeBtn());
+    var nav = document.querySelector('.site-header nav') || document.querySelector('header nav');
+    var host = nav || document.querySelector('.site-header .header-inner') || document.querySelector('header .header-inner') || document.querySelector('.site-header') || document.querySelector('header');
+    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-search-open]'));
+
+    if (!triggers.length && host) {
+      var existing = host.querySelector('.nav-search, .nav-search-btn');
+      if (existing) {
+        existing.setAttribute('data-search-open', '');
+        triggers = [existing];
+      } else {
+        var fallback = makeBtn();
+        host.appendChild(fallback);
+        triggers = [fallback];
+      }
     }
+
+    if (triggers.some(function (el) { return el.classList && el.classList.contains('nav-search'); })) {
+      Array.prototype.forEach.call(document.querySelectorAll('.site-header .nav-search-btn, header .nav-search-btn'), function (el) {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      });
+    }
+
+    triggers.forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); open(el.getAttribute('data-search-prefill') || ''); });
+    });
 
     /* Mobile menu toggle. */
     var toggle = document.querySelector('.nav-toggle');

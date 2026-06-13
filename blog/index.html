@@ -39,20 +39,31 @@ gtag('config', 'G-4T2H0KH9H7');
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="/">
-      <span class="brand-flag">🇵🇰</span>
+    <a class="brand" href="/" aria-label="Pakistan Investment Advisor — home">
+      <svg class="brand-mark" viewBox="0 0 30 20" role="img" aria-hidden="true" focusable="false">
+        <defs><clipPath id="pk-flag"><rect width="30" height="20" rx="3"></rect></clipPath></defs>
+        <g clip-path="url(#pk-flag)">
+          <rect width="30" height="20" fill="#01411C"></rect>
+          <rect width="7.8" height="20" fill="#ffffff"></rect>
+          <circle cx="18.4" cy="10" r="5.4" fill="#ffffff"></circle>
+          <circle cx="20.4" cy="9" r="4.5" fill="#01411C"></circle>
+          <path d="M22 5.6 22.59 7.39 24.47 7.4 22.95 8.51 23.53 10.3 22 9.2 20.47 10.3 21.05 8.51 19.53 7.4 21.41 7.39Z" fill="#ffffff"></path>
+        </g>
+      </svg>
       <span class="brand-name">Pakistan <span>Investment Advisor</span></span>
     </a>
-    <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
-    <nav class="site-nav" id="site-nav">
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
       <a href="/about.html">About</a>
       <a href="/methodology.html">Methodology</a>
       <a href="/contact.html">Contact</a>
-      <button class="nav-search" type="button" data-search-open aria-label="Search (press slash)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
     </nav>
+    <div class="header-actions">
+      <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
 

@@ -206,7 +206,20 @@ function goPage(n) {
   if (n === 1) renderNationalSavings();
   if (n === 2) renderMutualFunds();
   if (n === 3) renderStocks();
-  if (n === 4) renderPortfolio();
+  if (n === 4) {
+    renderPortfolio();
+    if (!goPage._completed && window.pkTrack) {
+      goPage._completed = true;   // fire once per session
+      window.pkTrack("calculator_complete", { amount_band: amountBand(AMOUNT) });
+    }
+  }
+}
+
+function amountBand(n) {
+  if (n < 50000) return "under_50k";
+  if (n < 200000) return "50k_200k";
+  if (n < 1000000) return "200k_1m";
+  return "1m_plus";
 }
 
 function startAnalysis() {
@@ -216,6 +229,7 @@ function startAnalysis() {
     return;
   }
   clearAmountError();
+  if (window.pkTrack) window.pkTrack("calculator_use", { amount_band: amountBand(AMOUNT) });
   goPage(1);
 }
 

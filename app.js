@@ -329,6 +329,7 @@ function renderMutualFunds() {
     `;
     grid.appendChild(card);
   });
+  grid.insertAdjacentHTML("beforeend", '<p style="grid-column:1/-1;font-size:.74rem;color:var(--muted);margin:6px 0 0">Fund returns are indicative and annualized, as of June 2026 — not live-updated like stock prices. Verify the latest NAV and returns with the AMC or MUFAP before investing.</p>');
 }
 
 function riskBadge(risk) {

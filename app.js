@@ -301,6 +301,7 @@ function renderMutualFunds() {
   DATA.mutual_funds.forEach(f => {
     const alloc = AMOUNT > 0 ? getPortfolioAlloc(f.name) : null;
     const earn = alloc ? Math.round(alloc * f.ret_1y / 100) : null;
+    const allocPct = alloc ? Math.round(alloc / AMOUNT * 100) : null;
 
     const card = document.createElement("div");
     card.className = "fund-card" + (f.recommended ? " rec" : "");
@@ -321,7 +322,7 @@ function renderMutualFunds() {
       </div>
       <div style="font-size:.78rem;color:var(--muted)">Min: PKR ${formatPKR(f.min_pkr)}</div>
       <div class="fund-verdict">${f.verdict}</div>
-      ${earn ? `<div class="fund-earn">Your ${alloc ? "PKR " + formatPKR(alloc) : ""} could earn ~PKR ${formatPKR(earn)}/yr</div>` : ""}
+      ${earn ? `<div class="fund-earn">A suggested PKR ${formatPKR(alloc)} allocation (${allocPct}% of your total) could earn ~PKR ${formatPKR(earn)}/yr</div>` : ""}
       <a href="${f.url}" target="_blank" rel="noopener" class="btn-cta btn-primary" style="margin-top:12px;font-size:.78rem;display:inline-flex">Invest Now →</a>
     `;
     grid.appendChild(card);

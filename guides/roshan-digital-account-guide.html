@@ -84,6 +84,46 @@
         "@type": "Answer",
         "text": "It depends on your location and priorities. HBL has the widest global presence and is best for Pakistanis in the UK, USA, and Gulf. Meezan Bank is best for Islamic account holders and offers fast onboarding. MCB is popular in the Middle East. For Pakistanis in Europe, UBL has a good presence. All six banks offer the same SBP-mandated RDA features — the difference is in the app quality and customer service."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I open RDAs with more than one bank?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is generally no rule limiting you to a single Roshan Digital Account, and many overseas Pakistanis hold RDAs at more than one participating bank to compare apps, services, or investment options. Each bank runs its own separate KYC and account-opening process. Confirm the current participating-bank list and any per-customer conditions on sbp.org.pk or directly with the bank before applying."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is an RDA different from a regular foreign currency account in Pakistan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An RDA is opened remotely from abroad without visiting a branch and is designed specifically for non-resident and overseas Pakistanis, giving access to dedicated products such as Naya Pakistan Certificates and full repatriation of funds and profits. A regular foreign currency account usually requires in-person onboarding and is geared toward residents. The RDA framework and its features are defined by the State Bank of Pakistan — verify the current terms on sbp.org.pk."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to my RDA if I move back to Pakistan permanently?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If your residency status changes, some RDA features and tax treatments that apply to non-resident Pakistanis — such as the NPC profit exemption and certain NRP withholding rates — may no longer apply, because they are tied to your non-resident status. Banks may also ask you to update your status or convert the account. Confirm the exact rules and any reporting obligations with your bank and on fbr.gov.pk before relocating."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add a nominee to my Roshan Digital Account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. RDAs allow you to nominate beneficiaries, and a non-Pakistani spouse who cannot open an RDA directly can still be added as a nominee. Nomination rules and the documents required vary by bank, so check the nominee section during onboarding or in your bank's RDA terms. For the latest requirements, confirm directly with your chosen bank."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to file a Pakistani tax return for my RDA income?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Whether you must file depends on your residency status and the type of income earned, since some RDA income is exempt for non-resident Pakistanis while other income may have tax withheld at NRP rates. Tax in many cases is deducted at source, but filing obligations and any treaty benefits depend on your individual circumstances. Verify your filing position on fbr.gov.pk or with a qualified cross-border tax advisor."
+      }
     }
   ]
 }
@@ -326,30 +366,55 @@ gtag('config', 'G-4T2H0KH9H7');
 
   <h2>Frequently Asked Questions</h2>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Can I open an RDA if I have dual nationality?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Yes. Roshan Digital Account is available to any Pakistani citizen holding a valid CNIC or NICOP (National Identity Card for Overseas Pakistanis), regardless of whether you hold dual nationality. Your NICOP number is used for identification. Non-Pakistani spouses of overseas Pakistanis cannot open an RDA directly but can be added as nominees.</div>
-  </div>
+  <details class="faq-item" id="faq-can-i-open-rda-dual-nationality">
+    <summary class="faq-question">Can I open an RDA if I have dual nationality?</summary>
+    <div class="faq-answer">Yes. Roshan Digital Account is available to any Pakistani citizen holding a valid CNIC or NICOP (National Identity Card for Overseas Pakistanis), regardless of whether you hold dual nationality. Your NICOP number is used for identification. Non-Pakistani spouses of overseas Pakistanis cannot open an RDA directly but can be added as nominees.</div>
+  </details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">How long does it take to open an RDA?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">The online account opening process typically takes 20–30 minutes to complete the application. Bank verification and KYC review usually takes 3–7 business days. Once approved, you receive your account credentials and can immediately begin transferring foreign currency. Meezan Bank and HBL are known for faster onboarding.</div>
-  </div>
+  <details class="faq-item" id="faq-how-long-to-open-rda">
+    <summary class="faq-question">How long does it take to open an RDA?</summary>
+    <div class="faq-answer">The online account opening process typically takes 20–30 minutes to complete the application. Bank verification and KYC review usually takes 3–7 business days. Once approved, you receive your account credentials and can immediately begin transferring foreign currency. Meezan Bank and HBL are known for faster onboarding.</div>
+  </details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Can I close my RDA and repatriate all my money?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Yes. RDA funds are fully repatriable — you can transfer both your principal and profits back to your foreign bank account at any time, without prior SBP approval. This is one of the most significant advantages of the RDA program and is guaranteed under SBP's RDA circular. There are no exit restrictions or lock-in periods for repatriation.</div>
-  </div>
+  <details class="faq-item" id="faq-close-rda-repatriate-money">
+    <summary class="faq-question">Can I close my RDA and repatriate all my money?</summary>
+    <div class="faq-answer">Yes. RDA funds are fully repatriable — you can transfer both your principal and profits back to your foreign bank account at any time, without prior SBP approval. This is one of the most significant advantages of the RDA program and is guaranteed under SBP's RDA circular. There are no exit restrictions or lock-in periods for repatriation.</div>
+  </details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Are Naya Pakistan Certificate profits really tax-free?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Yes, for overseas Pakistanis (NRPs). Profit earned on NPCs by non-resident account holders is exempt from Pakistani income tax under the Income Tax Ordinance 2001 (as amended). This exemption applies only to the NPC profit — other income types (PSX dividends, mutual fund gains) may still attract withholding tax at applicable NRP rates.</div>
-  </div>
+  <details class="faq-item" id="faq-npc-profits-tax-free">
+    <summary class="faq-question">Are Naya Pakistan Certificate profits really tax-free?</summary>
+    <div class="faq-answer">Yes, for overseas Pakistanis (NRPs). Profit earned on NPCs by non-resident account holders is exempt from Pakistani income tax under the Income Tax Ordinance 2001 (as amended). This exemption applies only to the NPC profit — other income types (PSX dividends, mutual fund gains) may still attract withholding tax at applicable NRP rates.</div>
+  </details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Which bank is best for opening an RDA?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">It depends on your location and priorities. HBL has the widest global presence and is best for Pakistanis in the UK, USA, and Gulf. Meezan Bank is best for Islamic account holders and offers fast onboarding. MCB is popular in the Middle East. For Pakistanis in Europe, UBL has a good presence. All six banks offer the same SBP-mandated RDA features — the difference is in the app quality and customer service.</div>
-  </div>
+  <details class="faq-item" id="faq-which-bank-best-for-rda">
+    <summary class="faq-question">Which bank is best for opening an RDA?</summary>
+    <div class="faq-answer">It depends on your location and priorities. HBL has the widest global presence and is best for Pakistanis in the UK, USA, and Gulf. Meezan Bank is best for Islamic account holders and offers fast onboarding. MCB is popular in the Middle East. For Pakistanis in Europe, UBL has a good presence. All six banks offer the same SBP-mandated RDA features — the difference is in the app quality and customer service.</div>
+  </details>
+
+  <details class="faq-item" id="faq-can-i-have-multiple-rda">
+    <summary class="faq-question">Can I open RDAs with more than one bank?</summary>
+    <div class="faq-answer">There is generally no rule limiting you to a single Roshan Digital Account, and many overseas Pakistanis hold RDAs at more than one participating bank to compare apps, services, or investment options. Each bank runs its own separate KYC and account-opening process. Confirm the current participating-bank list and any per-customer conditions on sbp.org.pk or directly with the bank before applying.</div>
+  </details>
+
+  <details class="faq-item" id="faq-is-rda-different-from-fcy-account">
+    <summary class="faq-question">How is an RDA different from a regular foreign currency account in Pakistan?</summary>
+    <div class="faq-answer">An RDA is opened remotely from abroad without visiting a branch and is designed specifically for non-resident and overseas Pakistanis, giving access to dedicated products such as Naya Pakistan Certificates and full repatriation of funds and profits. A regular foreign currency account usually requires in-person onboarding and is geared toward residents. The RDA framework and its features are defined by the State Bank of Pakistan — verify the current terms on sbp.org.pk.</div>
+  </details>
+
+  <details class="faq-item" id="faq-what-if-i-become-resident-again">
+    <summary class="faq-question">What happens to my RDA if I move back to Pakistan permanently?</summary>
+    <div class="faq-answer">If your residency status changes, some RDA features and tax treatments that apply to non-resident Pakistanis — such as the NPC profit exemption and certain NRP withholding rates — may no longer apply, because they are tied to your non-resident status. Banks may also ask you to update your status or convert the account. Confirm the exact rules and any reporting obligations with your bank and on fbr.gov.pk before relocating.</div>
+  </details>
+
+  <details class="faq-item" id="faq-can-i-add-nominee-to-rda">
+    <summary class="faq-question">Can I add a nominee to my Roshan Digital Account?</summary>
+    <div class="faq-answer">Yes. RDAs allow you to nominate beneficiaries, and a non-Pakistani spouse who cannot open an RDA directly can still be added as a nominee. Nomination rules and the documents required vary by bank, so check the nominee section during onboarding or in your bank's RDA terms. For the latest requirements, confirm directly with your chosen bank.</div>
+  </details>
+
+  <details class="faq-item" id="faq-do-i-need-to-file-tax-return-for-rda">
+    <summary class="faq-question">Do I need to file a Pakistani tax return for my RDA income?</summary>
+    <div class="faq-answer">Whether you must file depends on your residency status and the type of income earned, since some RDA income is exempt for non-resident Pakistanis while other income may have tax withheld at NRP rates. Tax in many cases is deducted at source, but filing obligations and any treaty benefits depend on your individual circumstances. Verify your filing position on fbr.gov.pk or with a qualified cross-border tax advisor.</div>
+  </details>
 
   <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="3214567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>

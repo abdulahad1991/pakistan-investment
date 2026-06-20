@@ -79,6 +79,46 @@
         "@type": "Answer",
         "text": "Non-resident Pakistanis can register on FBR's IRIS portal and file a return to appear on the ATL, and FBR has offered simplified routes for non-residents with no Pakistan-source taxable income. Investors using Roshan Digital Accounts benefit from special withholding arrangements on eligible investments. The treatment of non-residents changes with Finance Acts and SBP circulars, so verify the current position on fbr.gov.pk and sbp.org.pk."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a filer and a non-filer for investments?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A filer is a person who appears on FBR's Active Taxpayer List after submitting their annual income tax return, while a non-filer does not. Non-filers generally face higher withholding tax rates on income such as profit on savings, dividends and capital gains, which can meaningfully reduce net returns. The exact rate gap is set by the prevailing Finance Act, so verify the current rates on fbr.gov.pk."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is tax handled on mutual fund dividends and redemptions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dividends distributed by mutual funds are typically subject to withholding tax deducted by the asset management company, and capital gains on the redemption of units may also be taxed depending on the fund type and holding period. The applicable rates differ for filers and non-filers under the prevailing Finance Act. The fund's annual tax certificate summarises what was deducted, which you use when filing; confirm the current treatment on fbr.gov.pk."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When is the deadline to file my income tax return in Pakistan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "FBR sets an annual filing deadline for individuals after the end of each tax year, and it is commonly extended through official notifications. Filing on time keeps you on the Active Taxpayer List and helps you avoid higher non-filer withholding rates. Because the date can change each year, check the current deadline and any extensions on fbr.gov.pk."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What taxes apply when I invest in property in Pakistan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Property transactions can involve several taxes, including advance tax at the time of purchase and sale, capital gains tax on disposal, and provincial stamp duty and registration charges. The rates and holding-period rules vary by filer status, property value and the prevailing Finance Act, and provincial levies differ between provinces. Verify the current position on fbr.gov.pk and your provincial revenue authority's website."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to declare foreign investment income if I am a Pakistan resident?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pakistan tax residents are generally required to declare their worldwide income, which can include profit, dividends or gains earned from investments held abroad. Foreign taxes already paid may be eligible for relief depending on applicable tax treaties and the Income Tax Ordinance. Because residency rules and treaty relief are detailed, verify your specific position on fbr.gov.pk or with a tax practitioner."
+      }
     }
   ]
 }
@@ -336,15 +376,25 @@ gtag('config', 'G-4T2H0KH9H7');
   <!-- FAQ Section -->
   <h2>Frequently Asked Questions</h2>
 
-  <details class="faq-item"><summary class="faq-question">How do I check if I am on the Active Taxpayer List (ATL)?</summary><div class="faq-answer">Send an SMS with the word ATL followed by a space and your 13-digit CNIC number (no dashes) to 9966. You will receive a reply confirming whether you are an active filer. You can also use the online ATL search on fbr.gov.pk or the Tax Asaan mobile app. The ATL is refreshed weekly, typically every Monday.</div></details>
+  <details class="faq-item" id="faq-check-atl"><summary class="faq-question">How do I check if I am on the Active Taxpayer List (ATL)?</summary><div class="faq-answer">Send an SMS with the word ATL followed by a space and your 13-digit CNIC number (no dashes) to 9966. You will receive a reply confirming whether you are an active filer. You can also use the online ATL search on fbr.gov.pk or the Tax Asaan mobile app. The ATL is refreshed weekly, typically every Monday.</div></details>
 
-  <details class="faq-item"><summary class="faq-question">If tax was already withheld on my profit or dividends, do I pay again when I file my return?</summary><div class="faq-answer">Generally no — tax withheld at source is either treated as final tax or adjusted against your total liability when you file, depending on the income type and the prevailing Finance Act. Filing often works in your favour: if more was withheld than you owe, you can claim the excess as an adjustment or refund. Keep your withholding certificates, and verify the current treatment on fbr.gov.pk or with a tax practitioner.</div></details>
+  <details class="faq-item" id="faq-withheld-pay-again"><summary class="faq-question">If tax was already withheld on my profit or dividends, do I pay again when I file my return?</summary><div class="faq-answer">Generally no — tax withheld at source is either treated as final tax or adjusted against your total liability when you file, depending on the income type and the prevailing Finance Act. Filing often works in your favour: if more was withheld than you owe, you can claim the excess as an adjustment or refund. Keep your withholding certificates, and verify the current treatment on fbr.gov.pk or with a tax practitioner.</div></details>
 
-  <details class="faq-item"><summary class="faq-question">Is capital gains tax on PSX shares deducted automatically?</summary><div class="faq-answer">Yes. NCCPL (National Clearing Company of Pakistan Limited) is the centralised CGT computation and collection agent for listed securities. It calculates gains and losses across your brokers, applies the rate for your filer status under the prevailing Finance Act, and collects the tax through your broker account, with loss offsetting handled automatically. You still report the figures in your annual return using NCCPL's certificate.</div></details>
+  <details class="faq-item" id="faq-psx-cgt-automatic"><summary class="faq-question">Is capital gains tax on PSX shares deducted automatically?</summary><div class="faq-answer">Yes. NCCPL (National Clearing Company of Pakistan Limited) is the centralised CGT computation and collection agent for listed securities. It calculates gains and losses across your brokers, applies the rate for your filer status under the prevailing Finance Act, and collects the tax through your broker account, with loss offsetting handled automatically. You still report the figures in your annual return using NCCPL's certificate.</div></details>
 
-  <details class="faq-item"><summary class="faq-question">How can I avoid the Zakat deduction on my savings certificates?</summary><div class="faq-answer">Under the Zakat and Ushr Ordinance 1980, banks and National Savings deduct 2.5% Zakat from eligible balances above the annually-notified nisab on the first day of Ramadan. If you are exempt on faith or fiqh grounds, file a notarised exemption declaration (Form CZ-50) with your bank or National Savings Centre at least 30 days before the deduction date. Some instruments, such as Behbood Savings Certificates, are not subject to compulsory deduction; confirm current rules at savings.gov.pk.</div></details>
+  <details class="faq-item" id="faq-avoid-zakat-deduction"><summary class="faq-question">How can I avoid the Zakat deduction on my savings certificates?</summary><div class="faq-answer">Under the Zakat and Ushr Ordinance 1980, banks and National Savings deduct 2.5% Zakat from eligible balances above the annually-notified nisab on the first day of Ramadan. If you are exempt on faith or fiqh grounds, file a notarised exemption declaration (Form CZ-50) with your bank or National Savings Centre at least 30 days before the deduction date. Some instruments, such as Behbood Savings Certificates, are not subject to compulsory deduction; confirm current rules at savings.gov.pk.</div></details>
 
-  <details class="faq-item"><summary class="faq-question">Do overseas Pakistanis need to file a return to get filer withholding rates?</summary><div class="faq-answer">Non-resident Pakistanis can register on FBR's IRIS portal and file a return to appear on the ATL, and FBR has offered simplified routes for non-residents with no Pakistan-source taxable income. Investors using Roshan Digital Accounts benefit from special withholding arrangements on eligible investments. The treatment of non-residents changes with Finance Acts and SBP circulars, so verify the current position on fbr.gov.pk and sbp.org.pk.</div></details>
+  <details class="faq-item" id="faq-overseas-filer-rates"><summary class="faq-question">Do overseas Pakistanis need to file a return to get filer withholding rates?</summary><div class="faq-answer">Non-resident Pakistanis can register on FBR's IRIS portal and file a return to appear on the ATL, and FBR has offered simplified routes for non-residents with no Pakistan-source taxable income. Investors using Roshan Digital Accounts benefit from special withholding arrangements on eligible investments. The treatment of non-residents changes with Finance Acts and SBP circulars, so verify the current position on fbr.gov.pk and sbp.org.pk.</div></details>
+
+  <details class="faq-item" id="faq-difference-filer-non-filer"><summary class="faq-question">What is the difference between a filer and a non-filer for investments?</summary><div class="faq-answer">A filer is a person who appears on FBR's Active Taxpayer List after submitting their annual income tax return, while a non-filer does not. Non-filers generally face higher withholding tax rates on income such as profit on savings, dividends and capital gains, which can meaningfully reduce net returns. The exact rate gap is set by the prevailing Finance Act, so verify the current rates on fbr.gov.pk.</div></details>
+
+  <details class="faq-item" id="faq-tax-on-mutual-fund-dividends"><summary class="faq-question">How is tax handled on mutual fund dividends and redemptions?</summary><div class="faq-answer">Dividends distributed by mutual funds are typically subject to withholding tax deducted by the asset management company, and capital gains on the redemption of units may also be taxed depending on the fund type and holding period. The applicable rates differ for filers and non-filers under the prevailing Finance Act. The fund's annual tax certificate summarises what was deducted, which you use when filing; confirm the current treatment on fbr.gov.pk.</div></details>
+
+  <details class="faq-item" id="faq-when-to-file-return"><summary class="faq-question">When is the deadline to file my income tax return in Pakistan?</summary><div class="faq-answer">FBR sets an annual filing deadline for individuals after the end of each tax year, and it is commonly extended through official notifications. Filing on time keeps you on the Active Taxpayer List and helps you avoid higher non-filer withholding rates. Because the date can change each year, check the current deadline and any extensions on fbr.gov.pk.</div></details>
+
+  <details class="faq-item" id="faq-property-investment-taxes"><summary class="faq-question">What taxes apply when I invest in property in Pakistan?</summary><div class="faq-answer">Property transactions can involve several taxes, including advance tax at the time of purchase and sale, capital gains tax on disposal, and provincial stamp duty and registration charges. The rates and holding-period rules vary by filer status, property value and the prevailing Finance Act, and provincial levies differ between provinces. Verify the current position on fbr.gov.pk and your provincial revenue authority's website.</div></details>
+
+  <details class="faq-item" id="faq-tax-on-foreign-investment-income"><summary class="faq-question">Do I have to declare foreign investment income if I am a Pakistan resident?</summary><div class="faq-answer">Pakistan tax residents are generally required to declare their worldwide income, which can include profit, dividends or gains earned from investments held abroad. Foreign taxes already paid may be eligible for relief depending on applicable tax treaties and the Income Tax Ordinance. Because residency rules and treaty relief are detailed, verify your specific position on fbr.gov.pk or with a tax practitioner.</div></details>
 
   <!-- Ad slot 2 — after FAQ section -->
   <div class="ad-slot">

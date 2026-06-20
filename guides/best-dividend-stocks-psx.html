@@ -84,6 +84,46 @@
         "@type": "Answer",
         "text": "Dividends are paid directly to the bank account registered with your CDC Investor Account. The company's share registrar processes payments within 30 days of the book closure date. You receive an SMS/email notification when the dividend is credited. Ensure your bank account details are updated in your CDC profile to avoid delays."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "What does dividend yield mean and how is it calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dividend yield is the annual dividend per share divided by the current share price, expressed as a percentage. For example, a share priced at PKR 100 that pays PKR 9 in dividends over a year has a yield of 9%. A very high yield can sometimes signal a falling share price rather than a genuinely generous payout, so it is worth checking why the yield is high before reading it as good news."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is tax applied to dividends in Pakistan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dividend income on PSX shares is generally subject to withholding tax deducted at source before the payment reaches your account, and filers and non-filers are typically treated differently. The exact rates are set in the Finance Act and can change each federal budget, so do not rely on figures quoted in articles. Verify the current dividend tax rates and your filer status position on fbr.gov.pk or with a registered tax practitioner."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a cash dividend and a bonus share issue?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A cash dividend pays you money directly into your registered bank account. A bonus share issue instead gives you additional shares in proportion to your existing holding, with no cash changing hands. A bonus issue increases the number of shares you own but does not by itself add new cash to your account, so the two reward shareholders in different ways."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I check a company's past dividend history?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A company's dividend announcements are filed through PSX's regulatory system (PUCARS) and are usually summarised on the company's own investor relations page. The PSX corporate actions calendar at psx.com.pk under Market Data then Corporate Actions lists upcoming book closures and declared dividends. Reviewing several years of payouts helps you see whether a company has a consistent track record rather than a one-off payment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do all PSX-listed companies pay dividends?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Paying a dividend is a decision made by each company's board of directors, and a company may choose to reinvest its profits for growth instead of distributing them. Some companies pay regularly, some pay irregularly, and some pay nothing at all. Whether a dividend is paid in any given year depends on the company's profits and its board's decision."
+      }
     }
   ]
 }
@@ -409,30 +449,25 @@ gtag('config', 'G-4T2H0KH9H7');
 
   <h2>Frequently Asked Questions</h2>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Do I need a lot of money to start investing in PSX stocks?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">No. PSX shares trade in lots of 500 shares, so the entry cost depends on the share price. For example, 500 shares of a stock priced at PKR 200 costs PKR 100,000. However, some brokers offer fractional investing or you can start with lower-priced stocks. Alternatively, an equity mutual fund gives you PSX exposure from as little as PKR 1,000.</div>
-  </div>
+  <details class="faq-item" id="faq-how-much-money-to-start"><summary class="faq-question">Do I need a lot of money to start investing in PSX stocks?</summary><div class="faq-answer">No. PSX shares trade in lots of 500 shares, so the entry cost depends on the share price. For example, 500 shares of a stock priced at PKR 200 costs PKR 100,000. However, some brokers offer fractional investing or you can start with lower-priced stocks. Alternatively, an equity mutual fund gives you PSX exposure from as little as PKR 1,000.</div></details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">How often are dividends paid on PSX?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Most listed companies pay dividends once or twice a year. Banks and fertilizer companies typically pay interim (half-year) and final (full-year) dividends. Some utility companies pay quarterly. Dividend dates are announced via PSX's regulatory filing system (PUCARS) and covered by financial media.</div>
-  </div>
+  <details class="faq-item" id="faq-how-often-dividends-paid"><summary class="faq-question">How often are dividends paid on PSX?</summary><div class="faq-answer">Most listed companies pay dividends once or twice a year. Banks and fertilizer companies typically pay interim (half-year) and final (full-year) dividends. Some utility companies pay quarterly. Dividend dates are announced via PSX's regulatory filing system (PUCARS) and covered by financial media.</div></details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">What is the book closure date and why does it matter?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">The book closure date is the deadline by which you must own shares to be entitled to the declared dividend. If you buy shares after the book closure announcement but before the actual closure date, you receive the dividend. If you buy after the book closure date, you do not. Settlement on PSX is T+2, so you must buy at least 2 business days before book closure.</div>
-  </div>
+  <details class="faq-item" id="faq-what-is-book-closure-date"><summary class="faq-question">What is the book closure date and why does it matter?</summary><div class="faq-answer">The book closure date is the deadline by which you must own shares to be entitled to the declared dividend. If you buy shares after the book closure announcement but before the actual closure date, you receive the dividend. If you buy after the book closure date, you do not. Settlement on PSX is T+2, so you must buy at least 2 business days before book closure.</div></details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Can I lose money even if a company pays dividends?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Yes. If a company's share price falls by 15% during the year, a 10% dividend yield results in a net loss of about 5% on your total investment. Dividend income does not insulate you from capital losses. This is why dividend investing is recommended with a minimum 3&ndash;5 year horizon and a focus on financially strong companies with consistent multi-year track records.</div>
-  </div>
+  <details class="faq-item" id="faq-can-i-lose-money"><summary class="faq-question">Can I lose money even if a company pays dividends?</summary><div class="faq-answer">Yes. If a company's share price falls by 15% during the year, a 10% dividend yield results in a net loss of about 5% on your total investment. Dividend income does not insulate you from capital losses. This is why dividend investing is recommended with a minimum 3–5 year horizon and a focus on financially strong companies with consistent multi-year track records.</div></details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">How do I receive my dividend payment from PSX stocks?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Dividends are paid directly to the bank account registered with your CDC Investor Account. The company's share registrar processes payments within 30 days of the book closure date. You receive an SMS/email notification when the dividend is credited. Ensure your bank account details are updated in your CDC profile to avoid delays.</div>
-  </div>
+  <details class="faq-item" id="faq-how-to-receive-dividend"><summary class="faq-question">How do I receive my dividend payment from PSX stocks?</summary><div class="faq-answer">Dividends are paid directly to the bank account registered with your CDC Investor Account. The company's share registrar processes payments within 30 days of the book closure date. You receive an SMS/email notification when the dividend is credited. Ensure your bank account details are updated in your CDC profile to avoid delays.</div></details>
+
+  <details class="faq-item" id="faq-what-is-dividend-yield"><summary class="faq-question">What does dividend yield mean and how is it calculated?</summary><div class="faq-answer">Dividend yield is the annual dividend per share divided by the current share price, expressed as a percentage. For example, a share priced at PKR 100 that pays PKR 9 in dividends over a year has a yield of 9%. A very high yield can sometimes signal a falling share price rather than a genuinely generous payout, so it is worth checking why the yield is high before reading it as good news.</div></details>
+
+  <details class="faq-item" id="faq-tax-on-dividends"><summary class="faq-question">How is tax applied to dividends in Pakistan?</summary><div class="faq-answer">Dividend income on PSX shares is generally subject to withholding tax deducted at source before the payment reaches your account, and filers and non-filers are typically treated differently. The exact rates are set in the Finance Act and can change each federal budget, so do not rely on figures quoted in articles. Verify the current dividend tax rates and your filer status position on fbr.gov.pk or with a registered tax practitioner.</div></details>
+
+  <details class="faq-item" id="faq-difference-cash-bonus-dividend"><summary class="faq-question">What is the difference between a cash dividend and a bonus share issue?</summary><div class="faq-answer">A cash dividend pays you money directly into your registered bank account. A bonus share issue instead gives you additional shares in proportion to your existing holding, with no cash changing hands. A bonus issue increases the number of shares you own but does not by itself add new cash to your account, so the two reward shareholders in different ways.</div></details>
+
+  <details class="faq-item" id="faq-find-dividend-history"><summary class="faq-question">Where can I check a company's past dividend history?</summary><div class="faq-answer">A company's dividend announcements are filed through PSX's regulatory system (PUCARS) and are usually summarised on the company's own investor relations page. The PSX corporate actions calendar at psx.com.pk under Market Data then Corporate Actions lists upcoming book closures and declared dividends. Reviewing several years of payouts helps you see whether a company has a consistent track record rather than a one-off payment.</div></details>
+
+  <details class="faq-item" id="faq-do-all-companies-pay"><summary class="faq-question">Do all PSX-listed companies pay dividends?</summary><div class="faq-answer">No. Paying a dividend is a decision made by each company's board of directors, and a company may choose to reinvest its profits for growth instead of distributing them. Some companies pay regularly, some pay irregularly, and some pay nothing at all. Whether a dividend is paid in any given year depends on the company's profits and its board's decision.</div></details>
 
   <!-- Ad slot 2 — after FAQ -->
   <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>

@@ -79,6 +79,46 @@
         "@type": "Answer",
         "text": "The real interest rate is the nominal rate minus inflation. With the SBP rate at 11.5% and CPI inflation at 7%, the real rate is approximately +4.5%. A positive real rate means savings are actually growing in purchasing power. In 2022, when inflation was 27% and the rate was 16%, the real rate was -11% — meaning cash savings were losing value rapidly despite earning nominal returns."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between the SBP policy rate and KIBOR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The policy rate is set directly by the SBP's Monetary Policy Committee and acts as the benchmark for the cost of money in the economy. KIBOR (Karachi Interbank Offered Rate) is the rate at which banks lend to each other and tends to move closely with the policy rate, since changes in the policy rate flow through interbank markets. Many loan and bond pricing formulas are linked to KIBOR rather than the policy rate itself. For the latest figures, verify on sbp.org.pk."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does a change in the policy rate affect my existing home loan or car financing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most consumer financing in Pakistan is priced on a floating basis, usually as a benchmark such as KIBOR plus a fixed bank margin. When the SBP raises the policy rate, the benchmark generally rises and your instalment can increase at the next repricing date; when the rate falls, the cost of borrowing typically eases. Fixed-rate arrangements are not affected until the agreed reset point. Check your loan agreement and your bank for the exact benchmark and repricing schedule."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the SBP policy rate affect the value of the Pakistani Rupee?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A higher policy rate can make Rupee-denominated savings more attractive relative to foreign currency, which is one factor that can support the Rupee, while lower rates can have the opposite tendency. However, the exchange rate is also driven by many other forces such as the current account, remittances, foreign reserves, and IMF program status, so the rate is only one input among several. Currency movements are inherently uncertain and should not be predicted with confidence."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When rates are expected to fall, is it better to lock into a fixed-rate certificate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This page explains that CDNS certificates lock in the profit rate that applies at the time of purchase, so an instrument bought before a series of cuts keeps its original rate while new issues are revised lower. That is a factual feature of how these certificates work, not a recommendation. The right choice depends on your time horizon, liquidity needs, and personal circumstances, so consider speaking with a SECP-registered advisor before deciding."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the SBP raise rates when inflation is high?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Raising the policy rate makes borrowing more expensive and saving more rewarding, which tends to cool overall demand and ease price pressures over time. The SBP uses this tool to steer inflation toward its medium-term objective while weighing growth and external stability. The precise inflation target and the current rate stance can change, so verify the latest figures and the SBP's reasoning on sbp.org.pk."
+      }
     }
   ]
 }
@@ -424,30 +464,55 @@ gtag('config', 'G-4T2H0KH9H7');
   <!-- FAQ Section -->
   <h2>Frequently Asked Questions</h2>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">How often does the SBP change the policy rate?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">The SBP's Monetary Policy Committee (MPC) meets approximately every 6–8 weeks, typically 8 times per year. Each meeting results in a decision to hold, raise, or cut the rate, which is announced on the same day via sbp.org.pk along with a written statement explaining the reasoning.</div>
-  </div>
+  <details class="faq-item" id="faq-how-often-sbp-changes-rate">
+    <summary class="faq-question">How often does the SBP change the policy rate?</summary>
+    <div class="faq-answer">The SBP's Monetary Policy Committee (MPC) meets approximately every 6–8 weeks, typically 8 times per year. Each meeting results in a decision to hold, raise, or cut the rate, which is announced on the same day via sbp.org.pk along with a written statement explaining the reasoning.</div>
+  </details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">How quickly do National Savings rates change after an SBP rate decision?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">CDNS profit rates are typically revised within 2–4 weeks of an SBP rate decision. However, certificates you already hold continue earning the rate locked in at the time of purchase — only new purchases are affected by revised rates. This makes buying CDNS certificates immediately after a rate peak strategically valuable.</div>
-  </div>
+  <details class="faq-item" id="faq-how-quickly-savings-rates-change">
+    <summary class="faq-question">How quickly do National Savings rates change after an SBP rate decision?</summary>
+    <div class="faq-answer">CDNS profit rates are typically revised within 2–4 weeks of an SBP rate decision. However, certificates you already hold continue earning the rate locked in at the time of purchase — only new purchases are affected by revised rates. This makes buying CDNS certificates immediately after a rate peak strategically valuable.</div>
+  </details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Does a rate cut always mean the stock market will go up?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">Not always immediately, but the historical relationship in Pakistan is strong. When the SBP cut rates from 22% to 11.5% (2024–2026), the KSE-100 rose from around 60,000 to over 164,000 — a 173% gain. However, other factors (corporate earnings, currency, IMF program status, geopolitical events) can override the rate effect in the short term.</div>
-  </div>
+  <details class="faq-item" id="faq-rate-cut-stock-market">
+    <summary class="faq-question">Does a rate cut always mean the stock market will go up?</summary>
+    <div class="faq-answer">Not always immediately, but the historical relationship in Pakistan is strong. When the SBP cut rates from 22% to 11.5% (2024–2026), the KSE-100 rose from around 60,000 to over 164,000 — a 173% gain. However, other factors (corporate earnings, currency, IMF program status, geopolitical events) can override the rate effect in the short term.</div>
+  </details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">Where can I find the SBP policy rate decision announcement?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">The official source is sbp.org.pk — go to "Monetary Policy" then "Monetary Policy Statements." Financial news outlets like Profit by Pakistan Today, Dawn Business, and The News cover decisions on the same day. Our investment analyzer tool also displays the current SBP rate pulled from official data.</div>
-  </div>
+  <details class="faq-item" id="faq-where-to-find-rate-announcement">
+    <summary class="faq-question">Where can I find the SBP policy rate decision announcement?</summary>
+    <div class="faq-answer">The official source is sbp.org.pk — go to "Monetary Policy" then "Monetary Policy Statements." Financial news outlets like Profit by Pakistan Today, Dawn Business, and The News cover decisions on the same day. Our investment analyzer tool also displays the current SBP rate pulled from official data.</div>
+  </details>
 
-  <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px">
-    <div style="background:var(--green-light);padding:14px 18px;font-weight:700;color:var(--green)">What is the "real interest rate" and why does it matter?</div>
-    <div style="padding:14px 18px;line-height:1.75;color:#2E2C26">The real interest rate is the nominal rate minus inflation. With the SBP rate at 11.5% and CPI inflation at 7%, the real rate is approximately +4.5%. A positive real rate means savings are actually growing in purchasing power. In 2022, when inflation was 27% and the rate was 16%, the real rate was -11% — meaning cash savings were losing value rapidly despite earning nominal returns.</div>
-  </div>
+  <details class="faq-item" id="faq-real-interest-rate">
+    <summary class="faq-question">What is the "real interest rate" and why does it matter?</summary>
+    <div class="faq-answer">The real interest rate is the nominal rate minus inflation. With the SBP rate at 11.5% and CPI inflation at 7%, the real rate is approximately +4.5%. A positive real rate means savings are actually growing in purchasing power. In 2022, when inflation was 27% and the rate was 16%, the real rate was -11% — meaning cash savings were losing value rapidly despite earning nominal returns.</div>
+  </details>
+
+  <details class="faq-item" id="faq-difference-policy-rate-kibor">
+    <summary class="faq-question">What is the difference between the SBP policy rate and KIBOR?</summary>
+    <div class="faq-answer">The policy rate is set directly by the SBP's Monetary Policy Committee and acts as the benchmark for the cost of money in the economy. KIBOR (Karachi Interbank Offered Rate) is the rate at which banks lend to each other and tends to move closely with the policy rate, since changes in the policy rate flow through interbank markets. Many loan and bond pricing formulas are linked to KIBOR rather than the policy rate itself. For the latest figures, verify on sbp.org.pk.</div>
+  </details>
+
+  <details class="faq-item" id="faq-rate-affect-home-loan">
+    <summary class="faq-question">How does a change in the policy rate affect my existing home loan or car financing?</summary>
+    <div class="faq-answer">Most consumer financing in Pakistan is priced on a floating basis, usually as a benchmark such as KIBOR plus a fixed bank margin. When the SBP raises the policy rate, the benchmark generally rises and your instalment can increase at the next repricing date; when the rate falls, the cost of borrowing typically eases. Fixed-rate arrangements are not affected until the agreed reset point. Check your loan agreement and your bank for the exact benchmark and repricing schedule.</div>
+  </details>
+
+  <details class="faq-item" id="faq-rate-impact-rupee">
+    <summary class="faq-question">Does the SBP policy rate affect the value of the Pakistani Rupee?</summary>
+    <div class="faq-answer">A higher policy rate can make Rupee-denominated savings more attractive relative to foreign currency, which is one factor that can support the Rupee, while lower rates can have the opposite tendency. However, the exchange rate is also driven by many other forces such as the current account, remittances, foreign reserves, and IMF program status, so the rate is only one input among several. Currency movements are inherently uncertain and should not be predicted with confidence.</div>
+  </details>
+
+  <details class="faq-item" id="faq-fixed-or-floating-savings">
+    <summary class="faq-question">When rates are expected to fall, is it better to lock into a fixed-rate certificate?</summary>
+    <div class="faq-answer">This page explains that CDNS certificates lock in the profit rate that applies at the time of purchase, so an instrument bought before a series of cuts keeps its original rate while new issues are revised lower. That is a factual feature of how these certificates work, not a recommendation. The right choice depends on your time horizon, liquidity needs, and personal circumstances, so consider speaking with a SECP-registered advisor before deciding.</div>
+  </details>
+
+  <details class="faq-item" id="faq-rate-vs-inflation-target">
+    <summary class="faq-question">Why does the SBP raise rates when inflation is high?</summary>
+    <div class="faq-answer">Raising the policy rate makes borrowing more expensive and saving more rewarding, which tends to cool overall demand and ease price pressures over time. The SBP uses this tool to steer inflation toward its medium-term objective while weighing growth and external stability. The precise inflation target and the current rate stance can change, so verify the latest figures and the SBP's reasoning on sbp.org.pk.</div>
+  </details>
 
   <!-- Ad slot 2 — after FAQ section -->
   <div class="ad-slot">

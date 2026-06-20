@@ -178,6 +178,51 @@ for yahoo_ticker, short in STOCK_TICKERS.items():
 if live_count:
     fetched.append(f"Stocks live: {live_count}/{len(STOCK_TICKERS)}")
 
+# ── 6. Mutual fund returns (finhisaab — server-rendered, requests-scrapable) ──
+# Each fund page renders rows like "<N> Year(s) <cumulative>% <annualized>%";
+# we take the ANNUALIZED (second) figure. Falls back to existing data.json
+# values if a page is unreachable or its structure changes.
+FUND_SLUGS = {
+    "Meezan Islamic Income Fund": "meezan-islamic-income-fund",
+    "Al Meezan Mutual Fund":      "al-meezan-mutual-fund",
+    "NBP Savings Fund":           "nbp-savings-fund",
+    "NBP Islamic Stock Fund":     "nbp-islamic-stock-fund",
+    "JS Islamic Fund":            "js-islamic-fund",
+}
+
+def _fund_return(text, years):
+    m = re.search(r"(?<!\d)" + str(years) + r" Years?\s+[+-]?[\d.]+%\s+([+-]?[\d.]+)%", text)
+    if not m:
+        return None
+    val = round(float(m.group(1)), 1)
+    return val if -95.0 <= val <= 500.0 else None
+
+fund_count = 0
+for fund in data["mutual_funds"]:
+    slug = FUND_SLUGS.get(fund["name"])
+    if not slug:
+        continue
+    try:
+        r = requests.get(f"https://finhisaab.com/mutual-funds/{slug}", timeout=20, headers=HEADERS)
+        if r.status_code != 200:
+            continue
+        text = re.sub(r"\s+", " ", BeautifulSoup(r.text, "html.parser").get_text(separator=" "))
+        y1 = _fund_return(text, 1)
+        if y1 is None:
+            continue  # structure changed — keep existing values
+        fund["ret_1y"] = y1
+        y3 = _fund_return(text, 3)
+        y5 = _fund_return(text, 5)
+        if y3 is not None:
+            fund["ret_3y"] = y3
+        if y5 is not None:
+            fund["ret_5y"] = y5
+        fund_count += 1
+    except Exception:
+        pass
+if fund_count:
+    fetched.append(f"Mutual fund returns: {fund_count}/{len(FUND_SLUGS)}")
+
 # ── Write updated data.json ───────────────────────────────────────
 data["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 

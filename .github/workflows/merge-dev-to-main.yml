@@ -30,5 +30,46 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin dev main
+          BEFORE=$(git rev-parse HEAD)
           git merge --ff-only origin/dev
           git push origin main
+          AFTER=$(git rev-parse HEAD)
+          echo "BEFORE=$BEFORE" >> "$GITHUB_ENV"
+          echo "AFTER=$AFTER" >> "$GITHUB_ENV"
+
+      - name: Notify IndexNow of changed pages
+        env:
+          INDEXNOW_KEY: 1eeb1aee03dd48e78804035bf15f0c2f
+          HOST: pakinvestlysis.com
+        run: |
+          # Added/Modified .html pages between the previous main and the new main
+          mapfile -t FILES < <(git diff --name-only --diff-filter=AM "$BEFORE" "$AFTER" -- '*.html')
+          if [ ${#FILES[@]} -eq 0 ]; then
+            echo "No HTML pages changed in this merge — nothing to submit to IndexNow."
+            exit 0
+          fi
+          urls=()
+          for f in "${FILES[@]}"; do
+            case "$f" in
+              index.html)   path= ;;                  # root -> https://host/
+              */index.html) path="${f%index.html}" ;; # dir/index.html -> dir/
+              *)            path="$f" ;;               # normal page -> /page.html
+            esac
+            urls+=("https://$HOST/$path")
+          done
+          printf 'Submitting %s URL(s) to IndexNow:\n' "${#urls[@]}"
+          printf '  %s\n' "${urls[@]}"
+          payload=$(printf '%s\n' "${urls[@]}" | jq -R . | jq -s \
+            --arg host "$HOST" --arg key "$INDEXNOW_KEY" \
+            --arg loc "https://$HOST/$INDEXNOW_KEY.txt" \
+            '{host:$host, key:$key, keyLocation:$loc, urlList:.}')
+          code=$(curl -sS -o /tmp/indexnow.out -w '%{http_code}' \
+            -X POST 'https://api.indexnow.org/indexnow' \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            --data "$payload") || true
+          echo "IndexNow responded HTTP ${code:-(no response)}"
+          cat /tmp/indexnow.out || true
+          # 200 = accepted, 202 = accepted/pending. Don't fail the deploy on IndexNow hiccups.
+          if [ "$code" != "200" ] && [ "$code" != "202" ]; then
+            echo "::warning::IndexNow returned HTTP $code (deploy still succeeded)."
+          fi

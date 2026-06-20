@@ -3,16 +3,19 @@
 
 User-agent: *
 Allow: /
+Disallow: /social-kit/
 
 # --- AI answer-engine & search crawlers (explicitly welcomed) ---
 User-agent: Googlebot
 Allow: /
+Disallow: /social-kit/
 
 User-agent: Google-Extended
 Allow: /
 
 User-agent: Bingbot
 Allow: /
+Disallow: /social-kit/
 
 User-agent: GPTBot
 Allow: /

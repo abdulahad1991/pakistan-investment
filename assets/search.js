@@ -8,6 +8,7 @@
 
   var STATIC = [
     { url: '/',                    title: 'Investment Comparison Tool',  description: 'Compare National Savings, mutual funds and PSX stocks side by side with live daily data.', type: 'Tool' },
+    { url: '/tax-calculator.html', title: 'Pakistan Tax Calculator 2026-27', description: 'Calculate income tax (salaried & business), GST, sales tax on services and restaurant tax, with a year-on-year comparison.', type: 'Tool' },
     { url: '/guides/',             title: 'All Investment Guides',       description: 'Step-by-step guides to every major investment route in Pakistan.', type: 'Guide' },
     { url: '/blog/',               title: 'Analysis & Blog',             description: 'Budget breakdowns, policy-rate analysis and salaried-class money moves.', type: 'Blog' },
     { url: '/about.html',          title: 'About',                       description: 'Who runs Pakistan Investment Advisor and why.', type: 'Page' },

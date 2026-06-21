@@ -223,6 +223,112 @@ for fund in data["mutual_funds"]:
 if fund_count:
     fetched.append(f"Mutual fund returns: {fund_count}/{len(FUND_SLUGS)}")
 
+# ── 7. Gold (local gold.pk scrape → international yfinance fallback) ──
+# Pakistani gold is quoted per tola (11.6638 g). We prefer the local
+# Sarafa-style rate (which carries the local premium/duty buyers actually
+# pay) and fall back to the international spot derived from gold futures
+# (GC=F, USD/oz, 24K) converted at the live PKR/USD when the scrape fails.
+TOLA_G = 11.6638  # grams per tola
+
+def _to_int(s):
+    try:
+        v = int(str(s).replace(",", ""))
+        return v if 100000 <= v <= 2000000 else None  # sanity band for PKR/tola
+    except Exception:
+        return None
+
+def _scrape_local_gold():
+    """gold.pk is server-rendered — returns (tola_24k, tola_22k) or None."""
+    try:
+        r = requests.get("https://gold.pk/", timeout=20, headers=HEADERS)
+        if r.status_code != 200:
+            return None
+        txt = re.sub(r"\s+", " ", BeautifulSoup(r.text, "html.parser").get_text(" "))
+        # 24K per tola — prefer the table form ("Rs. 445500.00 24 Karat Gold Rate (1 Tola)"),
+        # fall back to the prose ("for 24 karat is Rs. 445500").
+        m24 = (re.search(r"Rs\.?\s*([\d,]+)(?:\.\d+)?\s*24 Karat Gold Rate \(1 ?Tola\)", txt)
+               or re.search(r"for 24 karat is Rs\.?\s*([\d,]+)", txt, re.I))
+        m22 = (re.search(r"22 [Kk]arat Gold price for today is Rs\.?\s*([\d,]+)", txt)
+               or re.search(r"Rs\.?\s*([\d,]+)(?:\.\d+)?\s*22 Karat Gold Rate \(1 ?Tola\)", txt))
+        t24 = _to_int(m24.group(1)) if m24 else None
+        t22 = _to_int(m22.group(1)) if m22 else None
+        if t24:
+            return (t24, t22)
+    except Exception as e:
+        print(f"  Gold local scrape failed: {e}")
+    return None
+
+def _intl_gold_tola_24k():
+    """International spot via GC=F (USD/oz, 24K) × live PKR/USD → PKR/tola."""
+    try:
+        oz = yf.Ticker("GC=F").history(period="5d")["Close"].dropna()
+        if oz.empty:
+            return None
+        usd_oz = float(oz.iloc[-1])
+        return round(usd_oz / 31.1035 * data["macro"]["pkr_usd"] * TOLA_G)
+    except Exception as e:
+        print(f"  Gold intl spot failed: {e}")
+    return None
+
+def _build_gold_history():
+    """Real PKR/tola 24K monthly history from GC=F × PKR=X (last ~6 years)."""
+    try:
+        oz = yf.Ticker("GC=F").history(period="6y", interval="1mo")["Close"].dropna()
+        if oz.empty:
+            return None
+        fx = yf.Ticker("PKR=X").history(period="6y", interval="1mo")["Close"].dropna()
+        labels, values = [], []
+        for ts, usd_oz in oz.items():
+            if not fx.empty:
+                prior = fx[fx.index <= ts]
+                rate = float(prior.iloc[-1]) if len(prior) else float(fx.iloc[0])
+            else:
+                rate = data["macro"]["pkr_usd"]
+            tola = round(float(usd_oz) / 31.1035 * rate * TOLA_G)
+            if 50000 <= tola <= 2000000:
+                labels.append(ts.strftime("%b'%y"))
+                values.append(tola)
+        return {"labels": labels, "values": values} if len(values) >= 6 else None
+    except Exception as e:
+        print(f"  Gold history failed: {e}")
+    return None
+
+gold = data.setdefault("gold", {})
+local = _scrape_local_gold()
+if local and local[0]:
+    t24, t22 = local
+    if not t22:
+        t22 = round(t24 * 22 / 24)
+    gold.update({"tola_24k": t24, "tola_22k": t22, "source": "gold.pk",
+                 "source_type": "local"})
+    fetched.append(f"Gold local: 24K tola = {t24:,}")
+else:
+    t24 = _intl_gold_tola_24k()
+    if t24:
+        gold.update({"tola_24k": t24, "tola_22k": round(t24 * 22 / 24),
+                     "source": "International spot (GC=F × PKR/USD)",
+                     "source_type": "international"})
+        fetched.append(f"Gold intl: 24K tola = {t24:,}")
+
+# Derived units (computed so per-tola, per-10g and per-gram always agree)
+if gold.get("tola_24k"):
+    t24 = gold["tola_24k"]; t22 = gold["tola_22k"]
+    gold["gram_24k"] = round(t24 / TOLA_G)
+    gold["gram_22k"] = round(t22 / TOLA_G)
+    gold["g10_24k"]  = round(t24 / TOLA_G * 10)
+    gold["g10_22k"]  = round(t22 / TOLA_G * 10)
+
+# History (rebuilt from real data each run; keep prior on failure)
+hist = _build_gold_history()
+if hist:
+    gold["history"] = hist
+    fetched.append(f"Gold history: {len(hist['values'])} months")
+
+# 1-year change from monthly history (-13 = 12 months back)
+hv = gold.get("history", {}).get("values", [])
+if len(hv) >= 13 and hv[-13]:
+    gold["chg1y_pct"] = round((hv[-1] - hv[-13]) / hv[-13] * 100, 1)
+
 # ── Write updated data.json ───────────────────────────────────────
 data["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 

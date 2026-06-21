@@ -64,6 +64,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
       <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/gold-rates.html">Gold Rates</a>
       <a href="/about.html">About</a>
       <a href="/methodology.html">Methodology</a>
       <a href="/contact.html">Contact</a>
@@ -135,6 +136,14 @@ gtag('config', 'G-4T2H0KH9H7');
       </div>
     </div>
 
+    <div class="data-source">
+      <div class="data-source-icon" style="background:#FBF1D8">🪙</div>
+      <div>
+        <div style="font-weight:700;margin-bottom:4px">Gold rates — local Sarafa rate with international fallback</div>
+        <div style="font-size:.85rem;color:#5E5C52">The 24K and 22K gold rates per tola, 10 gram and gram shown on the <a href="/gold-rates.html">gold rates page</a> are pulled daily from a public Pakistani market source that mirrors the Sarafa (jewellers' association) rate. If that source is unreachable, we fall back to the international spot price — gold futures in US dollars per ounce converted at the live PKR/USD rate — so the page always shows a value, clearly labelled with which method produced it. The local rate is a reference price; jewellers add making charges, so the till price is usually a little higher. The 6-year history chart and forecast calculator are derived from these inputs.</div>
+      </div>
+    </div>
+
     <p style="margin-top:6px;margin-bottom:0">Where a derived figure (for example, a dividend yield or a real, inflation-adjusted return) is calculated rather than taken directly from a source, it is computed from these primary inputs using standard, publicly documented formulas — not from any proprietary or unverifiable model.</p>
   </div>
 
@@ -146,7 +155,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <div class="pipeline-step">
         <div class="step-num">1</div>
         <div><strong style="font-family:var(--display)">06:00 PKT — Fetch</strong>
-        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">A scheduled GitHub Action pulls today's figures from SBP, CDNS, MUFAP and PSX.</div></div>
+        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">A scheduled GitHub Action pulls today's figures from SBP, CDNS, MUFAP, PSX and the daily gold market rate.</div></div>
       </div>
       <div class="pipeline-step">
         <div class="step-num">2</div>

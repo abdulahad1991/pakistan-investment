@@ -83,6 +83,9 @@ function applyData() {
   renderKSEChart();
   renderSBPChart();
 
+  // Live gold rates card
+  renderGold();
+
   // Dashboard section (below the tool)
   renderInsightStrip();
   renderGrowChart();
@@ -787,6 +790,71 @@ function renderRealChart() {
         tooltip: { callbacks: { label: c => (c.raw > 0 ? "+" : "") + c.raw + " pts vs inflation" } } },
       scales: { x: { ticks: { font: MONO_FONT, callback: v => v + "%" }, grid: { color: "#EFE8D8" } },
                 y: { ticks: { font: { ...MONO_FONT, size: 10 } }, grid: { display: false } } } }
+  });
+}
+
+// ── Live gold rates (homepage card) ──────────────────────────────
+function renderGold() {
+  const g = DATA && DATA.gold;
+  if (!g) return;
+  setText("g-tola24", "₨" + formatPKR(g.tola_24k));
+  setText("g-tola22", "₨" + formatPKR(g.tola_22k));
+  setText("g-10g24",  "₨" + formatPKR(g.g10_24k));
+  setText("g-gram24", "₨" + formatPKR(g.gram_24k));
+
+  const chgEl = document.getElementById("gold-chg");
+  if (chgEl && g.chg1y_pct != null) {
+    const up = g.chg1y_pct >= 0;
+    chgEl.textContent = (up ? "▲ " : "▼ ") + Math.abs(g.chg1y_pct) + "% / 1yr";
+    chgEl.style.background = up ? "var(--green-light)" : "var(--red-light)";
+    chgEl.style.color = up ? "var(--green)" : "var(--red)";
+    chgEl.style.borderColor = "transparent";
+  }
+
+  const srcEl = document.getElementById("gold-src");
+  if (srcEl) {
+    const d = new Date(DATA.updated);
+    const when = d.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
+    const note = g.source_type === "local"
+      ? "local Sarafa rate via gold.pk"
+      : "international spot (gold futures × PKR/USD)";
+    srcEl.textContent = `As of ${when} · ${note}`;
+  }
+
+  renderGoldChart();
+}
+
+function renderGoldChart() {
+  const ctx = document.getElementById("chart-gold");
+  if (!ctx || typeof Chart === "undefined" || !DATA.gold || !DATA.gold.history) return;
+  destroyChart("gold");
+  chartInstances["gold"] = new Chart(ctx.getContext("2d"), {
+    type: "line",
+    data: {
+      labels: DATA.gold.history.labels,
+      datasets: [{
+        label: "24K gold (PKR/tola)",
+        data: DATA.gold.history.values,
+        borderColor: "#B7791F",
+        backgroundColor: "rgba(242,185,75,.16)",
+        borderWidth: 3,
+        pointRadius: 0,
+        fill: true,
+        tension: .35,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => " ₨" + formatPKR(c.parsed.y) + " / tola" } }
+      },
+      scales: {
+        y: { ticks: { callback: v => (v / 1000).toFixed(0) + "K" }, grid: { color: "#E6EBF1" } },
+        x: { ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 8 }, grid: { display: false } }
+      }
+    }
   });
 }
 

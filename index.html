@@ -110,6 +110,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
       <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/gold-rates.html">Gold Rates</a>
       <a href="/about.html">About</a>
       <a href="/methodology.html">Methodology</a>
       <a href="/contact.html">Contact</a>
@@ -253,6 +254,40 @@ gtag('config', 'G-4T2H0KH9H7');
           <span class="chart-badge">Rates</span>
         </div>
         <div class="chart-wrap-sm"><canvas id="chart-sbp"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Live gold rates -->
+    <div class="card dashboard-card" id="gold-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">
+        <div>
+          <div class="section-kicker">Live gold rates</div>
+          <div class="section-title">Gold Price in Pakistan Today</div>
+          <div class="section-sub" id="gold-src">Daily data refresh</div>
+        </div>
+        <span class="chart-badge" id="gold-chg">—</span>
+      </div>
+      <div class="macro-grid">
+        <div class="macro-pill">
+          <div class="macro-val" id="g-tola24">—</div>
+          <div class="macro-lbl">24K · per tola</div>
+        </div>
+        <div class="macro-pill">
+          <div class="macro-val" id="g-tola22">—</div>
+          <div class="macro-lbl">22K · per tola</div>
+        </div>
+        <div class="macro-pill">
+          <div class="macro-val" id="g-10g24">—</div>
+          <div class="macro-lbl">24K · per 10 g</div>
+        </div>
+        <div class="macro-pill">
+          <div class="macro-val" id="g-gram24">—</div>
+          <div class="macro-lbl">24K · per gram</div>
+        </div>
+      </div>
+      <div class="chart-wrap-sm" style="margin-top:16px"><canvas id="chart-gold"></canvas></div>
+      <div class="cta-btns" style="margin-top:14px">
+        <a href="/gold-rates.html" class="btn-cta btn-gold">Gold history &amp; forecast calculator →</a>
       </div>
     </div>
 
@@ -583,7 +618,7 @@ gtag('config', 'G-4T2H0KH9H7');
 
 <footer>
   <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Data updated daily &nbsp;|&nbsp; Not financial advice — for educational purposes only</div>
-  <div style="margin-top:6px;opacity:.7">Sources: PSX · SBP · CDNS · MUFAP · Yahoo Finance</div>
+  <div style="margin-top:6px;opacity:.7">Sources: PSX · SBP · CDNS · MUFAP · Gold market · Yahoo Finance</div>
   <div style="margin-top:12px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
     <span style="opacity:.8">Built by <strong>Abdul Ahad</strong></span>
     <a href="/faq.html"

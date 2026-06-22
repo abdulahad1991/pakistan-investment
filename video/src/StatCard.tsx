@@ -86,7 +86,7 @@ const Card: React.FC<{ data: StatCardProps }> = ({ data }) => {
         style={{
           fontFamily: MONO,
           fontWeight: 600,
-          fontSize: 168 * u,
+          fontSize: 132 * u,
           color: C.ink,
           letterSpacing: -2,
           lineHeight: 1,

@@ -6,3 +6,6 @@ build
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+
+# Regenerated each run by scripts/build_daily.py
+daily-props.json

@@ -26,6 +26,7 @@
   },
   "scripts": {
     "dev": "remotion studio",
+    "daily": "python3 ../scripts/build_daily.py && remotion render StatCard-9x16 --props=daily-props.json out/daily/short.mp4 && remotion render StatCard-1x1 --props=daily-props.json out/daily/linkedin.mp4 && remotion still StatCard-1x1 --props=daily-props.json out/daily/card.png",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc"

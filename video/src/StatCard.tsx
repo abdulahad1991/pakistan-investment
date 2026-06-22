@@ -56,6 +56,7 @@ const Card: React.FC<{ data: StatCardProps }> = ({ data }) => {
   const trendColor = data.trend === "up" ? C.green : data.trend === "down" ? C.red : C.muted;
   const arrow = data.trend === "up" ? "▲" : data.trend === "down" ? "▼" : "■";
   const pop = spring({ frame: frame - 18, fps, config: { damping: 18 }, durationInFrames: 30 });
+  const r18 = reveal(frame, 18);
 
   return (
     <AbsoluteFill style={{ opacity: op, padding: pad, justifyContent: "center", alignItems: "flex-start" }}>
@@ -110,8 +111,8 @@ const Card: React.FC<{ data: StatCardProps }> = ({ data }) => {
           display: "inline-flex",
           alignItems: "center",
           gap: 14 * u,
-          ...reveal(frame, 18),
-          transform: `${reveal(frame, 18).transform} scale(${0.9 + pop * 0.1})`,
+          ...r18,
+          transform: `${r18.transform} scale(${0.9 + pop * 0.1})`,
           transformOrigin: "left center",
           background: trendColor,
           color: C.paper,

@@ -46,9 +46,10 @@ class BuildDailyTest(unittest.TestCase):
         self.assertEqual(gold["locale"], "en-IN")
         self.assertEqual(gold["trend"], "up")  # chg1y_pct 23.7 > 0
 
-    def test_kse_trend_from_history(self):
+    def test_kse_is_level_not_trend(self):
         kse = self.metrics[1]["props"]
-        self.assertEqual(kse["trend"], "up")  # 173001 > 162994
+        self.assertEqual(kse["trend"], "flat")
+        self.assertEqual(kse["changeLabel"], "index level")
 
     def test_nss_uses_behbood_rate(self):
         nss = self.metrics[4]["props"]

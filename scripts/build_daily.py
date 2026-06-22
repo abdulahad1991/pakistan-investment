@@ -122,13 +122,8 @@ def build_metrics(data, as_of):
         },
     })
 
-    # 1 — KSE-100 (trend from the last two history points)
-    hist = data.get("kse100_history", {}).get("values", [])
-    ktrend, kchg = "flat", ""
-    if len(hist) >= 2 and hist[-2]:
-        pct = (hist[-1] - hist[-2]) / hist[-2] * 100
-        ktrend = "up" if pct >= 0 else "down"
-        kchg = f"{pct:+.1f}% · recent"
+    # 1 — KSE-100 (presented as a level; history points are sparse/non-consecutive
+    #      so no intra-series delta is computed or labelled)
     metrics.append({
         "key": "kse100",
         "props": _props(
@@ -137,8 +132,8 @@ def build_metrics(data, as_of):
             value=macro.get("kse100_level", 0),
             decimals=0,
             locale="en-US",
-            trend=ktrend,
-            changeLabel=kchg or "index level",
+            trend="flat",
+            changeLabel="index level",
             asOf=as_of,
             takeaway="Stocks are a long-term game — zoom out before you react.",
         ),

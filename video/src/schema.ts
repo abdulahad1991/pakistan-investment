@@ -30,26 +30,46 @@ const compareBar = z.object({
   color: zColor(),
 });
 
+// Shared building blocks — reused by both Promo (schema.ts) and StatCard (statSchema.ts).
+export const colorsSchema = z.object({
+  paper: zColor(),
+  ink: zColor(),
+  green: zColor(),
+  greenLight: zColor(),
+  gold: zColor(),
+  goldPale: zColor(),
+  navy: zColor(),
+  red: zColor(),
+  border: zColor(),
+  muted: zColor(),
+});
+
+export type Colors = z.infer<typeof colorsSchema>;
+
+export const defaultColors: Colors = {
+  paper: "#F5F7FA",
+  ink: "#111827",
+  green: "#075E4B",
+  greenLight: "#E6F6F0",
+  gold: "#F2B94B",
+  goldPale: "#F8D98A",
+  navy: "#2854C5",
+  red: "#C24132",
+  border: "#DDE3EA",
+  muted: "#667085",
+};
+
+export const audioSchema = z.object({
+  sfx: z.boolean(), // master on/off for the frame-synced sound effects
+  volume: z.number().min(0).max(2), // multiplies every cue's level
+});
+
 export const promoSchema = z.object({
   // ---- Brand palette (live-editable color pickers) --------------------
-  colors: z.object({
-    paper: zColor(),
-    ink: zColor(),
-    green: zColor(),
-    greenLight: zColor(),
-    gold: zColor(),
-    goldPale: zColor(),
-    navy: zColor(),
-    red: zColor(),
-    border: zColor(),
-    muted: zColor(),
-  }),
+  colors: colorsSchema,
 
   // ---- Audio ----------------------------------------------------------
-  audio: z.object({
-    sfx: z.boolean(), // master on/off for the frame-synced sound effects
-    volume: z.number().min(0).max(2), // multiplies every cue's level
-  }),
+  audio: audioSchema,
 
   // ---- Scene 1 · Hook -------------------------------------------------
   hook: z.object({
@@ -96,7 +116,6 @@ export const promoSchema = z.object({
 });
 
 export type PromoProps = z.infer<typeof promoSchema>;
-export type Colors = PromoProps["colors"];
 
 // --------------------------------------------------------------------------
 // Defaults — reproduce the original hard-coded promo exactly. These are the
@@ -104,18 +123,7 @@ export type Colors = PromoProps["colors"];
 // Numbers mirror data.json as of 20 Jun 2026 (promo, not advice).
 // --------------------------------------------------------------------------
 export const defaultPromoProps: PromoProps = {
-  colors: {
-    paper: "#F5F7FA",
-    ink: "#111827",
-    green: "#075E4B",
-    greenLight: "#E6F6F0",
-    gold: "#F2B94B",
-    goldPale: "#F8D98A",
-    navy: "#2854C5",
-    red: "#C24132",
-    border: "#DDE3EA",
-    muted: "#667085",
-  },
+  colors: defaultColors,
   audio: { sfx: true, volume: 1 },
   hook: {
     durationInFrames: 90,
@@ -169,7 +177,7 @@ export const defaultPromoProps: PromoProps = {
 // Color context — so scenes/components read the live palette without threading
 // `colors` through every prop.
 // --------------------------------------------------------------------------
-const ColorContext = createContext<Colors>(defaultPromoProps.colors);
+const ColorContext = createContext<Colors>(defaultColors);
 export const ColorProvider = ColorContext.Provider;
 export const useColors = () => useContext(ColorContext);
 

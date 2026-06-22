@@ -3,7 +3,8 @@ import { useCurrentFrame, interpolate, Easing } from "remotion";
 
 const easeOut = Easing.bezier(0.16, 1, 0.3, 1);
 
-// Count-up number. `decimals` controls precision; values are grouped with commas.
+// Count-up number. `decimals` controls precision; `locale` controls digit
+// grouping ("en-IN" => Pakistani lakh/crore grouping X,XX,XXX).
 export const Counter: React.FC<{
   to: number;
   from?: number;
@@ -12,15 +13,16 @@ export const Counter: React.FC<{
   decimals?: number;
   prefix?: string;
   suffix?: string;
+  locale?: string;
   style?: React.CSSProperties;
-}> = ({ to, from = 0, start = 0, dur = 30, decimals = 0, prefix = "", suffix = "", style }) => {
+}> = ({ to, from = 0, start = 0, dur = 30, decimals = 0, prefix = "", suffix = "", locale = "en-US", style }) => {
   const frame = useCurrentFrame();
   const v = interpolate(frame, [start, start + dur], [from, to], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: easeOut,
   });
-  const txt = v.toLocaleString("en-US", {
+  const txt = v.toLocaleString(locale, {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });

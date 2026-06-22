@@ -70,3 +70,68 @@ jobs:
           git fetch origin dev
           git merge --ff-only origin/dev
           git push origin main
+
+  social:
+    name: Render daily social assets
+    needs: scrape
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Pull the data commit the scrape job just pushed
+        run: git pull --ff-only origin dev
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: video/package-lock.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install video dependencies
+        working-directory: video
+        run: npm ci
+
+      - name: Build daily props + caption
+        run: python scripts/build_daily.py
+
+      - name: Render YouTube Short (9:16)
+        working-directory: video
+        run: npx remotion render StatCard-9x16 --props=daily-props.json out/daily/short.mp4
+
+      - name: Render LinkedIn video (1:1)
+        working-directory: video
+        run: npx remotion render StatCard-1x1 --props=daily-props.json out/daily/linkedin.mp4
+
+      - name: Render LinkedIn still (1:1)
+        working-directory: video
+        run: npx remotion still StatCard-1x1 --props=daily-props.json out/daily/card.png
+
+      - name: Upload daily assets (download to post manually)
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-social-${{ github.run_id }}
+          path: video/out/daily/*
+          retention-days: 14
+
+      - name: Commit caption to dev
+        run: |
+          git config user.name  "Abdul Ahad"
+          git config user.email "abdulahad1991@users.noreply.github.com"
+          git add social-kit/daily/*.md
+          git diff --cached --quiet || (
+            git commit -m "chore: daily social caption $(date -u +'%Y-%m-%d')" &&
+            git push origin dev
+          )

@@ -8,14 +8,20 @@ import {
   totalDuration,
   type PromoProps,
 } from "./schema";
+import { StatCard } from "./StatCard";
+import { statCardSchema, defaultStatProps, type StatCardProps } from "./statSchema";
 
-// Total duration is derived from the per-scene durations in the props, so
-// editing any scene length in Studio reflows the timeline automatically.
-const calculateMetadata: CalculateMetadataFunction<PromoProps> = ({ props }) => ({
+// Promo total duration is derived from the per-scene durations in the props.
+const promoMetadata: CalculateMetadataFunction<PromoProps> = ({ props }) => ({
   durationInFrames: totalDuration(props),
   fps: FPS,
   width: 1080,
   height: 1920,
+});
+
+// StatCard length is a single editable prop; width/height stay per-composition.
+const statMetadata: CalculateMetadataFunction<StatCardProps> = ({ props }) => ({
+  durationInFrames: props.durationInFrames,
 });
 
 export const RemotionRoot: React.FC = () => {
@@ -31,7 +37,31 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         schema={promoSchema}
         defaultProps={defaultPromoProps}
-        calculateMetadata={calculateMetadata}
+        calculateMetadata={promoMetadata}
+      />
+
+      {/* Daily stat-of-the-day card — one component, two aspect ratios. */}
+      <Composition
+        id="StatCard-9x16"
+        component={StatCard}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        durationInFrames={defaultStatProps.durationInFrames}
+        schema={statCardSchema}
+        defaultProps={defaultStatProps}
+        calculateMetadata={statMetadata}
+      />
+      <Composition
+        id="StatCard-1x1"
+        component={StatCard}
+        fps={FPS}
+        width={1080}
+        height={1080}
+        durationInFrames={defaultStatProps.durationInFrames}
+        schema={statCardSchema}
+        defaultProps={defaultStatProps}
+        calculateMetadata={statMetadata}
       />
     </>
   );

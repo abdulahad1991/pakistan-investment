@@ -88,7 +88,7 @@ def _series(hist, take, end_value=None):
     }
 
 
-def build_props(data, date_str):
+def build_props(data, date_str, session):
     macro = data.get("macro", {})
     gold = data.get("gold", {})
     stocks = data.get("stocks", []) or []
@@ -106,6 +106,7 @@ def build_props(data, date_str):
         "colors": DEFAULT_COLORS,
         "audio": {"sfx": True, "volume": 1},
         "date": date_str,
+        "session": session,
         "footer": FOOTER,
         "macro": {
             "kse100": kse100,
@@ -124,7 +125,7 @@ def build_props(data, date_str):
 def caption_md(date_str, p):
     m, g = p["macro"], p["gold"]
     top = p["movers"][0] if p["movers"] else {"ticker": "", "name": "", "change1y": 0}
-    headline = "Pakistan market brief"
+    headline = f"Pakistan market brief · {p['session']}"
     hook = (
         f"Pakistan market brief — {date_str}: KSE-100 at {grp(m['kse100'], locale_in=False)}, "
         f"the rupee at ₨{m['pkrUsd']:.2f}/$, gold ₨{grp(g['tola'])}/tola ({g['change1y']:+.1f}% in a year)."
@@ -161,10 +162,16 @@ def main():
     date_str = today.strftime("%-d %b %Y")
     file_str = today.strftime("%Y-%m-%d")
 
+    # Two runs a day: morning (~04:45 UTC, just after the PSX 9:30 PKT open) and
+    # evening (~11:30 UTC, an hour after the 15:30 close). Tag the brief by
+    # session so the two daily videos read as distinct posts, not duplicates.
+    utc_hour = datetime.datetime.now(datetime.timezone.utc).hour
+    session = "Market open" if utc_hour < 9 else "Market close"
+
     with open(os.path.join(ROOT, "data.json"), encoding="utf-8") as f:
         data = json.load(f)
 
-    props = build_props(data, date_str)
+    props = build_props(data, date_str, session)
 
     props_path = os.path.join(ROOT, "video", "daily-props.json")
     with open(props_path, "w", encoding="utf-8") as f:

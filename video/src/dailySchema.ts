@@ -28,6 +28,7 @@ export const dailySchema = z.object({
   colors: colorsSchema,
   audio: audioSchema,
   date: z.string(),
+  session: z.string(), // "Market open" (morning run) or "Market close" (evening)
   footer: z.string(),
 
   macro: z.object({
@@ -55,6 +56,7 @@ export const defaultDailyProps: DailyProps = {
   colors: defaultColors,
   audio: { sfx: true, volume: 1 },
   date: "22 Jun 2026",
+  session: "Market open",
   footer: "Not financial advice · pakinvestlysis.com",
   macro: { kse100: 178471, pkrUsd: 277.9, sbpRate: 11.5, inflation: 7.0 },
   gold: { tola: 448000, change1y: 34.7 },

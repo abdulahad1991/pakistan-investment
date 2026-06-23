@@ -2,8 +2,11 @@ name: Update Investment Data
 
 on:
   schedule:
-    # 01:00 UTC = 06:00 PKT — runs every day
-    - cron: "0 1 * * *"
+    # Twice a weekday, mirroring PSX hours (Mon–Fri; market is shut weekends).
+    # 04:45 UTC = 09:45 PKT — "Market open", just after the 09:30 PSX open.
+    - cron: "45 4 * * 1-5"
+    # 11:30 UTC = 16:30 PKT — "Market close", ~1h after the 15:30 PSX close.
+    - cron: "30 11 * * 1-5"
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
 
 jobs:

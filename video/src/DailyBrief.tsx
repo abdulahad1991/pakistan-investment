@@ -38,7 +38,7 @@ const GOLD_DARK = "#B7791F"; // matches site --gold2 (not in the shared palette)
 // Fixed scene lengths (frames @30fps). Total drives calculateMetadata.
 export const SCENES = {
   title: 66,
-  board: 114,
+  board: 126,
   psx: 102,
   gold: 102,
   movers: 108,
@@ -119,7 +119,7 @@ const Title: React.FC<{ data: DailyProps }> = ({ data }) => {
   return (
     <Scene dur={SCENES.title} u={u}>
       <div style={{ ...reveal(frame, 2), display: "flex", justifyContent: "center" }}>
-        <Kicker u={u}>Pakistan · Daily Brief</Kicker>
+        <Kicker u={u}>Pakistan · {data.session}</Kicker>
       </div>
       <div style={{ height: 36 * u }} />
       <div
@@ -207,6 +207,8 @@ const Board: React.FC<{ data: DailyProps }> = ({ data }) => {
         value={<Counter to={data.gold.tola} decimals={0} prefix="₨" locale="en-IN" start={38} dur={26} />} />
       <BoardRow label="SBP policy rate" start={50} u={u}
         value={<Counter to={data.macro.sbpRate} decimals={2} suffix="%" start={50} dur={26} />} />
+      <BoardRow label="CPI inflation" start={62} u={u}
+        value={<Counter to={data.macro.inflation} decimals={1} suffix="%" start={62} dur={26} />} />
     </Scene>
   );
 };
@@ -462,7 +464,7 @@ const Sfx: React.FC<{ data: DailyProps }> = ({ data }) => {
   // whoosh into each scene after the first
   ORDER.slice(1).forEach((k) => cues.push({ at: Math.max(0, s[k] - 2), src: "whoosh.wav", vol: 0.4 }));
   // board rows: ticks, gold row a chime
-  [14, 26, 38, 50].forEach((f, i) => cues.push({ at: s.board + f, src: i === 2 ? "chime.wav" : "tick.wav", vol: i === 2 ? 0.4 : 0.3 }));
+  [14, 26, 38, 50, 62].forEach((f, i) => cues.push({ at: s.board + f, src: i === 2 ? "chime.wav" : "tick.wav", vol: i === 2 ? 0.4 : 0.3 }));
   // charts sweep
   cues.push({ at: s.psx + 16, src: "sweep.wav", vol: 0.5 });
   cues.push({ at: s.gold + 16, src: "sweep.wav", vol: 0.5 });

@@ -19,8 +19,13 @@ Educational only; **never financial advice**. Audience: Pakistani retail savers.
 - Work on **`dev`**. Pushing to `dev` triggers `.github/workflows/merge-dev-to-main.yml`,
   which **fast-forwards `main`** and pings IndexNow for changed `.html` pages. Pages serves `main`.
 - So: **commit to `dev`, that's the deploy.** Don't push straight to `main`.
-- Daily cron `.github/workflows/update-data.yml` (01:00 UTC / 06:00 PKT): runs
-  `fetch_data.py` + `build_manifest.py` on `dev`, commits `data.json`/`manifest.json`, merges to `main`.
+- Cron `.github/workflows/update-data.yml` runs **twice every weekday** (Mon–Fri):
+  **04:45 UTC / 09:45 PKT** ("Market open", after the 09:30 PSX open) and
+  **11:30 UTC / 16:30 PKT** ("Market close", ~1h after the 15:30 close). Each run:
+  `fetch_data.py` + `build_manifest.py` on `dev`, commits `data.json`/`manifest.json`,
+  merges to `main`, then the `social` job runs `build_daily.py` and re-renders the
+  DailyBrief videos (Short 9:16, LinkedIn 1:1, still card, homepage 16:9). The video
+  is labelled by `session` ("Market open"/"Market close") so the two daily posts differ.
 - User works autonomously with skip-permissions; pushing to deploy is expected.
 
 ## Data pipeline

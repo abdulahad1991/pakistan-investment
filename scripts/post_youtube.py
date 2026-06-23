@@ -76,10 +76,13 @@ def main():
             "categoryId": CATEGORY_ID,
         },
         "status": {
-            "privacyStatus": "public",
+            # Defaults public for real runs; set YT_PRIVACY=unlisted|private to
+            # test without broadcasting to subscribers.
+            "privacyStatus": os.environ.get("YT_PRIVACY") or "public",
             "selfDeclaredMadeForKids": False,
         },
     }
+    want_privacy = body["status"]["privacyStatus"]
     media = MediaFileUpload(video_path, mimetype="video/mp4", chunksize=-1, resumable=True)
     request = youtube.videos().insert(part="snippet,status", body=body, media_body=media)
 
@@ -95,7 +98,11 @@ def main():
             sys.exit(1)
 
     vid = response["id"]
-    print(f"[post_youtube] uploaded: https://youtube.com/shorts/{vid}")
+    got_privacy = response.get("status", {}).get("privacyStatus", "?")
+    print(f"[post_youtube] uploaded ({got_privacy}): https://youtube.com/shorts/{vid}")
+    if want_privacy == "public" and got_privacy != "public":
+        print(f"[post_youtube] WARNING: requested public but got '{got_privacy}' — "
+              "channel likely not phone-verified; verify at youtube.com/verify.")
 
 
 if __name__ == "__main__":

@@ -3,6 +3,10 @@ __pycache__/
 *.pyc
 *.pyo
 .env
+# local auto-post credentials — never commit
+scripts/*.env
+scripts/client_secret.json
+scripts/token.json
 node_modules/
 
 .jpg

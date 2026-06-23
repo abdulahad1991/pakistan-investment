@@ -26,7 +26,7 @@
   },
   "scripts": {
     "dev": "remotion studio",
-    "daily": "python3 ../scripts/build_daily.py && remotion render DailyBrief-9x16 --props=daily-props.json out/daily/short.mp4 && remotion render DailyBrief-1x1 --props=daily-props.json out/daily/linkedin.mp4 && remotion still DailyCard-1x1 --props=daily-props.json out/daily/card.png --frame=60",
+    "daily": "python3 ../scripts/build_daily.py && remotion render DailyBrief-9x16 --props=daily-props.json out/daily/short.mp4 && remotion render DailyBrief-1x1 --props=daily-props.json out/daily/linkedin.mp4 && remotion still DailyCard-1x1 --props=daily-props.json out/daily/card.png --frame=60 && remotion render DailyBrief-16x9 --props=daily-props.json ../assets/daily-brief.mp4 --crf=23 && remotion still DailyBrief-16x9 --props=daily-props.json ../assets/daily-brief-poster.jpg --frame=150 --image-format=jpeg",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc"

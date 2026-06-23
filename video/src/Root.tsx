@@ -109,6 +109,18 @@ export const RemotionRoot: React.FC = () => {
         schema={dailySchema}
         defaultProps={defaultDailyProps}
       />
+      {/* 16:9 — embedded on the website home page. Doubles as the promo: it
+          opens on the brand, walks every live rate, and closes on the CTA. */}
+      <Composition
+        id="DailyBrief-16x9"
+        component={DailyBrief}
+        fps={FPS}
+        width={1920}
+        height={1080}
+        durationInFrames={dailyTotal()}
+        schema={dailySchema}
+        defaultProps={defaultDailyProps}
+      />
       <Composition
         id="DailyCard-1x1"
         component={DailyCard}

@@ -109,15 +109,15 @@ jobs:
 
       - name: Render YouTube Short (9:16)
         working-directory: video
-        run: npx remotion render StatCard-9x16 --props=daily-props.json out/daily/short.mp4
+        run: npx remotion render DailyBrief-9x16 --props=daily-props.json out/daily/short.mp4
 
       - name: Render LinkedIn video (1:1)
         working-directory: video
-        run: npx remotion render StatCard-1x1 --props=daily-props.json out/daily/linkedin.mp4
+        run: npx remotion render DailyBrief-1x1 --props=daily-props.json out/daily/linkedin.mp4
 
       - name: Render LinkedIn still (1:1)
         working-directory: video
-        run: npx remotion still StatCard-1x1 --props=daily-props.json out/daily/card.png
+        run: npx remotion still DailyCard-1x1 --props=daily-props.json out/daily/card.png --frame=60
 
       - name: Upload daily assets (download to post manually)
         uses: actions/upload-artifact@v4

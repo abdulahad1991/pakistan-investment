@@ -100,6 +100,8 @@ article .container,body>.container{padding-top:40px;padding-bottom:40px}
 .site-header .brand-mark{display:block;flex:0 0 auto;width:28px;height:19px;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.4)}
 .site-header .brand-name{min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:1.04rem;font-weight:800;letter-spacing:-.01em;color:#fff}
 .site-header .brand-name span{color:var(--gold)}
+.site-header .brand-logo{display:block;flex:0 0 auto;height:32px;width:auto;background:#fff;padding:6px 11px;border-radius:9px;box-shadow:0 1px 4px rgba(0,0,0,.28)}
+@media (max-width:640px){.site-header .brand-logo{height:26px;padding:5px 9px}}
 
 /* Primary nav links */
 .site-header .site-nav{display:flex;align-items:center;gap:2px}
@@ -712,3 +714,8 @@ tr.rec-row td{background:#F0FBF6}
 .list-search input::placeholder{color:var(--muted)}
 .list-search .ls-ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.45;font-size:1.02rem;pointer-events:none}
 .filter-empty{display:none;padding:26px 18px;text-align:center;color:var(--muted);font-size:.95rem}
+
+/* ── Home promo video ──────────────────────────────────── */
+.promo-card{overflow:hidden}
+.promo-video-wrap{margin-top:18px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#0c1320;box-shadow:0 20px 50px -30px rgba(16,24,40,.5)}
+.promo-video{display:block;width:100%;aspect-ratio:16/9;height:auto;object-fit:cover}

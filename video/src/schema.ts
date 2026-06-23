@@ -134,12 +134,12 @@ export const defaultPromoProps: PromoProps = {
   market: {
     durationInFrames: 138,
     heading: "The board, today.",
-    asOf: "20 Jun 2026",
+    asOf: "22 Jun 2026",
     rows: [
       { label: "SBP policy rate", value: 11.5, decimals: 1, prefix: "", suffix: "%", up: false },
       { label: "Inflation (CPI)", value: 7.0, decimals: 1, prefix: "", suffix: "%", up: false },
-      { label: "KSE-100 index", value: 178922, decimals: 0, prefix: "", suffix: "", up: false },
-      { label: "Gold · 1-year", value: 23.7, decimals: 1, prefix: "+", suffix: "%", up: true },
+      { label: "KSE-100 index", value: 178471, decimals: 0, prefix: "", suffix: "", up: false },
+      { label: "Gold · 1-year", value: 34.7, decimals: 1, prefix: "+", suffix: "%", up: true },
     ],
   },
   compare: {
@@ -151,7 +151,7 @@ export const defaultPromoProps: PromoProps = {
     bars: [
       { label: "Islamic Income", sub: "low risk", value: 8.4, color: "#075E4B" },
       { label: "National Savings", sub: "Behbood", value: 12.72, color: "#2854C5" },
-      { label: "Islamic Equity", sub: "Al Meezan", value: 35.9, color: "#F2B94B" },
+      { label: "Islamic Equity", sub: "Al Meezan", value: 33.7, color: "#F2B94B" },
     ],
   },
   value: {

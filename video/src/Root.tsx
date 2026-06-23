@@ -1,6 +1,7 @@
 import "./index.css";
 import { Composition, type CalculateMetadataFunction } from "remotion";
 import { Promo } from "./Promo";
+import { PromoWide } from "./PromoWide";
 import {
   FPS,
   promoSchema,
@@ -10,6 +11,9 @@ import {
 } from "./schema";
 import { StatCard } from "./StatCard";
 import { statCardSchema, defaultStatProps, type StatCardProps } from "./statSchema";
+import { DailyBrief, dailyTotal } from "./DailyBrief";
+import { DailyCard } from "./DailyCard";
+import { dailySchema, defaultDailyProps } from "./dailySchema";
 
 // Promo total duration is derived from the per-scene durations in the props.
 const promoMetadata: CalculateMetadataFunction<PromoProps> = ({ props }) => ({
@@ -40,6 +44,24 @@ export const RemotionRoot: React.FC = () => {
         calculateMetadata={promoMetadata}
       />
 
+      {/* Landscape 16:9 — embedded on the website home page. Same content/
+          schema/audio as the vertical Promo, re-laid-out for a wide frame. */}
+      <Composition
+        id="PromoWide"
+        component={PromoWide}
+        fps={FPS}
+        width={1920}
+        height={1080}
+        schema={promoSchema}
+        defaultProps={defaultPromoProps}
+        calculateMetadata={({ props }) => ({
+          durationInFrames: totalDuration(props),
+          fps: FPS,
+          width: 1920,
+          height: 1080,
+        })}
+      />
+
       {/* Daily stat-of-the-day card — one component, two aspect ratios. */}
       <Composition
         id="StatCard-9x16"
@@ -62,6 +84,40 @@ export const RemotionRoot: React.FC = () => {
         schema={statCardSchema}
         defaultProps={defaultStatProps}
         calculateMetadata={statMetadata}
+      />
+
+      {/* Daily market brief — multi-insight successor to StatCard. One props
+          object (built by scripts/build_daily.py) drives all three: the 9:16
+          Short, the 1:1 LinkedIn video, and the 1:1 still image card. */}
+      <Composition
+        id="DailyBrief-9x16"
+        component={DailyBrief}
+        fps={FPS}
+        width={1080}
+        height={1920}
+        durationInFrames={dailyTotal()}
+        schema={dailySchema}
+        defaultProps={defaultDailyProps}
+      />
+      <Composition
+        id="DailyBrief-1x1"
+        component={DailyBrief}
+        fps={FPS}
+        width={1080}
+        height={1080}
+        durationInFrames={dailyTotal()}
+        schema={dailySchema}
+        defaultProps={defaultDailyProps}
+      />
+      <Composition
+        id="DailyCard-1x1"
+        component={DailyCard}
+        fps={FPS}
+        width={1080}
+        height={1080}
+        durationInFrames={90}
+        schema={dailySchema}
+        defaultProps={defaultDailyProps}
       />
     </>
   );

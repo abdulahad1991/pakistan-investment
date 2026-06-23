@@ -162,17 +162,21 @@ function updateHeroScore() {
 }
 
 function formatPKR(n) {
-  // Pakistani numbering: X,XX,XXX
+  // Pakistani numbering: X,XX,XXX — group the integer part only, keep decimals.
   if (isNaN(n)) return "0";
-  const s = String(n);
-  if (s.length <= 3) return s;
-  let result = s.slice(-3);
-  let rest = s.slice(0, -3);
-  while (rest.length > 2) {
-    result = rest.slice(-2) + "," + result;
-    rest = rest.slice(0, -2);
+  const neg = Number(n) < 0;
+  const [intRaw, decPart] = String(Math.abs(Number(n))).split(".");
+  let result = intRaw;
+  if (intRaw.length > 3) {
+    let tail = intRaw.slice(-3);
+    let rest = intRaw.slice(0, -3);
+    while (rest.length > 2) {
+      tail = rest.slice(-2) + "," + tail;
+      rest = rest.slice(0, -2);
+    }
+    result = rest + "," + tail;
   }
-  return rest + "," + result;
+  return (neg ? "-" : "") + result + (decPart ? "." + decPart : "");
 }
 
 function parseAmount() {

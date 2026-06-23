@@ -69,6 +69,19 @@ class BuildDailyTest(unittest.TestCase):
         self.assertEqual(tickers, ["HUBC", "FFC", "MCB", "OGDC"])  # PSO drops off
         self.assertEqual(self.p["movers"][0]["change1y"], 88.3)
 
+    def test_social_payload_for_autoposters(self):
+        s = bd.social_payload("2026-06-22", self.p)
+        self.assertEqual(s["session"], SESSION)
+        # YouTube
+        self.assertLessEqual(len(s["youtube"]["title"]), 100)
+        self.assertIn("KSE-100", s["youtube"]["title"])
+        self.assertIsInstance(s["youtube"]["tags"], list)
+        self.assertIn("#Shorts", s["youtube"]["description"])
+        # LinkedIn — honest, tagged with session, has a grouped number
+        self.assertIn("Not financial advice", s["linkedin"]["text"])
+        self.assertIn(SESSION, s["linkedin"]["text"])
+        self.assertIn("4,45,500", s["linkedin"]["text"])
+
     def test_caption_is_honest_with_session_and_number(self):
         md = bd.caption_md("2026-06-22", self.p)
         self.assertIn("Not financial advice", md)

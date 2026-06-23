@@ -21,6 +21,10 @@ import os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FOOTER = "Not financial advice · pakinvestlysis.com"
 HASHTAGS = "#Pakistan #Investing #PSX #Gold #PersonalFinance"
+# YouTube keyword tags (the API takes a flat list, no '#').
+YT_TAGS = ["Pakistan", "investing", "PSX", "KSE-100", "gold",
+           "mutual funds", "national savings", "personal finance"]
+YT_TITLE_MAX = 100  # YouTube hard limit on snippet.title
 
 # Mirrors video/src/schema.ts defaultColors so Studio defaults and CI renders match.
 DEFAULT_COLORS = {
@@ -122,12 +126,14 @@ def build_props(data, date_str, session):
     }
 
 
-def caption_md(date_str, p):
+def social_payload(date_str, p):
+    """Single source of truth for the day's copy. Both the human-readable .md
+    and the machine-readable .json (consumed by the auto-post scripts) derive
+    from this, so LinkedIn/YouTube never re-parse markdown."""
     m, g = p["macro"], p["gold"]
     top = p["movers"][0] if p["movers"] else {"ticker": "", "name": "", "change1y": 0}
-    headline = f"Pakistan market brief · {p['session']}"
     hook = (
-        f"Pakistan market brief — {date_str}: KSE-100 at {grp(m['kse100'], locale_in=False)}, "
+        f"Pakistan market brief — {date_str} ({p['session']}): KSE-100 at {grp(m['kse100'], locale_in=False)}, "
         f"the rupee at ₨{m['pkrUsd']:.2f}/$, gold ₨{grp(g['tola'])}/tola ({g['change1y']:+.1f}% in a year)."
     )
     body = (
@@ -137,23 +143,36 @@ def caption_md(date_str, p):
         "illustrative way to split a rupee across savings, funds, stocks and gold. "
         "Compare every option with daily data and real-return charts on the site."
     )
+    linkedin_text = f"{hook}\n\n{body}\n\n{FOOTER} — free live tools at pakinvestlysis.com\n\n{HASHTAGS}"
+
     yt_title = f"Pakistan market brief {date_str}: KSE-100 {grp(m['kse100'], locale_in=False)}, gold ₨{grp(g['tola'])}/tola"
-    yt_desc = "Daily Pakistan market snapshot — PSX, rupee, gold, top movers. Educational, not financial advice."
+    yt_title = yt_title[:YT_TITLE_MAX]
+    yt_desc = (
+        "Daily Pakistan market snapshot — PSX, rupee, gold, top movers. "
+        "Educational, not financial advice. pakinvestlysis.com\n\n"
+        f"#Shorts {HASHTAGS}"
+    )
+    return {
+        "date": date_str,
+        "session": p["session"],
+        "hook": hook,
+        "body": body,
+        "linkedin": {"text": linkedin_text},
+        "youtube": {"title": yt_title, "description": yt_desc, "tags": YT_TAGS},
+    }
+
+
+def caption_md(date_str, p):
+    s = social_payload(date_str, p)
+    headline = f"Pakistan market brief · {p['session']}"
     return f"""# {date_str} · {headline}
 
 ## LinkedIn
-{hook}
-
-{body}
-
-{FOOTER} — free live tools at pakinvestlysis.com
-
-{HASHTAGS}
+{s['linkedin']['text']}
 
 ## YouTube Short
-**Title:** {yt_title}
-**Description:** {yt_desc} pakinvestlysis.com
-**Hashtags:** #Shorts {HASHTAGS}
+**Title:** {s['youtube']['title']}
+**Description:** {s['youtube']['description']}
 """
 
 
@@ -182,6 +201,11 @@ def main():
     cap_path = os.path.join(daily_dir, f"{file_str}.md")
     with open(cap_path, "w", encoding="utf-8") as f:
         f.write(caption_md(date_str, props))
+
+    # Structured copy for the auto-post scripts (post_youtube.py / post_linkedin.py).
+    payload_path = os.path.join(daily_dir, f"{file_str}.json")
+    with open(payload_path, "w", encoding="utf-8") as f:
+        json.dump(social_payload(date_str, props), f, ensure_ascii=False, indent=2)
 
     print(f"  props:   {os.path.relpath(props_path, ROOT)}")
     print(f"  caption: {os.path.relpath(cap_path, ROOT)}")

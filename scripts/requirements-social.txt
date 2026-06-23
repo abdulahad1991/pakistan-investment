@@ -1,0 +1,7 @@
+# Deps for the auto-post step in update-data.yml (CI only).
+# YouTube upload:
+google-api-python-client
+google-auth
+google-auth-httplib2
+# LinkedIn REST calls:
+requests

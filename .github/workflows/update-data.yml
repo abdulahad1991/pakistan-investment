@@ -141,8 +141,30 @@ jobs:
         run: |
           git config user.name  "Abdul Ahad"
           git config user.email "abdulahad1991@users.noreply.github.com"
-          git add social-kit/daily/*.md assets/daily-brief.mp4 assets/daily-brief-poster.jpg
+          git add social-kit/daily/*.md social-kit/daily/*.json assets/daily-brief.mp4 assets/daily-brief-poster.jpg
           git diff --cached --quiet || (
             git commit -m "chore: daily market brief + caption $(date -u +'%Y-%m-%d')" &&
             git push origin dev
           )
+
+      # Auto-post the rendered videos. Both steps no-op (exit 0) when their
+      # secrets are absent, and are continue-on-error so a posting failure (e.g.
+      # a lapsed 60-day LinkedIn token) never blocks the data/homepage pipeline.
+      - name: Install auto-post dependencies
+        run: pip install -r scripts/requirements-social.txt
+
+      - name: Auto-post Short to YouTube (public)
+        continue-on-error: true
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python scripts/post_youtube.py
+
+      - name: Auto-post video to LinkedIn company page
+        continue-on-error: true
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
+          LINKEDIN_VERSION: ${{ secrets.LINKEDIN_VERSION }}
+        run: python scripts/post_linkedin.py

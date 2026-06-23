@@ -485,6 +485,27 @@ const Sfx: React.FC<{ data: DailyProps }> = ({ data }) => {
   );
 };
 
+// Low background music bed under the SFX. Trimmed clip in public/music.mp3
+// (24s, pre-faded); a frame envelope adds clean in/out and keeps it well below
+// the SFX so counters/ticks stay legible. Gated on the same audio toggle.
+const MUSIC_BASE = 0.14;
+const MusicBed: React.FC<{ volume: number }> = ({ volume }) => {
+  const total = dailyTotal();
+  return (
+    <Audio
+      src={staticFile("music.mp3")}
+      volume={(f) =>
+        MUSIC_BASE *
+        volume *
+        interpolate(f, [0, 18, total - 30, total], [0, 1, 1, 0], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        })
+      }
+    />
+  );
+};
+
 // =========================================================================
 // Master
 // =========================================================================
@@ -499,6 +520,7 @@ export const DailyBrief: React.FC<DailyProps> = (props) => {
     <ColorProvider value={props.colors}>
       <AbsoluteFill style={{ backgroundColor: props.colors.paper }}>
         <PaperBg />
+        {props.audio.sfx ? <MusicBed volume={props.audio.volume} /> : null}
         <Sfx data={props} />
         {scene("title", <Title data={props} />)}
         {scene("board", <Board data={props} />)}

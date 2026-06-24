@@ -4,7 +4,7 @@
 (function () {
   'use strict';
   function pkr(n) {
-    if (n == null || isNaN(n)) return '—';
+    if (n == null || isNaN(n)) return '-';
     var s = String(Math.round(Math.abs(n))), out = s;
     if (s.length > 3) {
       var tail = s.slice(-3), rest = s.slice(0, -3);

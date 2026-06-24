@@ -1,14 +1,14 @@
 /* ===========================================================================
-   pakinvestlysis.com — v2 "Macro Terminal" design system
+   pakinvestlysis.com - v2 "Macro Terminal" design system
    ---------------------------------------------------------------------------
    Self-contained stylesheet for the v2 redesign. Loaded INSTEAD of site.css on
    ported pages. Keeps every class/id the JS (app.js, gold.js, calculators,
-   search.js) queries, so behaviour is untouched — only the look changes.
+   search.js) queries, so behaviour is untouched - only the look changes.
 
-   Accent rule: acid-lime --acid (#EDF804) is a HIGHLIGHT only — top bar, LIVE
+   Accent rule: acid-lime --acid (#EDF804) is a HIGHLIGHT only - top bar, LIVE
    dot, active underline, highlighter, and as text/kicker ON DARK GREEN only.
    NEVER acid as text on a light ground (it is ~1.1:1 on white).
-   Money up = green, money down = red — never decorative.
+   Money up = green, money down = red - never decorative.
    =========================================================================== */
 
 :root{
@@ -21,17 +21,17 @@
   /* ink (green-undertone, AA-checked on sage + mint) */
   --ink       : #0E2A22;   /* headings */
   --ink2      : #2F4A40;   /* body */
-  --muted     : #436055;   /* secondary text — AA on sage(#CCDFD3)=4.7 & mint=6.4 */
-  --muted2    : #3C564C;   /* small caps / kickers on sage — AA safe */
+  --muted     : #436055;   /* secondary text - AA on sage(#CCDFD3)=4.7 & mint=6.4 */
+  --muted2    : #3C564C;   /* small caps / kickers on sage - AA safe */
 
   /* brand */
   --green     : #075E4B;   /* primary */
   --green2    : #0B755F;   /* hover / positive ink */
-  --green-d   : #053C30;   /* deep — dark panels, footer, ticker */
+  --green-d   : #053C30;   /* deep - dark panels, footer, ticker */
   --green3    : #0B7C5E;   /* up / gains text (AA 4.6 on white) */
   --green-l   : #DDF3E9;   /* tint */
 
-  --acid      : #EDF804;   /* signature highlight — see accent rule */
+  --acid      : #EDF804;   /* signature highlight - see accent rule */
   --gold      : #F2B94B;
   --gold2     : #8A6512;   /* gold-ish text, AA on white */
   --navy      : #2854C5;
@@ -94,7 +94,7 @@ h1,h2,h3,h4{font-family:var(--display);color:var(--ink);margin:0;letter-spacing:
   padding:0 var(--pad);
 }
 .brand{display:flex;align-items:center;flex-shrink:0}
-.brand-logo{height:30px;width:auto;display:block}
+.brand-logo{height:40px;width:auto;display:block}
 .site-nav{display:flex;gap:22px;margin-left:auto;align-items:center}
 .site-nav a{
   font-family:var(--body);font-size:.86rem;font-weight:700;color:var(--ink);
@@ -122,12 +122,16 @@ h1,h2,h3,h4{font-family:var(--display);color:var(--ink);margin:0;letter-spacing:
 .ticker{background:var(--green-d);color:var(--sage);border-bottom:1px solid var(--line)}
 .ticker-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;height:38px;padding:0 var(--pad);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,#000 93%,transparent);mask-image:linear-gradient(90deg,#000 93%,transparent)}
 .ticker-live{
-  display:flex;align-items:center;gap:7px;flex-shrink:0;
+  display:flex;align-items:center;gap:7px;flex-shrink:0;align-self:stretch;
   font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:var(--acid);
   padding-right:16px;margin-right:16px;border-right:1px solid var(--line-dk);white-space:nowrap;
+  background:var(--green-d);position:relative;z-index:5;
+  /* extend opaque bg to the true left edge so scrolling feed never shows left of LIVE */
+  margin-left:calc(-1 * var(--pad));padding-left:var(--pad);
+  box-shadow:-40px 0 0 var(--green-d);
 }
 .ticker-live .dot{width:6px;height:6px;background:var(--acid);display:inline-block;border-radius:1px;animation:pulse 1.4s infinite}
-.ticker-feed{display:flex;gap:26px;white-space:nowrap;width:max-content;will-change:transform;animation:tkrScroll 38s linear infinite}
+.ticker-feed{display:flex;gap:26px;white-space:nowrap;width:max-content;position:relative;z-index:1;will-change:transform;animation:tkrScroll 38s linear infinite}
 .ticker:hover .ticker-feed{animation-play-state:paused}
 @keyframes tkrScroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 .ticker-feed .tk{font-family:var(--display);font-size:.72rem;font-weight:500;letter-spacing:.02em;color:rgba(204,223,211,.92)}
@@ -441,7 +445,7 @@ details[open] .faq-question::after{content:"–"}
 footer{background:var(--green-d);color:var(--sage);max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr}
 .foot-brand{padding:38px 32px;border-right:1px solid var(--line-dk)}
-.foot-brand img{height:26px;width:auto;filter:brightness(0) invert(1);opacity:.92;margin-bottom:16px}
+.foot-brand img{height:34px;width:auto;opacity:.96;margin-bottom:16px}
 .foot-brand p{font-family:var(--body);font-size:.86rem;line-height:1.55;color:rgba(204,223,211,.72);margin:0;max-width:280px;font-weight:500}
 .foot-col{padding:38px 26px;border-right:1px solid var(--line-dk)}
 .foot-col:last-child{border-right:none}

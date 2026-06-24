@@ -1,4 +1,4 @@
-// ── Pakistan Investment Advisor — app.js ──────────────────────────
+// ── Pakistan Investment Advisor - app.js ──────────────────────────
 
 let DATA = null;
 let AMOUNT = 0;
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
       applyData();
     })
     .catch(() => {
-      document.getElementById("data-age").textContent = "Data unavailable — retrying…";
+      document.getElementById("data-age").textContent = "Data unavailable - retrying…";
       // Retry once after 3 s (handles transient network hiccup on page load)
       setTimeout(() => {
         fetch("data.json?v=" + Date.now())
@@ -82,7 +82,7 @@ function applyData() {
       "As of " + d.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
   }
 
-  // Live ticker tape (v2 masthead) — best-effort, only if present
+  // Live ticker tape (v2 masthead) - best-effort, only if present
   renderTicker();
 
   // Charts (page 0)
@@ -106,7 +106,7 @@ function applyData() {
   else if (currentPage === 4) renderPortfolio();
 }
 
-// ── Amount input — Pakistani comma formatting ─────────────────────
+// ── Amount input - Pakistani comma formatting ─────────────────────
 function formatAmountInput() {
   const inp = document.getElementById("amount-input");
   inp.addEventListener("input", () => {
@@ -168,7 +168,7 @@ function updateHeroScore() {
 }
 
 function formatPKR(n) {
-  // Pakistani numbering: X,XX,XXX — group the integer part only, keep decimals.
+  // Pakistani numbering: X,XX,XXX - group the integer part only, keep decimals.
   if (isNaN(n)) return "0";
   const neg = Number(n) < 0;
   const [intRaw, decPart] = String(Math.abs(Number(n))).split(".");
@@ -270,7 +270,7 @@ document.getElementById("step-nav").addEventListener("click", e => {
   goPage(step);
 });
 
-// ── PAGE 1 — National Savings ─────────────────────────────────────
+// ── PAGE 1 - National Savings ─────────────────────────────────────
 function renderNationalSavings() {
   if (!DATA) return;
   const tbody = document.getElementById("ns-tbody");
@@ -292,7 +292,7 @@ function renderNationalSavings() {
       <td>${s.tenure}</td>
       <td>${s.payout}</td>
       <td class="num" style="color:#23415E;font-weight:700">
-        ${earn ? "PKR " + formatPKR(earn) + "/yr" : "—"}
+        ${earn ? "PKR " + formatPKR(earn) + "/yr" : "-"}
       </td>
       <td>${s.eligible}</td>
       <td style="font-size:.8rem;color:#555">${s.verdict}</td>
@@ -301,7 +301,7 @@ function renderNationalSavings() {
   });
 }
 
-// ── PAGE 2 — Mutual Funds ─────────────────────────────────────────
+// ── PAGE 2 - Mutual Funds ─────────────────────────────────────────
 function renderMutualFunds() {
   if (!DATA) return;
   const grid = document.getElementById("funds-grid");
@@ -358,7 +358,7 @@ function getPortfolioAlloc(fundName) {
   return null;
 }
 
-// ── PAGE 3 — Stocks ───────────────────────────────────────────────
+// ── PAGE 3 - Stocks ───────────────────────────────────────────────
 function renderStocks() {
   if (!DATA) return;
   const tbody = document.getElementById("stocks-tbody");
@@ -376,7 +376,7 @@ function renderStocks() {
         <td class="num ${up ? "chg-up" : "chg-dn"}">${up ? "▲" : "▼"} ${Math.abs(s.chg1y)}%</td>
         <td class="num yield-hi">${s.yield}%</td>
         <td class="num">${s.div}</td>
-        <td class="num">${s.pe || "—"}</td>
+        <td class="num">${s.pe || "-"}</td>
       </tr>
     `;
   });
@@ -384,7 +384,7 @@ function renderStocks() {
   renderStocksChart(sorted.slice(0, 8));
 }
 
-// ── PAGE 4 — Portfolio ────────────────────────────────────────────
+// ── PAGE 4 - Portfolio ────────────────────────────────────────────
 function renderPortfolio() {
   if (!DATA) {
     document.getElementById("alloc-grid").innerHTML =
@@ -439,7 +439,7 @@ function renderPortfolio() {
         </div>
         <div class="alloc-amount">
           <div>PKR ${formatPKR(amt)}</div>
-          <div class="alloc-pct">${a.pct}% &nbsp;·&nbsp; ${a.ret ? a.ret + "% ret" : "—"}</div>
+          <div class="alloc-pct">${a.pct}% &nbsp;·&nbsp; ${a.ret ? a.ret + "% ret" : "-"}</div>
           ${income ? `<div style="font-size:.75rem;color:var(--navy)">~PKR ${formatPKR(income)}/yr</div>` : ""}
         </div>
       </div>
@@ -451,7 +451,7 @@ function renderPortfolio() {
     { n: 1, title: "Open CDNS / National Savings Account", body: `Visit any Pakistan Post Office with your CNIC. Deposit PKR ${formatPKR(Math.round(AMOUNT * 0.30))} into a Special Savings Certificate.`, color: "#0E3B2E" },
     { n: 2, title: "Register on Al Meezan Online Portal",  body: `Go to almeezangroup.com → Register → upload CNIC → KYC online (~15 mins). Invest PKR ${formatPKR(Math.round(AMOUNT * 0.25))} in Meezan Islamic Income Fund and PKR ${formatPKR(Math.round(AMOUNT * 0.20))} in Al Meezan Mutual Fund.`, color: "#23415E" },
     { n: 3, title: "Open a PSX Brokerage + CDC Account",   body: `Choose a broker (Arif Habib, MCB FSL, or Akseer). Register online. Transfer PKR ${formatPKR(Math.round(AMOUNT * 0.20))} and split: 60% into FFC, 40% into MCB Bank shares.`, color: "#A4452F" },
-    { n: 4, title: "Keep Emergency Buffer Liquid",          body: `At the same CDNS visit, open a Savings Account with PKR ${formatPKR(Math.round(AMOUNT * 0.05))}. No lock-in — withdraw anytime.`, color: "#5E5C52" },
+    { n: 4, title: "Keep Emergency Buffer Liquid",          body: `At the same CDNS visit, open a Savings Account with PKR ${formatPKR(Math.round(AMOUNT * 0.05))}. No lock-in - withdraw anytime.`, color: "#5E5C52" },
   ];
   const stepsEl = document.getElementById("action-steps");
   stepsEl.innerHTML = steps.map(s => `
@@ -745,11 +745,11 @@ function renderInsightStrip() {
   const real = (ssc.rate - m.inflation_cpi).toFixed(1);
   el.innerHTML = `
     <div class="insight-cell"><div class="insight-num">+${real} pts</div>
-      <div class="insight-lbl">Real return on ${ssc.name} (${ssc.rate}%) after ${m.inflation_cpi}% inflation — savers are beating inflation</div></div>
+      <div class="insight-lbl">Real return on ${ssc.name} (${ssc.rate}%) after ${m.inflation_cpi}% inflation - savers are beating inflation</div></div>
     <div class="insight-cell"><div class="insight-num">${topStock.yield}%</div>
-      <div class="insight-lbl">${topStock.name} dividend yield vs ${m.sbp_rate}% policy rate — but dividends carry market risk</div></div>
+      <div class="insight-lbl">${topStock.name} dividend yield vs ${m.sbp_rate}% policy rate - but dividends carry market risk</div></div>
     <div class="insight-cell"><div class="insight-num">${eq.ret_5y}%/yr</div>
-      <div class="insight-lbl">${eq.name} 5-year average vs ${ssc.rate}% on certificates — the reward for taking equity risk</div></div>`;
+      <div class="insight-lbl">${eq.name} 5-year average vs ${ssc.rate}% on certificates - the reward for taking equity risk</div></div>`;
 }
 
 function renderGrowChart() {
@@ -807,7 +807,7 @@ function renderRealChart() {
 function renderTicker() {
   if (!DATA) return;
   const m = DATA.macro, g = DATA.gold;
-  setText("tk-kse", m.kse100_level ? formatPKR(m.kse100_level) : "—");
+  setText("tk-kse", m.kse100_level ? formatPKR(m.kse100_level) : "-");
   setText("tk-sbp", m.sbp_rate + "%");
   setText("tk-pkr", "₨" + m.pkr_usd);
   setText("tk-inf", m.inflation_cpi + "%");

@@ -96,12 +96,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&amp;family=Nunito:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -112,47 +112,207 @@ gtag('config', 'G-4T2H0KH9H7');
 </script>
 
 <style>
-/* Tax calculator components — built on the site's ledger palette */
-.tax-app{background:#FDFBF4;border:1px solid #D9D1BE;border-radius:12px;padding:0;margin:8px 0 28px;overflow:hidden}
-.tax-tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid #D9D1BE;background:#F1ECDD}
-.tax-tab{flex:1 1 auto;min-width:130px;border:0;background:transparent;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;color:#6B6A60;padding:14px 12px;border-bottom:3px solid transparent;transition:all .15s}
-.tax-tab:hover{color:#0E3B2E;background:#EFEAD9}
-.tax-tab-active{color:#0E3B2E;background:#FDFBF4;border-bottom-color:#B98A2F;font-weight:600}
-.tax-panel{padding:22px}
-.tax-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
-.tax-field{flex:1 1 200px;display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.tax-field label,.tax-field .tax-glabel{display:block;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:#6B6A60}
-.tax-field input,.tax-field select{font-family:Newsreader,serif;font-size:1.05rem;padding:11px 13px;border:1px solid #C9D6C0;border-radius:8px;background:#fff;color:#191D1A;width:100%}
-.tax-field input:focus,.tax-field select:focus{outline:0;border-color:#B98A2F;box-shadow:0 0 0 3px rgba(185,138,47,.18)}
+/* ===========================================================================
+   Tax calculator — v2 "macro terminal" component styles.
+   Built on v2.css tokens. Acid-lime is ACCENT only (top bar, active tab
+   underline, highlight marker, dark-panel kicker), never text on a light bg.
+   =========================================================================== */
+
+/* editorial hero head */
+.tax-head{
+  display:grid;grid-template-columns:7fr 5fr;
+  max-width:var(--maxw);margin:0 auto;
+  border-left:1px solid var(--line);border-right:1px solid var(--line);
+}
+.tax-head-copy{padding:48px 44px;border-right:1px solid var(--line)}
+.tax-head-eyebrow{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+.tax-head-copy h1{
+  font-family:var(--display);font-weight:800;line-height:.98;letter-spacing:-.025em;color:var(--green-d);
+  font-size:clamp(2.1rem,4.6vw,3.4rem);margin:0 0 20px;max-width:560px;overflow-wrap:break-word;
+}
+.tax-head-copy .byline{font-size:1.06rem;line-height:1.55;color:var(--ink2);max-width:460px;margin:0;font-weight:500}
+.tax-head-aside{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+.tax-head-aside .ak{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+.tax-head-aside p{font-family:var(--body);font-size:1rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+.tax-head-aside b{color:#fff;font-weight:700}
+.tax-head-aside .acc{color:var(--acid);font-weight:700}
+
+/* full-bleed framed section wrappers */
+.tax-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+/* ── calculator app ── */
+.tax-app{
+  max-width:var(--maxw);margin:0 auto;
+  border:1px solid var(--line);border-top:4px solid var(--acid);
+  background:var(--mint);
+}
+.tax-tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--line)}
+.tax-tab{
+  flex:1 1 130px;border:0;background:transparent;cursor:pointer;
+  font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);padding:16px 12px;border-bottom:3px solid transparent;
+  border-right:1px solid var(--line2);transition:all .15s;
+}
+.tax-tab:last-child{border-right:none}
+.tax-tab:hover{color:var(--green-d);background:rgba(255,255,255,.5)}
+.tax-tab-active{color:var(--green-d);background:var(--mint);border-bottom-color:var(--acid)}
+.tax-panel{padding:30px 44px}
+.tax-row{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end}
+.tax-field{flex:1 1 220px;display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+.tax-field label,.tax-field .tax-glabel{
+  display:block;font-family:var(--display);font-size:.62rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);
+}
+.tax-field input,.tax-field select{
+  font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--green-d);
+  padding:13px 15px;border:1px solid rgba(7,94,75,.4);background:var(--paper);width:100%;outline:none;
+  border-radius:0;
+}
+.tax-field select{font-family:var(--body);font-size:.96rem;font-weight:600;padding:12px 13px}
+.tax-field input:focus,.tax-field select:focus{box-shadow:inset 0 0 0 2px var(--green);border-color:var(--green)}
 .tax-seg{display:inline-flex;flex-wrap:wrap;gap:8px}
-.tax-seg label{display:inline-flex;align-items:center;gap:6px;font-family:Newsreader,serif;font-size:.96rem;background:#fff;border:1px solid #C9D6C0;border-radius:8px;padding:9px 13px;cursor:pointer;color:#3a3a32}
-.tax-seg input{accent-color:#0E3B2E}
-.tax-result{margin-top:6px}
-.tax-result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:6px}
-.tax-cell{background:#fff;border:1px solid #D9D1BE;border-radius:8px;padding:13px 14px;text-align:center}
-.tax-cell-val{font-family:'IBM Plex Mono',monospace;font-size:1.18rem;font-weight:600;line-height:1.2}
-.tax-cell-lbl{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;color:#6B6A60;margin-top:5px}
-.tax-note{font-size:.86rem;line-height:1.6;color:#5E5C52;margin:14px 0 0}
-.tax-hint{font-size:.92rem;color:#8a887d;font-style:italic;margin:6px 0 0}
-.tax-chart-card{background:#FDFBF4;border:1px solid #D9D1BE;border-radius:12px;padding:22px 24px;margin:18px 0 28px}
+.tax-seg label{
+  display:inline-flex;align-items:center;gap:7px;font-family:var(--display);font-size:.82rem;font-weight:700;
+  background:var(--paper);border:1px solid rgba(7,94,75,.3);padding:10px 16px;cursor:pointer;color:var(--green);
+  transition:all .15s;
+}
+.tax-seg label:hover{border-color:var(--green)}
+.tax-seg input{accent-color:var(--green);width:15px;height:15px}
+.tax-seg label:has(input:checked){background:var(--green);border-color:var(--green);color:var(--mint)}
+.tax-result{margin-top:4px}
+.tax-result-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;
+  border:1px solid var(--line);border-left:none;margin-top:2px;overflow:hidden;
+}
+.tax-cell{background:var(--paper);border-left:1px solid var(--line2);padding:18px 16px;text-align:left}
+.tax-cell-val{font-family:var(--display);font-size:1.4rem;font-weight:800;letter-spacing:-.01em;line-height:1.15;font-variant-numeric:tabular-nums}
+.tax-cell-lbl{
+  font-family:var(--display);font-size:.58rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-top:6px;
+}
+.tax-note{
+  font-family:var(--body);font-size:.9rem;line-height:1.65;color:var(--ink2);margin:16px 0 0;
+}
+.tax-note a{color:var(--green);border-bottom:1px solid var(--line)}
+.tax-hint{
+  font-family:var(--body);font-size:.94rem;color:var(--muted);margin:6px 0 0;
+  padding:16px 18px;background:var(--paper);border:1px dashed var(--line);text-align:center;
+}
+
+/* disclaimer line under calc */
+.tax-microcopy{
+  max-width:var(--maxw);margin:0 auto;
+  border-left:1px solid var(--line);border-right:1px solid var(--line);
+  padding:14px 44px;font-family:var(--display);font-size:.66rem;font-weight:500;letter-spacing:.02em;color:var(--muted);
+  border-bottom:1px solid var(--line);
+}
+.tax-microcopy a{color:var(--green)}
+
+/* comparison chart card */
+.tax-chart-card{
+  max-width:var(--maxw);margin:0 auto;
+  border:1px solid var(--line);border-top:none;
+  padding:40px 44px;background:var(--paper);
+}
+.tax-chart-kicker{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.14em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+.tax-chart-card h2{font-family:var(--display);font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:0 0 6px}
+.tax-chart-card .tax-chart-sub{font-family:var(--body);font-size:1rem;line-height:1.6;color:var(--ink2);max-width:640px;margin:0 0 20px;font-weight:500}
+.tax-chart-foot{font-family:var(--body);font-size:.82rem;color:var(--muted);margin-top:14px;line-height:1.6}
+.tax-chart-foot a{color:var(--green);border-bottom:1px solid var(--line)}
+
+/* prose + sticky rail */
+.tax-prose-wrap{
+  max-width:var(--maxw);margin:0 auto;
+  border:1px solid var(--line);border-top:none;
+  display:grid;grid-template-columns:minmax(0,1fr) 340px;
+}
+.tax-prose{padding:44px;border-right:1px solid var(--line)}
+.tax-prose h2{font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:0 0 16px}
+.tax-prose h2 + p{margin-top:0}
+.tax-prose h2:not(:first-child){margin-top:34px}
+.tax-prose p{font-family:var(--body);font-size:1.02rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+.tax-prose p b,.tax-prose p strong{color:var(--green-d)}
+.tax-prose a{color:var(--green);border-bottom:1px solid var(--line)}
+.tax-prose table{width:100%;border-collapse:collapse;margin:0 0 24px;font-size:.86rem;min-width:0}
+.tax-prose table th{background:var(--green-d);color:#fff;text-align:left;padding:11px 14px;font-family:var(--display);font-weight:600;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase}
+.tax-prose table td{padding:10px 14px;border-bottom:1px solid var(--line2);background:var(--paper);font-family:var(--body);font-weight:600;color:var(--ink2);font-size:.86rem}
+.tax-tbl-wrap{border:1px solid rgba(7,94,75,.3);overflow:auto;margin:0 0 24px}
+.tax-tbl-wrap table{margin:0}
+
+/* FAQ details (in prose) */
+.tax-prose .faq-item{border:none;border-top:1px solid var(--line);background:transparent;margin:0}
+.tax-prose .faq-item:last-of-type{border-bottom:1px solid var(--line)}
+.tax-prose .faq-question{font-family:var(--display);font-size:.98rem;font-weight:700;color:var(--green-d);padding:16px 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.tax-prose .faq-question::-webkit-details-marker{display:none}
+.tax-prose .faq-question::after{content:"+";font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--green)}
+.tax-prose details[open] .faq-question::after{content:"–"}
+.tax-prose .faq-answer{font-family:var(--body);font-size:.96rem;color:var(--ink2);padding:0 0 16px;line-height:1.65}
+.tax-prose .faq-answer a{color:var(--green);border-bottom:1px solid var(--line)}
+
+.tax-disclaimer{background:var(--green-d);padding:16px 20px;margin:28px 0 0;font-family:var(--body);font-size:.84rem;color:#D7E7DD;line-height:1.6}
+.tax-disclaimer strong{color:var(--acid)}
+.tax-disclaimer a{color:#cfe; border-bottom:1px solid rgba(255,255,255,.3)}
+
+/* sticky rail */
+.tax-rail{padding:0}
+.tax-rail-inner{position:sticky;top:80px}
+.tax-rail-glance{padding:24px 28px;border-bottom:1px solid var(--line);background:var(--green-d);color:var(--sage)}
+.tax-rail-glance .rk{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--acid);margin-bottom:16px}
+.tax-glance-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.tax-glance-item:last-child{border-bottom:none}
+.tax-glance-n{font-family:var(--display);font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tax-glance-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px}
+.tax-rail-related{padding:24px 28px}
+.tax-rail-related .rk{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px}
+.tax-rail-related a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+.tax-rail-related a:first-of-type{border-top:none}
+.tax-rail-related a:hover{color:var(--green)}
+
+/* in-stream ad slot inside the frame */
+.tax-frame .ad-slot{margin:0;border:none;border-bottom:1px solid var(--line);border-radius:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:980px){
+  .tax-prose-wrap{grid-template-columns:1fr}
+  .tax-prose{border-right:none;border-bottom:1px solid var(--line)}
+  .tax-rail-inner{position:static}
+}
+@media(max-width:860px){
+  .tax-head{grid-template-columns:1fr}
+  .tax-head-copy{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+  .tax-head-aside{padding:28px 24px}
+  .tax-panel{padding:24px}
+  .tax-microcopy,.tax-chart-card,.tax-prose{padding-left:24px;padding-right:24px}
+  .tax-result-grid{grid-template-columns:1fr 1fr}
+  .tax-cell{border-bottom:1px solid var(--line2)}
+}
+@media(max-width:560px){
+  .tax-head-copy h1{font-size:2rem}
+  .tax-chart-card h2{font-size:1.5rem}
+  .tax-result-grid{grid-template-columns:1fr}
+  .tax-tab{flex:1 0 50%;border-right:1px solid var(--line2)}
+  .tax-panel{padding:20px 18px}
+  .tax-microcopy,.tax-chart-card,.tax-prose{padding-left:18px;padding-right:18px}
+}
 </style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header ─────────────────────────────────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html" aria-current="page">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html" class="active" aria-current="page">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -161,251 +321,317 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="breadcrumb"><a href="/">Home</a> › Tax Calculator</div>
-
-  <h1>Pakistan Tax Calculator 2026-27</h1>
-  <div class="byline">Income tax · GST · sales tax on services · restaurant bills &nbsp;·&nbsp; Updated June 2026</div>
-
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one line:</strong> Pakistan taxes annual income in progressive slabs. Salaried pay 0% up to Rs 600,000, rising to 35% above Rs 7 million (FY2026-27), while businesses and AOPs sit on a separate scale that reaches 45%. On spending, GST is 18% on goods, provincial sales tax on services is 15–16%, and restaurants charge as little as 5% when you pay by card. Use the calculator below for the exact figures.</p>
-
-  <!-- Ad slot 1 -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <!-- ===== Calculator app ===== -->
-  <div class="tax-app">
-    <div class="tax-tabs" role="tablist" aria-label="Tax calculators">
-      <button class="tax-tab tax-tab-active" data-tax-tab="income" role="tab" aria-selected="true" type="button">Income Tax</button>
-      <button class="tax-tab" data-tax-tab="gst" role="tab" aria-selected="false" type="button">GST &amp; Sales Tax</button>
-      <button class="tax-tab" data-tax-tab="rest" role="tab" aria-selected="false" type="button">Restaurant Bill</button>
-    </div>
-
-    <!-- Income tax panel -->
-    <div class="tax-panel" data-tax-panel="income" role="tabpanel">
-      <div class="tax-row">
-        <div class="tax-field">
-          <label for="inc-amount">Taxable income (Rs)</label>
-          <input type="text" inputmode="numeric" id="inc-amount" placeholder="e.g. 3,500,000" autocomplete="off">
-        </div>
-        <div class="tax-field" style="flex:0 1 150px">
-          <label for="inc-period">Income is</label>
-          <select id="inc-period">
-            <option value="annual">Per year</option>
-            <option value="monthly">Per month</option>
-          </select>
-        </div>
-      </div>
-      <div class="tax-field">
-        <span class="tax-glabel" id="inc-type-lbl">Taxpayer type</span>
-        <div class="tax-seg" role="radiogroup" aria-labelledby="inc-type-lbl">
-          <label><input type="radio" name="inc-type" value="salaried" checked> Salaried</label>
-          <label><input type="radio" name="inc-type" value="nonsalaried"> Business individual / AOP</label>
-        </div>
-      </div>
-      <div class="tax-result" id="inc-result"></div>
-    </div>
-
-    <!-- GST panel -->
-    <div class="tax-panel" data-tax-panel="gst" role="tabpanel" hidden>
-      <div class="tax-row">
-        <div class="tax-field" style="flex:0 1 180px">
-          <label for="gst-kind">Taxed item</label>
-          <select id="gst-kind">
-            <option value="goods">Goods (federal GST)</option>
-            <option value="services">Services (provincial)</option>
-          </select>
-        </div>
-        <div class="tax-field" id="gst-province-wrap" style="flex:0 1 170px;display:none">
-          <label for="gst-province">Province</label>
-          <select id="gst-province">
-            <option value="Punjab">Punjab (16%)</option>
-            <option value="Sindh">Sindh (15%)</option>
-            <option value="KPK">KP (15%)</option>
-            <option value="Balochistan">Balochistan (15%)</option>
-            <option value="Islamabad">Islamabad / ICT (15%)</option>
-          </select>
-        </div>
-        <div class="tax-field" style="flex:0 1 120px">
-          <label for="gst-rate">Rate (%)</label>
-          <input type="number" id="gst-rate" value="18" min="0" max="100" step="0.5">
-        </div>
-      </div>
-      <div class="tax-row">
-        <div class="tax-field">
-          <label for="gst-amount">Amount (Rs)</label>
-          <input type="text" inputmode="numeric" id="gst-amount" placeholder="e.g. 10,000" autocomplete="off">
-        </div>
-        <div class="tax-field" style="flex:0 1 230px">
-          <label for="gst-mode">The amount above is</label>
-          <select id="gst-mode">
-            <option value="add">Before tax (add tax)</option>
-            <option value="extract">Tax-inclusive (extract tax)</option>
-          </select>
-        </div>
-      </div>
-      <div class="tax-result" id="gst-result"></div>
-    </div>
-
-    <!-- Restaurant panel -->
-    <div class="tax-panel" data-tax-panel="rest" role="tabpanel" hidden>
-      <div class="tax-row">
-        <div class="tax-field">
-          <label for="rest-amount">Food bill (Rs)</label>
-          <input type="text" inputmode="numeric" id="rest-amount" placeholder="e.g. 5,000" autocomplete="off">
-        </div>
-        <div class="tax-field" style="flex:0 1 180px">
-          <label for="rest-province">Province</label>
-          <select id="rest-province">
-            <option value="Punjab">Punjab</option>
-            <option value="Sindh">Sindh</option>
-            <option value="KPK">Khyber Pakhtunkhwa</option>
-            <option value="Balochistan">Balochistan</option>
-            <option value="Islamabad">Islamabad / ICT</option>
-          </select>
-        </div>
-      </div>
-      <div class="tax-field">
-        <span class="tax-glabel" id="rest-pay-lbl">Payment method</span>
-        <div class="tax-seg" role="radiogroup" aria-labelledby="rest-pay-lbl">
-          <label><input type="radio" name="rest-pay" value="card" checked> Card / digital</label>
-          <label><input type="radio" name="rest-pay" value="cash"> Cash</label>
-        </div>
-      </div>
-      <div class="tax-result" id="rest-result"></div>
+<!-- ── Live ticker ───────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
   </div>
-
-  <p style="font-size:.82rem;color:#8a887d;margin:-14px 0 30px">Estimates for guidance only, not tax advice. Salaried slabs reflect Budget 2026-27 (effective 1 July 2026, pending the Finance Act); other rates reflect the current published position. Verify on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> and your provincial revenue authority.</p>
-
-  <!-- ===== History comparison chart ===== -->
-  <h2>Tax History: How the Budget Changed Your Bill</h2>
-  <p>The 2026-27 budget cut salaried tax rates on the middle and upper-middle slabs. The chart below compares the <strong>total annual income tax a salaried person pays under the old FY2025-26 slabs versus the new FY2026-27 slabs</strong> across a range of incomes. It is a like-for-like view of the relief, for comparison only.</p>
-
-  <div class="tax-chart-card">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#6B6A60;margin-bottom:4px">Salaried income tax · FY2025-26 vs FY2026-27</div>
-    <div style="font-family:Fraunces,serif;font-weight:600;font-size:1.1rem;color:#0E3B2E;margin-bottom:14px">Annual tax payable at each income level (Rs)</div>
-    <div id="tax-history-chart"></div>
-    <div style="font-size:.78rem;color:#8a887d;margin-top:10px;line-height:1.6">The gap between the bars is your saving from the budget. Relief is concentrated between Rs 2.2 million and Rs 7 million of annual income; below Rs 2.2 million the slabs were unchanged. Figures computed from the published slabs — verify on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</div>
-  </div>
-
-  <!-- Ad slot 2 -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <!-- ===== Educational content ===== -->
-  <h2>How Income Tax Works in Pakistan</h2>
-  <p>Pakistan taxes income through a <strong>progressive slab system</strong>. Your income is sliced into bands, and a higher rate applies only to each band, not to your whole income. Every slab carries a <strong>fixed amount</strong> (the tax accumulated from all the slabs below it) plus a <strong>marginal rate</strong> on the portion of income inside that slab. This is why a small raise that pushes you into a higher slab never cuts your take-home pay. Only the rupees above the threshold are taxed at the higher rate.</p>
-
-  <p>Who you are matters too. <strong>Salaried individuals</strong>, where salary is more than 75% of taxable income, sit on one scale. <strong>Non-salaried individuals and Associations of Persons (AOPs)</strong> sit on a separate, steeper one. That second group includes sole proprietors, freelancers billing locally, and partnership firms.</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr><th>Annual taxable income</th><th>Salaried (FY2026-27)</th><th>Non-salaried / AOP</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Up to Rs 600,000</td><td>0%</td><td>0%</td></tr>
-      <tr><td>Rs 600,001 – 1,200,000</td><td>1%</td><td>15%</td></tr>
-      <tr><td>Rs 1,200,001 – 1,600,000</td><td>11%</td><td>20%</td></tr>
-      <tr><td>Rs 1,600,001 – 2,200,000</td><td>11%</td><td>30%</td></tr>
-      <tr><td>Rs 2,200,001 – 3,200,000</td><td>20%</td><td>30%</td></tr>
-      <tr><td>Rs 3,200,001 – 4,100,000</td><td>25%</td><td>40%</td></tr>
-      <tr><td>Rs 4,100,001 – 5,600,000</td><td>29%</td><td>40%</td></tr>
-      <tr><td>Rs 5,600,001 – 7,000,000</td><td>32%</td><td>45%</td></tr>
-      <tr><td>Above Rs 7,000,000</td><td>35%</td><td>45%</td></tr>
-    </tbody>
-  </table>
-  <p>The salaried FY2026-27 rates are still proposed: effective 1 July 2026, pending the Finance Act. The table shows marginal rates; the calculator applies the exact fixed-amount-plus-marginal-rate arithmetic for each slab. A <strong>10% surcharge</strong> on the tax applies to non-salaried taxpayers and AOPs whose income exceeds Rs 10 million. The equivalent salaried surcharge was abolished for FY2026-27. For the slab-by-slab story of the salaried cuts, see our <a href="/blog/budget-2026-27-tax-slabs-salaried-explained.html">Budget 2026-27 tax slabs explainer</a>.</p>
-
-  <h2>GST, Sales Tax on Services, and FED: What's the Difference?</h2>
-  <p>Pakistan runs <strong>three separate indirect taxes</strong>. Which one applies depends on what is being sold and who has jurisdiction. Mixing them up is the most common point of confusion.</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr><th>Tax</th><th>Applies to</th><th>Collected by</th><th>Typical rate</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>GST</strong> (General Sales Tax)</td><td>Goods</td><td>FBR (federal)</td><td>18% standard</td></tr>
-      <tr><td><strong>Sales tax on services (SST)</strong></td><td>Services</td><td>Provinces (PRA, SRB, KPRA, BRA)</td><td>15–16%</td></tr>
-      <tr><td><strong>FED</strong> (Federal Excise Duty)</td><td>Specific goods (cigarettes, drinks, cement) &amp; limited services</td><td>FBR (federal)</td><td>Item-specific</td></tr>
-    </tbody>
-  </table>
-  <p>So when you buy a physical product, you pay <strong>18% GST</strong> to the federal government. Pay for a service instead, say a salon visit, a hotel room, a telecom package or a restaurant meal, and you pay <strong>provincial sales tax on services</strong> to the province where it is consumed (16% in Punjab; 15% in Sindh, KP, Balochistan and Islamabad). <strong>FED</strong> is a narrower excise tax layered on specific items the government wants to discourage or tax heavily, such as cigarettes and sugary drinks, plus a limited set of services in Islamabad.</p>
-
-  <h2>How Restaurant Tax Works, and Why Card Is Cheaper</h2>
-  <p>A restaurant meal is a <strong>service</strong>, so it is taxed under provincial sales tax on services, charged on your food bill (not on any service charge or tip the restaurant itself adds). The headline rate is 15–16%. But several provinces deliberately offer a <strong>much lower rate for digital payments</strong> to pull the cash-heavy sector into the documented economy.</p>
-  <p>In <strong>Punjab and Islamabad</strong>, paying by debit or credit card is taxed at roughly <strong>5%</strong> against about <strong>16%</strong> for cash. On a Rs 5,000 food bill that works out to about Rs 250 in tax by card versus roughly Rs 800 in cash. That is a real, repeatable saving just for tapping a card. The Restaurant Bill tab above runs the numbers for your bill and province. Rates are set by each provincial authority and get revised from time to time, so treat the figures as current-best and confirm locally.</p>
-
-  <h2>Business, Remittances and Foreign Income</h2>
-  <p><strong>Business income</strong> for a sole proprietor or partnership is taxed on the non-salaried/AOP scale above, after deducting allowable business expenses to arrive at taxable profit. A company (a registered limited entity) is taxed differently again, under the corporate regime rather than these individual slabs.</p>
-  <p><strong>Foreign remittances</strong> sent home through official banking channels are generally not treated as taxable income in Pakistan, with amounts up to around Rs 5 million a year clearly outside the tax net. That is one reason to always route money through banks and keep the remittance documentation. Separately, advance tax on spending abroad through debit, credit and prepaid cards was cut to <strong>0.5%</strong>, and exporters of IT and IT-enabled services can access a concessional <strong>0.25%</strong> rate on their export proceeds. For overseas Pakistanis investing back home, our <a href="/guides/roshan-digital-account-guide.html">Roshan Digital Account guide</a> covers the mechanics.</p>
-
-  <h2>Filer vs Non-Filer: An Easy Way to Lower Withholding</h2>
-  <p>Beyond the slabs, your <strong>filer status</strong> quietly changes how much tax is withheld from you. A <strong>filer</strong> appears on the FBR's Active Taxpayer List (ATL) because they have filed their annual return. A <strong>non-filer</strong> has not, and pays <strong>higher withholding tax, often roughly double,</strong> on dividends, profit on savings, property and vehicle transactions and more, all deducted at source. Filing a return to get on the ATL is one of the simplest ways to stop overpaying. Our guide on <a href="/guides/investment-tax-pakistan.html">how investments are taxed in Pakistan</a> walks through the filer process and the withholding rates in detail.</p>
-
-  <!-- FAQ -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-how-is-income-tax-calculated"><summary class="faq-question">How is income tax calculated in Pakistan?</summary><div class="faq-answer">Pakistan uses a progressive slab system on annual taxable income. Each slab has a fixed amount plus a marginal rate that applies only to the part of your income inside that slab. For salaried individuals in FY2026-27, income up to Rs 600,000 is tax-free, then rates rise through 1%, 11%, 20%, 25%, 29% and 32%, reaching 35% above Rs 7 million. You pay the fixed amount for your slab plus the marginal rate on the excess over the slab's lower limit, then divide by 12 for the monthly deduction.</div></details>
-
-  <details class="faq-item" id="faq-salaried-vs-business-tax"><summary class="faq-question">What is the difference between salaried and business (non-salaried) income tax in Pakistan?</summary><div class="faq-answer">Salaried individuals — where salary is more than 75% of taxable income — use one slab scale that tops out at 35%. Non-salaried individuals and Associations of Persons (AOPs), such as sole proprietors and partnerships, use a separate, steeper scale that reaches 45%, and pay a 10% surcharge on their tax when annual income exceeds Rs 10 million. The tax-free threshold of Rs 600,000 is the same for both.</div></details>
-
-  <details class="faq-item" id="faq-what-is-gst-rate"><summary class="faq-question">What is GST and what is the GST rate in Pakistan?</summary><div class="faq-answer">GST (General Sales Tax) is the federal sales tax on goods, collected by the FBR. The standard GST rate in Pakistan is 18%, charged on the value of most goods and added to the price you pay. Some goods carry reduced rates or exemptions, and a few are zero-rated, but 18% is the headline rate for ordinary purchases.</div></details>
-
-  <details class="faq-item" id="faq-gst-vs-sst-vs-fed"><summary class="faq-question">What is the difference between GST, sales tax on services (SST), and FED?</summary><div class="faq-answer">GST is the federal sales tax on goods (standard 18%). Sales tax on services (SST) is charged by the provinces on services — for example 16% in Punjab and 15% in Sindh, KP and Balochistan — through bodies like the PRA and SRB. Federal Excise Duty (FED) is a separate federal duty on specific items such as cigarettes, beverages and cement, and on a limited set of services in Islamabad. So the same transaction is taxed by whoever has jurisdiction: federal for goods and excise items, provincial for services.</div></details>
-
-  <details class="faq-item" id="faq-restaurant-sales-tax"><summary class="faq-question">How is sales tax calculated at a restaurant in Pakistan?</summary><div class="faq-answer">Restaurant meals are a service, so provincial sales tax on services applies to the food bill. The standard rate is around 15–16%, but several provinces give a large reduced rate for digital payments to encourage documentation — in Punjab and Islamabad, paying by debit or credit card is taxed at about 5% instead of 16%. So a Rs 5,000 bill costs about Rs 250 in tax by card versus about Rs 800 in cash in Punjab. Rates are set by each provincial revenue authority and change periodically.</div></details>
-
-  <details class="faq-item" id="faq-foreign-remittances-taxed"><summary class="faq-question">Are foreign remittances taxed in Pakistan?</summary><div class="faq-answer">Money sent home through official banking channels is generally not treated as taxable income — foreign remittances received through proper channels are exempt from income tax, with remittances up to about Rs 5 million a year cleanly outside the tax net. Separately, advance tax on spending abroad via debit, credit and prepaid cards was reduced to 0.5%, and IT/IT-enabled service exporters can access a concessional 0.25% rate on export proceeds. Always route remittances through banks and keep the proceeds documentation.</div></details>
-
-  <details class="faq-item" id="faq-filer-vs-non-filer"><summary class="faq-question">What is the difference between a filer and a non-filer in Pakistan?</summary><div class="faq-answer">A filer is a person on the FBR's Active Taxpayer List (ATL) because they have filed their annual income tax return; a non-filer has not. Non-filers face higher withholding tax — often roughly double — on dividends, profit on savings, property and vehicle transactions, and many other payments deducted at source. Becoming a filer by submitting your return is the single cheapest way to reduce the tax withheld from you.</div></details>
-
-  <details class="faq-item" id="faq-calculator-official-accurate"><summary class="faq-question">Is this Pakistan tax calculator official or accurate?</summary><div class="faq-answer">This is an independent educational tool, not an FBR or government service. It uses the salaried slabs as reported for Budget 2026-27 (effective 1 July 2026, pending the Finance Act), the current published non-salaried/AOP slabs, and standard GST and provincial sales-tax rates. It does not account for every allowance, credit, exemption or sector-specific rule. Treat the result as an estimate and verify the enacted figures on fbr.gov.pk and your provincial revenue authority before relying on them.</div></details>
-
-  <details class="faq-item" id="faq-when-does-tax-year-start"><summary class="faq-question">When does the tax year start and when do the new budget rates apply in Pakistan?</summary><div class="faq-answer">Pakistan's tax year for individuals runs from 1 July to 30 June, and it is named after the year in which it ends. Budget changes announced in June are generally proposed to take effect from 1 July of that year, but they become law only once the Finance Act is passed, so figures can change between the budget speech and enactment. For the exact effective dates and final rates that apply to you, verify on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-tax-on-50000-salary"><summary class="faq-question">Do I have to pay income tax if my salary is Rs 50,000 a month?</summary><div class="faq-answer">A monthly salary of Rs 50,000 is about Rs 600,000 a year, which sits at the salaried tax-free threshold, so income tax on salary at that level is generally nil. Earnings above that threshold are taxed slab by slab, with only the portion inside each slab taxed at that slab's rate. You can enter your own figure in the calculator above to see an estimate, and verify the current threshold and slabs on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-how-to-become-a-filer"><summary class="faq-question">How do I become a filer in Pakistan?</summary><div class="faq-answer">Becoming a filer means getting your name onto the FBR's Active Taxpayer List (ATL), which happens after you register for a National Tax Number and file your annual income tax return. Registration and filing are done through the FBR's Iris online portal, and the ATL is updated on a defined schedule rather than instantly. For the current registration steps, deadlines and any applicable fees, check the official process on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-is-gst-already-in-price"><summary class="faq-question">Is GST already included in the price shown on a product?</summary><div class="faq-answer">It depends on the seller. Many retail prices in Pakistan are quoted inclusive of GST, so the tax is already inside the shelf price, while some invoices add GST separately on top of the listed amount. The standard GST rate on most goods is 18%, so on a tax-exclusive price you can estimate the tax as 18% of the base value. Check the receipt or invoice, which should show whether the price is inclusive or exclusive of tax.</div></details>
-
-  <details class="faq-item" id="faq-difference-gross-net-taxable"><summary class="faq-question">What is the difference between gross salary, taxable income, and take-home pay?</summary><div class="faq-answer">Gross salary is your total pay before any deductions. Taxable income is the part of that pay on which income tax is charged after any applicable exemptions or allowances are removed, and it is what the slab rates are applied to. Take-home pay is what reaches your account after income tax and any other deductions are subtracted. This calculator estimates the tax portion; specific allowances and credits can change your final taxable income, so verify the rules that apply to you on fbr.gov.pk.</div></details>
-
-  <div class="related-links">
-    <h3>Related Reading</h3>
-    <a href="/zakat-calculator.html">Zakat Calculator: Work Out Your 2.5% Zakat</a>
-    <a href="/blog/budget-2026-27-tax-slabs-salaried-explained.html">Budget 2026-27 Tax Slabs Explained for the Salaried Class</a>
-    <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed in Pakistan: Filer vs Non-Filer</a>
-    <a href="/blog/budget-2026-27-salaried-class-investing.html">Budget 2026-27 Cut Your Income Tax — 5 Smart Moves</a>
-    <a href="/guides/roshan-digital-account-guide.html">Roshan Digital Account Guide for Overseas Pakistanis</a>
-    <a href="/">Investment Comparison Tool</a>
-  </div>
-
-  <div class="disclaimer">⚠ This calculator is for educational purposes only and is <strong>not tax, legal, or financial advice</strong>. It is an independent tool, not an FBR or government service. Salaried income tax slabs reflect Budget 2026-27 as reported (effective 1 July 2026, pending the Finance Act); non-salaried/AOP slabs, GST, provincial sales-tax and other rates reflect the current published position and change over time. The tool does not capture every allowance, tax credit, exemption, sector-specific rule, or provincial variation, and results are estimates only. Verify the enacted figures on finance.gov.pk, fbr.gov.pk and your provincial revenue authority (PRA, SRB, KPRA, BRA), and consult a qualified tax adviser before acting.</div>
-
 </div>
 
+<main>
+
+<!-- breadcrumb -->
+<div class="tax-frame">
+  <div class="breadcrumb" style="padding:14px 44px;border-bottom:1px solid var(--line);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted)"><a href="/" style="color:var(--green)">HOME</a> &nbsp;/&nbsp; TAX CALCULATOR</div>
+</div>
+
+<!-- editorial hero -->
+<div class="tax-head">
+  <div class="tax-head-copy">
+    <div class="tax-head-eyebrow">Tool — FY 2026-27</div>
+    <h1>Pakistan tax calculator.</h1>
+    <p class="byline">Income tax · GST on goods · provincial sales tax on services · restaurant bills — with a clear breakdown and a year-on-year comparison.</p>
+  </div>
+  <div class="tax-head-aside">
+    <div class="ak">IN ONE LINE</div>
+    <p>Salaried pay <b>0%</b> up to ₨ 600,000, rising to <span class="acc">35%</span> above ₨ 7M. Business and AOPs reach 45%. GST is 18% on goods, services 15–16%, and restaurants can be as low as <span class="acc">5%</span> when you pay by card.</p>
+  </div>
+</div>
+
+<!-- Ad slot 1 -->
+<div class="tax-frame">
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+</div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<!-- ===== Calculator app ===== -->
+<div class="tax-app">
+  <div class="tax-tabs" role="tablist" aria-label="Tax calculators">
+    <button class="tax-tab tax-tab-active" data-tax-tab="income" role="tab" aria-selected="true" type="button">Income Tax</button>
+    <button class="tax-tab" data-tax-tab="gst" role="tab" aria-selected="false" type="button">GST &amp; Sales Tax</button>
+    <button class="tax-tab" data-tax-tab="rest" role="tab" aria-selected="false" type="button">Restaurant Bill</button>
+  </div>
+
+  <!-- Income tax panel -->
+  <div class="tax-panel" data-tax-panel="income" role="tabpanel">
+    <div class="tax-row">
+      <div class="tax-field">
+        <label for="inc-amount">Taxable income (₨)</label>
+        <input type="text" inputmode="numeric" id="inc-amount" placeholder="e.g. 35,00,000" autocomplete="off">
+      </div>
+      <div class="tax-field" style="flex:0 1 160px">
+        <label for="inc-period">Income is</label>
+        <select id="inc-period">
+          <option value="annual">Per year</option>
+          <option value="monthly">Per month</option>
+        </select>
+      </div>
+    </div>
+    <div class="tax-field">
+      <span class="tax-glabel" id="inc-type-lbl">Taxpayer type</span>
+      <div class="tax-seg" role="radiogroup" aria-labelledby="inc-type-lbl">
+        <label><input type="radio" name="inc-type" value="salaried" checked> Salaried</label>
+        <label><input type="radio" name="inc-type" value="nonsalaried"> Business individual / AOP</label>
+      </div>
+    </div>
+    <div class="tax-result" id="inc-result"></div>
+  </div>
+
+  <!-- GST panel -->
+  <div class="tax-panel" data-tax-panel="gst" role="tabpanel" hidden>
+    <div class="tax-row">
+      <div class="tax-field" style="flex:0 1 220px">
+        <label for="gst-kind">Taxed item</label>
+        <select id="gst-kind">
+          <option value="goods">Goods (federal GST)</option>
+          <option value="services">Services (provincial)</option>
+        </select>
+      </div>
+      <div class="tax-field" id="gst-province-wrap" style="flex:0 1 190px;display:none">
+        <label for="gst-province">Province</label>
+        <select id="gst-province">
+          <option value="Punjab">Punjab (16%)</option>
+          <option value="Sindh">Sindh (15%)</option>
+          <option value="KPK">KP (15%)</option>
+          <option value="Balochistan">Balochistan (15%)</option>
+          <option value="Islamabad">Islamabad / ICT (15%)</option>
+        </select>
+      </div>
+      <div class="tax-field" style="flex:0 1 130px">
+        <label for="gst-rate">Rate (%)</label>
+        <input type="number" id="gst-rate" value="18" min="0" max="100" step="0.5">
+      </div>
+    </div>
+    <div class="tax-row">
+      <div class="tax-field">
+        <label for="gst-amount">Amount (₨)</label>
+        <input type="text" inputmode="numeric" id="gst-amount" placeholder="e.g. 10,000" autocomplete="off">
+      </div>
+      <div class="tax-field" style="flex:0 1 240px">
+        <label for="gst-mode">The amount above is</label>
+        <select id="gst-mode">
+          <option value="add">Before tax (add tax)</option>
+          <option value="extract">Tax-inclusive (extract tax)</option>
+        </select>
+      </div>
+    </div>
+    <div class="tax-result" id="gst-result"></div>
+  </div>
+
+  <!-- Restaurant panel -->
+  <div class="tax-panel" data-tax-panel="rest" role="tabpanel" hidden>
+    <div class="tax-row">
+      <div class="tax-field">
+        <label for="rest-amount">Food bill (₨)</label>
+        <input type="text" inputmode="numeric" id="rest-amount" placeholder="e.g. 5,000" autocomplete="off">
+      </div>
+      <div class="tax-field" style="flex:0 1 200px">
+        <label for="rest-province">Province</label>
+        <select id="rest-province">
+          <option value="Punjab">Punjab</option>
+          <option value="Sindh">Sindh</option>
+          <option value="KPK">Khyber Pakhtunkhwa</option>
+          <option value="Balochistan">Balochistan</option>
+          <option value="Islamabad">Islamabad / ICT</option>
+        </select>
+      </div>
+    </div>
+    <div class="tax-field">
+      <span class="tax-glabel" id="rest-pay-lbl">Payment method</span>
+      <div class="tax-seg" role="radiogroup" aria-labelledby="rest-pay-lbl">
+        <label><input type="radio" name="rest-pay" value="card" checked> Card / digital</label>
+        <label><input type="radio" name="rest-pay" value="cash"> Cash</label>
+      </div>
+    </div>
+    <div class="tax-result" id="rest-result"></div>
+  </div>
+</div>
+
+<div class="tax-microcopy">Estimates for guidance only, not tax advice. Salaried slabs reflect Budget 2026-27 (effective 1 July 2026, pending the Finance Act); other rates reflect the current published position. Verify on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> and your provincial revenue authority.</div>
+
+<!-- ===== History comparison chart ===== -->
+<div class="tax-chart-card">
+  <div class="tax-chart-kicker">Salaried income tax · FY2025-26 vs FY2026-27</div>
+  <h2>How the budget changed your bill.</h2>
+  <p class="tax-chart-sub">The 2026-27 budget cut salaried tax rates on the middle and upper-middle slabs. The chart compares the total annual income tax a salaried person pays under the old FY2025-26 slabs versus the new FY2026-27 slabs across a range of incomes — a like-for-like view of the relief.</p>
+  <div id="tax-history-chart"></div>
+  <div class="tax-chart-foot">The gap between the bars is your saving from the budget. Relief is concentrated between Rs 2.2 million and Rs 7 million of annual income; below Rs 2.2 million the slabs were unchanged. Figures computed from the published slabs — verify on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</div>
+</div>
+
+<!-- Ad slot 2 -->
+<div class="tax-frame">
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+</div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<!-- ===== Prose + sticky rail ===== -->
+<div class="tax-prose-wrap">
+  <div class="tax-prose">
+
+    <h2>How income tax works in Pakistan</h2>
+    <p>Pakistan taxes income through a <strong>progressive slab system</strong>. Your income is sliced into bands, and a higher rate applies only to each band, not to your whole income. Every slab carries a <strong>fixed amount</strong> (the tax accumulated from all the slabs below it) plus a <strong>marginal rate</strong> on the portion of income inside that slab. This is why a small raise that pushes you into a higher slab never cuts your take-home pay. Only the rupees above the threshold are taxed at the higher rate.</p>
+    <p>Who you are matters too. <strong>Salaried individuals</strong>, where salary is more than 75% of taxable income, sit on one scale. <strong>Non-salaried individuals and Associations of Persons (AOPs)</strong> sit on a separate, steeper one. That second group includes sole proprietors, freelancers billing locally, and partnership firms.</p>
+
+    <div class="tax-tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Annual taxable income</th><th>Salaried (FY2026-27)</th><th>Non-salaried / AOP</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Up to Rs 600,000</td><td>0%</td><td>0%</td></tr>
+          <tr><td>Rs 600,001 – 1,200,000</td><td>1%</td><td>15%</td></tr>
+          <tr><td>Rs 1,200,001 – 1,600,000</td><td>11%</td><td>20%</td></tr>
+          <tr><td>Rs 1,600,001 – 2,200,000</td><td>11%</td><td>30%</td></tr>
+          <tr><td>Rs 2,200,001 – 3,200,000</td><td>20%</td><td>30%</td></tr>
+          <tr><td>Rs 3,200,001 – 4,100,000</td><td>25%</td><td>40%</td></tr>
+          <tr><td>Rs 4,100,001 – 5,600,000</td><td>29%</td><td>40%</td></tr>
+          <tr><td>Rs 5,600,001 – 7,000,000</td><td>32%</td><td>45%</td></tr>
+          <tr><td>Above Rs 7,000,000</td><td>35%</td><td>45%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The salaried FY2026-27 rates are still proposed: effective 1 July 2026, pending the Finance Act. The table shows marginal rates; the calculator applies the exact fixed-amount-plus-marginal-rate arithmetic for each slab. A <strong>10% surcharge</strong> on the tax applies to non-salaried taxpayers and AOPs whose income exceeds Rs 10 million. The equivalent salaried surcharge was abolished for FY2026-27. For the slab-by-slab story of the salaried cuts, see our <a href="/blog/budget-2026-27-tax-slabs-salaried-explained.html">Budget 2026-27 tax slabs explainer</a>.</p>
+
+    <h2>GST, sales tax on services, and FED: what's the difference?</h2>
+    <p>Pakistan runs <strong>three separate indirect taxes</strong>. Which one applies depends on what is being sold and who has jurisdiction. Mixing them up is the most common point of confusion.</p>
+
+    <div class="tax-tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Tax</th><th>Applies to</th><th>Collected by</th><th>Typical rate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>GST</strong> (General Sales Tax)</td><td>Goods</td><td>FBR (federal)</td><td>18% standard</td></tr>
+          <tr><td><strong>Sales tax on services (SST)</strong></td><td>Services</td><td>Provinces (PRA, SRB, KPRA, BRA)</td><td>15–16%</td></tr>
+          <tr><td><strong>FED</strong> (Federal Excise Duty)</td><td>Specific goods (cigarettes, drinks, cement) &amp; limited services</td><td>FBR (federal)</td><td>Item-specific</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>So when you buy a physical product, you pay <strong>18% GST</strong> to the federal government. Pay for a service instead, say a salon visit, a hotel room, a telecom package or a restaurant meal, and you pay <strong>provincial sales tax on services</strong> to the province where it is consumed (16% in Punjab; 15% in Sindh, KP, Balochistan and Islamabad). <strong>FED</strong> is a narrower excise tax layered on specific items the government wants to discourage or tax heavily, such as cigarettes and sugary drinks, plus a limited set of services in Islamabad.</p>
+
+    <h2>How restaurant tax works, and why card is cheaper</h2>
+    <p>A restaurant meal is a <strong>service</strong>, so it is taxed under provincial sales tax on services, charged on your food bill (not on any service charge or tip the restaurant itself adds). The headline rate is 15–16%. But several provinces deliberately offer a <strong>much lower rate for digital payments</strong> to pull the cash-heavy sector into the documented economy.</p>
+    <p>In <strong>Punjab and Islamabad</strong>, paying by debit or credit card is taxed at roughly <strong>5%</strong> against about <strong>16%</strong> for cash. On a Rs 5,000 food bill that works out to about Rs 250 in tax by card versus roughly Rs 800 in cash. That is a real, repeatable saving just for tapping a card. The Restaurant Bill tab above runs the numbers for your bill and province. Rates are set by each provincial authority and get revised from time to time, so treat the figures as current-best and confirm locally.</p>
+
+    <h2>Business, remittances and foreign income</h2>
+    <p><strong>Business income</strong> for a sole proprietor or partnership is taxed on the non-salaried/AOP scale above, after deducting allowable business expenses to arrive at taxable profit. A company (a registered limited entity) is taxed differently again, under the corporate regime rather than these individual slabs.</p>
+    <p><strong>Foreign remittances</strong> sent home through official banking channels are generally not treated as taxable income in Pakistan, with amounts up to around Rs 5 million a year clearly outside the tax net. That is one reason to always route money through banks and keep the remittance documentation. Separately, advance tax on spending abroad through debit, credit and prepaid cards was cut to <strong>0.5%</strong>, and exporters of IT and IT-enabled services can access a concessional <strong>0.25%</strong> rate on their export proceeds. For overseas Pakistanis investing back home, our <a href="/guides/roshan-digital-account-guide.html">Roshan Digital Account guide</a> covers the mechanics.</p>
+
+    <h2>Filer vs non-filer: an easy way to lower withholding</h2>
+    <p>Beyond the slabs, your <strong>filer status</strong> quietly changes how much tax is withheld from you. A <strong>filer</strong> appears on the FBR's Active Taxpayer List (ATL) because they have filed their annual return. A <strong>non-filer</strong> has not, and pays <strong>higher withholding tax, often roughly double,</strong> on dividends, profit on savings, property and vehicle transactions and more, all deducted at source. Filing a return to get on the ATL is one of the simplest ways to stop overpaying. Our guide on <a href="/guides/investment-tax-pakistan.html">how investments are taxed in Pakistan</a> walks through the filer process and the withholding rates in detail.</p>
+
+    <!-- FAQ -->
+    <h2 id="faq">Frequently asked questions</h2>
+
+    <details class="faq-item" id="faq-how-is-income-tax-calculated"><summary class="faq-question">How is income tax calculated in Pakistan?</summary><div class="faq-answer">Pakistan uses a progressive slab system on annual taxable income. Each slab has a fixed amount plus a marginal rate that applies only to the part of your income inside that slab. For salaried individuals in FY2026-27, income up to Rs 600,000 is tax-free, then rates rise through 1%, 11%, 20%, 25%, 29% and 32%, reaching 35% above Rs 7 million. You pay the fixed amount for your slab plus the marginal rate on the excess over the slab's lower limit, then divide by 12 for the monthly deduction.</div></details>
+
+    <details class="faq-item" id="faq-salaried-vs-business-tax"><summary class="faq-question">What is the difference between salaried and business (non-salaried) income tax in Pakistan?</summary><div class="faq-answer">Salaried individuals — where salary is more than 75% of taxable income — use one slab scale that tops out at 35%. Non-salaried individuals and Associations of Persons (AOPs), such as sole proprietors and partnerships, use a separate, steeper scale that reaches 45%, and pay a 10% surcharge on their tax when annual income exceeds Rs 10 million. The tax-free threshold of Rs 600,000 is the same for both.</div></details>
+
+    <details class="faq-item" id="faq-what-is-gst-rate"><summary class="faq-question">What is GST and what is the GST rate in Pakistan?</summary><div class="faq-answer">GST (General Sales Tax) is the federal sales tax on goods, collected by the FBR. The standard GST rate in Pakistan is 18%, charged on the value of most goods and added to the price you pay. Some goods carry reduced rates or exemptions, and a few are zero-rated, but 18% is the headline rate for ordinary purchases.</div></details>
+
+    <details class="faq-item" id="faq-gst-vs-sst-vs-fed"><summary class="faq-question">What is the difference between GST, sales tax on services (SST), and FED?</summary><div class="faq-answer">GST is the federal sales tax on goods (standard 18%). Sales tax on services (SST) is charged by the provinces on services — for example 16% in Punjab and 15% in Sindh, KP and Balochistan — through bodies like the PRA and SRB. Federal Excise Duty (FED) is a separate federal duty on specific items such as cigarettes, beverages and cement, and on a limited set of services in Islamabad. So the same transaction is taxed by whoever has jurisdiction: federal for goods and excise items, provincial for services.</div></details>
+
+    <details class="faq-item" id="faq-restaurant-sales-tax"><summary class="faq-question">How is sales tax calculated at a restaurant in Pakistan?</summary><div class="faq-answer">Restaurant meals are a service, so provincial sales tax on services applies to the food bill. The standard rate is around 15–16%, but several provinces give a large reduced rate for digital payments to encourage documentation — in Punjab and Islamabad, paying by debit or credit card is taxed at about 5% instead of 16%. So a Rs 5,000 bill costs about Rs 250 in tax by card versus about Rs 800 in cash in Punjab. Rates are set by each provincial revenue authority and change periodically.</div></details>
+
+    <details class="faq-item" id="faq-foreign-remittances-taxed"><summary class="faq-question">Are foreign remittances taxed in Pakistan?</summary><div class="faq-answer">Money sent home through official banking channels is generally not treated as taxable income — foreign remittances received through proper channels are exempt from income tax, with remittances up to about Rs 5 million a year cleanly outside the tax net. Separately, advance tax on spending abroad via debit, credit and prepaid cards was reduced to 0.5%, and IT/IT-enabled service exporters can access a concessional 0.25% rate on export proceeds. Always route remittances through banks and keep the proceeds documentation.</div></details>
+
+    <details class="faq-item" id="faq-filer-vs-non-filer"><summary class="faq-question">What is the difference between a filer and a non-filer in Pakistan?</summary><div class="faq-answer">A filer is a person on the FBR's Active Taxpayer List (ATL) because they have filed their annual income tax return; a non-filer has not. Non-filers face higher withholding tax — often roughly double — on dividends, profit on savings, property and vehicle transactions, and many other payments deducted at source. Becoming a filer by submitting your return is the single cheapest way to reduce the tax withheld from you.</div></details>
+
+    <details class="faq-item" id="faq-calculator-official-accurate"><summary class="faq-question">Is this Pakistan tax calculator official or accurate?</summary><div class="faq-answer">This is an independent educational tool, not an FBR or government service. It uses the salaried slabs as reported for Budget 2026-27 (effective 1 July 2026, pending the Finance Act), the current published non-salaried/AOP slabs, and standard GST and provincial sales-tax rates. It does not account for every allowance, credit, exemption or sector-specific rule. Treat the result as an estimate and verify the enacted figures on fbr.gov.pk and your provincial revenue authority before relying on them.</div></details>
+
+    <details class="faq-item" id="faq-when-does-tax-year-start"><summary class="faq-question">When does the tax year start and when do the new budget rates apply in Pakistan?</summary><div class="faq-answer">Pakistan's tax year for individuals runs from 1 July to 30 June, and it is named after the year in which it ends. Budget changes announced in June are generally proposed to take effect from 1 July of that year, but they become law only once the Finance Act is passed, so figures can change between the budget speech and enactment. For the exact effective dates and final rates that apply to you, verify on fbr.gov.pk.</div></details>
+
+    <details class="faq-item" id="faq-tax-on-50000-salary"><summary class="faq-question">Do I have to pay income tax if my salary is Rs 50,000 a month?</summary><div class="faq-answer">A monthly salary of Rs 50,000 is about Rs 600,000 a year, which sits at the salaried tax-free threshold, so income tax on salary at that level is generally nil. Earnings above that threshold are taxed slab by slab, with only the portion inside each slab taxed at that slab's rate. You can enter your own figure in the calculator above to see an estimate, and verify the current threshold and slabs on fbr.gov.pk.</div></details>
+
+    <details class="faq-item" id="faq-how-to-become-a-filer"><summary class="faq-question">How do I become a filer in Pakistan?</summary><div class="faq-answer">Becoming a filer means getting your name onto the FBR's Active Taxpayer List (ATL), which happens after you register for a National Tax Number and file your annual income tax return. Registration and filing are done through the FBR's Iris online portal, and the ATL is updated on a defined schedule rather than instantly. For the current registration steps, deadlines and any applicable fees, check the official process on fbr.gov.pk.</div></details>
+
+    <details class="faq-item" id="faq-is-gst-already-in-price"><summary class="faq-question">Is GST already included in the price shown on a product?</summary><div class="faq-answer">It depends on the seller. Many retail prices in Pakistan are quoted inclusive of GST, so the tax is already inside the shelf price, while some invoices add GST separately on top of the listed amount. The standard GST rate on most goods is 18%, so on a tax-exclusive price you can estimate the tax as 18% of the base value. Check the receipt or invoice, which should show whether the price is inclusive or exclusive of tax.</div></details>
+
+    <details class="faq-item" id="faq-difference-gross-net-taxable"><summary class="faq-question">What is the difference between gross salary, taxable income, and take-home pay?</summary><div class="faq-answer">Gross salary is your total pay before any deductions. Taxable income is the part of that pay on which income tax is charged after any applicable exemptions or allowances are removed, and it is what the slab rates are applied to. Take-home pay is what reaches your account after income tax and any other deductions are subtracted. This calculator estimates the tax portion; specific allowances and credits can change your final taxable income, so verify the rules that apply to you on fbr.gov.pk.</div></details>
+
+    <div class="tax-disclaimer"><strong>⚠</strong> This calculator is for educational purposes only and is <strong style="color:#fff">not tax, legal, or financial advice</strong>. It is an independent tool, not an FBR or government service. Salaried income tax slabs reflect Budget 2026-27 as reported (effective 1 July 2026, pending the Finance Act); non-salaried/AOP slabs, GST, provincial sales-tax and other rates reflect the current published position and change over time. The tool does not capture every allowance, tax credit, exemption, sector-specific rule, or provincial variation, and results are estimates only. Verify the enacted figures on finance.gov.pk, fbr.gov.pk and your provincial revenue authority (PRA, SRB, KPRA, BRA), and consult a qualified tax adviser before acting.</div>
+
+  </div>
+
+  <!-- sticky rail -->
+  <aside class="tax-rail" aria-label="Key thresholds and related reading">
+    <div class="tax-rail-inner">
+      <div class="tax-rail-glance">
+        <div class="rk">KEY THRESHOLDS</div>
+        <div class="tax-glance-item"><div class="tax-glance-n">₨ 6 L</div><div class="tax-glance-l">TAX-FREE THRESHOLD</div></div>
+        <div class="tax-glance-item"><div class="tax-glance-n">35%</div><div class="tax-glance-l">TOP SALARIED RATE</div></div>
+        <div class="tax-glance-item"><div class="tax-glance-n">45%</div><div class="tax-glance-l">TOP BUSINESS / AOP RATE</div></div>
+        <div class="tax-glance-item"><div class="tax-glance-n">18%</div><div class="tax-glance-l">STANDARD GST ON GOODS</div></div>
+      </div>
+      <div class="tax-rail-related">
+        <div class="rk">RELATED READING</div>
+        <a href="/zakat-calculator.html">Zakat Calculator: work out your 2.5% →</a>
+        <a href="/blog/budget-2026-27-tax-slabs-salaried-explained.html">Budget 2026-27 tax slabs explained →</a>
+        <a href="/guides/investment-tax-pakistan.html">How investments are taxed: filer vs non-filer →</a>
+        <a href="/blog/budget-2026-27-salaried-class-investing.html">Budget 2026-27 cut your tax — 5 smart moves →</a>
+        <a href="/guides/roshan-digital-account-guide.html">Roshan Digital Account guide →</a>
+        <a href="/">Investment comparison tool →</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+</main>
+
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/blog/">Blog</a>
-    <a href="/tax-calculator.html">Tax Calculator</a>
-    <a href="/gold-rates.html">Gold Rates</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: FBR · PRA · SRB · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
@@ -413,6 +639,7 @@ gtag('config', 'G-4T2H0KH9H7');
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

@@ -131,12 +131,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -158,23 +158,160 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(1.9rem,4vw,3rem);font-weight:800;line-height:1.04;letter-spacing:-.022em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose a{color:var(--green);font-weight:700;border-bottom:1px solid var(--line)}
+  .prose a:hover{color:var(--green2)}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:0 0 6px}
+
+  /* lead / quick-answer */
+  .lead{background:var(--mint);border-left:4px solid var(--acid);padding:16px 20px;margin:0 0 26px}
+  .lead p{margin:0;font-family:var(--body);font-size:1.06rem;line-height:1.65;color:var(--green-d);font-weight:600}
+  .lead strong{color:var(--green-d);font-weight:800}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);padding:18px 22px;margin:22px 0}
+  .cl-dark p{margin:0;color:#E4F2EA;font-family:var(--body);font-size:1.02rem;line-height:1.6;font-weight:500}
+  .cl-dark strong{color:var(--acid)!important;font-weight:700}
+  .cl-blue{background:var(--green-d);border-left:4px solid var(--acid);padding:18px 22px;margin:22px 0}
+  .cl-blue p{margin:0;color:#E4F2EA;font-family:var(--body);font-size:1.02rem;line-height:1.6;font-weight:500}
+  .cl-blue strong{color:var(--acid)!important;font-weight:700}
+
+  /* live snapshot (article.js fills #live-snap) */
+  #live-snap{border:1px solid var(--line);border-top:3px solid var(--acid);background:var(--mint);padding:18px;margin:0 0 28px;min-width:0;overflow-x:auto}
+  #live-snap:empty{display:none}
+
+  /* data tables */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 22px;overflow-x:auto}
+  .v2-table{width:100%;border-collapse:collapse;min-width:520px}
+  .v2-table thead th{background:var(--green-d);color:var(--sage);font-family:var(--display);font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:12px 16px}
+  .v2-table td{font-family:var(--body);font-size:.92rem;line-height:1.5;color:var(--ink2);padding:13px 16px;border-bottom:1px solid var(--line2);vertical-align:top}
+  .v2-table tbody tr:last-child td{border-bottom:none}
+  .v2-table tbody tr:hover td{background:var(--paper)}
+  .v2-table td strong{color:var(--green-d);font-weight:700}
+
+  /* steps */
+  .step-block{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;padding:16px 0;border-top:1px solid var(--line)}
+  .step-num{font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--acid);-webkit-text-stroke:1px var(--green)}
+  .step-body p{margin:0 0 10px}
+  .step-body ul{margin:6px 0 0}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7}
+
+  /* related links */
+  .related-links{border-top:1px solid var(--line);margin:32px 0 0;padding-top:22px}
+  .related-links h3{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--green-d);text-transform:uppercase;margin:0 0 10px}
+  .related-links a{display:block;padding:11px 0;border-bottom:1px solid var(--line2);font-family:var(--body);font-size:.94rem;font-weight:700;color:var(--green-d)}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700;border-bottom:none}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:1.85rem}
+    .step-block{grid-template-columns:36px 1fr;gap:12px}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -183,299 +320,410 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › Pakistan Housing Loan Scheme 2026</div>
-
-  <h1>Pakistan Housing Loan Scheme 2026: Mera Ghar Mera Aashiana Explained — and What It Means for Your Money</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Last updated: 13 June 2026 &nbsp;·&nbsp; 11 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one line:</strong> Pakistan's 2026 subsidised housing scheme, reported as Mera Ghar Mera Aashiana, lends up to about Rs 10 million at a fixed 5% end-user rate for the first 10 years, through participating banks, for a house up to 10 marla or a flat up to 1,500 square feet.</p>
-
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Last updated: 13 June 2026</span></div>
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
   </div>
-
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>The scheme at a glance:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>Pakistan's subsidised home-loan scheme, reported in 2026 as <strong>Mera Ghar Mera Aashiana</strong> (building on the earlier Mera Pakistan Mera Ghar / Naya Pakistan Housing programme), now lends up to about <strong>Rs 10 million</strong> at a fixed <strong>5% end-user rate for the first 10 years</strong>. Verify on sbp.org.pk</li>
-      <li>You apply through a participating bank (Meezan, HBL, Standard Chartered, Sindh Bank, MCB, UBL and others) for a house up to <strong>10 marla</strong> or a flat up to <strong>1,500 sq ft</strong></li>
-      <li>The FY27 budget reportedly <strong>cut property transaction taxes</strong> (transfer 2.5%→1.25%, purchase 5.5%→2.75% for filers), making 2026 an unusually cheap window to buy</li>
-      <li>For a salaried family, a subsidised loan turns rent into <strong>your own equity</strong>. That only holds if the installment stays inside ~35–40% of income and your emergency fund is already built</li>
-    </ul>
-  </div>
-
-  <!-- Ad slot 1 — after summary, before main content -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>For most salaried Pakistanis a home is the single biggest purchase of a lifetime. For decades the maths simply did not work. A normal mortgage charged a rate in the mid-to-high teens that no ordinary salary could service. The government's markup-subsidy housing scheme exists to break that wall. It pays part of the bank's profit so the borrower's own rate stays low and fixed. In 2026 the scheme was sharpened again: a bigger loan ceiling, a single low rate, larger eligible homes. This guide covers what the loan actually is, who can take it, which banks offer it, the documents and steps, why this particular window is favourable, and the part most coverage skips entirely, namely what carrying this loan means for the rest of a household's savings and investments.</p>
-
-  <p>One housekeeping note before the detail. Scheme branding in Pakistan changes often. The subsidised mortgage launched in 2020 as <strong>Mera Pakistan Mera Ghar</strong> under the Naya Pakistan Housing programme. The revised 2026 version is widely reported as <strong>Mera Ghar Mera Aashiana</strong>, and a separate <strong>PM's Apna Ghar</strong> allocation also shows up in the FY27 budget. Banks sell the same underlying subsidy under their own product names (Meezan's <em>Easy Home</em>, HBL's <em>Islamic Home Finance</em>, and so on). Every rate and limit below is <strong>as reported</strong> and changes with policy, so treat <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a> and the participating bank as the authoritative source before you act.</p>
-
-  <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-top:3px solid #B98A2F;border-radius:6px;padding:18px;margin:0 0 26px"></div>
-
-  <h2>What the Housing Loan Actually Is</h2>
-
-  <p>Strip away the branding and the scheme is one idea. <strong>The government subsidises the markup so you pay a low, fixed rate.</strong> In a normal home loan the bank charges roughly <strong>one-year KIBOR plus 3%</strong>, and with KIBOR in the low double digits that lands in the mid-teens. Under the subsidised scheme, as revised by the Economic Coordination Committee in early 2026, the <strong>end user pays a uniform 5%</strong> for the first 10 years and the government pays the bank the difference. The same revision raised the maximum loan to about <strong>Rs 10 million</strong> and expanded eligible units to a <strong>house up to 10 marla or a flat up to 1,500 square feet</strong>, with a reported four-year target of financing around 500,000 homes.</p>
-
-  <p>Two structural points matter. First, the subsidy covers the <strong>first 10 years</strong>. The loan tenor itself can run up to about <strong>20 years</strong>, and after the subsidised decade the rate becomes variable (KIBOR plus a margin). Budget for that reset. It is the single most overlooked feature. Second, most banks offer the loan two ways:</p>
-
-  <ul style="line-height:1.9">
-    <li><strong>Conventional.</strong> A standard subsidised mortgage with the 5% markup.</li>
-    <li><strong>Islamic (Diminishing Musharakah).</strong> The Shariah-compliant version most Islamic banks use. The bank and you jointly buy the property, you pay rent on the bank's share, and you gradually buy its units back until you own it outright. The cost works out to the same subsidised rate, structured as rent rather than interest. See our <a href="/guides/halal-investing-pakistan.html">halal investing guide</a> for how Diminishing Musharakah avoids riba.</li>
-  </ul>
-
-  <div class="callout callout-gold" style="margin:22px 0">
-    <strong>The number that makes this worth reading:</strong> a borrower under the scheme pays roughly <strong>5%</strong> while a market-rate buyer pays roughly <strong>KIBOR + 3% ≈ the mid-teens</strong>. On a Rs 10 million, 20-year loan that gap is worth lakhs of rupees a year in saved markup. The government is, in effect, handing eligible first-home buyers a large, ongoing subsidy. That is the whole reason to understand the eligibility rules carefully.
-  </div>
-
-  <h2>Who Can Apply</h2>
-
-  <p>The scheme is aimed squarely at first-time, owner-occupier buyers of modest homes, not investors assembling a portfolio of flats. Banks set their own precise rules within the State Bank's framework, but the common gates are:</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Requirement</th>
-        <th>Typical condition (verify with the bank)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Nationality &amp; ID</strong></td>
-        <td>Pakistani national with a valid CNIC; a co-applicant (often a spouse) is allowed and can raise the eligible loan.</td>
-      </tr>
-      <tr>
-        <td><strong>Age</strong></td>
-        <td>Adult, commonly 21–65, with the loan structured to mature before retirement age.</td>
-      </tr>
-      <tr>
-        <td><strong>First home</strong></td>
-        <td>Generally you must <em>not already own a house</em>; the subsidy is for a first/primary residence and is usually one-per-person.</td>
-      </tr>
-      <tr>
-        <td><strong>Property size</strong></td>
-        <td>House up to 10 marla or flat up to 1,500 sq ft (raised in the 2026 revision).</td>
-      </tr>
-      <tr>
-        <td><strong>Income</strong></td>
-        <td>A verifiable, regular income that covers the installment. Banks commonly look for around Rs 50,000/month for existing customers and more for new ones. Salaried and self-employed both qualify with the right paperwork.</td>
-      </tr>
-      <tr>
-        <td><strong>Credit record</strong></td>
-        <td>A clean credit history (the bank checks the SBP's eCIB bureau); existing defaults are a common rejection reason.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>Because the scheme has been re-tiered several times, the exact income floors, first-home conditions, and any registration step (historically via NAPHDA) shift between revisions and between banks. Confirm the current criteria on <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a> and the specific bank before you build your plans around a number.</p>
-
-  <!-- Ad slot 2 — mid-article -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <h2>Which Banks Offer It</h2>
-
-  <p>The subsidy is set centrally by the State Bank, but you borrow from and deal with an individual bank. That bank handles your application, the property valuation, and the monthly servicing. Most major banks participate, in both conventional and Islamic flavours. A non-exhaustive map of who lends under the scheme:</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Bank</th>
-        <th>Product / type</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Meezan Bank</strong></td>
-        <td>Easy Home — Islamic (Diminishing Musharakah)</td>
-        <td>Pakistan's largest Islamic bank; widely used for the Shariah-compliant route.</td>
-      </tr>
-      <tr>
-        <td><strong>HBL</strong></td>
-        <td>Islamic Home Finance — Diminishing Musharakah</td>
-        <td>Reported limits roughly Rs 2m–50m for its own product range; scheme terms apply to the subsidised tier.</td>
-      </tr>
-      <tr>
-        <td><strong>Standard Chartered</strong></td>
-        <td>Mera Pakistan Mera Ghar mortgage</td>
-        <td>Long-standing participant in the subsidised programme.</td>
-      </tr>
-      <tr>
-        <td><strong>Sindh Bank</strong></td>
-        <td>Mera Ghar / subsidised mortgage</td>
-        <td>One of several public-sector banks in the scheme.</td>
-      </tr>
-      <tr>
-        <td><strong>MCB, UBL, Bank Alfalah &amp; others</strong></td>
-        <td>Conventional &amp; Islamic home finance</td>
-        <td>Most large commercial banks offer a subsidised-scheme tier; compare fees and turnaround.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>Because the subsidised <em>rate</em> is fixed by the State Bank, what actually differs between banks is <strong>processing fees, valuation charges, turnaround time, and service</strong>, not the headline markup. Shortlist two or three, compare their total upfront cost, and check the current participating list on <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>, since banks join and leave the scheme over time.</p>
-
-  <h2>How to Apply: Procedure and Required Documents</h2>
-
-  <p>The process is more paperwork than difficulty. Salaried applicants with a stable job and clean credit are exactly the profile the scheme is built for. The flow runs roughly like this:</p>
-
-  <div class="step-block">
-    <div class="step-num">1</div>
-    <div class="step-body">
-      <h3>Check eligibility and pick your tier</h3>
-      <p>Confirm you are a first-home buyer within the size limit, and that your income comfortably covers the likely installment. A useful self-test: the monthly installment should sit inside <strong>35–40% of your take-home pay</strong>, which is the debt-burden ratio banks apply. Use a bank's online EMI/home-loan calculator to estimate the installment on the amount you need.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">2</div>
-    <div class="step-body">
-      <h3>Choose a bank and get pre-approval</h3>
-      <p>Shortlist participating banks, compare processing fees, and approach one for an indicative approval. This tells you the maximum loan they will offer against your income before you commit to a specific property.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">3</div>
-    <div class="step-body">
-      <h3>Gather your documents</h3>
-      <p>The standard set for a salaried applicant (the exact list is on each bank's form):</p>
-      <ul style="line-height:1.9;margin-top:6px">
-        <li><strong>CNIC</strong> copies for the applicant and any co-applicant/guarantor</li>
-        <li>Two recent <strong>passport-size photographs</strong></li>
-        <li><strong>Salary slips</strong> for the last 3–6 months plus an <strong>employer/salary certificate</strong></li>
-        <li><strong>Bank statements</strong> for the last 6–12 months</li>
-        <li><strong>NTN / proof of filer status</strong> (more on why this matters below)</li>
-        <li><strong>Property documents</strong>: sale agreement, title deed/registry, approved building plan, and any NOC</li>
-        <li>For the <strong>self-employed</strong>: business proof, tax returns, and bank statements in place of salary slips</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">4</div>
-    <div class="step-body">
-      <h3>Submit, get the property valued, and clear the credit check</h3>
-      <p>The bank runs an <strong>eCIB credit-bureau check</strong> on you and commissions an <strong>independent valuation</strong> of the property. Both must pass. A weak credit history or an over-priced/irregular property are the two most common stumbling blocks.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">5</div>
-    <div class="step-body">
-      <h3>Receive the offer, pay your equity, and disburse</h3>
-      <p>On approval the bank issues an offer letter. You pay your <strong>down payment / equity contribution</strong>, commonly around <strong>10–20%</strong> of the property value, and the bank disburses the rest. The property is registered (with the bank's charge/co-ownership recorded), and your fixed monthly installments begin.</p>
-    </div>
-  </div>
-
-  <h2>Why 2026 Is a Good Time to Take This Loan</h2>
-
-  <p>Timing arguments are usually soft. This one is unusually concrete, because three independent forces happen to point the same way right now.</p>
-
-  <p><strong>1. The subsidised rate is far below market, and fixed.</strong> Paying about 5% while a market borrower pays roughly KIBOR + 3% (mid-teens) is the core of it. The SBP policy rate is currently 11.5% and holding, so a market mortgage is nowhere near 5%. Because the 5% is <em>fixed for 10 years</em>, you are insulated from rate moves during the subsidised decade regardless of what the SBP does next.</p>
-
-  <p><strong>2. The budget cut the cost of buying.</strong> The FY27 budget reportedly trimmed property transaction taxes to revive real estate: <strong>transfer tax for filers from 2.5% to 1.25%</strong> and <strong>purchase tax from 5.5% to 2.75%</strong>. On a multi-million-rupee property that is a meaningful saving on entry, and it stacks with a separate <strong>Rs 71 billion</strong> allocation reported for the PM's Apna Ghar housing programme. These figures are as reported at budget presentation on 12 June 2026 and may be amended. Verify on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>
-
-  <p><strong>3. Inflation makes a fixed loan cheap in real terms.</strong> The budget reportedly projects <strong>8.2% inflation for FY27</strong>. A loan whose rate is fixed at 5% while prices rise faster than that has a <em>negative real cost</em>. You repay in rupees worth less each year, while rents on the home you would otherwise have rented keep climbing. A fixed installment against a rising rent is one of the few inflation-protected positions an ordinary household can hold.</p>
-
-  <div class="callout callout-blue" style="margin:22px 0">
-    <strong>The counterweight:</strong> after the 10-year subsidy ends, the rate becomes variable (KIBOR + margin), so plan for a higher installment in year 11 onwards. And property is <em>illiquid</em>. You cannot sell a bedroom to cover an emergency. The timing is favourable, but only if your finances can absorb both the reset and an unexpected shock without forcing a distressed sale.
-  </div>
-
-  <h2>What It Means for a Salaried or Low-Income Household's Investments</h2>
-
-  <p>Here is the framing this site cares about most. A subsidised home loan is not just a place to live. Financially, it is <strong>a leveraged real-asset investment bought with the cheapest money you will ever be offered</strong>. Three ways to think about it.</p>
-
-  <p><strong>Rent becomes equity.</strong> Every rent cheque funds your landlord's asset. Every installment, by contrast, buys back a slice of your own home (literally so under Diminishing Musharakah). A home loan is therefore a form of <em>forced saving</em>, the most reliable kind, because the bank rather than your willpower enforces it. For a low-income household that struggles to save voluntarily, this structure can build more net worth over a decade than any voluntary plan they would actually stick to.</p>
-
-  <p><strong>Cheap leverage amplifies a real asset.</strong> Putting down ~15% and borrowing the rest at a subsidised 5% means a modest rise in the property's value translates into a large return on the cash you actually invested. That leverage cuts both ways, so it is only sound for a <em>primary residence you intend to keep</em>, not a speculative flip.</p>
-
-  <p><strong>But do not let the house eat your whole balance sheet.</strong> This is where households get hurt. Four guardrails.</p>
-
-  <ul style="line-height:1.9">
-    <li><strong>Keep the installment inside ~35–40% of income.</strong> Beyond that, one bad month (a medical bill, a job gap) turns the dream asset into a default risk.</li>
-    <li><strong>Build the emergency floor first.</strong> Hold 3–6 months of expenses in something liquid before you sign. A <a href="/guides/money-market-funds-vs-bank-savings.html">money market fund</a> pays far more than a current account while staying accessible. That is exactly the buffer a leveraged household needs.</li>
-    <li><strong>Don't drain every rupee into the down payment.</strong> Stripping your savings to the bone to put 30% down leaves you fragile. The subsidy already makes borrowing cheap, so there is little reason to over-fund the equity and leave yourself no cushion.</li>
-    <li><strong>Stay diversified.</strong> A house is one large, illiquid, undiversified asset tied to one city's property market. Keep some money working in liquid, diversified instruments (see <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs mutual funds</a> and our <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual funds guide</a>) so your entire net worth doesn't ride on a single address.</li>
-  </ul>
-
-  <p><strong>One free optimisation: become a filer first.</strong> The budget's property-tax cuts (transfer 1.25%, purchase 2.75%) are the <em>filer</em> rates. Non-filers pay materially more, and on a multi-million-rupee property that difference dwarfs the cost of filing one annual return. Getting on FBR's Active Taxpayer List before you buy is the highest-return hour of admin in this entire process. Our <a href="/guides/investment-tax-pakistan.html">filer vs non-filer tax guide</a> walks through the IRIS steps.</p>
-
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-what-is-the-scheme"><summary class="faq-question">What is the Pakistan housing loan scheme in 2026?</summary><div class="faq-answer">It is a government markup-subsidy home-financing scheme, currently reported under the name Mera Ghar Mera Aashiana, building on the earlier Mera Pakistan Mera Ghar / Naya Pakistan Housing programme. The State Bank of Pakistan and NAPHDA route it through participating banks. As revised by the ECC in early 2026, the maximum loan was raised to about Rs 10 million, the end-user markup set at a uniform 5% for the first 10 years, and eligible units expanded to houses up to 10 marla or flats up to 1,500 square feet. The bank's price is reported as one-year KIBOR plus 3%, with the government paying the difference as subsidy. Always verify current terms on sbp.org.pk and with the participating bank before applying.</div></details>
-
-  <details class="faq-item" id="faq-who-can-apply"><summary class="faq-question">Who can apply for the subsidised housing loan?</summary><div class="faq-answer">Broadly, an adult Pakistani CNIC holder buying or building a first home within the eligible size limit, who does not already own a house and has a verifiable income that comfortably covers the installment. Banks set their own minimum income — commonly around Rs 50,000 a month for existing customers and higher for new ones — and an age cap so the loan matures before retirement. Exact eligibility, income floors, and first-home conditions vary by bank and tier, so confirm on sbp.org.pk and the bank's site.</div></details>
-
-  <details class="faq-item" id="faq-which-banks-offer"><summary class="faq-question">Which banks offer the Mera Ghar Mera Aashiana home loan?</summary><div class="faq-answer">Most major banks participate, both conventional and Islamic. Islamic banks offer it under Diminishing Musharakah product names — for example Meezan Bank's Easy Home and HBL's Islamic Home Finance — while conventional banks, Standard Chartered, Sindh Bank, MCB, UBL and others also lend under the scheme. The subsidy terms are set by the State Bank; the bank you choose handles the application, valuation, and servicing. Compare processing fees and service quality, and confirm the current participating list on sbp.org.pk.</div></details>
-
-  <details class="faq-item" id="faq-why-2026-good-time"><summary class="faq-question">Why is 2026 a good time to take a housing loan in Pakistan?</summary><div class="faq-answer">Three reasons line up. First, the subsidised end-user rate of about 5% is far below a normal mortgage priced at roughly KIBOR plus 3% (in the mid-teens), and it is fixed for the first 10 years. Second, the FY27 budget reportedly cut property transaction taxes — transfer tax for filers from 2.5% to 1.25% and purchase tax from 5.5% to 2.75% — lowering the cost of buying. Third, with inflation projected around 8.2% for FY27, a fixed 5% nominal cost is very cheap in real terms while rents keep rising. These figures are as reported and subject to change; verify on sbp.org.pk and fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-good-investment-salaried"><summary class="faq-question">Is taking a home loan a good investment for a salaried or low-income family?</summary><div class="faq-answer">For a primary residence at a subsidised 5% rate it usually is, because each installment builds your own equity instead of a landlord's, and the home is a forced-savings real asset bought with cheap leverage. The cautions are real, though: keep the installment within roughly 35-40% of income, hold a 3-6 month emergency fund before committing, do not drain every rupee of savings into the down payment, and remember a house is one large illiquid asset — keep some money in liquid funds for diversification. This is general education, not personal financial advice.</div></details>
-
-  <details class="faq-item" id="faq-documents-needed"><summary class="faq-question">What documents do I need to apply for the housing loan?</summary><div class="faq-answer">Banks typically ask for your CNIC, recent salary slips or proof of business income, bank statements covering the last six to twelve months, and the property documents for the home you intend to buy or build. Salaried applicants usually add an employer letter, while self-employed applicants provide business registration and tax records. The bank also arranges a property valuation as part of approval. Exact checklists differ by bank and by whether you apply under a conventional or Islamic product, so confirm the current list with the participating bank and on sbp.org.pk.</div></details>
-
-  <details class="faq-item" id="faq-down-payment"><summary class="faq-question">How much down payment is required for the subsidised home loan?</summary><div class="faq-answer">Home-finance schemes generally fund a percentage of the property value, so the borrower contributes the rest as a down payment or equity share. The exact loan-to-value ratio depends on the bank, the property tier, and the size of the unit within the eligible limits. A larger down payment lowers the financed amount and the monthly installment, while a smaller one increases both. Because these ratios change with policy and lender, verify the current down-payment and loan-to-value terms with the participating bank and on sbp.org.pk before budgeting.</div></details>
-
-  <details class="faq-item" id="faq-conventional-vs-islamic"><summary class="faq-question">What is the difference between the conventional and Islamic versions of the loan?</summary><div class="faq-answer">The conventional version is structured as an interest-bearing mortgage, with the bank's price reported as one-year KIBOR plus 3% and the government paying the difference down to the subsidised end-user rate. The Islamic version uses Diminishing Musharakah, where the bank and customer co-own the property and the customer gradually buys out the bank's share while paying rent on the portion still owned by the bank. The end-user cost under the subsidy is designed to be comparable, and major Islamic banks offer it under product names such as Meezan Easy Home and HBL Islamic Home Finance. Confirm the structure and current terms with your chosen bank and on sbp.org.pk.</div></details>
-
-  <details class="faq-item" id="faq-can-i-prepay"><summary class="faq-question">Can I pay off the housing loan early, and are there penalties?</summary><div class="faq-answer">Many home-finance products allow partial prepayments or full early settlement, which can reduce the total markup you pay over the life of the loan. Some lenders apply early-settlement or partial-payment charges, and the rules can differ between conventional and Diminishing Musharakah products. Since terms vary by bank and can change, read the finance agreement carefully and confirm any prepayment conditions and fees directly with the participating bank. This is general information, not financial advice.</div></details>
-
-  <details class="faq-item" id="faq-build-on-own-plot"><summary class="faq-question">Can I use the scheme to build a house on a plot I already own?</summary><div class="faq-answer">Subsidised housing schemes in Pakistan have generally covered construction of a home as well as purchase, provided the unit stays within the eligible size limits, such as houses up to 10 marla or flats up to about 1,500 square feet as reported for the current programme. For self-construction, banks usually release funds in stages tied to building progress and require ownership documents for the plot. Eligibility for construction financing, disbursement rules, and size limits can differ by bank and policy revision, so verify the current terms with the participating bank and on sbp.org.pk.</div></details>
-
-  <!-- Ad slot 3 — after FAQ section -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Reading</h3>
-    <a href="/blog/budget-2026-27-tax-slabs-salaried-explained.html">Budget 2026-27 Tax Slabs Explained: A Sigh of Relief for the Salaried Class</a>
-    <a href="/blog/budget-2026-27-salaried-class-investing.html">Budget 2026-27 Cut Your Income Tax — 5 Smart Moves for the Salaried Class</a>
-    <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed in Pakistan: Filer vs Non-Filer</a>
-    <a href="/guides/money-market-funds-vs-bank-savings.html">Money Market Funds vs Bank Savings Accounts</a>
-    <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan: A Practical Guide</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not financial, tax, or property advice</strong>. All scheme terms, rates, limits, and tax figures are <strong>as reported in 2026</strong> and the housing scheme has been revised repeatedly — verify the current rules on sbp.org.pk, the participating bank, and fbr.gov.pk before applying. Budget 2026-27 figures are as reported at presentation on 12 June 2026 and remain subject to amendment until the Finance Act is passed. Worked figures and examples are deliberately simplified illustrations, not recommendations. Consult the bank and a qualified financial adviser before taking on a mortgage.</div>
-
 </div>
 
+<main>
+<article class="art-frame">
+
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li aria-current="page">Pakistan Housing Loan Scheme 2026</li>
+    </ol>
+  </nav>
+
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 07 — Property &amp; Credit · Housing Finance</div>
+      <h1>Pakistan housing loan scheme 2026: Mera Ghar Mera Aashiana explained.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 13 June 2026</span>
+        <span>· 11 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">In one line</div>
+      <p>Pakistan's 2026 subsidised housing scheme, reported as <b>Mera Ghar Mera Aashiana</b>, lends up to about <b class="acc">Rs 10 million</b> at a fixed <b class="acc">5%</b> end-user rate for the first 10 years, through participating banks, for a house up to 10 marla or a flat up to 1,500 square feet.</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 13 June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Lead / quick answer -->
+      <div class="lead">
+        <p><strong>In one line:</strong> Pakistan's 2026 subsidised housing scheme, reported as Mera Ghar Mera Aashiana, lends up to about Rs 10 million at a fixed 5% end-user rate for the first 10 years, through participating banks, for a house up to 10 marla or a flat up to 1,500 square feet.</p>
+      </div>
+
+      <!-- Summary box -->
+      <div class="cl-key">
+        <div class="k">The scheme at a glance</div>
+        <ul>
+          <li>Pakistan's subsidised home-loan scheme, reported in 2026 as <strong>Mera Ghar Mera Aashiana</strong> (building on the earlier Mera Pakistan Mera Ghar / Naya Pakistan Housing programme), now lends up to about <strong>Rs 10 million</strong> at a fixed <strong>5% end-user rate for the first 10 years</strong>. Verify on sbp.org.pk</li>
+          <li>You apply through a participating bank (Meezan, HBL, Standard Chartered, Sindh Bank, MCB, UBL and others) for a house up to <strong>10 marla</strong> or a flat up to <strong>1,500 sq ft</strong></li>
+          <li>The FY27 budget reportedly <strong>cut property transaction taxes</strong> (transfer 2.5%→1.25%, purchase 5.5%→2.75% for filers), making 2026 an unusually cheap window to buy</li>
+          <li>For a salaried family, a subsidised loan turns rent into <strong>your own equity</strong>. That only holds if the installment stays inside ~35–40% of income and your emergency fund is already built</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary, before main content -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>For most salaried Pakistanis a home is the single biggest purchase of a lifetime. For decades the maths simply did not work. A normal mortgage charged a rate in the mid-to-high teens that no ordinary salary could service. The government's markup-subsidy housing scheme exists to break that wall. It pays part of the bank's profit so the borrower's own rate stays low and fixed. In 2026 the scheme was sharpened again: a bigger loan ceiling, a single low rate, larger eligible homes. This guide covers what the loan actually is, who can take it, which banks offer it, the documents and steps, why this particular window is favourable, and the part most coverage skips entirely, namely what carrying this loan means for the rest of a household's savings and investments.</p>
+
+      <p>One housekeeping note before the detail. Scheme branding in Pakistan changes often. The subsidised mortgage launched in 2020 as <strong>Mera Pakistan Mera Ghar</strong> under the Naya Pakistan Housing programme. The revised 2026 version is widely reported as <strong>Mera Ghar Mera Aashiana</strong>, and a separate <strong>PM's Apna Ghar</strong> allocation also shows up in the FY27 budget. Banks sell the same underlying subsidy under their own product names (Meezan's <em>Easy Home</em>, HBL's <em>Islamic Home Finance</em>, and so on). Every rate and limit below is <strong>as reported</strong> and changes with policy, so treat <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a> and the participating bank as the authoritative source before you act.</p>
+
+      <!-- Live snapshot widget (article.js fills #live-snap from data.json) -->
+      <div id="live-snap"></div>
+
+      <h2 id="s1"><span class="sn">01</span>What the housing loan actually is</h2>
+
+      <p>Strip away the branding and the scheme is one idea. <strong>The government subsidises the markup so you pay a low, fixed rate.</strong> In a normal home loan the bank charges roughly <strong>one-year KIBOR plus 3%</strong>, and with KIBOR in the low double digits that lands in the mid-teens. Under the subsidised scheme, as revised by the Economic Coordination Committee in early 2026, the <strong>end user pays a uniform 5%</strong> for the first 10 years and the government pays the bank the difference. The same revision raised the maximum loan to about <strong>Rs 10 million</strong> and expanded eligible units to a <strong>house up to 10 marla or a flat up to 1,500 square feet</strong>, with a reported four-year target of financing around 500,000 homes.</p>
+
+      <p>Two structural points matter. First, the subsidy covers the <strong>first 10 years</strong>. The loan tenor itself can run up to about <strong>20 years</strong>, and after the subsidised decade the rate becomes variable (KIBOR plus a margin). Budget for that reset. It is the single most overlooked feature. Second, most banks offer the loan two ways:</p>
+
+      <ul>
+        <li><strong>Conventional.</strong> A standard subsidised mortgage with the 5% markup.</li>
+        <li><strong>Islamic (Diminishing Musharakah).</strong> The Shariah-compliant version most Islamic banks use. The bank and you jointly buy the property, you pay rent on the bank's share, and you gradually buy its units back until you own it outright. The cost works out to the same subsidised rate, structured as rent rather than interest. See our <a href="/guides/halal-investing-pakistan.html">halal investing guide</a> for how Diminishing Musharakah avoids riba.</li>
+      </ul>
+
+      <div class="cl-dark">
+        <p><strong>The number that makes this worth reading:</strong> a borrower under the scheme pays roughly 5% while a market-rate buyer pays roughly KIBOR + 3% ≈ the mid-teens. On a Rs 10 million, 20-year loan that gap is worth lakhs of rupees a year in saved markup. The government is, in effect, handing eligible first-home buyers a large, ongoing subsidy. That is the whole reason to understand the eligibility rules carefully.</p>
+      </div>
+
+      <h2 id="s2"><span class="sn">02</span>Who can apply</h2>
+
+      <p>The scheme is aimed squarely at first-time, owner-occupier buyers of modest homes, not investors assembling a portfolio of flats. Banks set their own precise rules within the State Bank's framework, but the common gates are:</p>
+
+      <div class="tbl-wrap">
+        <table class="v2-table">
+          <thead>
+            <tr>
+              <th>Requirement</th>
+              <th>Typical condition (verify with the bank)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Nationality &amp; ID</strong></td>
+              <td>Pakistani national with a valid CNIC; a co-applicant (often a spouse) is allowed and can raise the eligible loan.</td>
+            </tr>
+            <tr>
+              <td><strong>Age</strong></td>
+              <td>Adult, commonly 21–65, with the loan structured to mature before retirement age.</td>
+            </tr>
+            <tr>
+              <td><strong>First home</strong></td>
+              <td>Generally you must <em>not already own a house</em>; the subsidy is for a first/primary residence and is usually one-per-person.</td>
+            </tr>
+            <tr>
+              <td><strong>Property size</strong></td>
+              <td>House up to 10 marla or flat up to 1,500 sq ft (raised in the 2026 revision).</td>
+            </tr>
+            <tr>
+              <td><strong>Income</strong></td>
+              <td>A verifiable, regular income that covers the installment. Banks commonly look for around Rs 50,000/month for existing customers and more for new ones. Salaried and self-employed both qualify with the right paperwork.</td>
+            </tr>
+            <tr>
+              <td><strong>Credit record</strong></td>
+              <td>A clean credit history (the bank checks the SBP's eCIB bureau); existing defaults are a common rejection reason.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Because the scheme has been re-tiered several times, the exact income floors, first-home conditions, and any registration step (historically via NAPHDA) shift between revisions and between banks. Confirm the current criteria on <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a> and the specific bank before you build your plans around a number.</p>
+
+      <!-- Ad slot 2 — mid-article -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <h2 id="s3"><span class="sn">03</span>Which banks offer it</h2>
+
+      <p>The subsidy is set centrally by the State Bank, but you borrow from and deal with an individual bank. That bank handles your application, the property valuation, and the monthly servicing. Most major banks participate, in both conventional and Islamic flavours. A non-exhaustive map of who lends under the scheme:</p>
+
+      <div class="tbl-wrap">
+        <table class="v2-table">
+          <thead>
+            <tr>
+              <th>Bank</th>
+              <th>Product / type</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Meezan Bank</strong></td>
+              <td>Easy Home — Islamic (Diminishing Musharakah)</td>
+              <td>Pakistan's largest Islamic bank; widely used for the Shariah-compliant route.</td>
+            </tr>
+            <tr>
+              <td><strong>HBL</strong></td>
+              <td>Islamic Home Finance — Diminishing Musharakah</td>
+              <td>Reported limits roughly Rs 2m–50m for its own product range; scheme terms apply to the subsidised tier.</td>
+            </tr>
+            <tr>
+              <td><strong>Standard Chartered</strong></td>
+              <td>Mera Pakistan Mera Ghar mortgage</td>
+              <td>Long-standing participant in the subsidised programme.</td>
+            </tr>
+            <tr>
+              <td><strong>Sindh Bank</strong></td>
+              <td>Mera Ghar / subsidised mortgage</td>
+              <td>One of several public-sector banks in the scheme.</td>
+            </tr>
+            <tr>
+              <td><strong>MCB, UBL, Bank Alfalah &amp; others</strong></td>
+              <td>Conventional &amp; Islamic home finance</td>
+              <td>Most large commercial banks offer a subsidised-scheme tier; compare fees and turnaround.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Because the subsidised <em>rate</em> is fixed by the State Bank, what actually differs between banks is <strong>processing fees, valuation charges, turnaround time, and service</strong>, not the headline markup. Shortlist two or three, compare their total upfront cost, and check the current participating list on <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>, since banks join and leave the scheme over time.</p>
+
+      <h2 id="s4"><span class="sn">04</span>How to apply: procedure and required documents</h2>
+
+      <p>The process is more paperwork than difficulty. Salaried applicants with a stable job and clean credit are exactly the profile the scheme is built for. The flow runs roughly like this:</p>
+
+      <div class="step-block">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Check eligibility and pick your tier</h3>
+          <p>Confirm you are a first-home buyer within the size limit, and that your income comfortably covers the likely installment. A useful self-test: the monthly installment should sit inside <strong>35–40% of your take-home pay</strong>, which is the debt-burden ratio banks apply. Use a bank's online EMI/home-loan calculator to estimate the installment on the amount you need.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Choose a bank and get pre-approval</h3>
+          <p>Shortlist participating banks, compare processing fees, and approach one for an indicative approval. This tells you the maximum loan they will offer against your income before you commit to a specific property.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Gather your documents</h3>
+          <p>The standard set for a salaried applicant (the exact list is on each bank's form):</p>
+          <ul>
+            <li><strong>CNIC</strong> copies for the applicant and any co-applicant/guarantor</li>
+            <li>Two recent <strong>passport-size photographs</strong></li>
+            <li><strong>Salary slips</strong> for the last 3–6 months plus an <strong>employer/salary certificate</strong></li>
+            <li><strong>Bank statements</strong> for the last 6–12 months</li>
+            <li><strong>NTN / proof of filer status</strong> (more on why this matters below)</li>
+            <li><strong>Property documents</strong>: sale agreement, title deed/registry, approved building plan, and any NOC</li>
+            <li>For the <strong>self-employed</strong>: business proof, tax returns, and bank statements in place of salary slips</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Submit, get the property valued, and clear the credit check</h3>
+          <p>The bank runs an <strong>eCIB credit-bureau check</strong> on you and commissions an <strong>independent valuation</strong> of the property. Both must pass. A weak credit history or an over-priced/irregular property are the two most common stumbling blocks.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Receive the offer, pay your equity, and disburse</h3>
+          <p>On approval the bank issues an offer letter. You pay your <strong>down payment / equity contribution</strong>, commonly around <strong>10–20%</strong> of the property value, and the bank disburses the rest. The property is registered (with the bank's charge/co-ownership recorded), and your fixed monthly installments begin.</p>
+        </div>
+      </div>
+
+      <h2 id="s5"><span class="sn">05</span>Why 2026 is a good time to take this loan</h2>
+
+      <p>Timing arguments are usually soft. This one is unusually concrete, because three independent forces happen to point the same way right now.</p>
+
+      <p><strong>1. The subsidised rate is far below market, and fixed.</strong> Paying about 5% while a market borrower pays roughly KIBOR + 3% (mid-teens) is the core of it. The SBP policy rate is currently 11.5% and holding, so a market mortgage is nowhere near 5%. Because the 5% is <em>fixed for 10 years</em>, you are insulated from rate moves during the subsidised decade regardless of what the SBP does next.</p>
+
+      <p><strong>2. The budget cut the cost of buying.</strong> The FY27 budget reportedly trimmed property transaction taxes to revive real estate: <strong>transfer tax for filers from 2.5% to 1.25%</strong> and <strong>purchase tax from 5.5% to 2.75%</strong>. On a multi-million-rupee property that is a meaningful saving on entry, and it stacks with a separate <strong>Rs 71 billion</strong> allocation reported for the PM's Apna Ghar housing programme. These figures are as reported at budget presentation on 12 June 2026 and may be amended. Verify on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>
+
+      <p><strong>3. Inflation makes a fixed loan cheap in real terms.</strong> The budget reportedly projects <strong>8.2% inflation for FY27</strong>. A loan whose rate is fixed at 5% while prices rise faster than that has a <em>negative real cost</em>. You repay in rupees worth less each year, while rents on the home you would otherwise have rented keep climbing. A fixed installment against a rising rent is one of the few inflation-protected positions an ordinary household can hold.</p>
+
+      <div class="cl-blue">
+        <p><strong>The counterweight:</strong> after the 10-year subsidy ends, the rate becomes variable (KIBOR + margin), so plan for a higher installment in year 11 onwards. And property is <em>illiquid</em>. You cannot sell a bedroom to cover an emergency. The timing is favourable, but only if your finances can absorb both the reset and an unexpected shock without forcing a distressed sale.</p>
+      </div>
+
+      <h2 id="s6"><span class="sn">06</span>What it means for a salaried or low-income household's investments</h2>
+
+      <p>Here is the framing this site cares about most. A subsidised home loan is not just a place to live. Financially, it is <strong>a leveraged real-asset investment bought with the cheapest money you will ever be offered</strong>. Three ways to think about it.</p>
+
+      <p><strong>Rent becomes equity.</strong> Every rent cheque funds your landlord's asset. Every installment, by contrast, buys back a slice of your own home (literally so under Diminishing Musharakah). A home loan is therefore a form of <em>forced saving</em>, the most reliable kind, because the bank rather than your willpower enforces it. For a low-income household that struggles to save voluntarily, this structure can build more net worth over a decade than any voluntary plan they would actually stick to.</p>
+
+      <p><strong>Cheap leverage amplifies a real asset.</strong> Putting down ~15% and borrowing the rest at a subsidised 5% means a modest rise in the property's value translates into a large return on the cash you actually invested. That leverage cuts both ways, so it is only sound for a <em>primary residence you intend to keep</em>, not a speculative flip.</p>
+
+      <p><strong>But do not let the house eat your whole balance sheet.</strong> This is where households get hurt. Four guardrails.</p>
+
+      <ul>
+        <li><strong>Keep the installment inside ~35–40% of income.</strong> Beyond that, one bad month (a medical bill, a job gap) turns the dream asset into a default risk.</li>
+        <li><strong>Build the emergency floor first.</strong> Hold 3–6 months of expenses in something liquid before you sign. A <a href="/guides/money-market-funds-vs-bank-savings.html">money market fund</a> pays far more than a current account while staying accessible. That is exactly the buffer a leveraged household needs.</li>
+        <li><strong>Don't drain every rupee into the down payment.</strong> Stripping your savings to the bone to put 30% down leaves you fragile. The subsidy already makes borrowing cheap, so there is little reason to over-fund the equity and leave yourself no cushion.</li>
+        <li><strong>Stay diversified.</strong> A house is one large, illiquid, undiversified asset tied to one city's property market. Keep some money working in liquid, diversified instruments (see <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs mutual funds</a> and our <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual funds guide</a>) so your entire net worth doesn't ride on a single address.</li>
+      </ul>
+
+      <p><strong>One free optimisation: become a filer first.</strong> The budget's property-tax cuts (transfer 1.25%, purchase 2.75%) are the <em>filer</em> rates. Non-filers pay materially more, and on a multi-million-rupee property that difference dwarfs the cost of filing one annual return. Getting on FBR's Active Taxpayer List before you buy is the highest-return hour of admin in this entire process. Our <a href="/guides/investment-tax-pakistan.html">filer vs non-filer tax guide</a> walks through the IRIS steps.</p>
+
+      <h2 id="s7"><span class="sn">07</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-what-is-the-scheme"><summary class="faq-question">What is the Pakistan housing loan scheme in 2026?</summary><div class="faq-answer">It is a government markup-subsidy home-financing scheme, currently reported under the name Mera Ghar Mera Aashiana, building on the earlier Mera Pakistan Mera Ghar / Naya Pakistan Housing programme. The State Bank of Pakistan and NAPHDA route it through participating banks. As revised by the ECC in early 2026, the maximum loan was raised to about Rs 10 million, the end-user markup set at a uniform 5% for the first 10 years, and eligible units expanded to houses up to 10 marla or flats up to 1,500 square feet. The bank's price is reported as one-year KIBOR plus 3%, with the government paying the difference as subsidy. Always verify current terms on sbp.org.pk and with the participating bank before applying.</div></details>
+
+      <details class="faq-item" id="faq-who-can-apply"><summary class="faq-question">Who can apply for the subsidised housing loan?</summary><div class="faq-answer">Broadly, an adult Pakistani CNIC holder buying or building a first home within the eligible size limit, who does not already own a house and has a verifiable income that comfortably covers the installment. Banks set their own minimum income — commonly around Rs 50,000 a month for existing customers and higher for new ones — and an age cap so the loan matures before retirement. Exact eligibility, income floors, and first-home conditions vary by bank and tier, so confirm on sbp.org.pk and the bank's site.</div></details>
+
+      <details class="faq-item" id="faq-which-banks-offer"><summary class="faq-question">Which banks offer the Mera Ghar Mera Aashiana home loan?</summary><div class="faq-answer">Most major banks participate, both conventional and Islamic. Islamic banks offer it under Diminishing Musharakah product names — for example Meezan Bank's Easy Home and HBL's Islamic Home Finance — while conventional banks, Standard Chartered, Sindh Bank, MCB, UBL and others also lend under the scheme. The subsidy terms are set by the State Bank; the bank you choose handles the application, valuation, and servicing. Compare processing fees and service quality, and confirm the current participating list on sbp.org.pk.</div></details>
+
+      <details class="faq-item" id="faq-why-2026-good-time"><summary class="faq-question">Why is 2026 a good time to take a housing loan in Pakistan?</summary><div class="faq-answer">Three reasons line up. First, the subsidised end-user rate of about 5% is far below a normal mortgage priced at roughly KIBOR plus 3% (in the mid-teens), and it is fixed for the first 10 years. Second, the FY27 budget reportedly cut property transaction taxes — transfer tax for filers from 2.5% to 1.25% and purchase tax from 5.5% to 2.75% — lowering the cost of buying. Third, with inflation projected around 8.2% for FY27, a fixed 5% nominal cost is very cheap in real terms while rents keep rising. These figures are as reported and subject to change; verify on sbp.org.pk and fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-good-investment-salaried"><summary class="faq-question">Is taking a home loan a good investment for a salaried or low-income family?</summary><div class="faq-answer">For a primary residence at a subsidised 5% rate it usually is, because each installment builds your own equity instead of a landlord's, and the home is a forced-savings real asset bought with cheap leverage. The cautions are real, though: keep the installment within roughly 35-40% of income, hold a 3-6 month emergency fund before committing, do not drain every rupee of savings into the down payment, and remember a house is one large illiquid asset — keep some money in liquid funds for diversification. This is general education, not personal financial advice.</div></details>
+
+      <details class="faq-item" id="faq-documents-needed"><summary class="faq-question">What documents do I need to apply for the housing loan?</summary><div class="faq-answer">Banks typically ask for your CNIC, recent salary slips or proof of business income, bank statements covering the last six to twelve months, and the property documents for the home you intend to buy or build. Salaried applicants usually add an employer letter, while self-employed applicants provide business registration and tax records. The bank also arranges a property valuation as part of approval. Exact checklists differ by bank and by whether you apply under a conventional or Islamic product, so confirm the current list with the participating bank and on sbp.org.pk.</div></details>
+
+      <details class="faq-item" id="faq-down-payment"><summary class="faq-question">How much down payment is required for the subsidised home loan?</summary><div class="faq-answer">Home-finance schemes generally fund a percentage of the property value, so the borrower contributes the rest as a down payment or equity share. The exact loan-to-value ratio depends on the bank, the property tier, and the size of the unit within the eligible limits. A larger down payment lowers the financed amount and the monthly installment, while a smaller one increases both. Because these ratios change with policy and lender, verify the current down-payment and loan-to-value terms with the participating bank and on sbp.org.pk before budgeting.</div></details>
+
+      <details class="faq-item" id="faq-conventional-vs-islamic"><summary class="faq-question">What is the difference between the conventional and Islamic versions of the loan?</summary><div class="faq-answer">The conventional version is structured as an interest-bearing mortgage, with the bank's price reported as one-year KIBOR plus 3% and the government paying the difference down to the subsidised end-user rate. The Islamic version uses Diminishing Musharakah, where the bank and customer co-own the property and the customer gradually buys out the bank's share while paying rent on the portion still owned by the bank. The end-user cost under the subsidy is designed to be comparable, and major Islamic banks offer it under product names such as Meezan Easy Home and HBL Islamic Home Finance. Confirm the structure and current terms with your chosen bank and on sbp.org.pk.</div></details>
+
+      <details class="faq-item" id="faq-can-i-prepay"><summary class="faq-question">Can I pay off the housing loan early, and are there penalties?</summary><div class="faq-answer">Many home-finance products allow partial prepayments or full early settlement, which can reduce the total markup you pay over the life of the loan. Some lenders apply early-settlement or partial-payment charges, and the rules can differ between conventional and Diminishing Musharakah products. Since terms vary by bank and can change, read the finance agreement carefully and confirm any prepayment conditions and fees directly with the participating bank. This is general information, not financial advice.</div></details>
+
+      <details class="faq-item" id="faq-build-on-own-plot"><summary class="faq-question">Can I use the scheme to build a house on a plot I already own?</summary><div class="faq-answer">Subsidised housing schemes in Pakistan have generally covered construction of a home as well as purchase, provided the unit stays within the eligible size limits, such as houses up to 10 marla or flats up to about 1,500 square feet as reported for the current programme. For self-construction, banks usually release funds in stages tied to building progress and require ownership documents for the plot. Eligibility for construction financing, disbursement rules, and size limits can differ by bank and policy revision, so verify the current terms with the participating bank and on sbp.org.pk.</div></details>
+
+      <!-- Ad slot 3 — after FAQ section -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Reading</h3>
+        <a href="/blog/budget-2026-27-tax-slabs-salaried-explained.html">Budget 2026-27 Tax Slabs Explained: A Sigh of Relief for the Salaried Class</a>
+        <a href="/blog/budget-2026-27-salaried-class-investing.html">Budget 2026-27 Cut Your Income Tax — 5 Smart Moves for the Salaried Class</a>
+        <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed in Pakistan: Filer vs Non-Filer</a>
+        <a href="/guides/money-market-funds-vs-bank-savings.html">Money Market Funds vs Bank Savings Accounts</a>
+        <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan: A Practical Guide</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not financial, tax, or property advice</strong>. All scheme terms, rates, limits, and tax figures are <strong>as reported in 2026</strong> and the housing scheme has been revised repeatedly — verify the current rules on sbp.org.pk, the participating bank, and fbr.gov.pk before applying. Budget 2026-27 figures are as reported at presentation on 12 June 2026 and remain subject to amendment until the Finance Act is passed. Worked figures and examples are deliberately simplified illustrations, not recommendations. Consult the bank and a qualified financial adviser before taking on a mortgage.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>What the loan is</a>
+            <a href="#s2"><span class="ti">02</span>Who can apply</a>
+            <a href="#s3"><span class="ti">03</span>Which banks offer it</a>
+            <a href="#s4"><span class="ti">04</span>How to apply &amp; documents</a>
+            <a href="#s5"><span class="ti">05</span>Why 2026 is a good time</a>
+            <a href="#s6"><span class="ti">06</span>What it means for your money</a>
+            <a href="#s7"><span class="ti">07</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">5%</div><div class="gl-l">Fixed end-user rate · 10 yrs</div></div>
+          <div class="gl-row"><div class="gl-n">Rs 10m</div><div class="gl-l">Maximum subsidised loan</div></div>
+          <div class="gl-row"><div class="gl-n">10 marla</div><div class="gl-l">Or flat up to 1,500 sq ft</div></div>
+          <div class="gl-row"><div class="gl-n">35–40%</div><div class="gl-l">Max installment of income</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/blog/budget-2026-27-tax-slabs-salaried-explained.html">Budget 2026-27 Tax Slabs Explained →</a>
+          <a href="/guides/investment-tax-pakistan.html">Filer vs Non-Filer Tax Guide →</a>
+          <a href="/guides/money-market-funds-vs-bank-savings.html">Money Market Funds vs Bank Savings →</a>
+          <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</article>
+</main>
+
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

@@ -31,12 +31,12 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -45,23 +45,163 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-4T2H0KH9H7');
 </script>
+
+<style>
+/* ── methodology.html — page-specific (v2 macro-terminal) ───────────── */
+.meth-crumb{
+  max-width:var(--maxw);margin:0 auto;
+  border-left:1px solid var(--line);border-right:1px solid var(--line);
+}
+.meth-crumb nav{
+  padding:14px var(--pad);border-bottom:1px solid var(--line2);
+  font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted2);
+}
+.meth-crumb ol{list-style:none;margin:0;padding:0;display:inline}
+.meth-crumb li{display:inline}
+.meth-crumb a{color:var(--green);border-bottom:1px solid var(--line)}
+.meth-crumb .sep{margin:0 8px;color:var(--muted)}
+
+/* hero */
+.meth-hero{
+  max-width:var(--maxw);margin:0 auto;
+  border-left:1px solid var(--line);border-right:1px solid var(--line);
+}
+.meth-hero .inner{padding:52px var(--pad);max-width:780px}
+.meth-hero h1{
+  font-family:var(--display);font-weight:800;line-height:1;letter-spacing:-.025em;color:var(--green-d);
+  font-size:clamp(2rem,4.6vw,3.4rem);margin:0 0 20px;
+}
+.meth-hero .lede{font-size:1.08rem;line-height:1.6;color:var(--ink2);margin:0;font-weight:500}
+
+/* generic full-bleed bordered section */
+.meth-sec{
+  max-width:var(--maxw);margin:0 auto;
+  border:1px solid var(--line);border-top:none;
+}
+.meth-sec .pad{padding:40px var(--pad)}
+.meth-sec h2{font-family:var(--display);font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:0 0 8px}
+.meth-sec p{font-size:1.02rem;line-height:1.7;color:var(--ink2);margin:0 0 16px;font-weight:500}
+.meth-sec p:last-child{margin-bottom:0}
+.meth-sec a.inline{color:var(--green);border-bottom:1px solid var(--line);font-weight:700}
+
+/* dark variant (primary sources) */
+.meth-sec.dark{background:var(--green-d);color:var(--sage)}
+.meth-sec.dark .kicker{font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:10px}
+.meth-sec.dark h2{color:var(--mint)}
+.source-row{
+  display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:baseline;
+  padding:20px var(--pad);border-top:1px solid var(--line-dk);
+}
+.source-row .stitle{font-family:var(--display);font-size:1rem;font-weight:700;color:#fff}
+.source-row .ssrc{font-family:var(--display);font-size:.62rem;font-weight:600;letter-spacing:.06em;color:var(--acid);margin-top:3px}
+.source-row .ssrc a{color:var(--acid);border-bottom:1px solid rgba(237,248,4,.4)}
+.source-row .sdesc{font-family:var(--body);font-size:.94rem;line-height:1.55;color:rgba(204,223,211,.82);font-weight:500}
+.source-row .sdesc a{color:var(--mint);border-bottom:1px solid rgba(204,223,211,.4)}
+
+/* live proof snapshot wrap (article.js fills #live-snap with its own markup) */
+.proof-shell .pad{padding-bottom:24px}
+.proof-note{font-size:.94rem;color:var(--muted);margin:0 0 16px;line-height:1.6}
+.proof-note a{color:var(--green);border-bottom:1px solid var(--line);font-weight:700}
+#live-snap{margin:0}
+
+/* pipeline grid */
+.pipe-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.pipe-step{padding:28px var(--pad);border-right:1px solid var(--line)}
+.pipe-step:last-child{border-right:none}
+.pipe-num{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--green);opacity:.5;margin-bottom:10px}
+.pipe-t{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--green-d);margin-bottom:6px}
+.pipe-d{font-family:var(--body);font-size:.88rem;line-height:1.55;color:var(--muted);font-weight:500}
+
+/* dark callout */
+.meth-callout{
+  background:var(--green-d);border-left:5px solid var(--acid);
+  padding:16px 20px;font-size:.92rem;color:#D7E7DD;line-height:1.6;margin:0;
+}
+.meth-callout b,.meth-callout strong{color:var(--acid)}
+
+/* verification + sidebar split */
+.meth-split{display:grid;grid-template-columns:minmax(0,1fr) 340px}
+.meth-split .main{padding:40px var(--pad);border-right:1px solid var(--line)}
+.meth-split .main h2{margin-top:0}
+.meth-split .main h2.next{margin-top:30px}
+
+/* independence list */
+.indep-list{border:1px solid var(--line);margin:6px 0 0}
+.indep-row{
+  display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:baseline;
+  padding:14px 18px;border-bottom:1px solid var(--line2);
+}
+.indep-row:last-child{border-bottom:none}
+.indep-i{font-family:var(--display);font-size:.9rem;font-weight:700;color:var(--green)}
+.indep-t{font-family:var(--body);font-size:.96rem;line-height:1.5;color:var(--ink2);font-weight:500}
+
+/* author rail */
+.meth-rail{padding:0}
+.rail-sticky{position:sticky;top:80px}
+.author-box{padding:30px 28px;border-bottom:1px solid var(--line);text-align:center}
+.author-avatar{
+  width:84px;height:84px;border-radius:50%;background:var(--green);color:var(--acid);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:1.8rem;font-weight:800;margin:0 auto 14px;
+}
+.author-name{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--green-d)}
+.author-role{font-family:var(--body);font-size:.85rem;color:var(--muted);font-weight:600;margin-top:4px}
+.author-bio{font-family:var(--body);font-size:.9rem;line-height:1.7;color:var(--ink2);margin:14px 0 0;font-weight:500;text-align:left}
+.author-bio p{margin:0 0 12px}
+.author-bio p:last-child{margin-bottom:0}
+.author-bio strong{color:var(--green-d)}
+.social-link{
+  display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+  font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);
+  border:1px solid var(--line);padding:8px 14px;border-radius:var(--radius);
+}
+.social-link:hover{background:var(--green-l)}
+.rail-explore{padding:24px 28px}
+.rail-explore .h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:6px}
+.rail-explore a{
+  display:block;padding:11px 0;border-top:1px solid var(--line2);
+  font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);
+}
+.rail-explore a::after{content:" →";color:var(--green)}
+.rail-explore a:hover{color:var(--green)}
+
+/* trailing spacer */
+.meth-spacer{height:36px}
+
+@media(max-width:860px){
+  .source-row{grid-template-columns:1fr;gap:6px}
+  .pipe-grid{grid-template-columns:1fr 1fr}
+  .pipe-step:nth-child(2n){border-right:none}
+  .pipe-step{border-bottom:1px solid var(--line)}
+  .pipe-step:nth-last-child(-n+2){border-bottom:none}
+  .meth-split{grid-template-columns:1fr}
+  .meth-split .main{border-right:none;border-bottom:1px solid var(--line)}
+  .rail-sticky{position:static}
+}
+@media(max-width:560px){
+  .pipe-grid{grid-template-columns:1fr}
+  .pipe-step{border-right:none;border-bottom:1px solid var(--line)}
+  .pipe-step:last-child{border-bottom:none}
+}
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header ─────────────────────────────────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -70,175 +210,255 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="breadcrumb"><a href="/">Home</a> &rsaquo; Methodology &amp; Editorial Standards</div>
-
-  <!-- Hero -->
-  <div class="hero-card">
-    <h1>Methodology &amp; Editorial Standards</h1>
-    <p style="margin-top:10px;font-size:1rem">How we source, update, and verify every figure on this site — who writes it, and how we keep our editorial decisions independent of our advertising.</p>
-  </div>
-
-  <!-- Live proof: this is the pipeline's actual output, today -->
-  <div class="card" style="border-top:3px solid var(--gold)">
-    <h2 style="margin-top:0">Proof, Not Promises</h2>
-    <p style="font-size:.92rem;color:var(--muted)">These numbers are the live output of the daily pipeline described below — fetched this morning, not typed by hand. If the date stamp ever looks stale, that is exactly the kind of thing we want you to <a href="/contact.html">report</a>.</p>
-    <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:6px;padding:18px;margin:0"></div>
-  </div>
-
-  <!-- Intro -->
-  <div class="card">
-    <p>Money is a serious subject, and trust has to be earned. This page exists so that you never have to take a number on Pakistan Investment Advisor at face value. Below we explain exactly where our data comes from, how often it is refreshed, how we check it for errors, who is behind the site, and how we make money — in plain language, with no spin.</p>
-    <p>We publish this because finance is what Google calls "Your Money or Your Life" (YMYL) content: information that can affect a reader's financial wellbeing. We hold ourselves to a high standard of accuracy and transparency, and we would rather tell you the limits of what we do than overstate our authority. If anything here is unclear, the <a href="/contact.html">contact page</a> is always open.</p>
-  </div>
-
-  <!-- Data sources -->
-  <div class="card">
-    <h2>How We Source Our Data</h2>
-    <p>Every figure on this site is traceable to an official, primary source — the institution that actually sets or publishes the number. We do not copy figures from other blogs, aggregators, or social media. The four primary sources we rely on are:</p>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#fce4ec">🏛</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">State Bank of Pakistan (SBP)</div>
-        <div style="font-size:.85rem;color:#5E5C52">Provides the SBP policy (interest) rate set by the Monetary Policy Committee, official CPI inflation readings, and the PKR–USD interbank exchange rate. These feed our return comparisons and the macro context shown across the guides. Source: <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a></div>
-      </div>
-    </div>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#E9EFE6">🏦</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">Central Directorate of National Savings (CDNS)</div>
-        <div style="font-size:.85rem;color:#5E5C52">Provides the official profit rates for every National Savings scheme — Special Savings Certificates, Defence Savings Certificates, Regular Income Certificates, Behbood Savings Certificates, and the Pensioners' Benefit Account. Source: <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a></div>
-      </div>
-    </div>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#E8EDF3">📋</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">MUFAP — Mutual Funds Association of Pakistan</div>
-        <div style="font-size:.85rem;color:#5E5C52">Provides daily Net Asset Values (NAVs) and standardised annualised return figures for SECP-registered mutual funds, both Islamic and conventional. MUFAP is the industry self-regulatory body, so its numbers are the closest thing to an official benchmark for fund performance. Source: <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">mufap.com.pk</a></div>
-      </div>
-    </div>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#F4E7D4">📈</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">Pakistan Stock Exchange (PSX)</div>
-        <div style="font-size:.85rem;color:#5E5C52">Provides closing stock prices, the KSE-100 index level, and dividend announcements used to calculate the dividend yields shown in our PSX guide. Source: <a href="https://www.psx.com.pk" target="_blank" rel="noopener">psx.com.pk</a></div>
-      </div>
-    </div>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#FBF1D8">🪙</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">Gold rates — local Sarafa rate with international fallback</div>
-        <div style="font-size:.85rem;color:#5E5C52">The 24K and 22K gold rates per tola, 10 gram and gram shown on the <a href="/gold-rates.html">gold rates page</a> are pulled daily from a public Pakistani market source that mirrors the Sarafa (jewellers' association) rate. If that source is unreachable, we fall back to the international spot price — gold futures in US dollars per ounce converted at the live PKR/USD rate — so the page always shows a value, clearly labelled with which method produced it. The local rate is a reference price; jewellers add making charges, so the till price is usually a little higher. The 6-year history chart and forecast calculator are derived from these inputs.</div>
-      </div>
-    </div>
-
-    <p style="margin-top:6px;margin-bottom:0">Where a derived figure (for example, a dividend yield or a real, inflation-adjusted return) is calculated rather than taken directly from a source, it is computed from these primary inputs using standard, publicly documented formulas — not from any proprietary or unverifiable model.</p>
-  </div>
-
-  <!-- Update cadence -->
-  <div class="card">
-    <h2>How Often Data Is Updated</h2>
-
-    <div style="margin:14px 0 22px">
-      <div class="pipeline-step">
-        <div class="step-num">1</div>
-        <div><strong style="font-family:var(--display)">06:00 PKT — Fetch</strong>
-        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">A scheduled GitHub Action pulls today's figures from SBP, CDNS, MUFAP, PSX and the daily gold market rate.</div></div>
-      </div>
-      <div class="pipeline-step">
-        <div class="step-num">2</div>
-        <div><strong style="font-family:var(--display)">Validate</strong>
-        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">Implausible jumps (a rate that doubles overnight) are flagged for review instead of being published blindly.</div></div>
-      </div>
-      <div class="pipeline-step">
-        <div class="step-num">3</div>
-        <div><strong style="font-family:var(--display)">Publish</strong>
-        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">The dataset and the guide/blog index are rebuilt and deployed — every chart, table and widget across the site updates at once.</div></div>
-      </div>
-      <div class="pipeline-step">
-        <div class="step-num">4</div>
-        <div><strong style="font-family:var(--display)">You verify</strong>
-        <div style="font-size:.88rem;color:var(--muted);line-height:1.7">Every figure carries an "as of" date and links to its primary source, so you can always check it yourself.</div></div>
-      </div>
-    </div>
-
-    <p>The figures on this site are refreshed automatically <strong>every day</strong>. We run an automated data pipeline — a scheduled GitHub Action — that pulls the latest numbers from the sources listed above and writes them into the site's dataset. Because the process is automated rather than hand-keyed, there is no lag while someone gets around to updating a spreadsheet, and far less room for transcription mistakes.</p>
-    <p>Every figure on the site carries an <strong>"as of" date</strong> so you can see exactly how fresh it is. Some data naturally moves faster than others: PSX prices and the PKR–USD rate change on every trading day, while the SBP policy rate only changes when the Monetary Policy Committee meets (roughly every six weeks) and CDNS profit rates change only when the government revises them. When a source has not published anything new, the "as of" date simply reflects the last time that source itself changed.</p>
-    <div class="callout callout-green">
-      <p style="margin:0;font-size:.9rem"><strong>Why this matters:</strong> rates in Pakistan can move sharply. An automated daily pipeline means the comparison you see today reflects today's environment, not a snapshot from months ago that has quietly gone stale.</p>
+<!-- ── Live ticker ───────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
   </div>
-
-  <!-- Verification -->
-  <div class="card">
-    <h2>How We Verify Accuracy &amp; Corrections</h2>
-    <p>Automation reduces human error, but it does not eliminate it — a source can change a page layout, publish a typo, or briefly serve bad data. To guard against this, headline figures are cross-checked against the primary source before they are relied upon in the guides, and obviously implausible values (for example, a profit rate that suddenly doubles overnight) are flagged for review rather than published blindly.</p>
-    <p>Even with these checks, this site is an <strong>educational tool, not a live trading terminal</strong>. Rates and prices can change between our last update and the moment you read a page. Before you actually invest, always confirm the current figure directly with the institution — the bank, the asset management company, the broker, CDNS, or the official source — because that number, not ours, is the one your money will be governed by.</p>
-    <p style="margin-bottom:0">If you spot a figure that looks wrong or out of date, please tell us. We genuinely want to know, and we correct verified errors promptly. You can report any issue through our <a href="/contact.html">contact page</a>.</p>
-  </div>
-
-  <!-- Author -->
-  <div class="card">
-    <h2>Who Writes This Site</h2>
-    <div class="author-card">
-      <div class="author-avatar">AA</div>
-      <div>
-        <div style="font-weight:700;font-size:1.1rem;margin-bottom:4px">Abdul Ahad</div>
-        <div style="color:var(--muted);font-size:.88rem;margin-bottom:10px">Software Engineer · Builder of this site &amp; its data pipeline</div>
-        <p>I am a software engineer, and I built both this site and the automated pipeline that keeps its data current. I am not an investment professional, and the guides are research-led rather than personal testimony: the underlying numbers come from official sources (FBR, SBP, PSX, CDNS, MUFAP), the calculators are tested, and where a guide describes a process it follows the official documented procedure. The content is AI-assisted and human-checked.</p>
-        <p>I want to be completely straight about my limits: <strong>I am not a SECP-registered or licensed financial advisor</strong>, and I do not present this as personal investing advice. What you read here is educational information built on primary sources and tested calculations. It cannot account for your specific circumstances, goals, or risk tolerance. For decisions that matter, please consult a SECP-registered advisor.</p>
-        <div>
-          <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" class="social-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Independence -->
-  <div class="card">
-    <h2>Independence &amp; Advertising Disclosure</h2>
-    <p>This site is free to use, and it is funded by <strong>display advertising</strong> — specifically Google AdSense, which serves the ads you see on the homepage and the guides. That is our only revenue stream.</p>
-    <p>Throughout the guides we also link out to brokers, asset management companies, CDNS, and other institutions so you can find the official source or open an account easily. To be clear about what those links are and are not:</p>
-    <ul>
-      <li>They are provided purely <strong>for your convenience</strong>, to point you to the right official page.</li>
-      <li>They are <strong>not paid placements and not affiliate links</strong>. No company has paid to be mentioned, recommended, or ranked.</li>
-      <li>We earn <strong>no commission</strong> if you click them, open an account, or invest. Our revenue is display advertising only.</li>
-    </ul>
-    <p style="margin-bottom:0">Because the ads are served programmatically by Google and we take no money from the institutions we write about, our editorial choices — which schemes we cover, how we compare them, what we caution against — are not influenced by who advertises or who we link to.</p>
-  </div>
-
-  <!-- Disclaimer -->
-  <div class="disclaimer-box">
-    <strong style="color:#7A5A1F">Important Disclaimer</strong>
-    <p style="margin-top:8px;margin-bottom:0;font-size:.88rem;color:#5E5C52;line-height:1.75">Pakistan Investment Advisor provides general educational information only and is not registered with SECP as an investment advisor. Nothing on this site constitutes personalised financial advice. Investment values can go up as well as down, and past performance of mutual funds or stocks does not guarantee future results. Always confirm current rates and prices with the relevant institution, and consult a SECP-registered financial advisor before making significant investment decisions.</p>
-  </div>
-
 </div>
 
+<main>
+
+  <!-- breadcrumb -->
+  <div class="meth-crumb">
+    <nav aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">HOME</a></li>
+        <li><span class="sep">/</span>METHODOLOGY</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- hero -->
+  <div class="meth-hero">
+    <div class="inner">
+      <div class="section-kicker">Methodology &amp; Editorial Standards</div>
+      <h1>How we source, check and update every number.</h1>
+      <p class="lede">How we source, update, and verify every figure on this site — who writes it, and how we keep our editorial decisions independent of our advertising. Money is a serious subject, and trust has to be earned. This page exists so you never have to take a number on Pakistan Investment Advisor at face value.</p>
+    </div>
+  </div>
+
+  <!-- live proof snapshot (article.js fills #live-snap) -->
+  <section class="meth-sec proof-shell" aria-labelledby="proof-h">
+    <div class="pad">
+      <div class="section-kicker">Proof, not promises</div>
+      <h2 id="proof-h">Today’s live pipeline output</h2>
+      <p class="proof-note">These numbers are the live output of the daily pipeline described below — fetched this morning, not typed by hand. If the date stamp ever looks stale, that is exactly the kind of thing we want you to <a href="/contact.html">report</a>.</p>
+      <div id="live-snap"></div>
+    </div>
+  </section>
+
+  <!-- intro / YMYL -->
+  <section class="meth-sec" aria-labelledby="why-h">
+    <div class="pad">
+      <h2 id="why-h">Why we publish this</h2>
+      <p>We publish this because finance is what Google calls “Your Money or Your Life” (YMYL) content: information that can affect a reader’s financial wellbeing. We hold ourselves to a high standard of accuracy and transparency, and we would rather tell you the limits of what we do than overstate our authority.</p>
+      <p>Below we explain exactly where our data comes from, how often it is refreshed, how we check it for errors, who is behind the site, and how we make money — in plain language, with no spin. If anything here is unclear, the <a class="inline" href="/contact.html">contact page</a> is always open.</p>
+    </div>
+  </section>
+
+  <!-- DATA SOURCES (dark) -->
+  <section class="meth-sec dark" aria-labelledby="sources-h">
+    <div class="pad">
+      <div class="kicker">Primary sources</div>
+      <h2 id="sources-h">Five institutions. No middlemen.</h2>
+      <p style="color:rgba(204,223,211,.82);margin-top:14px;margin-bottom:0">Every figure on this site is traceable to an official, primary source — the institution that actually sets or publishes the number. We do not copy figures from other blogs, aggregators, or social media.</p>
+    </div>
+
+    <div class="source-row">
+      <div>
+        <div class="stitle">State Bank of Pakistan (SBP)</div>
+        <div class="ssrc"><a href="https://www.sbp.org.pk" target="_blank" rel="noopener">SBP.ORG.PK</a></div>
+      </div>
+      <div class="sdesc">Provides the SBP policy (interest) rate set by the Monetary Policy Committee, official CPI inflation readings, and the PKR–USD interbank exchange rate. These feed our return comparisons and the macro context shown across the guides.</div>
+    </div>
+
+    <div class="source-row">
+      <div>
+        <div class="stitle">Central Directorate of National Savings (CDNS)</div>
+        <div class="ssrc"><a href="https://www.savings.gov.pk" target="_blank" rel="noopener">SAVINGS.GOV.PK</a></div>
+      </div>
+      <div class="sdesc">Provides the official profit rates for every National Savings scheme — Special Savings Certificates, Defence Savings Certificates, Regular Income Certificates, Behbood Savings Certificates, and the Pensioners’ Benefit Account.</div>
+    </div>
+
+    <div class="source-row">
+      <div>
+        <div class="stitle">MUFAP — Mutual Funds Association of Pakistan</div>
+        <div class="ssrc"><a href="https://www.mufap.com.pk" target="_blank" rel="noopener">MUFAP.COM.PK</a></div>
+      </div>
+      <div class="sdesc">Provides daily Net Asset Values (NAVs) and standardised annualised return figures for SECP-registered mutual funds, both Islamic and conventional. MUFAP is the industry self-regulatory body, so its numbers are the closest thing to an official benchmark for fund performance.</div>
+    </div>
+
+    <div class="source-row">
+      <div>
+        <div class="stitle">Pakistan Stock Exchange (PSX)</div>
+        <div class="ssrc"><a href="https://www.psx.com.pk" target="_blank" rel="noopener">PSX.COM.PK</a></div>
+      </div>
+      <div class="sdesc">Provides closing stock prices, the KSE-100 index level, and dividend announcements used to calculate the dividend yields shown in our PSX guide.</div>
+    </div>
+
+    <div class="source-row">
+      <div>
+        <div class="stitle">Gold — local Sarafa rate</div>
+        <div class="ssrc">+ INTL SPOT FALLBACK</div>
+      </div>
+      <div class="sdesc">The 24K and 22K gold rates per tola, 10 gram and gram shown on the <a href="/gold-rates.html">gold rates page</a> are pulled daily from a public Pakistani market source that mirrors the Sarafa (jewellers’ association) rate. If that source is unreachable, we fall back to the international spot price — gold futures in US dollars per ounce converted at the live PKR/USD rate — so the page always shows a value, clearly labelled with which method produced it. The local rate is a reference price; jewellers add making charges, so the till price is usually a little higher. The 6-year history chart and forecast calculator are derived from these inputs.</div>
+    </div>
+
+    <div class="source-row" style="grid-template-columns:1fr">
+      <div class="sdesc">Where a derived figure (for example, a dividend yield or a real, inflation-adjusted return) is calculated rather than taken directly from a source, it is computed from these primary inputs using standard, publicly documented formulas — not from any proprietary or unverifiable model.</div>
+    </div>
+  </section>
+
+  <!-- UPDATE CADENCE -->
+  <section class="meth-sec" aria-labelledby="cadence-h">
+    <div class="pad" style="padding-bottom:20px">
+      <h2 id="cadence-h">How often data is updated</h2>
+      <p style="margin-bottom:0">The figures on this site are refreshed automatically <strong>every day</strong> by a scheduled GitHub Action — no lag while someone gets around to updating a spreadsheet, and far less room for transcription mistakes.</p>
+    </div>
+
+    <div class="pipe-grid">
+      <div class="pipe-step">
+        <div class="pipe-num">01</div>
+        <div class="pipe-t">06:00 PKT — Fetch</div>
+        <div class="pipe-d">A scheduled GitHub Action pulls today’s figures from SBP, CDNS, MUFAP, PSX and the daily gold market rate.</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div class="pipe-t">Validate</div>
+        <div class="pipe-d">Implausible jumps (a rate that doubles overnight) are flagged for review instead of being published blindly.</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div class="pipe-t">Publish</div>
+        <div class="pipe-d">The dataset and the guide/blog index are rebuilt and deployed — every chart, table and widget across the site updates at once.</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">04</div>
+        <div class="pipe-t">You verify</div>
+        <div class="pipe-d">Every figure carries an “as of” date and links to its primary source, so you can always check it yourself.</div>
+      </div>
+    </div>
+
+    <div class="pad" style="border-top:1px solid var(--line)">
+      <p>Every figure on the site carries an <strong>“as of” date</strong> so you can see exactly how fresh it is. Some data naturally moves faster than others: PSX prices and the PKR–USD rate change on every trading day, while the SBP policy rate only changes when the Monetary Policy Committee meets (roughly every six weeks) and CDNS profit rates change only when the government revises them. When a source has not published anything new, the “as of” date simply reflects the last time that source itself changed.</p>
+      <div class="meth-callout"><strong>Why this matters:</strong> rates in Pakistan can move sharply. An automated daily pipeline means the comparison you see today reflects today’s environment, not a snapshot from months ago that has quietly gone stale.</div>
+    </div>
+  </section>
+
+  <!-- VERIFICATION + AUTHOR + INDEPENDENCE -->
+  <section class="meth-sec" aria-labelledby="verify-h">
+    <div class="meth-split">
+      <div class="main">
+        <h2 id="verify-h">Verification &amp; corrections</h2>
+        <p>Automation reduces human error, but it does not eliminate it — a source can change a page layout, publish a typo, or briefly serve bad data. To guard against this, headline figures are cross-checked against the primary source before they are relied upon in the guides, and obviously implausible values (for example, a profit rate that suddenly doubles overnight) are flagged for review rather than published blindly.</p>
+        <p>Even with these checks, this site is an <strong>educational tool, not a live trading terminal</strong>. Rates and prices can change between our last update and the moment you read a page. Before you actually invest, always confirm the current figure directly with the institution — the bank, the asset management company, the broker, CDNS, or the official source — because that number, not ours, is the one your money will be governed by.</p>
+        <p>If you spot a figure that looks wrong or out of date, please tell us. We genuinely want to know, and we correct verified errors promptly. You can report any issue through our <a class="inline" href="/contact.html">contact page</a>.</p>
+
+        <h2 class="next" id="indep-h">Independence &amp; advertising disclosure</h2>
+        <p>This site is free to use, and it is funded by <strong>display advertising</strong> — specifically Google AdSense, which serves the ads you see on the homepage and the guides. That is our only revenue stream. Throughout the guides we also link out to brokers, asset management companies, CDNS, and other institutions so you can find the official source or open an account easily. To be clear about what those links are and are not:</p>
+        <div class="indep-list">
+          <div class="indep-row">
+            <span class="indep-i">01</span>
+            <span class="indep-t">They are provided purely <strong>for your convenience</strong>, to point you to the right official page.</span>
+          </div>
+          <div class="indep-row">
+            <span class="indep-i">02</span>
+            <span class="indep-t">They are <strong>not paid placements and not affiliate links</strong>. No company has paid to be mentioned, recommended, or ranked.</span>
+          </div>
+          <div class="indep-row">
+            <span class="indep-i">03</span>
+            <span class="indep-t">We earn <strong>no commission</strong> if you click them, open an account, or invest. Our revenue is display advertising only.</span>
+          </div>
+        </div>
+        <p style="margin-top:16px">Because the ads are served programmatically by Google and we take no money from the institutions we write about, our editorial choices — which schemes we cover, how we compare them, what we caution against — are not influenced by who advertises or who we link to.</p>
+
+        <div class="meth-callout" style="margin-top:24px;font-size:.86rem"><strong>⚠ Important:</strong> Pakistan Investment Advisor provides general educational information only and is not registered with SECP as an investment advisor. Nothing on this site constitutes personalised financial advice. Investment values can go up as well as down, and past performance does not guarantee future results. Content is AI-assisted and human-checked; every figure traces to FBR, SBP, PSX, CDNS or MUFAP.</div>
+      </div>
+
+      <aside class="meth-rail" aria-label="Author and related links">
+        <div class="rail-sticky">
+          <div class="author-box">
+            <div class="author-avatar">AA</div>
+            <div class="author-name">Abdul Ahad</div>
+            <div class="author-role">Software engineer · builder of this site &amp; its data pipeline</div>
+            <div class="author-bio">
+              <p>I am a software engineer, and I built both this site and the automated pipeline that keeps its data current. I am not an investment professional, and the guides are research-led rather than personal testimony: the underlying numbers come from official sources (FBR, SBP, PSX, CDNS, MUFAP), the calculators are tested, and the content is AI-assisted and human-checked.</p>
+              <p>To be straight about my limits: <strong>I am not a SECP-registered or licensed financial advisor</strong>, and I do not present this as personal investing advice. For decisions that matter, please consult a SECP-registered advisor.</p>
+            </div>
+            <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" class="social-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+              LinkedIn
+            </a>
+          </div>
+          <div class="rail-explore">
+            <div class="h">EXPLORE</div>
+            <a href="/about.html">About the project</a>
+            <a href="/contact.html">Contact &amp; corrections</a>
+            <a href="/">Markets terminal</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- standard disclaimer -->
+  <section class="meth-sec" aria-label="Disclaimer">
+    <div class="pad">
+      <div class="disclaimer">
+        <strong>Important Disclaimer.</strong> Pakistan Investment Advisor provides general educational information only and is not registered with SECP as an investment advisor. Nothing on this site constitutes personalised financial advice. Investment values can go up as well as down, and past performance of mutual funds or stocks does not guarantee future results. Always confirm current rates and prices with the relevant institution, and consult a SECP-registered financial advisor before making significant investment decisions.
+      </div>
+    </div>
+  </section>
+
+  <div class="meth-spacer"></div>
+
+</main>
+
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

@@ -136,12 +136,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -163,23 +163,157 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.6vw,3.5rem);font-weight:800;line-height:1;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:620px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:0 0 6px}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+
+  /* live widget */
+  .live-widget{border:1px solid var(--line);margin:0 0 28px}
+  .lw-head{padding:14px 18px;border-bottom:1px solid var(--line);background:var(--mint);border-top:3px solid var(--acid)}
+  .lw-head .t{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--green-d);text-transform:uppercase;display:block}
+  .lw-head .v{font-family:var(--display);font-size:.58rem;font-weight:600;color:var(--muted);display:block;margin-top:5px}
+  #rda-widget{padding:18px;font-family:var(--body);font-size:.9rem;color:var(--muted)}
+  .rda-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .rda-stat{background:var(--paper);border:1px solid var(--line2);padding:16px 12px;text-align:center}
+  .rda-stat.acc{border-top:3px solid var(--acid)}
+  .rda-stat .n{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--green-d);letter-spacing:-.02em}
+  .rda-stat .n.navy{color:var(--navy)}
+  .rda-stat .l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.06em;color:var(--muted);margin-top:6px;text-transform:uppercase}
+  .rda-stat .d{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-top:3px}
+
+  /* bank table */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 22px;overflow-x:auto}
+  .bank-table{width:100%;border-collapse:collapse;min-width:520px}
+  .bank-table th{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-d);text-align:left;padding:13px 16px;background:var(--mint);border-bottom:2px solid var(--acid)}
+  .bank-table td{font-family:var(--body);font-size:.92rem;color:var(--ink2);padding:12px 16px;border-bottom:1px solid var(--line2);vertical-align:top}
+  .bank-table td:first-child{font-family:var(--display);font-weight:700;color:var(--green-d)}
+  .bank-table tr:last-child td{border-bottom:none}
+  .bank-table tr:hover td{background:var(--paper)}
+
+  /* steps */
+  .step-block{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;padding:16px 0;border-top:1px solid var(--line)}
+  .step-num{font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--acid);-webkit-text-stroke:1px var(--green)}
+  .step-body p{margin:0}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0;cursor:pointer}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-family:var(--body);font-size:1rem;line-height:1.7;color:var(--ink2)}
+
+  /* related links */
+  .related-links{border-top:1px solid var(--line);padding-top:22px;margin:8px 0 0}
+  .related-links h3{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:12px;text-transform:uppercase}
+  .related-links a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.94rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .related-links a:first-of-type{border-top:none}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+    .rda-grid{grid-template-columns:1fr}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
-      <a href="/guides/">Guides</a>
+      <a href="/guides/" class="active">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -188,263 +322,376 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/guides/">Guides</a> › Roshan Digital Account Guide</div>
-
-  <h1>Roshan Digital Account (RDA) — Complete Guide for Overseas Pakistanis (2026)</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Updated 20 May 2026 &nbsp;·&nbsp; 11 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one line:</strong> The Roshan Digital Account is a fully online foreign-currency and PKR bank account launched by the State Bank of Pakistan in September 2020 for overseas Pakistanis, opened from abroad with a valid CNIC or NICOP and offered through six banks.</p>
-
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn &rarr;</a> &nbsp;&middot;&nbsp; <span style="color:#888">Updated 20 May 2026</span></div>
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
   </div>
-
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>RDA at a glance:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>A 100% online bank account for overseas Pakistanis. You open it from anywhere with just your CNIC or NICOP.</li>
-      <li>Naya Pakistan Certificates pay 5–6.5% on USD deposits, tax-free for NRPs, with money you can take out whenever you want.</li>
-      <li>Offered by HBL, MCB, UBL, Meezan Bank, Allied Bank and Bank Al-Falah.</li>
-    </ul>
-  </div>
-
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="3214567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <h2>What Is the Roshan Digital Account?</h2>
-
-  <p>The <strong>Roshan Digital Account (RDA)</strong> is a foreign-currency and PKR bank account that the State Bank of Pakistan launched in September 2020, part of a wider push on financial inclusion and remittances. It was built to fix one specific headache that overseas Pakistanis had lived with for decades: how hard it was to invest back home from abroad. The whole thing runs online. No trip to Pakistan, no local guarantor, no branch visit.</p>
-
-  <p>Any Pakistani citizen living abroad can open one, as long as they hold a valid <strong>CNIC</strong> (Computerised National Identity Card) or <strong>NICOP</strong> (National Identity Card for Overseas Pakistanis). Dual nationals qualify too. If you carry a British, American, Canadian or any other passport alongside your Pakistani documents, you are eligible. The account holds several currencies at once: USD, GBP, EUR, AED, SAR, CAD, AUD and PKR.</p>
-
-  <p>Six banks offer RDA services right now: <strong>HBL, MCB, UBL, Meezan Bank, Allied Bank and Bank Al-Falah</strong>. Each runs its own portal and app, but they all sit under the same SBP framework, so the core account features are the same wherever you open it.</p>
-
-  <p>The biggest draw, and the thing that sets the RDA apart from an ordinary Pakistani account, is the <strong>unconditional repatriation right</strong>. Whatever sits in your RDA, principal or profit, can go back to your overseas bank account whenever you ask, with no prior SBP approval. SBP's RDA circular spells this out, and it is the reason overseas investors trust that their money is not stuck. That single guarantee pulled in over $7 billion of foreign-currency inflows during the program's first three years.</p>
-
-  <div class="live-widget" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:12px;padding:20px;margin:24px 0">
-    <div style="font-weight:700;margin-bottom:4px;color:#0E3B2E">Key Rates for RDA Investors</div>
-    <div style="font-size:.78rem;color:#888;margin-bottom:14px">Last verified: 20 May 2026 — NPC rates vary by bank, confirm directly with your bank before opening</div>
-    <div id="rda-widget">Loading...</div>
-    <noscript>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-        <div style="background:#E9EFE6;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.4rem;font-weight:800;color:#0E3B2E">278.7</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">PKR per USD</div></div>
-        <div style="background:#E8EDF3;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.4rem;font-weight:800;color:#23415E">11.5%</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">SBP Policy Rate</div></div>
-        <div style="background:#F6EFDA;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.4rem;font-weight:800;color:#f57f17">~5–6.5%</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">NPC USD Rate (indicative)</div></div>
-      </div>
-      <p style="font-size:.75rem;color:#888;margin-top:8px">Enable JavaScript for live data</p>
-    </noscript>
-  </div>
-  <script>
-  fetch('/data.json').then(r=>r.json()).then(d=>{
-    const m=d.macro;
-    document.getElementById('rda-widget').innerHTML=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"><div style="background:#E9EFE6;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.4rem;font-weight:800;color:#0E3B2E">${m.pkr_usd}</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">PKR per USD</div></div><div style="background:#E8EDF3;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.4rem;font-weight:800;color:#23415E">${m.sbp_rate}%</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">SBP Policy Rate</div><div style="font-size:.72rem;color:#888">${m.sbp_direction}</div></div><div style="background:#F6EFDA;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.4rem;font-weight:800;color:#f57f17">~5–6.5%</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">NPC USD Rate (indicative)</div></div></div>`;
-  }).catch(()=>{document.getElementById('rda-widget').textContent='Unable to load live data.';});
-  </script>
-
-  <h2>Which Banks Offer RDA and How They Differ</h2>
-
-  <p>All six banks run under the same SBP framework, so the basics (holding foreign currency, NPC access, repatriation) are identical wherever you go. The differences are in service quality, the app, NPC profit rates that wobble a little bank to bank, and how close the bank is to where you live. The right pick comes down to your location and the kind of investor you are.</p>
-
-  <p><strong>HBL</strong> is the obvious starting point for most overseas Pakistanis, simply because it is everywhere. It has branches and representative offices in over 25 countries, including the big diaspora hubs in the UK, USA, UAE and Saudi Arabia. The HBL Connect app gets good reviews and the NPC onboarding is built for overseas users. If you ever need to walk into a branch, HBL gives you the most doors.</p>
-
-  <p><strong>Meezan Bank</strong> is the one to pick if you need Shariah-compliant products. Its RDA works on profit-sharing rather than interest, and everything (including its NPC equivalent, Roshan Apna Kar) is structured under Islamic finance rules. Customers also rate Meezan for quick digital onboarding, often clearing KYC in 2–3 business days. <strong>MCB Bank</strong> is strong in the UAE and Saudi Arabia, a sensible choice for Gulf-based Pakistanis who want a Pakistani account tied to a bank that knows their patch. <strong>UBL</strong> has long looked after the European diaspora, the UK in particular. <strong>Allied Bank</strong> and <strong>Bank Al-Falah</strong> are dependable all-rounders with competitive NPC rates, worth a look if you are shopping on rate.</p>
-
-  <table class="bank-table">
-    <thead>
-      <tr>
-        <th>Bank</th>
-        <th>Best For</th>
-        <th>Notable Feature</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>HBL</td><td>UK, USA, Gulf diaspora</td><td>Widest global branch network; HBL Connect app</td></tr>
-      <tr><td>MCB</td><td>Middle East diaspora</td><td>Popular in UAE and Saudi Arabia</td></tr>
-      <tr><td>Meezan Bank</td><td>Islamic accounts</td><td>Shariah-compliant RDA; fast onboarding</td></tr>
-      <tr><td>UBL</td><td>European diaspora</td><td>UBL Direct app; presence in UK/Europe</td></tr>
-      <tr><td>Allied Bank</td><td>General</td><td>Competitive NPC rates</td></tr>
-      <tr><td>Bank Al-Falah</td><td>General</td><td>Strong mobile app</td></tr>
-    </tbody>
-  </table>
-
-  <p>One practical tip. Open your RDA with the bank whose app actually works where you live. A few Pakistani banking apps are geo-restricted or run badly in certain markets. Before you commit, check the community forums (Pakistanis Abroad subreddits, WhatsApp investment groups) for recent feedback.</p>
-
-  <h2>Step-by-Step: How to Open an RDA</h2>
-
-  <div class="step-block">
-    <div class="step-num">1</div>
-    <div class="step-body">
-      <h3>Visit Your Chosen Bank's RDA Portal</h3>
-      <p>Each bank has its own RDA page. Search "[Bank Name] Roshan Digital Account", for example "HBL Roshan Digital Account" or "Meezan Bank RDA". Always land on the official bank site rather than a third-party link, so your personal data stays safe.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">2</div>
-    <div class="step-body">
-      <h3>Complete the Online Application</h3>
-      <p>Fill in your personal details, your current country of residence, and a source-of-funds declaration. Keep these ready: your <strong>CNIC or NICOP number</strong>, a recent passport-size photo, a copy of your valid passport, and proof of overseas residence (usually a utility bill or bank statement from your country, dated within the last 3 months). The form takes roughly 20–30 minutes.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">3</div>
-    <div class="step-body">
-      <h3>Complete Video KYC</h3>
-      <p>Most banks now do video-based KYC (Know Your Customer). It is a short call where a bank rep checks your identity by looking at your CNIC or NICOP and passport on camera, usually 10–15 minutes. Banks work around time zones, so you can book a slot during your own daytime. A few, Meezan included, let you upload a video instead of joining a live call.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">4</div>
-    <div class="step-body">
-      <h3>Account Activation (3–7 Business Days)</h3>
-      <p>Once KYC is done, the compliance team reviews your application, usually within 3–7 business days. Your account number and portal login arrive by email or SMS. Some banks also post a physical welcome kit to your overseas address.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">5</div>
-    <div class="step-body">
-      <h3>Fund Your Account via SWIFT Transfer</h3>
-      <p>Send foreign currency from your overseas bank using the SWIFT details your Pakistani bank gives you. Most banks offer better-than-market exchange rates on RDA remittances to pull in inflows. Your money lands in the original currency. Nothing gets converted to PKR unless you decide to convert it.</p>
-    </div>
-  </div>
-
-  <h2>Naya Pakistan Certificates (NPCs) — The Star Product</h2>
-
-  <p>Naya Pakistan Certificates are the headline product, available only through the RDA channel. They are <strong>sovereign instruments issued by the Government of Pakistan's Ministry of Finance</strong>, so they carry the full credit of the federal government, the same credit that backs Pakistan's international Eurobonds. If you want a simple, high-yield government investment without touching the stock market, NPCs are the strongest thing the RDA program offers.</p>
-
-  <p>NPCs come in two flavours. <strong>Conventional</strong> ones are interest-based; <strong>Islamic</strong> ones run on profit-and-loss sharing and are Shariah-compliant. Same tenors, same currencies. The only difference is the underlying structure. The Islamic version is the right one if you avoid interest on religious grounds, and Meezan Bank and Bank Al-Falah are particularly strong on Islamic NPC issuance.</p>
-
-  <p><strong>Tenors</strong> run 3 months, 6 months, 1 year, 3 years and 5 years. You can hold NPCs in <strong>multiple currencies</strong>: USD, GBP, EUR, AED, SAR, CAD, AUD and PKR. A foreign-currency NPC pays profit in that same currency, so if you hold to maturity and repatriate in the original currency, there is no exchange-rate risk on your principal or profit.</p>
-
-  <p>As of May 2026, indicative NPC profit rates sit around <strong>5.5–6.0% per annum for USD</strong> (1-year tenor), <strong>4.5–5.0% for GBP</strong> and <strong>3.5–4.0% for EUR</strong>. PKR-denominated NPCs pay at rates in line with Central Directorate of National Savings (CDNS) instruments. For context, the SBP policy rate is currently 11.5% and holding, so PKR returns reflect that domestic level. Rates vary by bank and get revised from time to time, so <strong>confirm the current rate directly with your bank before opening</strong>. They move with SBP decisions and global rates.</p>
-
-  <p>The tax angle is the real prize. <strong>Profit earned on NPCs by non-resident Pakistanis is fully exempt from Pakistani income tax</strong> under the Income Tax Ordinance 2001 (as amended). You keep 100% of the stated rate, with no withholding deducted at source for NRP NPC holders.</p>
-
-  <p>Buying one is quick. Log into your RDA bank's portal, open the Investments section, pick "Naya Pakistan Certificates", choose your currency and tenor, enter the amount, confirm. Under five minutes once your RDA is funded. Profit lands at the end of each tenor period, or semi-annually on the longer tenors, depending on the bank. At maturity both principal and profit are repatriable in the original foreign currency.</p>
-
-  <h2>Investing in PSX Stocks via RDA</h2>
-
-  <p>The RDA opens the door to the Pakistan Stock Exchange (PSX), historically one of Asia's highest-yielding markets. You link your RDA to a SECP-licensed brokerage account, all online. No need to be in Pakistan, no local contact acting on your behalf. The KSE-100 is trading near 181,000, which gives you a sense of where the market sits before you wade in.</p>
-
-  <p>Start by picking a PSX-licensed broker that takes RDA-linked accounts. <strong>Arif Habib Securities, MCB-FSL (MCB Financial Services Limited) and Akseer Research</strong> come up most often with overseas investors. All are SECP-licensed and open accounts online for non-residents. Once the brokerage account is live, move PKR from your RDA to the broker by ordinary bank transfer. If your RDA holds USD or another foreign currency, the bank converts to PKR at the interbank rate when the transfer goes through.</p>
-
-  <p>From the broker's platform you buy and sell KSE-100 shares, collect dividends, and watch your portfolio in real time. Dividends pay into the bank account registered with the Central Depository Company (CDC), which has to match your RDA-linked account. To repatriate, sell your shares, take the PKR proceeds into your RDA-linked account, ask your RDA bank to convert PKR into foreign currency, then fire off a SWIFT transfer to your overseas account. The whole chain from sale to overseas receipt usually wraps up in 5–7 business days.</p>
-
-  <p>One bit of admin. As a non-resident opening a brokerage account, you have to complete <strong>FATCA (Foreign Account Tax Compliance Act)</strong> and <strong>CRS (Common Reporting Standard)</strong> declarations, listing your country of residence and tax identification number. It is a legal requirement, not optional.</p>
-
-  <h2>Investing in Mutual Funds via RDA</h2>
-
-  <p>Mutual funds suit RDA investors who want Pakistan-market exposure but would rather not pick individual stocks. The industry is regulated by the SECP and the menu is wide: equity funds, money market funds, income funds and Islamic alternatives, all professionally managed with daily liquidity. To put recent numbers on it, over the year to mid-2026 NBP Islamic Stock returned 42.2% and Al Meezan Mutual 35.9%, while the steadier Meezan Islamic Income returned 8.4%. The gap between an equity fund and an income fund is the gap between chasing growth and parking cash.</p>
-
-  <p>The route copies the PSX one. Move PKR from your RDA to your chosen Asset Management Company (AMC), invest in the funds you want, redeem when you are ready. Most big AMCs take RDA-origin money now, though check eligibility before you open. <strong>Al Meezan Investment Management, NBP Funds and JS Investments</strong> have confirmed they accept RDA investors. Opening an AMC account needs your NICOP, a selfie and your RDA-linked bank details. It is fully online and approval runs 1–2 business days.</p>
-
-  <p>If you prefer Shariah-compliant investing, Islamic mutual funds fit well. Al Meezan, Pakistan's largest Islamic AMC, runs a full set of Islamic equity, income and money market funds you can reach through the RDA. Their returns come as profit-sharing distributions rather than interest, which works for investors who object to conventional finance on religious grounds.</p>
-
-  <p>When you redeem units, the AMC settles within <strong>T+2 or T+3 business days</strong>, depending on the fund type, and pays the proceeds into your RDA-linked account. From there it is the same path as PSX: convert PKR to foreign currency through your RDA bank and send a SWIFT transfer. Redemption to overseas receipt usually takes 7–10 business days.</p>
-
-  <h2>Tax Treatment for Overseas Pakistanis</h2>
-
-  <p>You need a handle on the Pakistani tax side of RDA investments, both to keep more of your returns and to stay on the right side of the rules. The good news: NRPs get several real tax breaks that resident investors do not.</p>
-
-  <p><strong>NPC profits</strong> are the clearest win. They are fully exempt from Pakistani income tax for non-resident account holders under the Income Tax Ordinance 2001. Nothing is withheld at source, and you do not have to declare NPC income in a Pakistani return to claim the exemption. It is automatic for NRP holders.</p>
-
-  <p><strong>PSX dividend income</strong> is taxed at <strong>15% for filers</strong> and <strong>30% for non-filers</strong>. Even living abroad, getting onto FBR's Active Taxpayer List (ATL) makes a big difference. Filing an NRP return on the FBR IRIS portal takes about 30 minutes and costs nothing, and it is some of the best-spent half-hour a Pakistani investor will find. Mutual fund dividend distributions carry the same 15% or 30% split.</p>
-
-  <p><strong>Capital gains</strong> on equity mutual funds held more than 4 years are taxed at <strong>0% CGT</strong>, the same as for resident Pakistanis. Hold for shorter and standard CGT rates kick in. PSX stock gains are also taxed on CGT according to how long you held.</p>
-
-  <p>Pakistan has double taxation avoidance treaties (DTAs) with several major diaspora countries, including the <strong>UAE, Saudi Arabia, UK, USA, Canada and Australia</strong>. If you are resident in one of them, you may be able to claim a credit at home for tax withheld in Pakistan, so the same income is not taxed twice. Read your country's specific DTA with Pakistan, or talk to a cross-border tax advisor, before putting large sums in.</p>
-
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-can-i-open-rda-dual-nationality">
-    <summary class="faq-question">Can I open an RDA if I have dual nationality?</summary>
-    <div class="faq-answer">Yes. Roshan Digital Account is available to any Pakistani citizen holding a valid CNIC or NICOP (National Identity Card for Overseas Pakistanis), regardless of whether you hold dual nationality. Your NICOP number is used for identification. Non-Pakistani spouses of overseas Pakistanis cannot open an RDA directly but can be added as nominees.</div>
-  </details>
-
-  <details class="faq-item" id="faq-how-long-to-open-rda">
-    <summary class="faq-question">How long does it take to open an RDA?</summary>
-    <div class="faq-answer">The online account opening process typically takes 20–30 minutes to complete the application. Bank verification and KYC review usually takes 3–7 business days. Once approved, you receive your account credentials and can immediately begin transferring foreign currency. Meezan Bank and HBL are known for faster onboarding.</div>
-  </details>
-
-  <details class="faq-item" id="faq-close-rda-repatriate-money">
-    <summary class="faq-question">Can I close my RDA and repatriate all my money?</summary>
-    <div class="faq-answer">Yes. RDA funds are fully repatriable — you can transfer both your principal and profits back to your foreign bank account at any time, without prior SBP approval. This is one of the most significant advantages of the RDA program and is guaranteed under SBP's RDA circular. There are no exit restrictions or lock-in periods for repatriation.</div>
-  </details>
-
-  <details class="faq-item" id="faq-npc-profits-tax-free">
-    <summary class="faq-question">Are Naya Pakistan Certificate profits really tax-free?</summary>
-    <div class="faq-answer">Yes, for overseas Pakistanis (NRPs). Profit earned on NPCs by non-resident account holders is exempt from Pakistani income tax under the Income Tax Ordinance 2001 (as amended). This exemption applies only to the NPC profit — other income types (PSX dividends, mutual fund gains) may still attract withholding tax at applicable NRP rates.</div>
-  </details>
-
-  <details class="faq-item" id="faq-which-bank-best-for-rda">
-    <summary class="faq-question">Which bank is best for opening an RDA?</summary>
-    <div class="faq-answer">It depends on your location and priorities. HBL has the widest global presence and is best for Pakistanis in the UK, USA, and Gulf. Meezan Bank is best for Islamic account holders and offers fast onboarding. MCB is popular in the Middle East. For Pakistanis in Europe, UBL has a good presence. All six banks offer the same SBP-mandated RDA features — the difference is in the app quality and customer service.</div>
-  </details>
-
-  <details class="faq-item" id="faq-can-i-have-multiple-rda">
-    <summary class="faq-question">Can I open RDAs with more than one bank?</summary>
-    <div class="faq-answer">There is generally no rule limiting you to a single Roshan Digital Account, and many overseas Pakistanis hold RDAs at more than one participating bank to compare apps, services, or investment options. Each bank runs its own separate KYC and account-opening process. Confirm the current participating-bank list and any per-customer conditions on sbp.org.pk or directly with the bank before applying.</div>
-  </details>
-
-  <details class="faq-item" id="faq-is-rda-different-from-fcy-account">
-    <summary class="faq-question">How is an RDA different from a regular foreign currency account in Pakistan?</summary>
-    <div class="faq-answer">An RDA is opened remotely from abroad without visiting a branch and is designed specifically for non-resident and overseas Pakistanis, giving access to dedicated products such as Naya Pakistan Certificates and full repatriation of funds and profits. A regular foreign currency account usually requires in-person onboarding and is geared toward residents. The RDA framework and its features are defined by the State Bank of Pakistan — verify the current terms on sbp.org.pk.</div>
-  </details>
-
-  <details class="faq-item" id="faq-what-if-i-become-resident-again">
-    <summary class="faq-question">What happens to my RDA if I move back to Pakistan permanently?</summary>
-    <div class="faq-answer">If your residency status changes, some RDA features and tax treatments that apply to non-resident Pakistanis — such as the NPC profit exemption and certain NRP withholding rates — may no longer apply, because they are tied to your non-resident status. Banks may also ask you to update your status or convert the account. Confirm the exact rules and any reporting obligations with your bank and on fbr.gov.pk before relocating.</div>
-  </details>
-
-  <details class="faq-item" id="faq-can-i-add-nominee-to-rda">
-    <summary class="faq-question">Can I add a nominee to my Roshan Digital Account?</summary>
-    <div class="faq-answer">Yes. RDAs allow you to nominate beneficiaries, and a non-Pakistani spouse who cannot open an RDA directly can still be added as a nominee. Nomination rules and the documents required vary by bank, so check the nominee section during onboarding or in your bank's RDA terms. For the latest requirements, confirm directly with your chosen bank.</div>
-  </details>
-
-  <details class="faq-item" id="faq-do-i-need-to-file-tax-return-for-rda">
-    <summary class="faq-question">Do I need to file a Pakistani tax return for my RDA income?</summary>
-    <div class="faq-answer">Whether you must file depends on your residency status and the type of income earned, since some RDA income is exempt for non-resident Pakistanis while other income may have tax withheld at NRP rates. Tax in many cases is deducted at source, but filing obligations and any treaty benefits depend on your individual circumstances. Verify your filing position on fbr.gov.pk or with a qualified cross-border tax advisor.</div>
-  </details>
-
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="3214567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Guides</h3>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better?</a>
-    <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
-    <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">&#9888; This article is for educational purposes only. RDA terms, investment options, NPC rates, and tax treatment are subject to change by the State Bank of Pakistan and the Federal Board of Revenue. NPC rates quoted are indicative as of May 2026 — always confirm the current rate directly with your bank before investing. This is not personalised financial advice. Consult a qualified tax or financial advisor for advice tailored to your circumstances.</div>
-
 </div>
 
+<main>
+<article class="art-frame">
+
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">Roshan Digital Account Guide</li>
+    </ol>
+  </nav>
+
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 06 — Overseas · Roshan Digital Account</div>
+      <h1>Roshan Digital Account, the full guide for overseas Pakistanis.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 20 May 2026</span>
+        <span>· 11 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">In one line</div>
+      <p>The <b>Roshan Digital Account</b> is a fully online foreign-currency and PKR bank account launched by the State Bank of Pakistan in <b>September 2020</b> for overseas Pakistanis — opened from abroad with a valid <b class="acc">CNIC or NICOP</b> and offered through <b>six banks</b>.</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 20 May 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">RDA at a glance</div>
+        <ul>
+          <li>A 100% online bank account for overseas Pakistanis. You open it from anywhere with just your CNIC or NICOP.</li>
+          <li>Naya Pakistan Certificates pay 5–6.5% on USD deposits, tax-free for NRPs, with money you can take out whenever you want.</li>
+          <li>Offered by HBL, MCB, UBL, Meezan Bank, Allied Bank and Bank Al-Falah.</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="3214567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <h2 id="s1"><span class="sn">01</span>What is the Roshan Digital Account?</h2>
+
+      <p>The <strong>Roshan Digital Account (RDA)</strong> is a foreign-currency and PKR bank account that the State Bank of Pakistan launched in September 2020, part of a wider push on financial inclusion and remittances. It was built to fix one specific headache that overseas Pakistanis had lived with for decades: how hard it was to invest back home from abroad. The whole thing runs online. No trip to Pakistan, no local guarantor, no branch visit.</p>
+
+      <p>Any Pakistani citizen living abroad can open one, as long as they hold a valid <strong>CNIC</strong> (Computerised National Identity Card) or <strong>NICOP</strong> (National Identity Card for Overseas Pakistanis). Dual nationals qualify too. If you carry a British, American, Canadian or any other passport alongside your Pakistani documents, you are eligible. The account holds several currencies at once: USD, GBP, EUR, AED, SAR, CAD, AUD and PKR.</p>
+
+      <p>Six banks offer RDA services right now: <strong>HBL, MCB, UBL, Meezan Bank, Allied Bank and Bank Al-Falah</strong>. Each runs its own portal and app, but they all sit under the same SBP framework, so the core account features are the same wherever you open it.</p>
+
+      <p>The biggest draw, and the thing that sets the RDA apart from an ordinary Pakistani account, is the <strong>unconditional repatriation right</strong>. Whatever sits in your RDA, principal or profit, can go back to your overseas bank account whenever you ask, with no prior SBP approval. SBP's RDA circular spells this out, and it is the reason overseas investors trust that their money is not stuck. That single guarantee pulled in over $7 billion of foreign-currency inflows during the program's first three years.</p>
+
+      <!-- Live data widget — fed from data.json -->
+      <div class="live-widget">
+        <div class="lw-head">
+          <span class="t">Key Rates for RDA Investors</span>
+          <span class="v">Last verified 20 May 2026 — NPC rates vary by bank, confirm directly before opening</span>
+        </div>
+        <div id="rda-widget">Loading…</div>
+        <noscript>
+          <div style="padding:18px">
+            <div class="rda-grid">
+              <div class="rda-stat"><div class="n">278.7</div><div class="l">PKR per USD</div></div>
+              <div class="rda-stat"><div class="n navy">11.5%</div><div class="l">SBP Policy Rate</div></div>
+              <div class="rda-stat acc"><div class="n">~5–6.5%</div><div class="l">NPC USD Rate (indicative)</div></div>
+            </div>
+            <p style="font-family:var(--body);font-size:.75rem;color:var(--muted);margin:8px 0 0">Enable JavaScript for live data</p>
+          </div>
+        </noscript>
+      </div>
+      <script>
+      fetch('/data.json?v=' + Date.now()).then(r=>r.json()).then(d=>{
+        const m=d.macro;
+        document.getElementById('rda-widget').innerHTML=`<div class="rda-grid"><div class="rda-stat"><div class="n">${m.pkr_usd}</div><div class="l">PKR per USD</div></div><div class="rda-stat"><div class="n navy">${m.sbp_rate}%</div><div class="l">SBP Policy Rate</div><div class="d">${m.sbp_direction}</div></div><div class="rda-stat acc"><div class="n">~5–6.5%</div><div class="l">NPC USD Rate (indicative)</div></div></div>`;
+        document.getElementById('rda-widget').style.padding='18px';
+      }).catch(()=>{document.getElementById('rda-widget').textContent='Unable to load live data.';});
+      </script>
+
+      <h2 id="s2"><span class="sn">02</span>Which banks offer RDA and how they differ</h2>
+
+      <p>All six banks run under the same SBP framework, so the basics (holding foreign currency, NPC access, repatriation) are identical wherever you go. The differences are in service quality, the app, NPC profit rates that wobble a little bank to bank, and how close the bank is to where you live. The right pick comes down to your location and the kind of investor you are.</p>
+
+      <p><strong>HBL</strong> is the obvious starting point for most overseas Pakistanis, simply because it is everywhere. It has branches and representative offices in over 25 countries, including the big diaspora hubs in the UK, USA, UAE and Saudi Arabia. The HBL Connect app gets good reviews and the NPC onboarding is built for overseas users. If you ever need to walk into a branch, HBL gives you the most doors.</p>
+
+      <p><strong>Meezan Bank</strong> is the one to pick if you need Shariah-compliant products. Its RDA works on profit-sharing rather than interest, and everything (including its NPC equivalent, Roshan Apna Kar) is structured under Islamic finance rules. Customers also rate Meezan for quick digital onboarding, often clearing KYC in 2–3 business days. <strong>MCB Bank</strong> is strong in the UAE and Saudi Arabia, a sensible choice for Gulf-based Pakistanis who want a Pakistani account tied to a bank that knows their patch. <strong>UBL</strong> has long looked after the European diaspora, the UK in particular. <strong>Allied Bank</strong> and <strong>Bank Al-Falah</strong> are dependable all-rounders with competitive NPC rates, worth a look if you are shopping on rate.</p>
+
+      <div class="tbl-wrap">
+        <table class="bank-table">
+          <thead>
+            <tr>
+              <th>Bank</th>
+              <th>Best For</th>
+              <th>Notable Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>HBL</td><td>UK, USA, Gulf diaspora</td><td>Widest global branch network; HBL Connect app</td></tr>
+            <tr><td>MCB</td><td>Middle East diaspora</td><td>Popular in UAE and Saudi Arabia</td></tr>
+            <tr><td>Meezan Bank</td><td>Islamic accounts</td><td>Shariah-compliant RDA; fast onboarding</td></tr>
+            <tr><td>UBL</td><td>European diaspora</td><td>UBL Direct app; presence in UK/Europe</td></tr>
+            <tr><td>Allied Bank</td><td>General</td><td>Competitive NPC rates</td></tr>
+            <tr><td>Bank Al-Falah</td><td>General</td><td>Strong mobile app</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>One practical tip. Open your RDA with the bank whose app actually works where you live. A few Pakistani banking apps are geo-restricted or run badly in certain markets. Before you commit, check the community forums (Pakistanis Abroad subreddits, WhatsApp investment groups) for recent feedback.</p>
+
+      <h2 id="s3"><span class="sn">03</span>Step-by-step: how to open an RDA</h2>
+
+      <div class="step-block">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Visit Your Chosen Bank's RDA Portal</h3>
+          <p>Each bank has its own RDA page. Search "[Bank Name] Roshan Digital Account", for example "HBL Roshan Digital Account" or "Meezan Bank RDA". Always land on the official bank site rather than a third-party link, so your personal data stays safe.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Complete the Online Application</h3>
+          <p>Fill in your personal details, your current country of residence, and a source-of-funds declaration. Keep these ready: your <strong>CNIC or NICOP number</strong>, a recent passport-size photo, a copy of your valid passport, and proof of overseas residence (usually a utility bill or bank statement from your country, dated within the last 3 months). The form takes roughly 20–30 minutes.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Complete Video KYC</h3>
+          <p>Most banks now do video-based KYC (Know Your Customer). It is a short call where a bank rep checks your identity by looking at your CNIC or NICOP and passport on camera, usually 10–15 minutes. Banks work around time zones, so you can book a slot during your own daytime. A few, Meezan included, let you upload a video instead of joining a live call.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Account Activation (3–7 Business Days)</h3>
+          <p>Once KYC is done, the compliance team reviews your application, usually within 3–7 business days. Your account number and portal login arrive by email or SMS. Some banks also post a physical welcome kit to your overseas address.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Fund Your Account via SWIFT Transfer</h3>
+          <p>Send foreign currency from your overseas bank using the SWIFT details your Pakistani bank gives you. Most banks offer better-than-market exchange rates on RDA remittances to pull in inflows. Your money lands in the original currency. Nothing gets converted to PKR unless you decide to convert it.</p>
+        </div>
+      </div>
+
+      <h2 id="s4"><span class="sn">04</span>Naya Pakistan Certificates (NPCs) — the star product</h2>
+
+      <p>Naya Pakistan Certificates are the headline product, available only through the RDA channel. They are <strong>sovereign instruments issued by the Government of Pakistan's Ministry of Finance</strong>, so they carry the full credit of the federal government, the same credit that backs Pakistan's international Eurobonds. If you want a simple, high-yield government investment without touching the stock market, NPCs are the strongest thing the RDA program offers.</p>
+
+      <p>NPCs come in two flavours. <strong>Conventional</strong> ones are interest-based; <strong>Islamic</strong> ones run on profit-and-loss sharing and are Shariah-compliant. Same tenors, same currencies. The only difference is the underlying structure. The Islamic version is the right one if you avoid interest on religious grounds, and Meezan Bank and Bank Al-Falah are particularly strong on Islamic NPC issuance.</p>
+
+      <p><strong>Tenors</strong> run 3 months, 6 months, 1 year, 3 years and 5 years. You can hold NPCs in <strong>multiple currencies</strong>: USD, GBP, EUR, AED, SAR, CAD, AUD and PKR. A foreign-currency NPC pays profit in that same currency, so if you hold to maturity and repatriate in the original currency, there is no exchange-rate risk on your principal or profit.</p>
+
+      <p>As of May 2026, indicative NPC profit rates sit around <strong>5.5–6.0% per annum for USD</strong> (1-year tenor), <strong>4.5–5.0% for GBP</strong> and <strong>3.5–4.0% for EUR</strong>. PKR-denominated NPCs pay at rates in line with Central Directorate of National Savings (CDNS) instruments. For context, the SBP policy rate is currently 11.5% and holding, so PKR returns reflect that domestic level. Rates vary by bank and get revised from time to time, so <strong>confirm the current rate directly with your bank before opening</strong>. They move with SBP decisions and global rates.</p>
+
+      <p>The tax angle is the real prize. <strong>Profit earned on NPCs by non-resident Pakistanis is fully exempt from Pakistani income tax</strong> under the Income Tax Ordinance 2001 (as amended). You keep 100% of the stated rate, with no withholding deducted at source for NRP NPC holders.</p>
+
+      <p>Buying one is quick. Log into your RDA bank's portal, open the Investments section, pick "Naya Pakistan Certificates", choose your currency and tenor, enter the amount, confirm. Under five minutes once your RDA is funded. Profit lands at the end of each tenor period, or semi-annually on the longer tenors, depending on the bank. At maturity both principal and profit are repatriable in the original foreign currency.</p>
+
+      <h2 id="s5"><span class="sn">05</span>Investing in PSX stocks via RDA</h2>
+
+      <p>The RDA opens the door to the Pakistan Stock Exchange (PSX), historically one of Asia's highest-yielding markets. You link your RDA to a SECP-licensed brokerage account, all online. No need to be in Pakistan, no local contact acting on your behalf. The KSE-100 is trading near 181,000, which gives you a sense of where the market sits before you wade in.</p>
+
+      <p>Start by picking a PSX-licensed broker that takes RDA-linked accounts. <strong>Arif Habib Securities, MCB-FSL (MCB Financial Services Limited) and Akseer Research</strong> come up most often with overseas investors. All are SECP-licensed and open accounts online for non-residents. Once the brokerage account is live, move PKR from your RDA to the broker by ordinary bank transfer. If your RDA holds USD or another foreign currency, the bank converts to PKR at the interbank rate when the transfer goes through.</p>
+
+      <p>From the broker's platform you buy and sell KSE-100 shares, collect dividends, and watch your portfolio in real time. Dividends pay into the bank account registered with the Central Depository Company (CDC), which has to match your RDA-linked account. To repatriate, sell your shares, take the PKR proceeds into your RDA-linked account, ask your RDA bank to convert PKR into foreign currency, then fire off a SWIFT transfer to your overseas account. The whole chain from sale to overseas receipt usually wraps up in 5–7 business days.</p>
+
+      <p>One bit of admin. As a non-resident opening a brokerage account, you have to complete <strong>FATCA (Foreign Account Tax Compliance Act)</strong> and <strong>CRS (Common Reporting Standard)</strong> declarations, listing your country of residence and tax identification number. It is a legal requirement, not optional.</p>
+
+      <h2 id="s6"><span class="sn">06</span>Investing in mutual funds via RDA</h2>
+
+      <p>Mutual funds suit RDA investors who want Pakistan-market exposure but would rather not pick individual stocks. The industry is regulated by the SECP and the menu is wide: equity funds, money market funds, income funds and Islamic alternatives, all professionally managed with daily liquidity. To put recent numbers on it, over the year to mid-2026 NBP Islamic Stock returned 42.2% and Al Meezan Mutual 35.9%, while the steadier Meezan Islamic Income returned 8.4%. The gap between an equity fund and an income fund is the gap between chasing growth and parking cash.</p>
+
+      <p>The route copies the PSX one. Move PKR from your RDA to your chosen Asset Management Company (AMC), invest in the funds you want, redeem when you are ready. Most big AMCs take RDA-origin money now, though check eligibility before you open. <strong>Al Meezan Investment Management, NBP Funds and JS Investments</strong> have confirmed they accept RDA investors. Opening an AMC account needs your NICOP, a selfie and your RDA-linked bank details. It is fully online and approval runs 1–2 business days.</p>
+
+      <p>If you prefer Shariah-compliant investing, Islamic mutual funds fit well. Al Meezan, Pakistan's largest Islamic AMC, runs a full set of Islamic equity, income and money market funds you can reach through the RDA. Their returns come as profit-sharing distributions rather than interest, which works for investors who object to conventional finance on religious grounds.</p>
+
+      <p>When you redeem units, the AMC settles within <strong>T+2 or T+3 business days</strong>, depending on the fund type, and pays the proceeds into your RDA-linked account. From there it is the same path as PSX: convert PKR to foreign currency through your RDA bank and send a SWIFT transfer. Redemption to overseas receipt usually takes 7–10 business days.</p>
+
+      <h2 id="s7"><span class="sn">07</span>Tax treatment for overseas Pakistanis</h2>
+
+      <p>You need a handle on the Pakistani tax side of RDA investments, both to keep more of your returns and to stay on the right side of the rules. The good news: NRPs get several real tax breaks that resident investors do not.</p>
+
+      <p><strong>NPC profits</strong> are the clearest win. They are fully exempt from Pakistani income tax for non-resident account holders under the Income Tax Ordinance 2001. Nothing is withheld at source, and you do not have to declare NPC income in a Pakistani return to claim the exemption. It is automatic for NRP holders.</p>
+
+      <p><strong>PSX dividend income</strong> is taxed at <strong>15% for filers</strong> and <strong>30% for non-filers</strong>. Even living abroad, getting onto FBR's Active Taxpayer List (ATL) makes a big difference. Filing an NRP return on the FBR IRIS portal takes about 30 minutes and costs nothing, and it is some of the best-spent half-hour a Pakistani investor will find. Mutual fund dividend distributions carry the same 15% or 30% split.</p>
+
+      <p><strong>Capital gains</strong> on equity mutual funds held more than 4 years are taxed at <strong>0% CGT</strong>, the same as for resident Pakistanis. Hold for shorter and standard CGT rates kick in. PSX stock gains are also taxed on CGT according to how long you held.</p>
+
+      <p>Pakistan has double taxation avoidance treaties (DTAs) with several major diaspora countries, including the <strong>UAE, Saudi Arabia, UK, USA, Canada and Australia</strong>. If you are resident in one of them, you may be able to claim a credit at home for tax withheld in Pakistan, so the same income is not taxed twice. Read your country's specific DTA with Pakistan, or talk to a cross-border tax advisor, before putting large sums in.</p>
+
+      <h2 id="s8"><span class="sn">08</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-can-i-open-rda-dual-nationality">
+        <summary class="faq-question">Can I open an RDA if I have dual nationality?</summary>
+        <div class="faq-answer">Yes. Roshan Digital Account is available to any Pakistani citizen holding a valid CNIC or NICOP (National Identity Card for Overseas Pakistanis), regardless of whether you hold dual nationality. Your NICOP number is used for identification. Non-Pakistani spouses of overseas Pakistanis cannot open an RDA directly but can be added as nominees.</div>
+      </details>
+
+      <details class="faq-item" id="faq-how-long-to-open-rda">
+        <summary class="faq-question">How long does it take to open an RDA?</summary>
+        <div class="faq-answer">The online account opening process typically takes 20–30 minutes to complete the application. Bank verification and KYC review usually takes 3–7 business days. Once approved, you receive your account credentials and can immediately begin transferring foreign currency. Meezan Bank and HBL are known for faster onboarding.</div>
+      </details>
+
+      <details class="faq-item" id="faq-close-rda-repatriate-money">
+        <summary class="faq-question">Can I close my RDA and repatriate all my money?</summary>
+        <div class="faq-answer">Yes. RDA funds are fully repatriable — you can transfer both your principal and profits back to your foreign bank account at any time, without prior SBP approval. This is one of the most significant advantages of the RDA program and is guaranteed under SBP's RDA circular. There are no exit restrictions or lock-in periods for repatriation.</div>
+      </details>
+
+      <details class="faq-item" id="faq-npc-profits-tax-free">
+        <summary class="faq-question">Are Naya Pakistan Certificate profits really tax-free?</summary>
+        <div class="faq-answer">Yes, for overseas Pakistanis (NRPs). Profit earned on NPCs by non-resident account holders is exempt from Pakistani income tax under the Income Tax Ordinance 2001 (as amended). This exemption applies only to the NPC profit — other income types (PSX dividends, mutual fund gains) may still attract withholding tax at applicable NRP rates.</div>
+      </details>
+
+      <details class="faq-item" id="faq-which-bank-best-for-rda">
+        <summary class="faq-question">Which bank is best for opening an RDA?</summary>
+        <div class="faq-answer">It depends on your location and priorities. HBL has the widest global presence and is best for Pakistanis in the UK, USA, and Gulf. Meezan Bank is best for Islamic account holders and offers fast onboarding. MCB is popular in the Middle East. For Pakistanis in Europe, UBL has a good presence. All six banks offer the same SBP-mandated RDA features — the difference is in the app quality and customer service.</div>
+      </details>
+
+      <details class="faq-item" id="faq-can-i-have-multiple-rda">
+        <summary class="faq-question">Can I open RDAs with more than one bank?</summary>
+        <div class="faq-answer">There is generally no rule limiting you to a single Roshan Digital Account, and many overseas Pakistanis hold RDAs at more than one participating bank to compare apps, services, or investment options. Each bank runs its own separate KYC and account-opening process. Confirm the current participating-bank list and any per-customer conditions on sbp.org.pk or directly with the bank before applying.</div>
+      </details>
+
+      <details class="faq-item" id="faq-is-rda-different-from-fcy-account">
+        <summary class="faq-question">How is an RDA different from a regular foreign currency account in Pakistan?</summary>
+        <div class="faq-answer">An RDA is opened remotely from abroad without visiting a branch and is designed specifically for non-resident and overseas Pakistanis, giving access to dedicated products such as Naya Pakistan Certificates and full repatriation of funds and profits. A regular foreign currency account usually requires in-person onboarding and is geared toward residents. The RDA framework and its features are defined by the State Bank of Pakistan — verify the current terms on sbp.org.pk.</div>
+      </details>
+
+      <details class="faq-item" id="faq-what-if-i-become-resident-again">
+        <summary class="faq-question">What happens to my RDA if I move back to Pakistan permanently?</summary>
+        <div class="faq-answer">If your residency status changes, some RDA features and tax treatments that apply to non-resident Pakistanis — such as the NPC profit exemption and certain NRP withholding rates — may no longer apply, because they are tied to your non-resident status. Banks may also ask you to update your status or convert the account. Confirm the exact rules and any reporting obligations with your bank and on fbr.gov.pk before relocating.</div>
+      </details>
+
+      <details class="faq-item" id="faq-can-i-add-nominee-to-rda">
+        <summary class="faq-question">Can I add a nominee to my Roshan Digital Account?</summary>
+        <div class="faq-answer">Yes. RDAs allow you to nominate beneficiaries, and a non-Pakistani spouse who cannot open an RDA directly can still be added as a nominee. Nomination rules and the documents required vary by bank, so check the nominee section during onboarding or in your bank's RDA terms. For the latest requirements, confirm directly with your chosen bank.</div>
+      </details>
+
+      <details class="faq-item" id="faq-do-i-need-to-file-tax-return-for-rda">
+        <summary class="faq-question">Do I need to file a Pakistani tax return for my RDA income?</summary>
+        <div class="faq-answer">Whether you must file depends on your residency status and the type of income earned, since some RDA income is exempt for non-resident Pakistanis while other income may have tax withheld at NRP rates. Tax in many cases is deducted at source, but filing obligations and any treaty benefits depend on your individual circumstances. Verify your filing position on fbr.gov.pk or with a qualified cross-border tax advisor.</div>
+      </details>
+
+      <!-- Ad slot 2 — after FAQ -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="3214567890" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Guides</h3>
+        <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better?</a>
+        <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
+        <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only. RDA terms, investment options, NPC rates, and tax treatment are subject to change by the State Bank of Pakistan and the Federal Board of Revenue. NPC rates quoted are indicative as of May 2026 — always confirm the current rate directly with your bank before investing. This is not personalised financial advice. Consult a qualified tax or financial advisor for advice tailored to your circumstances.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>What is the RDA?</a>
+            <a href="#s2"><span class="ti">02</span>Which banks offer RDA</a>
+            <a href="#s3"><span class="ti">03</span>How to open an RDA</a>
+            <a href="#s4"><span class="ti">04</span>Naya Pakistan Certificates</a>
+            <a href="#s5"><span class="ti">05</span>PSX stocks via RDA</a>
+            <a href="#s6"><span class="ti">06</span>Mutual funds via RDA</a>
+            <a href="#s7"><span class="ti">07</span>Tax for overseas Pakistanis</a>
+            <a href="#s8"><span class="ti">08</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">6 banks</div><div class="gl-l">Participating RDA banks</div></div>
+          <div class="gl-row"><div class="gl-n">5–6.5%</div><div class="gl-l">NPC USD rate (indicative)</div></div>
+          <div class="gl-row"><div class="gl-n">Tax-free</div><div class="gl-l">NPC profit for NRPs</div></div>
+          <div class="gl-row"><div class="gl-n">3–7 days</div><div class="gl-l">Typical activation time</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds →</a>
+          <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds →</a>
+          <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</article>
+</main>
+
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>&copy; 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

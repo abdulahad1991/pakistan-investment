@@ -61,12 +61,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -87,23 +87,152 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(1.9rem,4.4vw,3.2rem);font-weight:800;line-height:1.04;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+  .prose a{color:var(--green);font-weight:700;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:2px}
+  .prose a:hover{color:var(--green2);text-decoration-color:var(--green2)}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-mint{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 24px}
+  .cl-mint p{margin:0;font-family:var(--body);font-size:1rem;line-height:1.65;color:var(--ink2);font-weight:500}
+  .cl-mint .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-mint strong{color:var(--green-d);font-weight:700}
+  .cl-dark{background:var(--green-d);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p{margin:0;color:#E4F2EA;font-family:var(--body);font-size:1rem;line-height:1.65;font-weight:500}
+  .cl-dark .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--acid);margin-bottom:8px;text-transform:uppercase}
+  .cl-dark strong{color:#fff;font-weight:700}
+
+  /* quick-answer lede */
+  .quick-answer{background:var(--mint);border-left:4px solid var(--acid);padding:16px 22px;margin:0 0 26px;font-family:var(--body);font-size:1.08rem;line-height:1.65;color:var(--ink2);font-weight:500}
+  .quick-answer strong{color:var(--green-d);font-weight:700}
+
+  /* data table */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 22px;overflow-x:auto}
+  .rate-table{width:100%;border-collapse:collapse;min-width:380px}
+  .rate-table th{font-family:var(--display);font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-d);text-align:left;padding:13px 18px;background:var(--mint);border-bottom:1px solid var(--line)}
+  .rate-table th:last-child{text-align:right}
+  .rate-table td{font-family:var(--body);font-size:.95rem;color:var(--ink2);padding:14px 18px;border-bottom:1px solid var(--line2)}
+  .rate-table td:last-child{font-family:var(--mono);font-weight:600;font-size:1rem;color:var(--green3);text-align:right;font-variant-numeric:tabular-nums}
+  .rate-table tr:last-child td{border-bottom:none}
+  .rate-table tr:hover td{background:var(--paper3)}
+  .rate-table strong{color:var(--green-d);font-weight:700}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7}
+
+  /* related links */
+  .related-links{border-top:1px solid var(--line);padding:24px 0 0;margin:8px 0 0}
+  .related-links h3{font-family:var(--display);font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-d);margin:0 0 12px}
+  .related-links a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d);text-decoration:none}
+  .related-links a:first-of-type{border-top:none}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:1.9rem}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -112,163 +241,266 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/guides/">Guides</a> &rsaquo; Freelancer &amp; IT Exporter Tax</div>
+<main>
+<article class="art-frame">
 
-  <h1>Freelancer &amp; IT Exporter Tax in Pakistan (2026): PSEB, the 0.25% Rate &amp; Remittances</h1>
-  <div class="byline">By Abdul Ahad &nbsp;&middot;&nbsp; Updated 20 June 2026 &nbsp;&middot;&nbsp; 9 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>If you only read one line:</strong> A freelancer or IT-services exporter in Pakistan who brings earnings home through banking channels pays a low final tax on export proceeds, about 0.25% if registered with the Pakistan Software Export Board (PSEB) and around 1% if not. You must repatriate the proceeds through normal banking channels and file an annual return. Income earned from clients inside Pakistan is taxed on the normal income tax slabs instead.</p>
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">Freelancer &amp; IT Exporter Tax</li>
+    </ol>
+  </nav>
 
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn &rarr;</a> &nbsp;&middot;&nbsp; <span style="color:#888">Updated 20 June 2026</span></div>
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 06 — Tax &amp; Compliance · Freelancers</div>
+      <h1>Freelancer &amp; IT exporter tax in Pakistan: PSEB, 0.25% &amp; remittances.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 20 June 2026</span>
+        <span>· 9 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">If you only read one line</div>
+      <p>A freelancer or IT-services exporter who brings earnings home through banking channels pays a low final tax on export proceeds — about <b class="acc">0.25%</b> if registered with <b>PSEB</b> and around <b class="acc">1%</b> if not. Repatriate through normal banking channels and file an annual return. Income from clients inside Pakistan is taxed on the <b>normal slabs</b> instead.</p>
     </div>
   </div>
 
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>What to know before you file:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>Two kinds of income, taxed differently: <strong>exported services</strong> (foreign clients) vs <strong>local clients</strong> in Pakistan</li>
-      <li>Export proceeds via banking channels: a <strong>final tax of ~0.25%</strong> if <strong>PSEB-registered</strong>, ~<strong>1%</strong> if not</li>
-      <li>Conditions: register with PSEB, bring <strong>at least 80%</strong> of proceeds through <strong>normal banking channels</strong>, repatriate <strong>within 30 days</strong> of month-end, and renew yearly</li>
-      <li>Local-client income is taxed on the <strong>normal non-salaried slabs</strong>; file an annual return and be a <strong>filer</strong> either way</li>
-    </ul>
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 20 June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Quick answer lede -->
+      <p class="quick-answer"><strong>If you only read one line:</strong> A freelancer or IT-services exporter in Pakistan who brings earnings home through banking channels pays a low final tax on export proceeds, about 0.25% if registered with the Pakistan Software Export Board (PSEB) and around 1% if not. You must repatriate the proceeds through normal banking channels and file an annual return. Income earned from clients inside Pakistan is taxed on the normal income tax slabs instead.</p>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">What to know before you file</div>
+        <ul>
+          <li>Two kinds of income, taxed differently: <strong>exported services</strong> (foreign clients) vs <strong>local clients</strong> in Pakistan</li>
+          <li>Export proceeds via banking channels: a <strong>final tax of ~0.25%</strong> if <strong>PSEB-registered</strong>, ~<strong>1%</strong> if not</li>
+          <li>Conditions: register with PSEB, bring <strong>at least 80%</strong> of proceeds through <strong>normal banking channels</strong>, repatriate <strong>within 30 days</strong> of month-end, and renew yearly</li>
+          <li>Local-client income is taxed on the <strong>normal non-salaried slabs</strong>; file an annual return and be a <strong>filer</strong> either way</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>Pakistan has one of the world's largest freelancer populations, and the tax system treats their earnings unusually kindly, <em>if</em> the money comes home the right way. Not all freelance income is taxed the same. It comes down to two things: where your client sits, and how you receive the money. Get both right and your tax bill can land at a fraction of a percent.</p>
+
+      <h2 id="s1"><span class="sn">01</span>Two kinds of freelance income</h2>
+      <p>Before any rate applies, sort your income into two buckets:</p>
+      <ul>
+        <li><strong>Exported services.</strong> You work for clients <strong>abroad</strong> (Upwork, Fiverr, direct foreign clients) and the payment arrives from outside Pakistan. This counts as an <strong>IT/IT-enabled service export</strong> and qualifies for the concessional regime below.</li>
+        <li><strong>Local services.</strong> You work for clients <strong>inside Pakistan</strong> and are paid in rupees. This is ordinary business income, taxed on the <strong>normal non-salaried slabs</strong>, and depending on what you do it may also attract <strong>provincial sales tax on services</strong>.</li>
+      </ul>
+
+      <h2 id="s2"><span class="sn">02</span>The export concession: 0.25% vs 1%</h2>
+      <p>For IT and IT-enabled service exports brought into Pakistan through banking channels, the tax is a <strong>low final tax on the export proceeds</strong>, not the normal slabs. One factor sets the rate: whether you are registered with the <strong>Pakistan Software Export Board (PSEB)</strong>.</p>
+
+      <div class="tbl-wrap">
+        <table class="rate-table">
+          <thead>
+            <tr><th>Status</th><th>Final tax on export proceeds</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>PSEB-registered</strong> IT/ITeS exporter</td><td>~0.25%</td></tr>
+            <tr><td><strong>Not registered</strong></td><td>~1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Take a year of, say, Rs 50,00,000 in export earnings. That works out to roughly <strong>Rs 12,500</strong> if you are registered versus <strong>Rs 50,000</strong> if you are not. That gap is what pushes most freelancers to register. These are <strong>final-tax</strong> rates, so the export receipts are not taxed again on the slabs afterwards. Rates and the underlying exemption are set by the annual Finance Act, so confirm the current numbers on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> and <a href="https://www.pseb.org.pk" target="_blank" rel="noopener">pseb.org.pk</a>.</p>
+
+      <h2 id="s3"><span class="sn">03</span>The conditions (Section 65F)</h2>
+      <p>The concession is not automatic. It comes with conditions, broadly under Section 65F of the Income Tax Ordinance:</p>
+      <ul>
+        <li><strong>Be registered with PSEB</strong> as an IT/ITeS exporter or freelancer, and <strong>renew annually</strong>.</li>
+        <li>Bring <strong>at least 80%</strong> of your export earnings into Pakistan through <strong>normal banking channels</strong>.</li>
+        <li><strong>Repatriate proceeds within 30 days</strong> of the end of the month in which the service was rendered.</li>
+        <li>File your income tax return and remain compliant.</li>
+      </ul>
+      <p>Miss the repatriation timeline or route money outside banking channels and you can <strong>lose the concession</strong>, which throws the income onto the much higher normal slabs. The concession has been extended year to year, and whether it survives beyond mid-2026 depends on the Finance Act. Verify the live position before you rely on it.</p>
+
+      <div class="cl-dark">
+        <div class="k">Key point</div>
+        <p>The concession generally requires proceeds to arrive <strong>through a bank</strong>. Whether a client pays via Payoneer, Wise, or direct transfer, the money is usually withdrawn into a Pakistani bank account, which is what makes it a banking-channel remittance. The <strong>Proceeds Realisation Certificate (PRC)</strong> or bank credit advice is your proof.</p>
+      </div>
+
+      <h2 id="s4"><span class="sn">04</span>How to register with PSEB</h2>
+      <p>Registration is done online with the Pakistan Software Export Board:</p>
+      <ul>
+        <li>Create an account on the <strong>PSEB portal</strong> (pseb.org.pk) and choose the <strong>freelancer</strong> (or company) category.</li>
+        <li>Provide your <strong>CNIC, NTN</strong>, contact details and proof of IT/ITeS work.</li>
+        <li>Link the <strong>bank account</strong> you use to receive export proceeds.</li>
+        <li>Pay the registration fee and <strong>renew each year</strong> to keep the concessional rate.</li>
+      </ul>
+      <p>You generally need an NTN first. See our guide on <a href="/guides/how-to-become-filer-pakistan.html">how to become a filer in Pakistan</a>.</p>
+
+      <h2 id="s5"><span class="sn">05</span>Receiving payments the right way</h2>
+      <p>Payment platforms are fine as a <em>route</em>. The money just has to land in a Pakistani bank in the end to qualify:</p>
+      <ul>
+        <li><strong>Payoneer / Wise</strong> → withdraw to your Pakistani bank account; the bank records it as a foreign remittance.</li>
+        <li>Consider a <strong>foreign-currency or freelancer digital account</strong> offered by several banks for export earnings.</li>
+        <li>Ask your bank for a <strong>Proceeds Realisation Certificate (PRC)</strong>. It documents that the money came through banking channels, and you need it to claim the concessional rate.</li>
+      </ul>
+
+      <h2 id="s6"><span class="sn">06</span>Local-client income is different</h2>
+      <p>If you invoice clients <strong>inside Pakistan</strong>, that income is <strong>not</strong> an export. It is ordinary business income taxed on the <strong>non-salaried slabs</strong> (which run up to 45%), and depending on the service and province it may also attract <strong>provincial sales tax on services</strong> (currently around 16% in Punjab and 15% in Sindh, KP and Balochistan; verify with the relevant provincial authority, whether that is PRA, SRB, KPRA or BRA). You can estimate the income tax on local earnings with our <a href="/tax-calculator.html">Pakistan tax calculator</a> using the &ldquo;business individual / AOP&rdquo; option.</p>
+
+      <h2 id="s7"><span class="sn">07</span>Filing and filer status</h2>
+      <p>Whichever bucket your income falls in, <strong>file an annual return</strong> and get on the <strong>Active Taxpayer List</strong>. Filing lets you document export proceeds and claim the right treatment, and being a filer stops you overpaying withholding on everything else. Our guides on <a href="/guides/how-to-become-filer-pakistan.html">becoming a filer</a> and <a href="/guides/investment-tax-pakistan.html">how investments are taxed</a> cover the process.</p>
+
+      <div class="cl-mint">
+        <div class="k">To sum up</div>
+        <p>For PSEB-registered exporters who bring proceeds home through a bank within the deadline, the tax can be about 0.25% of proceeds. Local-client work, by contrast, is taxed on the full slabs, and every rate here is reset yearly by the Finance Act. Routing earnings through banking channels, keeping PRCs and filing annually are what preserve the concession. Verify the current rules on fbr.gov.pk and pseb.org.pk.</p>
+      </div>
+
+      <h2 id="s8"><span class="sn">08</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-do-freelancers-pay-tax"><summary class="faq-question">Do freelancers have to pay tax in Pakistan?</summary><div class="faq-answer">Yes. Freelance and IT-services income is taxable in Pakistan, but how it is taxed depends on the client. Earnings exported abroad and brought home through banking channels fall under a concessional final tax on export proceeds, while income earned from clients inside Pakistan is taxed on the normal non-salaried income tax slabs. Either way, you should register with FBR and file an annual return to stay compliant and on the Active Taxpayer List.</div></details>
+
+      <details class="faq-item" id="faq-freelance-export-tax-rate"><summary class="faq-question">What is the tax rate on freelance and IT export income in Pakistan?</summary><div class="faq-answer">For IT and IT-enabled service exports brought in through banking channels, the final tax on export proceeds is about 0.25% if you are registered with the Pakistan Software Export Board (PSEB), versus around 1% if you are not registered. These are final-tax rates on the export receipts, not the standard income tax slabs. The rates and the underlying exemption are set each year by the Finance Act, so confirm the current position on fbr.gov.pk and pseb.org.pk.</div></details>
+
+      <details class="faq-item" id="faq-pseb-registration-worth-it"><summary class="faq-question">Is PSEB registration worth it for a freelancer?</summary><div class="faq-answer">For an exporter, the difference between roughly 0.25% (registered) and 1% (unregistered) on every remittance is large over a year, which is the main financial reason freelancers register with the Pakistan Software Export Board. Registration must be renewed annually and comes with conditions — chiefly that export proceeds come through normal banking channels. Whether it is worthwhile depends on your export volume; weigh the saving against the registration effort and confirm current benefits on pseb.org.pk.</div></details>
+
+      <details class="faq-item" id="faq-foreign-income-taxable"><summary class="faq-question">Is foreign income from freelancing taxable in Pakistan?</summary><div class="faq-answer">Foreign remittances received through official banking channels are generally not treated as taxable income in Pakistan. For IT/IT-enabled service exporters, the export proceeds instead fall under the concessional final-tax regime (about 0.25% for PSEB-registered, 1% otherwise) provided the money is repatriated through banking channels within the required timeline. Receiving payment outside banking channels can forfeit the concession and expose the income to the normal slabs — always route earnings through a bank and keep the proceeds documentation.</div></details>
+
+      <details class="faq-item" id="faq-need-to-become-filer"><summary class="faq-question">Do freelancers still need to become a filer?</summary><div class="faq-answer">Yes. Even with a low final tax on exports, you should file an annual income tax return and be on the Active Taxpayer List. Non-filers pay higher withholding on bank transactions, property and vehicles, and PSEB and bank processes generally expect you to be a registered taxpayer. Filing also lets you document your export proceeds and claim the concessional treatment correctly. Registering is free on iris.fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-how-to-register-with-fbr"><summary class="faq-question">How does a freelancer register with FBR in Pakistan?</summary><div class="faq-answer">Registration is done online through the FBR Iris portal at iris.fbr.gov.pk, where you create an account using your CNIC and obtain a National Tax Number (NTN) at no cost. After registration, you log into Iris each year to file your income tax return and stay on the Active Taxpayer List. The exact steps and required documents can change, so check the current registration process on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-which-tax-return-form"><summary class="faq-question">Which tax return form should a freelancer file?</summary><div class="faq-answer">Freelancers generally file the income tax return for individuals through the FBR Iris portal, declaring their freelance or IT-export income along with any other sources. Because export proceeds and locally earned income can be treated differently, the way each is entered matters for claiming the correct concessional treatment. If you are unsure which fields or schedules apply to your situation, verify the current return format on fbr.gov.pk or consult a registered tax practitioner.</div></details>
+
+      <details class="faq-item" id="faq-record-keeping-payment-proofs"><summary class="faq-question">What records should a freelancer keep for tax purposes?</summary><div class="faq-answer">Keep documentation that shows your export proceeds came through official banking channels, such as bank credit advices, remittance or Proceeds Realisation Certificates, invoices, and contracts with clients. These records support your claim to the concessional final-tax treatment and help if FBR ever asks for proof. Retaining clear, organised records each year makes filing your annual return more straightforward.</div></details>
+
+      <details class="faq-item" id="faq-platforms-and-local-clients"><summary class="faq-question">Does it matter whether I earn through Upwork, Fiverr, or local Pakistani clients?</summary><div class="faq-answer">What matters for tax treatment is whether the income is an export of IT or IT-enabled services brought in through banking channels, or income earned from clients inside Pakistan. Money received from foreign platforms and routed through your bank can fall under the concessional final-tax regime for export proceeds, while income from local clients is taxed on the normal non-salaried slabs. The platform name itself is not the deciding factor, so document how and from where each payment was received and confirm the current rules on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-missing-filing-deadline"><summary class="faq-question">What happens if a freelancer misses the tax return deadline?</summary><div class="faq-answer">Filing late or not at all can keep you off the Active Taxpayer List, which generally means higher withholding tax on bank transactions, property, and vehicles until you become compliant. FBR may also apply penalties or surcharges for late filing. Deadlines and penalty amounts are set each year, so check the current filing deadline and consequences on fbr.gov.pk.</div></details>
+
+      <!-- Ad slot 2 — after FAQ -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Reading</h3>
+        <a href="/guides/how-to-become-filer-pakistan.html">How to Become a Filer in Pakistan (FBR IRIS)</a>
+        <a href="/tax-calculator.html">Pakistan Tax Calculator: Income, GST &amp; Sales Tax</a>
+        <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed in Pakistan: Filer vs Non-Filer</a>
+        <a href="/guides/roshan-digital-account-guide.html">Roshan Digital Account Guide for Overseas Pakistanis</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">⚠ This guide is for educational purposes only and is <strong>not tax, legal, or financial advice</strong>. The export concession, its rate, and the Section 65F conditions are set by the annual Finance Act and FBR/PSEB notifications and change over time; the concessional treatment's continuation is subject to extension. Verify the current rates, conditions and deadlines on fbr.gov.pk and pseb.org.pk and consult a qualified tax adviser for your specific situation before acting.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>Two kinds of income</a>
+            <a href="#s2"><span class="ti">02</span>The export concession</a>
+            <a href="#s3"><span class="ti">03</span>The conditions (65F)</a>
+            <a href="#s4"><span class="ti">04</span>Register with PSEB</a>
+            <a href="#s5"><span class="ti">05</span>Receiving payments</a>
+            <a href="#s6"><span class="ti">06</span>Local-client income</a>
+            <a href="#s7"><span class="ti">07</span>Filing &amp; filer status</a>
+            <a href="#s8"><span class="ti">08</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">0.25%</div><div class="gl-l">PSEB-registered export tax</div></div>
+          <div class="gl-row"><div class="gl-n">1%</div><div class="gl-l">Unregistered export tax</div></div>
+          <div class="gl-row"><div class="gl-n">80%</div><div class="gl-l">Min. via banking channels</div></div>
+          <div class="gl-row"><div class="gl-n">30 days</div><div class="gl-l">Repatriation window</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/how-to-become-filer-pakistan.html">How to Become a Filer in Pakistan →</a>
+          <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed →</a>
+          <a href="/guides/roshan-digital-account-guide.html">Roshan Digital Account Guide →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
   </div>
+</article>
+</main>
 
-  <!-- Ad slot 1 -->
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>Pakistan has one of the world's largest freelancer populations, and the tax system treats their earnings unusually kindly, <em>if</em> the money comes home the right way. Not all freelance income is taxed the same. It comes down to two things: where your client sits, and how you receive the money. Get both right and your tax bill can land at a fraction of a percent.</p>
-
-  <h2>Two Kinds of Freelance Income</h2>
-  <p>Before any rate applies, sort your income into two buckets:</p>
-  <ul>
-    <li><strong>Exported services.</strong> You work for clients <strong>abroad</strong> (Upwork, Fiverr, direct foreign clients) and the payment arrives from outside Pakistan. This counts as an <strong>IT/IT-enabled service export</strong> and qualifies for the concessional regime below.</li>
-    <li><strong>Local services.</strong> You work for clients <strong>inside Pakistan</strong> and are paid in rupees. This is ordinary business income, taxed on the <strong>normal non-salaried slabs</strong>, and depending on what you do it may also attract <strong>provincial sales tax on services</strong>.</li>
-  </ul>
-
-  <h2>The Export Concession: 0.25% vs 1%</h2>
-  <p>For IT and IT-enabled service exports brought into Pakistan through banking channels, the tax is a <strong>low final tax on the export proceeds</strong>, not the normal slabs. One factor sets the rate: whether you are registered with the <strong>Pakistan Software Export Board (PSEB)</strong>.</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr><th>Status</th><th>Final tax on export proceeds</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>PSEB-registered</strong> IT/ITeS exporter</td><td>~0.25%</td></tr>
-      <tr><td><strong>Not registered</strong></td><td>~1%</td></tr>
-    </tbody>
-  </table>
-  <p>Take a year of, say, Rs 5,000,000 in export earnings. That works out to roughly <strong>Rs 12,500</strong> if you are registered versus <strong>Rs 50,000</strong> if you are not. That gap is what pushes most freelancers to register. These are <strong>final-tax</strong> rates, so the export receipts are not taxed again on the slabs afterwards. Rates and the underlying exemption are set by the annual Finance Act, so confirm the current numbers on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> and <a href="https://www.pseb.org.pk" target="_blank" rel="noopener">pseb.org.pk</a>.</p>
-
-  <h2>The Conditions (Section 65F)</h2>
-  <p>The concession is not automatic. It comes with conditions, broadly under Section 65F of the Income Tax Ordinance:</p>
-  <ul>
-    <li><strong>Be registered with PSEB</strong> as an IT/ITeS exporter or freelancer, and <strong>renew annually</strong>.</li>
-    <li>Bring <strong>at least 80%</strong> of your export earnings into Pakistan through <strong>normal banking channels</strong>.</li>
-    <li><strong>Repatriate proceeds within 30 days</strong> of the end of the month in which the service was rendered.</li>
-    <li>File your income tax return and remain compliant.</li>
-  </ul>
-  <p>Miss the repatriation timeline or route money outside banking channels and you can <strong>lose the concession</strong>, which throws the income onto the much higher normal slabs. The concession has been extended year to year, and whether it survives beyond mid-2026 depends on the Finance Act. Verify the live position before you rely on it.</p>
-
-  <div class="callout callout-gold">
-    <strong>Key point:</strong> the concession generally requires proceeds to arrive <strong>through a bank</strong>. Whether a client pays via Payoneer, Wise, or direct transfer, the money is usually withdrawn into a Pakistani bank account, which is what makes it a banking-channel remittance. The <strong>Proceeds Realisation Certificate (PRC)</strong> or bank credit advice is your proof.
-  </div>
-
-  <h2>How to Register with PSEB</h2>
-  <p>Registration is done online with the Pakistan Software Export Board:</p>
-  <ul>
-    <li>Create an account on the <strong>PSEB portal</strong> (pseb.org.pk) and choose the <strong>freelancer</strong> (or company) category.</li>
-    <li>Provide your <strong>CNIC, NTN</strong>, contact details and proof of IT/ITeS work.</li>
-    <li>Link the <strong>bank account</strong> you use to receive export proceeds.</li>
-    <li>Pay the registration fee and <strong>renew each year</strong> to keep the concessional rate.</li>
-  </ul>
-  <p>You generally need an NTN first. See our guide on <a href="/guides/how-to-become-filer-pakistan.html">how to become a filer in Pakistan</a>.</p>
-
-  <h2>Receiving Payments the Right Way</h2>
-  <p>Payment platforms are fine as a <em>route</em>. The money just has to land in a Pakistani bank in the end to qualify:</p>
-  <ul>
-    <li><strong>Payoneer / Wise</strong> &rarr; withdraw to your Pakistani bank account; the bank records it as a foreign remittance.</li>
-    <li>Consider a <strong>foreign-currency or freelancer digital account</strong> offered by several banks for export earnings.</li>
-    <li>Ask your bank for a <strong>Proceeds Realisation Certificate (PRC)</strong>. It documents that the money came through banking channels, and you need it to claim the concessional rate.</li>
-  </ul>
-
-  <h2>Local-Client Income Is Different</h2>
-  <p>If you invoice clients <strong>inside Pakistan</strong>, that income is <strong>not</strong> an export. It is ordinary business income taxed on the <strong>non-salaried slabs</strong> (which run up to 45%), and depending on the service and province it may also attract <strong>provincial sales tax on services</strong> (currently around 16% in Punjab and 15% in Sindh, KP and Balochistan; verify with the relevant provincial authority, whether that is PRA, SRB, KPRA or BRA). You can estimate the income tax on local earnings with our <a href="/tax-calculator.html">Pakistan tax calculator</a> using the &ldquo;business individual / AOP&rdquo; option.</p>
-
-  <h2>Filing and Filer Status</h2>
-  <p>Whichever bucket your income falls in, <strong>file an annual return</strong> and get on the <strong>Active Taxpayer List</strong>. Filing lets you document export proceeds and claim the right treatment, and being a filer stops you overpaying withholding on everything else. Our guides on <a href="/guides/how-to-become-filer-pakistan.html">becoming a filer</a> and <a href="/guides/investment-tax-pakistan.html">how investments are taxed</a> cover the process.</p>
-
-  <div class="callout callout-green">
-    <strong>To sum up:</strong> for PSEB-registered exporters who bring proceeds home through a bank within the deadline, the tax can be about 0.25% of proceeds. Local-client work, by contrast, is taxed on the full slabs, and every rate here is reset yearly by the Finance Act. Routing earnings through banking channels, keeping PRCs and filing annually are what preserve the concession. Verify the current rules on fbr.gov.pk and pseb.org.pk.
-  </div>
-
-  <!-- FAQ Section -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-do-freelancers-pay-tax"><summary class="faq-question">Do freelancers have to pay tax in Pakistan?</summary><div class="faq-answer">Yes. Freelance and IT-services income is taxable in Pakistan, but how it is taxed depends on the client. Earnings exported abroad and brought home through banking channels fall under a concessional final tax on export proceeds, while income earned from clients inside Pakistan is taxed on the normal non-salaried income tax slabs. Either way, you should register with FBR and file an annual return to stay compliant and on the Active Taxpayer List.</div></details>
-
-  <details class="faq-item" id="faq-freelance-export-tax-rate"><summary class="faq-question">What is the tax rate on freelance and IT export income in Pakistan?</summary><div class="faq-answer">For IT and IT-enabled service exports brought in through banking channels, the final tax on export proceeds is about 0.25% if you are registered with the Pakistan Software Export Board (PSEB), versus around 1% if you are not registered. These are final-tax rates on the export receipts, not the standard income tax slabs. The rates and the underlying exemption are set each year by the Finance Act, so confirm the current position on fbr.gov.pk and pseb.org.pk.</div></details>
-
-  <details class="faq-item" id="faq-pseb-registration-worth-it"><summary class="faq-question">Is PSEB registration worth it for a freelancer?</summary><div class="faq-answer">For an exporter, the difference between roughly 0.25% (registered) and 1% (unregistered) on every remittance is large over a year, which is the main financial reason freelancers register with the Pakistan Software Export Board. Registration must be renewed annually and comes with conditions — chiefly that export proceeds come through normal banking channels. Whether it is worthwhile depends on your export volume; weigh the saving against the registration effort and confirm current benefits on pseb.org.pk.</div></details>
-
-  <details class="faq-item" id="faq-foreign-income-taxable"><summary class="faq-question">Is foreign income from freelancing taxable in Pakistan?</summary><div class="faq-answer">Foreign remittances received through official banking channels are generally not treated as taxable income in Pakistan. For IT/IT-enabled service exporters, the export proceeds instead fall under the concessional final-tax regime (about 0.25% for PSEB-registered, 1% otherwise) provided the money is repatriated through banking channels within the required timeline. Receiving payment outside banking channels can forfeit the concession and expose the income to the normal slabs — always route earnings through a bank and keep the proceeds documentation.</div></details>
-
-  <details class="faq-item" id="faq-need-to-become-filer"><summary class="faq-question">Do freelancers still need to become a filer?</summary><div class="faq-answer">Yes. Even with a low final tax on exports, you should file an annual income tax return and be on the Active Taxpayer List. Non-filers pay higher withholding on bank transactions, property and vehicles, and PSEB and bank processes generally expect you to be a registered taxpayer. Filing also lets you document your export proceeds and claim the concessional treatment correctly. Registering is free on iris.fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-how-to-register-with-fbr"><summary class="faq-question">How does a freelancer register with FBR in Pakistan?</summary><div class="faq-answer">Registration is done online through the FBR Iris portal at iris.fbr.gov.pk, where you create an account using your CNIC and obtain a National Tax Number (NTN) at no cost. After registration, you log into Iris each year to file your income tax return and stay on the Active Taxpayer List. The exact steps and required documents can change, so check the current registration process on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-which-tax-return-form"><summary class="faq-question">Which tax return form should a freelancer file?</summary><div class="faq-answer">Freelancers generally file the income tax return for individuals through the FBR Iris portal, declaring their freelance or IT-export income along with any other sources. Because export proceeds and locally earned income can be treated differently, the way each is entered matters for claiming the correct concessional treatment. If you are unsure which fields or schedules apply to your situation, verify the current return format on fbr.gov.pk or consult a registered tax practitioner.</div></details>
-
-  <details class="faq-item" id="faq-record-keeping-payment-proofs"><summary class="faq-question">What records should a freelancer keep for tax purposes?</summary><div class="faq-answer">Keep documentation that shows your export proceeds came through official banking channels, such as bank credit advices, remittance or Proceeds Realisation Certificates, invoices, and contracts with clients. These records support your claim to the concessional final-tax treatment and help if FBR ever asks for proof. Retaining clear, organised records each year makes filing your annual return more straightforward.</div></details>
-
-  <details class="faq-item" id="faq-platforms-and-local-clients"><summary class="faq-question">Does it matter whether I earn through Upwork, Fiverr, or local Pakistani clients?</summary><div class="faq-answer">What matters for tax treatment is whether the income is an export of IT or IT-enabled services brought in through banking channels, or income earned from clients inside Pakistan. Money received from foreign platforms and routed through your bank can fall under the concessional final-tax regime for export proceeds, while income from local clients is taxed on the normal non-salaried slabs. The platform name itself is not the deciding factor, so document how and from where each payment was received and confirm the current rules on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-missing-filing-deadline"><summary class="faq-question">What happens if a freelancer misses the tax return deadline?</summary><div class="faq-answer">Filing late or not at all can keep you off the Active Taxpayer List, which generally means higher withholding tax on bank transactions, property, and vehicles until you become compliant. FBR may also apply penalties or surcharges for late filing. Deadlines and penalty amounts are set each year, so check the current filing deadline and consequences on fbr.gov.pk.</div></details>
-
-  <!-- Ad slot 2 -->
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Reading</h3>
-    <a href="/guides/how-to-become-filer-pakistan.html">How to Become a Filer in Pakistan (FBR IRIS)</a>
-    <a href="/tax-calculator.html">Pakistan Tax Calculator: Income, GST &amp; Sales Tax</a>
-    <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed in Pakistan: Filer vs Non-Filer</a>
-    <a href="/guides/roshan-digital-account-guide.html">Roshan Digital Account Guide for Overseas Pakistanis</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">&#9888; This guide is for educational purposes only and is <strong>not tax, legal, or financial advice</strong>. The export concession, its rate, and the Section 65F conditions are set by the annual Finance Act and FBR/PSEB notifications and change over time; the concessional treatment's continuation is subject to extension. Verify the current rates, conditions and deadlines on fbr.gov.pk and pseb.org.pk and consult a qualified tax adviser for your specific situation before acting.</div>
-
-</div>
-
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>&copy; 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/blog/">Blog</a>
-    <a href="/tax-calculator.html">Tax Calculator</a>
-    <a href="/gold-rates.html">Gold Rates</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: FBR · PSEB · SBP · CDNS</span>
   </div>
 </footer>
 
-<script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

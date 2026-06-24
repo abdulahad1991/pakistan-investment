@@ -131,12 +131,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -156,23 +156,157 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(1.9rem,4.2vw,3.1rem);font-weight:800;line-height:1.04;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose p a,.prose li a{color:var(--green);font-weight:700;border-bottom:1px solid var(--line)}
+  .prose p a:hover,.prose li a:hover{color:var(--green2)}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+
+  /* quick-answer / standfirst */
+  .stand{font-family:var(--body);font-size:1.12rem;line-height:1.65;color:var(--green-d);border-left:4px solid var(--acid);background:var(--mint);padding:14px 20px;margin:0 0 26px;font-weight:600}
+  .stand strong{color:var(--green-d);font-weight:800}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 28px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);padding:18px 22px;margin:22px 0}
+  .cl-dark p{margin:0;color:#E4F2EA;font-family:var(--body);font-size:1.02rem;line-height:1.6;font-weight:500}
+  .cl-dark .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--acid);margin-bottom:8px;text-transform:uppercase}
+  .cl-dark strong{color:#fff;font-weight:700}
+  .cl-dark a{color:var(--acid);font-weight:700;border-bottom:1px solid rgba(237,248,4,.4)}
+
+  /* note under table */
+  .tbl-note{font-family:var(--body);font-size:.86rem;color:var(--muted);margin:-6px 0 24px;line-height:1.6}
+
+  /* live snapshot widget shell (article.js fills #live-snap) */
+  .live-widget{border:1px solid var(--line);margin:0 0 28px}
+  .lw-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--mint);border-top:3px solid var(--acid)}
+  .lw-head .t{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--green-d);text-transform:uppercase}
+  #live-snap{padding:18px}
+  #live-snap:empty{display:none}
+
+  /* data table — IBM Plex Mono figures */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 8px;overflow-x:auto}
+  .data-table{width:100%;border-collapse:collapse;min-width:520px}
+  .data-table thead th{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-d);text-align:left;padding:12px 16px;border-bottom:2px solid var(--acid);background:var(--mint);white-space:nowrap}
+  .data-table tbody td{font-family:var(--mono);font-size:.86rem;color:var(--ink2);padding:11px 16px;border-bottom:1px solid var(--line2);font-variant-numeric:tabular-nums;vertical-align:middle}
+  .data-table tbody td:first-child{font-family:var(--body);font-weight:600;color:var(--ink);font-variant-numeric:normal}
+  .data-table tbody tr:hover td{background:var(--paper)}
+  .data-table tbody tr:last-child td{border-bottom:none}
+
+  /* faq — reuse v2 .faq-item, just remove side borders inside prose */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7;color:var(--ink2)}
+
+  /* related links */
+  .related-links{border-top:1px solid var(--line);margin-top:8px;padding-top:22px}
+  .related-links h3{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-d);margin:0 0 10px}
+  .related-links a{display:block;padding:10px 0;border-bottom:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d)}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:1.85rem}
+    .prose h2{font-size:1.45rem}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -181,264 +315,378 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › Budget 2026-27: Tax Slabs Explained</div>
+<main>
+<article class="art-frame">
 
-  <h1>Budget 2026-27 Tax Slabs Explained: A Sigh of Relief for Pakistan's Salaried Class</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Last updated: 13 June 2026 &nbsp;·&nbsp; 8 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In short:</strong> The Budget 2026-27, presented 12 June 2026, cuts salaried marginal tax rates on four slabs between Rs 2.2m and Rs 7m (23%→20%, 30%→25%, 35%→29%, 35%→32%) and abolishes the surcharge on income above Rs 10m, effective 1 July 2026 pending the Finance Act.</p>
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li aria-current="page">Budget 2026-27: Tax Slabs Explained</li>
+    </ol>
+  </nav>
 
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Last updated: 13 June 2026</span></div>
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 07 — Fiscal Policy · Salaried Tax</div>
+      <h1>Budget 2026-27 tax slabs explained: a sigh of relief for the salaried class.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 13 June 2026</span>
+        <span>· 8 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">The change in one breath</div>
+      <p>The FY27 budget cuts salaried marginal rates on <b>four slabs</b> between Rs 2.2m and Rs 7m — <b class="acc">23%→20%, 30%→25%, 35%→29%, 35%→32%</b> — and abolishes the surcharge on income above Rs 10m, effective <b>1 July 2026</b> pending the Finance Act.</p>
     </div>
   </div>
 
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>The slab cuts at a glance:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>The FY27 budget (presented 12 June 2026) cuts salaried marginal tax rates on <strong>four slabs</strong> and <strong>abolishes the surcharge</strong> on high earners, effective 1 July 2026 pending the Finance Act</li>
-      <li>The cuts: <strong>23%→20%</strong> (Rs 2.2–3.2m), <strong>30%→25%</strong> (3.2–4.1m), <strong>35%→29%</strong> (4.1–5.6m), <strong>35%→32%</strong> (5.6–7m). Below Rs 2.2m and the Rs 600,000 tax-free floor stay <strong>unchanged</strong></li>
-      <li>Your saving depends on income: roughly <strong>Rs 9,000/yr at Rs 2.5m</strong>, <strong>Rs 45,000 at Rs 3.5m</strong>, <strong>Rs 129,000 at Rs 5m</strong>, <strong>Rs 207,000 at Rs 7m</strong> (illustrative)</li>
-      <li>Every figure is <strong>as reported</strong>. Verify the enacted slab table on fbr.gov.pk before planning</li>
-    </ul>
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- standfirst / quick answer -->
+      <p class="stand"><strong>In short:</strong> The Budget 2026-27, presented 12 June 2026, cuts salaried marginal tax rates on four slabs between Rs 2.2m and Rs 7m (23%→20%, 30%→25%, 35%→29%, 35%→32%) and abolishes the surcharge on income above Rs 10m, effective 1 July 2026 pending the Finance Act.</p>
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Last updated: 13 June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Summary box -->
+      <div class="cl-key">
+        <div class="k">The slab cuts at a glance</div>
+        <ul>
+          <li>The FY27 budget (presented 12 June 2026) cuts salaried marginal tax rates on <strong>four slabs</strong> and <strong>abolishes the surcharge</strong> on high earners, effective 1 July 2026 pending the Finance Act</li>
+          <li>The cuts: <strong>23%→20%</strong> (Rs 2.2–3.2m), <strong>30%→25%</strong> (3.2–4.1m), <strong>35%→29%</strong> (4.1–5.6m), <strong>35%→32%</strong> (5.6–7m). Below Rs 2.2m and the Rs 600,000 tax-free floor stay <strong>unchanged</strong></li>
+          <li>Your saving depends on income: roughly <strong>Rs 9,000/yr at Rs 2.5m</strong>, <strong>Rs 45,000 at Rs 3.5m</strong>, <strong>Rs 129,000 at Rs 5m</strong>, <strong>Rs 207,000 at Rs 7m</strong> (illustrative)</li>
+          <li>Every figure is <strong>as reported</strong>. Verify the enacted slab table on fbr.gov.pk before planning</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary, before main content -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>For three years the salaried class has been the most reliably squeezed taxpayer in Pakistan. Fully documented, fully withheld at source, with no shelter to park income the way other sectors manage. So when Finance Minister Muhammad Aurangzeb stood up on 12 June 2026 and announced rate cuts across four salaried slabs and the abolition of the surcharge, the reaction was less celebration than exhale. A sigh of relief after years of the opposite. This post is the plain-English explainer: what the slabs were, what they become, and how much lands back in your pocket. For what to actually <em>do</em> with the saving, see our companion piece on <a href="/blog/budget-2026-27-salaried-class-investing.html">5 smart moves for the salaried class</a>. This one is purely about the numbers.</p>
+
+      <p>One caveat up front, and I'll repeat it because it matters: a budget speech is a <strong>proposal</strong>, not law. The figures below are <strong>as reported at presentation</strong>. They take effect from 1 July 2026 only once the National Assembly passes the Finance Act, and slabs can be amended before then. Treat the enacted table on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> as the final word.</p>
+
+      <!-- Live snapshot (filled by article.js from data.json) -->
+      <div class="live-widget">
+        <div class="lw-head">
+          <span class="t">Today's Market Numbers</span>
+        </div>
+        <div id="live-snap"></div>
+      </div>
+
+      <h2 id="s1"><span class="sn">01</span>The headline: what actually changed</h2>
+
+      <p>In one sentence: <strong>the marginal tax rate fell on every salaried slab between Rs 2.2 million and Rs 7 million a year, and the surcharge on high earners was scrapped.</strong> Nothing below Rs 2.2 million moved. The top 35% rate above Rs 7 million stayed put too. The relief is aimed squarely at the broad middle and upper-middle of the salaried spectrum, the slabs where most documented professionals sit.</p>
+
+      <h2 id="s2"><span class="sn">02</span>Old vs new slabs, side by side</h2>
+
+      <p>The cleanest way to see the change is the <strong>marginal rate</strong> on each income band, meaning the rate that applies to the rupees <em>within</em> that band, not your whole salary. Here is the before-and-after, as reported:</p>
+
+      <div class="tbl-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Annual taxable income</th>
+              <th>FY26 rate (old)</th>
+              <th>FY27 rate (new)</th>
+              <th>Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Up to Rs 600,000</td>
+              <td>0%</td>
+              <td>0%</td>
+              <td><span class="badge badge-grey">No change</span></td>
+            </tr>
+            <tr>
+              <td>Rs 600,001 – 1,200,000</td>
+              <td>1%</td>
+              <td>1%</td>
+              <td><span class="badge badge-grey">No change</span></td>
+            </tr>
+            <tr>
+              <td>Rs 1,200,001 – 2,200,000</td>
+              <td>11%</td>
+              <td>11%</td>
+              <td><span class="badge badge-grey">No change</span></td>
+            </tr>
+            <tr>
+              <td>Rs 2,200,001 – 3,200,000</td>
+              <td>23%</td>
+              <td><strong>20%</strong></td>
+              <td><span class="badge badge-green">−3 pts</span></td>
+            </tr>
+            <tr>
+              <td>Rs 3,200,001 – 4,100,000</td>
+              <td>30%</td>
+              <td><strong>25%</strong></td>
+              <td><span class="badge badge-green">−5 pts</span></td>
+            </tr>
+            <tr>
+              <td>Rs 4,100,001 – 5,600,000</td>
+              <td>35%</td>
+              <td><strong>29%</strong></td>
+              <td><span class="badge badge-green">−6 pts</span></td>
+            </tr>
+            <tr>
+              <td>Rs 5,600,001 – 7,000,000</td>
+              <td>35%</td>
+              <td><strong>32%</strong></td>
+              <td><span class="badge badge-green">−3 pts</span></td>
+            </tr>
+            <tr>
+              <td>Above Rs 7,000,000</td>
+              <td>35%</td>
+              <td>35%</td>
+              <td><span class="badge badge-grey">No change</span></td>
+            </tr>
+            <tr>
+              <td>Surcharge (income &gt; Rs 10m)</td>
+              <td>9%</td>
+              <td><strong>Abolished</strong></td>
+              <td><span class="badge badge-green">Removed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="tbl-note"><em>Marginal rates as reported from the 12 June 2026 budget speech. Each slab also carries a fixed rupee base amount (tax on the bands below it) that comes from the enacted Finance Act. The table above shows the rate changes, which is what the budget emphasised. The FY26 "above Rs 4.1m at 35%" band is now split into the three finer bands shown. Verify the complete enacted table, including base amounts, on fbr.gov.pk.</em></p>
+
+      <!-- Ad slot 2 — mid-article -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <h2 id="s3"><span class="sn">03</span>How much will you actually save?</h2>
+
+      <p>Because the rates are <em>marginal</em>, your saving is not "3% of my salary". It is the rate cut applied only to the rupees that fall inside each reduced band, then added up. The higher into the relief band your income reaches, the more bands benefit, so the saving grows faster than income until it caps at the top of the Rs 7 million band. Worked illustratively:</p>
+
+      <div class="tbl-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Annual taxable salary</th>
+              <th>Roughly per month</th>
+              <th>Illustrative annual saving</th>
+              <th>≈ per month</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rs 2,000,000</td>
+              <td>Rs 166,667</td>
+              <td>Rs 0 (below relief band)</td>
+              <td>Rs 0</td>
+            </tr>
+            <tr>
+              <td>Rs 2,500,000</td>
+              <td>Rs 208,333</td>
+              <td>~Rs 9,000</td>
+              <td>~Rs 750</td>
+            </tr>
+            <tr>
+              <td>Rs 3,500,000</td>
+              <td>Rs 291,667</td>
+              <td>~Rs 45,000</td>
+              <td>~Rs 3,750</td>
+            </tr>
+            <tr>
+              <td>Rs 5,000,000</td>
+              <td>Rs 416,667</td>
+              <td>~Rs 129,000</td>
+              <td>~Rs 10,750</td>
+            </tr>
+            <tr>
+              <td>Rs 7,000,000</td>
+              <td>Rs 583,333</td>
+              <td>~Rs 207,000</td>
+              <td>~Rs 17,250</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Take the <strong>Rs 3.5 million</strong> earner. Their income clears the Rs 2.2–3.2 million band entirely, where the rate dropped 3 points, so about Rs 30,000 saved on that Rs 1 million slice. The remaining Rs 300,000 sits in the Rs 3.2–4.1 million band, where the rate dropped 5 points, adding about Rs 15,000 more. Total: roughly <strong>Rs 45,000 a year, near Rs 3,750 a month</strong>. The arithmetic is the same at every level. Figure out which bands your income passes through, multiply each band's slice by its rate cut, then add them up.</p>
+
+      <p>These numbers ignore the fixed-amount components within the slab formula, and they assume the reported marginal rates survive the Finance Act. So treat them strictly as an <strong>illustration of the method</strong>. The authoritative figure is whatever your July 2026 salary slip shows against the same gross pay as June.</p>
+
+      <h2 id="s4"><span class="sn">04</span>The surcharge abolition: who it helps</h2>
+
+      <p>Separate from the slab cuts, the budget reportedly <strong>abolished the surcharge</strong> that was levied on top of normal income tax for the highest earners, those with taxable income above Rs 10 million. For someone in that bracket this is a second, additive saving. The slab-rate cuts reduce the base tax, and removing the surcharge then shaves a further slice off the total bill. It is the one part of this budget aimed at the top of the salaried ladder, and it is why the relief for very high earners runs larger than the slab table alone suggests.</p>
+
+      <h2 id="s5"><span class="sn">05</span>What did not change</h2>
+
+      <p>Three things stayed exactly where they were, and they matter as much as the cuts:</p>
+
+      <ul>
+        <li><strong>The Rs 600,000 tax-free threshold.</strong> Income up to Rs 600,000 a year is still taxed at 0%. Anyone earning below that pays no salary tax, same as before.</li>
+        <li><strong>Every slab below Rs 2.2 million.</strong> The 1% and 11% bands are untouched, so <strong>lower-income salaried workers see no direct rate cut</strong> from this budget. The relief sits in the Rs 2.2–7 million range. If your salary is below Rs 2.2 million, your tax is unchanged.</li>
+        <li><strong>The top 35% rate above Rs 7 million.</strong> The ceiling rate held. What changed is that the bands <em>between</em> Rs 4.1m and Rs 7m now step up more gently to it.</li>
+      </ul>
+
+      <div class="cl-dark">
+        <div class="k">A note on "relief" in context</div>
+        <p>The cuts are real, but they partly unwind increases the salaried class absorbed in earlier budgets. And the saving arrives as a slightly bigger monthly credit, not a cheque. It's invisible enough that lifestyle inflation will quietly swallow it unless you do something deliberate. That is the whole argument of our companion piece on <a href="/blog/budget-2026-27-salaried-class-investing.html">five smart moves for the freed-up cash</a>.</p>
+      </div>
+
+      <h2 id="s6"><span class="sn">06</span>One step to keep the relief working</h2>
+
+      <p>Whatever your saving turns out to be, one piece of housekeeping protects and extends it: <strong>be a filer</strong>. The slab cuts apply through your payroll automatically. But every <em>other</em> tax you touch, like withholding on bank profit, dividends, mutual fund payouts and property transactions, costs materially more for non-filers. To put that in perspective, the dividend yields in our daily dataset run from FFC at 6.8% up to HUBC at 10.7%, and the non-filer withholding hit on those payouts is real money. Getting onto FBR's Active Taxpayer List is a one-evening job for a salaried person whose employer already withholds tax, and it multiplies the value of any saving you go on to invest. Our <a href="/guides/investment-tax-pakistan.html">filer vs non-filer guide</a> covers the IRIS steps. And if a home is on your horizon, the budget's property-tax cuts are <em>filer</em> rates too, so see our <a href="/blog/pakistan-housing-loan-scheme-2026.html">2026 housing loan scheme guide</a>.</p>
+
+      <h2 id="s7"><span class="sn">07</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-new-tax-slabs-salaried-2026-27"><summary class="faq-question">What are the new income tax slabs for the salaried class in Budget 2026-27?</summary><div class="faq-answer">As reported in the budget presented on 12 June 2026, the salaried marginal rates were cut on four slabs effective 1 July 2026: the Rs 2.2-3.2 million band falls from 23% to 20%, Rs 3.2-4.1 million from 30% to 25%, Rs 4.1-5.6 million from 35% to 29%, and Rs 5.6-7 million from 35% to 32%. The surcharge on high earners was also abolished. Slabs below Rs 2.2 million per year, including the Rs 600,000 tax-free threshold, were left unchanged. These figures are as reported and apply only once the National Assembly passes the Finance Act — verify the final table on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-how-much-tax-will-i-save"><summary class="faq-question">How much tax will I save under the new budget?</summary><div class="faq-answer">It depends on your income. Someone earning Rs 2.5 million a year saves only on the small slice above Rs 2.2 million — roughly Rs 9,000 a year. At Rs 3.5 million the saving is around Rs 45,000 a year (about Rs 3,750 a month); at Rs 5 million around Rs 129,000; and at Rs 7 million, the top of the relief band, roughly Rs 207,000 a year. Above Rs 10 million, abolishing the surcharge adds further saving. These are illustrative figures based on the marginal-rate cuts before fixed-amount components — compute your own from the enacted slab table on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-earn-less-than-2-2-million"><summary class="faq-question">I earn less than Rs 2.2 million a year — does the budget cut my tax?</summary><div class="faq-answer">As reported, no — the slabs below Rs 2.2 million per year were left unchanged, so the rate on your income is the same as before, and the Rs 600,000 annual tax-free threshold also stayed put. Lower-income salaried workers therefore see no direct rate cut from this budget. The relief is concentrated in the Rs 2.2-7 million bands. Verify the final Finance Act on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-when-new-slabs-take-effect"><summary class="faq-question">When do the new tax slabs take effect?</summary><div class="faq-answer">The budget was presented on 12 June 2026 and the new slabs are proposed to apply from 1 July 2026, the start of FY27 — but only once the National Assembly passes the Finance Act, and proposals can be amended before passage, usually before the end of June. Your payroll department applies the final enacted slabs from your July salary. Compare your June and July salary slips for the same gross pay to see the actual change.</div></details>
+
+      <details class="faq-item" id="faq-what-is-the-abolished-surcharge"><summary class="faq-question">What is the surcharge that was abolished?</summary><div class="faq-answer">It was an additional surcharge levied on top of the normal income tax for high earners — applied to individuals whose taxable income exceeded Rs 10 million. The FY27 budget reportedly abolished it, which lowers the effective tax burden specifically for the highest-earning salaried individuals on top of the slab-rate cuts. As with every figure here, confirm the final position in the enacted Finance Act on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-do-proposed-slabs-change-before-passage"><summary class="faq-question">Can the proposed slabs still change before they become law?</summary><div class="faq-answer">Yes. The figures presented on 12 June 2026 are budget proposals, and the National Assembly can amend them during the debate before the Finance Act is passed, usually before the end of June. Until the Act is enacted, no rate is final. Always treat pre-passage numbers as provisional and confirm the final slab table on fbr.gov.pk once the Finance Act is passed.</div></details>
+
+      <details class="faq-item" id="faq-gross-vs-taxable-income"><summary class="faq-question">Are the slab thresholds based on my gross salary or taxable income?</summary><div class="faq-answer">Income tax slabs in Pakistan are applied to taxable income, not your headline gross salary. Taxable income is your gross pay after any allowable deductions and exemptions that the law permits. Because the threshold that matters is taxable income, two people with the same gross package can fall into different slabs. Check the definitions and any applicable exemptions on fbr.gov.pk before assuming which band you are in.</div></details>
+
+      <details class="faq-item" id="faq-marginal-rate-meaning"><summary class="faq-question">Does the slab rate apply to my entire income or only part of it?</summary><div class="faq-answer">Pakistan's salaried slabs are marginal, so a given rate applies only to the portion of income that falls within that band, not to your whole income. This is why someone whose income just crosses into a higher band sees only a small slice taxed at the higher rate, not their full salary. That is also why the savings in this guide differ sharply by income level. Confirm the exact band-by-band structure in the enacted slab table on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-how-employer-deducts-tax"><summary class="faq-question">How does my employer deduct this tax from my pay?</summary><div class="faq-answer">Salaried tax in Pakistan is generally collected through withholding, where the employer deducts the estimated annual tax in monthly instalments from your pay before you receive it. Once the Finance Act is passed, payroll applies the final enacted slabs, typically from the July salary at the start of the financial year. Comparing your June and July salary slips for the same gross pay shows the actual change. Verify the current withholding rules on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-do-i-still-file-return"><summary class="faq-question">Do I still need to file a tax return if my employer deducts tax?</summary><div class="faq-answer">Withholding by an employer and filing an annual income tax return are separate things, and tax being deducted at source does not by itself remove a filing obligation. Filing requirements depend on income levels and other criteria set by the FBR, and being a filer can affect other withholding rates you face. Check whether you are required to file, and the current return process, on fbr.gov.pk.</div></details>
+
+      <!-- Ad slot 3 — after FAQ section -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Reading</h3>
+        <a href="/blog/budget-2026-27-salaried-class-investing.html">Budget 2026-27 Cut Your Income Tax — 5 Smart Moves for the Salaried Class</a>
+        <a href="/blog/pakistan-budget-2026-27-investors.html">Budget 2026-27: What It Means for Pakistani Investors</a>
+        <a href="/blog/pakistan-housing-loan-scheme-2026.html">Pakistan Housing Loan Scheme 2026: Mera Ghar Mera Aashiana Explained</a>
+        <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed in Pakistan: Filer vs Non-Filer</a>
+        <a href="/blog/budget-2026-27-stock-market-impact.html">Budget 2026-27 and the Stock Market: Sector-by-Sector Impact</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not financial or tax advice</strong>. All Budget 2026-27 slab rates, the surcharge change, and figures are <strong>as reported at presentation on 12 June 2026</strong> and remain subject to amendment until the Finance Act is passed — verify the final enacted table, including the fixed-amount components within each slab, on fbr.gov.pk. Worked savings examples are deliberately simplified marginal-rate illustrations, not exact calculations. Consult a qualified tax practitioner before acting on anything here.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>What actually changed</a>
+            <a href="#s2"><span class="ti">02</span>Old vs new slabs</a>
+            <a href="#s3"><span class="ti">03</span>How much you save</a>
+            <a href="#s4"><span class="ti">04</span>The surcharge abolition</a>
+            <a href="#s5"><span class="ti">05</span>What did not change</a>
+            <a href="#s6"><span class="ti">06</span>Keep the relief working</a>
+            <a href="#s7"><span class="ti">07</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">4 slabs</div><div class="gl-l">Cut (Rs 2.2m–7m)</div></div>
+          <div class="gl-row"><div class="gl-n">Rs 600k</div><div class="gl-l">Tax-free floor — unchanged</div></div>
+          <div class="gl-row"><div class="gl-n">Rs 3,750</div><div class="gl-l">≈ Monthly saving at Rs 3.5m</div></div>
+          <div class="gl-row"><div class="gl-n">1 Jul 2026</div><div class="gl-l">Effective, pending Finance Act</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/blog/budget-2026-27-salaried-class-investing.html">5 Smart Moves for the Salaried Class →</a>
+          <a href="/blog/pakistan-budget-2026-27-investors.html">Budget 2026-27 for Investors →</a>
+          <a href="/guides/investment-tax-pakistan.html">Filer vs Non-Filer Tax Guide →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
   </div>
+</article>
+</main>
 
-  <!-- Ad slot 1 — after summary, before main content -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>For three years the salaried class has been the most reliably squeezed taxpayer in Pakistan. Fully documented, fully withheld at source, with no shelter to park income the way other sectors manage. So when Finance Minister Muhammad Aurangzeb stood up on 12 June 2026 and announced rate cuts across four salaried slabs and the abolition of the surcharge, the reaction was less celebration than exhale. A sigh of relief after years of the opposite. This post is the plain-English explainer: what the slabs were, what they become, and how much lands back in your pocket. For what to actually <em>do</em> with the saving, see our companion piece on <a href="/blog/budget-2026-27-salaried-class-investing.html">5 smart moves for the salaried class</a>. This one is purely about the numbers.</p>
-
-  <p>One caveat up front, and I'll repeat it because it matters: a budget speech is a <strong>proposal</strong>, not law. The figures below are <strong>as reported at presentation</strong>. They take effect from 1 July 2026 only once the National Assembly passes the Finance Act, and slabs can be amended before then. Treat the enacted table on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> as the final word.</p>
-
-  <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-top:3px solid #B98A2F;border-radius:6px;padding:18px;margin:0 0 26px"></div>
-
-  <h2>The Headline: What Actually Changed</h2>
-
-  <p>In one sentence: <strong>the marginal tax rate fell on every salaried slab between Rs 2.2 million and Rs 7 million a year, and the surcharge on high earners was scrapped.</strong> Nothing below Rs 2.2 million moved. The top 35% rate above Rs 7 million stayed put too. The relief is aimed squarely at the broad middle and upper-middle of the salaried spectrum, the slabs where most documented professionals sit.</p>
-
-  <h2>Old vs New Slabs, Side by Side</h2>
-
-  <p>The cleanest way to see the change is the <strong>marginal rate</strong> on each income band, meaning the rate that applies to the rupees <em>within</em> that band, not your whole salary. Here is the before-and-after, as reported:</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Annual taxable income</th>
-        <th>FY26 rate (old)</th>
-        <th>FY27 rate (new)</th>
-        <th>Change</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Up to Rs 600,000</td>
-        <td>0%</td>
-        <td>0%</td>
-        <td><span class="badge badge-grey">No change</span></td>
-      </tr>
-      <tr>
-        <td>Rs 600,001 – 1,200,000</td>
-        <td>1%</td>
-        <td>1%</td>
-        <td><span class="badge badge-grey">No change</span></td>
-      </tr>
-      <tr>
-        <td>Rs 1,200,001 – 2,200,000</td>
-        <td>11%</td>
-        <td>11%</td>
-        <td><span class="badge badge-grey">No change</span></td>
-      </tr>
-      <tr>
-        <td>Rs 2,200,001 – 3,200,000</td>
-        <td>23%</td>
-        <td><strong>20%</strong></td>
-        <td><span class="badge badge-green">−3 pts</span></td>
-      </tr>
-      <tr>
-        <td>Rs 3,200,001 – 4,100,000</td>
-        <td>30%</td>
-        <td><strong>25%</strong></td>
-        <td><span class="badge badge-green">−5 pts</span></td>
-      </tr>
-      <tr>
-        <td>Rs 4,100,001 – 5,600,000</td>
-        <td>35%</td>
-        <td><strong>29%</strong></td>
-        <td><span class="badge badge-green">−6 pts</span></td>
-      </tr>
-      <tr>
-        <td>Rs 5,600,001 – 7,000,000</td>
-        <td>35%</td>
-        <td><strong>32%</strong></td>
-        <td><span class="badge badge-green">−3 pts</span></td>
-      </tr>
-      <tr>
-        <td>Above Rs 7,000,000</td>
-        <td>35%</td>
-        <td>35%</td>
-        <td><span class="badge badge-grey">No change</span></td>
-      </tr>
-      <tr>
-        <td>Surcharge (income &gt; Rs 10m)</td>
-        <td>9%</td>
-        <td><strong>Abolished</strong></td>
-        <td><span class="badge badge-green">Removed</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p style="font-size:.86rem;color:#6B6A60;margin-top:-6px"><em>Marginal rates as reported from the 12 June 2026 budget speech. Each slab also carries a fixed rupee base amount (tax on the bands below it) that comes from the enacted Finance Act. The table above shows the rate changes, which is what the budget emphasised. The FY26 "above Rs 4.1m at 35%" band is now split into the three finer bands shown. Verify the complete enacted table, including base amounts, on fbr.gov.pk.</em></p>
-
-  <!-- Ad slot 2 — mid-article -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <h2>How Much Will You Actually Save?</h2>
-
-  <p>Because the rates are <em>marginal</em>, your saving is not "3% of my salary". It is the rate cut applied only to the rupees that fall inside each reduced band, then added up. The higher into the relief band your income reaches, the more bands benefit, so the saving grows faster than income until it caps at the top of the Rs 7 million band. Worked illustratively:</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Annual taxable salary</th>
-        <th>Roughly per month</th>
-        <th>Illustrative annual saving</th>
-        <th>≈ per month</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Rs 2,000,000</td>
-        <td>Rs 166,667</td>
-        <td>Rs 0 (below relief band)</td>
-        <td>Rs 0</td>
-      </tr>
-      <tr>
-        <td>Rs 2,500,000</td>
-        <td>Rs 208,333</td>
-        <td>~Rs 9,000</td>
-        <td>~Rs 750</td>
-      </tr>
-      <tr>
-        <td>Rs 3,500,000</td>
-        <td>Rs 291,667</td>
-        <td>~Rs 45,000</td>
-        <td>~Rs 3,750</td>
-      </tr>
-      <tr>
-        <td>Rs 5,000,000</td>
-        <td>Rs 416,667</td>
-        <td>~Rs 129,000</td>
-        <td>~Rs 10,750</td>
-      </tr>
-      <tr>
-        <td>Rs 7,000,000</td>
-        <td>Rs 583,333</td>
-        <td>~Rs 207,000</td>
-        <td>~Rs 17,250</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>Take the <strong>Rs 3.5 million</strong> earner. Their income clears the Rs 2.2–3.2 million band entirely, where the rate dropped 3 points, so about Rs 30,000 saved on that Rs 1 million slice. The remaining Rs 300,000 sits in the Rs 3.2–4.1 million band, where the rate dropped 5 points, adding about Rs 15,000 more. Total: roughly <strong>Rs 45,000 a year, near Rs 3,750 a month</strong>. The arithmetic is the same at every level. Figure out which bands your income passes through, multiply each band's slice by its rate cut, then add them up.</p>
-
-  <p>These numbers ignore the fixed-amount components within the slab formula, and they assume the reported marginal rates survive the Finance Act. So treat them strictly as an <strong>illustration of the method</strong>. The authoritative figure is whatever your July 2026 salary slip shows against the same gross pay as June.</p>
-
-  <h2>The Surcharge Abolition: Who It Helps</h2>
-
-  <p>Separate from the slab cuts, the budget reportedly <strong>abolished the surcharge</strong> that was levied on top of normal income tax for the highest earners, those with taxable income above Rs 10 million. For someone in that bracket this is a second, additive saving. The slab-rate cuts reduce the base tax, and removing the surcharge then shaves a further slice off the total bill. It is the one part of this budget aimed at the top of the salaried ladder, and it is why the relief for very high earners runs larger than the slab table alone suggests.</p>
-
-  <h2>What Did Not Change</h2>
-
-  <p>Three things stayed exactly where they were, and they matter as much as the cuts:</p>
-
-  <ul style="line-height:1.9">
-    <li><strong>The Rs 600,000 tax-free threshold.</strong> Income up to Rs 600,000 a year is still taxed at 0%. Anyone earning below that pays no salary tax, same as before.</li>
-    <li><strong>Every slab below Rs 2.2 million.</strong> The 1% and 11% bands are untouched, so <strong>lower-income salaried workers see no direct rate cut</strong> from this budget. The relief sits in the Rs 2.2–7 million range. If your salary is below Rs 2.2 million, your tax is unchanged.</li>
-    <li><strong>The top 35% rate above Rs 7 million.</strong> The ceiling rate held. What changed is that the bands <em>between</em> Rs 4.1m and Rs 7m now step up more gently to it.</li>
-  </ul>
-
-  <div class="callout callout-blue" style="margin:22px 0">
-    <strong>A note on "relief" in context:</strong> the cuts are real, but they partly unwind increases the salaried class absorbed in earlier budgets. And the saving arrives as a slightly bigger monthly credit, not a cheque. It's invisible enough that lifestyle inflation will quietly swallow it unless you do something deliberate. That is the whole argument of our companion piece on <a href="/blog/budget-2026-27-salaried-class-investing.html">five smart moves for the freed-up cash</a>.
-  </div>
-
-  <h2>One Step to Keep the Relief Working</h2>
-
-  <p>Whatever your saving turns out to be, one piece of housekeeping protects and extends it: <strong>be a filer</strong>. The slab cuts apply through your payroll automatically. But every <em>other</em> tax you touch, like withholding on bank profit, dividends, mutual fund payouts and property transactions, costs materially more for non-filers. To put that in perspective, the dividend yields in our daily dataset run from FFC at 6.8% up to HUBC at 10.7%, and the non-filer withholding hit on those payouts is real money. Getting onto FBR's Active Taxpayer List is a one-evening job for a salaried person whose employer already withholds tax, and it multiplies the value of any saving you go on to invest. Our <a href="/guides/investment-tax-pakistan.html">filer vs non-filer guide</a> covers the IRIS steps. And if a home is on your horizon, the budget's property-tax cuts are <em>filer</em> rates too, so see our <a href="/blog/pakistan-housing-loan-scheme-2026.html">2026 housing loan scheme guide</a>.</p>
-
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-new-tax-slabs-salaried-2026-27"><summary class="faq-question">What are the new income tax slabs for the salaried class in Budget 2026-27?</summary><div class="faq-answer">As reported in the budget presented on 12 June 2026, the salaried marginal rates were cut on four slabs effective 1 July 2026: the Rs 2.2-3.2 million band falls from 23% to 20%, Rs 3.2-4.1 million from 30% to 25%, Rs 4.1-5.6 million from 35% to 29%, and Rs 5.6-7 million from 35% to 32%. The surcharge on high earners was also abolished. Slabs below Rs 2.2 million per year, including the Rs 600,000 tax-free threshold, were left unchanged. These figures are as reported and apply only once the National Assembly passes the Finance Act — verify the final table on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-how-much-tax-will-i-save"><summary class="faq-question">How much tax will I save under the new budget?</summary><div class="faq-answer">It depends on your income. Someone earning Rs 2.5 million a year saves only on the small slice above Rs 2.2 million — roughly Rs 9,000 a year. At Rs 3.5 million the saving is around Rs 45,000 a year (about Rs 3,750 a month); at Rs 5 million around Rs 129,000; and at Rs 7 million, the top of the relief band, roughly Rs 207,000 a year. Above Rs 10 million, abolishing the surcharge adds further saving. These are illustrative figures based on the marginal-rate cuts before fixed-amount components — compute your own from the enacted slab table on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-earn-less-than-2-2-million"><summary class="faq-question">I earn less than Rs 2.2 million a year — does the budget cut my tax?</summary><div class="faq-answer">As reported, no — the slabs below Rs 2.2 million per year were left unchanged, so the rate on your income is the same as before, and the Rs 600,000 annual tax-free threshold also stayed put. Lower-income salaried workers therefore see no direct rate cut from this budget. The relief is concentrated in the Rs 2.2-7 million bands. Verify the final Finance Act on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-when-new-slabs-take-effect"><summary class="faq-question">When do the new tax slabs take effect?</summary><div class="faq-answer">The budget was presented on 12 June 2026 and the new slabs are proposed to apply from 1 July 2026, the start of FY27 — but only once the National Assembly passes the Finance Act, and proposals can be amended before passage, usually before the end of June. Your payroll department applies the final enacted slabs from your July salary. Compare your June and July salary slips for the same gross pay to see the actual change.</div></details>
-
-  <details class="faq-item" id="faq-what-is-the-abolished-surcharge"><summary class="faq-question">What is the surcharge that was abolished?</summary><div class="faq-answer">It was an additional surcharge levied on top of the normal income tax for high earners — applied to individuals whose taxable income exceeded Rs 10 million. The FY27 budget reportedly abolished it, which lowers the effective tax burden specifically for the highest-earning salaried individuals on top of the slab-rate cuts. As with every figure here, confirm the final position in the enacted Finance Act on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-do-proposed-slabs-change-before-passage"><summary class="faq-question">Can the proposed slabs still change before they become law?</summary><div class="faq-answer">Yes. The figures presented on 12 June 2026 are budget proposals, and the National Assembly can amend them during the debate before the Finance Act is passed, usually before the end of June. Until the Act is enacted, no rate is final. Always treat pre-passage numbers as provisional and confirm the final slab table on fbr.gov.pk once the Finance Act is passed.</div></details>
-
-  <details class="faq-item" id="faq-gross-vs-taxable-income"><summary class="faq-question">Are the slab thresholds based on my gross salary or taxable income?</summary><div class="faq-answer">Income tax slabs in Pakistan are applied to taxable income, not your headline gross salary. Taxable income is your gross pay after any allowable deductions and exemptions that the law permits. Because the threshold that matters is taxable income, two people with the same gross package can fall into different slabs. Check the definitions and any applicable exemptions on fbr.gov.pk before assuming which band you are in.</div></details>
-
-  <details class="faq-item" id="faq-marginal-rate-meaning"><summary class="faq-question">Does the slab rate apply to my entire income or only part of it?</summary><div class="faq-answer">Pakistan's salaried slabs are marginal, so a given rate applies only to the portion of income that falls within that band, not to your whole income. This is why someone whose income just crosses into a higher band sees only a small slice taxed at the higher rate, not their full salary. That is also why the savings in this guide differ sharply by income level. Confirm the exact band-by-band structure in the enacted slab table on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-how-employer-deducts-tax"><summary class="faq-question">How does my employer deduct this tax from my pay?</summary><div class="faq-answer">Salaried tax in Pakistan is generally collected through withholding, where the employer deducts the estimated annual tax in monthly instalments from your pay before you receive it. Once the Finance Act is passed, payroll applies the final enacted slabs, typically from the July salary at the start of the financial year. Comparing your June and July salary slips for the same gross pay shows the actual change. Verify the current withholding rules on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-do-i-still-file-return"><summary class="faq-question">Do I still need to file a tax return if my employer deducts tax?</summary><div class="faq-answer">Withholding by an employer and filing an annual income tax return are separate things, and tax being deducted at source does not by itself remove a filing obligation. Filing requirements depend on income levels and other criteria set by the FBR, and being a filer can affect other withholding rates you face. Check whether you are required to file, and the current return process, on fbr.gov.pk.</div></details>
-
-  <!-- Ad slot 3 — after FAQ section -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Reading</h3>
-    <a href="/blog/budget-2026-27-salaried-class-investing.html">Budget 2026-27 Cut Your Income Tax — 5 Smart Moves for the Salaried Class</a>
-    <a href="/blog/pakistan-budget-2026-27-investors.html">Budget 2026-27: What It Means for Pakistani Investors</a>
-    <a href="/blog/pakistan-housing-loan-scheme-2026.html">Pakistan Housing Loan Scheme 2026: Mera Ghar Mera Aashiana Explained</a>
-    <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed in Pakistan: Filer vs Non-Filer</a>
-    <a href="/blog/budget-2026-27-stock-market-impact.html">Budget 2026-27 and the Stock Market: Sector-by-Sector Impact</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not financial or tax advice</strong>. All Budget 2026-27 slab rates, the surcharge change, and figures are <strong>as reported at presentation on 12 June 2026</strong> and remain subject to amendment until the Finance Act is passed — verify the final enacted table, including the fixed-amount components within each slab, on fbr.gov.pk. Worked savings examples are deliberately simplified marginal-rate illustrations, not exact calculations. Consult a qualified tax practitioner before acting on anything here.</div>
-
-</div>
-
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

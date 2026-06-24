@@ -75,9 +75,15 @@ function applyData() {
   setText("h-pkr", "₨" + m.pkr_usd);
   setText("h-inf", m.inflation_cpi + "%");
 
-  const d = new Date(DATA.updated);
-  document.getElementById("snapshot-date").textContent =
-    "As of " + d.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
+  const snap = document.getElementById("snapshot-date");
+  if (snap) {
+    const d = new Date(DATA.updated);
+    snap.textContent =
+      "As of " + d.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
+  }
+
+  // Live ticker tape (v2 masthead) — best-effort, only if present
+  renderTicker();
 
   // Charts (page 0)
   renderKSEChart();
@@ -795,6 +801,31 @@ function renderRealChart() {
       scales: { x: { ticks: { font: MONO_FONT, callback: v => v + "%" }, grid: { color: "#EFE8D8" } },
                 y: { ticks: { font: { ...MONO_FONT, size: 10 } }, grid: { display: false } } } }
   });
+}
+
+// ── Live ticker tape (v2 masthead) ───────────────────────────────
+function renderTicker() {
+  if (!DATA) return;
+  const m = DATA.macro, g = DATA.gold;
+  setText("tk-kse", m.kse100_level ? formatPKR(m.kse100_level) : "—");
+  setText("tk-sbp", m.sbp_rate + "%");
+  setText("tk-pkr", "₨" + m.pkr_usd);
+  setText("tk-inf", m.inflation_cpi + "%");
+  if (g) {
+    setText("tk-gold", "₨" + formatPKR(g.tola_24k));
+    const chg = document.getElementById("tkc-gold");
+    if (chg && g.chg1y_pct != null) {
+      const up = g.chg1y_pct >= 0;
+      chg.textContent = (up ? "▲" : "▼") + Math.abs(g.chg1y_pct) + "%";
+      chg.className = up ? "up" : "dn";
+    }
+  }
+  // duplicate the feed once so the marquee (-50%) loops seamlessly
+  const feed = document.querySelector(".ticker-feed");
+  if (feed && !feed.dataset.looped) {
+    feed.dataset.looped = "1";
+    feed.insertAdjacentHTML("beforeend", feed.innerHTML.replace(/\sid="[^"]*"/g, ""));
+  }
 }
 
 // ── Live gold rates (homepage card) ──────────────────────────────

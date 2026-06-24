@@ -91,12 +91,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -107,38 +107,218 @@ gtag('config', 'G-4T2H0KH9H7');
 </script>
 
 <style>
-.tax-app{background:#FDFBF4;border:1px solid #D9D1BE;border-radius:12px;padding:22px;margin:8px 0 12px}
-.tax-section-lbl{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#B98A2F;font-weight:600;margin:6px 0 10px;padding-bottom:6px;border-bottom:1px solid #EFE8D8}
-.tax-row{display:flex;flex-wrap:wrap;gap:16px}
-.tax-field{flex:1 1 220px;display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.tax-field label,.tax-field .tax-glabel{display:block;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:#6B6A60}
-.tax-field input,.tax-field select{font-family:Newsreader,serif;font-size:1.05rem;padding:11px 13px;border:1px solid #C9D6C0;border-radius:8px;background:#fff;color:#191D1A;width:100%}
-.tax-field input:focus,.tax-field select:focus{outline:0;border-color:#B98A2F;box-shadow:0 0 0 3px rgba(185,138,47,.18)}
-.tax-result{margin-top:10px}
-.tax-result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.tax-cell{background:#fff;border:1px solid #D9D1BE;border-radius:8px;padding:13px 14px;text-align:center}
-.tax-cell-val{font-family:'IBM Plex Mono',monospace;font-size:1.18rem;font-weight:600;line-height:1.2}
-.tax-cell-lbl{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;color:#6B6A60;margin-top:5px}
-.tax-note{font-size:.86rem;line-height:1.6;color:#5E5C52;margin:14px 0 0}
-.tax-hint{font-size:.92rem;color:#8a887d;font-style:italic;margin:6px 0 0}
+/* ===========================================================================
+   Zakat calculator — v2 "macro terminal" component styles.
+   Built on v2.css tokens. Acid-lime is ACCENT only (top bar of calc card,
+   dark-rail kickers, status when above nisab on deep-green) — never as text
+   on a light background. Mirrors the tax-calculator chrome and rhythm.
+   =========================================================================== */
+
+/* editorial hero head */
+.zk-head{
+  display:grid;grid-template-columns:7fr 5fr;
+  max-width:var(--maxw);margin:0 auto;
+  border-left:1px solid var(--line);border-right:1px solid var(--line);
+}
+.zk-head-copy{padding:48px 44px;border-right:1px solid var(--line)}
+.zk-head-eyebrow{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+.zk-head-copy h1{
+  font-family:var(--display);font-weight:800;line-height:.98;letter-spacing:-.025em;color:var(--green-d);
+  font-size:clamp(2.1rem,4.6vw,3.4rem);margin:0 0 20px;max-width:560px;overflow-wrap:break-word;
+}
+.zk-head-copy .byline{font-size:1.06rem;line-height:1.55;color:var(--ink2);max-width:460px;margin:0;font-weight:500;font-family:var(--body)}
+.zk-head-aside{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+.zk-head-aside .ak{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+.zk-head-aside p{font-family:var(--body);font-size:1rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+.zk-head-aside b{color:#fff;font-weight:700}
+.zk-head-aside .acc{color:var(--acid);font-weight:700}
+
+/* full-bleed framed section wrappers */
+.zk-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+/* breadcrumb */
+.zk-crumb{padding:14px 44px;border-bottom:1px solid var(--line);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted)}
+.zk-crumb a{color:var(--green)}
+.zk-crumb ol{list-style:none;margin:0;padding:0;display:inline}
+.zk-crumb li{display:inline}
+
+/* ── calculator app: form left, deep-green result rail right ── */
+.zk-app{
+  max-width:var(--maxw);margin:0 auto;
+  border:1px solid var(--line);border-top:4px solid var(--acid);
+  background:var(--mint);
+  display:grid;grid-template-columns:minmax(0,1fr) 360px;
+}
+.zk-form{padding:30px 44px;border-right:1px solid var(--line)}
+.zk-section-lbl{
+  font-family:var(--display);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);border-bottom:1px solid var(--line);padding-bottom:7px;margin:0 0 16px;
+}
+.zk-section-lbl.mt{margin-top:26px}
+.zk-row{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:8px}
+.zk-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;margin-bottom:8px}
+.zk-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;min-width:0}
+.zk-field.half{max-width:50%}
+.zk-field label,.zk-field .zk-glabel{
+  display:block;font-family:var(--display);font-size:.6rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--muted);
+}
+.zk-field input,.zk-field select{
+  font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--green-d);
+  padding:11px 13px;border:1px solid rgba(7,94,75,.4);background:var(--paper);width:100%;outline:none;border-radius:0;
+}
+.zk-field select{font-family:var(--body);font-size:.94rem;font-weight:600;padding:11px 13px;color:var(--green-d)}
+.zk-field input:focus,.zk-field select:focus{box-shadow:inset 0 0 0 2px var(--green);border-color:var(--green)}
+
+/* deep-green "YOUR ZAKAT" result rail (holds #zk-result) */
+.zk-rail{background:var(--green-d);color:var(--sage);padding:32px 30px;display:flex;flex-direction:column;justify-content:center}
+.zk-rail-k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--acid);margin-bottom:10px}
+
+/* The JS renders into #zk-result. These classes match what zakat-calculator.js emits. */
+.zk-rail .tax-result{margin:0}
+.zk-rail .tax-hint{
+  font-family:var(--body);font-size:.95rem;line-height:1.55;color:rgba(204,223,211,.9);margin:0;
+  padding:0;background:transparent;border:none;text-align:left;font-weight:500;
+}
+.zk-rail .tax-result-grid{
+  display:flex;flex-direction:column;gap:0;border:none;margin:0;overflow:visible;
+  border-top:1px solid rgba(255,255,255,.16);margin-top:18px;
+}
+.zk-rail .tax-cell{
+  background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.12);
+  padding:11px 0;text-align:left;display:flex;flex-direction:column;
+}
+.zk-rail .tax-cell-val{
+  font-family:var(--display);font-size:1.15rem;font-weight:800;letter-spacing:-.01em;line-height:1.15;
+  color:#fff !important;font-variant-numeric:tabular-nums;order:2;
+}
+.zk-rail .tax-cell-lbl{
+  font-family:var(--display);font-size:.58rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(204,223,211,.72);margin:0 0 3px;order:1;
+}
+/* the "Zakat payable" / "no zakat due" boxes from the JS */
+.zk-rail .zk-due{
+  margin-top:18px !important;background:rgba(237,248,4,.1) !important;border:none !important;
+  border-left:4px solid var(--acid) !important;border-radius:0 !important;padding:16px 18px !important;
+}
+.zk-rail .zk-due > div:first-child{color:var(--acid) !important}
+.zk-rail .zk-due > div:nth-child(2){color:#fff !important}
+.zk-rail .zk-due > div:last-child{color:rgba(204,223,211,.85) !important}
+.zk-rail .tax-note{
+  font-family:var(--body);font-size:.82rem;line-height:1.55;color:rgba(204,223,211,.7);margin:16px 0 0;font-weight:500;
+}
+
+/* microcopy disclaimer line under calc */
+.zk-microcopy{
+  max-width:var(--maxw);margin:0 auto;
+  border-left:1px solid var(--line);border-right:1px solid var(--line);
+  padding:14px 44px;font-family:var(--display);font-size:.64rem;font-weight:500;letter-spacing:.03em;color:var(--muted);
+  border-bottom:1px solid var(--line);
+}
+
+/* prose + sticky rail */
+.zk-prose-wrap{
+  max-width:var(--maxw);margin:0 auto;
+  border:1px solid var(--line);border-top:none;
+  display:grid;grid-template-columns:minmax(0,1fr) 340px;
+}
+.zk-prose{padding:44px;border-right:1px solid var(--line)}
+.zk-prose h2{font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:0 0 16px}
+.zk-prose h2:not(:first-child){margin-top:32px}
+.zk-prose p{font-family:var(--body);font-size:1.02rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+.zk-prose p b,.zk-prose p strong{color:var(--green-d)}
+.zk-prose ul{font-family:var(--body);font-size:1.02rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;padding-left:22px;font-weight:500}
+.zk-prose li{margin:0 0 6px}
+.zk-prose li b,.zk-prose li strong{color:var(--green-d)}
+.zk-prose a{color:var(--green);border-bottom:1px solid var(--line)}
+.zk-prose table{width:100%;border-collapse:collapse;margin:0}
+.zk-prose table th{background:var(--green-d);color:#fff;text-align:left;padding:11px 14px;font-family:var(--display);font-weight:600;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase}
+.zk-prose table td{padding:10px 14px;border-bottom:1px solid var(--line2);background:var(--paper);font-family:var(--body);font-weight:600;color:var(--ink2);font-size:.86rem}
+.zk-tbl-wrap{border:1px solid rgba(7,94,75,.3);overflow:auto;margin:0 0 24px}
+.zk-tbl-wrap table{margin:0}
+
+/* "to sum up" callout */
+.zk-callout{
+  background:var(--green-d);border-left:5px solid var(--acid);padding:18px 22px;margin:24px 0 0;
+  font-family:var(--body);font-size:.94rem;line-height:1.65;color:#D7E7DD;font-weight:500;
+}
+.zk-callout strong{color:var(--acid)}
+
+/* FAQ details (in prose) */
+.zk-prose .faq-item{border:none;border-top:1px solid var(--line);background:transparent;margin:0}
+.zk-prose .faq-item:last-of-type{border-bottom:1px solid var(--line)}
+.zk-prose .faq-question{font-family:var(--display);font-size:.98rem;font-weight:700;color:var(--green-d);padding:16px 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.zk-prose .faq-question::-webkit-details-marker{display:none}
+.zk-prose .faq-question::after{content:"+";font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--green)}
+.zk-prose details[open] .faq-question::after{content:"–"}
+.zk-prose .faq-answer{font-family:var(--body);font-size:.96rem;color:var(--ink2);padding:0 0 16px;line-height:1.65}
+.zk-prose .faq-answer a{color:var(--green);border-bottom:1px solid var(--line)}
+
+/* page disclaimer */
+.zk-disclaimer{background:var(--green-d);border-left:5px solid var(--acid);padding:16px 20px;margin:28px 0 0;font-family:var(--body);font-size:.84rem;color:#D7E7DD;line-height:1.6;font-weight:500}
+.zk-disclaimer strong{color:var(--acid)}
+
+/* sticky rail */
+.zk-side{padding:0}
+.zk-side-inner{position:sticky;top:80px}
+.zk-side-glance{padding:24px 28px;border-bottom:1px solid var(--line);background:var(--green-d);color:var(--sage)}
+.zk-side-glance .rk{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--acid);margin-bottom:16px}
+.zk-glance-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.zk-glance-item:last-child{border-bottom:none}
+.zk-glance-n{font-family:var(--display);font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.zk-glance-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px}
+.zk-side-related{padding:24px 28px}
+.zk-side-related .rk{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px}
+.zk-side-related a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+.zk-side-related a:first-of-type{border-top:none}
+.zk-side-related a:hover{color:var(--green)}
+
+/* in-stream ad slot inside the frame */
+.zk-frame .ad-slot{margin:0;border:none;border-bottom:1px solid var(--line);border-radius:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:980px){
+  .zk-app{grid-template-columns:1fr}
+  .zk-form{border-right:none;border-bottom:1px solid var(--line)}
+  .zk-prose-wrap{grid-template-columns:1fr}
+  .zk-prose{border-right:none;border-bottom:1px solid var(--line)}
+  .zk-side-inner{position:static}
+}
+@media(max-width:860px){
+  .zk-head{grid-template-columns:1fr}
+  .zk-head-copy{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+  .zk-head-aside{padding:28px 24px}
+  .zk-form{padding:24px}
+  .zk-rail{padding:28px 24px}
+  .zk-crumb,.zk-microcopy,.zk-prose{padding-left:24px;padding-right:24px}
+}
+@media(max-width:560px){
+  .zk-head-copy h1{font-size:2rem}
+  .zk-grid{grid-template-columns:1fr}
+  .zk-field.half{max-width:100%}
+  .zk-form{padding:20px 18px}
+  .zk-crumb,.zk-microcopy,.zk-prose{padding-left:18px;padding-right:18px}
+  .zk-rail{padding:24px 18px}
+}
 </style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header ─────────────────────────────────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -147,149 +327,226 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <div class="breadcrumb"><a href="/">Home</a> &rsaquo; Zakat Calculator</div>
+<main>
 
-  <h1>Zakat Calculator Pakistan 2026</h1>
-  <div class="byline">Cash · gold &amp; silver · investments · business assets &nbsp;·&nbsp; Updated June 2026</div>
+<!-- breadcrumb -->
+<div class="zk-frame">
+  <nav class="zk-crumb" aria-label="Breadcrumb">
+    <ol><li><a href="/">HOME</a></li><li>&nbsp;/&nbsp; ZAKAT CALCULATOR</li></ol>
+  </nav>
+</div>
 
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In short:</strong> Zakat in Pakistan is <strong>2.5%</strong> of your net zakatable wealth (cash, gold, silver, investments and business assets, minus debts), provided that wealth stays at or above the <strong>nisab</strong> for one lunar year. The nisab is the value of 87.48g / 7.5 tola of gold, or 612.36g / 52.5 tola of silver. Enter your assets and today's metal price below to calculate it.</p>
+<!-- editorial hero -->
+<div class="zk-head">
+  <div class="zk-head-copy">
+    <div class="zk-head-eyebrow">Tool — 1447 AH / 2026</div>
+    <h1>Zakat calculator.</h1>
+    <p class="byline">Add your cash, gold, silver, investments and business assets, subtract debts, set the nisab from today's metal price — and get your 2.5% Zakat instantly.</p>
+  </div>
+  <div class="zk-head-aside">
+    <div class="ak">IN SHORT</div>
+    <p>Zakat is <b class="acc">2.5%</b> of net zakatable wealth, provided it stays at or above the <b>nisab</b> for one lunar year. The nisab is the value of 7.5 tola of gold, or <span class="acc">52.5 tola</span> of silver (the lower threshold).</p>
+  </div>
+</div>
 
-  <!-- Ad slot 1 -->
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<!-- Ad slot 1 -->
+<div class="zk-frame">
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+</div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-  <!-- ===== Calculator ===== -->
-  <div class="tax-app">
-    <div class="tax-section-lbl">Nisab basis</div>
-    <div class="tax-row">
-      <div class="tax-field" style="flex:0 1 220px">
+<!-- ===== Calculator app: form left, deep-green result rail right ===== -->
+<div class="zk-app">
+  <div class="zk-form">
+    <div class="zk-section-lbl">Nisab basis</div>
+    <div class="zk-row">
+      <div class="zk-field" style="flex:1 1 240px">
         <label for="zk-basis">Nisab metal</label>
         <select id="zk-basis">
           <option value="silver">Silver — 52.5 tola (lower threshold)</option>
           <option value="gold">Gold — 7.5 tola</option>
         </select>
       </div>
-      <div class="tax-field" style="flex:0 1 240px">
+      <div class="zk-field" style="flex:1 1 240px">
         <label id="zk-price-label" for="zk-price">Silver price per tola (Rs)</label>
         <input type="text" inputmode="numeric" id="zk-price" placeholder="today's rate, e.g. 4,200" autocomplete="off">
       </div>
     </div>
 
-    <div class="tax-section-lbl" style="margin-top:8px">Your zakatable assets</div>
-    <div class="tax-row">
-      <div class="tax-field"><label for="zk-cash">Cash &amp; bank balances (Rs)</label><input type="text" inputmode="numeric" id="zk-cash" placeholder="0" autocomplete="off"></div>
-      <div class="tax-field"><label for="zk-gold">Value of gold you own (Rs)</label><input type="text" inputmode="numeric" id="zk-gold" placeholder="0" autocomplete="off"></div>
-      <div class="tax-field"><label for="zk-silver">Value of silver you own (Rs)</label><input type="text" inputmode="numeric" id="zk-silver" placeholder="0" autocomplete="off"></div>
-    </div>
-    <div class="tax-row">
-      <div class="tax-field"><label for="zk-invest">Investments — shares, funds, certificates (Rs)</label><input type="text" inputmode="numeric" id="zk-invest" placeholder="0" autocomplete="off"></div>
-      <div class="tax-field"><label for="zk-business">Business stock / inventory (Rs)</label><input type="text" inputmode="numeric" id="zk-business" placeholder="0" autocomplete="off"></div>
-      <div class="tax-field"><label for="zk-receivable">Money owed to you (recoverable) (Rs)</label><input type="text" inputmode="numeric" id="zk-receivable" placeholder="0" autocomplete="off"></div>
+    <div class="zk-section-lbl mt">Your zakatable assets</div>
+    <div class="zk-grid">
+      <div class="zk-field"><label for="zk-cash">Cash &amp; bank balances (Rs)</label><input type="text" inputmode="numeric" id="zk-cash" placeholder="0" autocomplete="off"></div>
+      <div class="zk-field"><label for="zk-gold">Value of gold you own (Rs)</label><input type="text" inputmode="numeric" id="zk-gold" placeholder="0" autocomplete="off"></div>
+      <div class="zk-field"><label for="zk-silver">Value of silver you own (Rs)</label><input type="text" inputmode="numeric" id="zk-silver" placeholder="0" autocomplete="off"></div>
+      <div class="zk-field"><label for="zk-invest">Investments — shares, funds, certificates (Rs)</label><input type="text" inputmode="numeric" id="zk-invest" placeholder="0" autocomplete="off"></div>
+      <div class="zk-field"><label for="zk-business">Business stock / inventory (Rs)</label><input type="text" inputmode="numeric" id="zk-business" placeholder="0" autocomplete="off"></div>
+      <div class="zk-field"><label for="zk-receivable">Money owed to you (recoverable) (Rs)</label><input type="text" inputmode="numeric" id="zk-receivable" placeholder="0" autocomplete="off"></div>
     </div>
 
-    <div class="tax-section-lbl" style="margin-top:8px">Liabilities</div>
-    <div class="tax-row">
-      <div class="tax-field"><label for="zk-liabilities">Debts &amp; bills due now (Rs)</label><input type="text" inputmode="numeric" id="zk-liabilities" placeholder="0" autocomplete="off"></div>
-    </div>
+    <div class="zk-section-lbl mt">Liabilities</div>
+    <div class="zk-field half"><label for="zk-liabilities">Debts &amp; bills due now (Rs)</label><input type="text" inputmode="numeric" id="zk-liabilities" placeholder="0" autocomplete="off"></div>
+  </div>
 
+  <!-- deep-green result rail — JS renders the live result into #zk-result -->
+  <aside class="zk-rail" aria-label="Your Zakat result">
+    <div class="zk-rail-k">YOUR ZAKAT</div>
     <div class="tax-result" id="zk-result"></div>
-  </div>
-
-  <p style="font-size:.82rem;color:#8a887d;margin:0 0 28px">An estimate for guidance, not a religious ruling. What counts as zakatable, and which nisab to use, can vary between scholars. Metal rates change daily, so enter the current price yourself. Consult a scholar you trust.</p>
-
-  <!-- Ad slot 2 -->
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <!-- ===== Educational ===== -->
-  <h2>How Zakat Is Calculated</h2>
-  <p>Zakat is one of the five pillars of Islam. It is an annual payment of <strong>2.5%</strong> of your qualifying wealth, due once that wealth has stayed at or above a minimum threshold for a full lunar year. Three things decide the amount: what counts as wealth, where the <strong>nisab</strong> threshold sits, and whether you have held the wealth for one <strong>lunar year (hawl)</strong>.</p>
-
-  <h2>What Counts as Zakatable Wealth</h2>
-  <p>Zakat is due on wealth that grows, or could grow. It is not due on what you use day to day. As a general rule:</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr><th>Zakatable</th><th>Not zakatable</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Cash in hand and in bank accounts</td><td>Your home you live in</td></tr>
-      <tr><td>Gold and silver</td><td>Personal car and household items</td></tr>
-      <tr><td>Shares, mutual funds, savings certificates (market value)</td><td>Tools and machinery of your trade</td></tr>
-      <tr><td>Business stock-in-trade and recoverable receivables</td><td>Clothing and personal effects</td></tr>
-    </tbody>
-  </table>
-  <p>From that total you <strong>deduct debts</strong> that are due, and what is left is your <strong>net zakatable wealth</strong>. Some rulings vary between scholars (long-term shares versus trading shares is the common example), so treat the calculator as a starting point rather than the last word.</p>
-
-  <h2>The Nisab: Gold vs Silver</h2>
-  <p>The <strong>nisab</strong> is the minimum net wealth at which Zakat becomes obligatory. It is fixed as a weight of precious metal, which you then convert to rupees at today's price:</p>
-  <ul>
-    <li><strong>Gold nisab:</strong> 87.48 grams (<strong>7.5 tola</strong>)</li>
-    <li><strong>Silver nisab:</strong> 612.36 grams (<strong>52.5 tola</strong>)</li>
-  </ul>
-  <p>Silver is far cheaper per gram, so the <strong>silver nisab works out much lower in rupees</strong>. Use it and Zakat falls due on smaller wealth, which means more of the needy benefit. Many scholars recommend the <strong>silver nisab</strong> for that reason, especially when you hold a mix of cash and assets rather than gold alone. The calculator lets you choose either and enter the current price.</p>
-
-  <h2>The Lunar Year (Hawl)</h2>
-  <p>Zakat is due once your zakatable wealth has stayed <strong>at or above the nisab for one full lunar year</strong>. You calculate it on the wealth you hold on that anniversary date, not on income as it trickles in through the year. Most Pakistanis just pay during <strong>Ramadan</strong>: the reward is greater, and a fixed annual date is easy to track.</p>
-
-  <h2>A Note for Investors</h2>
-  <p>Hold <a href="/guides/best-dividend-stocks-psx.html">PSX shares</a>, <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual funds</a> or <a href="/guides/national-savings-vs-mutual-funds.html">savings certificates</a>? Their <strong>market value</strong> on your Zakat date counts as zakatable wealth. With the KSE-100 near 181,000 and funds like NBP Islamic Stock up 42.2% over the past year, a portfolio can move a lot between two Zakat dates, so value it on the day itself rather than going off last year's figure. Zakat is separate from <a href="/tax-calculator.html">income tax</a>: tax is charged on income you earn, Zakat on wealth you hold. For Shariah-compliant ways to invest, see our <a href="/guides/halal-investing-pakistan.html">halal investing guide</a>.</p>
-
-  <div class="callout callout-green">
-    <strong>To sum up:</strong> Zakat is 2.5% of net zakatable wealth (cash, gold, silver, investments and business assets, minus debts) once it has sat at or above the nisab for a lunar year. The silver nisab captures more wealth than the gold one. Use today's metal price so the threshold is accurate, and check any ruling you are unsure about with a scholar you trust.
-  </div>
-
-  <!-- FAQ -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-how-much-is-zakat"><summary class="faq-question">How much is Zakat in Pakistan?</summary><div class="faq-answer">Zakat is 2.5% of your net zakatable wealth, payable once each lunar year if that wealth is at or above the nisab. Zakatable wealth includes cash and bank balances, gold and silver, investments such as shares and mutual funds at market value, and business stock and receivables, minus debts that are due. For example, on Rs 4,000,000 of net zakatable wealth above the nisab, Zakat is Rs 100,000.</div></details>
-
-  <details class="faq-item" id="faq-nisab-gold-or-silver"><summary class="faq-question">What is the nisab for Zakat, and should I use gold or silver?</summary><div class="faq-answer">The nisab is the minimum wealth at which Zakat becomes due: the value of 87.48 grams (7.5 tola) of gold, or 612.36 grams (52.5 tola) of silver. The silver nisab is much lower in rupee terms, so using it means more people pay Zakat and more of the needy benefit — many scholars recommend the silver nisab for that reason, especially if you hold mixed assets. Use the current market price of the metal to convert the nisab into rupees.</div></details>
-
-  <details class="faq-item" id="faq-which-assets-are-zakatable"><summary class="faq-question">Which assets are zakatable in Pakistan?</summary><div class="faq-answer">Zakat is generally due on cash in hand and in bank accounts, gold and silver, money lent out that you expect back, the market value of shares and mutual funds and savings certificates, and business stock-in-trade. Your own home, personal car, household items and tools of your trade are normally not zakatable. Outstanding debts you owe can be deducted. Rulings on some items, such as shares held long-term, vary between scholars.</div></details>
-
-  <details class="faq-item" id="faq-when-is-zakat-due"><summary class="faq-question">When is Zakat due?</summary><div class="faq-answer">Zakat falls due once your zakatable wealth has stayed at or above the nisab for one full lunar year (hawl). Many Pakistanis choose to pay during Ramadan for the extra reward and to make the date easy to remember, but it can be paid whenever your lunar year completes. You calculate it on the wealth you hold on that date, not on income as it arrives.</div></details>
-
-  <details class="faq-item" id="faq-whole-savings-or-growth"><summary class="faq-question">Is Zakat calculated on my whole savings or only the growth?</summary><div class="faq-answer">Zakat is calculated on the whole zakatable amount you hold at the end of the lunar year, not just the profit or growth. So if you hold Rs 2,000,000 in cash and investments above the nisab, Zakat is 2.5% of the full Rs 2,000,000, regardless of how much it grew during the year. This is different from income tax, which is charged on income earned.</div></details>
-
-  <details class="faq-item" id="faq-bank-zakat-deduction"><summary class="faq-question">Does the bank deducting Zakat mean I have paid all my Zakat?</summary><div class="faq-answer">Banks in Pakistan deduct Zakat on certain savings and deposit accounts around Ramadan under the Zakat and Ushr system, but that deduction usually covers only those specific account balances. Cash held outside the banking system, gold and silver, shares, and business assets are generally not covered by the bank deduction, so Zakat on them may still be due. The exact rules and any exemption process (such as filing a declaration) can change, so verify the current position with your bank or the relevant authority.</div></details>
-
-  <details class="faq-item" id="faq-zakat-on-loan-money"><summary class="faq-question">Do I pay Zakat on money I have lent to someone or on a loan I owe?</summary><div class="faq-answer">Money you have lent out and reasonably expect to get back is generally treated as part of your zakatable wealth. Debts that you owe and are due can usually be deducted from your zakatable wealth before applying the 2.5% rate. Treatment of long-term or doubtful loans can differ between scholars, so check the ruling that applies to your situation.</div></details>
-
-  <details class="faq-item" id="faq-zakat-on-property-and-plots"><summary class="faq-question">Is there Zakat on property, plots, or my house?</summary><div class="faq-answer">The house you live in and property kept for personal use are normally not zakatable. A plot or property bought with the clear intention of resale is often treated as trade goods, so its market value can be zakatable, while property held to earn rent is usually not zakatable on its capital value, though the rental income saved may be. Scholars differ on some of these cases, so confirm the ruling for your specific intention and use.</div></details>
-
-  <details class="faq-item" id="faq-zakat-vs-income-tax"><summary class="faq-question">Is Zakat the same as paying income tax to FBR?</summary><div class="faq-answer">No. Zakat is a religious obligation calculated at 2.5% on accumulated zakatable wealth held for a full lunar year, while income tax is a government levy charged on income you earn during a tax year. Paying one does not remove the obligation of the other, and they are calculated on different bases. For income tax rules, slabs, and filing, verify the current details on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-give-zakat-to-relatives"><summary class="faq-question">Can I give my Zakat to my own relatives?</summary><div class="faq-answer">Zakat can generally be given to eligible relatives who are not among your direct dependents that you are already obliged to support, such as your spouse, parents, or minor children. Eligible recipients are those who meet the conditions for receiving Zakat, for example needy family members who fall below the nisab. Because views on specific relationships vary, it is best to confirm eligibility with a knowledgeable scholar.</div></details>
-
-  <div class="related-links">
-    <h3>Related Reading</h3>
-    <a href="/tax-calculator.html">Pakistan Tax Calculator: Income, GST &amp; Sales Tax</a>
-    <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan: Islamic Funds &amp; Sukuk</a>
-    <a href="/guides/gold-investment-pakistan.html">Gold Investment in Pakistan</a>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds</a>
-    <a href="/">Investment Comparison Tool</a>
-  </div>
-
-  <div class="disclaimer">&#9888; This calculator is for educational purposes only and is <strong>not a religious ruling or financial advice</strong>. It applies the common 2.5% rate and standard nisab weights. Scholarly opinions differ on what is zakatable, which nisab to use, and how to treat certain assets such as long-term shares, pensions and jointly-held wealth. Metal prices change daily, so enter the current rate. Consult a qualified scholar, and where relevant a financial adviser, for your specific situation before paying.</div>
-
+  </aside>
 </div>
 
+<div class="zk-microcopy">AN ESTIMATE FOR GUIDANCE, NOT A RELIGIOUS RULING. WHAT COUNTS AS ZAKATABLE, AND WHICH NISAB TO USE, CAN VARY BETWEEN SCHOLARS. METAL RATES CHANGE DAILY — ENTER TODAY'S PRICE. CONSULT A SCHOLAR YOU TRUST.</div>
+
+<!-- Ad slot 2 -->
+<div class="zk-frame">
+  <div class="ad-slot">
+    <span class="ad-label">Advertisement</span>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+</div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<!-- ===== Prose + sticky rail ===== -->
+<div class="zk-prose-wrap">
+  <div class="zk-prose">
+
+    <h2>How Zakat is calculated</h2>
+    <p>Zakat is one of the five pillars of Islam. It is an annual payment of <strong>2.5%</strong> of your qualifying wealth, due once that wealth has stayed at or above a minimum threshold for a full lunar year. Three things decide the amount: what counts as wealth, where the <strong>nisab</strong> threshold sits, and whether you have held the wealth for one <strong>lunar year (hawl)</strong>.</p>
+
+    <h2>What counts as zakatable wealth</h2>
+    <p>Zakat is due on wealth that grows, or could grow. It is not due on what you use day to day. As a general rule:</p>
+
+    <div class="zk-tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Zakatable</th><th>Not zakatable</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cash in hand and in bank accounts</td><td>Your home you live in</td></tr>
+          <tr><td>Gold and silver</td><td>Personal car and household items</td></tr>
+          <tr><td>Shares, mutual funds, savings certificates (market value)</td><td>Tools and machinery of your trade</td></tr>
+          <tr><td>Business stock-in-trade and recoverable receivables</td><td>Clothing and personal effects</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>From that total you <strong>deduct debts</strong> that are due, and what is left is your <strong>net zakatable wealth</strong>. Some rulings vary between scholars (long-term shares versus trading shares is the common example), so treat the calculator as a starting point rather than the last word.</p>
+
+    <h2>The nisab: gold vs silver</h2>
+    <p>The <strong>nisab</strong> is the minimum net wealth at which Zakat becomes obligatory. It is fixed as a weight of precious metal, which you then convert to rupees at today's price:</p>
+    <ul>
+      <li><strong>Gold nisab:</strong> 87.48 grams (<strong>7.5 tola</strong>)</li>
+      <li><strong>Silver nisab:</strong> 612.36 grams (<strong>52.5 tola</strong>)</li>
+    </ul>
+    <p>Silver is far cheaper per gram, so the <strong>silver nisab works out much lower in rupees</strong>. Use it and Zakat falls due on smaller wealth, which means more of the needy benefit. Many scholars recommend the <strong>silver nisab</strong> for that reason, especially when you hold a mix of cash and assets rather than gold alone. The calculator lets you choose either and enter the current price.</p>
+
+    <h2>The lunar year (hawl)</h2>
+    <p>Zakat is due once your zakatable wealth has stayed <strong>at or above the nisab for one full lunar year</strong>. You calculate it on the wealth you hold on that anniversary date, not on income as it trickles in through the year. Most Pakistanis just pay during <strong>Ramadan</strong>: the reward is greater, and a fixed annual date is easy to track.</p>
+
+    <h2>A note for investors</h2>
+    <p>Hold <a href="/guides/best-dividend-stocks-psx.html">PSX shares</a>, <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual funds</a> or <a href="/guides/national-savings-vs-mutual-funds.html">savings certificates</a>? Their <strong>market value</strong> on your Zakat date counts as zakatable wealth. With the KSE-100 near 181,000 and funds like NBP Islamic Stock up 42.2% over the past year, a portfolio can move a lot between two Zakat dates, so value it on the day itself rather than going off last year's figure. Zakat is separate from <a href="/tax-calculator.html">income tax</a>: tax is charged on income you earn, Zakat on wealth you hold. For Shariah-compliant ways to invest, see our <a href="/guides/halal-investing-pakistan.html">halal investing guide</a>.</p>
+
+    <div class="zk-callout">
+      <strong>To sum up:</strong> Zakat is 2.5% of net zakatable wealth (cash, gold, silver, investments and business assets, minus debts) once it has sat at or above the nisab for a lunar year. The silver nisab captures more wealth than the gold one. Use today's metal price so the threshold is accurate, and check any ruling you are unsure about with a scholar you trust.
+    </div>
+
+    <!-- FAQ -->
+    <h2 id="faq">Frequently asked questions</h2>
+
+    <details class="faq-item" id="faq-how-much-is-zakat"><summary class="faq-question">How much is Zakat in Pakistan?</summary><div class="faq-answer">Zakat is 2.5% of your net zakatable wealth, payable once each lunar year if that wealth is at or above the nisab. Zakatable wealth includes cash and bank balances, gold and silver, investments such as shares and mutual funds at market value, and business stock and receivables, minus debts that are due. For example, on Rs 4,000,000 of net zakatable wealth above the nisab, Zakat is Rs 100,000.</div></details>
+
+    <details class="faq-item" id="faq-nisab-gold-or-silver"><summary class="faq-question">What is the nisab for Zakat, and should I use gold or silver?</summary><div class="faq-answer">The nisab is the minimum wealth at which Zakat becomes due: the value of 87.48 grams (7.5 tola) of gold, or 612.36 grams (52.5 tola) of silver. The silver nisab is much lower in rupee terms, so using it means more people pay Zakat and more of the needy benefit — many scholars recommend the silver nisab for that reason, especially if you hold mixed assets. Use the current market price of the metal to convert the nisab into rupees.</div></details>
+
+    <details class="faq-item" id="faq-which-assets-are-zakatable"><summary class="faq-question">Which assets are zakatable in Pakistan?</summary><div class="faq-answer">Zakat is generally due on cash in hand and in bank accounts, gold and silver, money lent out that you expect back, the market value of shares and mutual funds and savings certificates, and business stock-in-trade. Your own home, personal car, household items and tools of your trade are normally not zakatable. Outstanding debts you owe can be deducted. Rulings on some items, such as shares held long-term, vary between scholars.</div></details>
+
+    <details class="faq-item" id="faq-when-is-zakat-due"><summary class="faq-question">When is Zakat due?</summary><div class="faq-answer">Zakat falls due once your zakatable wealth has stayed at or above the nisab for one full lunar year (hawl). Many Pakistanis choose to pay during Ramadan for the extra reward and to make the date easy to remember, but it can be paid whenever your lunar year completes. You calculate it on the wealth you hold on that date, not on income as it arrives.</div></details>
+
+    <details class="faq-item" id="faq-whole-savings-or-growth"><summary class="faq-question">Is Zakat calculated on my whole savings or only the growth?</summary><div class="faq-answer">Zakat is calculated on the whole zakatable amount you hold at the end of the lunar year, not just the profit or growth. So if you hold Rs 2,000,000 in cash and investments above the nisab, Zakat is 2.5% of the full Rs 2,000,000, regardless of how much it grew during the year. This is different from income tax, which is charged on income earned.</div></details>
+
+    <details class="faq-item" id="faq-bank-zakat-deduction"><summary class="faq-question">Does the bank deducting Zakat mean I have paid all my Zakat?</summary><div class="faq-answer">Banks in Pakistan deduct Zakat on certain savings and deposit accounts around Ramadan under the Zakat and Ushr system, but that deduction usually covers only those specific account balances. Cash held outside the banking system, gold and silver, shares, and business assets are generally not covered by the bank deduction, so Zakat on them may still be due. The exact rules and any exemption process (such as filing a declaration) can change, so verify the current position with your bank or the relevant authority.</div></details>
+
+    <details class="faq-item" id="faq-zakat-on-loan-money"><summary class="faq-question">Do I pay Zakat on money I have lent to someone or on a loan I owe?</summary><div class="faq-answer">Money you have lent out and reasonably expect to get back is generally treated as part of your zakatable wealth. Debts that you owe and are due can usually be deducted from your zakatable wealth before applying the 2.5% rate. Treatment of long-term or doubtful loans can differ between scholars, so check the ruling that applies to your situation.</div></details>
+
+    <details class="faq-item" id="faq-zakat-on-property-and-plots"><summary class="faq-question">Is there Zakat on property, plots, or my house?</summary><div class="faq-answer">The house you live in and property kept for personal use are normally not zakatable. A plot or property bought with the clear intention of resale is often treated as trade goods, so its market value can be zakatable, while property held to earn rent is usually not zakatable on its capital value, though the rental income saved may be. Scholars differ on some of these cases, so confirm the ruling for your specific intention and use.</div></details>
+
+    <details class="faq-item" id="faq-zakat-vs-income-tax"><summary class="faq-question">Is Zakat the same as paying income tax to FBR?</summary><div class="faq-answer">No. Zakat is a religious obligation calculated at 2.5% on accumulated zakatable wealth held for a full lunar year, while income tax is a government levy charged on income you earn during a tax year. Paying one does not remove the obligation of the other, and they are calculated on different bases. For income tax rules, slabs, and filing, verify the current details on fbr.gov.pk.</div></details>
+
+    <details class="faq-item" id="faq-give-zakat-to-relatives"><summary class="faq-question">Can I give my Zakat to my own relatives?</summary><div class="faq-answer">Zakat can generally be given to eligible relatives who are not among your direct dependents that you are already obliged to support, such as your spouse, parents, or minor children. Eligible recipients are those who meet the conditions for receiving Zakat, for example needy family members who fall below the nisab. Because views on specific relationships vary, it is best to confirm eligibility with a knowledgeable scholar.</div></details>
+
+    <div class="zk-disclaimer"><strong>⚠</strong> This calculator is for educational purposes only and is <strong style="color:#fff">not a religious ruling or financial advice</strong>. It applies the common 2.5% rate and standard nisab weights. Scholarly opinions differ on what is zakatable, which nisab to use, and how to treat certain assets such as long-term shares, pensions and jointly-held wealth. Metal prices change daily, so enter the current rate. Consult a qualified scholar, and where relevant a financial adviser, for your specific situation before paying.</div>
+
+  </div>
+
+  <!-- sticky rail -->
+  <aside class="zk-side" aria-label="Zakat essentials and related reading">
+    <div class="zk-side-inner">
+      <div class="zk-side-glance">
+        <div class="rk">THE ESSENTIALS</div>
+        <div class="zk-glance-item"><div class="zk-glance-n">2.5%</div><div class="zk-glance-l">ZAKAT RATE</div></div>
+        <div class="zk-glance-item"><div class="zk-glance-n">7.5 tola</div><div class="zk-glance-l">GOLD NISAB</div></div>
+        <div class="zk-glance-item"><div class="zk-glance-n">52.5 tola</div><div class="zk-glance-l">SILVER NISAB</div></div>
+        <div class="zk-glance-item"><div class="zk-glance-n">1 year</div><div class="zk-glance-l">LUNAR HOLDING (HAWL)</div></div>
+      </div>
+      <div class="zk-side-related">
+        <div class="rk">RELATED READING</div>
+        <a href="/tax-calculator.html">Pakistan Tax Calculator: income, GST &amp; sales tax →</a>
+        <a href="/guides/halal-investing-pakistan.html">Halal investing in Pakistan: Islamic funds &amp; sukuk →</a>
+        <a href="/guides/gold-investment-pakistan.html">Gold investment in Pakistan →</a>
+        <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds →</a>
+        <a href="/">Investment comparison tool →</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+</main>
+
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>&copy; 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/blog/">Blog</a>
-    <a href="/tax-calculator.html">Tax Calculator</a>
-    <a href="/zakat-calculator.html">Zakat Calculator</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: CDNS · gold.pk · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
@@ -297,6 +554,7 @@ gtag('config', 'G-4T2H0KH9H7');
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

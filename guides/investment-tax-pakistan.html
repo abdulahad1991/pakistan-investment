@@ -131,12 +131,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -158,23 +158,168 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.4vw,3.3rem);font-weight:800;line-height:1.02;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose p a,.prose li a{color:var(--green);border-bottom:1px solid var(--line);font-weight:700}
+  .prose p a:hover,.prose li a:hover{color:var(--green2);border-color:var(--green2)}
+  .prose ul,.prose ol{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 30px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose ul li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose ol{counter-reset:step}
+  .prose ol li{counter-increment:step}
+  .prose ol li::before{content:counter(step);position:absolute;left:0;top:10px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:var(--green);color:#fff;font-family:var(--display);font-size:.72rem;font-weight:700;border-radius:2px}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* section heads */
+  .prose h2{font-family:var(--display);font-size:1.55rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:38px 0 16px;scroll-margin-top:78px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:24px 0 8px}
+
+  /* lead / quick answer */
+  .quick-answer{font-family:var(--body);font-size:1.06rem;line-height:1.65;color:var(--ink2);background:var(--mint);border-left:4px solid var(--acid);padding:16px 20px;margin:0 0 24px;font-weight:500}
+  .quick-answer strong{color:var(--green-d);font-weight:700}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 28px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:10px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p{margin:0;color:#E4F2EA;font-family:var(--body);font-size:1.02rem;line-height:1.6;font-weight:500}
+  .cl-dark strong{color:var(--acid)!important;font-weight:700}
+  .cl-dark a{color:var(--acid)!important;border-bottom:1px solid rgba(237,248,4,.5)}
+  .cl-note{background:#FFF6E4;border-left:4px solid var(--gold);padding:16px 20px;margin:0 0 24px}
+  .cl-note p{margin:0;font-family:var(--body);font-size:.98rem;line-height:1.6;color:#6B561F;font-weight:500}
+  .cl-note strong{color:#5A4715;font-weight:700}
+  .cl-note a{color:var(--gold2);border-bottom:1px solid #E2C173;font-weight:700}
+
+  /* live snapshot widget (filled by article.js) */
+  #live-snap{margin:0 0 28px}
+
+  /* data table */
+  .tax-tbl-wrap{border:1px solid var(--line);margin:0 0 24px;overflow-x:auto}
+  .tax-tbl{width:100%;border-collapse:collapse;min-width:560px;font-family:var(--body);font-size:.92rem}
+  .tax-tbl th{background:var(--green-d);color:#fff;font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-align:left;padding:12px 14px;vertical-align:bottom}
+  .tax-tbl td{padding:13px 14px;border-bottom:1px solid var(--line2);background:var(--paper);color:var(--ink2);line-height:1.5;vertical-align:top}
+  .tax-tbl tr:last-child td{border-bottom:none}
+  .tax-tbl tr:hover td{background:var(--paper3)}
+  .tax-tbl td strong{color:var(--green-d);font-weight:700}
+  /* numeric worked-example table */
+  .num-tbl td:not(:first-child),.num-tbl th:not(:first-child){font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+  .num-tbl th:not(:first-child){text-align:right}
+  .num-tbl td:first-child{font-family:var(--body)}
+
+  /* byline (kept for share.js / article.js hooks) */
+  .byline{font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;list-style:none}
+  .prose .faq-question::-webkit-details-marker{display:none}
+  .prose .faq-question::after{content:"+";font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--green)}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose details[open] .faq-question::after{content:"–"}
+  .prose .faq-answer{padding:0 0 18px;font-family:var(--body);font-size:1rem;line-height:1.7;color:var(--ink2)}
+
+  /* related links */
+  .related-links{border-top:1px solid var(--line);padding-top:22px;margin-top:30px}
+  .related-links h3{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--green-d);text-transform:uppercase;margin-bottom:10px}
+  .related-links a{display:block;padding:11px 0;border-bottom:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .related-links a:last-child{border-bottom:none}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green);flex-shrink:0}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+    .prose{padding:28px 18px}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -183,253 +328,365 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/guides/">Guides</a> › Investment Tax: Filer vs Non-Filer</div>
+<main>
+<article class="art-frame">
 
-  <h1>How Investments Are Taxed in Pakistan: Filer vs Non-Filer Guide (2026)</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Last updated: 12 June 2026 &nbsp;·&nbsp; 11 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one line:</strong> In Pakistan, appearing on FBR's Active Taxpayer List (filer status) roughly halves the withholding tax non-filers pay on profit on debt, dividends, capital gains, and mutual fund income. Each is deducted at source by the bank, company, NCCPL, or AMC.</p>
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">Investment Tax: Filer vs Non-Filer</li>
+    </ol>
+  </nav>
 
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Last updated: 12 June 2026</span></div>
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 06 — Tax · Filer Status</div>
+      <h1>How investments are taxed in Pakistan: filer vs non-filer.</h1>
+      <div class="art-byline byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 12 June 2026</span>
+        <span>· 11 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">Why it matters</div>
+      <p>Appearing on FBR's <b>Active Taxpayer List</b> roughly <b class="acc">halves</b> the withholding non-filers pay on profit on debt, dividends, capital gains, and mutual fund income — all deducted at source by the bank, company, NCCPL, or AMC.</p>
     </div>
   </div>
 
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>Filer vs non-filer, in brief:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>Being on FBR's Active Taxpayer List (ATL) roughly halves withholding tax on most investment income. It is the biggest "return boost" available to a Pakistani investor.</li>
-      <li>Four income streams, four collection mechanisms: profit on debt, dividends, capital gains (collected by NCCPL), and mutual fund distributions</li>
-      <li>Becoming a filer is free and online. Register on FBR's IRIS portal (your CNIC is your NTN), file one annual return, then verify by SMS to 9966.</li>
-    </ul>
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Quick answer / lead -->
+      <p class="quick-answer"><strong>In one line:</strong> In Pakistan, appearing on FBR's Active Taxpayer List (filer status) roughly halves the withholding tax non-filers pay on profit on debt, dividends, capital gains, and mutual fund income. Each is deducted at source by the bank, company, NCCPL, or AMC.</p>
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 12 June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">Filer vs non-filer, in brief</div>
+        <ul>
+          <li>Being on FBR's Active Taxpayer List (ATL) roughly halves withholding tax on most investment income. It is the biggest "return boost" available to a Pakistani investor.</li>
+          <li>Four income streams, four collection mechanisms: profit on debt, dividends, capital gains (collected by NCCPL), and mutual fund distributions</li>
+          <li>Becoming a filer is free and online. Register on FBR's IRIS portal (your CNIC is your NTN), file one annual return, then verify by SMS to 9966.</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary, before main content -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>Most Pakistani investors chase an extra percentage point. They compare National Savings rates, hunt for the best mutual fund, screen PSX stocks for dividends. But the single largest, most reliable boost to your net return is not a product at all. It is your <strong>tax status</strong>. Whether you appear on the Federal Board of Revenue's <strong>Active Taxpayer List (ATL)</strong>, that is, whether you are a "filer" or a "non-filer", decides how much of every rupee of profit, dividend, and gain you actually keep. Across most investment income, non-filers face roughly double the withholding tax of filers.</p>
+
+      <p>This guide covers how each of the four main investment income streams is taxed, why filer status matters so much, how to become a filer on FBR's IRIS portal, how the annual Zakat deduction works, and which records to keep. One caveat first. Pakistani tax <em>rates</em> change with every annual Finance Act, sometimes dramatically. So this guide sticks to the <em>mechanisms</em>, which are stable, and deliberately avoids presenting any specific percentage as current law. Wherever a number matters, verify the latest rate on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> before acting.</p>
+
+      <!-- Live snapshot widget — populated by article.js from data.json -->
+      <div id="live-snap"></div>
+
+      <h2 id="s1"><span class="sn">01</span>Filer vs non-filer: why the ATL is the biggest return boost available</h2>
+
+      <p>Pakistan collects a large share of tax through <strong>withholding at source</strong>. Your bank, broker, the company paying your dividend, or the National Savings Centre deducts tax before the money reaches you. To push people into the documented economy, the law applies <strong>higher withholding rates to anyone not on the Active Taxpayer List</strong>, the FBR's published register of people who filed their most recent income tax return.</p>
+
+      <p>The penalty for staying off the list is steep. Exact rates shift with each Finance Act, but the structural pattern has held for years. <strong>Non-filers pay roughly double the withholding of filers</strong> on profit on debt, dividends, and several other income types, and they face less favourable capital gains treatment. A non-filer earning 11–12% on a savings certificate may take home one to two full percentage points less per year than a filer holding the identical certificate.</p>
+
+      <p>The fix is remarkably cheap. Filing a return costs nothing if you do it yourself, and a tax practitioner typically charges a few thousand rupees for a straightforward salaried-investor return. No fund switch or stock pick will improve your net return as reliably as moving from non-filer to filer.</p>
+
+      <h2 id="s2"><span class="sn">02</span>The four investment income streams and how each is taxed</h2>
+
+      <p>Almost everything a retail investor earns in Pakistan falls into one of four buckets, each with its own collection mechanism. In all four cases tax is deducted at source, so there is no complicated self-assessment for typical retail amounts. The structural map:</p>
+
+      <div class="tax-tbl-wrap">
+        <table class="tax-tbl">
+          <thead>
+            <tr>
+              <th scope="col">Income stream</th>
+              <th scope="col">Who deducts the tax</th>
+              <th scope="col">Filer vs non-filer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Profit on debt</strong> (bank deposits, National Savings, T-bills)</td>
+              <td>Bank, CDNS, or paying institution withholds at source on each profit payment</td>
+              <td>Non-filers face substantially higher withholding, historically roughly double</td>
+            </tr>
+            <tr>
+              <td><strong>Dividends</strong> (PSX shares)</td>
+              <td>The company (via its registrar/CDC) withholds before the dividend is credited</td>
+              <td>Non-filer rate has typically been around double the filer rate</td>
+            </tr>
+            <tr>
+              <td><strong>Capital gains</strong> (listed securities)</td>
+              <td>NCCPL computes gains/losses centrally and collects through your broker</td>
+              <td>Rate depends on filer status, acquisition date, and the prevailing Finance Act</td>
+            </tr>
+            <tr>
+              <td><strong>Mutual funds</strong> (distributions and redemptions)</td>
+              <td>The AMC withholds on distributions; redemption gains fall under CGT-style rules</td>
+              <td>Filer status and fund category (equity vs income) both affect the rate</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>1. Profit on debt: National Savings, bank deposits, and T-bills</h3>
+
+      <p>"Profit on debt" is the tax law's umbrella term for interest-type income: profit on bank deposits, returns on <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">National Savings (CDNS)</a> certificates and accounts, and yields on government securities such as T-bills, now accessible to retail investors through banks and SBP-facilitated channels (see <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>). Each time profit is paid, the paying institution deducts withholding tax at the rate set by the latest Finance Act and deposits it with FBR. You receive the net amount.</p>
+
+      <p>Your CNIC and ATL status determine which rate applies. The institution checks the list automatically. Depending on the amounts and the prevailing Finance Act, the tax withheld may be final or adjustable against your overall liability when you file. Larger profit amounts have at times been pushed into normal slab taxation. Verify the current profit-on-debt rates on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>
+
+      <h3>2. Dividends from PSX stocks</h3>
+
+      <p>When a listed company announces a dividend, the tax is gone before the cash arrives. The company's share registrar, working with the Central Depository Company (CDC), deducts dividend withholding tax at the rate for your status and credits the net amount. A filer and a non-filer holding identical shares receive visibly different cash on the same payout date. The non-filer's deduction has typically been around twice the filer's. Check current dividend rates on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>
+
+      <p>For most retail investors, dividend withholding has generally operated as a final tax. The deduction settles your liability, and you simply report it in your return. On an income portfolio built around high-yield PSX names like HUBC (currently around 10.7%) or MCB (8.8%), filer status is the difference between keeping the yield you screened for and silently giving a large slice back.</p>
+
+      <h3>3. Capital gains on listed securities: the NCCPL system</h3>
+
+      <p>Capital gains tax (CGT) on listed shares is where Pakistan's system is investor-friendly by design. You calculate nothing yourself. The <a href="https://www.nccpl.com.pk" target="_blank" rel="noopener">National Clearing Company of Pakistan Limited (NCCPL)</a> is the centralised CGT computation and collection agent. It tracks every purchase and sale across your broker accounts, nets gains against losses, applies the rate for your filer status under the prevailing Finance Act, and collects the tax through your broker.</p>
+
+      <p>Recent Finance Acts have tied CGT rates to when securities were acquired and whether you are on the ATL, and the regime has been redesigned more than once. The mechanism stays constant. NCCPL computes, your broker collects, losses offset gains, and NCCPL issues an annual certificate summarising gains and tax collected. Use that certificate when filing, and verify the current CGT slabs on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> before making tax-driven sell decisions.</p>
+
+      <h3>4. Mutual fund distributions and redemptions</h3>
+
+      <p>Mutual funds generate two taxable events. First, <strong>distributions</strong>: when a fund pays out dividends or profit, the asset management company (AMC) withholds tax before crediting your account, with the rate depending on your filer status and, in some years, on whether the fund is equity- or income-oriented. Second, <strong>redemptions</strong>: when you sell units for more than you paid, the gain falls under capital-gains-style rules, with withholding handled by the AMC or through the NCCPL framework.</p>
+
+      <p>Holding-period rules have mattered historically. Some Finance Acts taxed longer-held units more lightly, and the equity/income distinction has carried different rates. These details change annually, so confirm the current treatment with your AMC and on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>. The structure does not change. The AMC handles the deduction, your filer status sets the rate, and your fund statement plus withholding certificate gives you everything you need at filing time.</p>
+
+      <h2 id="s3"><span class="sn">03</span>Worked example: filer vs non-filer on PKR 1,000,000</h2>
+
+      <div class="cl-note">
+        <p><strong>Important:</strong> the percentages below are <strong>illustrative hypothetical rates chosen only to show the mechanism</strong>. They are not a statement of current law. Actual withholding rates are set by each year's Finance Act, so check <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> for the rates in force.</p>
+      </div>
+
+      <p>Suppose you place <strong>PKR 1,000,000</strong> in a Special Savings Certificate earning 11.6% per year (the SSC rate as of June 2026 per <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a>). Gross annual profit: <strong>Rs 116,000</strong>. Now assume, purely for illustration, withholding of <strong>15% for filers</strong> and <strong>30% for non-filers</strong>. That two-to-one ratio is consistent with the long-running structural pattern.</p>
+
+      <div class="tax-tbl-wrap">
+        <table class="tax-tbl num-tbl">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Filer (hypothetical 15%)</th>
+              <th scope="col">Non-filer (hypothetical 30%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Gross profit</strong></td>
+              <td>Rs 116,000</td>
+              <td>Rs 116,000</td>
+            </tr>
+            <tr>
+              <td><strong>Tax withheld</strong></td>
+              <td>Rs 17,400</td>
+              <td>Rs 34,800</td>
+            </tr>
+            <tr>
+              <td><strong>Net profit</strong></td>
+              <td>Rs 98,600</td>
+              <td>Rs 81,200</td>
+            </tr>
+            <tr>
+              <td><strong>Effective net return</strong></td>
+              <td>9.86%</td>
+              <td>8.12%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The non-filer surrenders an extra <strong>Rs 17,400 every year</strong> on the same certificate. That is about 1.74 percentage points of return, and over Rs 50,000 across a 3-year SSC tenure. The same two-to-one logic applies to dividend income on a comparable PSX position. Whatever the actual rates this year, the conclusion is the same. <strong>Filing one tax return buys you a permanent raise on every investment you own.</strong></p>
+
+      <h2 id="s4"><span class="sn">04</span>How to become a filer: step by step</h2>
+
+      <p>Becoming a filer means two things. Register with FBR, then file your annual return so your name appears on the ATL. The whole process is online and free.</p>
+
+      <ol>
+        <li><strong>Register on the IRIS portal.</strong> Go to <a href="https://iris.fbr.gov.pk" target="_blank" rel="noopener">iris.fbr.gov.pk</a> and choose new e-enrollment for an individual. You need your 13-digit CNIC, a mobile number registered against your own CNIC, and an email address. For individuals, <strong>your CNIC itself serves as your National Tax Number (NTN)</strong>, so there is no separate NTN card. Verification codes arrive by SMS and email.</li>
+        <li><strong>File your annual income tax return.</strong> The tax year runs 1 July to 30 June. The individual deadline has typically been 30 September, with frequent extensions (confirm on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>). In IRIS you declare your income (salary, profit on debt, dividends, capital gains per your NCCPL certificate) plus tax already withheld, and you submit a <strong>wealth statement</strong> reconciling assets and liabilities. Salaried investors can often finish in an evening.</li>
+        <li><strong>Wait for the ATL to update.</strong> FBR publishes a new ATL on 1 March each year based on returns for the latest tax year, refreshed weekly (typically Mondays). Missed the deadline? You can generally still get on the ATL by filing late and paying a surcharge. Verify the amount on fbr.gov.pk.</li>
+        <li><strong>Check your status.</strong> SMS <strong>ATL [space] your 13-digit CNIC</strong> (no dashes) to <strong>9966</strong>, or use the ATL search on fbr.gov.pk or the Tax Asaan app. Check before any major transaction. Banks and brokers apply whichever status the list shows that day.</li>
+      </ol>
+
+      <div class="cl-dark">
+        <p><strong>Practical tip:</strong> file every year, even when little tax is due. Falling off the ATL silently resets your withholding to non-filer rates across every bank, brokerage, and savings account you hold. No institution will warn you.</p>
+      </div>
+
+      <h2 id="s5"><span class="sn">05</span>Zakat deduction: the other deduction on your savings</h2>
+
+      <p>Separate from income tax entirely, Pakistan operates a compulsory <strong>Zakat deduction</strong> system under the Zakat and Ushr Ordinance, 1980. On the <strong>first day of Ramadan</strong> each year, banks and National Savings Centres deduct <strong>2.5%</strong> from eligible balances (savings accounts, profit-and-loss sharing accounts, and most savings certificates) held by Muslim account holders above the <strong>nisab</strong> threshold notified annually. Current accounts are generally outside the net, and certain instruments such as Behbood Savings Certificates are exempt from compulsory deduction. See <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a> for the current schedule.</p>
+
+      <p>If you are exempt on faith or fiqh grounds, file a notarised <strong>exemption declaration (Form CZ-50)</strong> with each bank branch and National Savings Centre where you hold accounts. The timing trips people up. The affidavit must be on file <strong>at least 30 days before the deduction date</strong>. One submitted the week before Ramadan will not stop that year's deduction, and the date moves earlier each Gregorian year. Zakat actually deducted is generally a deductible allowance against taxable income, which is one more reason to keep the deduction certificates your bank issues.</p>
+
+      <h2 id="s6"><span class="sn">06</span>Record-keeping: the paper trail that pays you back</h2>
+
+      <p>Good records turn filing from a dreaded chore into a one-evening task, and they let you claim every rupee of adjustable withholding. Collect four documents every year.</p>
+
+      <ul>
+        <li><strong>CDC account statements:</strong> your holdings and transactions in listed securities, downloadable via CDC Access or your broker. Proof of ownership and cost basis.</li>
+        <li><strong>NCCPL capital gains statements and tax certificates:</strong> the annual summary of computed gains, offset losses, and CGT collected, available through your broker or <a href="https://www.nccpl.com.pk" target="_blank" rel="noopener">nccpl.com.pk</a>. These figures go straight into your IRIS return.</li>
+        <li><strong>Withholding tax certificates from banks and CDNS:</strong> an annual certificate showing profit paid and tax deducted against your CNIC. Most banks generate these in their apps; CDNS issues them at the branch. Without them you cannot substantiate refunds.</li>
+        <li><strong>Mutual fund statements and AMC withholding certificates:</strong> units held, distributions, redemptions, and tax withheld. Request the formal tax certificate if it is not emailed automatically.</li>
+      </ul>
+
+      <p>Store digital copies in one folder per tax year. When you sit down to file, everything IRIS asks for is already in hand, and the return becomes data entry rather than detective work.</p>
+
+      <div class="cl-key">
+        <div class="k">Where to start in 2026</div>
+        <ul>
+          <li>Before you optimise anything else about your portfolio, get on the ATL. Register on IRIS, file the return, confirm by SMS to 9966, then re-file every year.</li>
+          <li>It is the only "investment" in Pakistan that reliably boosts your net return on every asset you own, from savings certificates and dividends to funds and stocks.</li>
+        </ul>
+      </div>
+
+      <!-- FAQ Section -->
+      <h2 id="s7"><span class="sn">07</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-check-atl"><summary class="faq-question">How do I check if I am on the Active Taxpayer List (ATL)?</summary><div class="faq-answer">Send an SMS with the word ATL followed by a space and your 13-digit CNIC number (no dashes) to 9966. You will receive a reply confirming whether you are an active filer. You can also use the online ATL search on fbr.gov.pk or the Tax Asaan mobile app. The ATL is refreshed weekly, typically every Monday.</div></details>
+
+      <details class="faq-item" id="faq-withheld-pay-again"><summary class="faq-question">If tax was already withheld on my profit or dividends, do I pay again when I file my return?</summary><div class="faq-answer">Generally no — tax withheld at source is either treated as final tax or adjusted against your total liability when you file, depending on the income type and the prevailing Finance Act. Filing often works in your favour: if more was withheld than you owe, you can claim the excess as an adjustment or refund. Keep your withholding certificates, and verify the current treatment on fbr.gov.pk or with a tax practitioner.</div></details>
+
+      <details class="faq-item" id="faq-psx-cgt-automatic"><summary class="faq-question">Is capital gains tax on PSX shares deducted automatically?</summary><div class="faq-answer">Yes. NCCPL (National Clearing Company of Pakistan Limited) is the centralised CGT computation and collection agent for listed securities. It calculates gains and losses across your brokers, applies the rate for your filer status under the prevailing Finance Act, and collects the tax through your broker account, with loss offsetting handled automatically. You still report the figures in your annual return using NCCPL's certificate.</div></details>
+
+      <details class="faq-item" id="faq-avoid-zakat-deduction"><summary class="faq-question">How can I avoid the Zakat deduction on my savings certificates?</summary><div class="faq-answer">Under the Zakat and Ushr Ordinance 1980, banks and National Savings deduct 2.5% Zakat from eligible balances above the annually-notified nisab on the first day of Ramadan. If you are exempt on faith or fiqh grounds, file a notarised exemption declaration (Form CZ-50) with your bank or National Savings Centre at least 30 days before the deduction date. Some instruments, such as Behbood Savings Certificates, are not subject to compulsory deduction; confirm current rules at savings.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-overseas-filer-rates"><summary class="faq-question">Do overseas Pakistanis need to file a return to get filer withholding rates?</summary><div class="faq-answer">Non-resident Pakistanis can register on FBR's IRIS portal and file a return to appear on the ATL, and FBR has offered simplified routes for non-residents with no Pakistan-source taxable income. Investors using Roshan Digital Accounts benefit from special withholding arrangements on eligible investments. The treatment of non-residents changes with Finance Acts and SBP circulars, so verify the current position on fbr.gov.pk and sbp.org.pk.</div></details>
+
+      <details class="faq-item" id="faq-difference-filer-non-filer"><summary class="faq-question">What is the difference between a filer and a non-filer for investments?</summary><div class="faq-answer">A filer is a person who appears on FBR's Active Taxpayer List after submitting their annual income tax return, while a non-filer does not. Non-filers generally face higher withholding tax rates on income such as profit on savings, dividends and capital gains, which can meaningfully reduce net returns. The exact rate gap is set by the prevailing Finance Act, so verify the current rates on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-tax-on-mutual-fund-dividends"><summary class="faq-question">How is tax handled on mutual fund dividends and redemptions?</summary><div class="faq-answer">Dividends distributed by mutual funds are typically subject to withholding tax deducted by the asset management company, and capital gains on the redemption of units may also be taxed depending on the fund type and holding period. The applicable rates differ for filers and non-filers under the prevailing Finance Act. The fund's annual tax certificate summarises what was deducted, which you use when filing; confirm the current treatment on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-when-to-file-return"><summary class="faq-question">When is the deadline to file my income tax return in Pakistan?</summary><div class="faq-answer">FBR sets an annual filing deadline for individuals after the end of each tax year, and it is commonly extended through official notifications. Filing on time keeps you on the Active Taxpayer List and helps you avoid higher non-filer withholding rates. Because the date can change each year, check the current deadline and any extensions on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-property-investment-taxes"><summary class="faq-question">What taxes apply when I invest in property in Pakistan?</summary><div class="faq-answer">Property transactions can involve several taxes, including advance tax at the time of purchase and sale, capital gains tax on disposal, and provincial stamp duty and registration charges. The rates and holding-period rules vary by filer status, property value and the prevailing Finance Act, and provincial levies differ between provinces. Verify the current position on fbr.gov.pk and your provincial revenue authority's website.</div></details>
+
+      <details class="faq-item" id="faq-tax-on-foreign-investment-income"><summary class="faq-question">Do I have to declare foreign investment income if I am a Pakistan resident?</summary><div class="faq-answer">Pakistan tax residents are generally required to declare their worldwide income, which can include profit, dividends or gains earned from investments held abroad. Foreign taxes already paid may be eligible for relief depending on applicable tax treaties and the Income Tax Ordinance. Because residency rules and treaty relief are detailed, verify your specific position on fbr.gov.pk or with a tax practitioner.</div></details>
+
+      <!-- Ad slot 2 — after FAQ section -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Guides</h3>
+        <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
+        <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
+        <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not tax advice</strong>. Pakistani tax rates, thresholds, and withholding rules change with every annual Finance Act and through FBR circulars — any figure here may be out of date by the time you read it, and the worked example uses deliberately hypothetical rates. Always verify current rates on fbr.gov.pk and consult a qualified tax practitioner before making tax or investment decisions based on this material.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>Why the ATL matters most</a>
+            <a href="#s2"><span class="ti">02</span>Four income streams</a>
+            <a href="#s3"><span class="ti">03</span>Worked example: ₨ 10,00,000</a>
+            <a href="#s4"><span class="ti">04</span>How to become a filer</a>
+            <a href="#s5"><span class="ti">05</span>Zakat deduction</a>
+            <a href="#s6"><span class="ti">06</span>Record-keeping</a>
+            <a href="#s7"><span class="ti">07</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">~2×</div><div class="gl-l">Non-filer vs filer withholding</div></div>
+          <div class="gl-row"><div class="gl-n">Free</div><div class="gl-l">Cost to file on IRIS yourself</div></div>
+          <div class="gl-row"><div class="gl-n">9966</div><div class="gl-l">SMS to check ATL status</div></div>
+          <div class="gl-row"><div class="gl-n">2.5%</div><div class="gl-l">Ramadan Zakat deduction</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds →</a>
+          <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX →</a>
+          <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
   </div>
+</article>
+</main>
 
-  <!-- Ad slot 1 — after summary, before main content -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>Most Pakistani investors chase an extra percentage point. They compare National Savings rates, hunt for the best mutual fund, screen PSX stocks for dividends. But the single largest, most reliable boost to your net return is not a product at all. It is your <strong>tax status</strong>. Whether you appear on the Federal Board of Revenue's <strong>Active Taxpayer List (ATL)</strong>, that is, whether you are a "filer" or a "non-filer", decides how much of every rupee of profit, dividend, and gain you actually keep. Across most investment income, non-filers face roughly double the withholding tax of filers.</p>
-
-  <p>This guide covers how each of the four main investment income streams is taxed, why filer status matters so much, how to become a filer on FBR's IRIS portal, how the annual Zakat deduction works, and which records to keep. One caveat first. Pakistani tax <em>rates</em> change with every annual Finance Act, sometimes dramatically. So this guide sticks to the <em>mechanisms</em>, which are stable, and deliberately avoids presenting any specific percentage as current law. Wherever a number matters, verify the latest rate on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> before acting.</p>
-
-  
-  <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-top:3px solid #B98A2F;border-radius:6px;padding:18px;margin:0 0 26px"></div>
-<h2>Filer vs Non-Filer: Why the ATL Is the Biggest Return Boost Available</h2>
-
-  <p>Pakistan collects a large share of tax through <strong>withholding at source</strong>. Your bank, broker, the company paying your dividend, or the National Savings Centre deducts tax before the money reaches you. To push people into the documented economy, the law applies <strong>higher withholding rates to anyone not on the Active Taxpayer List</strong>, the FBR's published register of people who filed their most recent income tax return.</p>
-
-  <p>The penalty for staying off the list is steep. Exact rates shift with each Finance Act, but the structural pattern has held for years. <strong>Non-filers pay roughly double the withholding of filers</strong> on profit on debt, dividends, and several other income types, and they face less favourable capital gains treatment. A non-filer earning 11–12% on a savings certificate may take home one to two full percentage points less per year than a filer holding the identical certificate.</p>
-
-  <p>The fix is remarkably cheap. Filing a return costs nothing if you do it yourself, and a tax practitioner typically charges a few thousand rupees for a straightforward salaried-investor return. No fund switch or stock pick will improve your net return as reliably as moving from non-filer to filer.</p>
-
-  <h2>The Four Investment Income Streams and How Each Is Taxed</h2>
-
-  <p>Almost everything a retail investor earns in Pakistan falls into one of four buckets, each with its own collection mechanism. In all four cases tax is deducted at source, so there is no complicated self-assessment for typical retail amounts. The structural map:</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Income stream</th>
-        <th>Who deducts the tax</th>
-        <th>Filer vs non-filer</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Profit on debt</strong> (bank deposits, National Savings, T-bills)</td>
-        <td>Bank, CDNS, or paying institution withholds at source on each profit payment</td>
-        <td>Non-filers face substantially higher withholding, historically roughly double</td>
-      </tr>
-      <tr>
-        <td><strong>Dividends</strong> (PSX shares)</td>
-        <td>The company (via its registrar/CDC) withholds before the dividend is credited</td>
-        <td>Non-filer rate has typically been around double the filer rate</td>
-      </tr>
-      <tr>
-        <td><strong>Capital gains</strong> (listed securities)</td>
-        <td>NCCPL computes gains/losses centrally and collects through your broker</td>
-        <td>Rate depends on filer status, acquisition date, and the prevailing Finance Act</td>
-      </tr>
-      <tr>
-        <td><strong>Mutual funds</strong> (distributions and redemptions)</td>
-        <td>The AMC withholds on distributions; redemption gains fall under CGT-style rules</td>
-        <td>Filer status and fund category (equity vs income) both affect the rate</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>1. Profit on Debt: National Savings, Bank Deposits, and T-Bills</h3>
-
-  <p>"Profit on debt" is the tax law's umbrella term for interest-type income: profit on bank deposits, returns on <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">National Savings (CDNS)</a> certificates and accounts, and yields on government securities such as T-bills, now accessible to retail investors through banks and SBP-facilitated channels (see <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>). Each time profit is paid, the paying institution deducts withholding tax at the rate set by the latest Finance Act and deposits it with FBR. You receive the net amount.</p>
-
-  <p>Your CNIC and ATL status determine which rate applies. The institution checks the list automatically. Depending on the amounts and the prevailing Finance Act, the tax withheld may be final or adjustable against your overall liability when you file. Larger profit amounts have at times been pushed into normal slab taxation. Verify the current profit-on-debt rates on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>
-
-  <h3>2. Dividends from PSX Stocks</h3>
-
-  <p>When a listed company announces a dividend, the tax is gone before the cash arrives. The company's share registrar, working with the Central Depository Company (CDC), deducts dividend withholding tax at the rate for your status and credits the net amount. A filer and a non-filer holding identical shares receive visibly different cash on the same payout date. The non-filer's deduction has typically been around twice the filer's. Check current dividend rates on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>
-
-  <p>For most retail investors, dividend withholding has generally operated as a final tax. The deduction settles your liability, and you simply report it in your return. On an income portfolio built around high-yield PSX names like HUBC (currently around 10.7%) or MCB (8.8%), filer status is the difference between keeping the yield you screened for and silently giving a large slice back.</p>
-
-  <h3>3. Capital Gains on Listed Securities: The NCCPL System</h3>
-
-  <p>Capital gains tax (CGT) on listed shares is where Pakistan's system is investor-friendly by design. You calculate nothing yourself. The <a href="https://www.nccpl.com.pk" target="_blank" rel="noopener">National Clearing Company of Pakistan Limited (NCCPL)</a> is the centralised CGT computation and collection agent. It tracks every purchase and sale across your broker accounts, nets gains against losses, applies the rate for your filer status under the prevailing Finance Act, and collects the tax through your broker.</p>
-
-  <p>Recent Finance Acts have tied CGT rates to when securities were acquired and whether you are on the ATL, and the regime has been redesigned more than once. The mechanism stays constant. NCCPL computes, your broker collects, losses offset gains, and NCCPL issues an annual certificate summarising gains and tax collected. Use that certificate when filing, and verify the current CGT slabs on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> before making tax-driven sell decisions.</p>
-
-  <h3>4. Mutual Fund Distributions and Redemptions</h3>
-
-  <p>Mutual funds generate two taxable events. First, <strong>distributions</strong>: when a fund pays out dividends or profit, the asset management company (AMC) withholds tax before crediting your account, with the rate depending on your filer status and, in some years, on whether the fund is equity- or income-oriented. Second, <strong>redemptions</strong>: when you sell units for more than you paid, the gain falls under capital-gains-style rules, with withholding handled by the AMC or through the NCCPL framework.</p>
-
-  <p>Holding-period rules have mattered historically. Some Finance Acts taxed longer-held units more lightly, and the equity/income distinction has carried different rates. These details change annually, so confirm the current treatment with your AMC and on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>. The structure does not change. The AMC handles the deduction, your filer status sets the rate, and your fund statement plus withholding certificate gives you everything you need at filing time.</p>
-
-  <h2>Worked Example: Filer vs Non-Filer on PKR 1,000,000</h2>
-
-  <div class="callout callout-gold">
-    <strong>Important:</strong> the percentages below are <strong>illustrative hypothetical rates chosen only to show the mechanism</strong>. They are not a statement of current law. Actual withholding rates are set by each year's Finance Act, so check <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> for the rates in force.
-  </div>
-
-  <p>Suppose you place <strong>PKR 1,000,000</strong> in a Special Savings Certificate earning 11.6% per year (the SSC rate as of June 2026 per <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a>). Gross annual profit: <strong>Rs 116,000</strong>. Now assume, purely for illustration, withholding of <strong>15% for filers</strong> and <strong>30% for non-filers</strong>. That two-to-one ratio is consistent with the long-running structural pattern.</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Filer (hypothetical 15%)</th>
-        <th>Non-filer (hypothetical 30%)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Gross profit</strong></td>
-        <td>Rs 116,000</td>
-        <td>Rs 116,000</td>
-      </tr>
-      <tr>
-        <td><strong>Tax withheld</strong></td>
-        <td>Rs 17,400</td>
-        <td>Rs 34,800</td>
-      </tr>
-      <tr>
-        <td><strong>Net profit</strong></td>
-        <td>Rs 98,600</td>
-        <td>Rs 81,200</td>
-      </tr>
-      <tr>
-        <td><strong>Effective net return</strong></td>
-        <td>9.86%</td>
-        <td>8.12%</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>The non-filer surrenders an extra <strong>Rs 17,400 every year</strong> on the same certificate. That is about 1.74 percentage points of return, and over Rs 50,000 across a 3-year SSC tenure. The same two-to-one logic applies to dividend income on a comparable PSX position. Whatever the actual rates this year, the conclusion is the same. <strong>Filing one tax return buys you a permanent raise on every investment you own.</strong></p>
-
-  <h2>How to Become a Filer: Step by Step</h2>
-
-  <p>Becoming a filer means two things. Register with FBR, then file your annual return so your name appears on the ATL. The whole process is online and free.</p>
-
-  <ol>
-    <li><strong>Register on the IRIS portal.</strong> Go to <a href="https://iris.fbr.gov.pk" target="_blank" rel="noopener">iris.fbr.gov.pk</a> and choose new e-enrollment for an individual. You need your 13-digit CNIC, a mobile number registered against your own CNIC, and an email address. For individuals, <strong>your CNIC itself serves as your National Tax Number (NTN)</strong>, so there is no separate NTN card. Verification codes arrive by SMS and email.</li>
-    <li><strong>File your annual income tax return.</strong> The tax year runs 1 July to 30 June. The individual deadline has typically been 30 September, with frequent extensions (confirm on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>). In IRIS you declare your income (salary, profit on debt, dividends, capital gains per your NCCPL certificate) plus tax already withheld, and you submit a <strong>wealth statement</strong> reconciling assets and liabilities. Salaried investors can often finish in an evening.</li>
-    <li><strong>Wait for the ATL to update.</strong> FBR publishes a new ATL on 1 March each year based on returns for the latest tax year, refreshed weekly (typically Mondays). Missed the deadline? You can generally still get on the ATL by filing late and paying a surcharge. Verify the amount on fbr.gov.pk.</li>
-    <li><strong>Check your status.</strong> SMS <strong>ATL [space] your 13-digit CNIC</strong> (no dashes) to <strong>9966</strong>, or use the ATL search on fbr.gov.pk or the Tax Asaan app. Check before any major transaction. Banks and brokers apply whichever status the list shows that day.</li>
-  </ol>
-
-  <div class="callout callout-blue">
-    <strong>Practical tip:</strong> file every year, even when little tax is due. Falling off the ATL silently resets your withholding to non-filer rates across every bank, brokerage, and savings account you hold. No institution will warn you.
-  </div>
-
-  <h2>Zakat Deduction: The Other Deduction on Your Savings</h2>
-
-  <p>Separate from income tax entirely, Pakistan operates a compulsory <strong>Zakat deduction</strong> system under the Zakat and Ushr Ordinance, 1980. On the <strong>first day of Ramadan</strong> each year, banks and National Savings Centres deduct <strong>2.5%</strong> from eligible balances (savings accounts, profit-and-loss sharing accounts, and most savings certificates) held by Muslim account holders above the <strong>nisab</strong> threshold notified annually. Current accounts are generally outside the net, and certain instruments such as Behbood Savings Certificates are exempt from compulsory deduction. See <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a> for the current schedule.</p>
-
-  <p>If you are exempt on faith or fiqh grounds, file a notarised <strong>exemption declaration (Form CZ-50)</strong> with each bank branch and National Savings Centre where you hold accounts. The timing trips people up. The affidavit must be on file <strong>at least 30 days before the deduction date</strong>. One submitted the week before Ramadan will not stop that year's deduction, and the date moves earlier each Gregorian year. Zakat actually deducted is generally a deductible allowance against taxable income, which is one more reason to keep the deduction certificates your bank issues.</p>
-
-  <h2>Record-Keeping: The Paper Trail That Pays You Back</h2>
-
-  <p>Good records turn filing from a dreaded chore into a one-evening task, and they let you claim every rupee of adjustable withholding. Collect four documents every year.</p>
-
-  <ul>
-    <li><strong>CDC account statements:</strong> your holdings and transactions in listed securities, downloadable via CDC Access or your broker. Proof of ownership and cost basis.</li>
-    <li><strong>NCCPL capital gains statements and tax certificates:</strong> the annual summary of computed gains, offset losses, and CGT collected, available through your broker or <a href="https://www.nccpl.com.pk" target="_blank" rel="noopener">nccpl.com.pk</a>. These figures go straight into your IRIS return.</li>
-    <li><strong>Withholding tax certificates from banks and CDNS:</strong> an annual certificate showing profit paid and tax deducted against your CNIC. Most banks generate these in their apps; CDNS issues them at the branch. Without them you cannot substantiate refunds.</li>
-    <li><strong>Mutual fund statements and AMC withholding certificates:</strong> units held, distributions, redemptions, and tax withheld. Request the formal tax certificate if it is not emailed automatically.</li>
-  </ul>
-
-  <p>Store digital copies in one folder per tax year. When you sit down to file, everything IRIS asks for is already in hand, and the return becomes data entry rather than detective work.</p>
-
-  <div class="callout callout-green">
-    <strong>Where to start in 2026:</strong> before you optimise anything else about your portfolio, get on the ATL. Register on IRIS, file the return, confirm by SMS to 9966, then re-file every year. It is the only "investment" in Pakistan that reliably boosts your net return on every asset you own, from savings certificates and dividends to funds and stocks.
-  </div>
-
-  <!-- FAQ Section -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-check-atl"><summary class="faq-question">How do I check if I am on the Active Taxpayer List (ATL)?</summary><div class="faq-answer">Send an SMS with the word ATL followed by a space and your 13-digit CNIC number (no dashes) to 9966. You will receive a reply confirming whether you are an active filer. You can also use the online ATL search on fbr.gov.pk or the Tax Asaan mobile app. The ATL is refreshed weekly, typically every Monday.</div></details>
-
-  <details class="faq-item" id="faq-withheld-pay-again"><summary class="faq-question">If tax was already withheld on my profit or dividends, do I pay again when I file my return?</summary><div class="faq-answer">Generally no — tax withheld at source is either treated as final tax or adjusted against your total liability when you file, depending on the income type and the prevailing Finance Act. Filing often works in your favour: if more was withheld than you owe, you can claim the excess as an adjustment or refund. Keep your withholding certificates, and verify the current treatment on fbr.gov.pk or with a tax practitioner.</div></details>
-
-  <details class="faq-item" id="faq-psx-cgt-automatic"><summary class="faq-question">Is capital gains tax on PSX shares deducted automatically?</summary><div class="faq-answer">Yes. NCCPL (National Clearing Company of Pakistan Limited) is the centralised CGT computation and collection agent for listed securities. It calculates gains and losses across your brokers, applies the rate for your filer status under the prevailing Finance Act, and collects the tax through your broker account, with loss offsetting handled automatically. You still report the figures in your annual return using NCCPL's certificate.</div></details>
-
-  <details class="faq-item" id="faq-avoid-zakat-deduction"><summary class="faq-question">How can I avoid the Zakat deduction on my savings certificates?</summary><div class="faq-answer">Under the Zakat and Ushr Ordinance 1980, banks and National Savings deduct 2.5% Zakat from eligible balances above the annually-notified nisab on the first day of Ramadan. If you are exempt on faith or fiqh grounds, file a notarised exemption declaration (Form CZ-50) with your bank or National Savings Centre at least 30 days before the deduction date. Some instruments, such as Behbood Savings Certificates, are not subject to compulsory deduction; confirm current rules at savings.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-overseas-filer-rates"><summary class="faq-question">Do overseas Pakistanis need to file a return to get filer withholding rates?</summary><div class="faq-answer">Non-resident Pakistanis can register on FBR's IRIS portal and file a return to appear on the ATL, and FBR has offered simplified routes for non-residents with no Pakistan-source taxable income. Investors using Roshan Digital Accounts benefit from special withholding arrangements on eligible investments. The treatment of non-residents changes with Finance Acts and SBP circulars, so verify the current position on fbr.gov.pk and sbp.org.pk.</div></details>
-
-  <details class="faq-item" id="faq-difference-filer-non-filer"><summary class="faq-question">What is the difference between a filer and a non-filer for investments?</summary><div class="faq-answer">A filer is a person who appears on FBR's Active Taxpayer List after submitting their annual income tax return, while a non-filer does not. Non-filers generally face higher withholding tax rates on income such as profit on savings, dividends and capital gains, which can meaningfully reduce net returns. The exact rate gap is set by the prevailing Finance Act, so verify the current rates on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-tax-on-mutual-fund-dividends"><summary class="faq-question">How is tax handled on mutual fund dividends and redemptions?</summary><div class="faq-answer">Dividends distributed by mutual funds are typically subject to withholding tax deducted by the asset management company, and capital gains on the redemption of units may also be taxed depending on the fund type and holding period. The applicable rates differ for filers and non-filers under the prevailing Finance Act. The fund's annual tax certificate summarises what was deducted, which you use when filing; confirm the current treatment on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-when-to-file-return"><summary class="faq-question">When is the deadline to file my income tax return in Pakistan?</summary><div class="faq-answer">FBR sets an annual filing deadline for individuals after the end of each tax year, and it is commonly extended through official notifications. Filing on time keeps you on the Active Taxpayer List and helps you avoid higher non-filer withholding rates. Because the date can change each year, check the current deadline and any extensions on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-property-investment-taxes"><summary class="faq-question">What taxes apply when I invest in property in Pakistan?</summary><div class="faq-answer">Property transactions can involve several taxes, including advance tax at the time of purchase and sale, capital gains tax on disposal, and provincial stamp duty and registration charges. The rates and holding-period rules vary by filer status, property value and the prevailing Finance Act, and provincial levies differ between provinces. Verify the current position on fbr.gov.pk and your provincial revenue authority's website.</div></details>
-
-  <details class="faq-item" id="faq-tax-on-foreign-investment-income"><summary class="faq-question">Do I have to declare foreign investment income if I am a Pakistan resident?</summary><div class="faq-answer">Pakistan tax residents are generally required to declare their worldwide income, which can include profit, dividends or gains earned from investments held abroad. Foreign taxes already paid may be eligible for relief depending on applicable tax treaties and the Income Tax Ordinance. Because residency rules and treaty relief are detailed, verify your specific position on fbr.gov.pk or with a tax practitioner.</div></details>
-
-  <!-- Ad slot 2 — after FAQ section -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Guides</h3>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
-    <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
-    <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not tax advice</strong>. Pakistani tax rates, thresholds, and withholding rules change with every annual Finance Act and through FBR circulars — any figure here may be out of date by the time you read it, and the worked example uses deliberately hypothetical rates. Always verify current rates on fbr.gov.pk and consult a qualified tax practitioner before making tax or investment decisions based on this material.</div>
-
-</div>
-
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

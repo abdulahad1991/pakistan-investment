@@ -131,12 +131,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -157,23 +157,169 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.6vw,3.5rem);font-weight:800;line-height:1.02;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px;text-transform:uppercase}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose a{color:var(--green);font-weight:700;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:2px}
+  .prose a:hover{color:var(--green-d);text-decoration-color:var(--green)}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.18rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:26px 0 8px}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p{margin:0;color:#E4F2EA;font-family:var(--body);font-size:1.02rem;line-height:1.6;font-weight:500}
+  .cl-dark a{color:#fff;text-decoration-color:rgba(255,255,255,.5)}
+  .cl-dark a:hover{color:var(--acid);text-decoration-color:var(--acid)}
+  .cl-dark strong{color:var(--acid)!important;font-weight:700}
+
+  /* lead / quick answer */
+  .lead{font-family:var(--display);font-size:1.16rem;line-height:1.55;color:var(--green-d);font-weight:600;border-left:4px solid var(--acid);background:var(--mint);padding:16px 22px;margin:0 0 26px}
+  .lead strong{font-weight:800}
+
+  /* live snapshot widget (filled by article.js) */
+  #live-snap{border:1px solid var(--line);border-top:3px solid var(--acid);background:var(--mint);padding:18px;margin:0 0 28px}
+  #live-snap:empty{display:none}
+
+  /* data table */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 24px;overflow-x:auto}
+  .comparison-table{width:100%;min-width:540px;border-collapse:collapse;font-size:.92rem}
+  .comparison-table thead th{background:var(--green-d);color:var(--sage);font-family:var(--display);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:12px 16px}
+  .comparison-table tbody td{font-family:var(--body);font-size:.92rem;color:var(--ink2);padding:12px 16px;border-bottom:1px solid var(--line2);vertical-align:top}
+  .comparison-table tbody td:nth-child(2),
+  .comparison-table tbody td:nth-child(3){font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .comparison-table tbody td strong{color:var(--green-d);font-weight:700;font-family:var(--body)}
+  .comparison-table tbody tr:hover td{background:var(--paper)}
+  .comparison-table tbody tr:last-child td{border-bottom:none}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0;cursor:pointer;list-style:none}
+  .prose .faq-question::-webkit-details-marker{display:none}
+  .prose .faq-question::before{content:"+";color:var(--green);font-weight:800;margin-right:10px}
+  .prose details[open] .faq-question::before{content:"–"}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-family:var(--body);font-size:1rem;line-height:1.7;color:var(--ink2)}
+  .prose .faq-answer strong{color:var(--green-d);font-weight:700}
+
+  /* related links */
+  .related-links{border-top:1px solid var(--line);padding:24px 0 4px;margin:8px 0 0}
+  .related-links h3{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);text-transform:uppercase;margin:0 0 12px}
+  .related-links a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d);text-decoration:none}
+  .related-links a:first-of-type{border-top:none}
+  .related-links a:hover{color:var(--green)}
+
+  /* disclaimer */
+  .disclaimer{font-family:var(--body);font-size:.85rem;line-height:1.6;color:#CCDFD3;background:var(--green-d);border:1px solid var(--green-d);border-left:4px solid var(--acid);padding:16px 20px;margin:28px 0 0}
+  .disclaimer strong{color:#F0FFFA}
+  .disclaimer a{color:var(--acid);font-weight:700}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  /* ad slot */
+  .ad-slot{margin:0 0 28px;text-align:center}
+  .ad-label{display:block;font-family:var(--display);font-size:.55rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s;text-decoration:none}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.45rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s;text-decoration:none}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+    .prose{padding:28px 16px}
+    .rail-sec{padding:20px 16px}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -182,200 +328,306 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › Budget 2026-27: The Investor Breakdown</div>
+<main>
+<article class="art-frame">
 
-  <h1>Pakistan Budget 2026-27: The Complete Breakdown for Investors and Savers</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Last updated: 13 June 2026 &nbsp;·&nbsp; 10 min read</div>
-<p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one line:</strong> Pakistan's Budget 2026-27, presented on 12 June 2026 and effective 1 July 2026, cuts salaried tax rates across four upper slabs, abolishes the 9% high-earner surcharge, and raises the petroleum levy target to Rs 1.727 trillion.</p>
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li aria-current="page">Budget 2026-27: The Investor Breakdown</li>
+    </ol>
+  </nav>
 
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Last updated: 13 June 2026</span></div>
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 07 — Fiscal Policy · Budget FY2026-27</div>
+      <h1>Pakistan Budget 2026-27: the complete breakdown for investors and savers.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 13 June 2026</span>
+        <span>· 10 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">In one line</div>
+      <p>Pakistan's Budget 2026-27, presented <b>12 June 2026</b> and effective <b>1 July 2026</b>, cuts salaried tax rates across four upper slabs, abolishes the <b>9%</b> high-earner surcharge, and raises the petroleum levy target to <b class="acc">Rs 1.727 trillion</b>.</p>
     </div>
   </div>
 
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>Budget at a glance:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>Presented on 12 June 2026 with a reported outlay of around Rs 18.77 trillion. It takes effect 1 July 2026, once the National Assembly passes the Finance Act (expected by end of June)</li>
-      <li>The salaried class wins. Rate cuts across four middle and upper slabs, the 9% high-earner surcharge gone, plus a proposed 2-point super tax cut for companies</li>
-      <li>Watch the inflation channel. The petroleum levy target rises to Rs 1.727 trillion, and the government itself projects 8.2% inflation for FY27 against roughly 7% today. That squeezes real returns on fixed-income savings</li>
-      <li>Initial reports show no change to CGT on listed shares or dividend withholding. Verify the final Finance Act before acting</li>
-    </ul>
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 13 June 2026</span></div>
+        </div>
+      </div>
+
+      <p class="lead"><strong>In one line:</strong> Pakistan's Budget 2026-27, presented on 12 June 2026 and effective 1 July 2026, cuts salaried tax rates across four upper slabs, abolishes the 9% high-earner surcharge, and raises the petroleum levy target to Rs 1.727 trillion.</p>
+
+      <!-- Summary box -->
+      <div class="cl-key">
+        <div class="k">Budget at a glance</div>
+        <ul>
+          <li>Presented on 12 June 2026 with a reported outlay of around Rs 18.77 trillion. It takes effect 1 July 2026, once the National Assembly passes the Finance Act (expected by end of June)</li>
+          <li>The salaried class wins. Rate cuts across four middle and upper slabs, the 9% high-earner surcharge gone, plus a proposed 2-point super tax cut for companies</li>
+          <li>Watch the inflation channel. The petroleum levy target rises to Rs 1.727 trillion, and the government itself projects 8.2% inflation for FY27 against roughly 7% today. That squeezes real returns on fixed-income savings</li>
+          <li>Initial reports show no change to CGT on listed shares or dividend withholding. Verify the final Finance Act before acting</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary, before main content -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>On 12 June 2026, Finance Minister Muhammad Aurangzeb presented the federal budget for fiscal year 2026-27 to the National Assembly. As presented, it trades one thing for another. Real income tax relief for the salaried class and a proposed super tax cut on one side; a much heavier petroleum levy and a new gas surcharge on the other. The National Assembly is expected to pass the Finance Act by the end of June, and the measures take effect on <strong>1 July 2026</strong>.</p>
+
+      <p>This page is our hub for what the budget means for retail investors and savers. A caution first. Budget-speech figures are proposals, and reporting across outlets diverged on several lines. Wherever a number is contested we say so. The binding version is the Finance Act as passed, so verify final figures in the official documents at <a href="https://www.finance.gov.pk" target="_blank" rel="noopener">finance.gov.pk</a> before you decide anything.</p>
+
+      <!-- Live snapshot widget (filled by article.js from data.json) -->
+      <div id="live-snap"></div>
+
+      <h2 id="s1"><span class="sn">01</span>The headline numbers</h2>
+
+      <p>The total outlay was widely reported at around <strong>Rs 18.77 trillion</strong>. Some breakdowns cite a Rs 17.57 trillion federal outlay instead, a reminder that classification differences and Finance Act amendments can move the headline figure. The macro frame is a 4% GDP growth target (FY26 came in around 3.7%), a federal deficit of Rs 7.02 trillion or 3.6% of GDP, and a primary surplus target of 2% of GDP. Here is the ledger as presented.</p>
+
+      <div class="tbl-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Line item</th>
+              <th>Budget FY2026-27</th>
+              <th>Context / change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Total outlay</strong></td><td>~Rs 18.77 trillion (reported)</td><td>Some breakdowns cite Rs 17.57tn federal outlay; final Finance Act may differ</td></tr>
+            <tr><td><strong>GDP growth target</strong></td><td>4.0%</td><td>FY26 actual around 3.7%</td></tr>
+            <tr><td><strong>Inflation projection</strong></td><td>8.2% for FY27</td><td>Current CPI around 7%</td></tr>
+            <tr><td><strong>Federal deficit</strong></td><td>Rs 7.02 trillion (3.6% of GDP)</td><td>Primary surplus target: 2% of GDP</td></tr>
+            <tr><td><strong>FBR tax revenue target</strong></td><td>Rs 15.26 trillion</td><td>+18% over revised FY26 Rs 12.98 trillion</td></tr>
+            <tr><td><strong>Debt servicing</strong></td><td>Rs 7.824 trillion</td><td>Down from Rs 8.207 trillion</td></tr>
+            <tr><td><strong>Defence</strong></td><td>Rs 3 trillion</td><td>+18% from Rs 2.55 trillion</td></tr>
+            <tr><td><strong>Pensions / BISP</strong></td><td>Over Rs 1.1 trillion / Rs 838 billion</td><td>BISP quarterly stipend rises Rs 13,000 → Rs 14,500</td></tr>
+            <tr><td><strong>Federal PSDP</strong></td><td>Rs 1 trillion</td><td>Provincial PSDP Rs 2.218 trillion</td></tr>
+            <tr><td><strong>Petroleum levy target</strong></td><td>Rs 1.727 trillion</td><td>+Rs 259 billion; new Rs 151 billion gas surcharge line</td></tr>
+            <tr><td><strong>External targets</strong></td><td>Exports $32.8bn / imports $70bn</td><td>Remittances over $41bn (92% via banks); FX reserves over $17bn</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Two structural points stand out. Debt servicing, at Rs 7.824 trillion, is <em>falling</em> for the first time in years. That is the dividend of the State Bank's rate-cutting cycle, from 22% down to the current 11.5%. The revenue side, meanwhile, leans on two engines: an FBR target growing 18% in a year, and a petroleum levy doing ever more of the fiscal work. Both hit investors directly, as the sections below show.</p>
+
+      <h2 id="s2"><span class="sn">02</span>What changed for the salaried class</h2>
+
+      <p>The clearest winners are salaried taxpayers in the middle and upper slabs. As presented, rates fall across four brackets, and the 9% surcharge that high earners paid on top of their slab rate is <strong>abolished</strong>. Slabs at the bottom of the schedule (for example Rs 0.6-1.2 million per year) are reported unchanged. So the relief is concentrated where the rate burden had climbed hardest in recent Finance Acts.</p>
+
+      <div class="tbl-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Annual taxable income</th>
+              <th>Old rate (FY26)</th>
+              <th>Proposed rate (FY27)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Rs 2.2m – 3.2m</td><td>23%</td><td><strong>20%</strong></td></tr>
+            <tr><td>Rs 3.2m – 4.1m</td><td>30%</td><td><strong>25%</strong></td></tr>
+            <tr><td>Rs 4.1m – 5.6m</td><td>35%</td><td><strong>29%</strong></td></tr>
+            <tr><td>Rs 5.6m – 7m</td><td>35%</td><td><strong>32%</strong></td></tr>
+            <tr><td>High-earner surcharge</td><td>9%</td><td><strong>Abolished</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Government employees also get a pay rise, reported between <strong>7% and 10%</strong> across outlets. The final figure is pending official notification, so treat anything more precise with suspicion. For private-sector professionals, the practical takeaway is simpler: take-home pay rises from July salaries onward, assuming the slabs survive the Finance Bill debate intact. That freed-up cash is a windfall only if you put it to work. We cover how to invest the difference in our companion piece on <a href="/blog/budget-2026-27-salaried-class-investing.html">what the salaried-class tax cut means for your investing plan</a>. And keep in mind that your filer status still moves your net investment returns more than any slab change does. Our guide explains <a href="/guides/investment-tax-pakistan.html">how investments are taxed in Pakistan</a>.</p>
+
+      <h2 id="s3"><span class="sn">03</span>What it means for each asset class</h2>
+
+      <h3>National Savings and T-Bills</h3>
+
+      <p>For fixed-income savers, one number matters most: the government's own <strong>8.2% inflation projection for FY27</strong>. Today, with CPI around 7% and the Special Savings Certificate paying 11.6%, National Savings instruments give you a real, inflation-adjusted return of roughly four and a half points. That is historically generous. If inflation does climb toward 8.2% while NSS rates hold or drift down with the policy rate, that cushion thins to nearer three points. The same logic applies to T-bills, whose yields track the SBP policy rate, now on hold at 11.5%. These instruments stay attractive. But the era of fat real yields is narrowing, and locking in longer tenures now makes sense. Our comparison of <a href="/guides/national-savings-vs-mutual-funds.html">National Savings versus mutual funds</a> walks through the trade-offs.</p>
+
+      <h3>Money Market Funds</h3>
+
+      <p>Money market funds hold short T-bills and bank placements, so their yields follow the policy rate with a short lag. The budget cuts both ways here. If the petroleum levy and gas surcharge push inflation toward the 8.2% projection, the State Bank has less room to cut, and that keeps money market yields elevated for longer. If inflation instead stays near 7% and the fiscal consolidation holds, rate cuts resume and fund yields drift down. Either way, these funds stay the natural parking place for cash while the Finance Act is finalised and the SBP's next moves come into focus. See <a href="/guides/sbp-policy-rate-investments.html">how the SBP policy rate drives your investment returns</a>.</p>
+
+      <h3>PSX Stocks</h3>
+
+      <p>For the equity market, with the KSE-100 sitting near 171,000, the budget reads mildly positive on a first pass. The proposed <strong>2 percentage-point super tax cut</strong> directly lifts after-tax earnings for the large banks, fertiliser, and energy names that dominate the index. The spending mix favours specific sectors. There is an 18% defence increase to Rs 3 trillion, and a Rs 1 trillion federal PSDP prioritising water, transport, energy transmission, digital transformation, and climate resilience. Add Rs 2.218 trillion of provincial PSDP on top, and that is a real pipeline for construction-linked and infrastructure-linked companies. The proposed withdrawal of the 1% advance income tax on exporters helps the export names, with the budget targeting $32.8 billion in exports.</p>
+
+      <p>What did <em>not</em> change matters just as much. Initial reports show <strong>no change to CGT on listed securities and no change to dividend withholding</strong>, the kind of continuity markets reward. But PSX's pre-budget asks, including corporate tax rationalisation and restoration of the inter-corporate dividend exemption (Clause 103C), were not confirmed as adopted, so check <a href="https://www.psx.com.pk" target="_blank" rel="noopener">psx.com.pk</a> and the final Finance Act. The offsetting risk is the petroleum levy. Dearer fuel raises costs across cyclicals and can reignite inflation. Our full sector-by-sector read is in <a href="/blog/budget-2026-27-stock-market-impact.html">Budget 2026-27 and the stock market</a>.</p>
+
+      <h3>Gold</h3>
+
+      <p>Gold's budget story is really about inflation. If the levy-driven price pressure shows up and CPI climbs from 7% toward the projected 8.2%, gold's old role as a rupee-debasement hedge strengthens, especially if the SBP responds with patience rather than hikes. The flip side: the budget's external targets (reserves above $17 billion, remittances above $41 billion) support rupee stability around the current 278 per dollar, and a steady rupee caps the local-currency gold tailwind. Treat a modest allocation as insurance, not as a bet.</p>
+
+      <h2 id="s4"><span class="sn">04</span>The fiscal-discipline picture</h2>
+
+      <p>Beneath the line items, this is a consolidation budget. A <strong>primary surplus target of 2% of GDP</strong> means that, before interest payments, the government plans to take in more than it spends. That is the metric the IMF watches most closely under the active $7 billion Extended Fund Facility. A 3.6%-of-GDP deficit and falling debt servicing point the debt ratio in the right direction. Per-capita income reaching $1,901, alongside reserves above $17 billion, gives the external account more cushion than Pakistan has had in years.</p>
+
+      <p>The credibility question sits in the revenue line. An FBR target of Rs 15.26 trillion needs <strong>18% growth</strong> over the revised FY26 collection of Rs 12.98 trillion, in a year when the government is at the same time cutting salaried rates and the super tax. The arithmetic leans on nominal GDP growth, enforcement gains, and the petroleum levy. That is exactly why the levy target jumped by Rs 259 billion. For investors, the two paths are clear. Fiscal discipline that holds means lower rates, a stable rupee, and re-rating equities. Discipline that slips means mid-year revenue measures. Both scenarios are live.</p>
+
+      <h2 id="s5"><span class="sn">05</span>Risks and what to watch</h2>
+
+      <p>Between now and 1 July, and through the first half of FY27, four things deserve a place on your watchlist.</p>
+
+      <ul>
+        <li><strong>Finance Act amendments.</strong> The numbers above are budget-speech proposals. Slab rates, the super tax cut, and the exporter tax withdrawal can all be modified before passage. Read the final Finance Act, or at least the summaries at <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>, before you re-plan anything.</li>
+        <li><strong>The FBR target's ambition.</strong> If collections run behind the 18% growth path, history says a mid-year "mini-budget" of extra measures tends to follow. That argues for keeping some portfolio flexibility instead of positioning fully for the announced regime.</li>
+        <li><strong>Levy-driven inflation.</strong> The Rs 1.727 trillion petroleum levy target, the Rs 151 billion gas surcharge, and the new environmental levy on large-engine vehicles (10% on 2001–3000cc, 19.5% above 3000cc) all feed into prices. The government's own 8.2% projection concedes the direction.</li>
+        <li><strong>The SBP rate path.</strong> The policy rate is on hold at 11.5%. Whether the next move is a resumption of cuts or a longer pause depends mostly on how the budget's price effects land. That single decision will reprice every asset class discussed above.</li>
+      </ul>
+
+      <div class="cl-dark">
+        <p><strong>Before you act on these numbers:</strong> every figure here is as presented in the budget speech, or as reported by major outlets on 12–13 June 2026. Where reporting diverged, notably the total outlay and the government salary increase, we have flagged it. The authoritative record is the Finance Act and the budget documents published at <a href="https://www.finance.gov.pk" target="_blank" rel="noopener">finance.gov.pk</a>.</p>
+      </div>
+
+      <!-- FAQ Section -->
+      <h2 id="s6"><span class="sn">06</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-when-does-budget-take-effect"><summary class="faq-question">When does Pakistan's Budget 2026-27 take effect?</summary><div class="faq-answer">The budget was presented to the National Assembly on 12 June 2026 by Finance Minister Muhammad Aurangzeb. The National Assembly debates the Finance Bill, can amend it, and is expected to approve it by the end of June. The budget then takes effect on 1 July 2026, the start of fiscal year 2026-27. The binding numbers are those in the Finance Act as finally passed, which can differ from the speech — verify them in the official documents at finance.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-cgt-dividend-psx-change"><summary class="faq-question">Did Budget 2026-27 change capital gains tax or dividend tax on PSX shares?</summary><div class="faq-answer">Initial reports indicate no change to capital gains tax on listed securities and no change to dividend withholding tax. PSX's pre-budget proposals — corporate tax rationalisation and restoring the inter-corporate dividend exemption under Clause 103C — were not confirmed as adopted in the budget speech. Because the Finance Bill can be amended before passage, verify the final Finance Act at fbr.gov.pk and follow announcements at psx.com.pk before acting.</div></details>
+
+      <details class="faq-item" id="faq-salaried-tax-saving-new-slabs"><summary class="faq-question">How much income tax will salaried people save under the new slabs?</summary><div class="faq-answer">The budget proposes rate cuts across four slabs: annual taxable income of Rs 2.2-3.2 million drops from 23% to 20%, Rs 3.2-4.1 million from 30% to 25%, Rs 4.1-5.6 million from 35% to 29%, and Rs 5.6-7 million from 35% to 32%. The 9% surcharge on high earners is abolished. Lower slabs, such as Rs 0.6-1.2 million, are reported unchanged. Your exact saving depends on where your income falls; confirm the final slab schedule in the Finance Act at fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-budget-inflation-impact"><summary class="faq-question">Will Budget 2026-27 push inflation higher?</summary><div class="faq-answer">The government itself projects 8.2% inflation for FY27, up from roughly 7% CPI currently. The main risk channel is energy: the petroleum levy target rises by Rs 259 billion to Rs 1.727 trillion, a new Rs 151 billion gas surcharge line appears, and an environmental levy hits large-engine vehicles. Higher fuel and gas costs feed through to transport and food prices. The State Bank's policy rate path — currently 11.5% — will depend on how this plays out; monitor sbp.org.pk.</div></details>
+
+      <details class="faq-item" id="faq-verify-final-budget-numbers"><summary class="faq-question">Where can I verify the final budget numbers?</summary><div class="faq-answer">The Ministry of Finance publishes the official documents — the budget speech, Budget in Brief, Annual Budget Statement, and the Finance Bill — at finance.gov.pk. Tax measures are administered by FBR at fbr.gov.pk. Media-reported figures varied on some lines (for example the total outlay and the government salary increase), so treat reported numbers as provisional until the Finance Act is passed at the end of June 2026.</div></details>
+
+      <details class="faq-item" id="faq-speech-vs-finance-act"><summary class="faq-question">What is the difference between the budget speech and the Finance Act?</summary><div class="faq-answer">The budget speech and the Finance Bill are proposals the Finance Minister presents to the National Assembly. During the debate the Assembly can amend, add, or drop measures before it votes. Only the Finance Act, as finally passed and notified, is legally binding. This is why figures quoted from the speech can change, and why it is worth checking the final text at fbr.gov.pk and finance.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-filer-vs-non-filer"><summary class="faq-question">Does the budget affect filers and non-filers differently?</summary><div class="faq-answer">Pakistan's tax system generally applies higher withholding rates to people who are not on the Active Taxpayers List, and budgets often adjust how this gap works across transactions such as property, vehicles, and banking. Whether any specific filer or non-filer measure changed in Budget 2026-27 should be confirmed against the final Finance Act rather than the speech. You can check your filing status and the current withholding schedules on the FBR portal at fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-overseas-pakistanis-impact"><summary class="faq-question">How does Budget 2026-27 affect overseas Pakistanis sending remittances?</summary><div class="faq-answer">Remittances sent through formal banking channels have historically been treated favourably in Pakistan's tax framework, and the government generally encourages inflows because they support the external account. Any change to remittance-related incentives or to taxes on assets held by non-residents would appear in the Finance Act rather than only the budget speech. Overseas Pakistanis can confirm the rules that apply to their situation through the State Bank at sbp.org.pk and the FBR at fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-property-real-estate-budget"><summary class="faq-question">Did the budget change taxes on property and real estate?</summary><div class="faq-answer">Property transactions in Pakistan are subject to several taxes, including withholding on purchase and sale, capital gains, and provincial duties, and these are commonly revisited at budget time. Reported budget coverage may not capture the final position because the Finance Bill can be amended before passage, and provincial taxes are set separately by each province. Verify any specific property tax change in the final Finance Act at fbr.gov.pk and with the relevant provincial revenue authority.</div></details>
+
+      <details class="faq-item" id="faq-how-budget-affects-savers"><summary class="faq-question">How could the budget affect ordinary savers and bank deposits?</summary><div class="faq-answer">Returns on bank deposits and savings instruments are influenced by the State Bank's policy rate, which currently stands at 11.5% and may move depending on how inflation develops. The budget itself can also change withholding tax on profit from savings and deposits, which affects what savers keep after tax. Because the government projects 8.2% inflation for FY27, the gap between deposit returns and inflation is something savers can monitor through sbp.org.pk, while confirming any tax change at fbr.gov.pk.</div></details>
+
+      <!-- Ad slot 2 — after FAQ section -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Reading</h3>
+        <a href="/blog/budget-2026-27-stock-market-impact.html">Budget 2026-27 and the Stock Market: Sector-by-Sector Impact</a>
+        <a href="/blog/budget-2026-27-salaried-class-investing.html">Budget 2026-27 Tax Cut: An Investing Plan for the Salaried Class</a>
+        <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed in Pakistan: Filer vs Non-Filer</a>
+        <a href="/guides/sbp-policy-rate-investments.html">How the SBP Policy Rate Drives Your Investment Returns</a>
+        <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
+      </div>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not financial or tax advice</strong>. All budget figures are as presented in the 12 June 2026 budget speech or as reported by major outlets, and may change before or after the Finance Act 2026 is passed — reporting diverged on several lines, including the total outlay and the government salary increase. Verify final figures at <a href="https://www.finance.gov.pk" target="_blank" rel="noopener">finance.gov.pk</a> and <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>, and consult a qualified advisor before making investment or tax decisions based on this material.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>The headline numbers</a>
+            <a href="#s2"><span class="ti">02</span>What changed for salaried</a>
+            <a href="#s3"><span class="ti">03</span>Impact by asset class</a>
+            <a href="#s4"><span class="ti">04</span>Fiscal-discipline picture</a>
+            <a href="#s5"><span class="ti">05</span>Risks and what to watch</a>
+            <a href="#s6"><span class="ti">06</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">1 Jul 2026</div><div class="gl-l">Takes effect (FY27)</div></div>
+          <div class="gl-row"><div class="gl-n">8.2%</div><div class="gl-l">Govt FY27 inflation projection</div></div>
+          <div class="gl-row"><div class="gl-n">Rs 1.727tn</div><div class="gl-l">Petroleum levy target</div></div>
+          <div class="gl-row"><div class="gl-n">11.5%</div><div class="gl-l">SBP policy rate (on hold)</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/blog/budget-2026-27-stock-market-impact.html">Budget &amp; the Stock Market →</a>
+          <a href="/blog/budget-2026-27-salaried-class-investing.html">Salaried-Class Investing Plan →</a>
+          <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed →</a>
+          <a href="/blog/">All blog articles →</a>
+        </div>
+      </div>
+    </aside>
+
   </div>
+</article>
+</main>
 
-  <!-- Ad slot 1 — after summary, before main content -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>On 12 June 2026, Finance Minister Muhammad Aurangzeb presented the federal budget for fiscal year 2026-27 to the National Assembly. As presented, it trades one thing for another. Real income tax relief for the salaried class and a proposed super tax cut on one side; a much heavier petroleum levy and a new gas surcharge on the other. The National Assembly is expected to pass the Finance Act by the end of June, and the measures take effect on <strong>1 July 2026</strong>.</p>
-
-  <p>This page is our hub for what the budget means for retail investors and savers. A caution first. Budget-speech figures are proposals, and reporting across outlets diverged on several lines. Wherever a number is contested we say so. The binding version is the Finance Act as passed, so verify final figures in the official documents at <a href="https://www.finance.gov.pk" target="_blank" rel="noopener">finance.gov.pk</a> before you decide anything.</p>
-
-  <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-top:3px solid #B98A2F;border-radius:6px;padding:18px;margin:0 0 26px"></div>
-
-  <h2>The Headline Numbers</h2>
-
-  <p>The total outlay was widely reported at around <strong>Rs 18.77 trillion</strong>. Some breakdowns cite a Rs 17.57 trillion federal outlay instead, a reminder that classification differences and Finance Act amendments can move the headline figure. The macro frame is a 4% GDP growth target (FY26 came in around 3.7%), a federal deficit of Rs 7.02 trillion or 3.6% of GDP, and a primary surplus target of 2% of GDP. Here is the ledger as presented.</p>
-
-  <table class="comparison-table">
-    <thead>
-      <tr>
-        <th>Line item</th>
-        <th>Budget FY2026-27</th>
-        <th>Context / change</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>Total outlay</strong></td><td>~Rs 18.77 trillion (reported)</td><td>Some breakdowns cite Rs 17.57tn federal outlay; final Finance Act may differ</td></tr>
-      <tr><td><strong>GDP growth target</strong></td><td>4.0%</td><td>FY26 actual around 3.7%</td></tr>
-      <tr><td><strong>Inflation projection</strong></td><td>8.2% for FY27</td><td>Current CPI around 7%</td></tr>
-      <tr><td><strong>Federal deficit</strong></td><td>Rs 7.02 trillion (3.6% of GDP)</td><td>Primary surplus target: 2% of GDP</td></tr>
-      <tr><td><strong>FBR tax revenue target</strong></td><td>Rs 15.26 trillion</td><td>+18% over revised FY26 Rs 12.98 trillion</td></tr>
-      <tr><td><strong>Debt servicing</strong></td><td>Rs 7.824 trillion</td><td>Down from Rs 8.207 trillion</td></tr>
-      <tr><td><strong>Defence</strong></td><td>Rs 3 trillion</td><td>+18% from Rs 2.55 trillion</td></tr>
-      <tr><td><strong>Pensions / BISP</strong></td><td>Over Rs 1.1 trillion / Rs 838 billion</td><td>BISP quarterly stipend rises Rs 13,000 → Rs 14,500</td></tr>
-      <tr><td><strong>Federal PSDP</strong></td><td>Rs 1 trillion</td><td>Provincial PSDP Rs 2.218 trillion</td></tr>
-      <tr><td><strong>Petroleum levy target</strong></td><td>Rs 1.727 trillion</td><td>+Rs 259 billion; new Rs 151 billion gas surcharge line</td></tr>
-      <tr><td><strong>External targets</strong></td><td>Exports $32.8bn / imports $70bn</td><td>Remittances over $41bn (92% via banks); FX reserves over $17bn</td></tr>
-    </tbody>
-  </table>
-
-  <p>Two structural points stand out. Debt servicing, at Rs 7.824 trillion, is <em>falling</em> for the first time in years. That is the dividend of the State Bank's rate-cutting cycle, from 22% down to the current 11.5%. The revenue side, meanwhile, leans on two engines: an FBR target growing 18% in a year, and a petroleum levy doing ever more of the fiscal work. Both hit investors directly, as the sections below show.</p>
-
-  <h2>What Changed for the Salaried Class</h2>
-
-  <p>The clearest winners are salaried taxpayers in the middle and upper slabs. As presented, rates fall across four brackets, and the 9% surcharge that high earners paid on top of their slab rate is <strong>abolished</strong>. Slabs at the bottom of the schedule (for example Rs 0.6-1.2 million per year) are reported unchanged. So the relief is concentrated where the rate burden had climbed hardest in recent Finance Acts.</p>
-
-  <table class="comparison-table">
-    <thead>
-      <tr>
-        <th>Annual taxable income</th>
-        <th>Old rate (FY26)</th>
-        <th>Proposed rate (FY27)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Rs 2.2m – 3.2m</td><td>23%</td><td><strong>20%</strong></td></tr>
-      <tr><td>Rs 3.2m – 4.1m</td><td>30%</td><td><strong>25%</strong></td></tr>
-      <tr><td>Rs 4.1m – 5.6m</td><td>35%</td><td><strong>29%</strong></td></tr>
-      <tr><td>Rs 5.6m – 7m</td><td>35%</td><td><strong>32%</strong></td></tr>
-      <tr><td>High-earner surcharge</td><td>9%</td><td><strong>Abolished</strong></td></tr>
-    </tbody>
-  </table>
-
-  <p>Government employees also get a pay rise, reported between <strong>7% and 10%</strong> across outlets. The final figure is pending official notification, so treat anything more precise with suspicion. For private-sector professionals, the practical takeaway is simpler: take-home pay rises from July salaries onward, assuming the slabs survive the Finance Bill debate intact. That freed-up cash is a windfall only if you put it to work. We cover how to invest the difference in our companion piece on <a href="/blog/budget-2026-27-salaried-class-investing.html">what the salaried-class tax cut means for your investing plan</a>. And keep in mind that your filer status still moves your net investment returns more than any slab change does. Our guide explains <a href="/guides/investment-tax-pakistan.html">how investments are taxed in Pakistan</a>.</p>
-
-  <h2>What It Means for Each Asset Class</h2>
-
-  <h3>National Savings and T-Bills</h3>
-
-  <p>For fixed-income savers, one number matters most: the government's own <strong>8.2% inflation projection for FY27</strong>. Today, with CPI around 7% and the Special Savings Certificate paying 11.6%, National Savings instruments give you a real, inflation-adjusted return of roughly four and a half points. That is historically generous. If inflation does climb toward 8.2% while NSS rates hold or drift down with the policy rate, that cushion thins to nearer three points. The same logic applies to T-bills, whose yields track the SBP policy rate, now on hold at 11.5%. These instruments stay attractive. But the era of fat real yields is narrowing, and locking in longer tenures now makes sense. Our comparison of <a href="/guides/national-savings-vs-mutual-funds.html">National Savings versus mutual funds</a> walks through the trade-offs.</p>
-
-  <h3>Money Market Funds</h3>
-
-  <p>Money market funds hold short T-bills and bank placements, so their yields follow the policy rate with a short lag. The budget cuts both ways here. If the petroleum levy and gas surcharge push inflation toward the 8.2% projection, the State Bank has less room to cut, and that keeps money market yields elevated for longer. If inflation instead stays near 7% and the fiscal consolidation holds, rate cuts resume and fund yields drift down. Either way, these funds stay the natural parking place for cash while the Finance Act is finalised and the SBP's next moves come into focus. See <a href="/guides/sbp-policy-rate-investments.html">how the SBP policy rate drives your investment returns</a>.</p>
-
-  <h3>PSX Stocks</h3>
-
-  <p>For the equity market, with the KSE-100 sitting near 171,000, the budget reads mildly positive on a first pass. The proposed <strong>2 percentage-point super tax cut</strong> directly lifts after-tax earnings for the large banks, fertiliser, and energy names that dominate the index. The spending mix favours specific sectors. There is an 18% defence increase to Rs 3 trillion, and a Rs 1 trillion federal PSDP prioritising water, transport, energy transmission, digital transformation, and climate resilience. Add Rs 2.218 trillion of provincial PSDP on top, and that is a real pipeline for construction-linked and infrastructure-linked companies. The proposed withdrawal of the 1% advance income tax on exporters helps the export names, with the budget targeting $32.8 billion in exports.</p>
-
-  <p>What did <em>not</em> change matters just as much. Initial reports show <strong>no change to CGT on listed securities and no change to dividend withholding</strong>, the kind of continuity markets reward. But PSX's pre-budget asks, including corporate tax rationalisation and restoration of the inter-corporate dividend exemption (Clause 103C), were not confirmed as adopted, so check <a href="https://www.psx.com.pk" target="_blank" rel="noopener">psx.com.pk</a> and the final Finance Act. The offsetting risk is the petroleum levy. Dearer fuel raises costs across cyclicals and can reignite inflation. Our full sector-by-sector read is in <a href="/blog/budget-2026-27-stock-market-impact.html">Budget 2026-27 and the stock market</a>.</p>
-
-  <h3>Gold</h3>
-
-  <p>Gold's budget story is really about inflation. If the levy-driven price pressure shows up and CPI climbs from 7% toward the projected 8.2%, gold's old role as a rupee-debasement hedge strengthens, especially if the SBP responds with patience rather than hikes. The flip side: the budget's external targets (reserves above $17 billion, remittances above $41 billion) support rupee stability around the current 278 per dollar, and a steady rupee caps the local-currency gold tailwind. Treat a modest allocation as insurance, not as a bet.</p>
-
-  <h2>The Fiscal-Discipline Picture</h2>
-
-  <p>Beneath the line items, this is a consolidation budget. A <strong>primary surplus target of 2% of GDP</strong> means that, before interest payments, the government plans to take in more than it spends. That is the metric the IMF watches most closely under the active $7 billion Extended Fund Facility. A 3.6%-of-GDP deficit and falling debt servicing point the debt ratio in the right direction. Per-capita income reaching $1,901, alongside reserves above $17 billion, gives the external account more cushion than Pakistan has had in years.</p>
-
-  <p>The credibility question sits in the revenue line. An FBR target of Rs 15.26 trillion needs <strong>18% growth</strong> over the revised FY26 collection of Rs 12.98 trillion, in a year when the government is at the same time cutting salaried rates and the super tax. The arithmetic leans on nominal GDP growth, enforcement gains, and the petroleum levy. That is exactly why the levy target jumped by Rs 259 billion. For investors, the two paths are clear. Fiscal discipline that holds means lower rates, a stable rupee, and re-rating equities. Discipline that slips means mid-year revenue measures. Both scenarios are live.</p>
-
-  <h2>Risks and What to Watch</h2>
-
-  <p>Between now and 1 July, and through the first half of FY27, four things deserve a place on your watchlist.</p>
-
-  <ul>
-    <li><strong>Finance Act amendments.</strong> The numbers above are budget-speech proposals. Slab rates, the super tax cut, and the exporter tax withdrawal can all be modified before passage. Read the final Finance Act, or at least the summaries at <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>, before you re-plan anything.</li>
-    <li><strong>The FBR target's ambition.</strong> If collections run behind the 18% growth path, history says a mid-year "mini-budget" of extra measures tends to follow. That argues for keeping some portfolio flexibility instead of positioning fully for the announced regime.</li>
-    <li><strong>Levy-driven inflation.</strong> The Rs 1.727 trillion petroleum levy target, the Rs 151 billion gas surcharge, and the new environmental levy on large-engine vehicles (10% on 2001–3000cc, 19.5% above 3000cc) all feed into prices. The government's own 8.2% projection concedes the direction.</li>
-    <li><strong>The SBP rate path.</strong> The policy rate is on hold at 11.5%. Whether the next move is a resumption of cuts or a longer pause depends mostly on how the budget's price effects land. That single decision will reprice every asset class discussed above.</li>
-  </ul>
-
-  <div class="callout callout-gold">
-    <strong>Before you act on these numbers:</strong> every figure here is as presented in the budget speech, or as reported by major outlets on 12–13 June 2026. Where reporting diverged, notably the total outlay and the government salary increase, we have flagged it. The authoritative record is the Finance Act and the budget documents published at <a href="https://www.finance.gov.pk" target="_blank" rel="noopener">finance.gov.pk</a>.
-  </div>
-
-  <!-- FAQ Section -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-when-does-budget-take-effect"><summary class="faq-question">When does Pakistan's Budget 2026-27 take effect?</summary><div class="faq-answer">The budget was presented to the National Assembly on 12 June 2026 by Finance Minister Muhammad Aurangzeb. The National Assembly debates the Finance Bill, can amend it, and is expected to approve it by the end of June. The budget then takes effect on 1 July 2026, the start of fiscal year 2026-27. The binding numbers are those in the Finance Act as finally passed, which can differ from the speech — verify them in the official documents at finance.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-cgt-dividend-psx-change"><summary class="faq-question">Did Budget 2026-27 change capital gains tax or dividend tax on PSX shares?</summary><div class="faq-answer">Initial reports indicate no change to capital gains tax on listed securities and no change to dividend withholding tax. PSX's pre-budget proposals — corporate tax rationalisation and restoring the inter-corporate dividend exemption under Clause 103C — were not confirmed as adopted in the budget speech. Because the Finance Bill can be amended before passage, verify the final Finance Act at fbr.gov.pk and follow announcements at psx.com.pk before acting.</div></details>
-
-  <details class="faq-item" id="faq-salaried-tax-saving-new-slabs"><summary class="faq-question">How much income tax will salaried people save under the new slabs?</summary><div class="faq-answer">The budget proposes rate cuts across four slabs: annual taxable income of Rs 2.2-3.2 million drops from 23% to 20%, Rs 3.2-4.1 million from 30% to 25%, Rs 4.1-5.6 million from 35% to 29%, and Rs 5.6-7 million from 35% to 32%. The 9% surcharge on high earners is abolished. Lower slabs, such as Rs 0.6-1.2 million, are reported unchanged. Your exact saving depends on where your income falls; confirm the final slab schedule in the Finance Act at fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-budget-inflation-impact"><summary class="faq-question">Will Budget 2026-27 push inflation higher?</summary><div class="faq-answer">The government itself projects 8.2% inflation for FY27, up from roughly 7% CPI currently. The main risk channel is energy: the petroleum levy target rises by Rs 259 billion to Rs 1.727 trillion, a new Rs 151 billion gas surcharge line appears, and an environmental levy hits large-engine vehicles. Higher fuel and gas costs feed through to transport and food prices. The State Bank's policy rate path — currently 11.5% — will depend on how this plays out; monitor sbp.org.pk.</div></details>
-
-  <details class="faq-item" id="faq-verify-final-budget-numbers"><summary class="faq-question">Where can I verify the final budget numbers?</summary><div class="faq-answer">The Ministry of Finance publishes the official documents — the budget speech, Budget in Brief, Annual Budget Statement, and the Finance Bill — at finance.gov.pk. Tax measures are administered by FBR at fbr.gov.pk. Media-reported figures varied on some lines (for example the total outlay and the government salary increase), so treat reported numbers as provisional until the Finance Act is passed at the end of June 2026.</div></details>
-
-  <details class="faq-item" id="faq-speech-vs-finance-act"><summary class="faq-question">What is the difference between the budget speech and the Finance Act?</summary><div class="faq-answer">The budget speech and the Finance Bill are proposals the Finance Minister presents to the National Assembly. During the debate the Assembly can amend, add, or drop measures before it votes. Only the Finance Act, as finally passed and notified, is legally binding. This is why figures quoted from the speech can change, and why it is worth checking the final text at fbr.gov.pk and finance.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-filer-vs-non-filer"><summary class="faq-question">Does the budget affect filers and non-filers differently?</summary><div class="faq-answer">Pakistan's tax system generally applies higher withholding rates to people who are not on the Active Taxpayers List, and budgets often adjust how this gap works across transactions such as property, vehicles, and banking. Whether any specific filer or non-filer measure changed in Budget 2026-27 should be confirmed against the final Finance Act rather than the speech. You can check your filing status and the current withholding schedules on the FBR portal at fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-overseas-pakistanis-impact"><summary class="faq-question">How does Budget 2026-27 affect overseas Pakistanis sending remittances?</summary><div class="faq-answer">Remittances sent through formal banking channels have historically been treated favourably in Pakistan's tax framework, and the government generally encourages inflows because they support the external account. Any change to remittance-related incentives or to taxes on assets held by non-residents would appear in the Finance Act rather than only the budget speech. Overseas Pakistanis can confirm the rules that apply to their situation through the State Bank at sbp.org.pk and the FBR at fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-property-real-estate-budget"><summary class="faq-question">Did the budget change taxes on property and real estate?</summary><div class="faq-answer">Property transactions in Pakistan are subject to several taxes, including withholding on purchase and sale, capital gains, and provincial duties, and these are commonly revisited at budget time. Reported budget coverage may not capture the final position because the Finance Bill can be amended before passage, and provincial taxes are set separately by each province. Verify any specific property tax change in the final Finance Act at fbr.gov.pk and with the relevant provincial revenue authority.</div></details>
-
-  <details class="faq-item" id="faq-how-budget-affects-savers"><summary class="faq-question">How could the budget affect ordinary savers and bank deposits?</summary><div class="faq-answer">Returns on bank deposits and savings instruments are influenced by the State Bank's policy rate, which currently stands at 11.5% and may move depending on how inflation develops. The budget itself can also change withholding tax on profit from savings and deposits, which affects what savers keep after tax. Because the government projects 8.2% inflation for FY27, the gap between deposit returns and inflation is something savers can monitor through sbp.org.pk, while confirming any tax change at fbr.gov.pk.</div></details>
-
-  <!-- Ad slot 2 — after FAQ section -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Reading</h3>
-    <a href="/blog/budget-2026-27-stock-market-impact.html">Budget 2026-27 and the Stock Market: Sector-by-Sector Impact</a>
-    <a href="/blog/budget-2026-27-salaried-class-investing.html">Budget 2026-27 Tax Cut: An Investing Plan for the Salaried Class</a>
-    <a href="/guides/investment-tax-pakistan.html">How Investments Are Taxed in Pakistan: Filer vs Non-Filer</a>
-    <a href="/guides/sbp-policy-rate-investments.html">How the SBP Policy Rate Drives Your Investment Returns</a>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
-  </div>
-
-  <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not financial or tax advice</strong>. All budget figures are as presented in the 12 June 2026 budget speech or as reported by major outlets, and may change before or after the Finance Act 2026 is passed — reporting diverged on several lines, including the total outlay and the government salary increase. Verify final figures at finance.gov.pk and fbr.gov.pk, and consult a qualified advisor before making investment or tax decisions based on this material.</div>
-
-</div>
-
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

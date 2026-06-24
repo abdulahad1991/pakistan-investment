@@ -13,22 +13,24 @@ document.addEventListener('DOMContentLoaded', function () {
         if (s.eligible === 'All Pakistanis' && (!ssc || s.rate > ssc.rate)) ssc = s;
       });
       var updated = (d.updated || '').slice(0, 10);
-      function cell(val, lbl, sub, bg, color) {
-        return '<div style="background:' + bg + ';border:1px solid #D9D1BE;border-radius:6px;padding:13px 8px;text-align:center">' +
-          '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:1.25rem;font-weight:600;color:' + color + '">' + val + '</div>' +
-          '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:#6B6A60;margin-top:4px">' + lbl + '</div>' +
-          (sub ? '<div style="font-size:.7rem;color:#8a887d;margin-top:2px">' + sub + '</div>' : '') + '</div>';
+      // v2 token palette for the injected widget
+      function cell(val, lbl, sub, accent) {
+        return '<div style="background:#FFFFFF;border:1px solid rgba(7,94,75,.22);border-top:3px solid ' + (accent || '#075E4B') + ';border-radius:4px;padding:13px 8px;text-align:center">' +
+          '<div style="font-family:\'Poppins\',sans-serif;font-size:1.25rem;font-weight:800;color:#053C30;font-variant-numeric:tabular-nums">' + val + '</div>' +
+          '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:#436055;margin-top:4px">' + lbl + '</div>' +
+          (sub ? '<div style="font-size:.7rem;color:#436055;margin-top:2px">' + sub + '</div>' : '') + '</div>';
       }
+      var realRate = (m.sbp_rate - m.inflation_cpi);
       slot.innerHTML =
         '<div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:10px">' +
-        '<div style="font-family:Fraunces,serif;font-weight:600;font-size:1.05rem;color:#0E3B2E">Today’s Market Numbers</div>' +
-        '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;background:#B98A2F;color:#191D1A;padding:3px 9px;border-radius:3px">Updated ' + updated + '</span></div>' +
+        '<div style="font-family:\'Poppins\',sans-serif;font-weight:800;font-size:1.05rem;color:#053C30">Today’s Market Numbers</div>' +
+        '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;background:#EDF804;color:#053C30;padding:3px 9px;border-radius:3px">Updated ' + updated + '</span></div>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px">' +
-        cell(m.sbp_rate + '%', 'SBP Policy Rate', m.sbp_direction, '#E9EFE6', '#0E3B2E') +
-        cell(m.inflation_cpi + '%', 'CPI Inflation', 'Real rate +' + (m.sbp_rate - m.inflation_cpi).toFixed(1) + '%', '#F4E7D4', '#A4452F') +
-        cell(m.kse100_level.toLocaleString(), 'KSE-100', 'Index level', '#E8EDF3', '#23415E') +
-        cell(m.pkr_usd, 'PKR / USD', 'Interbank', '#F6EFDA', '#7A5A1F') +
-        (ssc ? cell(ssc.rate + '%', 'Top NSS Rate', ssc.name.replace(' Certificate', ''), '#E9EFE6', '#175A41') : '') +
+        cell(m.sbp_rate + '%', 'SBP Policy Rate', m.sbp_direction, '#075E4B') +
+        cell(m.inflation_cpi + '%', 'CPI Inflation', 'Real rate ' + (realRate >= 0 ? '+' : '') + realRate.toFixed(1) + '%', realRate >= 0 ? '#0B7C5E' : '#C24132') +
+        cell(m.kse100_level.toLocaleString(), 'KSE-100', 'Index level', '#075E4B') +
+        cell(m.pkr_usd, 'PKR / USD', 'Interbank', '#075E4B') +
+        (ssc ? cell(ssc.rate + '%', 'Top NSS Rate', ssc.name.replace(' Certificate', ''), '#0B7C5E') : '') +
         '</div>';
     }).catch(function () { slot.style.display = 'none'; });
   }
@@ -38,14 +40,14 @@ document.addEventListener('DOMContentLoaded', function () {
   var heads = Array.prototype.slice.call(document.querySelectorAll('.container h2'));
   if (byline && heads.length >= 4) {
     var toc = document.createElement('details');
-    toc.style.cssText = 'border:1px solid #D9D1BE;border-left:4px solid #B98A2F;border-radius:6px;background:#FDFBF4;padding:0;margin:0 0 24px';
+    toc.style.cssText = 'border:1px solid rgba(7,94,75,.22);border-left:4px solid #EDF804;border-radius:4px;background:#F0FFFA;padding:0;margin:0 0 24px';
     var items = '';
     heads.forEach(function (h, i) {
       if (!h.id) h.id = 'sec-' + (i + 1) + '-' + h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 50);
-      items += '<a href="#' + h.id + '" style="display:block;padding:7px 0;border-bottom:1px solid #EFE8D8;font-size:.92rem;color:#0E3B2E">' + h.textContent + '</a>';
+      items += '<a href="#' + h.id + '" style="display:block;padding:7px 0;border-bottom:1px solid rgba(7,94,75,.14);font-size:.92rem;color:#053C30">' + h.textContent + '</a>';
     });
     toc.innerHTML =
-      '<summary style="cursor:pointer;list-style:none;padding:13px 18px;font-family:\'IBM Plex Mono\',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#6B6A60">☰ On this page • ' + heads.length + ' sections</summary>' +
+      '<summary style="cursor:pointer;list-style:none;padding:13px 18px;font-family:\'IBM Plex Mono\',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#436055">☰ On this page • ' + heads.length + ' sections</summary>' +
       '<div style="padding:4px 18px 14px">' + items + '</div>';
     byline.parentNode.insertBefore(toc, byline.nextSibling);
   }

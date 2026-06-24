@@ -74,34 +74,150 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&amp;family=Nunito:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 
 <style>
-  /* Gold calculator — self-contained, mirrors the cream calculator idiom */
-  .gold-app{background:#FDFBF4;border:1px solid #D9D1BE;border-radius:12px;padding:20px;margin:8px 0 18px}
-  .gold-row{display:flex;flex-wrap:wrap;gap:16px}
-  .gold-field{flex:1 1 200px;display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-  .gold-field label,.gold-field .gold-glabel{display:block;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:#6B6A60}
-  .gold-field input,.gold-field select{font-family:var(--serif);font-size:1.05rem;padding:11px 13px;border:1px solid #C9D6C0;border-radius:8px;background:#fff;color:#191D1A;width:100%}
-  .gold-field input:focus,.gold-field select:focus{outline:0;border-color:#B98A2F;box-shadow:0 0 0 3px rgba(185,138,47,.18)}
-  .gold-seg{display:inline-flex;flex-wrap:wrap;gap:8px}
-  .gold-seg label{display:inline-flex;align-items:center;gap:6px;font-size:.92rem;padding:9px 14px;border:1px solid #C9D6C0;border-radius:8px;background:#fff;cursor:pointer}
-  .gold-seg input{accent-color:#B98A2F}
-  .gold-help{font-size:.74rem;color:#8a887d;margin-top:-8px}
-  .gold-result{margin-top:6px;border-top:1px dashed #D9D1BE;padding-top:16px}
+  /* ── Gold page — v2 macro-terminal, self-contained ─────────────── */
+  .gold-main{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  .g-crumb{padding:14px 44px;border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted2);text-transform:uppercase}
+  .g-crumb a{color:var(--green)}
+
+  /* hero split */
+  .g-head{display:grid;grid-template-columns:7fr 5fr;border-bottom:1px solid var(--line)}
+  .g-head-copy{padding:48px 44px;border-right:1px solid var(--line)}
+  .g-desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px}
+  .g-head-copy h1{font-family:var(--display);font-size:clamp(2rem,4.6vw,3.4rem);font-weight:800;line-height:.98;letter-spacing:-.025em;color:var(--green-d);margin:0 0 18px;max-width:560px}
+  .g-head-copy .g-lede{font-size:1.06rem;line-height:1.55;color:var(--ink2);max-width:440px;margin:0;font-weight:500}
+  .g-head-aside{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .g-head-aside .k{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .g-head-aside p{font-family:var(--body);font-size:1rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .g-head-aside b{color:#fff}
+  .g-head-aside .em{color:var(--acid)}
+
+  /* live rate block */
+  .g-rate-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:18px 44px;border-bottom:1px solid var(--line);background:var(--mint);border-top:4px solid var(--acid)}
+  .g-rate-bar .lbl{font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--green-d)}
+  /* gold.js styles #gr-chg inline (bg/color/border) — give it base shape */
+  #gr-chg{font-family:var(--display);font-size:.78rem;font-weight:700;border-radius:999px;padding:5px 13px;white-space:nowrap;background:var(--green-l);color:var(--green);border:1px solid var(--green3)}
+
+  .g-rate-split{display:grid;grid-template-columns:340px 1fr}
+  .g-bench{background:var(--green-d);color:var(--sage);padding:34px 32px;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+  .g-bench .k{font-family:var(--display);font-size:.6rem;font-weight:700;letter-spacing:.14em;color:var(--acid);margin-bottom:12px}
+  .g-bench .big{font-family:var(--display);font-size:3rem;font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+  .g-bench .sub{font-family:var(--body);font-size:.84rem;color:rgba(204,223,211,.7);margin-top:14px;font-weight:500}
+
+  /* rates matrix table */
+  .g-matrix{width:100%;border-collapse:collapse;min-width:0}
+  .g-matrix thead th{background:var(--mint);color:var(--muted2);font-family:var(--display);font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px 18px;border-bottom:1px solid var(--line);white-space:nowrap}
+  .g-matrix thead th.r{text-align:right}
+  .g-matrix tbody td{padding:17px 18px;border-bottom:1px solid var(--line2);background:var(--paper);font-family:var(--mono);font-size:.95rem;font-weight:600;color:var(--ink2);font-variant-numeric:tabular-nums;text-align:right}
+  .g-matrix tbody tr:last-child td{border-bottom:none}
+  .g-matrix tbody tr:hover td{background:var(--mint)}
+  .g-matrix tbody th.purity{text-align:left;font-family:var(--display);font-size:.95rem;font-weight:700;color:var(--green-d);background:var(--paper);border-bottom:1px solid var(--line2);padding:17px 18px;white-space:nowrap}
+  .g-matrix tbody tr:last-child th.purity{border-bottom:none}
+  .g-matrix tbody tr:hover th.purity{background:var(--mint)}
+  .g-matrix .purity .dot{width:9px;height:9px;background:var(--gold);display:inline-block;margin-right:9px;vertical-align:middle}
+  .g-matrix td.lead{font-family:var(--display);font-weight:700;color:var(--green-d)}
+  #gr-source{font-family:var(--body);font-size:.8rem;color:var(--muted);line-height:1.6;padding:14px 44px;border-bottom:1px solid var(--line);background:var(--paper)}
+
+  /* generic content section inside the frame */
+  .g-sec{padding:40px 44px;border-bottom:1px solid var(--line)}
+  .g-sec .k{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.14em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .g-sec h2{font-family:var(--display);font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:0 0 8px}
+  .g-sec p{font-size:1rem;line-height:1.65;color:var(--ink2);max-width:680px;margin:0 0 18px;font-weight:500}
+  .g-sec p:last-child{margin-bottom:0}
+  .g-sec p b,.g-sec p strong{color:var(--green-d)}
+  .g-sec a{color:var(--green);border-bottom:1px solid var(--line)}
+  .g-chartbox{position:relative;height:300px}
+  #gr-cagr{font-family:var(--body);font-size:.8rem;color:var(--muted);margin-top:14px;line-height:1.6}
+
+  /* forecast calculator */
+  .g-fc{background:var(--mint);border-top:4px solid var(--acid);border-bottom:1px solid var(--line)}
+  .g-fc-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px}
+  .g-fc-form{padding:32px 44px;border-right:1px solid var(--line)}
+  .g-fc-form .k{font-family:var(--display);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+  .g-fc-form .h{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--green-d);margin-bottom:22px;letter-spacing:-.01em}
+  .g-fields{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:20px}
+  .g-field{display:flex;flex-direction:column}
+  .g-field.amt{flex:1 1 200px}
+  .g-field.yrs{flex:0 1 120px}
+  .g-field.rt{flex:0 1 150px}
+  .g-field label,.g-glabel{font-family:var(--display);font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
+  .g-field input{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--green-d);background:var(--paper);border:1px solid var(--line);padding:12px 14px;width:100%;outline:none}
+  .g-field input:focus{box-shadow:inset 0 0 0 2px var(--green)}
+  .g-help{font-family:var(--body);font-size:.74rem;color:var(--muted);margin-top:8px;line-height:1.5}
+  .g-seg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+  .g-seg label{display:inline-flex;align-items:center;gap:7px;font-family:var(--display);font-size:.82rem;font-weight:700;color:var(--green);background:var(--paper);border:1px solid var(--line);padding:10px 16px;cursor:pointer;transition:all .15s}
+  .g-seg input{accent-color:var(--green)}
+  /* gold.js renders #gc-result with .gold-stat-grid / .gold-stat */
   .gold-stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
   @media(min-width:680px){.gold-stat-grid{grid-template-columns:repeat(4,1fr)}}
-  .gold-stat{background:#fff;border:1px solid #E7DFCB;border-top:3px solid #B98A2F;border-radius:8px;padding:14px;text-align:center}
-  .gold-stat .v{font-family:var(--display);font-weight:800;font-size:1.35rem;color:#0E3B2E;line-height:1.1}
-  .gold-stat .l{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:#6B6A60;margin-top:6px}
-  .gold-chart-card{background:var(--paper2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin:18px 0}
-  .gold-rate-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:6px 0 0}
-  @media(min-width:680px){.gold-rate-grid{grid-template-columns:repeat(4,1fr)}}
+  .gold-stat{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--acid);padding:14px;text-align:center}
+  .gold-stat .v{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--green-d);line-height:1.1;font-variant-numeric:tabular-nums}
+  .gold-stat .l{font-family:var(--body);font-size:.7rem;font-weight:600;color:var(--muted);margin-top:6px;line-height:1.3}
+  #gc-result{margin-top:8px}
+  #gc-result p{font-family:var(--body);font-size:.86rem;color:var(--ink2);line-height:1.6;margin:14px 0 0}
+  #gc-result p strong{color:var(--green-d)}
+  .g-fc-side{background:var(--green-d);color:var(--sage);padding:34px 32px;display:flex;flex-direction:column;justify-content:center}
+  .g-fc-side .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--acid);margin-bottom:12px}
+  .g-fc-side .note{font-family:var(--body);font-size:.9rem;line-height:1.6;color:#D7E7DD;margin:0;font-weight:500}
+  .g-fc-side .note b{color:#fff}
+  .g-fc-chart{padding:32px 44px;border-top:1px solid var(--line)}
+  .g-fc-chart .k{font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.14em;color:var(--green);margin-bottom:14px;text-transform:uppercase}
+  .g-fc-chartbox{position:relative;height:280px}
+  .g-fc-note{font-family:var(--body);font-size:.78rem;color:var(--muted);margin-top:12px;line-height:1.6}
+  .g-mini-dis{padding:14px 44px;border-bottom:1px solid var(--line);font-family:var(--display);font-size:.62rem;font-weight:500;letter-spacing:.04em;color:var(--muted2);text-transform:uppercase}
+
+  /* edu + sidebar */
+  .g-edu{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-bottom:1px solid var(--line)}
+  .g-edu-main{padding:44px;border-right:1px solid var(--line)}
+  .g-callout{background:var(--green-d);border-left:5px solid var(--acid);padding:18px 22px;margin:8px 0 0}
+  .g-callout p{margin:0;font-family:var(--body);font-size:.98rem;line-height:1.6;color:#E4F2EA;font-weight:500;max-width:none}
+  .g-callout b{color:var(--acid)}
+  .g-callout a{color:var(--acid);border-bottom:1px solid var(--acid)}
+  .g-faq{margin-top:28px}
+  .g-faq h2{margin-bottom:6px}
+  .g-aside{padding:0}
+  .g-aside .sticky{position:sticky;top:80px}
+  .g-glance{padding:24px 28px;border-bottom:1px solid var(--line);background:var(--green-d);color:var(--sage)}
+  .g-glance .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--acid);margin-bottom:16px}
+  .g-glance .row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .g-glance .row:last-child{border-bottom:none}
+  .g-glance .n{font-family:var(--display);font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .g-glance .l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .g-keep{padding:24px 28px}
+  .g-keep .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px}
+  .g-keep a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d)}
+  .g-keep a:hover{color:var(--green)}
+  .g-keep a:first-of-type{border-top:none}
+
+  .g-pad{padding:0 44px}
+  .g-pad .ad-slot{margin:24px 0}
+  .g-pad .disclaimer{margin:24px 0}
+
+  /* ── responsive ─────────────────────────────────────────────── */
+  @media(max-width:860px){
+    .g-crumb,.g-rate-bar,#gr-source,.g-sec,.g-fc-form,.g-fc-chart,.g-mini-dis,.g-edu-main,.g-pad{padding-left:24px;padding-right:24px}
+    .g-head,.g-rate-split,.g-fc-grid,.g-edu{grid-template-columns:1fr}
+    .g-head-copy{border-right:none;border-bottom:1px solid var(--line)}
+    .g-bench{border-right:none;border-bottom:1px solid var(--line);text-align:center}
+    .g-bench .big{font-size:2.4rem}
+    .g-fc-form{border-right:none;border-bottom:1px solid var(--line)}
+    .g-edu-main{border-right:none;border-bottom:1px solid var(--line)}
+    .g-aside .sticky{position:static}
+    .g-matrix{display:block;overflow-x:auto;white-space:nowrap}
+  }
+  @media(max-width:560px){
+    .g-head-copy,.g-head-aside,.g-bench,.g-sec,.g-fc-form,.g-fc-side,.g-fc-chart,.g-edu-main,.g-pad{padding-left:18px;padding-right:18px}
+    .g-bench .big{font-size:2rem}
+    .g-head-copy h1{font-size:2rem}
+    .g-sec h2{font-size:1.5rem}
+  }
 </style>
 
 <!-- Google Analytics 4 -->
@@ -115,20 +231,21 @@ gtag('config', 'G-4T2H0KH9H7');
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header ─────────────────────────────────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html" aria-current="page">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html" class="active" aria-current="page">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -137,157 +254,271 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="breadcrumb"><a href="/">Home</a> › Gold Rates</div>
-
-  <h1>Gold Rate in Pakistan Today</h1>
-  <div class="byline">Live 24K &amp; 22K price · per tola, 10 gram, gram · 6-year history · forecast calculator &nbsp;·&nbsp; <span id="gold-asof">Updated daily</span></div>
-
-  <p class="quick-answer" style="font-family:var(--serif);font-size:1.08rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one line:</strong> Gold in Pakistan is quoted per tola (11.6638 g). The rupee price tracks the international gold price and the PKR/USD rate together — which is why gold has historically kept pace with rupee depreciation. The live rate is below; use the forecast calculator to project what an amount invested in gold today could be worth.</p>
-
-  <!-- ===== Live rates ===== -->
-  <div class="gold-chart-card">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:6px">
-      <div>
-        <div class="section-kicker">Live rate</div>
-        <div class="chart-title" style="margin:0">Today's gold price</div>
-      </div>
-      <span class="chart-badge" id="gr-chg">—</span>
+<!-- ── Live ticker ───────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
-    <div class="gold-rate-grid">
-      <div class="gold-stat"><div class="v" id="gr-tola24">—</div><div class="l">24K · per tola</div></div>
-      <div class="gold-stat"><div class="v" id="gr-tola22">—</div><div class="l">22K · per tola</div></div>
-      <div class="gold-stat"><div class="v" id="gr-10g24">—</div><div class="l">24K · per 10 g</div></div>
-      <div class="gold-stat"><div class="v" id="gr-gram24">—</div><div class="l">24K · per gram</div></div>
+  </div>
+</div>
+
+<main class="gold-main">
+
+  <div class="g-crumb"><a href="/">HOME</a> &nbsp;/&nbsp; GOLD RATES</div>
+
+  <!-- ── HEAD ─────────────────────────────────────────── -->
+  <div class="g-head">
+    <div class="g-head-copy">
+      <div class="g-desk">DESK 04 — GOLD &amp; METALS</div>
+      <h1>Gold rate in Pakistan today.</h1>
+      <p class="g-lede">Live 24K &amp; 22K price per tola, 10 gram and gram · a six-year history · and a forecast calculator to project your gold investment. <span id="gold-asof">Updated daily</span>.</p>
     </div>
-    <div class="gold-rate-grid" style="margin-top:12px">
-      <div class="gold-stat"><div class="v" id="gr-10g22">—</div><div class="l">22K · per 10 g</div></div>
-      <div class="gold-stat"><div class="v" id="gr-gram22">—</div><div class="l">22K · per gram</div></div>
-      <div class="gold-stat"><div class="v" id="gr-tola21">—</div><div class="l">21K · per tola (est.)</div></div>
-      <div class="gold-stat"><div class="v" id="gr-tola18">—</div><div class="l">18K · per tola (est.)</div></div>
-    </div>
-    <div style="font-size:.78rem;color:#8a887d;margin-top:12px;line-height:1.6" id="gr-source">Loading live rate…</div>
+    <aside class="g-head-aside">
+      <div class="k">WHY IT TRACKS THE RUPEE</div>
+      <p>Gold trades globally in <b>USD per ounce</b>. The rupee price moves with the global price <span class="em">and</span> the PKR/USD rate — so gold rises even when world gold is flat, simply because the rupee weakened.</p>
+    </aside>
   </div>
 
-  <!-- ===== History ===== -->
-  <h2>Gold Price History (PKR / tola, 24K)</h2>
-  <p>The chart below tracks the 24-karat gold rate per tola over roughly the last six years. The steep climb mostly reflects two forces working in the same direction: a rising international gold price and a weaker rupee. When the rupee loses value against the dollar, the same ounce of gold costs more rupees — so for a Pakistani saver, gold has behaved like a hedge against both global uncertainty and local currency depreciation.</p>
-  <div class="gold-chart-card">
-    <div class="chart-title" style="margin:0 0 10px">24K gold · PKR per tola</div>
-    <div class="chart-wrap"><canvas id="gr-history"></canvas></div>
-    <div style="font-size:.78rem;color:#8a887d;margin-top:10px" id="gr-cagr">Computing long-run trend…</div>
+  <!-- ── LIVE RATES ───────────────────────────────────── -->
+  <div class="g-rate-bar">
+    <span class="lbl">TODAY'S GOLD PRICE</span>
+    <span id="gr-chg">—</span>
   </div>
+  <div class="g-rate-split">
+    <div class="g-bench">
+      <div class="k">24K · PER TOLA · BENCHMARK</div>
+      <div class="big" id="gr-tola24">—</div>
+      <div class="sub">11.6638 g of pure gold · live Sarafa reference</div>
+    </div>
+    <div>
+      <table class="g-matrix">
+        <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Gold rate by purity and unit</caption>
+        <thead>
+          <tr>
+            <th scope="col">Purity</th>
+            <th scope="col" class="r">Per tola</th>
+            <th scope="col" class="r">Per 10 g</th>
+            <th scope="col" class="r">Per gram</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="purity"><span class="dot"></span>24K</th>
+            <td class="lead" id="gr-tola24-m">—</td>
+            <td id="gr-10g24">—</td>
+            <td id="gr-gram24">—</td>
+          </tr>
+          <tr>
+            <th scope="row" class="purity"><span class="dot"></span>22K</th>
+            <td class="lead" id="gr-tola22">—</td>
+            <td id="gr-10g22">—</td>
+            <td id="gr-gram22">—</td>
+          </tr>
+          <tr>
+            <th scope="row" class="purity"><span class="dot"></span>21K <span style="font-weight:500;color:var(--muted);font-size:.78rem">est.</span></th>
+            <td class="lead" id="gr-tola21">—</td>
+            <td id="gr-10g21">—</td>
+            <td id="gr-gram21">—</td>
+          </tr>
+          <tr>
+            <th scope="row" class="purity"><span class="dot"></span>18K <span style="font-weight:500;color:var(--muted);font-size:.78rem">est.</span></th>
+            <td class="lead" id="gr-tola18">—</td>
+            <td id="gr-10g18">—</td>
+            <td id="gr-gram18">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="gr-source">Loading live rate…</div>
+
+  <!-- ── HISTORY ──────────────────────────────────────── -->
+  <section class="g-sec">
+    <div class="k">24K GOLD · PKR PER TOLA · HISTORY</div>
+    <h2>A six-year climb, decoded.</h2>
+    <p>The chart tracks the 24-karat gold rate per tola over roughly the last six years. The steep rise reflects two forces in the same direction: a rising international gold price and a weaker rupee. For a Pakistani saver, gold has behaved like a hedge against both global uncertainty and local currency depreciation.</p>
+    <div class="g-chartbox"><canvas id="gr-history"></canvas></div>
+    <div id="gr-cagr">Computing long-run trend…</div>
+  </section>
 
   <!-- Ad slot 1 -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="1521267786" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <!-- ===== Forecast calculator ===== -->
-  <h2>Gold Investment Forecast Calculator</h2>
-  <p>Enter an amount you would invest in gold today and a time horizon. The calculator shows how much gold that buys at the current rate and projects its future value at an expected annual appreciation rate, alongside an inflation-adjusted view and a comparison with a National Savings certificate.</p>
-
-  <div class="gold-app">
-    <div class="gold-row">
-      <div class="gold-field">
-        <label for="gc-amount">Amount to invest (Rs)</label>
-        <input type="text" inputmode="numeric" id="gc-amount" placeholder="e.g. 5,00,000" autocomplete="off" value="5,00,000">
-      </div>
-      <div class="gold-field" style="flex:0 1 150px">
-        <label for="gc-years">Hold for (years)</label>
-        <input type="number" id="gc-years" min="1" max="30" step="1" value="5">
-      </div>
+  <div class="g-pad">
+    <div class="ad-slot">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="1521267786" data-ad-format="auto" data-full-width-responsive="true"></ins>
     </div>
-    <div class="gold-row">
-      <div class="gold-field" style="flex:0 1 240px">
-        <span class="gold-glabel" id="gc-karat-lbl">Gold purity</span>
-        <div class="gold-seg" role="radiogroup" aria-labelledby="gc-karat-lbl">
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ── FORECAST CALCULATOR ──────────────────────────── -->
+  <div class="g-fc">
+    <div class="g-fc-grid">
+      <div class="g-fc-form">
+        <div class="k">Forecast calculator</div>
+        <div class="h">Project a gold investment</div>
+        <div class="g-fields">
+          <div class="g-field amt">
+            <label for="gc-amount">Amount to invest (₨)</label>
+            <input type="text" inputmode="numeric" id="gc-amount" placeholder="e.g. 5,00,000" autocomplete="off" value="5,00,000" aria-label="Amount to invest in rupees">
+          </div>
+          <div class="g-field yrs">
+            <label for="gc-years">Hold (years)</label>
+            <input type="number" id="gc-years" min="1" max="30" step="1" value="5" aria-label="Hold period in years">
+          </div>
+          <div class="g-field rt">
+            <label for="gc-rate">Growth (%/yr)</label>
+            <input type="number" id="gc-rate" min="0" max="60" step="0.5" value="15" aria-label="Expected gold growth percent per year">
+          </div>
+        </div>
+        <span class="g-glabel" id="gc-karat-lbl">Gold purity</span>
+        <div class="g-seg" role="radiogroup" aria-labelledby="gc-karat-lbl">
           <label><input type="radio" name="gc-karat" value="24" checked> 24K (pure)</label>
           <label><input type="radio" name="gc-karat" value="22"> 22K (jewellery)</label>
         </div>
+        <div class="g-help" id="gc-rate-help">Historical average loads here.</div>
+        <div id="gc-result"></div>
       </div>
-      <div class="gold-field" style="flex:0 1 220px">
-        <label for="gc-rate">Expected gold growth (%/yr)</label>
-        <input type="number" id="gc-rate" min="0" max="60" step="0.5" value="15">
-        <div class="gold-help" id="gc-rate-help">Historical average loads here.</div>
-      </div>
+      <aside class="g-fc-side">
+        <div class="k">HOW TO READ THIS</div>
+        <p class="note">The projection compounds your amount at the growth rate you set, then shows it against <b>National Savings</b> at the best public rate and against cash eroded by inflation. Gold pays no income while you hold it — verify the live rate before buying.</p>
+      </aside>
     </div>
-
-    <div class="gold-result" id="gc-result"></div>
+    <div class="g-fc-chart">
+      <div class="k">PROJECTED VALUE OVER TIME — GOLD vs NATIONAL SAVINGS vs CASH</div>
+      <div class="g-fc-chartbox"><canvas id="gc-chart"></canvas></div>
+      <div class="g-fc-note">Gold value uses your expected growth rate. "If kept as cash" erodes by current CPI inflation. "National Savings" compounds at the best public certificate rate. Projections are illustrative, not guarantees — gold can fall as well as rise.</div>
+    </div>
   </div>
-
-  <div class="gold-chart-card">
-    <div class="chart-title" style="margin:0 0 10px">Projected value over time</div>
-    <div class="chart-wrap"><canvas id="gc-chart"></canvas></div>
-    <div style="font-size:.78rem;color:#8a887d;margin-top:10px">Gold value uses your expected growth rate. "If kept as cash" erodes by current CPI inflation. "National Savings" compounds at the best public certificate rate. Projections are illustrative, not guarantees — gold can fall as well as rise.</div>
-  </div>
-
-  <p style="font-size:.82rem;color:#8a887d;margin:-4px 0 30px">Estimates for guidance only, not investment advice. Future returns are unknown; the default growth rate is the historical average and may not repeat. Local jewellers add making charges and may quote slightly different rates. Verify the live rate before buying.</p>
+  <div class="g-mini-dis">Estimates for guidance only — not investment advice. Gold can fall as well as rise. Local jewellers add making charges. Verify the live rate before buying.</div>
 
   <!-- Ad slot 2 -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="4791529033" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <!-- ===== Educational content ===== -->
-  <h2>How Gold Pricing Works in Pakistan</h2>
-  <p>Gold trades globally in <strong>US dollars per troy ounce</strong> (31.1035 grams) of pure, 24-karat gold. Pakistan quotes gold in <strong>rupees per tola</strong>, where one tola is <strong>11.6638 grams</strong>, and also per 10 grams and per gram. To convert, the international dollar price is divided by the grams in an ounce, multiplied by the PKR/USD exchange rate, and then scaled to a tola.</p>
-  <p>Because two variables drive the rupee price — the <strong>global gold price</strong> and the <strong>exchange rate</strong> — Pakistani gold can rise even when international gold is flat, simply because the rupee weakened. Purity matters for jewellery: <strong>22K is about 91.7%</strong> of the 24K rate, 21K about 87.5%, and 18K about 75%. The daily reference rate is published by the Sarafa (jewellers') associations; the price at a shop also includes <strong>making charges</strong> and, for coins or bars, a small premium.</p>
-
-  <h2>Is Gold a Good Investment?</h2>
-  <p>Gold's strength is that it holds value when the rupee and other assets wobble. Over the last several years it has broadly kept pace with — and at times beaten — inflation, which is its main job in a portfolio. Its weakness is that it <strong>produces no income</strong>: unlike a National Savings certificate or a dividend stock, a tola of gold pays nothing while you hold it, and its price can stall or fall for long stretches. Storage and security are real costs too.</p>
-  <p>A common, balanced approach is to treat gold as a <strong>10–20% diversifier</strong> rather than a core holding — enough to cushion currency shocks without giving up the income that savings and equities provide. For a structured allocation across savings, funds, stocks and gold, use the <a href="/">investment comparison tool</a>, and read the full <a href="/guides/gold-investment-pakistan.html">gold investment guide</a>.</p>
-
-  <h2>Zakat on Gold</h2>
-  <p>If your gold — by itself or together with cash and other zakatable wealth — exceeds the <strong>nisab</strong> and you have held it for one <strong>lunar year</strong>, zakat is <strong>2.5%</strong> of its current market value. Work out the exact figure with our <a href="/zakat-calculator.html">zakat calculator</a>.</p>
-
-  <!-- FAQ -->
-  <div class="faq-section">
-    <div class="section-kicker">FAQ</div>
-    <h2>Gold rate questions</h2>
-    <details class="faq-item"><summary class="faq-question">What is the gold rate in Pakistan today?</summary><div class="faq-answer">The live 24K and 22K rate per tola, 10 gram and gram is shown at the top of this page and refreshes daily. Local jewellers add making and other charges, so the price you pay in a shop is usually a little higher than the reference rate.</div></details>
-    <details class="faq-item"><summary class="faq-question">How is the gold price calculated?</summary><div class="faq-answer">Gold is priced internationally in US dollars per troy ounce of 24K gold. The rupee price per tola moves with both the global gold price and the PKR/USD exchange rate. One tola is 11.6638 grams; 22K is about 91.7% of the 24K rate.</div></details>
-    <details class="faq-item"><summary class="faq-question">Is gold a good investment in Pakistan?</summary><div class="faq-answer">Gold has historically protected savings against rupee depreciation and inflation, but it pays no income and prices can fall. It works best as a 10–20% diversifier within a wider portfolio, not as your only investment.</div></details>
-    <details class="faq-item"><summary class="faq-question">Should I buy 24K or 22K gold?</summary><div class="faq-answer">24K is purer and is the cleaner store of value for investment (coins and bars). 22K is standard for jewellery because it is more durable, but you also pay making charges on jewellery, which you do not fully recover on resale.</div></details>
-    <details class="faq-item"><summary class="faq-question">Do I pay zakat on gold?</summary><div class="faq-answer">Yes — if your gold is above the nisab and held for one lunar year, zakat is 2.5% of its market value. Use the <a href="/zakat-calculator.html">zakat calculator</a> to work out the amount.</div></details>
+  <div class="g-pad">
+    <div class="ad-slot">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="4791529033" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <div class="related-links">
-    <div class="section-kicker">Keep reading</div>
-    <a href="/guides/gold-investment-pakistan.html">How to Invest in Gold in Pakistan — Full Guide</a>
-    <a href="/zakat-calculator.html">Zakat Calculator</a>
-    <a href="/">Investment Comparison Tool</a>
+  <!-- ── EDU + FAQ + SIDEBAR ──────────────────────────── -->
+  <div class="g-edu">
+    <div class="g-edu-main">
+      <h2 style="font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:0 0 16px">How gold pricing works in Pakistan</h2>
+      <p style="font-family:var(--body);font-size:1.02rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500">Gold trades globally in <b style="color:var(--green-d)">US dollars per troy ounce</b> (31.1035 g) of pure 24-karat gold. Pakistan quotes gold in <b style="color:var(--green-d)">rupees per tola</b> (11.6638 g), and also per 10 grams and per gram. Because two variables drive the rupee price — the global gold price and the exchange rate — Pakistani gold can rise even when international gold is flat, simply because the rupee weakened. Purity matters: <b style="color:var(--green-d)">22K ≈ 91.7%</b> of 24K, 21K ≈ 87.5%, 18K ≈ 75%. The daily reference is published by the Sarafa associations; the shop price also adds <b style="color:var(--green-d)">making charges</b>.</p>
+      <h2 style="font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:28px 0 16px">Is gold a good investment?</h2>
+      <p style="font-family:var(--body);font-size:1.02rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500">Gold's strength is holding value when the rupee and other assets wobble — over recent years it has broadly kept pace with, and at times beaten, inflation. Its weakness is that it <b style="color:var(--green-d)">produces no income</b>: a tola pays nothing while you hold it, and the price can stall or fall for long stretches, with real storage costs. A balanced approach treats gold as a <b style="color:var(--green-d)">10–20% diversifier</b>, not a core holding. For a structured allocation, use the <a href="/" style="color:var(--green);border-bottom:1px solid var(--line)">investment comparison tool</a> or read the full <a href="/guides/gold-investment-pakistan.html" style="color:var(--green);border-bottom:1px solid var(--line)">gold investment guide</a>.</p>
+      <div class="g-callout"><p><b>Zakat on gold:</b> if your gold — alone or with cash and other zakatable wealth — exceeds the nisab and is held for one lunar year, zakat is 2.5% of its market value. Work it out with the <a href="/zakat-calculator.html">zakat calculator</a>.</p></div>
+
+      <!-- FAQ -->
+      <div class="faq-section g-faq">
+        <div class="section-kicker">FAQ</div>
+        <h2 style="font-family:var(--display);font-size:1.6rem;font-weight:800;color:var(--green-d)">Gold rate questions</h2>
+        <details class="faq-item"><summary class="faq-question">What is the gold rate in Pakistan today?</summary><div class="faq-answer">The live 24K and 22K rate per tola, 10 gram and gram is shown at the top of this page and refreshes daily. Local jewellers add making and other charges, so the price you pay in a shop is usually a little higher than the reference rate.</div></details>
+        <details class="faq-item"><summary class="faq-question">How is the gold price calculated?</summary><div class="faq-answer">Gold is priced internationally in US dollars per troy ounce of 24K gold. The rupee price per tola moves with both the global gold price and the PKR/USD exchange rate. One tola is 11.6638 grams; 22K is about 91.7% of the 24K rate.</div></details>
+        <details class="faq-item"><summary class="faq-question">Is gold a good investment in Pakistan?</summary><div class="faq-answer">Gold has historically protected savings against rupee depreciation and inflation, but it pays no income and prices can fall. It works best as a 10–20% diversifier within a wider portfolio, not as your only investment.</div></details>
+        <details class="faq-item"><summary class="faq-question">Should I buy 24K or 22K gold?</summary><div class="faq-answer">24K is purer and is the cleaner store of value for investment (coins and bars). 22K is standard for jewellery because it is more durable, but you also pay making charges on jewellery, which you do not fully recover on resale.</div></details>
+        <details class="faq-item"><summary class="faq-question">Do I pay zakat on gold?</summary><div class="faq-answer">Yes — if your gold is above the nisab and held for one lunar year, zakat is 2.5% of its market value. Use the <a href="/zakat-calculator.html">zakat calculator</a> to work out the amount.</div></details>
+      </div>
+
+      <div class="disclaimer" style="margin-top:24px">⚠ Educational information only — <strong>not financial advice</strong>. Live rates are sourced daily from public Sarafa/market data with international spot as a fallback and may differ from your local jeweller. Forecasts are illustrative projections, not guarantees; gold prices can fall. Verify the current rate before buying and consult a SECP-registered adviser before investing.</div>
+    </div>
+
+    <aside class="g-aside">
+      <div class="sticky">
+        <div class="g-glance">
+          <div class="k">REFERENCE</div>
+          <div class="row"><div class="n">11.6638 g</div><div class="l">One tola</div></div>
+          <div class="row"><div class="n">91.7%</div><div class="l">22K vs 24K</div></div>
+          <div class="row"><div class="n">10–20%</div><div class="l">Suggested allocation</div></div>
+          <div class="row"><div class="n">2.5%</div><div class="l">Zakat on gold</div></div>
+        </div>
+        <nav class="g-keep" aria-label="Keep reading">
+          <div class="k">KEEP READING</div>
+          <a href="/guides/gold-investment-pakistan.html">How to invest in gold — full guide →</a>
+          <a href="/zakat-calculator.html">Zakat Calculator →</a>
+          <a href="/">Investment Comparison Tool →</a>
+        </nav>
+      </div>
+    </aside>
   </div>
 
-  <div class="disclaimer">⚠ Educational information only — <strong>not financial advice</strong>. Live rates are sourced daily from public Sarafa/market data with international spot as a fallback and may differ from your local jeweller. Forecasts are illustrative projections, not guarantees; gold prices can fall. Verify the current rate before buying and consult a SECP-registered adviser before investing.</div>
+</main>
 
-</div>
-
+<!-- ── Footer (v2 dark) ─────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Data updated daily &nbsp;|&nbsp; Not financial advice — for educational purposes only</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/blog/">Blog</a>
-    <a href="/tax-calculator.html">Tax Calculator</a>
-    <a href="/gold-rates.html">Gold Rates</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: Sarafa · International spot · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
+<!-- Matrix glue: fills only the per-10g / per-gram cells for 21K & 18K and the
+     24K-per-tola matrix cell, which gold.js does not populate. Presentation-only;
+     mirrors gold.js's own ×21/24, ×18/24 estimate and Pakistani digit grouping. -->
+<script>
+(function () {
+  var TOLA_G = 11.6638;
+  function pak(n) {
+    if (n == null || isNaN(n)) return "—";
+    n = Math.round(n);
+    var s = String(Math.abs(n)), out;
+    if (s.length <= 3) out = s;
+    else { var r = s.slice(-3), rest = s.slice(0, -3);
+      while (rest.length > 2) { r = rest.slice(-2) + "," + r; rest = rest.slice(0, -2); }
+      out = rest + "," + r; }
+    return (n < 0 ? "-" : "") + "₨" + out;
+  }
+  function set(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+  function fill(d) {
+    var g = (d && d.gold) || {}; if (g.tola_24k == null) return;
+    set("gr-tola24-m", pak(g.tola_24k));
+    var t21 = g.tola_24k * 21 / 24, t18 = g.tola_24k * 18 / 24;
+    set("gr-10g21", pak(t21 / TOLA_G * 10));
+    set("gr-gram21", pak(t21 / TOLA_G));
+    set("gr-10g18", pak(t18 / TOLA_G * 10));
+    set("gr-gram18", pak(t18 / TOLA_G));
+  }
+  fetch("/data.json?v=" + Date.now())
+    .then(function (r) { return r.json(); }).then(fill).catch(function () {});
+})();
+</script>
+
 <script src="/assets/gold.js" defer></script>
-<script src="/assets/article.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-<script src="/assets/share.js" defer></script>
 </body>
 </html>

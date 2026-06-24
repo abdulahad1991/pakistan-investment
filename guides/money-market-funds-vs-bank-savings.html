@@ -131,12 +131,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -158,23 +158,173 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(1.9rem,4.2vw,3.1rem);font-weight:800;line-height:1.02;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose p em{font-style:italic;color:var(--ink)}
+  .prose p a,.prose li a{color:var(--green);font-weight:700;border-bottom:1px solid var(--line)}
+  .prose p a:hover,.prose li a:hover{color:var(--green2)}
+  .prose ul,.prose ol{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose ul li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose ol{counter-reset:olc}
+  .prose ol li{counter-increment:olc}
+  .prose ol li::before{content:counter(olc);position:absolute;left:0;top:10px;color:var(--green);font-family:var(--display);font-weight:800;font-size:.92rem}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px;scroll-margin-top:80px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.12rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:0 0 6px}
+
+  /* quick-answer lede */
+  .quick-answer{background:var(--mint);border-left:4px solid var(--acid);font-family:var(--body);font-size:1.06rem;line-height:1.65;color:var(--ink);font-weight:500;padding:16px 22px;margin:0 0 24px}
+  .quick-answer strong{color:var(--green-d);font-weight:700}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 28px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);padding:18px 22px;margin:0 0 24px}
+  .cl-dark .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--acid);margin-bottom:8px;text-transform:uppercase}
+  .cl-dark ul{margin:0;list-style:none;padding:0}
+  .cl-dark li{font-family:var(--body);font-size:1rem;line-height:1.6;color:#E4F2EA;font-weight:500;padding:9px 0 9px 26px;border-bottom:1px solid var(--line-dk);position:relative}
+  .cl-dark li:last-child{border-bottom:none}
+  .cl-dark li::before{content:"→";position:absolute;left:0;color:var(--acid);font-family:var(--display);font-weight:700}
+  .cl-dark li strong,.cl-dark p strong{color:#fff;font-weight:700}
+  .cl-dark p{margin:0;color:#E4F2EA;font-family:var(--body);font-weight:500}
+  .cl-dark p a{color:var(--acid);font-weight:700;border-bottom:1px solid rgba(237,248,4,.4)}
+
+  /* verdict card (light, navy-titled strategy box) */
+  .verdict-card{background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--acid);padding:20px 24px;margin:0 0 24px}
+  .verdict-card .vt{font-family:var(--display);font-size:1.05rem;font-weight:800;color:var(--green-d);margin-bottom:6px}
+  .verdict-card ul{margin:0}
+
+  /* live snapshot widget (article.js writes inline styles into #live-snap) */
+  #live-snap{margin:0 0 28px}
+  #live-snap:empty{display:none}
+
+  /* comparison table */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 24px;overflow-x:auto}
+  .vs-table{width:100%;border-collapse:collapse;min-width:640px;font-size:.9rem}
+  .vs-table th,.vs-table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+  .vs-table thead th{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--green-d);color:var(--sage);border-bottom:none}
+  .vs-table thead th.acc{background:var(--green-d);color:var(--acid)}
+  .vs-table tbody td:first-child{font-family:var(--display);font-weight:700;color:var(--green-d);background:var(--mint)}
+  .vs-table tbody td{font-family:var(--body);color:var(--ink2);font-weight:500;line-height:1.5}
+  .vs-table tbody tr:last-child td{border-bottom:none}
+  .vs-table tbody tr:hover td{background:var(--paper)}
+  .vs-table tbody tr:hover td:first-child{background:var(--green-l)}
+
+  /* steps */
+  .step-block{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;padding:16px 0;border-top:1px solid var(--line)}
+  .step-num{font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--acid);-webkit-text-stroke:1px var(--green)}
+  .step-body p{margin:0}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7}
+
+  /* related links */
+  .related-links{border-top:1px solid var(--line);padding-top:22px;margin:28px 0 0}
+  .related-links h3{font-family:var(--display);font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-d);margin-bottom:12px}
+  .related-links a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d)}
+  .related-links a:first-of-type{border-top:none}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:1.85rem}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
-      <a href="/guides/">Guides</a>
+      <a href="/guides/" class="active">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -183,209 +333,349 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/guides/">Guides</a> › Money Market Funds vs Bank Savings</div>
+<main>
+<article class="art-frame">
 
-  <h1>Money Market Funds vs Bank Savings Accounts in Pakistan: Where Should Your Idle Cash Sit? (2026)</h1>
-  <div class="byline">By <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">Abdul Ahad</a> &nbsp;·&nbsp; Last updated: 12 June 2026 &nbsp;·&nbsp; 12 min read</div>
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">Money Market Funds vs Bank Savings</li>
+    </ol>
+  </nav>
 
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>Where idle cash should sit:</strong> Ordinary bank savings accounts pay the MDR floor, several points below the 11.5% SBP policy rate, while SECP-regulated money market funds hold mostly T-bills and yield close to that rate, redeeming to your bank account on a T+0 or T+1 basis.</p>
-
-  <!-- Author Bio Card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer and active PSX and mutual-fund investor. Built this tool to answer his own investing questions — including where to park cash between stock purchases.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Last updated: 12 June 2026</span></div>
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 04 — Cash Management · Mutual Funds</div>
+      <h1>Money market funds vs bank savings: where should idle cash sit?</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 12 June 2026</span>
+        <span>· 12 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">Where idle cash should sit</div>
+      <p>Ordinary bank savings accounts pay the <b>MDR floor</b>, several points below the <b class="acc">11.5%</b> SBP policy rate. SECP-regulated <b>money market funds</b> hold mostly T-bills and yield close to that rate, redeeming to your bank account on a <b>T+0 / T+1</b> basis.</p>
     </div>
   </div>
 
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>Where your cash should go:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>Ordinary bank savings accounts pay well below the 11.5% SBP policy rate. Idle cash there barely keeps pace with 7.0% inflation.</li>
-      <li>Money market funds are SECP-regulated, hold mostly T-bills, redeem in T+0/T+1, and yield close to the policy rate (NBP Savings Fund: 14.9% over the past year)</li>
-      <li>Keep about one month of expenses in the bank for instant ATM access. Park the rest of your cash buffer in a money market fund.</li>
-    </ul>
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Quick answer lede -->
+      <p class="quick-answer"><strong>Where idle cash should sit:</strong> Ordinary bank savings accounts pay the MDR floor, several points below the 11.5% SBP policy rate, while SECP-regulated money market funds hold mostly T-bills and yield close to that rate, redeeming to your bank account on a T+0 or T+1 basis.</p>
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer, not an investment professional. He built this site to answer his own investing questions — including where to park cash between stock purchases. Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Last updated: 12 June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">Where your cash should go</div>
+        <ul>
+          <li>Ordinary bank savings accounts pay well below the 11.5% SBP policy rate. Idle cash there barely keeps pace with 7.0% inflation</li>
+          <li>Money market funds are SECP-regulated, hold mostly T-bills, redeem in T+0/T+1, and yield close to the policy rate (NBP Savings Fund: 14.9% over the past year)</li>
+          <li>Keep about one month of expenses in the bank for instant ATM access. Park the rest of your cash buffer in a money market fund</li>
+        </ul>
+      </div>
+
+      <!-- Ad Slot 1 -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>Most Pakistani households keep their spare cash in exactly one place: a bank savings account. It feels safe, it is instantly accessible, and it pays <em>something</em>. The problem is the size of that something. The State Bank's policy rate sits at <strong>11.5%</strong> and CPI inflation runs at <strong>7.0%</strong>. An ordinary savings account paying several points below the policy rate leaves your money treading water. A current account, which pays nothing, guarantees a slow loss of purchasing power every month.</p>
+
+      <p>There is a regulated, low-risk alternative that most salaried Pakistanis have never been shown: the <strong>money market mutual fund</strong>. This guide explains why your bank pays what it pays, what a money market fund actually holds, and gives you a line-by-line comparison. That includes the deposit-protection question fund marketing tends to skip.</p>
+
+      <!-- Live snapshot widget (populated by article.js from /data.json) -->
+      <div id="live-snap"></div>
+
+      <h2 id="s1"><span class="sn">01</span>The problem: idle cash quietly loses the race</h2>
+
+      <p>Think of every rupee you hold as running a race against inflation. At 7.0% CPI, PKR 100,000 sitting in a current account is worth roughly PKR 93,000 in real terms a year later. A typical savings account narrows the gap but rarely closes it. Banks have little reason to pay you more than the regulatory minimum: your deposit is cheap funding, which they redeploy into T-bills and loans yielding near the policy rate. The spread between what your deposit earns the bank and what the bank pays you is their business model.</p>
+
+      <p>So you end up with a strange equilibrium. The Government of Pakistan borrows short-term money at rates near 11.5%, partly funded by your bank deposit, and you receive a fraction of that. A money market fund is the most direct way for a retail saver to step around the middleman and earn something much closer to the wholesale rate.</p>
+
+      <h2 id="s2"><span class="sn">02</span>Why your bank pays what it pays: MDR explained</h2>
+
+      <p>Savings account pricing in Pakistan is not a free-for-all. Since 2008, the SBP has enforced a <strong>Minimum Deposit Rate (MDR)</strong> on conventional banks. It is a regulatory floor on the profit rate they must pay on PKR savings deposits, and it is mechanically linked to the policy rate, set at a fixed margin below the floor of the SBP's interest-rate corridor. When the policy rate moves, the minimum your bank must pay moves with it, usually from the start of the following month. You can read the governing circulars on the SBP website at <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>.</p>
+
+      <p>Three things follow from this. Conventional savings accounts always pay <em>below</em> the policy rate by design, because the corridor floor sits below the policy rate and the MDR sits below the floor. Banks have no incentive to pay much above the minimum for small balances, so the advertised rate on a basic savings account is usually the MDR itself, give or take. And <strong>Islamic banks were historically exempt from the MDR</strong>, because their deposits are profit-and-loss-sharing arrangements rather than guaranteed-return contracts. In practice that often meant Islamic savings accounts paid noticeably less than conventional ones. The SBP has more recently moved to narrow the gap by imposing profit-distribution requirements on Islamic banks too, so check the latest circulars at sbp.org.pk. These rules keep changing.</p>
+
+      <p>There are exceptions worth knowing. Banks compete harder for large balances, fixed-term deposits and "premium" savings products, where rates can sit above the MDR. But for the ordinary account where your salary lands, assume you are earning the regulatory minimum, and that the minimum is well below what the money market pays.</p>
+
+      <h2 id="s3"><span class="sn">03</span>What exactly is a money market fund?</h2>
+
+      <p>A money market fund is a mutual fund regulated by the Securities and Exchange Commission of Pakistan (<a href="https://www.secp.gov.pk" target="_blank" rel="noopener">secp.gov.pk</a>). It pools investors' cash and invests it in the safest, shortest-dated instruments available: government Treasury bills, short-term bank deposits and placements, and high-grade short-term corporate paper. Because everything in the portfolio matures within months, the fund's unit price (its NAV, or net asset value) barely moves day to day. It is the closest thing the mutual fund industry has to a bank account.</p>
+
+      <p>Key features for a retail saver:</p>
+
+      <ul>
+        <li><strong>Daily NAV pricing.</strong> Your units are valued every business day, and the day's profit accrues into the NAV. There is no "profit payment date" to wait for.</li>
+        <li><strong>AAA-rated options.</strong> Rating agencies assign fund stability ratings. The most conservative money market funds carry AA+ or AAA(f) ratings, signalling minimal credit risk.</li>
+        <li><strong>Conventional and Islamic variants.</strong> Islamic money market and income funds replace T-bills with short-term government Ijarah Sukuk and Shariah-compliant bank placements.</li>
+        <li><strong>Yields near the policy rate.</strong> Because the fund holds wholesale instruments, its return tracks T-bill yields, not the MDR.</li>
+      </ul>
+
+      <p>From the funds tracked in our data, the <strong>NBP Savings Fund</strong> (NBP Fund Management, conventional money market, low risk, minimum PKR 5,000) returned <strong>14.9%</strong> over the past year, <strong>12.8%</strong> annualised over three years, and <strong>13.5%</strong> over five. On the Islamic side, the <strong>Meezan Islamic Income Fund</strong> (Al Meezan Investments, low risk, minimum PKR 1,000) returned <strong>9.8%</strong> over the past year and <strong>11.2%</strong> annualised over five. That fund serves the same cash-parking role for Shariah-conscious savers. These are historical figures, not promises. Money market yields float with the policy rate, so check live fund yields on the Mutual Funds Association of Pakistan site at <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">mufap.com.pk</a> before investing.</p>
+
+      <h2 id="s4"><span class="sn">04</span>The honest comparison: savings vs fund vs certificate</h2>
+
+      <p>Most comparisons stop at the headline rate. The full picture includes access speed, what protects your money, minimums and tax. We have added the CDNS Special Savings Certificate (currently <strong>11.6%</strong>, from <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a>) as the third column, because for money you will not touch for years it beats both.</p>
+
+      <div class="tbl-wrap">
+        <table class="vs-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Bank Savings Account</th>
+              <th>Money Market Fund</th>
+              <th class="acc">Special Savings Certificate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Regulator</td><td>State Bank of Pakistan (SBP)</td><td>SECP (fund) + independent trustee</td><td>Ministry of Finance (CDNS)</td></tr>
+            <tr><td>Return (indicative)</td><td>MDR floor — several points below the 11.5% policy rate; check your bank</td><td>Tracks T-bill yields; NBP Savings Fund earned 14.9% over the past year — see mufap.com.pk for live yields</td><td>11.6% fixed at purchase, 3-year tenor</td></tr>
+            <tr><td>Access to money</td><td>Instant — ATM, card, app transfer</td><td>T+0 / T+1 redemption to your bank account</td><td>Low — early encashment penalties apply</td></tr>
+            <tr><td>Protection</td><td>Deposit Protection Corporation cover up to a prescribed limit (dpc.org.pk)</td><td>No deposit protection; assets ring-fenced with an independent trustee</td><td>Sovereign guarantee — Government of Pakistan</td></tr>
+            <tr><td>Minimum</td><td>Usually PKR 0–1,000 to open</td><td>PKR 1,000–5,000 (varies by AMC)</td><td>PKR 500</td></tr>
+            <tr><td>Tax withholding</td><td>WHT on profit: 15% filers / 30% non-filers</td><td>WHT on dividends: 15% filers / 30% non-filers</td><td>WHT at source: 15% filers / 30% non-filers</td></tr>
+            <tr><td>Rate when SBP cuts</td><td>Falls with the MDR, next month</td><td>Drifts down within weeks as paper reprices</td><td>Locked — unaffected for the full tenor</td></tr>
+            <tr><td>Shariah option</td><td>Islamic banks (historically outside MDR)</td><td>Yes — Islamic money market / income funds</td><td>Limited</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="s5"><span class="sn">05</span>Deposit protection vs ring-fencing: know the difference</h2>
+
+      <p>This is the single most important risk distinction, so it deserves plain language. <strong>Bank deposits are insured.</strong> The Deposit Protection Corporation, a subsidiary of the SBP, guarantees eligible deposits up to a prescribed limit per depositor per bank if a member bank fails. Verify the current protected amount at <a href="https://www.dpc.org.pk" target="_blank" rel="noopener">dpc.org.pk</a> or via <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>. Above that limit you become an ordinary creditor of the bank, but for typical household balances the cover is meaningful.</p>
+
+      <p><strong>Mutual funds are not insured. They are ring-fenced.</strong> No deposit protection scheme covers fund units. Instead, SECP rules require every fund's assets to be held by an independent trustee (typically a large bank or CDC), completely separate from the asset management company's own balance sheet. If the AMC goes bankrupt tomorrow, your T-bills are still sitting with the trustee. A new manager is appointed, or the fund is wound up and the proceeds returned to unit holders. What ring-fencing does <em>not</em> protect you from is market risk: if the instruments in the portfolio lose value, your NAV falls with them. For a money market fund holding three-month government paper that risk is tiny. But it is not zero, and it is not the same thing as insurance.</p>
+
+      <h2 id="s6"><span class="sn">06</span>Where each belongs: the emergency-fund split</h2>
+
+      <p>The practical answer is not "pick one." Each instrument has a job, and the jobs do not overlap.</p>
+
+      <div class="verdict-card">
+        <div class="vt">A simple cash strategy that works</div>
+        <ul>
+          <li><strong>One month of expenses in your bank savings account.</strong> Instant ATM and card access for same-minute emergencies, with deposit protection on top.</li>
+          <li><strong>The remaining 2–5 months of your emergency fund in a money market fund.</strong> It earns near-wholesale rates and redeems to your bank account in one business day or less.</li>
+          <li><strong>Money you will not need for 3+ years in a Special Savings Certificate</strong> at 11.6%, locking today's rate before further SBP cuts erode floating yields.</li>
+        </ul>
+      </div>
+
+      <p>The logic is simple. Almost no real emergency requires six months of expenses in cash within the hour. A hospital deposit or urgent travel is covered by the bank-account month, and the money market portion arrives the next business day. Meanwhile the bulk of your buffer compounds at roughly double what the savings account pays, instead of subsidising your bank's margin. Savers who keep PKR 1,000,000 idle in a savings account routinely give up tens of thousands of rupees a year for liquidity they never actually use.</p>
+
+      <h2 id="s7"><span class="sn">07</span>Step-by-step: opening a money market fund account online</h2>
+
+      <p>Opening a fund account in 2026 is a 20–30 minute phone exercise. The process is broadly the same across the major AMCs (Al Meezan, NBP Funds, UBL Funds, HBL Asset Management and others):</p>
+
+      <div class="step-block">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Pick the fund, not just the AMC</h3>
+          <p>On the AMC's website or on <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">mufap.com.pk</a>, confirm the fund's category (money market), its stability rating, and its recent yield.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Start digital onboarding</h3>
+          <p>Download the AMC's app or use its web portal and choose "open an account." You will need your <strong>CNIC</strong> (front and back photos), a <strong>live selfie</strong> for biometric verification, and your bank account's <strong>IBAN</strong>.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Choose the account type</h3>
+          <p>Small investors can opt for a <strong>Sahulat Sarmayakari Account</strong>, SECP's simplified low-documentation account designed for first-timers, with lighter KYC in exchange for a cap on total investment (details at <a href="https://www.secp.gov.pk" target="_blank" rel="noopener">secp.gov.pk</a>). Larger investors complete standard KYC, which may add an income-proof document.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Fund the account</h3>
+          <p>Transfer from your own bank account via IBFT or raast. AMCs only accept money from an account in your name, which is also where redemptions will be sent.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Set your redemption path</h3>
+          <p>Confirm your registered bank account in the app and note the daily cut-off time (orders after the cut-off price at the next day's NAV). Test the loop early: invest a small amount, redeem it, and watch it land back in your bank account on T+0 or T+1.</p>
+        </div>
+      </div>
+
+      <p>Two small habits make the account far more useful. Enable the AMC app's fingerprint login so redemption takes seconds, not a password reset. And if you are a tax filer, upload your ATL status during onboarding. Otherwise the system may withhold tax at the 30% non-filer rate on your dividends.</p>
+
+      <h2 id="s8"><span class="sn">08</span>The risks nobody mentions</h2>
+
+      <p>Money market funds are low-risk, not no-risk. Be clear-eyed about four things before you move your buffer:</p>
+
+      <ul>
+        <li><strong>The NAV can have rare bad days.</strong> A sudden spike in T-bill yields marks down the value of paper the fund already holds, and a credit event at a bank where the fund has placements can dent the NAV. Such days are rare and historically small in Pakistani money market funds, but they happen. There is no contractual guarantee.</li>
+        <li><strong>Expense ratios eat into the headline.</strong> The fund's management fee and expenses are deducted before the returns you see, so compare funds on after-fee yield, published on mufap.com.pk. A fund yielding slightly less with a stronger rating and lower expenses is often the better hold.</li>
+        <li><strong>Yields float, and the current direction is down.</strong> The SBP rate has already fallen from 22% in 2023 to 11.5% today, and with inflation at 7.0% the easing bias remains. Money market returns will drift down within weeks of each future cut. The 14.9% the NBP Savings Fund earned over the past year reflects yesterday's higher rates, so do not project it forward.</li>
+        <li><strong>Tax treatment differs from price appreciation.</strong> Money market funds distribute most of their return as dividends, which attract withholding tax of 15% for filers and 30% for non-filers. That is the same structure as bank profit, but worth remembering when comparing net yields.</li>
+      </ul>
+
+      <div class="cl-dark">
+        <div class="k">Practical tip</div>
+        <p>In a falling-rate environment, the money market fund is for your <em>buffer</em>, not your long-term savings. For multi-year money, locking 11.6% in a Special Savings Certificate, or accepting equity risk in a stock fund, will likely beat a floating yield that drifts down from here. Use our <a href="/">free analyzer tool</a> to compare options at your exact budget.</p>
+      </div>
+
+      <h2 id="s9"><span class="sn">09</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-can-mmf-lose-money"><summary class="faq-question">Can a money market fund in Pakistan lose money?</summary><div class="faq-answer">It is rare but possible. Money market funds hold very short-dated government paper, so the NAV is extremely stable, but it is not contractually guaranteed. A sharp single-day move in T-bill yields or a credit event in a bank placement can produce a small negative day. Over any meaningful holding period, Pakistani money market funds have historically delivered smooth positive returns, but you should treat them as very-low-risk, not zero-risk.</div></details>
+
+      <details class="faq-item" id="faq-deposit-protection"><summary class="faq-question">Are money market funds covered by deposit protection like bank accounts?</summary><div class="faq-answer">No. Deposit Protection Corporation cover applies only to eligible bank deposits, up to a prescribed limit per depositor per bank. Mutual fund units are not deposit-protected. Instead, fund assets are ring-fenced: they are held by an independent trustee, completely separate from the AMC's own balance sheet, so the failure of the fund manager does not put your units at risk.</div></details>
+
+      <details class="faq-item" id="faq-withdrawal-speed"><summary class="faq-question">How quickly can I withdraw money from a money market fund?</summary><div class="faq-answer">Most Pakistani money market funds process redemptions on a T+0 or T+1 basis — same business day or next business day — with proceeds sent to your registered bank account. Some AMCs also offer instant-redemption features up to a daily cap. That is slower than an ATM withdrawal from a bank account, which is why a small instant-access buffer at the bank still makes sense.</div></details>
+
+      <details class="faq-item" id="faq-shariah-alternative"><summary class="faq-question">Is there a Shariah-compliant alternative to a money market fund?</summary><div class="faq-answer">Yes. Most large AMCs run Islamic money market and Islamic income funds that invest in short-term Shariah-compliant instruments such as government Ijarah Sukuk and Islamic bank placements instead of T-bills. In our tracked data, the Meezan Islamic Income Fund (Al Meezan Investments, low risk) returned 9.8% over the past year. Check MUFAP at mufap.com.pk for the full list of Islamic cash-management funds and their live yields.</div></details>
+
+      <details class="faq-item" id="faq-returns-fall-rate-cut"><summary class="faq-question">Will money market fund returns fall when the SBP cuts the policy rate?</summary><div class="faq-answer">Yes, and quickly. Money market funds hold short-dated paper that matures and gets reinvested at prevailing rates, so their yields track the SBP policy rate within weeks of a cut. With the policy rate at 11.5% and inflation at 7.0%, the market expects yields to drift lower from here. If you want to lock a rate for several years instead, a National Savings certificate fixes your rate at purchase.</div></details>
+
+      <details class="faq-item" id="faq-taxed-on-returns"><summary class="faq-question">How are money market fund returns taxed in Pakistan?</summary><div class="faq-answer">Returns from mutual funds are generally distributed as dividends, and the AMC typically deducts withholding tax at source before the payout reaches you, with the rate often differing for filers and non-filers. Bank profit is taxed separately under its own withholding regime. The exact rates and treatment change with each Finance Act, so confirm the current figures on fbr.gov.pk or with your AMC before assuming a net yield.</div></details>
+
+      <details class="faq-item" id="faq-minimum-investment"><summary class="faq-question">What is the minimum amount needed to start a money market fund?</summary><div class="faq-answer">Minimums are set by each AMC and are usually modest, with many funds opening accounts for a few thousand rupees and some allowing small recurring top-ups after that. There is no single industry-wide figure, so check the offering document or the AMC's website for the exact minimum on the specific fund you are looking at. This is generally lower than the lump sum a bank may require for a high-yield term deposit.</div></details>
+
+      <details class="faq-item" id="faq-how-to-open"><summary class="faq-question">How do I open a money market fund account in Pakistan?</summary><div class="faq-answer">Most AMCs now offer a fully digital onboarding flow that uses your CNIC for identity verification, plus a bank account in your own name for funding and redemptions. You complete a standard know-your-customer and risk-profiling step, then transfer funds to subscribe to units at the day's NAV. MUFAP at mufap.com.pk lists the licensed AMCs so you can compare funds before applying.</div></details>
+
+      <details class="faq-item" id="faq-better-than-bank"><summary class="faq-question">Is a money market fund always better than a bank savings account?</summary><div class="faq-answer">Not necessarily; they serve different roles. A bank savings account gives instant ATM and debit-card access and, for eligible deposits, Deposit Protection Corporation cover, while a money market fund has historically offered a higher yield but settles redemptions on a T+0 or T+1 basis and is not deposit-protected. Many people keep a small instant-access buffer at the bank and hold their larger short-term cash in a fund. Compare live fund yields on mufap.com.pk against your bank's posted rate.</div></details>
+
+      <details class="faq-item" id="faq-vs-fixed-deposit"><summary class="faq-question">What is the difference between a money market fund and a bank fixed deposit?</summary><div class="faq-answer">A bank fixed deposit locks your money for a set term at a rate fixed when you open it, and breaking it early usually means a penalty or lost profit. A money market fund has no fixed term, lets you redeem on a T+0 or T+1 basis, and pays a floating yield that moves with short-term market rates rather than a rate fixed at purchase. So a fixed deposit gives rate certainty while a fund gives flexibility and a yield that can rise or fall.</div></details>
+
+      <!-- Ad Slot 2 -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Guides</h3>
+        <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan (Step-by-Step)</a>
+        <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better?</a>
+        <a href="/guides/treasury-bills-pakistan.html">Treasury Bills in Pakistan: How to Buy T-Bills Directly</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">This article is for educational purposes only. It is not personalised financial advice. Investment values can go up as well as down, and money market fund yields float with market rates. Always verify current profit rates and fund yields at sbp.org.pk, mufap.com.pk, and savings.gov.pk, and confirm deposit protection coverage at dpc.org.pk before making decisions. Fund return figures are historical as of 12 June 2026 and do not guarantee future performance. Tax rates referenced are based on FBR rules current as of June 2026 and may change.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>The problem with idle cash</a>
+            <a href="#s2"><span class="ti">02</span>Why your bank pays the MDR</a>
+            <a href="#s3"><span class="ti">03</span>What is a money market fund</a>
+            <a href="#s4"><span class="ti">04</span>The honest comparison</a>
+            <a href="#s5"><span class="ti">05</span>Protection vs ring-fencing</a>
+            <a href="#s6"><span class="ti">06</span>The emergency-fund split</a>
+            <a href="#s7"><span class="ti">07</span>Opening a fund account</a>
+            <a href="#s8"><span class="ti">08</span>The risks nobody mentions</a>
+            <a href="#s9"><span class="ti">09</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">11.5%</div><div class="gl-l">SBP policy rate</div></div>
+          <div class="gl-row"><div class="gl-n">14.9%</div><div class="gl-l">NBP Savings Fund, 1-yr</div></div>
+          <div class="gl-row"><div class="gl-n">T+0 / T+1</div><div class="gl-l">Fund redemption speed</div></div>
+          <div class="gl-row"><div class="gl-n">11.6%</div><div class="gl-l">Special Savings Certificate</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds →</a>
+          <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds →</a>
+          <a href="/guides/treasury-bills-pakistan.html">Treasury Bills in Pakistan →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
   </div>
+</article>
+</main>
 
-  <!-- Ad Slot 1 -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>Most Pakistani households keep their spare cash in exactly one place: a bank savings account. It feels safe, it is instantly accessible, and it pays <em>something</em>. The problem is the size of that something. The State Bank's policy rate sits at <strong>11.5%</strong> and CPI inflation runs at <strong>7.0%</strong>. An ordinary savings account paying several points below the policy rate leaves your money treading water. A current account, which pays nothing, guarantees a slow loss of purchasing power every month.</p>
-
-  <p>There is a regulated, low-risk alternative that most salaried Pakistanis have never been shown: the <strong>money market mutual fund</strong>. This guide explains why your bank pays what it pays, what a money market fund actually holds, and gives you a line-by-line comparison. That includes the deposit-protection question fund marketing tends to skip.</p>
-
-  
-  <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-top:3px solid #B98A2F;border-radius:6px;padding:18px;margin:0 0 26px"></div>
-<h2>The Problem: Idle Cash Quietly Loses the Race</h2>
-
-  <p>Think of every rupee you hold as running a race against inflation. At 7.0% CPI, PKR 100,000 sitting in a current account is worth roughly PKR 93,000 in real terms a year later. A typical savings account narrows the gap but rarely closes it. Banks have little reason to pay you more than the regulatory minimum: your deposit is cheap funding, which they redeploy into T-bills and loans yielding near the policy rate. The spread between what your deposit earns the bank and what the bank pays you is their business model.</p>
-
-  <p>So you end up with a strange equilibrium. The Government of Pakistan borrows short-term money at rates near 11.5%, partly funded by your bank deposit, and you receive a fraction of that. A money market fund is the most direct way for a retail saver to step around the middleman and earn something much closer to the wholesale rate.</p>
-
-  <h2>Why Your Bank Pays What It Pays: MDR Explained</h2>
-
-  <p>Savings account pricing in Pakistan is not a free-for-all. Since 2008, the SBP has enforced a <strong>Minimum Deposit Rate (MDR)</strong> on conventional banks. It is a regulatory floor on the profit rate they must pay on PKR savings deposits, and it is mechanically linked to the policy rate, set at a fixed margin below the floor of the SBP's interest-rate corridor. When the policy rate moves, the minimum your bank must pay moves with it, usually from the start of the following month. You can read the governing circulars on the SBP website at <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>.</p>
-
-  <p>Three things follow from this. Conventional savings accounts always pay <em>below</em> the policy rate by design, because the corridor floor sits below the policy rate and the MDR sits below the floor. Banks have no incentive to pay much above the minimum for small balances, so the advertised rate on a basic savings account is usually the MDR itself, give or take. And <strong>Islamic banks were historically exempt from the MDR</strong>, because their deposits are profit-and-loss-sharing arrangements rather than guaranteed-return contracts. In practice that often meant Islamic savings accounts paid noticeably less than conventional ones. The SBP has more recently moved to narrow the gap by imposing profit-distribution requirements on Islamic banks too, so check the latest circulars at sbp.org.pk. These rules keep changing.</p>
-
-  <p>There are exceptions worth knowing. Banks compete harder for large balances, fixed-term deposits and "premium" savings products, where rates can sit above the MDR. But for the ordinary account where your salary lands, assume you are earning the regulatory minimum, and that the minimum is well below what the money market pays.</p>
-
-  <h2>What Exactly Is a Money Market Fund?</h2>
-
-  <p>A money market fund is a mutual fund regulated by the Securities and Exchange Commission of Pakistan (<a href="https://www.secp.gov.pk" target="_blank" rel="noopener">secp.gov.pk</a>). It pools investors' cash and invests it in the safest, shortest-dated instruments available: government Treasury bills, short-term bank deposits and placements, and high-grade short-term corporate paper. Because everything in the portfolio matures within months, the fund's unit price (its NAV, or net asset value) barely moves day to day. It is the closest thing the mutual fund industry has to a bank account.</p>
-
-  <p>Key features for a retail saver:</p>
-
-  <ul>
-    <li><strong>Daily NAV pricing.</strong> Your units are valued every business day, and the day's profit accrues into the NAV. There is no "profit payment date" to wait for.</li>
-    <li><strong>AAA-rated options.</strong> Rating agencies assign fund stability ratings. The most conservative money market funds carry AA+ or AAA(f) ratings, signalling minimal credit risk.</li>
-    <li><strong>Conventional and Islamic variants.</strong> Islamic money market and income funds replace T-bills with short-term government Ijarah Sukuk and Shariah-compliant bank placements.</li>
-    <li><strong>Yields near the policy rate.</strong> Because the fund holds wholesale instruments, its return tracks T-bill yields, not the MDR.</li>
-  </ul>
-
-  <p>From the funds tracked in our data, the <strong>NBP Savings Fund</strong> (NBP Fund Management, conventional money market, low risk, minimum PKR 5,000) returned <strong>14.9%</strong> over the past year, <strong>12.8%</strong> annualised over three years, and <strong>13.5%</strong> over five. On the Islamic side, the <strong>Meezan Islamic Income Fund</strong> (Al Meezan Investments, low risk, minimum PKR 1,000) returned <strong>9.8%</strong> over the past year and <strong>11.2%</strong> annualised over five. That fund serves the same cash-parking role for Shariah-conscious savers. These are historical figures, not promises. Money market yields float with the policy rate, so check live fund yields on the Mutual Funds Association of Pakistan site at <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">mufap.com.pk</a> before investing.</p>
-
-  <h2>The Honest Comparison: Bank Savings vs Money Market Fund vs Savings Certificate</h2>
-
-  <p>Most comparisons stop at the headline rate. The full picture includes access speed, what protects your money, minimums and tax. We have added the CDNS Special Savings Certificate (currently <strong>11.6%</strong>, from <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a>) as the third column, because for money you will not touch for years it beats both.</p>
-
-  <table class="vs-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th class="ns">Bank Savings Account</th>
-        <th class="mf">Money Market Fund</th>
-        <th style="background:var(--gold);color:#fff">Special Savings Certificate</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Regulator</td><td>State Bank of Pakistan (SBP)</td><td>SECP (fund) + independent trustee</td><td>Ministry of Finance (CDNS)</td></tr>
-      <tr><td>Return (indicative)</td><td>MDR floor — several points below the 11.5% policy rate; check your bank</td><td>Tracks T-bill yields; NBP Savings Fund earned 14.9% over the past year — see mufap.com.pk for live yields</td><td>11.6% fixed at purchase, 3-year tenor</td></tr>
-      <tr><td>Access to Money</td><td>Instant — ATM, card, app transfer</td><td>T+0 / T+1 redemption to your bank account</td><td>Low — early encashment penalties apply</td></tr>
-      <tr><td>Protection</td><td>Deposit Protection Corporation cover up to a prescribed limit (dpc.org.pk)</td><td>No deposit protection; assets ring-fenced with an independent trustee</td><td>Sovereign guarantee — Government of Pakistan</td></tr>
-      <tr><td>Minimum</td><td>Usually PKR 0–1,000 to open</td><td>PKR 1,000–5,000 (varies by AMC)</td><td>PKR 500</td></tr>
-      <tr><td>Tax Withholding</td><td>WHT on profit: 15% filers / 30% non-filers</td><td>WHT on dividends: 15% filers / 30% non-filers</td><td>WHT at source: 15% filers / 30% non-filers</td></tr>
-      <tr><td>Rate When SBP Cuts</td><td>Falls with the MDR, next month</td><td>Drifts down within weeks as paper reprices</td><td>Locked — unaffected for the full tenor</td></tr>
-      <tr><td>Shariah Option</td><td>Islamic banks (historically outside MDR)</td><td>Yes — Islamic money market / income funds</td><td>Limited</td></tr>
-    </tbody>
-  </table>
-
-  <h2>Deposit Protection vs Ring-Fencing: Know the Difference</h2>
-
-  <p>This is the single most important risk distinction, so it deserves plain language. <strong>Bank deposits are insured.</strong> The Deposit Protection Corporation, a subsidiary of the SBP, guarantees eligible deposits up to a prescribed limit per depositor per bank if a member bank fails. Verify the current protected amount at <a href="https://www.dpc.org.pk" target="_blank" rel="noopener">dpc.org.pk</a> or via <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>. Above that limit you become an ordinary creditor of the bank, but for typical household balances the cover is meaningful.</p>
-
-  <p><strong>Mutual funds are not insured. They are ring-fenced.</strong> No deposit protection scheme covers fund units. Instead, SECP rules require every fund's assets to be held by an independent trustee (typically a large bank or CDC), completely separate from the asset management company's own balance sheet. If the AMC goes bankrupt tomorrow, your T-bills are still sitting with the trustee. A new manager is appointed, or the fund is wound up and the proceeds returned to unit holders. What ring-fencing does <em>not</em> protect you from is market risk: if the instruments in the portfolio lose value, your NAV falls with them. For a money market fund holding three-month government paper that risk is tiny. But it is not zero, and it is not the same thing as insurance.</p>
-
-  <h2>Where Each Belongs: The Emergency-Fund Split</h2>
-
-  <p>The practical answer is not "pick one." Each instrument has a job, and the jobs do not overlap.</p>
-
-  <div class="verdict-card verdict-mf">
-    <div class="verdict-title" style="color:var(--navy)">A simple cash strategy that works:</div>
-    <ul style="margin-left:18px;line-height:2;color:#2E2C26">
-      <li><strong>One month of expenses in your bank savings account.</strong> Instant ATM and card access for same-minute emergencies, with deposit protection on top.</li>
-      <li><strong>The remaining 2–5 months of your emergency fund in a money market fund.</strong> It earns near-wholesale rates and redeems to your bank account in one business day or less.</li>
-      <li><strong>Money you will not need for 3+ years in a Special Savings Certificate</strong> at 11.6%, locking today's rate before further SBP cuts erode floating yields</li>
-    </ul>
-  </div>
-
-  <p>The logic is simple. Almost no real emergency requires six months of expenses in cash within the hour. A hospital deposit or urgent travel is covered by the bank-account month, and the money market portion arrives the next business day. Meanwhile the bulk of your buffer compounds at roughly double what the savings account pays, instead of subsidising your bank's margin. Savers who keep PKR 1,000,000 idle in a savings account routinely give up tens of thousands of rupees a year for liquidity they never actually use.</p>
-
-  <h2>Step-by-Step: Opening a Money Market Fund Account Online</h2>
-
-  <p>Opening a fund account in 2026 is a 20–30 minute phone exercise. The process is broadly the same across the major AMCs (Al Meezan, NBP Funds, UBL Funds, HBL Asset Management and others):</p>
-
-  <ol>
-    <li><strong>Pick the fund, not just the AMC.</strong> On the AMC's website or on <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">mufap.com.pk</a>, confirm the fund's category (money market), its stability rating, and its recent yield.</li>
-    <li><strong>Start digital onboarding.</strong> Download the AMC's app or use its web portal and choose "open an account." You will need your <strong>CNIC</strong> (front and back photos), a <strong>live selfie</strong> for biometric verification, and your bank account's <strong>IBAN</strong>.</li>
-    <li><strong>Choose the account type.</strong> Small investors can opt for a <strong>Sahulat Sarmayakari Account</strong>, SECP's simplified low-documentation account designed for first-timers, with lighter KYC in exchange for a cap on total investment (details at <a href="https://www.secp.gov.pk" target="_blank" rel="noopener">secp.gov.pk</a>). Larger investors complete standard KYC, which may add an income-proof document.</li>
-    <li><strong>Fund the account.</strong> Transfer from your own bank account via IBFT or raast. AMCs only accept money from an account in your name, which is also where redemptions will be sent.</li>
-    <li><strong>Set your redemption path.</strong> Confirm your registered bank account in the app and note the daily cut-off time (orders after the cut-off price at the next day's NAV). Test the loop early: invest a small amount, redeem it, and watch it land back in your bank account on T+0 or T+1.</li>
-  </ol>
-
-  <p>Two small habits make the account far more useful. Enable the AMC app's fingerprint login so redemption takes seconds, not a password reset. And if you are a tax filer, upload your ATL status during onboarding. Otherwise the system may withhold tax at the 30% non-filer rate on your dividends.</p>
-
-  <h2>The Risks Nobody Mentions</h2>
-
-  <p>Money market funds are low-risk, not no-risk. Be clear-eyed about four things before you move your buffer:</p>
-
-  <ul>
-    <li><strong>The NAV can have rare bad days.</strong> A sudden spike in T-bill yields marks down the value of paper the fund already holds, and a credit event at a bank where the fund has placements can dent the NAV. Such days are rare and historically small in Pakistani money market funds, but they happen. There is no contractual guarantee.</li>
-    <li><strong>Expense ratios eat into the headline.</strong> The fund's management fee and expenses are deducted before the returns you see, so compare funds on after-fee yield, published on mufap.com.pk. A fund yielding slightly less with a stronger rating and lower expenses is often the better hold.</li>
-    <li><strong>Yields float, and the current direction is down.</strong> The SBP rate has already fallen from 22% in 2023 to 11.5% today, and with inflation at 7.0% the easing bias remains. Money market returns will drift down within weeks of each future cut. The 14.9% the NBP Savings Fund earned over the past year reflects yesterday's higher rates, so do not project it forward.</li>
-    <li><strong>Tax treatment differs from price appreciation.</strong> Money market funds distribute most of their return as dividends, which attract withholding tax of 15% for filers and 30% for non-filers. That is the same structure as bank profit, but worth remembering when comparing net yields.</li>
-  </ul>
-
-  <div class="callout callout-gold">
-    <strong>Practical tip:</strong> In a falling-rate environment, the money market fund is for your <em>buffer</em>, not your long-term savings. For multi-year money, locking 11.6% in a Special Savings Certificate, or accepting equity risk in a stock fund, will likely beat a floating yield that drifts down from here. Use our <a href="/">free analyzer tool</a> to compare options at your exact budget.
-  </div>
-
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-can-mmf-lose-money"><summary class="faq-question">Can a money market fund in Pakistan lose money?</summary><div class="faq-answer">It is rare but possible. Money market funds hold very short-dated government paper, so the NAV is extremely stable, but it is not contractually guaranteed. A sharp single-day move in T-bill yields or a credit event in a bank placement can produce a small negative day. Over any meaningful holding period, Pakistani money market funds have historically delivered smooth positive returns, but you should treat them as very-low-risk, not zero-risk.</div></details>
-
-  <details class="faq-item" id="faq-deposit-protection"><summary class="faq-question">Are money market funds covered by deposit protection like bank accounts?</summary><div class="faq-answer">No. Deposit Protection Corporation cover applies only to eligible bank deposits, up to a prescribed limit per depositor per bank. Mutual fund units are not deposit-protected. Instead, fund assets are ring-fenced: they are held by an independent trustee, completely separate from the AMC's own balance sheet, so the failure of the fund manager does not put your units at risk.</div></details>
-
-  <details class="faq-item" id="faq-withdrawal-speed"><summary class="faq-question">How quickly can I withdraw money from a money market fund?</summary><div class="faq-answer">Most Pakistani money market funds process redemptions on a T+0 or T+1 basis — same business day or next business day — with proceeds sent to your registered bank account. Some AMCs also offer instant-redemption features up to a daily cap. That is slower than an ATM withdrawal from a bank account, which is why a small instant-access buffer at the bank still makes sense.</div></details>
-
-  <details class="faq-item" id="faq-shariah-alternative"><summary class="faq-question">Is there a Shariah-compliant alternative to a money market fund?</summary><div class="faq-answer">Yes. Most large AMCs run Islamic money market and Islamic income funds that invest in short-term Shariah-compliant instruments such as government Ijarah Sukuk and Islamic bank placements instead of T-bills. In our tracked data, the Meezan Islamic Income Fund (Al Meezan Investments, low risk) returned 9.8% over the past year. Check MUFAP at mufap.com.pk for the full list of Islamic cash-management funds and their live yields.</div></details>
-
-  <details class="faq-item" id="faq-returns-fall-rate-cut"><summary class="faq-question">Will money market fund returns fall when the SBP cuts the policy rate?</summary><div class="faq-answer">Yes, and quickly. Money market funds hold short-dated paper that matures and gets reinvested at prevailing rates, so their yields track the SBP policy rate within weeks of a cut. With the policy rate at 11.5% and inflation at 7.0%, the market expects yields to drift lower from here. If you want to lock a rate for several years instead, a National Savings certificate fixes your rate at purchase.</div></details>
-
-  <details class="faq-item" id="faq-taxed-on-returns"><summary class="faq-question">How are money market fund returns taxed in Pakistan?</summary><div class="faq-answer">Returns from mutual funds are generally distributed as dividends, and the AMC typically deducts withholding tax at source before the payout reaches you, with the rate often differing for filers and non-filers. Bank profit is taxed separately under its own withholding regime. The exact rates and treatment change with each Finance Act, so confirm the current figures on fbr.gov.pk or with your AMC before assuming a net yield.</div></details>
-
-  <details class="faq-item" id="faq-minimum-investment"><summary class="faq-question">What is the minimum amount needed to start a money market fund?</summary><div class="faq-answer">Minimums are set by each AMC and are usually modest, with many funds opening accounts for a few thousand rupees and some allowing small recurring top-ups after that. There is no single industry-wide figure, so check the offering document or the AMC's website for the exact minimum on the specific fund you are looking at. This is generally lower than the lump sum a bank may require for a high-yield term deposit.</div></details>
-
-  <details class="faq-item" id="faq-how-to-open"><summary class="faq-question">How do I open a money market fund account in Pakistan?</summary><div class="faq-answer">Most AMCs now offer a fully digital onboarding flow that uses your CNIC for identity verification, plus a bank account in your own name for funding and redemptions. You complete a standard know-your-customer and risk-profiling step, then transfer funds to subscribe to units at the day's NAV. MUFAP at mufap.com.pk lists the licensed AMCs so you can compare funds before applying.</div></details>
-
-  <details class="faq-item" id="faq-better-than-bank"><summary class="faq-question">Is a money market fund always better than a bank savings account?</summary><div class="faq-answer">Not necessarily; they serve different roles. A bank savings account gives instant ATM and debit-card access and, for eligible deposits, Deposit Protection Corporation cover, while a money market fund has historically offered a higher yield but settles redemptions on a T+0 or T+1 basis and is not deposit-protected. Many people keep a small instant-access buffer at the bank and hold their larger short-term cash in a fund. Compare live fund yields on mufap.com.pk against your bank's posted rate.</div></details>
-
-  <details class="faq-item" id="faq-vs-fixed-deposit"><summary class="faq-question">What is the difference between a money market fund and a bank fixed deposit?</summary><div class="faq-answer">A bank fixed deposit locks your money for a set term at a rate fixed when you open it, and breaking it early usually means a penalty or lost profit. A money market fund has no fixed term, lets you redeem on a T+0 or T+1 basis, and pays a floating yield that moves with short-term market rates rather than a rate fixed at purchase. So a fixed deposit gives rate certainty while a fund gives flexibility and a yield that can rise or fall.</div></details>
-
-  <!-- Ad Slot 2 -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Guides</h3>
-    <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan (Step-by-Step)</a>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better?</a>
-    <a href="/guides/treasury-bills-pakistan.html">Treasury Bills in Pakistan: How to Buy T-Bills Directly</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">This article is for educational purposes only. It is not personalised financial advice. Investment values can go up as well as down, and money market fund yields float with market rates. Always verify current profit rates and fund yields at sbp.org.pk, mufap.com.pk, and savings.gov.pk, and confirm deposit protection coverage at dpc.org.pk before making decisions. Fund return figures are historical as of 12 June 2026 and do not guarantee future performance. Tax rates referenced are based on FBR rules current as of June 2026 and may change.</div>
-
-</div>
-
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

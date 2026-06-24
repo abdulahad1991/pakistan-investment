@@ -131,12 +131,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -158,23 +158,173 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.6vw,3.2rem);font-weight:800;line-height:1.02;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+  .prose em{font-style:italic;color:var(--green-d)}
+  .prose a{color:var(--green);font-weight:700}
+  .prose a:hover{color:var(--green2)}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p{margin:0;font-family:var(--body);font-size:1rem;line-height:1.6;color:#E4F2EA;font-weight:500}
+  .cl-dark strong{color:var(--acid)!important;font-weight:700}
+  .cl-dark a{color:#fff;text-decoration:underline}
+
+  /* verdict cards (best-for boxes) */
+  .verdict-card{background:var(--mint);border:1px solid var(--line);border-left:4px solid var(--green);padding:20px 22px;margin:0 0 24px}
+  .verdict-card.verdict-mf{border-left-color:var(--navy)}
+  .verdict-title{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--green-d);margin-bottom:6px}
+  .verdict-card.verdict-mf .verdict-title{color:var(--navy)}
+  .verdict-card ul{margin:0}
+
+  /* comparison vs-table */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 28px;overflow-x:auto}
+  .vs-table{width:100%;border-collapse:collapse;min-width:560px}
+  .vs-table thead th{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:14px 16px;background:var(--green-d);color:var(--sage);border-bottom:3px solid var(--acid)}
+  .vs-table thead th.ns{color:#fff}
+  .vs-table thead th.mf{color:#fff}
+  .vs-table tbody td{font-family:var(--body);font-size:.92rem;line-height:1.5;color:var(--ink2);padding:13px 16px;border-bottom:1px solid var(--line2);vertical-align:top;font-weight:500}
+  .vs-table tbody td:first-child{font-family:var(--display);font-weight:700;color:var(--green-d);font-size:.86rem}
+  .vs-table tbody tr:last-child td{border-bottom:none}
+  .vs-table tbody tr:hover td{background:var(--paper)}
+
+  /* live widget */
+  .live-widget{border:1px solid var(--line);margin:0 0 28px}
+  .lw-head{padding:14px 18px;border-bottom:1px solid var(--line);background:var(--mint);border-top:3px solid var(--acid)}
+  .lw-head .t{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--green-d);text-transform:uppercase}
+  .lw-head .v{display:block;margin-top:4px;font-family:var(--display);font-size:.58rem;font-weight:600;color:var(--muted)}
+  .live-widget #ns-mf-widget{font-family:var(--body);font-size:.9rem;color:var(--muted);padding:18px}
+  /* style the JS/noscript injected table without changing its markup hooks */
+  .live-widget #ns-mf-widget table,
+  .live-widget noscript table{width:100%;border-collapse:collapse;font-family:var(--body)}
+  .live-widget #ns-mf-widget td,
+  .live-widget noscript td,
+  .live-widget #ns-mf-widget th,
+  .live-widget noscript th{font-size:.9rem}
+
+  /* steps formula box */
+  .formula{background:var(--green-d);color:var(--acid);font-family:var(--display);font-size:.95rem;font-weight:600;padding:16px 20px;margin:0 0 18px}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0;cursor:pointer;list-style:none}
+  .prose .faq-question::-webkit-details-marker{display:none}
+  .prose .faq-question::before{content:"+";color:var(--green);font-weight:800;margin-right:10px}
+  .prose details[open] .faq-question::before{content:"–"}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-family:var(--body);font-size:1rem;line-height:1.7;color:var(--ink2);font-weight:500}
+  .prose .faq-answer a{color:var(--green);font-weight:700}
+
+  /* related links block */
+  .related-links{border-top:1px solid var(--line);margin:0;padding:24px 0 4px}
+  .related-links h3{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin:0 0 12px;text-transform:uppercase}
+  .related-links a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.94rem;font-weight:700;color:var(--green-d)}
+  .related-links a:first-of-type{border-top:none}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -183,253 +333,355 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/guides/">Guides</a> › National Savings vs Mutual Funds</div>
+<main>
+<article class="art-frame">
 
-  <h1>National Savings vs Mutual Funds: Which Is Better for Pakistani Investors? (2026)</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Updated 20 May 2026 &nbsp;·&nbsp; 12 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one line:</strong> National Savings certificates are government-guaranteed with rates locked in at purchase but low liquidity, while SECP-regulated mutual funds offer higher potential returns and daily liquidity without a capital guarantee; many Pakistani portfolios use both.</p>
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">National Savings vs Mutual Funds</li>
+    </ol>
+  </nav>
 
-  <!-- Author Bio Card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Updated 20 May 2026</span></div>
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 02 — Fixed Income · Funds</div>
+      <h1>National Savings vs mutual funds: which is better?</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 20 May 2026</span>
+        <span>· 12 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">In one line</div>
+      <p><b>National Savings</b> certificates are government-guaranteed with rates locked in at purchase but low liquidity, while <b>SECP-regulated mutual funds</b> offer higher potential returns and daily liquidity <b class="acc">without a capital guarantee</b>. Many Pakistani portfolios use both.</p>
     </div>
   </div>
 
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>CDNS vs funds at a glance:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>National Savings: zero risk, government-guaranteed, low liquidity. Best for retirees and anyone who can't stomach losses.</li>
-      <li>Mutual funds: higher potential returns, daily liquidity, SECP-regulated. Best for working-age investors with a 3+ year horizon.</li>
-      <li>The best portfolios use both: CDNS for stable income, equity funds for long-term growth.</li>
-    </ul>
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 20 May 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">CDNS vs funds at a glance</div>
+        <ul>
+          <li>National Savings: zero risk, government-guaranteed, low liquidity. Best for retirees and anyone who can't stomach losses.</li>
+          <li>Mutual funds: higher potential returns, daily liquidity, SECP-regulated. Best for working-age investors with a 3+ year horizon.</li>
+          <li>The best portfolios use both: CDNS for stable income, equity funds for long-term growth.</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="8797122579" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>It's the question every Pakistani saver eventually hits. Should the money go into a <strong>National Savings certificate at CDNS</strong>, or into a <strong>mutual fund through an AMC</strong>? Both are legitimate and regulated. They just serve different needs and suit different kinds of investor.</p>
+
+      <p>What follows is a plain comparison built on current rates, the actual tax treatment, and the mechanics the brochures skip over. Whether you have PKR 5,000 or PKR 5,000,000 to invest, the same framework applies.</p>
+
+      <h2 id="s1"><span class="sn">01</span>Side-by-side comparison</h2>
+
+      <div class="tbl-wrap">
+        <table class="vs-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="ns">National Savings (CDNS)</th>
+              <th class="mf">Mutual Funds (SECP-regulated)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Regulator</td><td>Ministry of Finance, Government of Pakistan</td><td>Securities &amp; Exchange Commission of Pakistan (SECP)</td></tr>
+            <tr><td>Capital Safety</td><td>100% government-guaranteed — zero default risk</td><td>Not government-guaranteed; subject to market and credit risk</td></tr>
+            <tr><td>Typical Returns (2026)</td><td>10.92–12.72% per year (varies by scheme)</td><td>Money market: ~14.9% · Equity funds: 10–20%+ (1-year)</td></tr>
+            <tr><td>Minimum Investment</td><td>PKR 500 (SSC/Behbood) to PKR 50,000 (RIC)</td><td>PKR 1,000 SIP; PKR 5,000 lump sum (varies by AMC)</td></tr>
+            <tr><td>Liquidity</td><td>Low — premature encashment attracts penalties</td><td>High — most funds redeemable within 2–5 business days</td></tr>
+            <tr><td>Shariah-Compliant Option</td><td>Limited (some Islamic CDNS products available)</td><td>Yes — large range of Islamic equity, income, money market funds</td></tr>
+            <tr><td>How to Invest</td><td>Walk into any Post Office or CDNS branch with CNIC</td><td>Online account opening via AMC website (15–30 minutes)</td></tr>
+            <tr><td>Tax on Returns</td><td>WHT at source: 15% filers / 30% non-filers</td><td>WHT on dividends: 15% filers / 30% non-filers; CGT on equity gains</td></tr>
+            <tr><td>Risk of Losing Money</td><td>Zero (sovereign guarantee)</td><td>Low for money market; moderate to high for equity funds</td></tr>
+            <tr><td>Suitable for</td><td>Retirees, risk-averse investors, offline investors</td><td>Anyone with internet access willing to accept some risk for higher returns</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Live Data Widget -->
+      <div class="live-widget">
+        <div class="lw-head">
+          <span class="t">Live Rates — Updated Daily</span>
+          <span class="v">Last verified 20 May 2026 — confirm at savings.gov.pk and mufap.com.pk before investing</span>
+        </div>
+        <div id="ns-mf-widget">Loading...</div>
+        <noscript>
+          <table>
+            <tr style="background:var(--green-d);color:#fff"><th style="padding:8px 12px;text-align:left">Instrument</th><th style="padding:8px 12px">Rate / Return</th><th style="padding:8px 12px">Type</th></tr>
+            <tr><td style="padding:8px 12px;border-bottom:1px solid var(--line2)">CDNS Special Savings Certificate</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid var(--line2)">11.6%</td><td style="padding:8px 12px;border-bottom:1px solid var(--line2)">Govt-guaranteed</td></tr>
+            <tr><td style="padding:8px 12px;border-bottom:1px solid var(--line2)">CDNS Regular Income Certificate</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid var(--line2)">10.92%</td><td style="padding:8px 12px;border-bottom:1px solid var(--line2)">Govt-guaranteed</td></tr>
+            <tr><td style="padding:8px 12px;border-bottom:1px solid var(--line2)">Meezan Islamic Income Fund</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid var(--line2)">9.8% (1yr)</td><td style="padding:8px 12px;border-bottom:1px solid var(--line2)">Islamic income</td></tr>
+            <tr><td style="padding:8px 12px">NBP Savings Fund</td><td style="padding:8px 12px;text-align:center">14.9% (1yr)</td><td style="padding:8px 12px">Conventional</td></tr>
+          </table>
+          <p style="font-family:var(--body);font-size:.75rem;color:var(--muted);padding:8px 18px;margin:0">Enable JavaScript for live rates</p>
+        </noscript>
+      </div>
+      <script>
+      fetch('/data.json').then(r=>r.json()).then(d=>{
+        const ns=d.national_savings.filter(x=>x.recommended).slice(0,3);
+        const mf=d.mutual_funds.filter(x=>x.recommended||x.risk==='Low').slice(0,3);
+        const rows=[
+          ...ns.map(x=>`<tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">${x.name}</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE;font-weight:700;color:#075E4B">${x.rate}%</td><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">Govt-guaranteed · ${x.payout}</td></tr>`),
+          ...mf.map(x=>`<tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">${x.name}</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE;font-weight:700;color:#2854C5">${x.ret_1y}% <span style="font-size:.75rem;font-weight:400">(1yr)</span></td><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">${x.type} · ${x.risk} risk</td></tr>`)
+        ];
+        document.getElementById('ns-mf-widget').innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:.88rem"><tr style="background:#053C30;color:#fff"><th style="padding:8px 12px;text-align:left">Instrument</th><th style="padding:8px 12px">Rate / Return</th><th style="padding:8px 12px">Type</th></tr>${rows.join('')}</table>`;
+        document.getElementById('ns-mf-widget').style.padding='0';
+      }).catch(()=>{document.getElementById('ns-mf-widget').textContent='Unable to load live data.';});
+      </script>
+
+      <h2 id="s2"><span class="sn">02</span>How National Savings certificates actually work</h2>
+
+      <p>Know the mechanics and you avoid the expensive mistakes. Opening an account is simple. Walk into any CDNS branch or Post Office with your original CNIC, a photocopy, and your investment amount in cash or a pay order, and the staff will handle the paperwork. For a first-timer it takes 20–40 minutes. You walk out with a physical certificate or a passbook, which you keep somewhere safe.</p>
+
+      <p>Don't want to visit a branch? CDNS has run the <strong>Savings.gov.pk</strong> online portal for a few years now. You create an account, link your bank account, and invest from home. The portal supports the Special Savings Certificate, Regular Income Certificate, and Defence Savings Certificate. Behbood certificates need proof of age (60 or above) or widow status, so those may still mean an in-person visit to set up. The portal also lets you nominate a beneficiary on any certificate, an estate-planning step plenty of investors forget. One more thing: CDNS certificates are non-transferable. Unlike shares, you can't sell one to another person or trade it in a secondary market.</p>
+
+      <p>How profit gets paid varies by scheme, and it should drive which certificate you pick. The <strong>Regular Income Certificate</strong> pays profit monthly into your linked bank account, which is why retirees living off investment income gravitate to it. The <strong>Special Savings Certificate</strong> pays every six months, suiting people who don't need a monthly cheque and are content to let profit build between dates. The <strong>Defence Savings Certificate</strong> holds all profit for its full 10-year tenor and pays one lump sum at maturity. That's handy for disciplined savers who want compounding and no temptation to spend periodic payouts.</p>
+
+      <p>Early encashment follows a tiered formula published on the CDNS website. Take the SSC. Encash within the first 6 months and you get no profit for that period, just the face value back. Between 6 and 12 months, a below-market rate applies. After 12 months a graduated rate kicks in, climbing the longer you hold until it approaches the full contracted rate near the 3-year maturity. The working rule: treat your CDNS money as locked for at least 12 months, ideally the whole tenor. Parking an emergency fund in a certificate and then breaking it early is one of the costliest mistakes Pakistani savers make.</p>
+
+      <h2 id="s3"><span class="sn">03</span>National Savings — strengths and weaknesses</h2>
+
+      <p>The Central Directorate of National Savings (CDNS) has run since 1947. Its instruments carry the full backing of the Government of Pakistan, so the only way you lose money is a complete sovereign default, something that has never happened here. For practical purposes, that makes CDNS schemes risk-free.</p>
+
+      <div class="verdict-card verdict-ns">
+        <div class="verdict-title">National Savings is best for:</div>
+        <ul>
+          <li>Retirees who need predictable monthly income (Regular Income Certificates at 10.92%)</li>
+          <li>Senior citizens and widows (Behbood Savings Certificates offer the highest rate at 12.72%)</li>
+          <li>Investors with no internet access or smartphone</li>
+          <li>Locking in today's rates before SBP cuts further reduce yields</li>
+          <li>Anyone who cannot afford to lose any principal</li>
+        </ul>
+      </div>
+
+      <p><strong>Key weakness:</strong> Liquidity. Break a certificate before maturity and you forfeit part of the profit you've earned. With the Special Savings Certificate (3-year tenor), encashing in the first six months returns only the face value with no profit, and encashing within the first year pays a reduced rate. So CDNS is a poor home for an emergency fund or any money you might need on short notice.</p>
+
+      <h2 id="s4"><span class="sn">04</span>Mutual funds — strengths and weaknesses</h2>
+
+      <p>Mutual funds give you two things National Savings can't: <strong>higher potential returns</strong> and <strong>daily liquidity</strong>. A well-chosen equity fund can deliver 20–30% annualised over a 5-year stretch, far ahead of any CDNS scheme. Even money market funds, the safest type, match or beat current National Savings rates while letting you pull your money out within 2–5 business days.</p>
+
+      <div class="verdict-card verdict-mf">
+        <div class="verdict-title">Mutual Funds are best for:</div>
+        <ul>
+          <li>Working professionals aged 25–50 who can tolerate short-term volatility</li>
+          <li>Investors with a 3–10 year time horizon who want to beat inflation</li>
+          <li>Muslim investors seeking fully Shariah-compliant investments (Islamic funds)</li>
+          <li>Salaried individuals wanting to automate monthly savings via SIPs (as low as PKR 1,000/month)</li>
+          <li>Overseas Pakistanis (via Roshan Digital Account)</li>
+        </ul>
+      </div>
+
+      <p><strong>Key weakness:</strong> No capital guarantee. An equity fund can shed 20–30% in a bear market, and the KSE-100 has done exactly that, in 2022 and other rough patches. Investors who panic and sell at the bottom lock in real losses. If watching your money drop is something you can't handle, financially or emotionally, start with a money market or income fund instead of an equity fund.</p>
+
+      <h2 id="s5"><span class="sn">05</span>The tax reality for both instruments</h2>
+
+      <p>Tax is where people most often get it wrong, and the error costs thousands of rupees a year. A lot of investors think CDNS certificates are "tax-free." They aren't. Others avoid mutual funds in the belief that the tax is complicated or heavy. Both assumptions miss the mark, and the real picture is manageable once you see it.</p>
+
+      <p>On <strong>National Savings certificates</strong>, withholding tax (WHT) comes off automatically at source when profit is paid. A tax filer (someone whose name sits in the Active Tax Payers List from the Federal Board of Revenue) pays <strong>15%</strong>. A non-filer pays <strong>30%</strong>. Because it's deducted before the profit hits your account, you never touch the gross amount. For filers this WHT is final, so you owe nothing extra on this income at year-end.</p>
+
+      <p>Mutual funds work a little differently. Income and money market funds that pay dividends carry WHT of <strong>15% for filers and 30% for non-filers</strong>, the same structure as CDNS. Equity funds that grow in NAV rather than paying dividends face Capital Gains Tax (CGT) on redemption: 15% if you hold under a year, 12.5% for 1–4 years, and 0% beyond four years. That last bracket is what makes long-term equity investing so tax-efficient for patient holders.</p>
+
+      <p>The filer gap is real money. Put PKR 500,000 into a CDNS Special Savings Certificate at 11.6% and you earn PKR 58,000 in annual profit. A filer pays roughly PKR 8,700 in WHT (15%); a non-filer pays about PKR 17,400 (30%). That's PKR 8,700 a year, gone, on this one investment. Filing your return on FBR's IRIS portal takes a salaried person around 30 minutes. The maths makes it an easy call.</p>
+
+      <h2 id="s6"><span class="sn">06</span>What happens in a rate cut cycle</h2>
+
+      <p>This is the macro question every Pakistani investor should be chewing on in 2026. The SBP policy rate sits at <strong>11.5%</strong> as of May 2026, down sharply from its 22% peak in mid-2023. The SBP's stance right now is "holding," though the market expects more gradual cuts as CPI inflation (currently 7.0%) keeps drifting toward the medium-term target band. The KSE-100 is trading near 181,000, a sign of how much that rate descent has already lifted equities.</p>
+
+      <p><strong>CDNS certificates lock your rate at purchase.</strong> Buy a Special Savings Certificate today at 11.6%, and even if the SBP cuts to 8% next year your SSC keeps earning 11.6% for the rest of its term. The rate is fixed on day one and no later policy move can touch it. In a falling-rate world that's the single biggest reason to use CDNS. People who locked into long-duration Defence Savings Certificates at 20%+ back in 2023 are still collecting those rates today.</p>
+
+      <p><strong>Money market funds reprice all the time.</strong> Their yields shadow prevailing interbank rates, so when the SBP trims its benchmark, money market returns slip within 2–4 weeks as the fund's short-dated assets mature and get reinvested at the new lower rate. That's their main disadvantage against CDNS when rates are heading down.</p>
+
+      <p><strong>Equity funds tend to do well when rates fall.</strong> Lower rates shrink the discount applied to future corporate earnings, which usually lifts share prices, and cheaper borrowing helps the economy and company profits too. The KSE-100 climbed roughly 180% as SBP rates dropped from 22% to 12% between mid-2023 and early 2025. If you think rates will keep falling, one sensible move is to lock part of your savings into a 3-year CDNS SSC at today's rate while gradually rotating money market holdings into equity funds to ride the upside.</p>
+
+      <h2 id="s7"><span class="sn">07</span>The verdict: you don't have to choose</h2>
+
+      <p>The strongest Pakistani portfolios use <em>both</em>. The whole "either/or" framing is a false choice, pushed by marketing from CDNS branches and AMC sales teams alike, each with a commercial reason to sell you only their product.</p>
+
+      <p>A common allocation for a middle-income Pakistani investor might look like this:</p>
+
+      <ul>
+        <li><strong>30–40% in National Savings:</strong> the anchor, zero-risk government returns locked in at today's still-attractive rates before further SBP cuts.</li>
+        <li><strong>40–50% in Mutual Funds:</strong> split between an Islamic money market fund for near-term liquidity and an equity fund for long-term growth.</li>
+        <li><strong>10–20% in PSX dividend stocks:</strong> extra income plus long-term capital appreciation from Pakistan's listed companies.</li>
+      </ul>
+
+      <div class="cl-dark">
+        <p><strong>Where to begin:</strong> If you're not sure, open a money market mutual fund with Al Meezan or NBP Funds for the slice of savings you might need within 1–2 years. For longer money (3+ years), look at a CDNS Special Savings Certificate or an equity fund. Run the numbers through our <a href="/">free analyzer tool</a> to see what each option earns at your specific budget.</p>
+      </div>
+
+      <h2 id="s8"><span class="sn">08</span>A real-world portfolio example</h2>
+
+      <p>Abstract comparisons only go so far. Here's how a PKR 500,000 portfolio spread across three instrument types plays out in practice, using current rates and recent returns as reference points.</p>
+
+      <p>The allocation: <strong>PKR 200,000 (40%) in a CDNS Special Savings Certificate</strong> at 11.6%, <strong>PKR 200,000 (40%) in Al Meezan Mutual Fund</strong> (Islamic equity, 1-year return 13.2%), and <strong>PKR 100,000 (20%) in MCB Bank shares</strong> at a dividend yield of 8.92%.</p>
+
+      <ul>
+        <li><strong>CDNS SSC, PKR 200,000:</strong> At 11.6% with semi-annual payments, gross annual profit is PKR 23,200. After 15% WHT for a filer, net income is about PKR 19,720. That rate holds for the full 3-year tenor whatever the SBP does, with zero capital risk.</li>
+        <li><strong>Al Meezan Mutual Fund, PKR 200,000:</strong> On the fund's 1-year return of 13.2%, estimated growth is about PKR 26,400. Held past a year, CGT is 12.5% on gains (0% after four years), leaving an estimated net gain near PKR 23,100. Past performance guarantees nothing. Treat this as illustrative, not a promise.</li>
+        <li><strong>MCB Bank shares, PKR 100,000:</strong> At an 8.92% dividend yield, annual dividend income is about PKR 8,920. After 15% WHT for a filer, net dividend income is roughly PKR 7,582 a year. The share price can move up or down independently of that yield.</li>
+      </ul>
+
+      <p><strong>Combined estimated annual income:</strong> roughly PKR 50,402 net of tax on PKR 500,000, a blended effective yield around 10.1%. The CDNS slice gives you a guaranteed income floor in any market, the fund gives you managed growth, and the shares give you direct equity exposure. One guaranteed source, one managed, one direct: that's the structure long-term Pakistani wealth builders keep coming back to.</p>
+
+      <h2 id="s9"><span class="sn">09</span>Impact of the SBP policy rate</h2>
+
+      <p>The State Bank of Pakistan's policy rate drives both instrument types. When the rate is high (it hit 22% in 2023–24), National Savings rates and money market returns rise together. When the SBP cuts, as it has since mid-2024, both fall. The difference that matters: <strong>National Savings certificates lock your rate at purchase</strong>, while money market funds keep adjusting to whatever the prevailing rate is.</p>
+
+      <p>In a falling-rate stretch like today's, locking into a long-duration CDNS certificate now can pay off, because you pin down a higher rate before it slides further. For a deeper look at how the policy rate transmits across asset classes, read our <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate guide</a>.</p>
+
+      <h2 id="s10"><span class="sn">10</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-invest-in-both"><summary class="faq-question">Can I invest in both National Savings and mutual funds at the same time?</summary><div class="faq-answer">Yes — most balanced Pakistani portfolios combine both. National Savings anchors the fixed-income portion while mutual funds provide liquidity and growth potential. There is no rule preventing you from holding CDNS certificates alongside mutual fund units. Many investors keep 3–6 months of living expenses in a liquid money market mutual fund while simultaneously holding a longer-duration CDNS certificate for their savings. Each instrument complements the other's weaknesses: CDNS gives you the safety and rate-lock that mutual funds cannot offer, while mutual funds give you the liquidity and growth potential that CDNS cannot match.</div></details>
+
+      <details class="faq-item" id="faq-minimum-investment"><summary class="faq-question">What is the minimum investment for National Savings vs mutual funds?</summary><div class="faq-answer">National Savings Special Savings Certificates start from PKR 500, while Regular Income Certificates require PKR 50,000. Mutual funds are more accessible — most AMCs accept SIPs from PKR 1,000 per month and lump sums from PKR 5,000. Al Meezan Mutual Fund allows investments from as little as PKR 1,000, making it possible for a first-time investor to start building a portfolio with very modest amounts. This low barrier to entry means there is genuinely no financial reason to delay starting — the most important step is simply beginning.</div></details>
+
+      <details class="faq-item" id="faq-profits-guaranteed"><summary class="faq-question">Are National Savings profits guaranteed even if the government changes?</summary><div class="faq-answer">Yes. National Savings certificates are sovereign obligations of Pakistan — the rate you lock in at purchase is guaranteed regardless of government changes or SBP rate movements. Only a full sovereign default (which has never occurred in Pakistan) would put these at risk. CDNS operates under the Ministry of Finance and its obligations transfer seamlessly across every successive government. This is why CDNS instruments are used by institutional investors and individuals alike as the risk-free reference rate for the domestic market.</div></details>
+
+      <details class="faq-item" id="faq-amc-closes"><summary class="faq-question">What happens to my mutual fund if the AMC closes down?</summary><div class="faq-answer">Your money is protected. SECP regulations require all AMC assets to be held in a separate trust by an independent trustee (typically a bank). If an AMC closes, a new manager is appointed or assets are liquidated and returned to investors. Your capital cannot be mixed with the AMC's own funds. This trust structure is a fundamental feature of Pakistan's mutual fund regulatory framework under the Non-Banking Finance Companies Rules. The trustee — typically a commercial bank such as MCB or Standard Chartered — holds all fund assets in custody, completely separate from the AMC's own balance sheet.</div></details>
+
+      <details class="faq-item" id="faq-3-year-horizon"><summary class="faq-question">Which is better for a 3-year investment horizon — National Savings or mutual funds?</summary><div class="faq-answer">For a strict 3-year horizon, a Special Savings Certificate (3-year tenor) offers a guaranteed rate locked in at purchase. If you are comfortable with some volatility and want higher potential returns, an income mutual fund or balanced fund over 3 years has historically outperformed CDNS rates, but without the capital guarantee. A practical blended approach is to put 50–60% into an SSC for the guaranteed floor, and 40–50% into an equity or income fund for growth upside. This way you protect most of your principal while still participating in potential market gains over the three-year window.</div></details>
+
+      <details class="faq-item" id="faq-how-is-profit-taxed"><summary class="faq-question">How is the profit from National Savings and mutual funds taxed in Pakistan?</summary><div class="faq-answer">Both instruments are generally subject to withholding tax on the profit or income they generate, and rates often differ for filers versus non-filers under FBR rules. National Savings profit is typically taxed at source by CDNS, while mutual fund dividends and capital gains are handled by the AMC. Because tax rates and slabs change with each Finance Act, confirm the current rates for your filer status on fbr.gov.pk before estimating your net return.</div></details>
+
+      <details class="faq-item" id="faq-early-withdrawal"><summary class="faq-question">Can I withdraw early, and will I lose profit if I do?</summary><div class="faq-answer">Most open-end mutual funds let you redeem units on any business day, with proceeds usually credited within a few working days. National Savings certificates can also be encashed before maturity, but early encashment often means you receive a lower profit rate than if you had held to the full tenor. Always check the specific encashment schedule for your certificate at the CDNS branch or on the official National Savings website before deciding.</div></details>
+
+      <details class="faq-item" id="faq-shariah-compliant"><summary class="faq-question">Are there Shariah-compliant options for both National Savings and mutual funds?</summary><div class="faq-answer">Yes, the mutual fund industry offers a range of Islamic income, money market, and equity funds — Al Meezan, for example, runs several Shariah-compliant funds screened by a Shariah board. National Savings has historically offered some Islamic-structured products as well, though availability can change over time. If Shariah compliance is essential to you, verify the current product list and the latest Shariah certification directly with the AMC or with CDNS.</div></details>
+
+      <details class="faq-item" id="faq-where-to-buy"><summary class="faq-question">Where do I actually buy National Savings certificates versus mutual funds?</summary><div class="faq-answer">National Savings certificates are purchased at CDNS National Savings Centres, at authorised commercial bank branches, and increasingly through online channels offered by CDNS. Mutual funds are bought directly from an Asset Management Company or through its app and website, and sometimes via bank or brokerage distribution partners. Both processes require completing basic KYC documentation such as CNIC and bank details, so confirm the exact onboarding steps with the provider you choose.</div></details>
+
+      <details class="faq-item" id="faq-inflation-protection"><summary class="faq-question">Which option better protects my savings against inflation?</summary><div class="faq-answer">Neither instrument guarantees a return above inflation, since real returns depend on how the profit rate compares with the inflation rate at the time. A fixed-rate National Savings certificate locks in a known nominal rate, which protects you if rates fall but can lag if inflation rises sharply. Equity and some income mutual funds carry more risk but have historically offered the potential for higher returns that may keep pace with inflation over longer periods — without any guarantee.</div></details>
+
+      <!-- Ad slot 2 — after FAQ -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="8797122579" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Guides</h3>
+        <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan (Step-by-Step)</a>
+        <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained: What It Means for Your Returns</a>
+        <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">This article is for educational purposes only. It is not personalised financial advice. Investment values can go up as well as down. Always verify current profit rates at savings.gov.pk and mufap.com.pk, and consult a SECP-registered financial advisor before making significant investment decisions. Tax rates referenced are based on FBR rules current as of May 2026 and may change.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>Side-by-side comparison</a>
+            <a href="#s2"><span class="ti">02</span>How CDNS works</a>
+            <a href="#s3"><span class="ti">03</span>National Savings — pros &amp; cons</a>
+            <a href="#s4"><span class="ti">04</span>Mutual funds — pros &amp; cons</a>
+            <a href="#s5"><span class="ti">05</span>The tax reality</a>
+            <a href="#s6"><span class="ti">06</span>In a rate cut cycle</a>
+            <a href="#s7"><span class="ti">07</span>The verdict</a>
+            <a href="#s8"><span class="ti">08</span>A real portfolio example</a>
+            <a href="#s9"><span class="ti">09</span>SBP policy rate impact</a>
+            <a href="#s10"><span class="ti">10</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">10.9–12.7%</div><div class="gl-l">CDNS rate range (2026)</div></div>
+          <div class="gl-row"><div class="gl-n">PKR 500</div><div class="gl-l">Lowest CDNS entry</div></div>
+          <div class="gl-row"><div class="gl-n">15% / 30%</div><div class="gl-l">WHT filer vs non-filer</div></div>
+          <div class="gl-row"><div class="gl-n">2–5 days</div><div class="gl-l">Mutual fund redemption</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds →</a>
+          <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained →</a>
+          <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
   </div>
+</article>
+</main>
 
-  <!-- Ad Slot 1 -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="8797122579" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>It's the question every Pakistani saver eventually hits. Should the money go into a <strong>National Savings certificate at CDNS</strong>, or into a <strong>mutual fund through an AMC</strong>? Both are legitimate and regulated. They just serve different needs and suit different kinds of investor.</p>
-
-  <p>What follows is a plain comparison built on current rates, the actual tax treatment, and the mechanics the brochures skip over. Whether you have PKR 5,000 or PKR 5,000,000 to invest, the same framework applies.</p>
-
-  <h2>Side-by-Side Comparison</h2>
-
-  <table class="vs-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th class="ns">National Savings (CDNS)</th>
-        <th class="mf">Mutual Funds (SECP-regulated)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Regulator</td><td>Ministry of Finance, Government of Pakistan</td><td>Securities &amp; Exchange Commission of Pakistan (SECP)</td></tr>
-      <tr><td>Capital Safety</td><td>100% government-guaranteed — zero default risk</td><td>Not government-guaranteed; subject to market and credit risk</td></tr>
-      <tr><td>Typical Returns (2026)</td><td>10.92–12.72% per year (varies by scheme)</td><td>Money market: ~14.9% · Equity funds: 10–20%+ (1-year)</td></tr>
-      <tr><td>Minimum Investment</td><td>PKR 500 (SSC/Behbood) to PKR 50,000 (RIC)</td><td>PKR 1,000 SIP; PKR 5,000 lump sum (varies by AMC)</td></tr>
-      <tr><td>Liquidity</td><td>Low — premature encashment attracts penalties</td><td>High — most funds redeemable within 2–5 business days</td></tr>
-      <tr><td>Shariah-Compliant Option</td><td>Limited (some Islamic CDNS products available)</td><td>Yes — large range of Islamic equity, income, money market funds</td></tr>
-      <tr><td>How to Invest</td><td>Walk into any Post Office or CDNS branch with CNIC</td><td>Online account opening via AMC website (15–30 minutes)</td></tr>
-      <tr><td>Tax on Returns</td><td>WHT at source: 15% filers / 30% non-filers</td><td>WHT on dividends: 15% filers / 30% non-filers; CGT on equity gains</td></tr>
-      <tr><td>Risk of Losing Money</td><td>Zero (sovereign guarantee)</td><td>Low for money market; moderate to high for equity funds</td></tr>
-      <tr><td>Suitable for</td><td>Retirees, risk-averse investors, offline investors</td><td>Anyone with internet access willing to accept some risk for higher returns</td></tr>
-    </tbody>
-  </table>
-
-  <!-- Live Data Widget -->
-  <div class="live-widget" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:12px;padding:20px;margin:24px 0">
-    <div style="font-weight:700;margin-bottom:4px;color:#0E3B2E">Live Rates — Updated Daily</div>
-    <div style="font-size:.78rem;color:#888;margin-bottom:14px">Last verified: 20 May 2026 — confirm at savings.gov.pk and mufap.com.pk before investing</div>
-    <div id="ns-mf-widget">Loading...</div>
-    <noscript>
-      <table style="width:100%;border-collapse:collapse;font-size:.88rem">
-        <tr style="background:#0E3B2E;color:#fff"><th style="padding:8px 12px;text-align:left">Instrument</th><th style="padding:8px 12px">Rate / Return</th><th style="padding:8px 12px">Type</th></tr>
-        <tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">CDNS Special Savings Certificate</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">11.6%</td><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">Govt-guaranteed</td></tr>
-        <tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">CDNS Regular Income Certificate</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">10.92%</td><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">Govt-guaranteed</td></tr>
-        <tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">Meezan Islamic Income Fund</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">9.8% (1yr)</td><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">Islamic income</td></tr>
-        <tr><td style="padding:8px 12px">NBP Savings Fund</td><td style="padding:8px 12px;text-align:center">14.9% (1yr)</td><td style="padding:8px 12px">Conventional</td></tr>
-      </table>
-      <p style="font-size:.75rem;color:#888;margin-top:8px">Enable JavaScript for live rates</p>
-    </noscript>
-  </div>
-  <script>
-  fetch('/data.json').then(r=>r.json()).then(d=>{
-    const ns=d.national_savings.filter(x=>x.recommended).slice(0,3);
-    const mf=d.mutual_funds.filter(x=>x.recommended||x.risk==='Low').slice(0,3);
-    const rows=[
-      ...ns.map(x=>`<tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">${x.name}</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE;font-weight:700;color:#0E3B2E">${x.rate}%</td><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">Govt-guaranteed · ${x.payout}</td></tr>`),
-      ...mf.map(x=>`<tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">${x.name}</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE;font-weight:700;color:#23415E">${x.ret_1y}% <span style="font-size:.75rem;font-weight:400">(1yr)</span></td><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">${x.type} · ${x.risk} risk</td></tr>`)
-    ];
-    document.getElementById('ns-mf-widget').innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:.88rem"><tr style="background:#0E3B2E;color:#fff"><th style="padding:8px 12px;text-align:left">Instrument</th><th style="padding:8px 12px">Rate / Return</th><th style="padding:8px 12px">Type</th></tr>${rows.join('')}</table>`;
-  }).catch(()=>{document.getElementById('ns-mf-widget').textContent='Unable to load live data.';});
-  </script>
-
-  <h2>How National Savings Certificates Actually Work</h2>
-
-  <p>Know the mechanics and you avoid the expensive mistakes. Opening an account is simple. Walk into any CDNS branch or Post Office with your original CNIC, a photocopy, and your investment amount in cash or a pay order, and the staff will handle the paperwork. For a first-timer it takes 20–40 minutes. You walk out with a physical certificate or a passbook, which you keep somewhere safe.</p>
-
-  <p>Don't want to visit a branch? CDNS has run the <strong>Savings.gov.pk</strong> online portal for a few years now. You create an account, link your bank account, and invest from home. The portal supports the Special Savings Certificate, Regular Income Certificate, and Defence Savings Certificate. Behbood certificates need proof of age (60 or above) or widow status, so those may still mean an in-person visit to set up. The portal also lets you nominate a beneficiary on any certificate, an estate-planning step plenty of investors forget. One more thing: CDNS certificates are non-transferable. Unlike shares, you can't sell one to another person or trade it in a secondary market.</p>
-
-  <p>How profit gets paid varies by scheme, and it should drive which certificate you pick. The <strong>Regular Income Certificate</strong> pays profit monthly into your linked bank account, which is why retirees living off investment income gravitate to it. The <strong>Special Savings Certificate</strong> pays every six months, suiting people who don't need a monthly cheque and are content to let profit build between dates. The <strong>Defence Savings Certificate</strong> holds all profit for its full 10-year tenor and pays one lump sum at maturity. That's handy for disciplined savers who want compounding and no temptation to spend periodic payouts.</p>
-
-  <p>Early encashment follows a tiered formula published on the CDNS website. Take the SSC. Encash within the first 6 months and you get no profit for that period, just the face value back. Between 6 and 12 months, a below-market rate applies. After 12 months a graduated rate kicks in, climbing the longer you hold until it approaches the full contracted rate near the 3-year maturity. The working rule: treat your CDNS money as locked for at least 12 months, ideally the whole tenor. Parking an emergency fund in a certificate and then breaking it early is one of the costliest mistakes Pakistani savers make.</p>
-
-  <h2>National Savings — Strengths and Weaknesses</h2>
-
-  <p>The Central Directorate of National Savings (CDNS) has run since 1947. Its instruments carry the full backing of the Government of Pakistan, so the only way you lose money is a complete sovereign default, something that has never happened here. For practical purposes, that makes CDNS schemes risk-free.</p>
-
-  <div class="verdict-card verdict-ns">
-    <div class="verdict-title" style="color:var(--green)">National Savings is best for:</div>
-    <ul style="margin-left:18px;line-height:2;color:#2E2C26">
-      <li>Retirees who need predictable monthly income (Regular Income Certificates at 10.92%)</li>
-      <li>Senior citizens and widows (Behbood Savings Certificates offer the highest rate at 12.72%)</li>
-      <li>Investors with no internet access or smartphone</li>
-      <li>Locking in today's rates before SBP cuts further reduce yields</li>
-      <li>Anyone who cannot afford to lose any principal</li>
-    </ul>
-  </div>
-
-  <p><strong>Key weakness:</strong> Liquidity. Break a certificate before maturity and you forfeit part of the profit you've earned. With the Special Savings Certificate (3-year tenor), encashing in the first six months returns only the face value with no profit, and encashing within the first year pays a reduced rate. So CDNS is a poor home for an emergency fund or any money you might need on short notice.</p>
-
-  <h2>Mutual Funds — Strengths and Weaknesses</h2>
-
-  <p>Mutual funds give you two things National Savings can't: <strong>higher potential returns</strong> and <strong>daily liquidity</strong>. A well-chosen equity fund can deliver 20–30% annualised over a 5-year stretch, far ahead of any CDNS scheme. Even money market funds, the safest type, match or beat current National Savings rates while letting you pull your money out within 2–5 business days.</p>
-
-  <div class="verdict-card verdict-mf">
-    <div class="verdict-title" style="color:var(--navy)">Mutual Funds are best for:</div>
-    <ul style="margin-left:18px;line-height:2;color:#2E2C26">
-      <li>Working professionals aged 25–50 who can tolerate short-term volatility</li>
-      <li>Investors with a 3–10 year time horizon who want to beat inflation</li>
-      <li>Muslim investors seeking fully Shariah-compliant investments (Islamic funds)</li>
-      <li>Salaried individuals wanting to automate monthly savings via SIPs (as low as PKR 1,000/month)</li>
-      <li>Overseas Pakistanis (via Roshan Digital Account)</li>
-    </ul>
-  </div>
-
-  <p><strong>Key weakness:</strong> No capital guarantee. An equity fund can shed 20–30% in a bear market, and the KSE-100 has done exactly that, in 2022 and other rough patches. Investors who panic and sell at the bottom lock in real losses. If watching your money drop is something you can't handle, financially or emotionally, start with a money market or income fund instead of an equity fund.</p>
-
-  <h2>The Tax Reality for Both Instruments</h2>
-
-  <p>Tax is where people most often get it wrong, and the error costs thousands of rupees a year. A lot of investors think CDNS certificates are "tax-free." They aren't. Others avoid mutual funds in the belief that the tax is complicated or heavy. Both assumptions miss the mark, and the real picture is manageable once you see it.</p>
-
-  <p>On <strong>National Savings certificates</strong>, withholding tax (WHT) comes off automatically at source when profit is paid. A tax filer (someone whose name sits in the Active Tax Payers List from the Federal Board of Revenue) pays <strong>15%</strong>. A non-filer pays <strong>30%</strong>. Because it's deducted before the profit hits your account, you never touch the gross amount. For filers this WHT is final, so you owe nothing extra on this income at year-end.</p>
-
-  <p>Mutual funds work a little differently. Income and money market funds that pay dividends carry WHT of <strong>15% for filers and 30% for non-filers</strong>, the same structure as CDNS. Equity funds that grow in NAV rather than paying dividends face Capital Gains Tax (CGT) on redemption: 15% if you hold under a year, 12.5% for 1–4 years, and 0% beyond four years. That last bracket is what makes long-term equity investing so tax-efficient for patient holders.</p>
-
-  <p>The filer gap is real money. Put PKR 500,000 into a CDNS Special Savings Certificate at 11.6% and you earn PKR 58,000 in annual profit. A filer pays roughly PKR 8,700 in WHT (15%); a non-filer pays about PKR 17,400 (30%). That's PKR 8,700 a year, gone, on this one investment. Filing your return on FBR's IRIS portal takes a salaried person around 30 minutes. The maths makes it an easy call.</p>
-
-  <h2>What Happens in a Rate Cut Cycle</h2>
-
-  <p>This is the macro question every Pakistani investor should be chewing on in 2026. The SBP policy rate sits at <strong>11.5%</strong> as of May 2026, down sharply from its 22% peak in mid-2023. The SBP's stance right now is "holding," though the market expects more gradual cuts as CPI inflation (currently 7.0%) keeps drifting toward the medium-term target band. The KSE-100 is trading near 181,000, a sign of how much that rate descent has already lifted equities.</p>
-
-  <p><strong>CDNS certificates lock your rate at purchase.</strong> Buy a Special Savings Certificate today at 11.6%, and even if the SBP cuts to 8% next year your SSC keeps earning 11.6% for the rest of its term. The rate is fixed on day one and no later policy move can touch it. In a falling-rate world that's the single biggest reason to use CDNS. People who locked into long-duration Defence Savings Certificates at 20%+ back in 2023 are still collecting those rates today.</p>
-
-  <p><strong>Money market funds reprice all the time.</strong> Their yields shadow prevailing interbank rates, so when the SBP trims its benchmark, money market returns slip within 2–4 weeks as the fund's short-dated assets mature and get reinvested at the new lower rate. That's their main disadvantage against CDNS when rates are heading down.</p>
-
-  <p><strong>Equity funds tend to do well when rates fall.</strong> Lower rates shrink the discount applied to future corporate earnings, which usually lifts share prices, and cheaper borrowing helps the economy and company profits too. The KSE-100 climbed roughly 180% as SBP rates dropped from 22% to 12% between mid-2023 and early 2025. If you think rates will keep falling, one sensible move is to lock part of your savings into a 3-year CDNS SSC at today's rate while gradually rotating money market holdings into equity funds to ride the upside.</p>
-
-  <h2>The Verdict: You Don't Have to Choose</h2>
-
-  <p>The strongest Pakistani portfolios use <em>both</em>. The whole "either/or" framing is a false choice, pushed by marketing from CDNS branches and AMC sales teams alike, each with a commercial reason to sell you only their product.</p>
-
-  <p>A common allocation for a middle-income Pakistani investor might look like this:</p>
-
-  <ul>
-    <li><strong>30–40% in National Savings:</strong> the anchor, zero-risk government returns locked in at today's still-attractive rates before further SBP cuts.</li>
-    <li><strong>40–50% in Mutual Funds:</strong> split between an Islamic money market fund for near-term liquidity and an equity fund for long-term growth.</li>
-    <li><strong>10–20% in PSX dividend stocks:</strong> extra income plus long-term capital appreciation from Pakistan's listed companies.</li>
-  </ul>
-
-  <div class="callout callout-gold">
-    <strong>Where to begin:</strong> If you're not sure, open a <strong>money market mutual fund</strong> with Al Meezan or NBP Funds for the slice of savings you might need within 1–2 years. For longer money (3+ years), look at a CDNS Special Savings Certificate or an equity fund. Run the numbers through our <a href="/">free analyzer tool</a> to see what each option earns at your specific budget.
-  </div>
-
-  <h2>A Real-World Portfolio Example</h2>
-
-  <p>Abstract comparisons only go so far. Here's how a PKR 500,000 portfolio spread across three instrument types plays out in practice, using current rates and recent returns as reference points.</p>
-
-  <p>The allocation: <strong>PKR 200,000 (40%) in a CDNS Special Savings Certificate</strong> at 11.6%, <strong>PKR 200,000 (40%) in Al Meezan Mutual Fund</strong> (Islamic equity, 1-year return 13.2%), and <strong>PKR 100,000 (20%) in MCB Bank shares</strong> at a dividend yield of 8.92%.</p>
-
-  <ul>
-    <li><strong>CDNS SSC, PKR 200,000:</strong> At 11.6% with semi-annual payments, gross annual profit is PKR 23,200. After 15% WHT for a filer, net income is about PKR 19,720. That rate holds for the full 3-year tenor whatever the SBP does, with zero capital risk.</li>
-    <li><strong>Al Meezan Mutual Fund, PKR 200,000:</strong> On the fund's 1-year return of 13.2%, estimated growth is about PKR 26,400. Held past a year, CGT is 12.5% on gains (0% after four years), leaving an estimated net gain near PKR 23,100. Past performance guarantees nothing. Treat this as illustrative, not a promise.</li>
-    <li><strong>MCB Bank shares, PKR 100,000:</strong> At an 8.92% dividend yield, annual dividend income is about PKR 8,920. After 15% WHT for a filer, net dividend income is roughly PKR 7,582 a year. The share price can move up or down independently of that yield.</li>
-  </ul>
-
-  <p><strong>Combined estimated annual income:</strong> roughly PKR 50,402 net of tax on PKR 500,000, a blended effective yield around 10.1%. The CDNS slice gives you a guaranteed income floor in any market, the fund gives you managed growth, and the shares give you direct equity exposure. One guaranteed source, one managed, one direct: that's the structure long-term Pakistani wealth builders keep coming back to.</p>
-
-  <h2>Impact of the SBP Policy Rate</h2>
-
-  <p>The State Bank of Pakistan's policy rate drives both instrument types. When the rate is high (it hit 22% in 2023–24), National Savings rates and money market returns rise together. When the SBP cuts, as it has since mid-2024, both fall. The difference that matters: <strong>National Savings certificates lock your rate at purchase</strong>, while money market funds keep adjusting to whatever the prevailing rate is.</p>
-
-  <p>In a falling-rate stretch like today's, locking into a long-duration CDNS certificate now can pay off, because you pin down a higher rate before it slides further. For a deeper look at how the policy rate transmits across asset classes, read our <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate guide</a>.</p>
-
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-invest-in-both"><summary class="faq-question">Can I invest in both National Savings and mutual funds at the same time?</summary><div class="faq-answer">Yes — most balanced Pakistani portfolios combine both. National Savings anchors the fixed-income portion while mutual funds provide liquidity and growth potential. There is no rule preventing you from holding CDNS certificates alongside mutual fund units. Many investors keep 3–6 months of living expenses in a liquid money market mutual fund while simultaneously holding a longer-duration CDNS certificate for their savings. Each instrument complements the other's weaknesses: CDNS gives you the safety and rate-lock that mutual funds cannot offer, while mutual funds give you the liquidity and growth potential that CDNS cannot match.</div></details>
-
-  <details class="faq-item" id="faq-minimum-investment"><summary class="faq-question">What is the minimum investment for National Savings vs mutual funds?</summary><div class="faq-answer">National Savings Special Savings Certificates start from PKR 500, while Regular Income Certificates require PKR 50,000. Mutual funds are more accessible — most AMCs accept SIPs from PKR 1,000 per month and lump sums from PKR 5,000. Al Meezan Mutual Fund allows investments from as little as PKR 1,000, making it possible for a first-time investor to start building a portfolio with very modest amounts. This low barrier to entry means there is genuinely no financial reason to delay starting — the most important step is simply beginning.</div></details>
-
-  <details class="faq-item" id="faq-profits-guaranteed"><summary class="faq-question">Are National Savings profits guaranteed even if the government changes?</summary><div class="faq-answer">Yes. National Savings certificates are sovereign obligations of Pakistan — the rate you lock in at purchase is guaranteed regardless of government changes or SBP rate movements. Only a full sovereign default (which has never occurred in Pakistan) would put these at risk. CDNS operates under the Ministry of Finance and its obligations transfer seamlessly across every successive government. This is why CDNS instruments are used by institutional investors and individuals alike as the risk-free reference rate for the domestic market.</div></details>
-
-  <details class="faq-item" id="faq-amc-closes"><summary class="faq-question">What happens to my mutual fund if the AMC closes down?</summary><div class="faq-answer">Your money is protected. SECP regulations require all AMC assets to be held in a separate trust by an independent trustee (typically a bank). If an AMC closes, a new manager is appointed or assets are liquidated and returned to investors. Your capital cannot be mixed with the AMC's own funds. This trust structure is a fundamental feature of Pakistan's mutual fund regulatory framework under the Non-Banking Finance Companies Rules. The trustee — typically a commercial bank such as MCB or Standard Chartered — holds all fund assets in custody, completely separate from the AMC's own balance sheet.</div></details>
-
-  <details class="faq-item" id="faq-3-year-horizon"><summary class="faq-question">Which is better for a 3-year investment horizon — National Savings or mutual funds?</summary><div class="faq-answer">For a strict 3-year horizon, a Special Savings Certificate (3-year tenor) offers a guaranteed rate locked in at purchase. If you are comfortable with some volatility and want higher potential returns, an income mutual fund or balanced fund over 3 years has historically outperformed CDNS rates, but without the capital guarantee. A practical blended approach is to put 50–60% into an SSC for the guaranteed floor, and 40–50% into an equity or income fund for growth upside. This way you protect most of your principal while still participating in potential market gains over the three-year window.</div></details>
-
-  <details class="faq-item" id="faq-how-is-profit-taxed"><summary class="faq-question">How is the profit from National Savings and mutual funds taxed in Pakistan?</summary><div class="faq-answer">Both instruments are generally subject to withholding tax on the profit or income they generate, and rates often differ for filers versus non-filers under FBR rules. National Savings profit is typically taxed at source by CDNS, while mutual fund dividends and capital gains are handled by the AMC. Because tax rates and slabs change with each Finance Act, confirm the current rates for your filer status on fbr.gov.pk before estimating your net return.</div></details>
-
-  <details class="faq-item" id="faq-early-withdrawal"><summary class="faq-question">Can I withdraw early, and will I lose profit if I do?</summary><div class="faq-answer">Most open-end mutual funds let you redeem units on any business day, with proceeds usually credited within a few working days. National Savings certificates can also be encashed before maturity, but early encashment often means you receive a lower profit rate than if you had held to the full tenor. Always check the specific encashment schedule for your certificate at the CDNS branch or on the official National Savings website before deciding.</div></details>
-
-  <details class="faq-item" id="faq-shariah-compliant"><summary class="faq-question">Are there Shariah-compliant options for both National Savings and mutual funds?</summary><div class="faq-answer">Yes, the mutual fund industry offers a range of Islamic income, money market, and equity funds — Al Meezan, for example, runs several Shariah-compliant funds screened by a Shariah board. National Savings has historically offered some Islamic-structured products as well, though availability can change over time. If Shariah compliance is essential to you, verify the current product list and the latest Shariah certification directly with the AMC or with CDNS.</div></details>
-
-  <details class="faq-item" id="faq-where-to-buy"><summary class="faq-question">Where do I actually buy National Savings certificates versus mutual funds?</summary><div class="faq-answer">National Savings certificates are purchased at CDNS National Savings Centres, at authorised commercial bank branches, and increasingly through online channels offered by CDNS. Mutual funds are bought directly from an Asset Management Company or through its app and website, and sometimes via bank or brokerage distribution partners. Both processes require completing basic KYC documentation such as CNIC and bank details, so confirm the exact onboarding steps with the provider you choose.</div></details>
-
-  <details class="faq-item" id="faq-inflation-protection"><summary class="faq-question">Which option better protects my savings against inflation?</summary><div class="faq-answer">Neither instrument guarantees a return above inflation, since real returns depend on how the profit rate compares with the inflation rate at the time. A fixed-rate National Savings certificate locks in a known nominal rate, which protects you if rates fall but can lag if inflation rises sharply. Equity and some income mutual funds carry more risk but have historically offered the potential for higher returns that may keep pace with inflation over longer periods — without any guarantee.</div></details>
-
-  <!-- Ad Slot 2 -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="8797122579" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Guides</h3>
-    <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan (Step-by-Step)</a>
-    <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained: What It Means for Your Returns</a>
-    <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">This article is for educational purposes only. It is not personalised financial advice. Investment values can go up as well as down. Always verify current profit rates at savings.gov.pk and mufap.com.pk, and consult a SECP-registered financial advisor before making significant investment decisions. Tax rates referenced are based on FBR rules current as of May 2026 and may change.</div>
-
-</div>
-
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

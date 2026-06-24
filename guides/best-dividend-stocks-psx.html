@@ -134,14 +134,16 @@
 </script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&amp;family=Nunito:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -162,23 +164,165 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.6vw,3.5rem);font-weight:800;line-height:1;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:620px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:0 0 6px}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p{margin:0;color:#E4F2EA}
+  .cl-dark strong{color:var(--acid)!important;font-weight:700}
+  .formula{background:var(--green-d);color:var(--acid);font-family:var(--display);font-size:.95rem;font-weight:600;padding:16px 20px;margin:0 0 18px}
+
+  /* live widget */
+  .live-widget{border:1px solid var(--line);margin:0 0 28px}
+  .lw-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--mint);border-top:3px solid var(--acid)}
+  .lw-head .t{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--green-d);text-transform:uppercase}
+  .lw-head .v{font-family:var(--display);font-size:.58rem;font-weight:600;color:var(--muted);white-space:nowrap}
+  #div-widget{font-family:var(--body);font-size:.9rem;color:var(--muted);padding:18px}
+  .lw-tbl{width:100%;border-collapse:collapse;min-width:0;font-size:.9rem}
+  .lw-tbl tr{display:grid;grid-template-columns:1.6fr 1fr 1fr .9fr;align-items:baseline;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line2)}
+  .lw-tbl .nm{font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--ink)}
+  .lw-tbl .fig{font-family:var(--mono);font-size:.86rem;font-weight:500;color:var(--ink2);text-align:right;font-variant-numeric:tabular-nums}
+  .lw-tbl .yld{font-family:var(--mono);font-size:.9rem;font-weight:700;color:var(--green);text-align:right;font-variant-numeric:tabular-nums}
+  .lw-chart{padding:18px}
+  .lw-chart-box{position:relative;height:180px}
+
+  /* sectors */
+  .sector-card{border-top:1px solid var(--line);padding:20px 0}
+  .sector-card h3{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+  .sector-card p{margin:0 0 12px}
+  .sector-stocks{display:flex;flex-wrap:wrap;gap:8px}
+  .stock-chip{font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.04em;color:var(--green);border:1px solid var(--line);padding:5px 10px}
+
+  /* steps */
+  .step-block{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;padding:16px 0;border-top:1px solid var(--line)}
+  .step-num{font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--acid);-webkit-text-stroke:1px var(--green)}
+  .step-body p{margin:0}
+
+  /* portfolio table */
+  .pf-wrap{border:1px solid var(--line);margin:0 0 18px;overflow-x:auto}
+  .portfolio-table{min-width:520px}
+  .portfolio-table th{text-align:right}
+  .portfolio-table th:first-child{text-align:left}
+  .portfolio-table td{font-family:var(--mono);font-size:.85rem;text-align:right;font-variant-numeric:tabular-nums}
+  .portfolio-table td:first-child{font-family:var(--body);font-weight:700;color:var(--ink);text-align:left}
+  .portfolio-table tr.total td{border-top:3px solid var(--acid);font-family:var(--display);font-weight:800;color:var(--green-d)}
+  .portfolio-table tr.total td:first-child{font-family:var(--display)}
+  .portfolio-table tr:hover td{background:var(--paper)}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+    .lw-tbl tr{grid-template-columns:1.4fr 1fr 1fr .9fr}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+    .lw-tbl tr{grid-template-columns:1.3fr .9fr .9fr .8fr;gap:6px;padding:12px 14px}
+    .lw-head,.lw-chart,.live-widget #div-widget{padding-left:14px;padding-right:14px}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
-      <a href="/guides/">Guides</a>
+      <a href="/guides/" class="active">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -187,318 +331,459 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/guides/">Guides</a> &rsaquo; Best Dividend Stocks on PSX</div>
-
-  <h1>Best Dividend Stocks on PSX for Passive Income (2026)</h1>
-  <div class="byline">By Abdul Ahad &nbsp;&middot;&nbsp; Updated 20 May 2026 &nbsp;&middot;&nbsp; 11 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>Where the income is:</strong> On PSX, fertilizers (FFC, ENGRO) and banks (MCB, UBL, HUBC) carry the highest dividend yields, currently 7&ndash;12%; buying shares requires a CDC brokerage account, and dividend investing suits a 3&ndash;5 year minimum horizon since prices fluctuate even when payouts are steady.</p>
-
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn &rarr;</a> &nbsp;&middot;&nbsp; <span style="color:#888">Updated 20 May 2026</span></div>
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
   </div>
-
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>Three things to know before you buy:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>Fertilizers (FFC, ENGRO) and banks (MCB, UBL, HUBC) pay the highest yields on PSX, currently 7&ndash;12%</li>
-      <li>You need a CDC brokerage account to buy shares. Full online setup takes 24&ndash;48 hours</li>
-      <li>Treat it as a 3&ndash;5 year hold. Prices move around even when the dividend itself stays steady</li>
-    </ul>
-  </div>
-
-  <!-- Ad slot 1 — after summary -->
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <h2>What Is Dividend Investing?</h2>
-
-  <p>When a company makes a profit, it either ploughs it back into the business or hands a slice to shareholders as a <strong>dividend</strong>. In Pakistan, most large companies declare a dividend once or twice a year: usually after their half-year results (the interim dividend) and again after the annual results (the final dividend). The <strong>dividend yield</strong> is how you measure the income a share throws off relative to what it costs you:</p>
-
-  <p style="background:#F0EADA;padding:12px 16px;border-radius:8px;font-family:monospace;font-size:.95rem">Dividend Yield = (Annual Dividend per Share &divide; Current Share Price) &times; 100</p>
-
-  <p>A company paying PKR 37 per share on a price of PKR 515 yields roughly 7.18%. That sits a little below the current National Savings Special Savings Certificate rate of 11.6%, but a fixed certificate never raises its payout. A growing company can. With the KSE-100 index at 164,742 and the SBP policy rate at 11.5%, blue-chip yields still look reasonable for anyone investing for income.</p>
-
-  <h2>Why PSX Dividend Stocks Are Attractive</h2>
-
-  <ul>
-    <li>Many KSE-100 blue chips have <strong>paid uninterrupted dividends for 20&ndash;40 years</strong></li>
-    <li>Yields of 6&ndash;14% are common among large caps, which stacks up well against savings rates</li>
-    <li>The dividend itself can grow as profits rise</li>
-    <li>You get capital appreciation on top of the income</li>
-    <li>You can sell on any trading day, so liquidity beats a CDNS certificate</li>
-  </ul>
-
-  <div class="callout callout-gold">
-    <strong>Don't forget the downside:</strong> Unlike National Savings, stock prices move. A share yielding 10% today can still drop 15&ndash;20% in a downturn, and then your total return is negative. This works best over a <strong>3&ndash;5 year minimum horizon</strong>, sticking to financially strong companies with long track records.
-  </div>
-
-  <!-- Live data widget — top 5 dividend yields -->
-  <div class="live-widget" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:12px;padding:20px;margin:24px 0">
-    <div style="font-weight:700;margin-bottom:4px;color:#0E3B2E">Current Dividend Yields &mdash; Top PSX Stocks</div>
-    <div style="font-size:.78rem;color:#888;margin-bottom:14px">Last verified: 20 May 2026 &mdash; yields change daily, confirm at psx.com.pk</div>
-    <div id="div-widget">Loading...</div>
-    <noscript>
-      <table style="width:100%;border-collapse:collapse;font-size:.88rem">
-        <tr style="background:#0E3B2E;color:#fff"><th style="padding:8px 12px;text-align:left">Stock</th><th style="padding:8px 12px">Price (PKR)</th><th style="padding:8px 12px">Annual Div</th><th style="padding:8px 12px">Yield</th></tr>
-        <tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">HUBC &mdash; Hub Power</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">214.43</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">25.00</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE;font-weight:700;color:#0E3B2E">11.66%</td></tr>
-        <tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">MCB &mdash; MCB Bank</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">403.41</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">36.00</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE;font-weight:700;color:#0E3B2E">8.92%</td></tr>
-        <tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">UBL &mdash; United Bank</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">385.11</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">32.00</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE;font-weight:700;color:#0E3B2E">8.31%</td></tr>
-        <tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE">FFC &mdash; Fauji Fertilizer</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">515.42</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">37.00</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE;font-weight:700;color:#0E3B2E">7.18%</td></tr>
-        <tr><td style="padding:8px 12px">HBL &mdash; Habib Bank</td><td style="padding:8px 12px;text-align:center">285.17</td><td style="padding:8px 12px;text-align:center">21.50</td><td style="padding:8px 12px;text-align:center;font-weight:700;color:#0E3B2E">7.54%</td></tr>
-      </table>
-      <p style="font-size:.75rem;color:#888;margin-top:8px">Enable JavaScript for live yields</p>
-    </noscript>
-  </div>
-  <script>
-  fetch('/data.json').then(r=>r.json()).then(d=>{
-    const top=d.stocks.filter(s=>s.yield>0).sort((a,b)=>b.yield-a.yield).slice(0,5);
-    const rows=top.map(s=>`<tr><td style="padding:8px 12px;border-bottom:1px solid #D9D1BE"><strong>${s.ticker}</strong> &mdash; ${s.name}</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">${s.price.toFixed(2)}</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE">${s.div.toFixed(2)}</td><td style="padding:8px 12px;text-align:center;border-bottom:1px solid #D9D1BE;font-weight:700;color:#0E3B2E">${s.yield.toFixed(2)}%</td></tr>`);
-    document.getElementById('div-widget').innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:.88rem"><tr style="background:#0E3B2E;color:#fff"><th style="padding:8px 12px;text-align:left">Stock</th><th style="padding:8px 12px">Price (PKR)</th><th style="padding:8px 12px">Annual Div</th><th style="padding:8px 12px">Yield</th></tr>${rows.join('')}</table>`;
-  }).catch(()=>{document.getElementById('div-widget').textContent='Unable to load live data.';});
-  </script>
-
-  <h2>Understanding Dividend Yield vs Dividend Growth</h2>
-
-  <p>Most first-time investors chase the highest current yield. That number matters, but it is only half the story. The other half is <strong>dividend growth</strong>: how reliably, and how fast, a company raises its dividend per share. Get both right and you have a portfolio that holds up. Chase yield alone and you often end up with one that looked good on paper and then let you down.</p>
-
-  <p>Take <strong>FFC (Fauji Fertilizer Company)</strong>. At a 7.18% yield on a price of PKR 515, it is not the top-yielding stock on PSX. But FFC has paid a dividend every single year since it listed in the early 1980s, through currency crises, energy shocks, political turmoil and commodity slumps. That unbroken record is worth a premium over a company dangling 12% for two or three years. Hold FFC for a decade and your yield-on-cost (the dividend measured against what you originally paid) keeps climbing, even when the headline market yield looks ordinary in a given year.</p>
-
-  <p><strong>MCB Bank</strong> makes the growth point even more bluntly. MCB paid about PKR 18 per share in 2019. By 2024 that was PKR 36. The dividend doubled in five years. Someone who bought in 2019 at a modest 4&ndash;5% yield is now earning a yield-on-cost above 9% on their original money, plus a fat capital gain as the price climbed. That is why growers tend to beat pure high-yielders over five to ten years.</p>
-
-  <p>The arithmetic backs it up. A stock starting at a 6% yield, growing its dividend 10% a year, doubles its payout in roughly seven years. Your yield-on-cost hits 12% without you putting in another rupee, just by holding a quality compounder through the cycles.</p>
-
-  <p>Now the warning: <strong>yield traps</strong>. A 15% yield is not always a gift. Often it means the share price has cratered because the market is bracing for a dividend cut. Check the payout ratio (dividend per share over earnings per share). If a company is paying out more than 90% of its earnings, there is almost no cushion for a bad year, and even a small drop in profit puts the dividend at risk. Pair that with a quick look at the earnings trend (growing, flat, or sliding?) and you have a simple screen that catches most of the traps on PSX.</p>
-
-  <h2>How to Read a PSX Dividend Announcement</h2>
-
-  <p>Get the timeline straight before you place your first buy order. Miss the key dates by a day and you wait another six to twelve months for the payment. On the ex-dividend date the price usually drops by about the dividend amount, so the loss is real.</p>
-
-  <p>When a company declares a dividend, the notice shows up in PSX's regulatory filing system <strong>PUCARS</strong>, on the company's own investor relations page, and in the financial press such as Profit by Pakistan Today and Dawn Business. Bookmark the PSX corporate actions calendar at <strong>psx.com.pk under Market Data &rarr; Corporate Actions</strong>. It lists upcoming book closures, so you can see when your holdings pay next.</p>
-
-  <p>Every announcement carries four dates. The <strong>declaration date</strong> is when the board announces the amount. The <strong>right-of-entitlement date</strong> (the ex-dividend date) is the first day new buyers miss out: own the shares before it and you get paid, buy on or after and you don't. The <strong>book closure start and end dates</strong> mark the window when the shareholder register is frozen. The <strong>payment date</strong> is when the cash actually lands, usually 30 days after book closure.</p>
-
-  <p>PSX settles on a <strong>T+2 cycle</strong>, meaning your trade settles two business days after you execute it. So place your buy order at least two business days before the right-of-entitlement date, otherwise your name isn't on the CDC register in time. One day late and you're out for that cycle.</p>
-
-  <p>The dividend itself arrives <strong>automatically</strong> in the bank account linked to your CDC Investor Account. No forms, nothing to chase. The share registrar processes it and you get an SMS or email when the money credits. Your only job is to keep your bank details current in your CDC profile, especially if you've changed banks since opening the account.</p>
-
-  <h2>Top Dividend-Paying Sectors on PSX</h2>
-
-  <div class="sector-card">
-    <h3>Fertilizers &mdash; Highest Yields on PSX</h3>
-    <p>Pakistan's fertilizer companies are cash machines. Subsidised gas, farmers who must buy whatever the price, and real pricing power make this the steadiest dividend sector on PSX. Yields of 7&ndash;14% are common here.</p>
-    <div class="sector-stocks">
-      <span class="stock-chip">FFC &mdash; Fauji Fertilizer</span>
-      <span class="stock-chip">ENGRO &mdash; Engro Fertilizers</span>
-      <span class="stock-chip">FFBL &mdash; Fauji Fertilizer Bin Qasim</span>
-    </div>
-    <p style="margin-top:12px;font-size:.88rem;color:var(--muted)">FFC has paid a dividend every single year since it listed in the 1980s, one of the most consistent records on PSX.</p>
-  </div>
-
-  <div class="sector-card">
-    <h3>Banking &mdash; Reliable Twice-Yearly Dividends</h3>
-    <p>Pakistani banks cashed in hard on the high-rate years of 2023&ndash;24 and posted record profits. The large commercial banks now pay hefty dividends twice a year. Earnings will ease as rates come down, but their balance sheets are strong enough that big dividend cuts look unlikely.</p>
-    <div class="sector-stocks">
-      <span class="stock-chip">MCB &mdash; MCB Bank</span>
-      <span class="stock-chip">HBL &mdash; Habib Bank</span>
-      <span class="stock-chip">UBL &mdash; United Bank</span>
-      <span class="stock-chip">BAHL &mdash; Bank Al-Habib</span>
-    </div>
-  </div>
-
-  <div class="sector-card">
-    <h3>Oil &amp; Gas &mdash; High Yields, State Exposure</h3>
-    <p>Pakistan's big oil and gas names are mostly state-owned and have long paid high dividends. Their fortunes ride on commodity prices and government policy, but the yields still appeal to income investors.</p>
-    <div class="sector-stocks">
-      <span class="stock-chip">PPL &mdash; Pakistan Petroleum</span>
-      <span class="stock-chip">OGDC &mdash; Oil &amp; Gas Dev. Co.</span>
-      <span class="stock-chip">PSO &mdash; Pakistan State Oil</span>
-    </div>
-  </div>
-
-  <div class="sector-card">
-    <h3>Cement &mdash; Cyclical but Capital Efficient</h3>
-    <p>Pakistan's larger cement makers have real export capacity and stand to gain from infrastructure spending. Yields run lower than fertilizers, but the capital upside is bigger when a construction boom hits.</p>
-    <div class="sector-stocks">
-      <span class="stock-chip">LUCK &mdash; Lucky Cement</span>
-      <span class="stock-chip">DGKC &mdash; D.G. Khan Cement</span>
-    </div>
-  </div>
-
-  <h2>Sector Deep Dive: Banking Stocks</h2>
-
-  <p>Pakistani commercial banks had a remarkable run from 2022 to 2024, when the SBP policy rate peaked at 22%. At that level they could park spare liquidity in government paper, T-bills and Pakistan Investment Bonds, and pocket a risk-free spread several points above their cost of deposits. Net interest income hit records across the sector. MCB, HBL and UBL posted after-tax profits 40&ndash;70% above their pre-hike averages, and a big chunk of that flowed back to shareholders. That is why bank yields surged.</p>
-
-  <p>With the rate now at 11.5% and easing underway, those earnings will come back down to earth. As rates drop, the yield on maturing government paper shrinks too, and the gap between what banks earn on their assets and pay on deposits narrows. This <strong>spread compression</strong> is the main earnings risk for bank investors in 2025&ndash;26. Understand it before you commit capital.</p>
-
-  <p>Not every bank is equally exposed, though. <strong>The big lenders like MCB and HBL</strong> have real structural edges: diversified loan books, solid fee income from trade finance, remittances and bancassurance, and cheaper funding thanks to large CASA (current account and savings account) deposit bases. That protects their margins far better than mid-tier banks with thinner product ranges. <strong>MCB is the gold standard for dividend consistency on PSX.</strong> It hasn't cut its dividend in over a decade, even through ugly cycles. If you're a conservative income investor, sticking to the top-four banks carries far less cut risk than reaching for the fatter yields at smaller lenders. One more thing to watch: if the SBP rate drops sharply below 9%, bank share prices may climb on better sentiment, which trims their trailing yields even when the rupee dividend per share doesn't budge.</p>
-
-  <h2>Sector Deep Dive: Fertilizer Stocks</h2>
-
-  <p>Fertilizer holds a special spot in the PSX dividend picture. Demand for urea barely moves with price. Farmers have to apply it every planting season, and the country's food security depends on it. Add a long-standing government policy of supplying subsidised natural gas as feedstock to the plants, and you get a sector that has churned out profits and dividends for decades.</p>
-
-  <p><strong>FFC (Fauji Fertilizer Company)</strong> is Pakistan's biggest urea producer, backed by the Fauji Foundation, one of the country's largest institutional investors with deep government ties. It has paid a dividend every single year since listing in the 1980s, a record almost no one on PSX can match. The main structural threat is gas subsidy risk: if the government trims or scraps the feedstock subsidy that keeps FFC's costs low, margins suffer. So far FFC has absorbed that through pricing and efficiency, and the government's own food security goals give it a strong reason to keep the subsidy in place.</p>
-
-  <p><strong>ENGRO Fertilizers</strong>, part of the wider ENGRO Corporation, carries a slightly different risk profile. The parent spans petrochemicals, foods, energy and digital services, so it has several ways to prop up the fertilizer arm through a rough patch. ENGRO has also built export muscle: surplus urea can go abroad when domestic demand or prices allow, a revenue lever pure domestic players like FFC don't have. That export optionality is underrated. As Pakistan pushes agricultural commodity exports, ENGRO's logistics and trading setup leaves it well placed for upside in the good years. Both belong on any PSX income investor's watchlist, FFC for sheer dividend consistency, ENGRO for a bit more growth optionality.</p>
-
-  <h2>Building a PKR 200,000 Dividend Portfolio</h2>
-
-  <p>Percentages are fine, but real numbers tell you what this actually feels like. Here is a worked PKR 200,000 starter portfolio across three sectors, using prices and dividends as of May 2026. It's not a recommendation, just an illustration to make the figures concrete for a first-time PSX investor.</p>
-
-  <p>The split is <strong>40% in FFC</strong> (PKR 80,000) for fertilizer, <strong>30% in MCB</strong> (PKR 60,000) for banking, and <strong>30% in HUBC</strong> (PKR 60,000) for power and utility income. Those are three sectors that move to different drums. Fertilizer tracks agriculture and gas prices, banking tracks interest rates and credit cycles, and power tracks electricity demand and government tariff policy. So a slump in one is less likely to wipe out your whole income stream in a bad year.</p>
-
-  <table class="portfolio-table">
-    <tr>
-      <th>Stock</th>
-      <th>Allocation</th>
-      <th>Price (PKR)</th>
-      <th>Approx. Shares</th>
-      <th>Annual Div/Share</th>
-      <th>Est. Annual Income</th>
-    </tr>
-    <tr>
-      <td>FFC &mdash; Fauji Fertilizer</td>
-      <td>PKR 80,000</td>
-      <td>515.42</td>
-      <td>~155</td>
-      <td>PKR 37.00</td>
-      <td>PKR 5,745</td>
-    </tr>
-    <tr>
-      <td>MCB &mdash; MCB Bank</td>
-      <td>PKR 60,000</td>
-      <td>403.41</td>
-      <td>~148</td>
-      <td>PKR 36.00</td>
-      <td>PKR 5,330</td>
-    </tr>
-    <tr>
-      <td>HUBC &mdash; Hub Power</td>
-      <td>PKR 60,000</td>
-      <td>214.43</td>
-      <td>~280</td>
-      <td>PKR 25.00</td>
-      <td>PKR 7,000</td>
-    </tr>
-    <tr>
-      <td><strong>Total</strong></td>
-      <td><strong>PKR 200,000</strong></td>
-      <td>&mdash;</td>
-      <td>&mdash;</td>
-      <td>&mdash;</td>
-      <td><strong>PKR 18,075 / year</strong></td>
-    </tr>
-  </table>
-
-  <p>The blended yield works out to about <strong>9.0%</strong>. After 15% withholding tax for active filers, net annual dividend income is roughly <strong>PKR 15,364</strong>, or about PKR 1,280 a month in passive income from a PKR 200,000 stake.</p>
-
-  <p>Two caveats. First, PSX shares trade in <strong>lots of 500 shares</strong>, so the share counts above are rounded for illustration. In practice you'd tweak the allocations to fit executable lots, or use a broker that handles odd-lot or fractional buys. Second, and this matters more: <strong>future dividends are never guaranteed</strong>. These figures rest on the latest declared dividends, and a company can cut or suspend its payout when profits fall, rules change, or it suddenly needs capital. Spreading across sectors is your main defence against that, not the track record by itself.</p>
-
-  <h2>How to Buy Stocks on PSX: Opening a CDC Account</h2>
-
-  <p>To buy and hold shares on the Pakistan Stock Exchange you need two things: a <strong>CDC (Central Depository Company) Investor Account</strong> that holds your shares electronically, and a <strong>brokerage account</strong> to place the trades. Most brokers open both for you at once.</p>
-
-  <div class="step-block">
-    <div class="step-num">1</div>
-    <div class="step-body">
-      <h3>Choose a PSX-Licensed Broker</h3>
-      <p>Popular online brokers include Arif Habib Securities (ahsecurities.com), MCB Financial Services (mcbfsl.com), and Akseer Research (akseerresearch.com). All are licensed by PSX and SECP.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">2</div>
-    <div class="step-body">
-      <h3>Complete Online KYC</h3>
-      <p>Visit the broker's website and start the account opening process. You'll need your CNIC, a selfie, your bank account details and your ZAKAT declaration status. Most brokers finish verification within 24&ndash;48 hours.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">3</div>
-    <div class="step-body">
-      <h3>Fund Your Trading Account</h3>
-      <p>Move money to your brokerage account through online banking. There's usually no formal minimum, but in practice PKR 10,000&ndash;25,000 gives you enough to buy a worthwhile number of shares in most blue chips.</p>
-    </div>
-  </div>
-
-  <div class="step-block">
-    <div class="step-num">4</div>
-    <div class="step-body">
-      <h3>Place Your First Order</h3>
-      <p>PSX shares trade in <strong>lots of 500 shares</strong>. Search your chosen company by ticker (FFC, MCB and so on), check the live price and place a "buy" order. The shares show up in your CDC account by the next settlement day (T+2).</p>
-    </div>
-  </div>
-
-  <h2>Tax on Dividends from PSX Stocks</h2>
-
-  <ul>
-    <li><strong>Withholding tax on dividends:</strong> 15% for filers, 30% for non-filers. It comes off automatically before the money hits your account.</li>
-    <li><strong>Capital gains tax:</strong> 15% if shares held under 1 year; 12.5% for 1&ndash;2 years; 10% for 2&ndash;3 years; 7.5% for 3&ndash;4 years; 0% for over 4 years.</li>
-    <li>File your annual income tax return to stay a filer. It halves your dividend tax rate.</li>
-  </ul>
-
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-how-much-money-to-start"><summary class="faq-question">Do I need a lot of money to start investing in PSX stocks?</summary><div class="faq-answer">No. PSX shares trade in lots of 500 shares, so the entry cost depends on the share price. For example, 500 shares of a stock priced at PKR 200 costs PKR 100,000. However, some brokers offer fractional investing or you can start with lower-priced stocks. Alternatively, an equity mutual fund gives you PSX exposure from as little as PKR 1,000.</div></details>
-
-  <details class="faq-item" id="faq-how-often-dividends-paid"><summary class="faq-question">How often are dividends paid on PSX?</summary><div class="faq-answer">Most listed companies pay dividends once or twice a year. Banks and fertilizer companies typically pay interim (half-year) and final (full-year) dividends. Some utility companies pay quarterly. Dividend dates are announced via PSX's regulatory filing system (PUCARS) and covered by financial media.</div></details>
-
-  <details class="faq-item" id="faq-what-is-book-closure-date"><summary class="faq-question">What is the book closure date and why does it matter?</summary><div class="faq-answer">The book closure date is the deadline by which you must own shares to be entitled to the declared dividend. If you buy shares after the book closure announcement but before the actual closure date, you receive the dividend. If you buy after the book closure date, you do not. Settlement on PSX is T+2, so you must buy at least 2 business days before book closure.</div></details>
-
-  <details class="faq-item" id="faq-can-i-lose-money"><summary class="faq-question">Can I lose money even if a company pays dividends?</summary><div class="faq-answer">Yes. If a company's share price falls by 15% during the year, a 10% dividend yield results in a net loss of about 5% on your total investment. Dividend income does not insulate you from capital losses. This is why dividend investing is recommended with a minimum 3–5 year horizon and a focus on financially strong companies with consistent multi-year track records.</div></details>
-
-  <details class="faq-item" id="faq-how-to-receive-dividend"><summary class="faq-question">How do I receive my dividend payment from PSX stocks?</summary><div class="faq-answer">Dividends are paid directly to the bank account registered with your CDC Investor Account. The company's share registrar processes payments within 30 days of the book closure date. You receive an SMS/email notification when the dividend is credited. Ensure your bank account details are updated in your CDC profile to avoid delays.</div></details>
-
-  <details class="faq-item" id="faq-what-is-dividend-yield"><summary class="faq-question">What does dividend yield mean and how is it calculated?</summary><div class="faq-answer">Dividend yield is the annual dividend per share divided by the current share price, expressed as a percentage. For example, a share priced at PKR 100 that pays PKR 9 in dividends over a year has a yield of 9%. A very high yield can sometimes signal a falling share price rather than a genuinely generous payout, so it is worth checking why the yield is high before reading it as good news.</div></details>
-
-  <details class="faq-item" id="faq-tax-on-dividends"><summary class="faq-question">How is tax applied to dividends in Pakistan?</summary><div class="faq-answer">Dividend income on PSX shares is generally subject to withholding tax deducted at source before the payment reaches your account, and filers and non-filers are typically treated differently. The exact rates are set in the Finance Act and can change each federal budget, so do not rely on figures quoted in articles. Verify the current dividend tax rates and your filer status position on fbr.gov.pk or with a registered tax practitioner.</div></details>
-
-  <details class="faq-item" id="faq-difference-cash-bonus-dividend"><summary class="faq-question">What is the difference between a cash dividend and a bonus share issue?</summary><div class="faq-answer">A cash dividend pays you money directly into your registered bank account. A bonus share issue instead gives you additional shares in proportion to your existing holding, with no cash changing hands. A bonus issue increases the number of shares you own but does not by itself add new cash to your account, so the two reward shareholders in different ways.</div></details>
-
-  <details class="faq-item" id="faq-find-dividend-history"><summary class="faq-question">Where can I check a company's past dividend history?</summary><div class="faq-answer">A company's dividend announcements are filed through PSX's regulatory system (PUCARS) and are usually summarised on the company's own investor relations page. The PSX corporate actions calendar at psx.com.pk under Market Data then Corporate Actions lists upcoming book closures and declared dividends. Reviewing several years of payouts helps you see whether a company has a consistent track record rather than a one-off payment.</div></details>
-
-  <details class="faq-item" id="faq-do-all-companies-pay"><summary class="faq-question">Do all PSX-listed companies pay dividends?</summary><div class="faq-answer">No. Paying a dividend is a decision made by each company's board of directors, and a company may choose to reinvest its profits for growth instead of distributing them. Some companies pay regularly, some pay irregularly, and some pay nothing at all. Whether a dividend is paid in any given year depends on the company's profits and its board's decision.</div></details>
-
-  <!-- Ad slot 2 — after FAQ -->
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Guides</h3>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better?</a>
-    <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
-    <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate: What It Means for Stock Investors</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">&#9888; This article is for educational purposes only. Stock prices and dividend yields change daily &mdash; verify current figures on psx.com.pk before investing. Past dividend payments do not guarantee future dividends. This is not personalised financial advice. Consult a SECP-registered financial advisor before making investment decisions.</div>
-
 </div>
 
+<main>
+<article class="art-frame">
+
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">Best Dividend Stocks on PSX</li>
+    </ol>
+  </nav>
+
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 03 — PSX Equities · Passive Income</div>
+      <h1>Best dividend stocks on PSX for passive income.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 20 May 2026</span>
+        <span>· 11 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">Where the income is</div>
+      <p>On PSX, <b>fertilizers (FFC, ENGRO)</b> and <b>banks (MCB, UBL, HUBC)</b> carry the highest dividend yields — currently <b class="acc">7–12%</b>. Buying shares requires a CDC brokerage account, and dividend investing suits a <b>3–5 year minimum</b> horizon since prices fluctuate even when payouts are steady.</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 20 May 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">Three things to know</div>
+        <ul>
+          <li>Fertilizers (FFC, ENGRO) and banks (MCB, UBL, HUBC) pay the highest yields on PSX, currently 7–12%</li>
+          <li>You need a CDC brokerage account to buy shares. Full online setup takes 24–48 hours</li>
+          <li>Treat it as a 3–5 year hold. Prices move around even when the dividend itself stays steady</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <h2 id="s1"><span class="sn">01</span>What is dividend investing?</h2>
+
+      <p>When a company makes a profit, it either ploughs it back into the business or hands a slice to shareholders as a <strong>dividend</strong>. In Pakistan, most large companies declare a dividend once or twice a year: usually after their half-year results (the interim dividend) and again after the annual results (the final dividend). The <strong>dividend yield</strong> is how you measure the income a share throws off relative to what it costs you:</p>
+
+      <div class="formula">Dividend Yield = (Annual Dividend per Share ÷ Current Share Price) × 100</div>
+
+      <p>A company paying ₨ 37 per share on a price of ₨ 515 yields roughly 7.18%. That sits a little below the current National Savings Special Savings Certificate rate of 11.6%, but a fixed certificate never raises its payout. A growing company can. With the KSE-100 index at 1,64,742 and the SBP policy rate at 11.5%, blue-chip yields still look reasonable for anyone investing for income.</p>
+
+      <h2 id="s2"><span class="sn">02</span>Why PSX dividend stocks are attractive</h2>
+
+      <ul>
+        <li>Many KSE-100 blue chips have <strong>paid uninterrupted dividends for 20–40 years</strong></li>
+        <li>Yields of 6–14% are common among large caps, which stacks up well against savings rates</li>
+        <li>The dividend itself can grow as profits rise</li>
+        <li>You get capital appreciation on top of the income</li>
+        <li>You can sell on any trading day, so liquidity beats a CDNS certificate</li>
+      </ul>
+
+      <div class="cl-dark">
+        <p><strong>Don't forget the downside:</strong> Unlike National Savings, stock prices move. A share yielding 10% today can still drop 15–20% in a downturn, and then your total return is negative. This works best over a 3–5 year minimum horizon, sticking to financially strong companies with long track records.</p>
+      </div>
+
+      <!-- Live data widget — top 5 dividend yields -->
+      <div class="live-widget">
+        <div class="lw-head">
+          <span class="t">Current Dividend Yields — Top PSX</span>
+          <span class="v">Verified 20 May 2026</span>
+        </div>
+        <div id="div-widget">Loading…</div>
+        <noscript>
+          <table class="lw-tbl" style="display:table">
+            <tr style="display:grid;grid-template-columns:1.6fr 1fr 1fr .9fr;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line2)"><th class="nm" style="text-align:left;background:none;color:var(--green-d);padding:0">Stock</th><th class="fig" style="background:none;color:var(--green-d);padding:0">Price</th><th class="fig" style="background:none;color:var(--green-d);padding:0">Annual Div</th><th class="fig" style="background:none;color:var(--green-d);padding:0">Yield</th></tr>
+            <tr><td class="nm" style="border:none;padding:13px 18px">HUBC — Hub Power</td><td class="fig" style="border:none;padding:13px 18px">₨ 214.43</td><td class="fig" style="border:none;padding:13px 18px">₨ 25.00</td><td class="yld" style="border:none;padding:13px 18px">11.66%</td></tr>
+            <tr><td class="nm" style="border:none;padding:13px 18px">MCB — MCB Bank</td><td class="fig" style="border:none;padding:13px 18px">₨ 403.41</td><td class="fig" style="border:none;padding:13px 18px">₨ 36.00</td><td class="yld" style="border:none;padding:13px 18px">8.92%</td></tr>
+            <tr><td class="nm" style="border:none;padding:13px 18px">UBL — United Bank</td><td class="fig" style="border:none;padding:13px 18px">₨ 385.11</td><td class="fig" style="border:none;padding:13px 18px">₨ 32.00</td><td class="yld" style="border:none;padding:13px 18px">8.31%</td></tr>
+            <tr><td class="nm" style="border:none;padding:13px 18px">FFC — Fauji Fertilizer</td><td class="fig" style="border:none;padding:13px 18px">₨ 515.42</td><td class="fig" style="border:none;padding:13px 18px">₨ 37.00</td><td class="yld" style="border:none;padding:13px 18px">7.18%</td></tr>
+            <tr><td class="nm" style="border:none;padding:13px 18px">HBL — Habib Bank</td><td class="fig" style="border:none;padding:13px 18px">₨ 285.17</td><td class="fig" style="border:none;padding:13px 18px">₨ 21.50</td><td class="yld" style="border:none;padding:13px 18px">7.54%</td></tr>
+          </table>
+          <p style="font-family:var(--body);font-size:.75rem;color:var(--muted);padding:8px 18px;margin:0">Enable JavaScript for live yields</p>
+        </noscript>
+        <div class="lw-chart"><div class="lw-chart-box"><canvas id="c-yields"></canvas></div></div>
+      </div>
+
+      <h2 id="s3"><span class="sn">03</span>Understanding dividend yield vs dividend growth</h2>
+
+      <p>Most first-time investors chase the highest current yield. That number matters, but it is only half the story. The other half is <strong>dividend growth</strong>: how reliably, and how fast, a company raises its dividend per share. Get both right and you have a portfolio that holds up. Chase yield alone and you often end up with one that looked good on paper and then let you down.</p>
+
+      <p>Take <strong>FFC (Fauji Fertilizer Company)</strong>. At a 7.18% yield on a price of ₨ 515, it is not the top-yielding stock on PSX. But FFC has paid a dividend every single year since it listed in the early 1980s, through currency crises, energy shocks, political turmoil and commodity slumps. That unbroken record is worth a premium over a company dangling 12% for two or three years. Hold FFC for a decade and your yield-on-cost (the dividend measured against what you originally paid) keeps climbing, even when the headline market yield looks ordinary in a given year.</p>
+
+      <p><strong>MCB Bank</strong> makes the growth point even more bluntly. MCB paid about ₨ 18 per share in 2019. By 2024 that was ₨ 36. The dividend doubled in five years. Someone who bought in 2019 at a modest 4–5% yield is now earning a yield-on-cost above 9% on their original money, plus a fat capital gain as the price climbed. That is why growers tend to beat pure high-yielders over five to ten years.</p>
+
+      <p>The arithmetic backs it up. A stock starting at a 6% yield, growing its dividend 10% a year, doubles its payout in roughly seven years. Your yield-on-cost hits 12% without you putting in another rupee, just by holding a quality compounder through the cycles.</p>
+
+      <p>Now the warning: <strong>yield traps</strong>. A 15% yield is not always a gift. Often it means the share price has cratered because the market is bracing for a dividend cut. Check the payout ratio (dividend per share over earnings per share). If a company is paying out more than 90% of its earnings, there is almost no cushion for a bad year, and even a small drop in profit puts the dividend at risk. Pair that with a quick look at the earnings trend (growing, flat, or sliding?) and you have a simple screen that catches most of the traps on PSX.</p>
+
+      <h2 id="s4"><span class="sn">04</span>How to read a PSX dividend announcement</h2>
+
+      <p>Get the timeline straight before you place your first buy order. Miss the key dates by a day and you wait another six to twelve months for the payment. On the ex-dividend date the price usually drops by about the dividend amount, so the loss is real.</p>
+
+      <p>When a company declares a dividend, the notice shows up in PSX's regulatory filing system <strong>PUCARS</strong>, on the company's own investor relations page, and in the financial press such as Profit by Pakistan Today and Dawn Business. Bookmark the PSX corporate actions calendar at <strong>psx.com.pk under Market Data → Corporate Actions</strong>. It lists upcoming book closures, so you can see when your holdings pay next.</p>
+
+      <p>Every announcement carries four dates. The <strong>declaration date</strong> is when the board announces the amount. The <strong>right-of-entitlement date</strong> (the ex-dividend date) is the first day new buyers miss out: own the shares before it and you get paid, buy on or after and you don't. The <strong>book closure start and end dates</strong> mark the window when the shareholder register is frozen. The <strong>payment date</strong> is when the cash actually lands, usually 30 days after book closure.</p>
+
+      <p>PSX settles on a <strong>T+2 cycle</strong>, meaning your trade settles two business days after you execute it. So place your buy order at least two business days before the right-of-entitlement date, otherwise your name isn't on the CDC register in time. One day late and you're out for that cycle.</p>
+
+      <p>The dividend itself arrives <strong>automatically</strong> in the bank account linked to your CDC Investor Account. No forms, nothing to chase. The share registrar processes it and you get an SMS or email when the money credits. Your only job is to keep your bank details current in your CDC profile, especially if you've changed banks since opening the account.</p>
+
+      <h2 id="s5"><span class="sn">05</span>Top dividend-paying sectors on PSX</h2>
+
+      <div class="sector-card">
+        <h3><span style="font-family:var(--display);font-weight:700;color:var(--green);opacity:.5">01</span> Fertilizers — highest yields on PSX</h3>
+        <p>Pakistan's fertilizer companies are cash machines. Subsidised gas, farmers who must buy whatever the price, and real pricing power make this the steadiest dividend sector on PSX. Yields of 7–14% are common here.</p>
+        <div class="sector-stocks">
+          <span class="stock-chip">FFC — Fauji Fertilizer</span>
+          <span class="stock-chip">ENGRO — Engro Fertilizers</span>
+          <span class="stock-chip">FFBL — Fauji Fertilizer Bin Qasim</span>
+        </div>
+        <p style="margin-top:12px;font-size:.92rem;color:var(--muted)">FFC has paid a dividend every single year since it listed in the 1980s, one of the most consistent records on PSX.</p>
+      </div>
+
+      <div class="sector-card">
+        <h3><span style="font-family:var(--display);font-weight:700;color:var(--green);opacity:.5">02</span> Banking — reliable twice-yearly dividends</h3>
+        <p>Pakistani banks cashed in hard on the high-rate years of 2023–24 and posted record profits. The large commercial banks now pay hefty dividends twice a year. Earnings will ease as rates come down, but their balance sheets are strong enough that big dividend cuts look unlikely.</p>
+        <div class="sector-stocks">
+          <span class="stock-chip">MCB — MCB Bank</span>
+          <span class="stock-chip">HBL — Habib Bank</span>
+          <span class="stock-chip">UBL — United Bank</span>
+          <span class="stock-chip">BAHL — Bank Al-Habib</span>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <h3><span style="font-family:var(--display);font-weight:700;color:var(--green);opacity:.5">03</span> Oil &amp; Gas — high yields, state exposure</h3>
+        <p>Pakistan's big oil and gas names are mostly state-owned and have long paid high dividends. Their fortunes ride on commodity prices and government policy, but the yields still appeal to income investors.</p>
+        <div class="sector-stocks">
+          <span class="stock-chip">PPL — Pakistan Petroleum</span>
+          <span class="stock-chip">OGDC — Oil &amp; Gas Dev. Co.</span>
+          <span class="stock-chip">PSO — Pakistan State Oil</span>
+        </div>
+      </div>
+
+      <div class="sector-card">
+        <h3><span style="font-family:var(--display);font-weight:700;color:var(--green);opacity:.5">04</span> Cement — cyclical but capital efficient</h3>
+        <p>Pakistan's larger cement makers have real export capacity and stand to gain from infrastructure spending. Yields run lower than fertilizers, but the capital upside is bigger when a construction boom hits.</p>
+        <div class="sector-stocks">
+          <span class="stock-chip">LUCK — Lucky Cement</span>
+          <span class="stock-chip">DGKC — D.G. Khan Cement</span>
+        </div>
+      </div>
+
+      <h2 id="s5b"><span class="sn">06</span>Sector deep dive: banking stocks</h2>
+
+      <p>Pakistani commercial banks had a remarkable run from 2022 to 2024, when the SBP policy rate peaked at 22%. At that level they could park spare liquidity in government paper, T-bills and Pakistan Investment Bonds, and pocket a risk-free spread several points above their cost of deposits. Net interest income hit records across the sector. MCB, HBL and UBL posted after-tax profits 40–70% above their pre-hike averages, and a big chunk of that flowed back to shareholders. That is why bank yields surged.</p>
+
+      <p>With the rate now at 11.5% and easing underway, those earnings will come back down to earth. As rates drop, the yield on maturing government paper shrinks too, and the gap between what banks earn on their assets and pay on deposits narrows. This <strong>spread compression</strong> is the main earnings risk for bank investors in 2025–26. Understand it before you commit capital.</p>
+
+      <p>Not every bank is equally exposed, though. <strong>The big lenders like MCB and HBL</strong> have real structural edges: diversified loan books, solid fee income from trade finance, remittances and bancassurance, and cheaper funding thanks to large CASA (current account and savings account) deposit bases. That protects their margins far better than mid-tier banks with thinner product ranges. <strong>MCB is the gold standard for dividend consistency on PSX.</strong> It hasn't cut its dividend in over a decade, even through ugly cycles. If you're a conservative income investor, sticking to the top-four banks carries far less cut risk than reaching for the fatter yields at smaller lenders. One more thing to watch: if the SBP rate drops sharply below 9%, bank share prices may climb on better sentiment, which trims their trailing yields even when the rupee dividend per share doesn't budge.</p>
+
+      <h2 id="s5c"><span class="sn">07</span>Sector deep dive: fertilizer stocks</h2>
+
+      <p>Fertilizer holds a special spot in the PSX dividend picture. Demand for urea barely moves with price. Farmers have to apply it every planting season, and the country's food security depends on it. Add a long-standing government policy of supplying subsidised natural gas as feedstock to the plants, and you get a sector that has churned out profits and dividends for decades.</p>
+
+      <p><strong>FFC (Fauji Fertilizer Company)</strong> is Pakistan's biggest urea producer, backed by the Fauji Foundation, one of the country's largest institutional investors with deep government ties. It has paid a dividend every single year since listing in the 1980s, a record almost no one on PSX can match. The main structural threat is gas subsidy risk: if the government trims or scraps the feedstock subsidy that keeps FFC's costs low, margins suffer. So far FFC has absorbed that through pricing and efficiency, and the government's own food security goals give it a strong reason to keep the subsidy in place.</p>
+
+      <p><strong>ENGRO Fertilizers</strong>, part of the wider ENGRO Corporation, carries a slightly different risk profile. The parent spans petrochemicals, foods, energy and digital services, so it has several ways to prop up the fertilizer arm through a rough patch. ENGRO has also built export muscle: surplus urea can go abroad when domestic demand or prices allow, a revenue lever pure domestic players like FFC don't have. That export optionality is underrated. As Pakistan pushes agricultural commodity exports, ENGRO's logistics and trading setup leaves it well placed for upside in the good years. Both belong on any PSX income investor's watchlist, FFC for sheer dividend consistency, ENGRO for a bit more growth optionality.</p>
+
+      <h2 id="s6"><span class="sn">08</span>Building a ₨ 2,00,000 dividend portfolio</h2>
+
+      <p>Percentages are fine, but real numbers tell you what this actually feels like. Here is a worked ₨ 2,00,000 starter portfolio across three sectors, using prices and dividends as of May 2026. It's not a recommendation, just an illustration to make the figures concrete for a first-time PSX investor.</p>
+
+      <p>The split is <strong>40% in FFC</strong> (₨ 80,000) for fertilizer, <strong>30% in MCB</strong> (₨ 60,000) for banking, and <strong>30% in HUBC</strong> (₨ 60,000) for power and utility income. Those are three sectors that move to different drums. Fertilizer tracks agriculture and gas prices, banking tracks interest rates and credit cycles, and power tracks electricity demand and government tariff policy. So a slump in one is less likely to wipe out your whole income stream in a bad year.</p>
+
+      <div class="pf-wrap">
+        <table class="portfolio-table">
+          <thead>
+            <tr>
+              <th>Stock</th>
+              <th>Allocation</th>
+              <th>Price (₨)</th>
+              <th>Approx. Shares</th>
+              <th>Annual Div/Share</th>
+              <th>Est. Annual Income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FFC — Fauji Fertilizer</td>
+              <td>₨ 80,000</td>
+              <td>515.42</td>
+              <td>~155</td>
+              <td>₨ 37.00</td>
+              <td>₨ 5,745</td>
+            </tr>
+            <tr>
+              <td>MCB — MCB Bank</td>
+              <td>₨ 60,000</td>
+              <td>403.41</td>
+              <td>~148</td>
+              <td>₨ 36.00</td>
+              <td>₨ 5,330</td>
+            </tr>
+            <tr>
+              <td>HUBC — Hub Power</td>
+              <td>₨ 60,000</td>
+              <td>214.43</td>
+              <td>~280</td>
+              <td>₨ 25.00</td>
+              <td>₨ 7,000</td>
+            </tr>
+            <tr class="total">
+              <td>Total</td>
+              <td>₨ 2,00,000</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>₨ 18,075 / yr</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The blended yield works out to about <strong>9.0%</strong>. After 15% withholding tax for active filers, net annual dividend income is roughly <strong>₨ 15,364</strong>, or about ₨ 1,280 a month in passive income from a ₨ 2,00,000 stake.</p>
+
+      <p>Two caveats. First, PSX shares trade in <strong>lots of 500 shares</strong>, so the share counts above are rounded for illustration. In practice you'd tweak the allocations to fit executable lots, or use a broker that handles odd-lot or fractional buys. Second, and this matters more: <strong>future dividends are never guaranteed</strong>. These figures rest on the latest declared dividends, and a company can cut or suspend its payout when profits fall, rules change, or it suddenly needs capital. Spreading across sectors is your main defence against that, not the track record by itself.</p>
+
+      <h2 id="s7"><span class="sn">09</span>How to buy stocks on PSX: opening a CDC account</h2>
+
+      <p>To buy and hold shares on the Pakistan Stock Exchange you need two things: a <strong>CDC (Central Depository Company) Investor Account</strong> that holds your shares electronically, and a <strong>brokerage account</strong> to place the trades. Most brokers open both for you at once.</p>
+
+      <div class="step-block">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Choose a PSX-licensed broker</h3>
+          <p>Popular online brokers include Arif Habib Securities (ahsecurities.com), MCB Financial Services (mcbfsl.com), and Akseer Research (akseerresearch.com). All are licensed by PSX and SECP.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Complete online KYC</h3>
+          <p>Visit the broker's website and start the account opening process. You'll need your CNIC, a selfie, your bank account details and your ZAKAT declaration status. Most brokers finish verification within 24–48 hours.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Fund your trading account</h3>
+          <p>Move money to your brokerage account through online banking. There's usually no formal minimum, but in practice ₨ 10,000–25,000 gives you enough to buy a worthwhile number of shares in most blue chips.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Place your first order</h3>
+          <p>PSX shares trade in <strong>lots of 500 shares</strong>. Search your chosen company by ticker (FFC, MCB and so on), check the live price and place a "buy" order. The shares show up in your CDC account by the next settlement day (T+2).</p>
+        </div>
+      </div>
+
+      <h2 id="s8"><span class="sn">10</span>Tax on dividends from PSX stocks</h2>
+
+      <ul>
+        <li><strong>Withholding tax on dividends:</strong> 15% for filers, 30% for non-filers. It comes off automatically before the money hits your account.</li>
+        <li><strong>Capital gains tax:</strong> 15% if shares held under 1 year; 12.5% for 1–2 years; 10% for 2–3 years; 7.5% for 3–4 years; 0% for over 4 years.</li>
+        <li>File your annual income tax return to stay a filer. It halves your dividend tax rate.</li>
+      </ul>
+
+      <h2 id="s9"><span class="sn">11</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-how-much-money-to-start"><summary class="faq-question">Do I need a lot of money to start investing in PSX stocks?</summary><div class="faq-answer">No. PSX shares trade in lots of 500 shares, so the entry cost depends on the share price. For example, 500 shares of a stock priced at PKR 200 costs PKR 100,000. However, some brokers offer fractional investing or you can start with lower-priced stocks. Alternatively, an equity mutual fund gives you PSX exposure from as little as PKR 1,000.</div></details>
+
+      <details class="faq-item" id="faq-how-often-dividends-paid"><summary class="faq-question">How often are dividends paid on PSX?</summary><div class="faq-answer">Most listed companies pay dividends once or twice a year. Banks and fertilizer companies typically pay interim (half-year) and final (full-year) dividends. Some utility companies pay quarterly. Dividend dates are announced via PSX's regulatory filing system (PUCARS) and covered by financial media.</div></details>
+
+      <details class="faq-item" id="faq-what-is-book-closure-date"><summary class="faq-question">What is the book closure date and why does it matter?</summary><div class="faq-answer">The book closure date is the deadline by which you must own shares to be entitled to the declared dividend. If you buy shares after the book closure announcement but before the actual closure date, you receive the dividend. If you buy after the book closure date, you do not. Settlement on PSX is T+2, so you must buy at least 2 business days before book closure.</div></details>
+
+      <details class="faq-item" id="faq-can-i-lose-money"><summary class="faq-question">Can I lose money even if a company pays dividends?</summary><div class="faq-answer">Yes. If a company's share price falls by 15% during the year, a 10% dividend yield results in a net loss of about 5% on your total investment. Dividend income does not insulate you from capital losses. This is why dividend investing is recommended with a minimum 3–5 year horizon and a focus on financially strong companies with consistent multi-year track records.</div></details>
+
+      <details class="faq-item" id="faq-how-to-receive-dividend"><summary class="faq-question">How do I receive my dividend payment from PSX stocks?</summary><div class="faq-answer">Dividends are paid directly to the bank account registered with your CDC Investor Account. The company's share registrar processes payments within 30 days of the book closure date. You receive an SMS/email notification when the dividend is credited. Ensure your bank account details are updated in your CDC profile to avoid delays.</div></details>
+
+      <details class="faq-item" id="faq-what-is-dividend-yield"><summary class="faq-question">What does dividend yield mean and how is it calculated?</summary><div class="faq-answer">Dividend yield is the annual dividend per share divided by the current share price, expressed as a percentage. For example, a share priced at PKR 100 that pays PKR 9 in dividends over a year has a yield of 9%. A very high yield can sometimes signal a falling share price rather than a genuinely generous payout, so it is worth checking why the yield is high before reading it as good news.</div></details>
+
+      <details class="faq-item" id="faq-tax-on-dividends"><summary class="faq-question">How is tax applied to dividends in Pakistan?</summary><div class="faq-answer">Dividend income on PSX shares is generally subject to withholding tax deducted at source before the payment reaches your account, and filers and non-filers are typically treated differently. The exact rates are set in the Finance Act and can change each federal budget, so do not rely on figures quoted in articles. Verify the current dividend tax rates and your filer status position on fbr.gov.pk or with a registered tax practitioner.</div></details>
+
+      <details class="faq-item" id="faq-difference-cash-bonus-dividend"><summary class="faq-question">What is the difference between a cash dividend and a bonus share issue?</summary><div class="faq-answer">A cash dividend pays you money directly into your registered bank account. A bonus share issue instead gives you additional shares in proportion to your existing holding, with no cash changing hands. A bonus issue increases the number of shares you own but does not by itself add new cash to your account, so the two reward shareholders in different ways.</div></details>
+
+      <details class="faq-item" id="faq-find-dividend-history"><summary class="faq-question">Where can I check a company's past dividend history?</summary><div class="faq-answer">A company's dividend announcements are filed through PSX's regulatory system (PUCARS) and are usually summarised on the company's own investor relations page. The PSX corporate actions calendar at psx.com.pk under Market Data then Corporate Actions lists upcoming book closures and declared dividends. Reviewing several years of payouts helps you see whether a company has a consistent track record rather than a one-off payment.</div></details>
+
+      <details class="faq-item" id="faq-do-all-companies-pay"><summary class="faq-question">Do all PSX-listed companies pay dividends?</summary><div class="faq-answer">No. Paying a dividend is a decision made by each company's board of directors, and a company may choose to reinvest its profits for growth instead of distributing them. Some companies pay regularly, some pay irregularly, and some pay nothing at all. Whether a dividend is paid in any given year depends on the company's profits and its board's decision.</div></details>
+
+      <!-- Ad slot 2 — after FAQ -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only. Stock prices and dividend yields change daily — verify current figures on psx.com.pk before investing. Past dividend payments do not guarantee future dividends. This is not personalised financial advice. Consult a SECP-registered financial advisor before making investment decisions.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>What is dividend investing?</a>
+            <a href="#s2"><span class="ti">02</span>Why PSX dividend stocks</a>
+            <a href="#s3"><span class="ti">03</span>Yield vs growth</a>
+            <a href="#s4"><span class="ti">04</span>Reading an announcement</a>
+            <a href="#s5"><span class="ti">05</span>Top sectors</a>
+            <a href="#s6"><span class="ti">08</span>A ₨ 2,00,000 portfolio</a>
+            <a href="#s7"><span class="ti">09</span>Opening a CDC account</a>
+            <a href="#s8"><span class="ti">10</span>Tax on dividends</a>
+            <a href="#s9"><span class="ti">11</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">7–12%</div><div class="gl-l">Typical blue-chip yield</div></div>
+          <div class="gl-row"><div class="gl-n">₨ 1,280</div><div class="gl-l">Net monthly on ₨ 2,00,000</div></div>
+          <div class="gl-row"><div class="gl-n">T+2</div><div class="gl-l">PSX settlement cycle</div></div>
+          <div class="gl-row"><div class="gl-n">3–5 yr</div><div class="gl-l">Minimum horizon</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds →</a>
+          <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds →</a>
+          <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</article>
+</main>
+
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>&copy; 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only &mdash; not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
+<!-- Live dividend widget — fetch data.json, render top-5 table + Chart.js bar -->
+<script>
+(function () {
+  function fmt(n){ return Number(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  var widget = document.getElementById('div-widget');
+  fetch('/data.json?v=' + Date.now()).then(function(r){ return r.json(); }).then(function(d){
+    var top = d.stocks.filter(function(s){ return s.yield > 0; })
+                      .sort(function(a,b){ return b.yield - a.yield; })
+                      .slice(0,5);
+    var rows = top.map(function(s){
+      return '<tr>'
+        + '<td class="nm" style="border:none;padding:0"><strong>' + s.ticker + '</strong> — ' + s.name + '</td>'
+        + '<td class="fig" style="border:none;padding:0">₨ ' + fmt(s.price) + '</td>'
+        + '<td class="fig" style="border:none;padding:0">₨ ' + fmt(s.div) + '</td>'
+        + '<td class="yld" style="border:none;padding:0">' + s.yield.toFixed(2) + '%</td>'
+        + '</tr>';
+    }).join('');
+    widget.innerHTML = '<table class="lw-tbl">' + rows + '</table>';
+    widget.style.padding = '0';
+    // Chart.js bar — same fetched data, acid-lime highlights the top yielder
+    var el = document.getElementById('c-yields');
+    function draw(){
+      if (!window.Chart || !el) return;
+      var labels = top.map(function(s){ return s.ticker; });
+      var vals = top.map(function(s){ return +s.yield.toFixed(2); });
+      var max = Math.max.apply(null, vals);
+      var ink = '#075E4B', acid = '#EDF804', sage = 'rgba(7,94,75,.14)', mut = '#5C7A6F';
+      var mono = { family: "'Poppins', sans-serif", size: 10, weight: '600' };
+      new Chart(el, {
+        type: 'bar',
+        data: { labels: labels, datasets: [{ data: vals, backgroundColor: vals.map(function(v){ return v === max ? acid : ink; }), borderColor: ink, borderWidth: 1 }] },
+        options: { responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { enabled: false } },
+          scales: {
+            x: { grid: { display: false }, border: { color: 'rgba(7,94,75,.3)' }, ticks: { color: mut, font: mono } },
+            y: { grid: { color: sage }, border: { display: false }, ticks: { color: mut, font: mono, callback: function(v){ return v + '%'; } } }
+          } }
+      });
+    }
+    if (window.Chart) draw();
+    else { var t = setInterval(function(){ if (window.Chart) { clearInterval(t); draw(); } }, 120); }
+  }).catch(function(){ widget.textContent = 'Unable to load live data.'; });
+})();
+</script>
+
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

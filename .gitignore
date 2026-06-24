@@ -11,3 +11,8 @@ node_modules/
 
 .jpg
 .png
+v2
+# v1 page backups from the v2 redesign — keep local, never deploy
+*.v1-backup.html
+# local-only visual review/markup tool — never deploy
+assets/review-mode.js

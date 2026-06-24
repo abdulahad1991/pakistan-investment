@@ -39,12 +39,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -53,23 +53,67 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-4T2H0KH9H7');
 </script>
+
+<style>
+/* ── contact.html — page-specific (v2 macro-terminal) ───────────── */
+.ct-hero{display:grid;grid-template-columns:7fr 5fr}
+.ct-hero-copy{padding:52px 44px;border-right:1px solid var(--line)}
+.ct-eyebrow{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);text-transform:uppercase;margin-bottom:22px}
+.ct-hero-copy h1{font-family:var(--display);font-size:3.4rem;font-weight:800;line-height:.98;letter-spacing:-.025em;color:var(--green-d);margin:0 0 20px;max-width:520px}
+.ct-hero-copy .lead{font-family:var(--body);font-size:1.06rem;line-height:1.55;color:var(--ink2);max-width:440px;margin:0;font-weight:500}
+
+/* channel rows — hover reveals deep-green panel + acid rail */
+.ct-channels{display:flex;flex-direction:column}
+.ct-channel{padding:26px 28px;border-bottom:1px solid var(--line2);color:var(--ink);transition:background .15s,color .15s,box-shadow .15s;display:block}
+.ct-channel:last-child{border-bottom:none}
+.ct-channel:hover,.ct-channel:focus-visible{background:var(--green);color:var(--mint);box-shadow:inset 5px 0 0 var(--acid)}
+.ct-channel .ct-lbl{font-family:var(--display);font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:inherit;opacity:.62;margin-bottom:6px}
+.ct-channel .ct-val{font-family:var(--display);font-size:1.06rem;font-weight:700;color:inherit;word-break:break-word}
+
+.ct-note{padding:18px 44px;font-family:var(--body);font-size:.88rem;color:var(--muted)}
+
+/* reasons grid */
+.ct-reasons-head{padding:40px 44px 20px}
+.ct-reasons-head h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:0}
+.ct-reasons{display:grid;grid-template-columns:1fr 1fr;list-style:none;margin:0;padding:0}
+.ct-reasons li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:baseline;padding:18px 44px;border-top:1px solid var(--line2)}
+.ct-reasons li .ri{font-family:var(--mono);font-size:.84rem;font-weight:600;color:var(--green)}
+.ct-reasons li .rt{font-family:var(--body);font-size:.96rem;font-weight:600;color:var(--ink2)}
+
+.ct-disclaim-wrap{padding:24px 44px;border-top:1px solid var(--line)}
+.ct-disclaim{background:var(--green-d);border-left:5px solid var(--acid);padding:16px 20px;font-family:var(--body);font-size:.86rem;color:#D7E7DD;line-height:1.6}
+.ct-disclaim strong{color:var(--acid)}
+
+@media(max-width:860px){
+  .ct-hero{grid-template-columns:1fr}
+  .ct-hero-copy{border-right:none;border-bottom:1px solid var(--line);padding:36px 22px}
+  .ct-hero-copy h1{font-size:2.5rem}
+  .ct-channel{padding:22px}
+  .ct-note{padding:18px 22px}
+  .ct-reasons{grid-template-columns:1fr}
+  .ct-reasons-head{padding:32px 22px 16px}
+  .ct-reasons li{padding:16px 22px}
+  .ct-disclaim-wrap{padding:22px}
+}
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header ─────────────────────────────────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -78,80 +122,124 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="page-brand"><img src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63"></div>
-  <h1>Contact</h1>
-  <p class="lead">Have feedback, found a data error, or want to ask a question about investing in Pakistan? I'd love to hear from you.</p>
-
-  <div class="card">
-    <h2>Get in Touch</h2>
-
-    <div class="contact-method">
-      <div class="contact-icon">✉️</div>
-      <div>
-        <div class="contact-label">Email</div>
-        <div class="contact-val"><a href="mailto:abdulahad1991@gmail.com">abdulahad1991@gmail.com</a></div>
-      </div>
+<!-- ── Live ticker ───────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
-
-    <div class="contact-method">
-      <div class="contact-icon">💼</div>
-      <div>
-        <div class="contact-label">LinkedIn</div>
-        <div class="contact-val"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">linkedin.com/in/abdulahad1991</a></div>
-      </div>
-    </div>
-
-    <div class="contact-method">
-      <div class="contact-icon">💻</div>
-      <div>
-        <div class="contact-label">GitHub</div>
-        <div class="contact-val"><a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">github.com/abdulahad1991</a></div>
-      </div>
-    </div>
-
-    <p style="margin-top:16px;font-size:.88rem;color:var(--muted)">I typically respond within 1–3 business days. This is a personal project run in my spare time, so I appreciate your patience.</p>
   </div>
+</div>
 
-  <div class="card">
-    <h2>What to Contact Us About</h2>
-    <ul class="reasons-list">
-      <li>A data error — wrong rate, stale price, or broken source</li>
-      <li>A suggestion for a new investment instrument to add</li>
-      <li>Feedback on the tool or a guide article</li>
-      <li>A question about how to interpret the data</li>
-      <li>A partnership or collaboration inquiry</li>
-      <li>A request to correct or update information</li>
-    </ul>
+<main>
+
+<!-- breadcrumb -->
+<div class="v2-frame">
+  <nav aria-label="Breadcrumb" class="breadcrumb" style="padding:14px 44px;border-bottom:1px solid var(--line);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted)">
+    <ol style="list-style:none;margin:0;padding:0;display:inline">
+      <li style="display:inline"><a href="/" style="color:var(--green)">HOME</a></li>
+      <li style="display:inline">&nbsp;/&nbsp; CONTACT</li>
+    </ol>
+  </nav>
+</div>
+
+<!-- editorial hero + channel rows -->
+<div class="v2-frame">
+  <div class="ct-hero">
+    <div class="ct-hero-copy">
+      <div class="ct-eyebrow">Contact the desk</div>
+      <h1>Get in touch.</h1>
+      <p class="lead">Have feedback, found a data error, or want to ask a question about investing in Pakistan? I'd love to hear from you. Typical reply in 1–3 business days — this is a personal project run in my spare time, so I appreciate your patience.</p>
+    </div>
+    <div class="ct-channels">
+      <a class="ct-channel" href="mailto:abdulahad1991@gmail.com">
+        <div class="ct-lbl">Email</div>
+        <div class="ct-val">abdulahad1991@gmail.com →</div>
+      </a>
+      <a class="ct-channel" href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">
+        <div class="ct-lbl">LinkedIn</div>
+        <div class="ct-val">linkedin.com/in/abdulahad1991 →</div>
+      </a>
+      <a class="ct-channel" href="https://github.com/abdulahad1991" target="_blank" rel="noopener">
+        <div class="ct-lbl">GitHub</div>
+        <div class="ct-val">github.com/abdulahad1991 →</div>
+      </a>
+      <div class="ct-note">I typically respond within 1–3 business days.</div>
+    </div>
   </div>
+</div>
 
-  <div style="position:relative" class="ad-slot">
+<!-- Ad slot 1 -->
+<div class="v2-frame">
+  <div class="ad-slot">
     <span class="ad-label">Advertisement</span>
     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="1521267786" data-ad-format="auto" data-full-width-responsive="true"></ins>
   </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-  <div class="disclaimer-box">
-    <strong style="color:#7A5A1F">Please note:</strong> Pakistan Investment Advisor is an educational tool only. We are not licensed financial advisors and cannot provide personalised investment advice via email or any other channel. For advice specific to your financial situation, please consult a SECP-registered financial advisor.
+<!-- what to get in touch about -->
+<div class="v2-frame">
+  <div class="ct-reasons-head">
+    <h2>What to get in touch about</h2>
   </div>
-
+  <ul class="ct-reasons">
+    <li><span class="ri">01</span><span class="rt">A data error — wrong rate, stale price, or broken source</span></li>
+    <li><span class="ri">02</span><span class="rt">A suggestion for a new investment instrument to add</span></li>
+    <li><span class="ri">03</span><span class="rt">Feedback on the tool or a guide article</span></li>
+    <li><span class="ri">04</span><span class="rt">A question about how to interpret the data</span></li>
+    <li><span class="ri">05</span><span class="rt">A partnership or collaboration inquiry</span></li>
+    <li><span class="ri">06</span><span class="rt">A request to correct or update information</span></li>
+  </ul>
+  <div class="ct-disclaim-wrap">
+    <div class="ct-disclaim"><strong>Please note:</strong> Pakistan Investment Advisor is an educational tool only. We are not licensed financial advisors and cannot provide personalised investment advice via email or any other channel. For advice specific to your financial situation, please consult a SECP-registered financial advisor.</div>
+  </div>
 </div>
 
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

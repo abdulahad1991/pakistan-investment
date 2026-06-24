@@ -131,12 +131,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -158,23 +158,175 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.6vw,3.5rem);font-weight:800;line-height:1;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:620px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose ul li:last-child{border-bottom:none}
+  .prose ul li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* ordered (numbered) lists — keep numerals visible */
+  .prose ol{margin:0 0 18px;padding-left:0;list-style:none;counter-reset:step}
+  .prose ol li{counter-increment:step;padding:12px 0 12px 40px;border-bottom:1px solid var(--line2);position:relative}
+  .prose ol li:last-child{border-bottom:none}
+  .prose ol li::before{content:counter(step);position:absolute;left:0;top:11px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:var(--green-d);color:var(--acid);font-family:var(--display);font-size:.8rem;font-weight:700;border-radius:3px}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:24px 0 6px}
+
+  /* links inside prose */
+  .prose p a,.prose li a,.prose td a{color:var(--green);border-bottom:1px solid var(--line);font-weight:700}
+  .prose p a:hover,.prose li a:hover,.prose td a:hover{color:var(--green2)}
+
+  /* quick-answer lede */
+  .lede{background:var(--mint);border-left:4px solid var(--acid);font-family:var(--body);font-size:1.08rem;line-height:1.65;color:var(--green-d);padding:16px 22px;margin:0 0 24px;font-weight:600}
+  .lede strong{color:var(--green-d);font-weight:800}
+
+  /* key callout (mint, acid bar) */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+
+  /* dark callouts */
+  .cl-dark{background:var(--green-d);padding:18px 22px;margin:0 0 24px;border-left:4px solid var(--acid)}
+  .cl-dark .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--acid);margin-bottom:8px;text-transform:uppercase}
+  .cl-dark p{margin:0;color:#E4F2EA;font-family:var(--body);font-size:1.02rem;line-height:1.6;font-weight:500}
+  .cl-dark p strong{color:var(--acid)!important;font-weight:700}
+  .cl-dark p a{color:#fff;border-bottom:1px solid rgba(255,255,255,.4);font-weight:700}
+
+  /* live snapshot widget shell */
+  .live-widget{border:1px solid var(--line);margin:0 0 28px}
+  .lw-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--mint);border-top:3px solid var(--acid)}
+  .lw-head .t{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--green-d);text-transform:uppercase}
+  #live-snap{padding:18px;font-family:var(--body);font-size:.9rem;color:var(--muted)}
+  #live-snap:empty{display:none}
+
+  /* three-ways cards */
+  .ways-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 28px}
+  .way-card{border:1px solid var(--line);background:var(--paper);padding:18px;border-top:3px solid var(--green)}
+  .way-card .ico{font-size:1.6rem;line-height:1;margin-bottom:10px}
+  .way-card .wt{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--green-d);margin-bottom:6px}
+  .way-card .wd{font-family:var(--body);font-size:.88rem;line-height:1.55;color:var(--ink2);font-weight:500}
+  .way-card.up{border-top-color:var(--green3)}
+  .way-card.dn{border-top-color:var(--red)}
+
+  /* comparison table */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);margin:0 0 18px}
+  .data-table{width:100%;border-collapse:collapse;min-width:560px}
+  .data-table th{font-family:var(--display);font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-d);text-align:left;padding:12px 14px;background:var(--mint);border-bottom:2px solid var(--acid)}
+  .data-table td{font-family:var(--body);font-size:.9rem;line-height:1.5;color:var(--ink2);padding:12px 14px;border-bottom:1px solid var(--line2);vertical-align:top}
+  .data-table tr:last-child td{border-bottom:none}
+  .data-table td:first-child{font-family:var(--display);font-weight:700;color:var(--green-d);white-space:nowrap}
+  .data-table tr:hover td{background:var(--paper3)}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7}
+
+  /* related links block */
+  .related{border-top:1px solid var(--line);padding:24px 0 0;margin:8px 0 0}
+  .related h3{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin:0 0 12px;text-transform:uppercase}
+  .related a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d)}
+  .related a:first-of-type{border-top:none}
+  .related a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+    .ways-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
-      <a href="/guides/">Guides</a>
+      <a href="/guides/" class="active">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -183,252 +335,362 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/guides/">Guides</a> › Gold Investment in Pakistan</div>
-
-  <h1>Gold Investment in Pakistan: Physical Gold, Digital Gold &amp; Gold Funds (2026)</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Last updated: 12 June 2026 &nbsp;·&nbsp; 11 min read</div>
-
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>Three ways to own gold:</strong> Pakistani retail investors can hold gold three ways: physical 24k bars or coins, SECP-regulated gold mutual funds, and PMEX gold contracts. Gold acts as a currency hedge that pays no income, typically sized at 5–15% of a portfolio.</p>
-
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Updated 12 June 2026</span></div>
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
   </div>
-
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>Gold in three lines:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>Gold is a currency hedge, not an income asset. It pays nothing, while an SSC yields 11.6% and big PSX banks pay 7–9% dividends.</li>
-      <li>For investment, buy 24k bars or coins, never jewellery. Making charges and wastage deductions destroy returns on resale.</li>
-      <li>Keep gold to 5–15% of your portfolio. Gold mutual funds are the easiest low-hassle route; PMEX contracts are for experienced traders only.</li>
-    </ul>
-  </div>
-
-  <!-- Ad slot 1 — after summary, before main content -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>No asset is woven as deeply into Pakistani financial life as gold. It anchors wedding budgets and sits in lockers as the family emergency reserve. But owning gold by tradition is not the same as owning it as a deliberate investment. This guide covers the three ways a Pakistani retail investor can get gold exposure in 2026 (physical gold, gold-backed mutual funds, and PMEX contracts) plus the purity checks, spread costs, and portfolio math that decide whether gold actually makes you money.</p>
-
-  
-  <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-top:3px solid #B98A2F;border-radius:6px;padding:18px;margin:0 0 26px"></div>
-<h2>Why Pakistanis Hold Gold: The Rupee Story</h2>
-
-  <p>The case for gold in Pakistan is, at its core, a case against holding rupees idle. In 2020, one US dollar bought roughly 160 rupees. Today the interbank rate is around <strong>278</strong>. You can verify the current rate on the <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">State Bank of Pakistan</a> website. That is a loss of more than 40% of the rupee's dollar value in about six years.</p>
-
-  <p>Gold is priced globally in US dollars. So even when the international gold price moves sideways, the rupee price of gold rises every time the currency slips. A family that converted rupee savings into gold in 2020 protected purchasing power that a bank deposit holder lost. This is why gold demand spikes during currency crises. It is the most accessible foreign-currency-linked asset an ordinary household can buy, with no brokerage or dollar account required.</p>
-
-  <p>The picture in 2026 is more balanced, though. CPI inflation has come down to <strong>7.0%</strong>, the SBP policy rate is <strong>11.5%</strong> (and holding there), and rupee instruments now pay a real return of roughly +4.5%. When cash actually grows in purchasing-power terms, the urgency of fleeing into gold fades. That is exactly when it pays to think about gold deliberately rather than emotionally.</p>
-
-  <h2>How Gold Is Priced in Pakistan: Tola, Karat, and the Sarafa Rate</h2>
-
-  <p>Before buying anything, learn the units. Pakistani gold trades in <strong>tola</strong>, and one tola is 11.66 grams. Jewellers quote a per-tola and per-10-gram rate that updates daily, set by local bullion dealer associations (the most-watched benchmark comes out of Karachi's Sarafa bazaar) and derived from the international spot price converted at the prevailing rupee-dollar rate. I will not quote a per-tola figure here, because it would be stale within days. Check the day's rate with your local sarafa association or a reputable jeweller, and sanity-check it against the international price and the <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">SBP exchange rate</a>.</p>
-
-  <p>Purity is measured in karats. <strong>24-karat</strong> gold is 99.9% pure and is what bars and coins are made of. <strong>22-karat</strong> is about 91.6% pure, alloyed with copper or silver for durability, and it is the standard for most Pakistani jewellery, with 21k and 18k also common. The quoted sarafa rate is for pure gold. A 22k item contains proportionally less, and an honest jeweller prices it accordingly.</p>
-
-  <p>The third concept is <strong>making charges</strong> (and their cousin, "wastage"). Jewellery costs the gold value plus a craftsmanship charge that ranges from a small percentage to well over a tenth of the item's value for intricate designs. When you sell it back, the jeweller pays for the gold content only. The making charges are gone, and many shops deduct further wastage on top. That round trip is why jewellery is a gift and an heirloom, but a poor investment vehicle.</p>
-
-  <h2>The Three Ways to Own Gold in Pakistan</h2>
-
-  <div class="impact-grid">
-    <div class="impact-card">
-      <div class="impact-icon">🪙</div>
-      <div class="impact-title">Physical Gold</div>
-      <div class="impact-desc">Bars, coins, or jewellery from a jeweller. Tangible and universally accepted — but you carry storage, theft, and purity risk plus a buy-sell spread.</div>
-    </div>
-    <div class="impact-card">
-      <div class="impact-icon">📊</div>
-      <div class="impact-title">Gold Mutual Funds</div>
-      <div class="impact-desc impact-up">SECP-regulated funds that track the gold price. No locker, no purity worries, small minimums — the most practical route for most investors.</div>
-    </div>
-    <div class="impact-card">
-      <div class="impact-icon">⚠️</div>
-      <div class="impact-title">PMEX Gold Contracts</div>
-      <div class="impact-desc impact-dn">Exchange-traded gold futures bought on margin. Leverage cuts both ways — experienced traders only.</div>
-    </div>
-  </div>
-
-  <h3>Option 1: Physical Gold — Bars, Coins, and Jewellery</h3>
-
-  <p>Physical gold is the traditional route: walk into a jeweller, pay the day's rate, walk out with metal. If you go this way, buy <strong>24k bars or coins</strong>. They carry minimal making charges and resell closest to the quoted rate. Buy only from established, certified jewellers, have the item weighed on a digital scale in front of you, and get a <strong>written receipt stating weight, karat, rate, and total paid</strong>. That receipt is your proof at resale and your documentation trail if you file taxes.</p>
-
-  <p>Now the drawbacks. Gold must be stored somewhere, and home storage carries real theft risk. A bank locker solves that for an annual fee, though locker contents are generally not insured by the bank, which surprises many people. Then there is the spread. Between the buying price and what a jeweller pays when you sell, expect to give up a few percent even on bars, and far more on jewellery. Gold needs a meaningful price rise just for you to break even.</p>
-
-  <h3>Option 2: Gold-Backed Mutual Funds — The Digital Route</h3>
-
-  <p>A handful of SECP-regulated asset management companies offer <strong>commodity schemes that track the gold price</strong>, typically by holding gold-backed assets including deliverable gold contracts on PMEX. The best-known example is Al Meezan's Meezan Gold Fund, which also carries Shariah-compliant certification. You can find the current list of commodity schemes and their audited published returns on <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">MUFAP</a>, the Mutual Funds Association of Pakistan.</p>
-
-  <p>For most readers of this site, this is the most sensible way to hold gold. No locker, no theft risk, no purity question, no haggling over wastage. Minimums are small, typically a few thousand rupees, you can run a monthly SIP exactly as with an equity fund, and you exit at the fund's published NAV rather than at whatever a jeweller offers that afternoon. For context on the equity side, Al Meezan's flagship stock fund returned 35.9% over the year to mid-2026, though a gold scheme tracks metal, not shares. The costs are a management fee (disclosed in the offering document) and a small tracking difference versus the metal itself.</p>
-
-  <h3>Option 3: PMEX Gold Contracts — Handle With Care</h3>
-
-  <p>The <a href="https://www.pmex.com.pk" target="_blank" rel="noopener">Pakistan Mercantile Exchange (PMEX)</a> is the country's SECP-regulated commodity futures exchange. It lists gold contracts in a range of sizes, from one-tola and gram-denominated contracts up to ounce-based contracts tied to international prices, traded through PMEX-licensed brokers (the exchange publishes the list).</p>
-
-  <p>Here is the critical point. <strong>These are futures contracts traded on margin.</strong> You put down a fraction of the contract value, so gains and losses are both multiplied. A few percent move against you can wipe out much of your margin. PMEX gold is a legitimate, regulated instrument and useful for hedgers and active traders, but it is not a savings product. If you are reading a beginner's gold guide, you are not the target user yet. Build experience with funds first.</p>
-
-  <h2>Gold vs National Savings vs Equities: The Yield Problem</h2>
-
-  <p>The most important thing to internalise: gold <strong>pays you nothing to hold it</strong>. No profit, no dividend, no coupon. Your entire return depends on selling at a higher rupee price than you paid. Compare what rupee assets offer today.</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Asset</th>
-        <th>Income While You Hold</th>
-        <th>What Protects You</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Gold (any form)</strong></td>
-        <td>None — pure price appreciation</td>
-        <td>PKR depreciation and crisis hedge; globally priced</td>
-      </tr>
-      <tr>
-        <td><strong>Special Savings Certificate</strong></td>
-        <td>11.6% per year, paid every 6 months (<a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a>)</td>
-        <td>Government-backed fixed return; no currency protection</td>
-      </tr>
-      <tr>
-        <td><strong>PSX dividend stocks</strong></td>
-        <td>Dividend yields of 7–9% on major banks; Hub Power yields 11.8% (<a href="https://www.psx.com.pk" target="_blank" rel="noopener">psx.com.pk</a>)</td>
-        <td>Earnings growth plus income; higher volatility</td>
-      </tr>
-      <tr>
-        <td><strong>Money market funds</strong></td>
-        <td>The top fund in our tracker returned 14.9% over the past year</td>
-        <td>Tracks SBP rate; fully liquid; no currency protection</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>Recent history humbles both camps. The KSE-100 has climbed from around 41,500 in early 2020 to roughly <strong>171,000</strong> today. Equities crushed every other asset class, gold included. But in the brutal 2021–23 stretch, when inflation hit the high twenties and the rupee fell off a cliff, gold holders slept far better than anyone holding cash or bonds. Gold is not a return-maximiser. It is insurance that happens to have a market price.</p>
-
-  <div class="callout callout-blue">
-    <strong>Key insight:</strong> An SSC at 11.6% with inflation at 7.0% earns a +4.6% real return with zero price risk. For gold to beat it, the rupee gold price must rise more than 11.6% every year you hold. Some years it will, some years it won't. That is why gold should be sized as a hedge, not your main engine of returns.
-  </div>
-
-  <h2>How Much Gold Belongs in Your Portfolio?</h2>
-
-  <p>For a typical Pakistani retail investor, a <strong>5–15% allocation to gold</strong> is a reasonable hedge band. At 5–10%, gold meaningfully cushions a currency shock without dragging much on long-run returns. Push past 15% and a large slice of your wealth produces no income and compounds nothing. You are betting on price alone in an asset that can go sideways in rupee terms for years when the currency is stable.</p>
-
-  <p>In my own portfolio, gold sits at the small end of that band: high-single-digit percent, held through a fund rather than metal, alongside PSX dividend stocks, Al Meezan equity funds, and fixed income. I treat it like an insurance premium. I am mildly pleased when it underperforms, because it means the rupee and the rest of the portfolio are doing fine. Families that already hold substantial jewellery should count it. If gold is already 20% of family wealth, you likely need no more.</p>
-
-  <h2>Step-by-Step: Buying Each Form Safely</h2>
-
-  <h3>Physical gold</h3>
-  <ol>
-    <li>Check the day's sarafa rate before visiting the shop, so you know the fair benchmark.</li>
-    <li>Choose an established, certified jeweller — ideally one that will buy back at a stated rate.</li>
-    <li>Buy 24k bars or coins for investment; ask for hallmarked or stamped pieces where available.</li>
-    <li>Watch the item being weighed on a digital scale, and confirm the karat marking yourself.</li>
-    <li>Take a detailed receipt — weight, karat, rate, date, total — and store it separately from the gold.</li>
-    <li>Arrange storage before you buy: a bank locker for meaningful quantities, and tell as few people as possible.</li>
-  </ol>
-
-  <h3>Gold mutual fund</h3>
-  <ol>
-    <li>Shortlist commodity schemes on <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">mufap.com.pk</a> and read each fund's offering document for fees.</li>
-    <li>Open an account with the AMC (CNIC, IBAN, KYC form — most now fully online).</li>
-    <li>Invest a lump sum or set a monthly SIP; you'll receive units at the fund's NAV.</li>
-    <li>Redeem online when needed — proceeds land in your bank account, normally within a few working days.</li>
-  </ol>
-
-  <h3>PMEX gold contracts</h3>
-  <ol>
-    <li>Only proceed if you have real trading experience and money you can afford to lose.</li>
-    <li>Verify your broker on the licensed-broker list at <a href="https://www.pmex.com.pk" target="_blank" rel="noopener">pmex.com.pk</a> before depositing a rupee.</li>
-    <li>Start with the smallest contract size, understand margin and mark-to-market calls, and never let one position dominate your account.</li>
-  </ol>
-
-  <h2>The Risks, Plainly</h2>
-
-  <ul>
-    <li><strong>Spread and round-trip costs:</strong> you buy at a premium and sell at a discount. Jewellery's making charges and wastage deductions can swallow years of price gains.</li>
-    <li><strong>Underkarat and fake gold:</strong> items sold as 22k that assay lower are a real problem. Hence certified jewellers, hallmarks, and receipts.</li>
-    <li><strong>No income:</strong> gold cannot compound. Every rupee in gold is a rupee not earning 11.6% in an SSC or a 7–9% dividend on PSX.</li>
-    <li><strong>Price volatility:</strong> international gold can fall hard and stay down. Buyers in strong-currency years have waited years to break even.</li>
-    <li><strong>Storage and theft:</strong> physical holdings concentrate risk in one drawer or locker. Funds remove this entirely.</li>
-  </ul>
-
-  <h2>The Tax Angle</h2>
-
-  <p>Profits on gold are not automatically tax-free. Depending on how the gain arises and your filer status, gold gains can be taxable, and holdings belong in a filer's wealth statement. Rates have changed across recent budgets, so I won't quote figures that could be stale by the time you read this. Check the current rules on the <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">FBR website</a> or ask a registered tax practitioner before selling a significant quantity. Keeping purchase receipts makes any future tax computation far easier.</p>
-
-  <div class="callout callout-gold">
-    <strong>Where this leaves you in 2026:</strong> Gold earned its reputation in Pakistan the hard way, protecting families through every rupee crisis of the past two decades. But with real interest rates positive and the KSE-100 near record highs, gold's job today is insurance, not growth. Hold 5–15% as a hedge, prefer a regulated gold fund or 24k bars over jewellery, keep your receipts, and let income-producing assets do the compounding.
-  </div>
-
-  <!-- FAQ Section -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-is-gold-good-investment-now"><summary class="faq-question">Is gold a good investment in Pakistan right now?</summary><div class="faq-answer">Gold has been an effective long-term hedge against PKR depreciation — the rupee fell from roughly 160 per US dollar in 2020 to around 278 in 2026, and rupee gold prices rose accordingly. But gold pays no income, while a Special Savings Certificate currently yields 11.6% and major PSX bank stocks pay 7–9% dividends. For most investors gold works best as a 5–15% hedge allocation, not a core holding.</div></details>
-
-  <details class="faq-item" id="faq-24-karat-or-22-karat"><summary class="faq-question">Should I buy 24-karat or 22-karat gold?</summary><div class="faq-answer">For investment, buy 24-karat (99.9% pure) bars or coins. 22-karat gold (about 91.6% pure) is alloyed for durability and is what most jewellery is made from. Jewellery carries making charges and wastage deductions that you lose on resale, so it is a poor pure-investment vehicle — buy jewellery for wearing, bars and coins for investing.</div></details>
-
-  <details class="faq-item" id="faq-gold-mutual-funds"><summary class="faq-question">Are there gold mutual funds in Pakistan?</summary><div class="faq-answer">Yes. A small number of SECP-regulated asset managers offer commodity schemes that track the gold price, typically by holding gold-backed assets including PMEX gold contracts. The best-known example is Al Meezan's Meezan Gold Fund. Check mufap.com.pk for the current list of commodity-scheme funds and their published returns before investing.</div></details>
-
-  <details class="faq-item" id="faq-gold-vs-national-savings"><summary class="faq-question">Is gold better than National Savings certificates?</summary><div class="faq-answer">They do different jobs. A Special Savings Certificate pays a fixed 11.6% per year in rupees but offers no protection if the rupee devalues sharply. Gold pays nothing but tends to rise in rupee terms when the currency weakens. With CPI inflation at 7%, the SSC currently delivers a solidly positive real return — which is why gold should complement income-producing assets, not replace them.</div></details>
-
-  <details class="faq-item" id="faq-tax-on-gold-profits"><summary class="faq-question">Do I have to pay tax on gold profits in Pakistan?</summary><div class="faq-answer">Gains on gold can be taxable, and the treatment depends on your filer status and how the gain is categorised. Tax rules change in federal budgets, so do not rely on rates quoted in articles — verify the current position on fbr.gov.pk or with a registered tax practitioner before selling a significant holding, and declare gold in your wealth statement if you file.</div></details>
-
-  <details class="faq-item" id="faq-tola-vs-gram"><summary class="faq-question">What is the difference between a tola and a gram of gold?</summary><div class="faq-answer">A tola is the traditional South Asian unit of weight used for gold and equals approximately 11.66 grams. Gold dealers in Pakistan often quote prices per tola, while international markets quote per gram or per troy ounce (about 31.1 grams). When comparing rates, convert everything to the same unit so you are comparing like with like, and check the day's published rates from a recognised jewellers' association.</div></details>
-
-  <details class="faq-item" id="faq-is-physical-gold-zakat-payable"><summary class="faq-question">Do I pay Zakat on gold I hold as an investment?</summary><div class="faq-answer">Under widely-followed Islamic rulings, gold held above the nisab threshold for a full lunar year is generally subject to Zakat, calculated on its market value. The nisab for gold is traditionally around 87.48 grams (about 7.5 tola), though scholars differ on how to treat jewellery in regular use. For your specific situation, confirm the current nisab value and method with a qualified scholar or your local Zakat authority.</div></details>
-
-  <details class="faq-item" id="faq-how-to-verify-gold-purity"><summary class="faq-question">How can I verify that physical gold is genuine and pure?</summary><div class="faq-answer">Look for a hallmark or assay stamp indicating the karat or fineness, and buy from established dealers who provide a proper receipt stating weight and purity. Bars and coins from recognised refiners often carry serial numbers and certificates. If you have doubts, an independent assay or testing service can confirm purity, which is worth doing before any significant purchase.</div></details>
-
-
-  <details class="faq-item" id="faq-pmex-gold-trading"><summary class="faq-question">Can I invest in gold without holding it physically?</summary><div class="faq-answer">Yes. The Pakistan Mercantile Exchange (PMEX) offers gold-linked contracts, and some SECP-regulated commodity funds give exposure to gold prices without you storing metal yourself. These instruments remove storage and security concerns but introduce their own costs, account requirements and market risks. Review the contract specifications, fees and regulatory status on the relevant exchange or fund's official documents before opening an account.</div></details>
-
-  <details class="faq-item" id="faq-why-does-pakistan-gold-price-differ"><summary class="faq-question">Why does the local gold price in Pakistan differ from the international price?</summary><div class="faq-answer">Local rupee gold prices are driven mainly by two factors: the international gold price in US dollars and the PKR-to-USD exchange rate. When the rupee weakens, local prices can rise even if the dollar price of gold is flat. Import duties, dealer margins and local supply and demand also create differences between the international benchmark and the rate you pay at a Pakistani jeweller.</div></details>
-
-  <!-- Ad slot 2 — after FAQ section -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Guides</h3>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
-    <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained: What It Means for Your Investments</a>
-    <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">⚠ This article is for educational purposes only. Gold prices are volatile and move daily with international markets and the rupee-dollar rate — always verify current rates, fund returns, and tax rules from primary sources before transacting. This is not personalised financial advice. Always consult a SECP-registered financial advisor before making significant investment decisions.</div>
-
 </div>
 
+<main>
+<article class="art-frame">
+
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">Gold Investment in Pakistan</li>
+    </ol>
+  </nav>
+
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 06 — Commodities · Gold &amp; Metals</div>
+      <h1>Gold investment in Pakistan: physical, digital &amp; funds.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 12 June 2026</span>
+        <span>· 11 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">Three ways to own gold</div>
+      <p>Pakistani retail investors can hold gold three ways: physical <b>24k bars or coins</b>, SECP-regulated <b>gold mutual funds</b>, and <b>PMEX gold contracts</b>. Gold is a currency hedge that pays no income, typically sized at <b class="acc">5–15%</b> of a portfolio.</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Lede / quick answer -->
+      <p class="lede"><strong>Three ways to own gold:</strong> Pakistani retail investors can hold gold three ways: physical 24k bars or coins, SECP-regulated gold mutual funds, and PMEX gold contracts. Gold acts as a currency hedge that pays no income, typically sized at 5–15% of a portfolio.</p>
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 12 June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">Gold in three lines</div>
+        <ul>
+          <li>Gold is a currency hedge, not an income asset. It pays nothing, while an SSC yields 11.6% and big PSX banks pay 7–9% dividends.</li>
+          <li>For investment, buy 24k bars or coins, never jewellery. Making charges and wastage deductions destroy returns on resale.</li>
+          <li>Keep gold to 5–15% of your portfolio. Gold mutual funds are the easiest low-hassle route; PMEX contracts are for experienced traders only.</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary, before main content -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>No asset is woven as deeply into Pakistani financial life as gold. It anchors wedding budgets and sits in lockers as the family emergency reserve. But owning gold by tradition is not the same as owning it as a deliberate investment. This guide covers the three ways a Pakistani retail investor can get gold exposure in 2026 (physical gold, gold-backed mutual funds, and PMEX contracts) plus the purity checks, spread costs, and portfolio math that decide whether gold actually makes you money.</p>
+
+      <!-- Live data snapshot (populated by article.js from data.json) -->
+      <div class="live-widget">
+        <div class="lw-head"><span class="t">Today's Market Numbers</span></div>
+        <div id="live-snap">Loading live figures…</div>
+      </div>
+
+      <h2 id="s1"><span class="sn">01</span>Why Pakistanis Hold Gold: The Rupee Story</h2>
+
+      <p>The case for gold in Pakistan is, at its core, a case against holding rupees idle. In 2020, one US dollar bought roughly 160 rupees. Today the interbank rate is around <strong>278</strong>. You can verify the current rate on the <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">State Bank of Pakistan</a> website. That is a loss of more than 40% of the rupee's dollar value in about six years.</p>
+
+      <p>Gold is priced globally in US dollars. So even when the international gold price moves sideways, the rupee price of gold rises every time the currency slips. A family that converted rupee savings into gold in 2020 protected purchasing power that a bank deposit holder lost. This is why gold demand spikes during currency crises. It is the most accessible foreign-currency-linked asset an ordinary household can buy, with no brokerage or dollar account required.</p>
+
+      <p>The picture in 2026 is more balanced, though. CPI inflation has come down to <strong>7.0%</strong>, the SBP policy rate is <strong>11.5%</strong> (and holding there), and rupee instruments now pay a real return of roughly +4.5%. When cash actually grows in purchasing-power terms, the urgency of fleeing into gold fades. That is exactly when it pays to think about gold deliberately rather than emotionally.</p>
+
+      <h2 id="s2"><span class="sn">02</span>How Gold Is Priced in Pakistan: Tola, Karat, and the Sarafa Rate</h2>
+
+      <p>Before buying anything, learn the units. Pakistani gold trades in <strong>tola</strong>, and one tola is 11.66 grams. Jewellers quote a per-tola and per-10-gram rate that updates daily, set by local bullion dealer associations (the most-watched benchmark comes out of Karachi's Sarafa bazaar) and derived from the international spot price converted at the prevailing rupee-dollar rate. I will not quote a per-tola figure here, because it would be stale within days. Check the day's rate with your local sarafa association or a reputable jeweller, and sanity-check it against the international price and the <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">SBP exchange rate</a>.</p>
+
+      <p>Purity is measured in karats. <strong>24-karat</strong> gold is 99.9% pure and is what bars and coins are made of. <strong>22-karat</strong> is about 91.6% pure, alloyed with copper or silver for durability, and it is the standard for most Pakistani jewellery, with 21k and 18k also common. The quoted sarafa rate is for pure gold. A 22k item contains proportionally less, and an honest jeweller prices it accordingly.</p>
+
+      <p>The third concept is <strong>making charges</strong> (and their cousin, "wastage"). Jewellery costs the gold value plus a craftsmanship charge that ranges from a small percentage to well over a tenth of the item's value for intricate designs. When you sell it back, the jeweller pays for the gold content only. The making charges are gone, and many shops deduct further wastage on top. That round trip is why jewellery is a gift and an heirloom, but a poor investment vehicle.</p>
+
+      <h2 id="s3"><span class="sn">03</span>The Three Ways to Own Gold in Pakistan</h2>
+
+      <div class="ways-grid">
+        <div class="way-card">
+          <div class="ico">🪙</div>
+          <div class="wt">Physical Gold</div>
+          <div class="wd">Bars, coins, or jewellery from a jeweller. Tangible and universally accepted — but you carry storage, theft, and purity risk plus a buy-sell spread.</div>
+        </div>
+        <div class="way-card up">
+          <div class="ico">📊</div>
+          <div class="wt">Gold Mutual Funds</div>
+          <div class="wd">SECP-regulated funds that track the gold price. No locker, no purity worries, small minimums — the most practical route for most investors.</div>
+        </div>
+        <div class="way-card dn">
+          <div class="ico">⚠️</div>
+          <div class="wt">PMEX Gold Contracts</div>
+          <div class="wd">Exchange-traded gold futures bought on margin. Leverage cuts both ways — experienced traders only.</div>
+        </div>
+      </div>
+
+      <h3>Option 1: Physical Gold — Bars, Coins, and Jewellery</h3>
+
+      <p>Physical gold is the traditional route: walk into a jeweller, pay the day's rate, walk out with metal. If you go this way, buy <strong>24k bars or coins</strong>. They carry minimal making charges and resell closest to the quoted rate. Buy only from established, certified jewellers, have the item weighed on a digital scale in front of you, and get a <strong>written receipt stating weight, karat, rate, and total paid</strong>. That receipt is your proof at resale and your documentation trail if you file taxes.</p>
+
+      <p>Now the drawbacks. Gold must be stored somewhere, and home storage carries real theft risk. A bank locker solves that for an annual fee, though locker contents are generally not insured by the bank, which surprises many people. Then there is the spread. Between the buying price and what a jeweller pays when you sell, expect to give up a few percent even on bars, and far more on jewellery. Gold needs a meaningful price rise just for you to break even.</p>
+
+      <h3>Option 2: Gold-Backed Mutual Funds — The Digital Route</h3>
+
+      <p>A handful of SECP-regulated asset management companies offer <strong>commodity schemes that track the gold price</strong>, typically by holding gold-backed assets including deliverable gold contracts on PMEX. The best-known example is Al Meezan's Meezan Gold Fund, which also carries Shariah-compliant certification. You can find the current list of commodity schemes and their audited published returns on <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">MUFAP</a>, the Mutual Funds Association of Pakistan.</p>
+
+      <p>For most readers of this site, this is the most sensible way to hold gold. No locker, no theft risk, no purity question, no haggling over wastage. Minimums are small, typically a few thousand rupees, you can run a monthly SIP exactly as with an equity fund, and you exit at the fund's published NAV rather than at whatever a jeweller offers that afternoon. For context on the equity side, Al Meezan's flagship stock fund returned 35.9% over the year to mid-2026, though a gold scheme tracks metal, not shares. The costs are a management fee (disclosed in the offering document) and a small tracking difference versus the metal itself.</p>
+
+      <h3>Option 3: PMEX Gold Contracts — Handle With Care</h3>
+
+      <p>The <a href="https://www.pmex.com.pk" target="_blank" rel="noopener">Pakistan Mercantile Exchange (PMEX)</a> is the country's SECP-regulated commodity futures exchange. It lists gold contracts in a range of sizes, from one-tola and gram-denominated contracts up to ounce-based contracts tied to international prices, traded through PMEX-licensed brokers (the exchange publishes the list).</p>
+
+      <p>Here is the critical point. <strong>These are futures contracts traded on margin.</strong> You put down a fraction of the contract value, so gains and losses are both multiplied. A few percent move against you can wipe out much of your margin. PMEX gold is a legitimate, regulated instrument and useful for hedgers and active traders, but it is not a savings product. If you are reading a beginner's gold guide, you are not the target user yet. Build experience with funds first.</p>
+
+      <h2 id="s4"><span class="sn">04</span>Gold vs National Savings vs Equities: The Yield Problem</h2>
+
+      <p>The most important thing to internalise: gold <strong>pays you nothing to hold it</strong>. No profit, no dividend, no coupon. Your entire return depends on selling at a higher rupee price than you paid. Compare what rupee assets offer today.</p>
+
+      <div class="tbl-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Income While You Hold</th>
+              <th>What Protects You</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gold (any form)</td>
+              <td>None — pure price appreciation</td>
+              <td>PKR depreciation and crisis hedge; globally priced</td>
+            </tr>
+            <tr>
+              <td>Special Savings Certificate</td>
+              <td>11.6% per year, paid every 6 months (<a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a>)</td>
+              <td>Government-backed fixed return; no currency protection</td>
+            </tr>
+            <tr>
+              <td>PSX dividend stocks</td>
+              <td>Dividend yields of 7–9% on major banks; Hub Power yields 11.8% (<a href="https://www.psx.com.pk" target="_blank" rel="noopener">psx.com.pk</a>)</td>
+              <td>Earnings growth plus income; higher volatility</td>
+            </tr>
+            <tr>
+              <td>Money market funds</td>
+              <td>The top fund in our tracker returned 14.9% over the past year</td>
+              <td>Tracks SBP rate; fully liquid; no currency protection</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Recent history humbles both camps. The KSE-100 has climbed from around 41,500 in early 2020 to roughly <strong>171,000</strong> today. Equities crushed every other asset class, gold included. But in the brutal 2021–23 stretch, when inflation hit the high twenties and the rupee fell off a cliff, gold holders slept far better than anyone holding cash or bonds. Gold is not a return-maximiser. It is insurance that happens to have a market price.</p>
+
+      <div class="cl-dark">
+        <div class="k">Key insight</div>
+        <p>An SSC at 11.6% with inflation at 7.0% earns a <strong>+4.6% real return</strong> with zero price risk. For gold to beat it, the rupee gold price must rise more than 11.6% every year you hold. Some years it will, some years it won't. That is why gold should be sized as a hedge, not your main engine of returns.</p>
+      </div>
+
+      <h2 id="s5"><span class="sn">05</span>How Much Gold Belongs in Your Portfolio?</h2>
+
+      <p>For a typical Pakistani retail investor, a <strong>5–15% allocation to gold</strong> is a reasonable hedge band. At 5–10%, gold meaningfully cushions a currency shock without dragging much on long-run returns. Push past 15% and a large slice of your wealth produces no income and compounds nothing. You are betting on price alone in an asset that can go sideways in rupee terms for years when the currency is stable.</p>
+
+      <p>In my own portfolio, gold sits at the small end of that band: high-single-digit percent, held through a fund rather than metal, alongside PSX dividend stocks, Al Meezan equity funds, and fixed income. I treat it like an insurance premium. I am mildly pleased when it underperforms, because it means the rupee and the rest of the portfolio are doing fine. Families that already hold substantial jewellery should count it. If gold is already 20% of family wealth, you likely need no more.</p>
+
+      <h2 id="s6"><span class="sn">06</span>Step-by-Step: Buying Each Form Safely</h2>
+
+      <h3>Physical gold</h3>
+      <ol>
+        <li>Check the day's sarafa rate before visiting the shop, so you know the fair benchmark.</li>
+        <li>Choose an established, certified jeweller — ideally one that will buy back at a stated rate.</li>
+        <li>Buy 24k bars or coins for investment; ask for hallmarked or stamped pieces where available.</li>
+        <li>Watch the item being weighed on a digital scale, and confirm the karat marking yourself.</li>
+        <li>Take a detailed receipt — weight, karat, rate, date, total — and store it separately from the gold.</li>
+        <li>Arrange storage before you buy: a bank locker for meaningful quantities, and tell as few people as possible.</li>
+      </ol>
+
+      <h3>Gold mutual fund</h3>
+      <ol>
+        <li>Shortlist commodity schemes on <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">mufap.com.pk</a> and read each fund's offering document for fees.</li>
+        <li>Open an account with the AMC (CNIC, IBAN, KYC form — most now fully online).</li>
+        <li>Invest a lump sum or set a monthly SIP; you'll receive units at the fund's NAV.</li>
+        <li>Redeem online when needed — proceeds land in your bank account, normally within a few working days.</li>
+      </ol>
+
+      <h3>PMEX gold contracts</h3>
+      <ol>
+        <li>Only proceed if you have real trading experience and money you can afford to lose.</li>
+        <li>Verify your broker on the licensed-broker list at <a href="https://www.pmex.com.pk" target="_blank" rel="noopener">pmex.com.pk</a> before depositing a rupee.</li>
+        <li>Start with the smallest contract size, understand margin and mark-to-market calls, and never let one position dominate your account.</li>
+      </ol>
+
+      <h2 id="s7"><span class="sn">07</span>The Risks, Plainly</h2>
+
+      <ul>
+        <li><strong>Spread and round-trip costs:</strong> you buy at a premium and sell at a discount. Jewellery's making charges and wastage deductions can swallow years of price gains.</li>
+        <li><strong>Underkarat and fake gold:</strong> items sold as 22k that assay lower are a real problem. Hence certified jewellers, hallmarks, and receipts.</li>
+        <li><strong>No income:</strong> gold cannot compound. Every rupee in gold is a rupee not earning 11.6% in an SSC or a 7–9% dividend on PSX.</li>
+        <li><strong>Price volatility:</strong> international gold can fall hard and stay down. Buyers in strong-currency years have waited years to break even.</li>
+        <li><strong>Storage and theft:</strong> physical holdings concentrate risk in one drawer or locker. Funds remove this entirely.</li>
+      </ul>
+
+      <h2 id="s8"><span class="sn">08</span>The Tax Angle</h2>
+
+      <p>Profits on gold are not automatically tax-free. Depending on how the gain arises and your filer status, gold gains can be taxable, and holdings belong in a filer's wealth statement. Rates have changed across recent budgets, so I won't quote figures that could be stale by the time you read this. Check the current rules on the <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">FBR website</a> or ask a registered tax practitioner before selling a significant quantity. Keeping purchase receipts makes any future tax computation far easier.</p>
+
+      <div class="cl-dark">
+        <div class="k">Where this leaves you in 2026</div>
+        <p>Gold earned its reputation in Pakistan the hard way, protecting families through every rupee crisis of the past two decades. But with real interest rates positive and the KSE-100 near record highs, gold's job today is insurance, not growth. Hold 5–15% as a hedge, prefer a regulated gold fund or 24k bars over jewellery, keep your receipts, and let income-producing assets do the compounding.</p>
+      </div>
+
+      <h2 id="s9"><span class="sn">09</span>Frequently Asked Questions</h2>
+
+      <details class="faq-item" id="faq-is-gold-good-investment-now"><summary class="faq-question">Is gold a good investment in Pakistan right now?</summary><div class="faq-answer">Gold has been an effective long-term hedge against PKR depreciation — the rupee fell from roughly 160 per US dollar in 2020 to around 278 in 2026, and rupee gold prices rose accordingly. But gold pays no income, while a Special Savings Certificate currently yields 11.6% and major PSX bank stocks pay 7–9% dividends. For most investors gold works best as a 5–15% hedge allocation, not a core holding.</div></details>
+
+      <details class="faq-item" id="faq-24-karat-or-22-karat"><summary class="faq-question">Should I buy 24-karat or 22-karat gold?</summary><div class="faq-answer">For investment, buy 24-karat (99.9% pure) bars or coins. 22-karat gold (about 91.6% pure) is alloyed for durability and is what most jewellery is made from. Jewellery carries making charges and wastage deductions that you lose on resale, so it is a poor pure-investment vehicle — buy jewellery for wearing, bars and coins for investing.</div></details>
+
+      <details class="faq-item" id="faq-gold-mutual-funds"><summary class="faq-question">Are there gold mutual funds in Pakistan?</summary><div class="faq-answer">Yes. A small number of SECP-regulated asset managers offer commodity schemes that track the gold price, typically by holding gold-backed assets including PMEX gold contracts. The best-known example is Al Meezan's Meezan Gold Fund. Check mufap.com.pk for the current list of commodity-scheme funds and their published returns before investing.</div></details>
+
+      <details class="faq-item" id="faq-gold-vs-national-savings"><summary class="faq-question">Is gold better than National Savings certificates?</summary><div class="faq-answer">They do different jobs. A Special Savings Certificate pays a fixed 11.6% per year in rupees but offers no protection if the rupee devalues sharply. Gold pays nothing but tends to rise in rupee terms when the currency weakens. With CPI inflation at 7%, the SSC currently delivers a solidly positive real return — which is why gold should complement income-producing assets, not replace them.</div></details>
+
+      <details class="faq-item" id="faq-tax-on-gold-profits"><summary class="faq-question">Do I have to pay tax on gold profits in Pakistan?</summary><div class="faq-answer">Gains on gold can be taxable, and the treatment depends on your filer status and how the gain is categorised. Tax rules change in federal budgets, so do not rely on rates quoted in articles — verify the current position on fbr.gov.pk or with a registered tax practitioner before selling a significant holding, and declare gold in your wealth statement if you file.</div></details>
+
+      <details class="faq-item" id="faq-tola-vs-gram"><summary class="faq-question">What is the difference between a tola and a gram of gold?</summary><div class="faq-answer">A tola is the traditional South Asian unit of weight used for gold and equals approximately 11.66 grams. Gold dealers in Pakistan often quote prices per tola, while international markets quote per gram or per troy ounce (about 31.1 grams). When comparing rates, convert everything to the same unit so you are comparing like with like, and check the day's published rates from a recognised jewellers' association.</div></details>
+
+      <details class="faq-item" id="faq-is-physical-gold-zakat-payable"><summary class="faq-question">Do I pay Zakat on gold I hold as an investment?</summary><div class="faq-answer">Under widely-followed Islamic rulings, gold held above the nisab threshold for a full lunar year is generally subject to Zakat, calculated on its market value. The nisab for gold is traditionally around 87.48 grams (about 7.5 tola), though scholars differ on how to treat jewellery in regular use. For your specific situation, confirm the current nisab value and method with a qualified scholar or your local Zakat authority.</div></details>
+
+      <details class="faq-item" id="faq-how-to-verify-gold-purity"><summary class="faq-question">How can I verify that physical gold is genuine and pure?</summary><div class="faq-answer">Look for a hallmark or assay stamp indicating the karat or fineness, and buy from established dealers who provide a proper receipt stating weight and purity. Bars and coins from recognised refiners often carry serial numbers and certificates. If you have doubts, an independent assay or testing service can confirm purity, which is worth doing before any significant purchase.</div></details>
+
+      <details class="faq-item" id="faq-pmex-gold-trading"><summary class="faq-question">Can I invest in gold without holding it physically?</summary><div class="faq-answer">Yes. The Pakistan Mercantile Exchange (PMEX) offers gold-linked contracts, and some SECP-regulated commodity funds give exposure to gold prices without you storing metal yourself. These instruments remove storage and security concerns but introduce their own costs, account requirements and market risks. Review the contract specifications, fees and regulatory status on the relevant exchange or fund's official documents before opening an account.</div></details>
+
+      <details class="faq-item" id="faq-why-does-pakistan-gold-price-differ"><summary class="faq-question">Why does the local gold price in Pakistan differ from the international price?</summary><div class="faq-answer">Local rupee gold prices are driven mainly by two factors: the international gold price in US dollars and the PKR-to-USD exchange rate. When the rupee weakens, local prices can rise even if the dollar price of gold is flat. Import duties, dealer margins and local supply and demand also create differences between the international benchmark and the rate you pay at a Pakistani jeweller.</div></details>
+
+      <!-- Ad slot 2 — after FAQ section -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related">
+        <h3>Related Guides</h3>
+        <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
+        <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained: What It Means for Your Investments</a>
+        <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only. Gold prices are volatile and move daily with international markets and the rupee-dollar rate — always verify current rates, fund returns, and tax rules from primary sources before transacting. This is not personalised financial advice. Always consult a SECP-registered financial advisor before making significant investment decisions.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>Why Pakistanis hold gold</a>
+            <a href="#s2"><span class="ti">02</span>Tola, karat &amp; sarafa rate</a>
+            <a href="#s3"><span class="ti">03</span>Three ways to own gold</a>
+            <a href="#s4"><span class="ti">04</span>Gold vs savings vs equities</a>
+            <a href="#s5"><span class="ti">05</span>How much to hold</a>
+            <a href="#s6"><span class="ti">06</span>Buying each form safely</a>
+            <a href="#s7"><span class="ti">07</span>The risks, plainly</a>
+            <a href="#s8"><span class="ti">08</span>The tax angle</a>
+            <a href="#s9"><span class="ti">09</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">5–15%</div><div class="gl-l">Typical hedge allocation</div></div>
+          <div class="gl-row"><div class="gl-n">24k</div><div class="gl-l">Buy bars/coins, not jewellery</div></div>
+          <div class="gl-row"><div class="gl-n">11.66g</div><div class="gl-l">One tola</div></div>
+          <div class="gl-row"><div class="gl-n">₨0</div><div class="gl-l">Income gold pays you</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/gold-rates.html">Live Gold Rates &amp; Forecast →</a>
+          <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds →</a>
+          <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</article>
+</main>
+
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

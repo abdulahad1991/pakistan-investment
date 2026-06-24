@@ -131,12 +131,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -157,23 +157,170 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.4vw,3.3rem);font-weight:800;line-height:1.02;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px;text-transform:uppercase}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose ul:last-child li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+  .prose a{color:var(--green);font-weight:700}
+  .prose a:hover{color:var(--green2)}
+
+  /* numbered ordered steps inside prose keep their numbers */
+  .prose ol.steps{margin:0 0 18px;padding:0;list-style:none;counter-reset:step}
+  .prose ol.steps li{counter-increment:step;padding:14px 0 14px 46px;border-bottom:1px solid var(--line2);position:relative}
+  .prose ol.steps li::before{content:counter(step);position:absolute;left:0;top:12px;width:30px;text-align:left;color:var(--green);font-family:var(--display);font-weight:800;font-size:1.15rem;-webkit-text-stroke:0}
+  .prose ol.steps li:last-child{border-bottom:none}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:22px 0 6px}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p{margin:0;color:#E4F2EA;font-weight:500}
+  .cl-dark strong{color:var(--acid)!important;font-weight:700}
+  .cl-dark .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--acid);margin-bottom:8px;text-transform:uppercase}
+
+  /* quick answer lede */
+  .quick-answer{background:var(--mint);border-left:4px solid var(--acid);font-family:var(--body);font-size:1.08rem;line-height:1.65;color:var(--green-d);padding:16px 22px;margin:0 0 26px;font-weight:500}
+  .quick-answer strong{color:var(--green-d);font-weight:800}
+
+  /* live snapshot widget shell (article.js fills #live-snap with its own inline theme) */
+  .live-widget{border:1px solid var(--line);margin:0 0 28px}
+  .lw-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--mint);border-top:3px solid var(--acid)}
+  .lw-head .t{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--green-d);text-transform:uppercase}
+  .lw-head .v{font-family:var(--display);font-size:.58rem;font-weight:600;color:var(--muted);white-space:nowrap}
+  #live-snap{padding:18px}
+  #live-snap:empty{display:none}
+
+  /* comparison table */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 22px;overflow-x:auto}
+  .cmp-table{width:100%;border-collapse:collapse;min-width:640px}
+  .cmp-table th,.cmp-table td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line2);vertical-align:top}
+  .cmp-table thead th{font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--green-d);background:var(--mint);border-bottom:2px solid var(--acid);text-transform:uppercase}
+  .cmp-table tbody td{font-family:var(--body);font-size:.92rem;line-height:1.5;color:var(--ink2);font-weight:500}
+  .cmp-table tbody td:first-child{font-family:var(--display);font-weight:700;color:var(--green-d);white-space:nowrap}
+  .cmp-table td.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .cmp-table tbody tr:last-child td{border-bottom:none}
+  .cmp-table tbody tr:hover td{background:var(--paper3)}
+
+  /* ad slot */
+  .ad-slot{margin:24px 0}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent;padding:0}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0;cursor:pointer;list-style:none}
+  .prose .faq-question::-webkit-details-marker{display:none}
+  .prose .faq-question::before{content:"+";color:var(--green);font-weight:800;margin-right:10px}
+  .prose details[open] .faq-question::before{content:"–"}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-family:var(--body);font-size:1rem;line-height:1.7;color:var(--ink2);font-weight:500}
+
+  /* related links block */
+  .related-links{border-top:1px solid var(--line);margin-top:28px;padding-top:18px}
+  .related-links h3{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);text-transform:uppercase;margin:0 0 10px}
+  .related-links a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d)}
+  .related-links a:first-of-type{border-top:none}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green);flex-shrink:0}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+    .prose{padding:28px 18px}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -182,245 +329,361 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/guides/">Guides</a> › T-Bills and PIBs in Pakistan</div>
+<main>
+<article class="art-frame">
 
-  <h1>How to Buy T-Bills and PIBs in Pakistan: The IPS Account Guide (2026)</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Last updated: 12 June 2026 &nbsp;·&nbsp; 12 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>Straight to it:</strong> You buy Government of Pakistan T-bills and PIBs directly by opening an IPS account at a commercial bank and bidding in SBP auctions; for smaller amounts, a money market fund holds largely the same T-bills from around Rs. 1,000.</p>
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">T-Bills and PIBs in Pakistan</li>
+    </ol>
+  </nav>
 
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer and active investor in PSX dividend stocks and mutual funds. Built this tool to answer his own investing questions.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Last updated: 12 June 2026</span></div>
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 06 — Government Securities · Fixed Income</div>
+      <h1>How to buy T-bills and PIBs in Pakistan: the IPS account guide.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 12 June 2026</span>
+        <span>· 12 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">Straight to it</div>
+      <p>You buy Government of Pakistan T-bills and PIBs directly by opening an <b>IPS account</b> at a commercial bank and bidding in SBP auctions. For smaller amounts, a <b class="acc">money market fund</b> holds largely the same T-bills from around <b>Rs. 1,000</b>.</p>
     </div>
   </div>
 
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>What you need to know:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>T-bills (3, 6, 12 months) and PIBs (2–30 years) are Government of Pakistan debt. Yields are anchored to the 11.5% SBP policy rate.</li>
-      <li>You buy them through an IPS account at most large commercial banks, bidding in SBP auctions via your bank</li>
-      <li>The catch: below a few million rupees, a money market fund gives the same T-bill exposure from Rs. 1,000 with far less friction</li>
-    </ul>
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer, not an investment professional. He built this site to answer his own investing questions in one place. Every figure comes from official sources and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 12 June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Quick answer lede -->
+      <p class="quick-answer"><strong>Straight to it:</strong> You buy Government of Pakistan T-bills and PIBs directly by opening an IPS account at a commercial bank and bidding in SBP auctions; for smaller amounts, a money market fund holds largely the same T-bills from around Rs. 1,000.</p>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">What you need to know</div>
+        <ul>
+          <li>T-bills (3, 6, 12 months) and PIBs (2–30 years) are Government of Pakistan debt. Yields are anchored to the 11.5% SBP policy rate</li>
+          <li>You buy them through an IPS account at most large commercial banks, bidding in SBP auctions via your bank</li>
+          <li>The catch: below a few million rupees, a money market fund gives the same T-bill exposure from Rs. 1,000 with far less friction</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary, before main content -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>Every few weeks the Government of Pakistan borrows hundreds of billions of rupees, auctioning Treasury bills and Pakistan Investment Bonds through the State Bank. Banks, mutual funds and insurance companies park enormous sums in these instruments and earn the "risk-free" yield. Your bank passes you only a fraction of it. What most retail investors never realise is that <strong>you can buy these exact securities yourself</strong>, through an IPS account at an ordinary commercial bank. This guide walks through what T-bills and PIBs are, how the auctions work, how to open an IPS account, the taxes, and when to skip the whole exercise and use a money market fund instead.</p>
+
+      <!-- Live data snapshot (filled by article.js from data.json) -->
+      <div class="live-widget">
+        <div class="lw-head">
+          <span class="t">Today's Market Numbers</span>
+          <span class="v">Auto-updated from data.json</span>
+        </div>
+        <div id="live-snap"></div>
+      </div>
+
+      <h2 id="s1"><span class="sn">01</span>What are T-bills and PIBs?</h2>
+
+      <p><strong>Market Treasury Bills (T-bills)</strong> are short-term government debt, issued in 3-month, 6-month and 12-month tenors. They are zero-coupon instruments sold at a discount to face value. You might pay roughly Rs. 97,200 today for a bill that repays Rs. 100,000 in three months, and that gap, annualised, is the quoted yield. Short maturity plus a federal-government issuer makes T-bills the closest thing to a pure "risk-free rate" in the rupee market.</p>
+
+      <p><strong>Pakistan Investment Bonds (PIBs)</strong> are the long-term sibling, running from 2 to 30 years. They come in two main flavours. <strong>Fixed-rate PIBs</strong> pay a coupon set at auction every six months until maturity. <strong>Floating-rate PIBs</strong> reset their coupon periodically against a short-term benchmark. A fixed-rate PIB freezes today's yield for a decade. A floater stays aligned with wherever rates go next.</p>
+
+      <p>Both are direct obligations of the <strong>Government of Pakistan</strong>, issued and settled through the State Bank. In rupee terms there is no stronger credit: the government that prints the currency is the borrower. They are not risk-free in every sense (inflation and reinvestment risk come up below), but default risk on rupee government paper is as low as it gets in Pakistan.</p>
+
+      <h2 id="s2"><span class="sn">02</span>How yields track the SBP policy rate</h2>
+
+      <p>Yields are discovered at auction, but they orbit one number: the <strong>SBP policy rate, currently 11.5% and holding</strong> as of June 2026. Short T-bill yields rarely stray far from it. The SBP publishes cut-off yields for every auction on <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>, and that is the best free signal of where the market thinks rates are heading. When 12-month bills clear <em>below</em> the policy rate, cuts are priced in. Above it, hikes.</p>
+
+      <p>This matters a lot for which tenor you choose. Pakistan has just been through a historic cutting cycle, from 22% in 2023 down to 11.5% today. Anyone rolling 3-month T-bills watched their reinvestment yield shrink at every maturity. Anyone who locked a long fixed-rate PIB near the peak is still collecting coupons set in a 20%+ world. The lesson:</p>
+
+      <ul>
+        <li><strong>If you expect further cuts:</strong> longer fixed-rate paper locks today's yield before it disappears. With CPI inflation at 7.0%, an 11%+ nominal lock-in is a meaningfully positive real return.</li>
+        <li><strong>If you expect hikes or are unsure:</strong> stay short (3-month bills) or use floating-rate PIBs, so your money reprices upward quickly.</li>
+        <li><strong>If you may need the money soon:</strong> stay short regardless — long PIBs sold early can trade below what you paid.</li>
+      </ul>
+
+      <p>With the SBP pausing after 1,050 basis points of cuts, the 2026 debate is whether more easing is coming. If it is, the window to lock double-digit government yields is closing. That is the same logic we cover in our <a href="/guides/sbp-policy-rate-investments.html">SBP policy rate guide</a>.</p>
+
+      <h2 id="s3"><span class="sn">03</span>What is an IPS account?</h2>
+
+      <p>Government securities in Pakistan are scripless and book-entry. There is no paper certificate. Institutions hold them at the SBP; retail investors hold them through an <strong>Investor Portfolio of Securities (IPS) account</strong> at a commercial bank. The bank acts as custodian. Securities are recorded in your name, <em>segregated from the bank's own holdings</em>. This is the part that matters: your T-bills are your property, not a deposit liability, so they do not depend on the bank's solvency.</p>
+
+      <p><strong>Most large commercial banks</strong> offer IPS accounts. HBL, UBL, Standard Chartered and Bank Alfalah are commonly cited examples. Meezan Bank offers the equivalent for Shariah-compliant Government Ijara Sukuk rather than conventional interest-bearing bills. Availability, minimums and fees vary, so ask your own bank first.</p>
+
+      <p>Opening requirements are similar everywhere:</p>
+
+      <ul>
+        <li>Your <strong>CNIC</strong> (and NTN if you have one, for filer withholding treatment)</li>
+        <li>An existing <strong>bank account</strong> at the same bank, to settle purchases and receive proceeds</li>
+        <li>The bank's <strong>IPS account opening form</strong> and terms acknowledgement</li>
+        <li><strong>FATCA/CRS self-certification</strong> forms (standard tax-residency declarations all banks now require)</li>
+        <li>Sometimes a brief source-of-funds declaration for larger amounts</li>
+      </ul>
+
+      <p>Account opening is usually free or nominal, but many banks levy small custody or transaction fees on IPS holdings. Get the fee schedule in writing. On small balances, those fees quietly eat a noticeable slice of your yield.</p>
+
+      <h2 id="s4"><span class="sn">04</span>Primary auctions vs the secondary market</h2>
+
+      <p>There are two ways to acquire government securities, and your bank handles both through the same IPS account.</p>
+
+      <h3>1. Primary auctions (via your bank as agent)</h3>
+      <p>The SBP runs auctions on a published calendar. T-bill auctions are typically fortnightly, PIB auctions roughly monthly, and the schedule and results sit on <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>. Only designated Primary Dealer banks bid directly; your bank submits your bid as your agent. Retail investors almost always use a <strong>non-competitive bid</strong>. You specify the amount and tenor, not the yield, and receive securities at the weighted-average yield of accepted competitive bids. No risk of mispricing your own bid.</p>
+
+      <h3>2. Secondary market purchase</h3>
+      <p>Banks also sell securities from their own books or source them in the interbank market. This is handy when you want a specific maturity date or want to buy between auctions. The price reflects current market yields, so an older high-coupon PIB costs more than face value when rates have fallen. Secondary pricing is less transparent, so compare the implied yield your bank quotes against recent auction cut-offs before you agree.</p>
+
+      <h2 id="s5"><span class="sn">05</span>Step-by-step: opening an IPS account and placing your first bid</h2>
+
+      <ol class="steps">
+        <li><strong>Pick the bank where you already hold an account.</strong> The settlement account usually has to be at the same bank. Call ahead, because not every branch handles IPS requests.</li>
+        <li><strong>Ask for the IPS account opening pack.</strong> Complete the form, attach your CNIC copy and sign the FATCA/CRS self-certification. Mention if you are a filer. Your Active Taxpayer List status sets your withholding rate.</li>
+        <li><strong>Confirm minimums and fees in writing.</strong> Banks set their own minimum bid sizes (often Rs. 100,000 or more) and may charge custody or transaction fees.</li>
+        <li><strong>Wait for activation.</strong> Usually a few working days. You then receive an IPS account number linked to your bank account.</li>
+        <li><strong>Check the auction calendar.</strong> Find the next auction date on sbp.org.pk and review recent cut-off yields.</li>
+        <li><strong>Submit your instruction before the bank's cut-off.</strong> Banks need your non-competitive bid one or more working days before the auction. Specify the instrument (say, a 6-month T-bill) and the face-value amount, with funds sitting in your settlement account.</li>
+        <li><strong>Settlement.</strong> Your account is debited the discounted price, the securities land in your IPS account, and you get a confirmation showing your yield.</li>
+        <li><strong>At maturity, roll or exit.</strong> Face value comes back to your bank account automatically. To stay invested, instruct a new bid. Many investors set a standing rollover instruction.</li>
+      </ol>
+
+      <div class="cl-dark">
+        <div class="k">Practical tip</div>
+        <p>Before your first bid, look up the last three auction results for your tenor on sbp.org.pk. If cut-off yields drift down auction after auction, the market is pricing in cuts, which is a nudge toward locking a longer tenor now.</p>
+      </div>
+
+      <h2 id="s6"><span class="sn">06</span>T-bills vs National Savings vs money market funds</h2>
+
+      <p>Buying securities directly is not the only way to earn the government yield, and for most readers it is not the best way:</p>
+
+      <div class="tbl-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>T-Bills via IPS</th>
+              <th>National Savings (CDNS)</th>
+              <th>Money Market Funds</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Practical minimum</td>
+              <td>Bank-set, often Rs. 100,000+</td>
+              <td>From Rs. 500 (e.g., SSC)</td>
+              <td>Around Rs. 1,000</td>
+            </tr>
+            <tr>
+              <td>Current yield anchor</td>
+              <td>Auction cut-offs near the 11.5% policy rate</td>
+              <td>SSC at 11.6% (3-year lock-in)</td>
+              <td>Tracks T-bill yields minus fund fees</td>
+            </tr>
+            <tr>
+              <td>Liquidity</td>
+              <td>Sell via bank; T+ settlement, price risk on PIBs</td>
+              <td>Encashment rules and early-exit penalties vary by certificate</td>
+              <td>Redeem in ~1–2 working days at NAV</td>
+            </tr>
+            <tr>
+              <td>Effort</td>
+              <td>High — account opening, auction calendar, bid instructions</td>
+              <td>Medium — CDNS centre or agent bank visit</td>
+              <td>Low — open online with most AMCs</td>
+            </tr>
+            <tr>
+              <td>Best suited to</td>
+              <td>Larger portfolios; investors locking specific maturities</td>
+              <td>Savers wanting fixed locked-in rates; seniors and widows (Behbood)</td>
+              <td>Almost everyone parking cash short-term</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Here is the part many guides skip: <strong>a money market mutual fund is, in substance, a T-bill portfolio with a Rs. 1,000 entry ticket.</strong> These funds invest mostly in the same short-term government paper, publish daily NAVs and yields through <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">mufap.com.pk</a>, and redeem within a day or two. You pay a small management fee and in return get diversification, no auction paperwork and near-instant access. For someone deploying Rs. 50,000 or Rs. 500,000, that trade is almost always worth it. Direct IPS ownership earns its keep when the amount is large enough that fund fees outweigh the convenience, or when you want to pin down a multi-year fixed-rate PIB before rates fall further. For locked-in rates at small ticket sizes, National Savings is still compelling. Meezan Islamic Income, for context, returned 8.4% over the year to mid-2026, a useful benchmark for the low-volatility income bucket these instruments compete in. Current rates are at <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a>, compared head-to-head in our <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs mutual funds guide</a>.</p>
+
+      <h2 id="s7"><span class="sn">07</span>Taxes on T-bill and PIB profit</h2>
+
+      <p>Returns on government securities are taxed as <strong>profit on debt</strong> under the Income Tax Ordinance. Your bank deducts <strong>withholding tax at source</strong>, so the amount hitting your account is already net of tax. Two things to keep in mind:</p>
+
+      <ul>
+        <li><strong>Filer status matters, a lot.</strong> Withholding rates for people not on the FBR's Active Taxpayer List are substantially higher. If you invest meaningful amounts and are not a filer, becoming one is usually the highest-return "investment" you can make.</li>
+        <li><strong>Rates change with federal budgets.</strong> We deliberately do not print percentages here, because they get revised in finance acts and depend on your circumstances. Check the current schedule on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> or confirm with your bank or a tax adviser.</li>
+      </ul>
+
+      <p>Capital gains on securities sold before maturity are taxable too, under different treatment. Keep your bank's transaction confirmations for return-filing time.</p>
+
+      <h2 id="s8"><span class="sn">08</span>The risks: what can actually go wrong</h2>
+
+      <h3>Reinvestment risk</h3>
+      <p>This is the defining risk of short paper in a cutting cycle. A 3-month T-bill bought today near 11.5% matures in September. If the SBP has cut by then, you reinvest at less. Rolling short bills from 2023 onward meant repricing down from 22% toward 11.5%, which roughly halved the income on the same capital. For dependable long-term income, fixed-rate PIBs or locked CDNS certificates solve exactly this problem.</p>
+
+      <h3>Price risk on PIBs sold before maturity</h3>
+      <p>A fixed-rate PIB held to maturity pays its face value, full stop. Sold early, it fetches whatever the market will pay. When yields rise, prices of existing fixed-rate bonds fall, and longer maturities swing the hardest. Anyone who bought 10-year PIBs in 2021 at single-digit coupons and needed cash in 2023, with the policy rate at 22%, took painful losses. Only commit to long tenors with money you will not need early. Floating-rate PIBs sidestep most of this risk.</p>
+
+      <h3>Inflation risk</h3>
+      <p>Government paper protects your rupees, not your purchasing power. Today the math is favourable. An 11.5% nominal anchor against 7.0% CPI inflation works out to roughly +4.5% real. But in 2022 and 2023, inflation ran far above even a 22% policy rate for long stretches, and "risk-free" savers lost real value every month. A locked 10-year coupon that looks generous today could look thin if inflation picks up again. That is the core argument for holding some real assets such as equities, which we discuss in our <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual fund investing guide</a>.</p>
+
+      <div class="cl-dark">
+        <div class="k">Where this leaves you in 2026</div>
+        <p>T-bills and PIBs are the cleanest way to earn Pakistan's government yield, and the IPS account is more accessible than most people assume. Just be realistic about scale. Under a few million rupees, a money market fund delivers the same exposure with none of the friction, and an SSC at 11.6% locks a comparable rate from Rs. 500. Direct IPS ownership shines for large balances and for locking long fixed rates before the next leg of the cutting cycle.</p>
+      </div>
+
+      <!-- FAQ Section -->
+      <h2 id="s9"><span class="sn">09</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-minimum-amount"><summary class="faq-question">What is the minimum amount needed to buy T-bills in Pakistan?</summary><div class="faq-answer">Banks set their own practical minimums for IPS customers — commonly Rs. 100,000 or more per bid, and some expect substantially larger amounts. Ask your branch for its current minimum before opening the account. If your investable amount is below that threshold, a money market mutual fund gives you the same T-bill exposure from around Rs. 1,000.</div></details>
+
+      <details class="faq-item" id="faq-safer-than-savings"><summary class="faq-question">Are T-bills safer than National Savings certificates?</summary><div class="faq-answer">Both are direct obligations of the Government of Pakistan, so the credit risk is essentially the same. The differences are practical: T-bills are tradable market instruments held in an IPS account, while National Savings certificates are non-tradable CDNS products with their own early-encashment rules. Neither protects you from inflation eroding real returns.</div></details>
+
+      <details class="faq-item" id="faq-sell-before-maturity"><summary class="faq-question">Can I sell my T-bills or PIBs before maturity?</summary><div class="faq-answer">Yes — through your bank in the secondary market. T-bills are short-dated, so their prices move little. PIBs are different: if rates have risen since you bought, a fixed-rate PIB will be worth less than you paid; if rates have fallen, you may sell at a gain. Held to maturity, you receive full face value regardless.</div></details>
+
+      <details class="faq-item" id="faq-tax-on-profit"><summary class="faq-question">Do I pay tax on T-bill and PIB profit?</summary><div class="faq-answer">Yes. Profit is treated as profit on debt and withholding tax is deducted at source by your bank — at a significantly higher rate if you are not on the FBR's Active Taxpayer List. Capital gains on early sales are also taxable. Rates change with federal budgets, so verify the current schedule at fbr.gov.pk rather than relying on any fixed figure.</div></details>
+
+      <details class="faq-item" id="faq-direct-or-fund"><summary class="faq-question">Should I buy T-bills directly or just use a money market fund?</summary><div class="faq-answer">For most retail investors with less than a few million rupees, a money market fund is more practical: it holds largely the same T-bills, accepts around Rs. 1,000, redeems in one or two working days, and needs no auction paperwork. Direct IPS ownership makes sense for larger amounts, avoiding fund fees, or locking a specific PIB maturity and coupon before an expected rate-cutting cycle.</div></details>
+
+      <details class="faq-item" id="faq-what-is-ips-account"><summary class="faq-question">What is an IPS account and how do I open one?</summary><div class="faq-answer">An Investor Portfolio Securities (IPS) account is the record-keeping account a bank maintains with the State Bank of Pakistan to hold your government securities such as T-bills and PIBs. You open one through a commercial bank that offers the service, usually by submitting standard KYC documents like your CNIC and an existing bank account. Eligibility, fees, and paperwork vary by bank, so confirm the exact requirements with your branch.</div></details>
+
+      <details class="faq-item" id="faq-tenor-options"><summary class="faq-question">What tenors are available for T-bills in Pakistan?</summary><div class="faq-answer">Treasury bills are short-term instruments, typically issued in three-month, six-month, and twelve-month tenors. They are sold at a discount to face value and pay no separate coupon — your return is the difference between the purchase price and the face value received at maturity. For longer fixed-income exposure, Pakistan Investment Bonds (PIBs) run for several years instead.</div></details>
+
+      <details class="faq-item" id="faq-can-overseas-pakistanis-buy"><summary class="faq-question">Can overseas Pakistanis buy T-bills?</summary><div class="faq-answer">Non-resident Pakistanis can generally invest in government securities, often through Roshan Digital Accounts or non-resident accounts offered by Pakistani banks, which channel funds into the relevant instruments. The specific products, currency options, and tax treatment differ from those for resident investors. Check the current terms with a participating bank and verify tax details on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-how-auctions-work"><summary class="faq-question">How are T-bill auctions conducted in Pakistan?</summary><div class="faq-answer">The State Bank of Pakistan holds periodic auctions on behalf of the government, where banks and primary dealers submit competitive bids. The cut-off yield is set by the accepted bids, and retail investors usually participate indirectly by placing orders through their bank rather than bidding at the auction themselves. Auction calendars and results are published by the State Bank, so check sbp.org.pk for the current schedule.</div></details>
+
+      <details class="faq-item" id="faq-tbills-vs-fixed-deposit"><summary class="faq-question">What is the difference between T-bills and a bank fixed deposit?</summary><div class="faq-answer">A T-bill is a direct obligation of the Government of Pakistan, while a fixed deposit is a liability of the bank that holds it. T-bills are tradable in the secondary market and held in an IPS account, whereas a fixed deposit is held with the bank and typically has its own early-withdrawal penalties. Both have their profit taxed as profit on debt, so verify the applicable withholding rates on fbr.gov.pk.</div></details>
+
+      <!-- Ad slot 2 — after FAQ section -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Guides</h3>
+        <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained: What It Means for Your Investments</a>
+        <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
+        <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only. Auction yields, bank requirements, fees, and tax rates change frequently — verify current figures with sbp.org.pk, fbr.gov.pk, and your bank. This is not personalised financial advice. Always consult a SECP-registered financial advisor before making significant investment decisions.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>What are T-bills and PIBs?</a>
+            <a href="#s2"><span class="ti">02</span>How yields track the SBP rate</a>
+            <a href="#s3"><span class="ti">03</span>What is an IPS account?</a>
+            <a href="#s4"><span class="ti">04</span>Auctions vs secondary market</a>
+            <a href="#s5"><span class="ti">05</span>Step-by-step IPS setup</a>
+            <a href="#s6"><span class="ti">06</span>T-bills vs NSS vs funds</a>
+            <a href="#s7"><span class="ti">07</span>Taxes on profit</a>
+            <a href="#s8"><span class="ti">08</span>The risks</a>
+            <a href="#s9"><span class="ti">09</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">11.5%</div><div class="gl-l">SBP policy rate anchor</div></div>
+          <div class="gl-row"><div class="gl-n">Rs. 1,000</div><div class="gl-l">Money market fund minimum</div></div>
+          <div class="gl-row"><div class="gl-n">3–30 yr</div><div class="gl-l">PIB tenor range</div></div>
+          <div class="gl-row"><div class="gl-n">+4.5%</div><div class="gl-l">Approx. real yield vs CPI</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained →</a>
+          <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds →</a>
+          <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
   </div>
+</article>
+</main>
 
-  <!-- Ad slot 1 — after summary, before main content -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>Every few weeks the Government of Pakistan borrows hundreds of billions of rupees, auctioning Treasury bills and Pakistan Investment Bonds through the State Bank. Banks, mutual funds and insurance companies park enormous sums in these instruments and earn the "risk-free" yield. Your bank passes you only a fraction of it. What most retail investors never realise is that <strong>you can buy these exact securities yourself</strong>, through an IPS account at an ordinary commercial bank. This guide walks through what T-bills and PIBs are, how the auctions work, how to open an IPS account, the taxes, and when to skip the whole exercise and use a money market fund instead.</p>
-
-  
-  <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-top:3px solid #B98A2F;border-radius:6px;padding:18px;margin:0 0 26px"></div>
-<h2>What Are T-Bills and PIBs?</h2>
-
-  <p><strong>Market Treasury Bills (T-bills)</strong> are short-term government debt, issued in 3-month, 6-month and 12-month tenors. They are zero-coupon instruments sold at a discount to face value. You might pay roughly Rs. 97,200 today for a bill that repays Rs. 100,000 in three months, and that gap, annualised, is the quoted yield. Short maturity plus a federal-government issuer makes T-bills the closest thing to a pure "risk-free rate" in the rupee market.</p>
-
-  <p><strong>Pakistan Investment Bonds (PIBs)</strong> are the long-term sibling, running from 2 to 30 years. They come in two main flavours. <strong>Fixed-rate PIBs</strong> pay a coupon set at auction every six months until maturity. <strong>Floating-rate PIBs</strong> reset their coupon periodically against a short-term benchmark. A fixed-rate PIB freezes today's yield for a decade. A floater stays aligned with wherever rates go next.</p>
-
-  <p>Both are direct obligations of the <strong>Government of Pakistan</strong>, issued and settled through the State Bank. In rupee terms there is no stronger credit: the government that prints the currency is the borrower. They are not risk-free in every sense (inflation and reinvestment risk come up below), but default risk on rupee government paper is as low as it gets in Pakistan.</p>
-
-  <h2>How Yields Track the SBP Policy Rate</h2>
-
-  <p>Yields are discovered at auction, but they orbit one number: the <strong>SBP policy rate, currently 11.5% and holding</strong> as of June 2026. Short T-bill yields rarely stray far from it. The SBP publishes cut-off yields for every auction on <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>, and that is the best free signal of where the market thinks rates are heading. When 12-month bills clear <em>below</em> the policy rate, cuts are priced in. Above it, hikes.</p>
-
-  <p>This matters a lot for which tenor you choose. Pakistan has just been through a historic cutting cycle, from 22% in 2023 down to 11.5% today. Anyone rolling 3-month T-bills watched their reinvestment yield shrink at every maturity. Anyone who locked a long fixed-rate PIB near the peak is still collecting coupons set in a 20%+ world. The lesson:</p>
-
-  <ul>
-    <li><strong>If you expect further cuts:</strong> longer fixed-rate paper locks today's yield before it disappears. With CPI inflation at 7.0%, an 11%+ nominal lock-in is a meaningfully positive real return.</li>
-    <li><strong>If you expect hikes or are unsure:</strong> stay short (3-month bills) or use floating-rate PIBs, so your money reprices upward quickly.</li>
-    <li><strong>If you may need the money soon:</strong> stay short regardless — long PIBs sold early can trade below what you paid.</li>
-  </ul>
-
-  <p>With the SBP pausing after 1,050 basis points of cuts, the 2026 debate is whether more easing is coming. If it is, the window to lock double-digit government yields is closing. That is the same logic we cover in our <a href="/guides/sbp-policy-rate-investments.html">SBP policy rate guide</a>.</p>
-
-  <h2>What Is an IPS Account?</h2>
-
-  <p>Government securities in Pakistan are scripless and book-entry. There is no paper certificate. Institutions hold them at the SBP; retail investors hold them through an <strong>Investor Portfolio of Securities (IPS) account</strong> at a commercial bank. The bank acts as custodian. Securities are recorded in your name, <em>segregated from the bank's own holdings</em>. This is the part that matters: your T-bills are your property, not a deposit liability, so they do not depend on the bank's solvency.</p>
-
-  <p><strong>Most large commercial banks</strong> offer IPS accounts. HBL, UBL, Standard Chartered and Bank Alfalah are commonly cited examples. Meezan Bank offers the equivalent for Shariah-compliant Government Ijara Sukuk rather than conventional interest-bearing bills. Availability, minimums and fees vary, so ask your own bank first.</p>
-
-  <p>Opening requirements are similar everywhere:</p>
-
-  <ul>
-    <li>Your <strong>CNIC</strong> (and NTN if you have one, for filer withholding treatment)</li>
-    <li>An existing <strong>bank account</strong> at the same bank, to settle purchases and receive proceeds</li>
-    <li>The bank's <strong>IPS account opening form</strong> and terms acknowledgement</li>
-    <li><strong>FATCA/CRS self-certification</strong> forms (standard tax-residency declarations all banks now require)</li>
-    <li>Sometimes a brief source-of-funds declaration for larger amounts</li>
-  </ul>
-
-  <p>Account opening is usually free or nominal, but many banks levy small custody or transaction fees on IPS holdings. Get the fee schedule in writing. On small balances, those fees quietly eat a noticeable slice of your yield.</p>
-
-  <h2>Primary Auctions vs the Secondary Market</h2>
-
-  <p>There are two ways to acquire government securities, and your bank handles both through the same IPS account.</p>
-
-  <h3>1. Primary auctions (via your bank as agent)</h3>
-  <p>The SBP runs auctions on a published calendar. T-bill auctions are typically fortnightly, PIB auctions roughly monthly, and the schedule and results sit on <a href="https://www.sbp.org.pk" target="_blank" rel="noopener">sbp.org.pk</a>. Only designated Primary Dealer banks bid directly; your bank submits your bid as your agent. Retail investors almost always use a <strong>non-competitive bid</strong>. You specify the amount and tenor, not the yield, and receive securities at the weighted-average yield of accepted competitive bids. No risk of mispricing your own bid.</p>
-
-  <h3>2. Secondary market purchase</h3>
-  <p>Banks also sell securities from their own books or source them in the interbank market. This is handy when you want a specific maturity date or want to buy between auctions. The price reflects current market yields, so an older high-coupon PIB costs more than face value when rates have fallen. Secondary pricing is less transparent, so compare the implied yield your bank quotes against recent auction cut-offs before you agree.</p>
-
-  <h2>Step-by-Step: Opening an IPS Account and Placing Your First Bid</h2>
-
-  <ol>
-    <li><strong>Pick the bank where you already hold an account.</strong> The settlement account usually has to be at the same bank. Call ahead, because not every branch handles IPS requests.</li>
-    <li><strong>Ask for the IPS account opening pack.</strong> Complete the form, attach your CNIC copy and sign the FATCA/CRS self-certification. Mention if you are a filer. Your Active Taxpayer List status sets your withholding rate.</li>
-    <li><strong>Confirm minimums and fees in writing.</strong> Banks set their own minimum bid sizes (often Rs. 100,000 or more) and may charge custody or transaction fees.</li>
-    <li><strong>Wait for activation.</strong> Usually a few working days. You then receive an IPS account number linked to your bank account.</li>
-    <li><strong>Check the auction calendar.</strong> Find the next auction date on sbp.org.pk and review recent cut-off yields.</li>
-    <li><strong>Submit your instruction before the bank's cut-off.</strong> Banks need your non-competitive bid one or more working days before the auction. Specify the instrument (say, a 6-month T-bill) and the face-value amount, with funds sitting in your settlement account.</li>
-    <li><strong>Settlement.</strong> Your account is debited the discounted price, the securities land in your IPS account, and you get a confirmation showing your yield.</li>
-    <li><strong>At maturity, roll or exit.</strong> Face value comes back to your bank account automatically. To stay invested, instruct a new bid. Many investors set a standing rollover instruction.</li>
-  </ol>
-
-  <div class="callout callout-blue">
-    <strong>Practical tip:</strong> Before your first bid, look up the last three auction results for your tenor on sbp.org.pk. If cut-off yields drift down auction after auction, the market is pricing in cuts, which is a nudge toward locking a longer tenor now.
-  </div>
-
-  <h2>T-Bills vs National Savings vs Money Market Funds</h2>
-
-  <p>Buying securities directly is not the only way to earn the government yield, and for most readers it is not the best way:</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Feature</th>
-        <th>T-Bills via IPS</th>
-        <th>National Savings (CDNS)</th>
-        <th>Money Market Funds</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Practical minimum</strong></td>
-        <td>Bank-set, often Rs. 100,000+</td>
-        <td>From Rs. 500 (e.g., SSC)</td>
-        <td>Around Rs. 1,000</td>
-      </tr>
-      <tr>
-        <td><strong>Current yield anchor</strong></td>
-        <td>Auction cut-offs near the 11.5% policy rate</td>
-        <td>SSC at 11.6% (3-year lock-in)</td>
-        <td>Tracks T-bill yields minus fund fees</td>
-      </tr>
-      <tr>
-        <td><strong>Liquidity</strong></td>
-        <td>Sell via bank; T+ settlement, price risk on PIBs</td>
-        <td>Encashment rules and early-exit penalties vary by certificate</td>
-        <td>Redeem in ~1–2 working days at NAV</td>
-      </tr>
-      <tr>
-        <td><strong>Effort</strong></td>
-        <td>High — account opening, auction calendar, bid instructions</td>
-        <td>Medium — CDNS centre or agent bank visit</td>
-        <td>Low — open online with most AMCs</td>
-      </tr>
-      <tr>
-        <td><strong>Best suited to</strong></td>
-        <td>Larger portfolios; investors locking specific maturities</td>
-        <td>Savers wanting fixed locked-in rates; seniors and widows (Behbood)</td>
-        <td>Almost everyone parking cash short-term</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>Here is the part many guides skip: <strong>a money market mutual fund is, in substance, a T-bill portfolio with a Rs. 1,000 entry ticket.</strong> These funds invest mostly in the same short-term government paper, publish daily NAVs and yields through <a href="https://www.mufap.com.pk" target="_blank" rel="noopener">mufap.com.pk</a>, and redeem within a day or two. You pay a small management fee and in return get diversification, no auction paperwork and near-instant access. For someone deploying Rs. 50,000 or Rs. 500,000, that trade is almost always worth it. Direct IPS ownership earns its keep when the amount is large enough that fund fees outweigh the convenience, or when you want to pin down a multi-year fixed-rate PIB before rates fall further. For locked-in rates at small ticket sizes, National Savings is still compelling. Meezan Islamic Income, for context, returned 8.4% over the year to mid-2026, a useful benchmark for the low-volatility income bucket these instruments compete in. Current rates are at <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">savings.gov.pk</a>, compared head-to-head in our <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs mutual funds guide</a>.</p>
-
-  <h2>Taxes on T-Bill and PIB Profit</h2>
-
-  <p>Returns on government securities are taxed as <strong>profit on debt</strong> under the Income Tax Ordinance. Your bank deducts <strong>withholding tax at source</strong>, so the amount hitting your account is already net of tax. Two things to keep in mind:</p>
-
-  <ul>
-    <li><strong>Filer status matters, a lot.</strong> Withholding rates for people not on the FBR's Active Taxpayer List are substantially higher. If you invest meaningful amounts and are not a filer, becoming one is usually the highest-return "investment" you can make.</li>
-    <li><strong>Rates change with federal budgets.</strong> We deliberately do not print percentages here, because they get revised in finance acts and depend on your circumstances. Check the current schedule on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a> or confirm with your bank or a tax adviser.</li>
-  </ul>
-
-  <p>Capital gains on securities sold before maturity are taxable too, under different treatment. Keep your bank's transaction confirmations for return-filing time.</p>
-
-  <h2>The Risks: What Can Actually Go Wrong</h2>
-
-  <h3>Reinvestment risk</h3>
-  <p>This is the defining risk of short paper in a cutting cycle. A 3-month T-bill bought today near 11.5% matures in September. If the SBP has cut by then, you reinvest at less. Rolling short bills from 2023 onward meant repricing down from 22% toward 11.5%, which roughly halved the income on the same capital. For dependable long-term income, fixed-rate PIBs or locked CDNS certificates solve exactly this problem.</p>
-
-  <h3>Price risk on PIBs sold before maturity</h3>
-  <p>A fixed-rate PIB held to maturity pays its face value, full stop. Sold early, it fetches whatever the market will pay. When yields rise, prices of existing fixed-rate bonds fall, and longer maturities swing the hardest. Anyone who bought 10-year PIBs in 2021 at single-digit coupons and needed cash in 2023, with the policy rate at 22%, took painful losses. Only commit to long tenors with money you will not need early. Floating-rate PIBs sidestep most of this risk.</p>
-
-  <h3>Inflation risk</h3>
-  <p>Government paper protects your rupees, not your purchasing power. Today the math is favourable. An 11.5% nominal anchor against 7.0% CPI inflation works out to roughly +4.5% real. But in 2022 and 2023, inflation ran far above even a 22% policy rate for long stretches, and "risk-free" savers lost real value every month. A locked 10-year coupon that looks generous today could look thin if inflation picks up again. That is the core argument for holding some real assets such as equities, which we discuss in our <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual fund investing guide</a>.</p>
-
-  <div class="callout callout-gold">
-    <strong>Where this leaves you in 2026:</strong> T-bills and PIBs are the cleanest way to earn Pakistan's government yield, and the IPS account is more accessible than most people assume. Just be realistic about scale. Under a few million rupees, a money market fund delivers the same exposure with none of the friction, and an SSC at 11.6% locks a comparable rate from Rs. 500. Direct IPS ownership shines for large balances and for locking long fixed rates before the next leg of the cutting cycle.
-  </div>
-
-  <!-- FAQ Section -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-minimum-amount"><summary class="faq-question">What is the minimum amount needed to buy T-bills in Pakistan?</summary><div class="faq-answer">Banks set their own practical minimums for IPS customers — commonly Rs. 100,000 or more per bid, and some expect substantially larger amounts. Ask your branch for its current minimum before opening the account. If your investable amount is below that threshold, a money market mutual fund gives you the same T-bill exposure from around Rs. 1,000.</div></details>
-
-  <details class="faq-item" id="faq-safer-than-savings"><summary class="faq-question">Are T-bills safer than National Savings certificates?</summary><div class="faq-answer">Both are direct obligations of the Government of Pakistan, so the credit risk is essentially the same. The differences are practical: T-bills are tradable market instruments held in an IPS account, while National Savings certificates are non-tradable CDNS products with their own early-encashment rules. Neither protects you from inflation eroding real returns.</div></details>
-
-  <details class="faq-item" id="faq-sell-before-maturity"><summary class="faq-question">Can I sell my T-bills or PIBs before maturity?</summary><div class="faq-answer">Yes — through your bank in the secondary market. T-bills are short-dated, so their prices move little. PIBs are different: if rates have risen since you bought, a fixed-rate PIB will be worth less than you paid; if rates have fallen, you may sell at a gain. Held to maturity, you receive full face value regardless.</div></details>
-
-  <details class="faq-item" id="faq-tax-on-profit"><summary class="faq-question">Do I pay tax on T-bill and PIB profit?</summary><div class="faq-answer">Yes. Profit is treated as profit on debt and withholding tax is deducted at source by your bank — at a significantly higher rate if you are not on the FBR's Active Taxpayer List. Capital gains on early sales are also taxable. Rates change with federal budgets, so verify the current schedule at fbr.gov.pk rather than relying on any fixed figure.</div></details>
-
-  <details class="faq-item" id="faq-direct-or-fund"><summary class="faq-question">Should I buy T-bills directly or just use a money market fund?</summary><div class="faq-answer">For most retail investors with less than a few million rupees, a money market fund is more practical: it holds largely the same T-bills, accepts around Rs. 1,000, redeems in one or two working days, and needs no auction paperwork. Direct IPS ownership makes sense for larger amounts, avoiding fund fees, or locking a specific PIB maturity and coupon before an expected rate-cutting cycle.</div></details>
-
-  <details class="faq-item" id="faq-what-is-ips-account"><summary class="faq-question">What is an IPS account and how do I open one?</summary><div class="faq-answer">An Investor Portfolio Securities (IPS) account is the record-keeping account a bank maintains with the State Bank of Pakistan to hold your government securities such as T-bills and PIBs. You open one through a commercial bank that offers the service, usually by submitting standard KYC documents like your CNIC and an existing bank account. Eligibility, fees, and paperwork vary by bank, so confirm the exact requirements with your branch.</div></details>
-
-  <details class="faq-item" id="faq-tenor-options"><summary class="faq-question">What tenors are available for T-bills in Pakistan?</summary><div class="faq-answer">Treasury bills are short-term instruments, typically issued in three-month, six-month, and twelve-month tenors. They are sold at a discount to face value and pay no separate coupon — your return is the difference between the purchase price and the face value received at maturity. For longer fixed-income exposure, Pakistan Investment Bonds (PIBs) run for several years instead.</div></details>
-
-  <details class="faq-item" id="faq-can-overseas-pakistanis-buy"><summary class="faq-question">Can overseas Pakistanis buy T-bills?</summary><div class="faq-answer">Non-resident Pakistanis can generally invest in government securities, often through Roshan Digital Accounts or non-resident accounts offered by Pakistani banks, which channel funds into the relevant instruments. The specific products, currency options, and tax treatment differ from those for resident investors. Check the current terms with a participating bank and verify tax details on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-how-auctions-work"><summary class="faq-question">How are T-bill auctions conducted in Pakistan?</summary><div class="faq-answer">The State Bank of Pakistan holds periodic auctions on behalf of the government, where banks and primary dealers submit competitive bids. The cut-off yield is set by the accepted bids, and retail investors usually participate indirectly by placing orders through their bank rather than bidding at the auction themselves. Auction calendars and results are published by the State Bank, so check sbp.org.pk for the current schedule.</div></details>
-
-  <details class="faq-item" id="faq-tbills-vs-fixed-deposit"><summary class="faq-question">What is the difference between T-bills and a bank fixed deposit?</summary><div class="faq-answer">A T-bill is a direct obligation of the Government of Pakistan, while a fixed deposit is a liability of the bank that holds it. T-bills are tradable in the secondary market and held in an IPS account, whereas a fixed deposit is held with the bank and typically has its own early-withdrawal penalties. Both have their profit taxed as profit on debt, so verify the applicable withholding rates on fbr.gov.pk.</div></details>
-
-  <!-- Ad slot 2 — after FAQ section -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Guides</h3>
-    <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained: What It Means for Your Investments</a>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
-    <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">⚠ This article is for educational purposes only. Auction yields, bank requirements, fees, and tax rates change frequently — verify current figures with sbp.org.pk, fbr.gov.pk, and your bank. This is not personalised financial advice. Always consult a SECP-registered financial advisor before making significant investment decisions.</div>
-
-</div>
-
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

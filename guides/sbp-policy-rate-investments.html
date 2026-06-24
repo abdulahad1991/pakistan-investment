@@ -144,12 +144,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -158,23 +158,195 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-4T2H0KH9H7');
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.6vw,3.5rem);font-weight:800;line-height:1;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:620px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:0 0 6px}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p{margin:0;color:#E4F2EA}
+  .cl-dark strong{color:var(--acid)!important;font-weight:700}
+  .cl-tip{background:var(--mint);border-left:4px solid var(--green);padding:18px 22px;margin:0 0 24px}
+  .cl-tip p{margin:0;font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500}
+  .cl-tip strong{color:var(--green-d);font-weight:700}
+
+  /* transmission / data tables */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 24px;overflow-x:auto}
+  .data-table{width:100%;border-collapse:collapse;min-width:560px}
+  .data-table th{font-family:var(--display);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-d);text-align:left;background:var(--mint);padding:12px 16px;border-bottom:2px solid var(--acid)}
+  .data-table td{font-family:var(--body);font-size:.92rem;line-height:1.55;color:var(--ink2);font-weight:500;padding:13px 16px;border-bottom:1px solid var(--line2);vertical-align:top}
+  .data-table tr:last-child td{border-bottom:none}
+  .data-table tr:hover td{background:var(--paper)}
+  .data-table td strong{color:var(--green-d);font-weight:700}
+  .data-table .rt{font-family:var(--mono);font-weight:600;color:var(--green);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  /* rate timeline */
+  .rate-timeline{border:1px solid var(--line);margin:0 0 24px}
+  .rate-row{display:grid;grid-template-columns:120px 92px 1fr;align-items:baseline;gap:14px;padding:13px 18px;border-bottom:1px solid var(--line2)}
+  .rate-row:last-child{border-bottom:none}
+  .rate-row:hover{background:var(--paper)}
+  .rate-date{font-family:var(--display);font-size:.78rem;font-weight:700;color:var(--green-d);letter-spacing:.02em}
+  .rate-val{font-family:var(--mono);font-size:1.05rem;font-weight:600;color:var(--green);text-align:right;font-variant-numeric:tabular-nums}
+  .rate-note{font-family:var(--body);font-size:.86rem;line-height:1.5;color:var(--muted);font-weight:500}
+
+  /* live SBP widget */
+  .live-widget{border:1px solid var(--line);border-top:3px solid var(--acid);margin:0 0 28px}
+  .lw-head{padding:16px 20px;border-bottom:1px solid var(--line);background:var(--mint)}
+  .lw-head .t{font-family:var(--display);font-size:.78rem;font-weight:700;letter-spacing:.04em;color:var(--green-d)}
+  .lw-head .v{display:block;font-family:var(--display);font-size:.58rem;font-weight:600;letter-spacing:.06em;color:var(--muted);margin-top:5px;text-transform:uppercase}
+  #sbp-widget{padding:20px;font-family:var(--body);font-size:.9rem;color:var(--muted)}
+  .sbp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .sbp-stat{border:1px solid var(--line2);padding:16px 12px;text-align:center;background:var(--paper)}
+  .sbp-stat .n{font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:-.02em}
+  .sbp-stat .l{font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.06em;color:var(--ink2);margin-top:6px;text-transform:uppercase}
+  .sbp-stat .s{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+  .sbp-stat.pol .n{color:var(--green-d)}
+  .sbp-stat.inf .n{color:var(--red)}
+  .sbp-stat.kse .n{color:var(--navy)}
+
+  /* impact grid */
+  .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 24px}
+  .impact-card{border:1px solid var(--line);border-top:3px solid var(--green);padding:18px 16px;background:#fff}
+  .impact-icon{font-size:1.5rem;line-height:1;margin-bottom:10px}
+  .impact-title{font-family:var(--display);font-size:.96rem;font-weight:700;color:var(--green-d);margin-bottom:8px}
+  .impact-desc{font-family:var(--body);font-size:.86rem;line-height:1.5;font-weight:500}
+  .impact-up{color:var(--green2)}
+  .impact-dn{color:var(--red)}
+
+  /* playbook grid */
+  .playbook-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 24px}
+  .playbook-card{border:1px solid var(--line);padding:18px 16px;background:#fff}
+  .playbook-card.high{border-top:3px solid var(--red)}
+  .playbook-card.mid{border-top:3px solid var(--acid)}
+  .playbook-card.low{border-top:3px solid var(--navy)}
+  .playbook-rate{font-family:var(--mono);font-size:1.1rem;font-weight:600;font-variant-numeric:tabular-nums}
+  .playbook-label{font-family:var(--display);font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:4px 0 12px}
+  .playbook-actions{font-family:var(--body);font-size:.86rem;line-height:1.7;color:var(--ink2);font-weight:500}
+  .playbook-actions strong{color:var(--green-d);font-weight:700}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7;font-family:var(--body);color:var(--ink2);font-weight:500}
+
+  /* related links */
+  .related-links{border-top:1px solid var(--line);padding-top:22px;margin:30px 0 0}
+  .related-links h3{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-d);margin:0 0 12px}
+  .related-links a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.94rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .related-links a:first-of-type{border-top:none}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+    .impact-grid,.playbook-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+    .sbp-grid{grid-template-columns:1fr;gap:10px}
+    .rate-row{grid-template-columns:96px 72px;grid-template-areas:"date val" "note note";gap:6px 12px}
+    .rate-date{grid-area:date}
+    .rate-val{grid-area:val}
+    .rate-note{grid-area:note}
+    #sbp-widget,.lw-head{padding-left:14px;padding-right:14px}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -183,370 +355,473 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/guides/">Guides</a> › SBP Policy Rate and Investments</div>
-
-  <h1>SBP Policy Rate Explained: What It Means for Your Investments in Pakistan</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Updated 20 May 2026 &nbsp;·&nbsp; 10 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one line:</strong> The SBP policy rate is the interest rate at which the State Bank of Pakistan lends to commercial banks overnight, set by its Monetary Policy Committee. It influences nearly every Pakistani investment return. Rate cuts tend to lift PSX stocks while lowering yields on new savings certificates.</p>
-
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Updated 20 May 2026</span></div>
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
   </div>
-
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>What this means for your money:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>The SBP rate sits at 11.5% (May 2026) and is holding. That puts the real rate at +4.5% above inflation.</li>
-      <li>Cuts are good for stocks and bad for new savings rates. The KSE-100 climbed 173% while rates dropped from 22% to 11.5%.</li>
-      <li>Action now: lock in CDNS rates before the next cut, and build equity fund exposure slowly through a SIP.</li>
-    </ul>
-  </div>
-
-  <!-- Ad slot 1 — after summary, before main content -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>If you have money anywhere in Pakistan, whether in a savings account, a mutual fund, a National Savings certificate or the stock market, the <strong>State Bank of Pakistan's policy rate</strong> is the one number you have to understand. It shapes almost every return available to a Pakistani investor, and often within weeks of a decision. This guide covers what the rate actually is, how the SBP decides it, how a change works its way through to your own investments, and what to do with your money right now.</p>
-
-  <h2>What Is the SBP Policy Rate?</h2>
-
-  <p>The policy rate, also called the benchmark rate or key rate, is the interest rate at which the State Bank lends money to commercial banks overnight. The SBP's Monetary Policy Committee (MPC) sets it. The committee meets roughly every 6–8 weeks and announces whether it is holding, raising or cutting.</p>
-
-  <p>Think of it as the price of money in Pakistan's economy. When the rate is high, borrowing is expensive, activity slows and inflation cools. When it is low, credit is cheap, businesses borrow and invest, and growth tends to pick up. Every product a Pakistani saver can buy, from a plain bank account to a T-bill to an equity mutual fund, is priced against this one number, directly or indirectly.</p>
-
-  <h2>How the Monetary Policy Committee Works</h2>
-
-  <p>The Monetary Policy Committee sets Pakistan's policy rate. If you understand how it works, you can see decisions coming and position your portfolio before them.</p>
-
-  <p>The <strong>Governor of the State Bank</strong> chairs the MPC, and the two Deputy Governors sit on it. Alongside these internal members, the federal government appoints external members: economists and finance professionals with serious grounding in macroeconomics, fiscal policy and capital markets. The point of mixing inside knowledge with independent voices is to keep decisions grounded in analysis rather than political pressure.</p>
-
-  <p>Meetings come around <strong>every 6–8 weeks</strong>, so roughly 6 to 8 a year. The SBP publishes the schedule in advance on <strong>sbp.org.pk</strong>, which lets investors and businesses plan around the dates. On meeting day the decision goes out with a written statement explaining the reasoning. Read that statement closely. It often matters more than the rate itself because it tells you where the committee is likely to go next.</p>
-
-  <p>Watch the language on inflation expectations, GDP growth, the current account and foreign exchange reserves. A line like "risks are tilted to the upside on inflation" hints at future hikes. "Inflation is on a downward trajectory" means the committee is happy to hold or cut. The statement usually touches on Pakistan's IMF programme commitments too, which have boxed in monetary policy for years now.</p>
-
-  <p>Dawn Business, Profit by Pakistan Today and Brecorder run same-day analysis of MPC decisions. Read those next to the SBP statement and you get both the raw data and how the market is reading it.</p>
-
-  <h2>The Transmission Mechanism: How Rate Changes Reach You</h2>
-
-  <p>A rate change from the MPC does not reset every return in the country overnight. Different instruments react at different speeds, and that lag is where the opportunity sits. It opens short windows where you can act before the rest of the market has caught up.</p>
-
-  <p>Here is how a change moves through the system, roughly fastest to slowest:</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Instrument</th>
-        <th>Response Time</th>
-        <th>Mechanism</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Treasury Bills (T-Bills)</strong></td>
-        <td>Immediate (days)</td>
-        <td>Auctioned weekly by SBP. Cut-off yields at T-bill auctions respond to the policy rate almost immediately. This is the market's purest read on rate expectations.</td>
-      </tr>
-      <tr>
-        <td><strong>Money Market Mutual Funds</strong></td>
-        <td>1–4 weeks</td>
-        <td>These funds hold T-bills and short-term bank placements. As the fund's holdings mature and are reinvested at new rates, the published return (annualised yield) adjusts within a few weeks of a rate change.</td>
-      </tr>
-      <tr>
-        <td><strong>CDNS (National Savings)</strong></td>
-        <td>2–6 weeks</td>
-        <td>The government revises CDNS profit rates following MPC decisions, though there is no fixed timetable. Existing certificate holders are not affected — only new purchases or renewals get the revised rate.</td>
-      </tr>
-      <tr>
-        <td><strong>Bank Term Deposits</strong></td>
-        <td>4–8 weeks</td>
-        <td>Banks adjust deposit rates more slowly, partly because they are competing for funding and partly due to regulatory floors. The SBP mandates a minimum deposit rate equal to 50 basis points below the policy rate.</td>
-      </tr>
-      <tr>
-        <td><strong>PSX / Equity Markets</strong></td>
-        <td>Immediate to months</td>
-        <td>Stock prices react to rate expectations even before an official decision, and continue adjusting as corporate earnings are revised and investor allocation shifts over months.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>The practical takeaway: if you think a cut is coming, lock in your CDNS certificates or longer-duration income fund units <em>before</em> it is announced, not after. The moment CDNS revises its rates, the window shuts. Equities are the opposite. They re-rate over months, so rushing into stocks the day after a cut usually means paying up during the early euphoria.</p>
-
-  <div class="callout callout-blue">
-    <strong>Timing tip:</strong> Check T-bill auction results on the SBP website each week. If cut-off yields keep coming in below the policy rate, the market is already betting on a cut. Treat that as your cue to review your fixed-income holdings before the MPC announces anything.
-  </div>
-
-  <h2>Historical Context: Pakistan's Rate Cycle 2019–2026</h2>
-
-  <p>Pakistan's recent rate history swings hard. Emergency COVID cuts, then record highs on the back of inflation and IMF conditions, and now a slow return to normal. Knowing this backdrop helps you judge where we sit in the cycle today.</p>
-
-  <div class="rate-timeline">
-    <div class="rate-row">
-      <div class="rate-date">Early 2019</div>
-      <div class="rate-val">10.75%</div>
-      <div class="rate-note">Rising rates to combat PKR depreciation and inflation under the new IMF programme</div>
-    </div>
-    <div class="rate-row">
-      <div class="rate-date">Mid 2020</div>
-      <div class="rate-val">7%</div>
-      <div class="rate-note">Emergency COVID-19 cuts — SBP slashed rates by 625 bps in just a few months to support the economy</div>
-    </div>
-    <div class="rate-row">
-      <div class="rate-date">Early 2022</div>
-      <div class="rate-val">9.75%</div>
-      <div class="rate-note">Post-COVID recovery, inflation beginning to accelerate; hiking cycle begins</div>
-    </div>
-    <div class="rate-row">
-      <div class="rate-date">Late 2022</div>
-      <div class="rate-val">16%</div>
-      <div class="rate-note">Aggressive hikes to combat surging inflation and currency pressure following devastating floods</div>
-    </div>
-    <div class="rate-row">
-      <div class="rate-date">Mid 2023</div>
-      <div class="rate-val">22%</div>
-      <div class="rate-note">Peak rate — highest in Pakistan's modern history; IMF programme conditions demanded fiscal and monetary tightening</div>
-    </div>
-    <div class="rate-row">
-      <div class="rate-date">Late 2024</div>
-      <div class="rate-val">15%</div>
-      <div class="rate-note">Cutting cycle begins as inflation falls from its peak; real rates turn significantly positive</div>
-    </div>
-    <div class="rate-row">
-      <div class="rate-date">May 2026</div>
-      <div class="rate-val">11.5%</div>
-      <div class="rate-note">Holding — 1,050 bps of cuts delivered; MPC pausing to assess inflation trajectory and IMF programme compliance</div>
-    </div>
-  </div>
-
-  <p>The 2020 to 2023 cycle was something else. A 1,500 basis point swing from trough to peak in three years. Several things hit at once: global commodity inflation, domestic food price shocks, the catastrophic 2022 floods (which damaged 45% of crops) and a sliding rupee. The IMF's $7 billion Extended Fund Facility, signed in 2023, demanded a positive real interest rate, which pinned the SBP at 22% even as the economy shrank.</p>
-
-  <p>The cutting cycle from late 2024 has been steadier. CPI inflation now runs at 7.0% and the real rate is firmly positive at +4.5%, so the SBP has headroom to keep easing. The MPC is taking its time though, watching for second-round inflation effects and keeping an eye on the current account. The question for investors has flipped. It is no longer "when do cuts begin?" but "how low do rates go, and how quickly?"</p>
-
-  <!-- Live data widget -->
-  <div class="live-widget" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:12px;padding:20px;margin:24px 0">
-    <div style="font-weight:700;margin-bottom:4px;color:#0E3B2E">Current SBP Rate vs Your Investments</div>
-    <div style="font-size:.78rem;color:#888;margin-bottom:14px">Last verified: 20 May 2026 — source: sbp.org.pk</div>
-    <div id="sbp-widget">Loading...</div>
-    <noscript>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-        <div style="background:#E9EFE6;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.6rem;font-weight:800;color:#0E3B2E">11.5%</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">SBP Policy Rate</div><div style="font-size:.72rem;color:#888">Holding</div></div>
-        <div style="background:#F4E7D4;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.6rem;font-weight:800;color:#A4452F">7.0%</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">CPI Inflation</div><div style="font-size:.72rem;color:#888">Real rate: +4.5%</div></div>
-        <div style="background:#E8EDF3;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.6rem;font-weight:800;color:#23415E">164,742</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">KSE-100</div><div style="font-size:.72rem;color:#888">Index level</div></div>
-      </div>
-      <p style="font-size:.75rem;color:#888;margin-top:8px">Enable JavaScript for live data</p>
-    </noscript>
-  </div>
-  <script>
-  fetch('/data.json').then(r=>r.json()).then(d=>{
-    const m=d.macro;
-    const realRate=(m.sbp_rate-m.inflation_cpi).toFixed(1);
-    document.getElementById('sbp-widget').innerHTML=`
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-        <div style="background:#E9EFE6;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.6rem;font-weight:800;color:#0E3B2E">${m.sbp_rate}%</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">SBP Policy Rate</div><div style="font-size:.72rem;color:#888">${m.sbp_direction}</div></div>
-        <div style="background:#F4E7D4;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.6rem;font-weight:800;color:#A4452F">${m.inflation_cpi}%</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">CPI Inflation</div><div style="font-size:.72rem;color:#888">Real rate: +${realRate}%</div></div>
-        <div style="background:#E8EDF3;border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.6rem;font-weight:800;color:#23415E">${m.kse100_level.toLocaleString()}</div><div style="font-size:.8rem;color:#5E5C52;margin-top:4px">KSE-100</div><div style="font-size:.72rem;color:#888">Index level</div></div>
-      </div>`;
-  }).catch(()=>{document.getElementById('sbp-widget').textContent='Unable to load live data.';});
-  </script>
-
-  <h2>How Rate Changes Affect Each Investment Type</h2>
-
-  <div class="impact-grid">
-    <div class="impact-card">
-      <div class="impact-icon">🏛</div>
-      <div class="impact-title">National Savings (CDNS)</div>
-      <div class="impact-desc impact-dn">Rate cut → yields fall on new certificates. Existing certificates keep their locked-in rate.</div>
-    </div>
-    <div class="impact-card">
-      <div class="impact-icon">📊</div>
-      <div class="impact-title">Money Market Funds</div>
-      <div class="impact-desc impact-dn">Rate cut → returns fall within weeks. These funds track the policy rate closely in real time.</div>
-    </div>
-    <div class="impact-card">
-      <div class="impact-icon">📈</div>
-      <div class="impact-title">PSX Stocks</div>
-      <div class="impact-desc impact-up">Rate cut → stocks typically rise. Lower rates make future earnings more valuable and push investors toward equities.</div>
-    </div>
-  </div>
-
-  <h2>Rate Cuts and the Stock Market</h2>
-
-  <p>The link between the SBP rate and the KSE-100 is strong and well documented. When rates hit 22% in 2023, fixed income paid extraordinary risk-free returns, and plenty of investors pulled money out of stocks and into Treasury bills and savings certificates.</p>
-
-  <p>As rates dropped from 22% toward 11.5%, the maths flipped. A stock paying a 10% dividend yield looked attractive again next to a savings certificate at 12%, once you allow for dividend growth and capital gains. The KSE-100 ran from around 60,000 in late 2023 to over 1,64,000 by May 2026, a gain of nearly 175% in about two and a half years, driven largely by the cuts and by institutional and retail money coming back into equities. The index sits near 181,000 today, and you can still find dividend yields like HUBC at 10.7% and MCB at 8.8% in our daily dataset.</p>
-
-  <div class="callout callout-blue">
-    <strong>Key insight:</strong> Cuts are usually good for equities and bad for fixed income. Hikes do the reverse: they hurt stocks but lift savings returns. Getting your portfolio in position before the move is where the real gain comes from.
-  </div>
-
-  <h2>How to Use the SBP Rate in Your Investment Decisions</h2>
-
-  <p>The simplest framework is to let the rate level guide how you split your portfolio. Here is a playbook across three rate regimes.</p>
-
-  <div class="playbook-grid">
-    <div class="playbook-card high">
-      <div class="playbook-rate" style="color:#A4452F">Rate &gt; 15%</div>
-      <div class="playbook-label">High Rate Regime</div>
-      <div class="playbook-actions">
-        <strong>Maximise fixed income.</strong><br>
-        — Shift 70–80% to CDNS certificates and money market funds<br>
-        — Lock in DSCs and SSCs at peak rates<br>
-        — Reduce equity exposure to 10–20%<br>
-        — Hold T-bills for liquidity; yields are exceptional<br>
-        — This is when risk-free returns beat equities risk-adjusted
-      </div>
-    </div>
-    <div class="playbook-card mid">
-      <div class="playbook-rate" style="color:#0E3B2E">Rate 10–15% (Now)</div>
-      <div class="playbook-label">Transition Regime</div>
-      <div class="playbook-actions">
-        <strong>Blend fixed income + equities.</strong><br>
-        — Lock in remaining CDNS allocation before further cuts<br>
-        — Reduce money market fund weight; shift to income funds<br>
-        — Build equity allocation to 30–40% via SIP<br>
-        — Focus on dividend stocks with 8%+ yields<br>
-        — This regime rewards balanced, diversified portfolios
-      </div>
-    </div>
-    <div class="playbook-card low">
-      <div class="playbook-rate" style="color:#23415E">Rate &lt; 10%</div>
-      <div class="playbook-label">Low Rate Regime</div>
-      <div class="playbook-actions">
-        <strong>Shift toward equities.</strong><br>
-        — Equity allocation 50–60% or higher<br>
-        — CDNS still useful for capital preservation<br>
-        — Money market funds offer little above inflation<br>
-        — Focus on growth sectors: technology, consumer goods<br>
-        — This is where equity compounding outperforms savers
-      </div>
-    </div>
-  </div>
-
-  <p>The rate is at 11.5% right now, sitting in the middle of the transition regime. For most people the single most useful move is to <strong>stop leaving money idle in a bank savings account</strong>, where the rate is usually well below the policy rate. Spread it instead across a CDNS Special Savings Certificate (currently around 11.6%), a money market fund for liquidity, and a growing equity slice through a diversified fund or direct dividend stocks on PSX.</p>
-
-  <p>If the SBP cuts further toward 9–10%, the playbook tilts harder toward equities. A certificate earning 9% in a 7% inflation environment is barely staying ahead in real terms, while earnings growth and rising dividends start to look far better. Build that equity exposure before the shift is obvious, not after.</p>
-
-  <p>The classic mistake Pakistani retail investors make is waiting for certainty. By the time it is clear that rates are falling and stocks are the better bet, the market has already banked most of the gain. A monthly Systematic Investment Plan (SIP) in an equity fund takes the timing pressure off. You buy at a range of prices over 12 months and average in, so you catch the benefit of falling rates without agonising over the perfect entry.</p>
-
-  <h2>How Rate Changes Affect Each Investment — In Detail</h2>
-
-  <h3>Lock in CDNS Rates Now</h3>
-  <p>National Savings certificates lock in the profit rate that applies on the day you buy. A <strong>Special Savings Certificate (SSC)</strong> bought today at 11.6% keeps earning that rate for the full 3-year tenure even as new rates fall. For most savers the SSC hits the sweet spot on yield, tenure and access: it starts at just Rs. 500, is open to all Pakistanis, and pays every 6 months. If the SBP trims another 100–200 bps over the next year, buying now locks in today's better yield.</p>
-
-  <h3>Reduce Money Market Fund Exposure</h3>
-  <p>Money market fund returns fall in step with rate cuts. These funds hold mostly T-bills and short-term bank placements, so their annualised yield tracks the policy rate minus a small fee. If you are earning 11–12% in one today, expect that to drift toward 9–10% as the SBP keeps easing. It may be worth moving part of that money into longer-duration income funds, which lock in higher yields on longer-maturity bonds, or into equity funds to catch the upside from a lower discount rate.</p>
-
-  <h3>Increase Equity Exposure Gradually</h3>
-  <p>When rates are falling, the risk and reward balance leans toward equities. Use a Systematic Investment Plan (SIP) in an equity fund to build your exposure gradually instead of trying to nail the perfect moment. Averaging in over time takes the guesswork out of entry. If you buy stocks directly, stick with companies that have a solid dividend record. Banking, energy and fertiliser names have historically paid 7–12% yields even while the market re-rates.</p>
-
-  <h2>How to Follow SBP Policy Rate Decisions</h2>
-
-  <p>The SBP posts its MPC decisions on <strong>sbp.org.pk</strong>. Meetings are usually flagged 2–3 weeks ahead, and the decision drops on the meeting date with a written statement laying out the reasoning. Profit by Pakistan Today, Dawn Business and ARY News Business cover and analyse it the same day.</p>
-
-  <p>Our <a href="/">investment analyzer tool</a> shows the current SBP rate next to live market data, so you can see at a glance how it stacks up against savings and stock returns without hunting across several sources.</p>
-
-  <div class="callout callout-gold">
-    <strong>Where this leaves you in 2026:</strong> Pakistan is holding rates after a big cutting cycle. If your money is sitting in short-term money market funds or a bank savings account, think about locking some into CDNS certificates at today's rates and adding to equity funds over time. The window for high risk-free returns is closing, but it has not closed yet.
-  </div>
-
-  <!-- FAQ Section -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-how-often-sbp-changes-rate">
-    <summary class="faq-question">How often does the SBP change the policy rate?</summary>
-    <div class="faq-answer">The SBP's Monetary Policy Committee (MPC) meets approximately every 6–8 weeks, typically 8 times per year. Each meeting results in a decision to hold, raise, or cut the rate, which is announced on the same day via sbp.org.pk along with a written statement explaining the reasoning.</div>
-  </details>
-
-  <details class="faq-item" id="faq-how-quickly-savings-rates-change">
-    <summary class="faq-question">How quickly do National Savings rates change after an SBP rate decision?</summary>
-    <div class="faq-answer">CDNS profit rates are typically revised within 2–4 weeks of an SBP rate decision. However, certificates you already hold continue earning the rate locked in at the time of purchase — only new purchases are affected by revised rates. This makes buying CDNS certificates immediately after a rate peak strategically valuable.</div>
-  </details>
-
-  <details class="faq-item" id="faq-rate-cut-stock-market">
-    <summary class="faq-question">Does a rate cut always mean the stock market will go up?</summary>
-    <div class="faq-answer">Not always immediately, but the historical relationship in Pakistan is strong. When the SBP cut rates from 22% to 11.5% (2024–2026), the KSE-100 rose from around 60,000 to over 164,000 — a 173% gain. However, other factors (corporate earnings, currency, IMF program status, geopolitical events) can override the rate effect in the short term.</div>
-  </details>
-
-  <details class="faq-item" id="faq-where-to-find-rate-announcement">
-    <summary class="faq-question">Where can I find the SBP policy rate decision announcement?</summary>
-    <div class="faq-answer">The official source is sbp.org.pk — go to "Monetary Policy" then "Monetary Policy Statements." Financial news outlets like Profit by Pakistan Today, Dawn Business, and The News cover decisions on the same day. Our investment analyzer tool also displays the current SBP rate pulled from official data.</div>
-  </details>
-
-  <details class="faq-item" id="faq-real-interest-rate">
-    <summary class="faq-question">What is the "real interest rate" and why does it matter?</summary>
-    <div class="faq-answer">The real interest rate is the nominal rate minus inflation. With the SBP rate at 11.5% and CPI inflation at 7%, the real rate is approximately +4.5%. A positive real rate means savings are actually growing in purchasing power. In 2022, when inflation was 27% and the rate was 16%, the real rate was -11% — meaning cash savings were losing value rapidly despite earning nominal returns.</div>
-  </details>
-
-  <details class="faq-item" id="faq-difference-policy-rate-kibor">
-    <summary class="faq-question">What is the difference between the SBP policy rate and KIBOR?</summary>
-    <div class="faq-answer">The policy rate is set directly by the SBP's Monetary Policy Committee and acts as the benchmark for the cost of money in the economy. KIBOR (Karachi Interbank Offered Rate) is the rate at which banks lend to each other and tends to move closely with the policy rate, since changes in the policy rate flow through interbank markets. Many loan and bond pricing formulas are linked to KIBOR rather than the policy rate itself. For the latest figures, verify on sbp.org.pk.</div>
-  </details>
-
-  <details class="faq-item" id="faq-rate-affect-home-loan">
-    <summary class="faq-question">How does a change in the policy rate affect my existing home loan or car financing?</summary>
-    <div class="faq-answer">Most consumer financing in Pakistan is priced on a floating basis, usually as a benchmark such as KIBOR plus a fixed bank margin. When the SBP raises the policy rate, the benchmark generally rises and your instalment can increase at the next repricing date; when the rate falls, the cost of borrowing typically eases. Fixed-rate arrangements are not affected until the agreed reset point. Check your loan agreement and your bank for the exact benchmark and repricing schedule.</div>
-  </details>
-
-  <details class="faq-item" id="faq-rate-impact-rupee">
-    <summary class="faq-question">Does the SBP policy rate affect the value of the Pakistani Rupee?</summary>
-    <div class="faq-answer">A higher policy rate can make Rupee-denominated savings more attractive relative to foreign currency, which is one factor that can support the Rupee, while lower rates can have the opposite tendency. However, the exchange rate is also driven by many other forces such as the current account, remittances, foreign reserves, and IMF program status, so the rate is only one input among several. Currency movements are inherently uncertain and should not be predicted with confidence.</div>
-  </details>
-
-  <details class="faq-item" id="faq-fixed-or-floating-savings">
-    <summary class="faq-question">When rates are expected to fall, is it better to lock into a fixed-rate certificate?</summary>
-    <div class="faq-answer">This page explains that CDNS certificates lock in the profit rate that applies at the time of purchase, so an instrument bought before a series of cuts keeps its original rate while new issues are revised lower. That is a factual feature of how these certificates work, not a recommendation. The right choice depends on your time horizon, liquidity needs, and personal circumstances, so consider speaking with a SECP-registered advisor before deciding.</div>
-  </details>
-
-  <details class="faq-item" id="faq-rate-vs-inflation-target">
-    <summary class="faq-question">Why does the SBP raise rates when inflation is high?</summary>
-    <div class="faq-answer">Raising the policy rate makes borrowing more expensive and saving more rewarding, which tends to cool overall demand and ease price pressures over time. The SBP uses this tool to steer inflation toward its medium-term objective while weighing growth and external stability. The precise inflation target and the current rate stance can change, so verify the latest figures and the SBP's reasoning on sbp.org.pk.</div>
-  </details>
-
-  <!-- Ad slot 2 — after FAQ section -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Guides</h3>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
-    <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
-    <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">⚠ This article is for educational purposes only. Monetary policy is inherently unpredictable — the SBP may change the rate direction at any time based on inflation, currency movements, or external factors. This is not personalised financial advice. Always consult a SECP-registered financial advisor before making significant investment decisions.</div>
-
 </div>
 
+<main>
+<article class="art-frame">
+
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">SBP Policy Rate and Investments</li>
+    </ol>
+  </nav>
+
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 01 — Macro · Monetary Policy</div>
+      <h1>SBP policy rate: what it means for your investments.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 20 May 2026</span>
+        <span>· 10 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">In one line</div>
+      <p>The SBP policy rate is the rate at which the <b>State Bank lends to commercial banks overnight</b>, set by its Monetary Policy Committee. It influences nearly every Pakistani investment return. <b class="acc">Rate cuts</b> tend to lift PSX stocks while lowering yields on new savings certificates.</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 20 May 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">What this means for your money</div>
+        <ul>
+          <li>The SBP rate sits at 11.5% (May 2026) and is holding. That puts the real rate at +4.5% above inflation.</li>
+          <li>Cuts are good for stocks and bad for new savings rates. The KSE-100 climbed 173% while rates dropped from 22% to 11.5%.</li>
+          <li>Action now: lock in CDNS rates before the next cut, and build equity fund exposure slowly through a SIP.</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary, before main content -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>If you have money anywhere in Pakistan, whether in a savings account, a mutual fund, a National Savings certificate or the stock market, the <strong>State Bank of Pakistan's policy rate</strong> is the one number you have to understand. It shapes almost every return available to a Pakistani investor, and often within weeks of a decision. This guide covers what the rate actually is, how the SBP decides it, how a change works its way through to your own investments, and what to do with your money right now.</p>
+
+      <h2 id="s1"><span class="sn">01</span>What is the SBP policy rate?</h2>
+
+      <p>The policy rate, also called the benchmark rate or key rate, is the interest rate at which the State Bank lends money to commercial banks overnight. The SBP's Monetary Policy Committee (MPC) sets it. The committee meets roughly every 6–8 weeks and announces whether it is holding, raising or cutting.</p>
+
+      <p>Think of it as the price of money in Pakistan's economy. When the rate is high, borrowing is expensive, activity slows and inflation cools. When it is low, credit is cheap, businesses borrow and invest, and growth tends to pick up. Every product a Pakistani saver can buy, from a plain bank account to a T-bill to an equity mutual fund, is priced against this one number, directly or indirectly.</p>
+
+      <h2 id="s2"><span class="sn">02</span>How the Monetary Policy Committee works</h2>
+
+      <p>The Monetary Policy Committee sets Pakistan's policy rate. If you understand how it works, you can see decisions coming and position your portfolio before them.</p>
+
+      <p>The <strong>Governor of the State Bank</strong> chairs the MPC, and the two Deputy Governors sit on it. Alongside these internal members, the federal government appoints external members: economists and finance professionals with serious grounding in macroeconomics, fiscal policy and capital markets. The point of mixing inside knowledge with independent voices is to keep decisions grounded in analysis rather than political pressure.</p>
+
+      <p>Meetings come around <strong>every 6–8 weeks</strong>, so roughly 6 to 8 a year. The SBP publishes the schedule in advance on <strong>sbp.org.pk</strong>, which lets investors and businesses plan around the dates. On meeting day the decision goes out with a written statement explaining the reasoning. Read that statement closely. It often matters more than the rate itself because it tells you where the committee is likely to go next.</p>
+
+      <p>Watch the language on inflation expectations, GDP growth, the current account and foreign exchange reserves. A line like "risks are tilted to the upside on inflation" hints at future hikes. "Inflation is on a downward trajectory" means the committee is happy to hold or cut. The statement usually touches on Pakistan's IMF programme commitments too, which have boxed in monetary policy for years now.</p>
+
+      <p>Dawn Business, Profit by Pakistan Today and Brecorder run same-day analysis of MPC decisions. Read those next to the SBP statement and you get both the raw data and how the market is reading it.</p>
+
+      <h2 id="s3"><span class="sn">03</span>The transmission mechanism: how rate changes reach you</h2>
+
+      <p>A rate change from the MPC does not reset every return in the country overnight. Different instruments react at different speeds, and that lag is where the opportunity sits. It opens short windows where you can act before the rest of the market has caught up.</p>
+
+      <p>Here is how a change moves through the system, roughly fastest to slowest:</p>
+
+      <div class="tbl-wrap">
+        <table class="data-table transmission-table">
+          <thead>
+            <tr>
+              <th>Instrument</th>
+              <th>Response Time</th>
+              <th>Mechanism</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Treasury Bills (T-Bills)</strong></td>
+              <td class="rt">Immediate (days)</td>
+              <td>Auctioned weekly by SBP. Cut-off yields at T-bill auctions respond to the policy rate almost immediately. This is the market's purest read on rate expectations.</td>
+            </tr>
+            <tr>
+              <td><strong>Money Market Mutual Funds</strong></td>
+              <td class="rt">1–4 weeks</td>
+              <td>These funds hold T-bills and short-term bank placements. As the fund's holdings mature and are reinvested at new rates, the published return (annualised yield) adjusts within a few weeks of a rate change.</td>
+            </tr>
+            <tr>
+              <td><strong>CDNS (National Savings)</strong></td>
+              <td class="rt">2–6 weeks</td>
+              <td>The government revises CDNS profit rates following MPC decisions, though there is no fixed timetable. Existing certificate holders are not affected — only new purchases or renewals get the revised rate.</td>
+            </tr>
+            <tr>
+              <td><strong>Bank Term Deposits</strong></td>
+              <td class="rt">4–8 weeks</td>
+              <td>Banks adjust deposit rates more slowly, partly because they are competing for funding and partly due to regulatory floors. The SBP mandates a minimum deposit rate equal to 50 basis points below the policy rate.</td>
+            </tr>
+            <tr>
+              <td><strong>PSX / Equity Markets</strong></td>
+              <td class="rt">Immediate to months</td>
+              <td>Stock prices react to rate expectations even before an official decision, and continue adjusting as corporate earnings are revised and investor allocation shifts over months.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The practical takeaway: if you think a cut is coming, lock in your CDNS certificates or longer-duration income fund units <em>before</em> it is announced, not after. The moment CDNS revises its rates, the window shuts. Equities are the opposite. They re-rate over months, so rushing into stocks the day after a cut usually means paying up during the early euphoria.</p>
+
+      <div class="cl-tip">
+        <p><strong>Timing tip:</strong> Check T-bill auction results on the SBP website each week. If cut-off yields keep coming in below the policy rate, the market is already betting on a cut. Treat that as your cue to review your fixed-income holdings before the MPC announces anything.</p>
+      </div>
+
+      <h2 id="s4"><span class="sn">04</span>Historical context: Pakistan's rate cycle 2019–2026</h2>
+
+      <p>Pakistan's recent rate history swings hard. Emergency COVID cuts, then record highs on the back of inflation and IMF conditions, and now a slow return to normal. Knowing this backdrop helps you judge where we sit in the cycle today.</p>
+
+      <div class="rate-timeline">
+        <div class="rate-row">
+          <div class="rate-date">Early 2019</div>
+          <div class="rate-val">10.75%</div>
+          <div class="rate-note">Rising rates to combat PKR depreciation and inflation under the new IMF programme</div>
+        </div>
+        <div class="rate-row">
+          <div class="rate-date">Mid 2020</div>
+          <div class="rate-val">7%</div>
+          <div class="rate-note">Emergency COVID-19 cuts — SBP slashed rates by 625 bps in just a few months to support the economy</div>
+        </div>
+        <div class="rate-row">
+          <div class="rate-date">Early 2022</div>
+          <div class="rate-val">9.75%</div>
+          <div class="rate-note">Post-COVID recovery, inflation beginning to accelerate; hiking cycle begins</div>
+        </div>
+        <div class="rate-row">
+          <div class="rate-date">Late 2022</div>
+          <div class="rate-val">16%</div>
+          <div class="rate-note">Aggressive hikes to combat surging inflation and currency pressure following devastating floods</div>
+        </div>
+        <div class="rate-row">
+          <div class="rate-date">Mid 2023</div>
+          <div class="rate-val">22%</div>
+          <div class="rate-note">Peak rate — highest in Pakistan's modern history; IMF programme conditions demanded fiscal and monetary tightening</div>
+        </div>
+        <div class="rate-row">
+          <div class="rate-date">Late 2024</div>
+          <div class="rate-val">15%</div>
+          <div class="rate-note">Cutting cycle begins as inflation falls from its peak; real rates turn significantly positive</div>
+        </div>
+        <div class="rate-row">
+          <div class="rate-date">May 2026</div>
+          <div class="rate-val">11.5%</div>
+          <div class="rate-note">Holding — 1,050 bps of cuts delivered; MPC pausing to assess inflation trajectory and IMF programme compliance</div>
+        </div>
+      </div>
+
+      <p>The 2020 to 2023 cycle was something else. A 1,500 basis point swing from trough to peak in three years. Several things hit at once: global commodity inflation, domestic food price shocks, the catastrophic 2022 floods (which damaged 45% of crops) and a sliding rupee. The IMF's $7 billion Extended Fund Facility, signed in 2023, demanded a positive real interest rate, which pinned the SBP at 22% even as the economy shrank.</p>
+
+      <p>The cutting cycle from late 2024 has been steadier. CPI inflation now runs at 7.0% and the real rate is firmly positive at +4.5%, so the SBP has headroom to keep easing. The MPC is taking its time though, watching for second-round inflation effects and keeping an eye on the current account. The question for investors has flipped. It is no longer "when do cuts begin?" but "how low do rates go, and how quickly?"</p>
+
+      <!-- Live data widget -->
+      <div class="live-widget">
+        <div class="lw-head">
+          <span class="t">Current SBP Rate vs Your Investments</span>
+          <span class="v">Last verified 20 May 2026 — source: sbp.org.pk</span>
+        </div>
+        <div id="sbp-widget">Loading…</div>
+        <noscript>
+          <div style="padding:20px">
+            <div class="sbp-grid">
+              <div class="sbp-stat pol"><div class="n">11.5%</div><div class="l">SBP Policy Rate</div><div class="s">Holding</div></div>
+              <div class="sbp-stat inf"><div class="n">7.0%</div><div class="l">CPI Inflation</div><div class="s">Real rate: +4.5%</div></div>
+              <div class="sbp-stat kse"><div class="n">164,742</div><div class="l">KSE-100</div><div class="s">Index level</div></div>
+            </div>
+            <p style="font-family:var(--body);font-size:.75rem;color:var(--muted);margin:10px 0 0">Enable JavaScript for live data</p>
+          </div>
+        </noscript>
+      </div>
+      <script>
+      fetch('/data.json?v=' + Date.now()).then(r=>r.json()).then(d=>{
+        const m=d.macro;
+        const realRate=(m.sbp_rate-m.inflation_cpi).toFixed(1);
+        document.getElementById('sbp-widget').innerHTML=`
+          <div class="sbp-grid">
+            <div class="sbp-stat pol"><div class="n">${m.sbp_rate}%</div><div class="l">SBP Policy Rate</div><div class="s">${m.sbp_direction}</div></div>
+            <div class="sbp-stat inf"><div class="n">${m.inflation_cpi}%</div><div class="l">CPI Inflation</div><div class="s">Real rate: +${realRate}%</div></div>
+            <div class="sbp-stat kse"><div class="n">${m.kse100_level.toLocaleString('en-IN')}</div><div class="l">KSE-100</div><div class="s">Index level</div></div>
+          </div>`;
+      }).catch(()=>{document.getElementById('sbp-widget').textContent='Unable to load live data.';});
+      </script>
+
+      <h2 id="s5"><span class="sn">05</span>How rate changes affect each investment type</h2>
+
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-icon">🏛</div>
+          <div class="impact-title">National Savings (CDNS)</div>
+          <div class="impact-desc impact-dn">Rate cut → yields fall on new certificates. Existing certificates keep their locked-in rate.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">📊</div>
+          <div class="impact-title">Money Market Funds</div>
+          <div class="impact-desc impact-dn">Rate cut → returns fall within weeks. These funds track the policy rate closely in real time.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">📈</div>
+          <div class="impact-title">PSX Stocks</div>
+          <div class="impact-desc impact-up">Rate cut → stocks typically rise. Lower rates make future earnings more valuable and push investors toward equities.</div>
+        </div>
+      </div>
+
+      <h2 id="s6"><span class="sn">06</span>Rate cuts and the stock market</h2>
+
+      <p>The link between the SBP rate and the KSE-100 is strong and well documented. When rates hit 22% in 2023, fixed income paid extraordinary risk-free returns, and plenty of investors pulled money out of stocks and into Treasury bills and savings certificates.</p>
+
+      <p>As rates dropped from 22% toward 11.5%, the maths flipped. A stock paying a 10% dividend yield looked attractive again next to a savings certificate at 12%, once you allow for dividend growth and capital gains. The KSE-100 ran from around 60,000 in late 2023 to over 1,64,000 by May 2026, a gain of nearly 175% in about two and a half years, driven largely by the cuts and by institutional and retail money coming back into equities. The index sits near 181,000 today, and you can still find dividend yields like HUBC at 10.7% and MCB at 8.8% in our daily dataset.</p>
+
+      <div class="cl-dark">
+        <p><strong>Key insight:</strong> Cuts are usually good for equities and bad for fixed income. Hikes do the reverse: they hurt stocks but lift savings returns. Getting your portfolio in position before the move is where the real gain comes from.</p>
+      </div>
+
+      <h2 id="s7"><span class="sn">07</span>How to use the SBP rate in your investment decisions</h2>
+
+      <p>The simplest framework is to let the rate level guide how you split your portfolio. Here is a playbook across three rate regimes.</p>
+
+      <div class="playbook-grid">
+        <div class="playbook-card high">
+          <div class="playbook-rate" style="color:var(--red)">Rate &gt; 15%</div>
+          <div class="playbook-label">High Rate Regime</div>
+          <div class="playbook-actions">
+            <strong>Maximise fixed income.</strong><br>
+            — Shift 70–80% to CDNS certificates and money market funds<br>
+            — Lock in DSCs and SSCs at peak rates<br>
+            — Reduce equity exposure to 10–20%<br>
+            — Hold T-bills for liquidity; yields are exceptional<br>
+            — This is when risk-free returns beat equities risk-adjusted
+          </div>
+        </div>
+        <div class="playbook-card mid">
+          <div class="playbook-rate" style="color:var(--green-d)">Rate 10–15% (Now)</div>
+          <div class="playbook-label">Transition Regime</div>
+          <div class="playbook-actions">
+            <strong>Blend fixed income + equities.</strong><br>
+            — Lock in remaining CDNS allocation before further cuts<br>
+            — Reduce money market fund weight; shift to income funds<br>
+            — Build equity allocation to 30–40% via SIP<br>
+            — Focus on dividend stocks with 8%+ yields<br>
+            — This regime rewards balanced, diversified portfolios
+          </div>
+        </div>
+        <div class="playbook-card low">
+          <div class="playbook-rate" style="color:var(--navy)">Rate &lt; 10%</div>
+          <div class="playbook-label">Low Rate Regime</div>
+          <div class="playbook-actions">
+            <strong>Shift toward equities.</strong><br>
+            — Equity allocation 50–60% or higher<br>
+            — CDNS still useful for capital preservation<br>
+            — Money market funds offer little above inflation<br>
+            — Focus on growth sectors: technology, consumer goods<br>
+            — This is where equity compounding outperforms savers
+          </div>
+        </div>
+      </div>
+
+      <p>The rate is at 11.5% right now, sitting in the middle of the transition regime. For most people the single most useful move is to <strong>stop leaving money idle in a bank savings account</strong>, where the rate is usually well below the policy rate. Spread it instead across a CDNS Special Savings Certificate (currently around 11.6%), a money market fund for liquidity, and a growing equity slice through a diversified fund or direct dividend stocks on PSX.</p>
+
+      <p>If the SBP cuts further toward 9–10%, the playbook tilts harder toward equities. A certificate earning 9% in a 7% inflation environment is barely staying ahead in real terms, while earnings growth and rising dividends start to look far better. Build that equity exposure before the shift is obvious, not after.</p>
+
+      <p>The classic mistake Pakistani retail investors make is waiting for certainty. By the time it is clear that rates are falling and stocks are the better bet, the market has already banked most of the gain. A monthly Systematic Investment Plan (SIP) in an equity fund takes the timing pressure off. You buy at a range of prices over 12 months and average in, so you catch the benefit of falling rates without agonising over the perfect entry.</p>
+
+      <h2 id="s8"><span class="sn">08</span>How rate changes affect each investment — in detail</h2>
+
+      <h3>Lock in CDNS rates now</h3>
+      <p>National Savings certificates lock in the profit rate that applies on the day you buy. A <strong>Special Savings Certificate (SSC)</strong> bought today at 11.6% keeps earning that rate for the full 3-year tenure even as new rates fall. For most savers the SSC hits the sweet spot on yield, tenure and access: it starts at just Rs. 500, is open to all Pakistanis, and pays every 6 months. If the SBP trims another 100–200 bps over the next year, buying now locks in today's better yield.</p>
+
+      <h3>Reduce money market fund exposure</h3>
+      <p>Money market fund returns fall in step with rate cuts. These funds hold mostly T-bills and short-term bank placements, so their annualised yield tracks the policy rate minus a small fee. If you are earning 11–12% in one today, expect that to drift toward 9–10% as the SBP keeps easing. It may be worth moving part of that money into longer-duration income funds, which lock in higher yields on longer-maturity bonds, or into equity funds to catch the upside from a lower discount rate.</p>
+
+      <h3>Increase equity exposure gradually</h3>
+      <p>When rates are falling, the risk and reward balance leans toward equities. Use a Systematic Investment Plan (SIP) in an equity fund to build your exposure gradually instead of trying to nail the perfect moment. Averaging in over time takes the guesswork out of entry. If you buy stocks directly, stick with companies that have a solid dividend record. Banking, energy and fertiliser names have historically paid 7–12% yields even while the market re-rates.</p>
+
+      <h2 id="s9"><span class="sn">09</span>How to follow SBP policy rate decisions</h2>
+
+      <p>The SBP posts its MPC decisions on <strong>sbp.org.pk</strong>. Meetings are usually flagged 2–3 weeks ahead, and the decision drops on the meeting date with a written statement laying out the reasoning. Profit by Pakistan Today, Dawn Business and ARY News Business cover and analyse it the same day.</p>
+
+      <p>Our <a href="/">investment analyzer tool</a> shows the current SBP rate next to live market data, so you can see at a glance how it stacks up against savings and stock returns without hunting across several sources.</p>
+
+      <div class="cl-tip">
+        <p><strong>Where this leaves you in 2026:</strong> Pakistan is holding rates after a big cutting cycle. If your money is sitting in short-term money market funds or a bank savings account, think about locking some into CDNS certificates at today's rates and adding to equity funds over time. The window for high risk-free returns is closing, but it has not closed yet.</p>
+      </div>
+
+      <!-- FAQ Section -->
+      <h2 id="s10"><span class="sn">10</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-how-often-sbp-changes-rate">
+        <summary class="faq-question">How often does the SBP change the policy rate?</summary>
+        <div class="faq-answer">The SBP's Monetary Policy Committee (MPC) meets approximately every 6–8 weeks, typically 8 times per year. Each meeting results in a decision to hold, raise, or cut the rate, which is announced on the same day via sbp.org.pk along with a written statement explaining the reasoning.</div>
+      </details>
+
+      <details class="faq-item" id="faq-how-quickly-savings-rates-change">
+        <summary class="faq-question">How quickly do National Savings rates change after an SBP rate decision?</summary>
+        <div class="faq-answer">CDNS profit rates are typically revised within 2–4 weeks of an SBP rate decision. However, certificates you already hold continue earning the rate locked in at the time of purchase — only new purchases are affected by revised rates. This makes buying CDNS certificates immediately after a rate peak strategically valuable.</div>
+      </details>
+
+      <details class="faq-item" id="faq-rate-cut-stock-market">
+        <summary class="faq-question">Does a rate cut always mean the stock market will go up?</summary>
+        <div class="faq-answer">Not always immediately, but the historical relationship in Pakistan is strong. When the SBP cut rates from 22% to 11.5% (2024–2026), the KSE-100 rose from around 60,000 to over 164,000 — a 173% gain. However, other factors (corporate earnings, currency, IMF program status, geopolitical events) can override the rate effect in the short term.</div>
+      </details>
+
+      <details class="faq-item" id="faq-where-to-find-rate-announcement">
+        <summary class="faq-question">Where can I find the SBP policy rate decision announcement?</summary>
+        <div class="faq-answer">The official source is sbp.org.pk — go to "Monetary Policy" then "Monetary Policy Statements." Financial news outlets like Profit by Pakistan Today, Dawn Business, and The News cover decisions on the same day. Our investment analyzer tool also displays the current SBP rate pulled from official data.</div>
+      </details>
+
+      <details class="faq-item" id="faq-real-interest-rate">
+        <summary class="faq-question">What is the "real interest rate" and why does it matter?</summary>
+        <div class="faq-answer">The real interest rate is the nominal rate minus inflation. With the SBP rate at 11.5% and CPI inflation at 7%, the real rate is approximately +4.5%. A positive real rate means savings are actually growing in purchasing power. In 2022, when inflation was 27% and the rate was 16%, the real rate was -11% — meaning cash savings were losing value rapidly despite earning nominal returns.</div>
+      </details>
+
+      <details class="faq-item" id="faq-difference-policy-rate-kibor">
+        <summary class="faq-question">What is the difference between the SBP policy rate and KIBOR?</summary>
+        <div class="faq-answer">The policy rate is set directly by the SBP's Monetary Policy Committee and acts as the benchmark for the cost of money in the economy. KIBOR (Karachi Interbank Offered Rate) is the rate at which banks lend to each other and tends to move closely with the policy rate, since changes in the policy rate flow through interbank markets. Many loan and bond pricing formulas are linked to KIBOR rather than the policy rate itself. For the latest figures, verify on sbp.org.pk.</div>
+      </details>
+
+      <details class="faq-item" id="faq-rate-affect-home-loan">
+        <summary class="faq-question">How does a change in the policy rate affect my existing home loan or car financing?</summary>
+        <div class="faq-answer">Most consumer financing in Pakistan is priced on a floating basis, usually as a benchmark such as KIBOR plus a fixed bank margin. When the SBP raises the policy rate, the benchmark generally rises and your instalment can increase at the next repricing date; when the rate falls, the cost of borrowing typically eases. Fixed-rate arrangements are not affected until the agreed reset point. Check your loan agreement and your bank for the exact benchmark and repricing schedule.</div>
+      </details>
+
+      <details class="faq-item" id="faq-rate-impact-rupee">
+        <summary class="faq-question">Does the SBP policy rate affect the value of the Pakistani Rupee?</summary>
+        <div class="faq-answer">A higher policy rate can make Rupee-denominated savings more attractive relative to foreign currency, which is one factor that can support the Rupee, while lower rates can have the opposite tendency. However, the exchange rate is also driven by many other forces such as the current account, remittances, foreign reserves, and IMF program status, so the rate is only one input among several. Currency movements are inherently uncertain and should not be predicted with confidence.</div>
+      </details>
+
+      <details class="faq-item" id="faq-fixed-or-floating-savings">
+        <summary class="faq-question">When rates are expected to fall, is it better to lock into a fixed-rate certificate?</summary>
+        <div class="faq-answer">This page explains that CDNS certificates lock in the profit rate that applies at the time of purchase, so an instrument bought before a series of cuts keeps its original rate while new issues are revised lower. That is a factual feature of how these certificates work, not a recommendation. The right choice depends on your time horizon, liquidity needs, and personal circumstances, so consider speaking with a SECP-registered advisor before deciding.</div>
+      </details>
+
+      <details class="faq-item" id="faq-rate-vs-inflation-target">
+        <summary class="faq-question">Why does the SBP raise rates when inflation is high?</summary>
+        <div class="faq-answer">Raising the policy rate makes borrowing more expensive and saving more rewarding, which tends to cool overall demand and ease price pressures over time. The SBP uses this tool to steer inflation toward its medium-term objective while weighing growth and external stability. The precise inflation target and the current rate stance can change, so verify the latest figures and the SBP's reasoning on sbp.org.pk.</div>
+      </details>
+
+      <!-- Ad slot 2 — after FAQ section -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Guides</h3>
+        <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds: Which Is Better Now?</a>
+        <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds in Pakistan</a>
+        <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only. Monetary policy is inherently unpredictable — the SBP may change the rate direction at any time based on inflation, currency movements, or external factors. This is not personalised financial advice. Always consult a SECP-registered financial advisor before making significant investment decisions.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>What is the SBP policy rate?</a>
+            <a href="#s2"><span class="ti">02</span>How the MPC works</a>
+            <a href="#s3"><span class="ti">03</span>Transmission mechanism</a>
+            <a href="#s4"><span class="ti">04</span>Rate cycle 2019–2026</a>
+            <a href="#s5"><span class="ti">05</span>Impact by investment</a>
+            <a href="#s6"><span class="ti">06</span>Rate cuts and PSX</a>
+            <a href="#s7"><span class="ti">07</span>Rate-regime playbook</a>
+            <a href="#s8"><span class="ti">08</span>Detailed positioning</a>
+            <a href="#s9"><span class="ti">09</span>Following decisions</a>
+            <a href="#s10"><span class="ti">10</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">11.5%</div><div class="gl-l">SBP policy rate (May 2026)</div></div>
+          <div class="gl-row"><div class="gl-n">+4.5%</div><div class="gl-l">Real rate above inflation</div></div>
+          <div class="gl-row"><div class="gl-n">+173%</div><div class="gl-l">KSE-100 over the cutting cycle</div></div>
+          <div class="gl-row"><div class="gl-n">6–8 wk</div><div class="gl-l">Between MPC meetings</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds →</a>
+          <a href="/guides/how-to-invest-mutual-funds-pakistan.html">How to Invest in Mutual Funds →</a>
+          <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</article>
+</main>
+
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

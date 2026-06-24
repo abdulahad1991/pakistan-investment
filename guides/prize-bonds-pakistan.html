@@ -61,12 +61,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -87,23 +87,150 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.6vw,3.5rem);font-weight:800;line-height:1;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:620px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose a{color:var(--green);font-weight:700;border-bottom:1px solid var(--line)}
+  .prose a:hover{color:var(--green2)}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+  .prose em{font-style:italic}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+
+  /* quick answer lede */
+  .quick-answer{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 28px;font-family:var(--body);font-size:1.06rem;line-height:1.65;color:var(--ink2);font-weight:500}
+  .quick-answer strong{color:var(--green-d);font-weight:700}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 28px}
+  .cl-key .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--green);margin-bottom:8px;text-transform:uppercase}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p{margin:0;color:#E4F2EA}
+  .cl-dark .k{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--acid);margin-bottom:8px;text-transform:uppercase}
+  .cl-dark strong{color:#fff;font-weight:700}
+  .cl-gold{background:#FFF6E4;border-left:4px solid var(--gold);padding:18px 22px;margin:0 0 24px}
+  .cl-gold p{margin:0;color:#6B561F;font-family:var(--body);font-size:1.02rem;line-height:1.65;font-weight:500}
+  .cl-gold strong{color:#5A4314;font-weight:700}
+
+  /* data table */
+  .tbl-wrap{border:1px solid var(--line);margin:0 0 18px;overflow-x:auto}
+  .data-table{width:100%;border-collapse:collapse;min-width:380px}
+  .data-table th{font-family:var(--display);font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-d);text-align:left;padding:13px 16px;background:var(--mint);border-bottom:2px solid var(--acid)}
+  .data-table td{font-family:var(--mono);font-size:.88rem;color:var(--ink2);padding:13px 16px;border-bottom:1px solid var(--line2);font-variant-numeric:tabular-nums}
+  .data-table td:first-child{font-weight:600;color:var(--ink)}
+  .data-table tr:last-child td{border-bottom:none}
+  .data-table tr:hover td{background:var(--paper)}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  /* related links */
+  .related-links{border-top:1px solid var(--line);margin-top:32px;padding-top:22px}
+  .related-links h3{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin:0 0 12px;text-transform:uppercase}
+  .related-links a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d);border-bottom:none}
+  .related-links a:first-of-type{border-top:none}
+  .related-links a:hover{color:var(--green)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
-      <a href="/guides/">Guides</a>
+      <a href="/guides/" class="active">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -112,154 +239,258 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/guides/">Guides</a> &rsaquo; Prize Bonds in Pakistan</div>
+<main>
+<article class="art-frame">
 
-  <h1>Prize Bonds in Pakistan (2026): How They Work, Denominations, Draws &amp; Tax</h1>
-  <div class="byline">By Abdul Ahad &nbsp;&middot;&nbsp; Updated 20 June 2026 &nbsp;&middot;&nbsp; 8 min read</div>
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one line:</strong> A prize bond is a government savings instrument that pays <strong>no fixed return</strong>. Your capital is safe and redeemable at face value any time, but your only gain is the chance of winning a cash prize in the quarterly draw. Bonds come in denominations from Rs 100 to Rs 40,000, and winnings are taxed at about <strong>15% for filers and 30% for non-filers</strong>. Unlike National Savings certificates, they offer no guaranteed profit.</p>
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li aria-current="page">Prize Bonds in Pakistan</li>
+    </ol>
+  </nav>
 
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn &rarr;</a> &nbsp;&middot;&nbsp; <span style="color:#888">Updated 20 June 2026</span></div>
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 02 — National Savings · Government Securities</div>
+      <h1>Prize bonds in Pakistan: how they work, draws &amp; tax.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 20 June 2026</span>
+        <span>· 8 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">In one line</div>
+      <p>A prize bond pays <b class="acc">no fixed return</b>. Your capital is safe and redeemable at face value any time, but your only gain is the chance of a prize in the quarterly draw. Bonds run from <b>Rs 100 to Rs 40,000</b>, and winnings are taxed about <b>15% for filers, 30% for non-filers</b>.</p>
     </div>
   </div>
 
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>Prize bonds at a glance:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>A prize bond is <strong>capital-safe</strong> (redeem at face value any time) but pays <strong>no fixed profit</strong>. Your return is simply the chance of a prize</li>
-      <li>Denominations: <strong>Rs 100, 200, 750, 1,500</strong> (bearer) and <strong>Rs 25,000 &amp; 40,000</strong> (registered premium); large bearer bonds were phased out</li>
-      <li>Draws are <strong>quarterly</strong>, run by SBP Banking Services Corporation under CDNS</li>
-      <li>Winnings taxed ~<strong>15% (filer)</strong> and ~<strong>30% (non-filer)</strong>; many scholars consider conventional prize bonds <strong>not Shariah-compliant</strong></li>
-    </ul>
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated 20 June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Quick answer lede -->
+      <p class="quick-answer"><strong>In one line:</strong> A prize bond is a government savings instrument that pays <strong>no fixed return</strong>. Your capital is safe and redeemable at face value any time, but your only gain is the chance of winning a cash prize in the quarterly draw. Bonds come in denominations from Rs 100 to Rs 40,000, and winnings are taxed at about <strong>15% for filers and 30% for non-filers</strong>. Unlike National Savings certificates, they offer no guaranteed profit.</p>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">Prize bonds at a glance</div>
+        <ul>
+          <li>A prize bond is <strong>capital-safe</strong> (redeem at face value any time) but pays <strong>no fixed profit</strong>. Your return is simply the chance of a prize</li>
+          <li>Denominations: <strong>Rs 100, 200, 750, 1,500</strong> (bearer) and <strong>Rs 25,000 &amp; 40,000</strong> (registered premium); large bearer bonds were phased out</li>
+          <li>Draws are <strong>quarterly</strong>, run by SBP Banking Services Corporation under CDNS</li>
+          <li>Winnings taxed ~<strong>15% (filer)</strong> and ~<strong>30% (non-filer)</strong>; many scholars consider conventional prize bonds <strong>not Shariah-compliant</strong></li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>Almost every Pakistani household has held a prize bond at some point. It is a government IOU you can buy at any bank, redeem whenever you like, and which might, four times a year, turn into a life-changing cash prize. People like them because they feel risk-free. The catch is that what a prize bond actually <em>returns</em> is widely misunderstood, and getting that straight is the difference between using them sensibly and mistaking them for an investment they are not.</p>
+
+      <h2 id="s1"><span class="sn">01</span>What a prize bond actually is</h2>
+      <p>A prize bond is a <strong>bearer or registered security issued by the Government of Pakistan</strong> through the Central Directorate of National Savings (CDNS). Buy one and you are, in effect, lending money to the government. What sets it apart from a <a href="/guides/national-savings-vs-mutual-funds.html">National Savings certificate</a> or a bank deposit is the way you get rewarded. There is no guaranteed profit rate. Instead your bonds go into periodic <strong>draws</strong>, and a small number win cash prizes. Your <strong>face value is always safe</strong>, since you can hand the bond back for full value at any time. But in any given draw, most bonds win nothing.</p>
+
+      <h2 id="s2"><span class="sn">02</span>Denominations</h2>
+      <p>Prize bonds have been issued in a range of denominations. The high-value <em>bearer</em> bonds were phased out and replaced with <strong>registered &ldquo;premium&rdquo;</strong> bonds for transparency. The smaller denominations are still bearer instruments you can buy over the counter.</p>
+
+      <div class="tbl-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Denomination</th><th>Type</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Rs 100, 200, 750, 1,500</td><td>Bearer (common, over-the-counter)</td></tr>
+            <tr><td>Rs 7,500, 15,000</td><td>Largely phased out / converted</td></tr>
+            <tr><td>Rs 25,000, 40,000</td><td>Registered &ldquo;premium&rdquo; prize bonds</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Because the government periodically changes which bonds are issued or discontinued, always confirm the current list and the latest draw schedule on the <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">CDNS website (savings.gov.pk)</a> before buying.</p>
+
+      <h2 id="s3"><span class="sn">03</span>How the draws work</h2>
+      <p>Draws happen <strong>quarterly</strong>, run by the <strong>State Bank of Pakistan's Banking Services Corporation (SBP BSC)</strong> under CDNS supervision. Each denomination has its own draw with a fixed prize structure: one or a few large first prizes, a set of second prizes, and a long list of smaller third prizes. Hold more bonds of a denomination and you hold more &ldquo;tickets&rdquo; in that draw, but the odds on any single bond stay very long.</p>
+
+      <h2 id="s4"><span class="sn">04</span>The return reality</h2>
+      <p>This is where prize bonds trip people up. Across all holders, the total prize money paid out is a <strong>modest percentage</strong> of the bonds in circulation. So the <strong>average</strong> return to an ordinary holder is low, and for most people in most years it is simply <strong>zero</strong>. A few win big. The many win nothing. That is the opposite of a National Savings certificate, where <em>every</em> holder earns a stated, predictable profit. For context, a top National Savings product like Behbood currently pays around 12.72% a year, money a never-winning bond holder forgoes entirely.</p>
+
+      <div class="cl-gold">
+        <p><strong>Worth knowing:</strong> because prize bonds pay no profit, money parked in them <strong>loses value to inflation</strong> while it waits. As long as inflation runs positive, as it usually does in Pakistan, a bond that never wins quietly loses purchasing power year after year. That is a real cost, and the excitement of the draw tends to hide it.</p>
+      </div>
+
+      <h2 id="s5"><span class="sn">05</span>Tax on winnings</h2>
+      <p>If you win, tax is <strong>withheld from the prize</strong> before you receive it. The rate depends on your filer status:</p>
+      <ul>
+        <li><strong>Filers</strong> (on the Active Taxpayer List): around <strong>15%</strong>.</li>
+        <li><strong>Non-filers</strong>: roughly double, commonly <strong>30%</strong>.</li>
+      </ul>
+      <p>Put numbers on it. A Rs 1,000,000 prize means about Rs 150,000 in tax for a filer versus around Rs 300,000 for a non-filer. That is Rs 150,000 gone for the sake of not having filed a return. Our guide on <a href="/guides/how-to-become-filer-pakistan.html">how to become a filer</a> covers the process. Rates are set by the Finance Act, so verify the current figure on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>
+
+      <h2 id="s6"><span class="sn">06</span>The Shariah question</h2>
+      <p>Whether prize bonds are <strong>halal</strong> is contested. <strong>Many Islamic scholars in Pakistan consider conventional prize bonds non-Shariah-compliant</strong>, on two grounds: the prize element resembles a lottery (<em>qimar</em> / <em>maysir</em>), and the underlying government borrowing is interest-based (<em>riba</em>). Other scholars take a different view. The right answer for you depends on the scholar or institution you follow. Pakistanis who want clearly Shariah-compliant options generally use <a href="/guides/halal-investing-pakistan.html">Islamic mutual funds, GoP Ijara sukuk, or Islamic bank deposits</a> instead. Consult a scholar you trust for a personal ruling.</p>
+
+      <h2 id="s7"><span class="sn">07</span>How to buy, encash and claim</h2>
+      <ul>
+        <li><strong>Buy</strong> bearer bonds over the counter at commercial banks and National Savings Centres; premium (registered) bonds are bought in your name through designated branches.</li>
+        <li><strong>Encash</strong> any bond at face value at a bank or National Savings Centre whenever you want — your capital is not locked.</li>
+        <li><strong>Check results</strong> by matching your bond's serial number against the published draw list on savings.gov.pk.</li>
+        <li><strong>Claim</strong> a prize by submitting the winning bond, a claim form and your CNIC; the prize is paid after tax is withheld. Remember that <strong>bearer bonds belong to whoever holds them</strong>, so keep them as safely as cash.</li>
+      </ul>
+
+      <h2 id="s8"><span class="sn">08</span>Are prize bonds a good place for your money?</h2>
+      <p>Prize bonds make sense for what they are: a <strong>safe place to park cash with a lottery-style upside</strong> and no risk to capital. What they are <strong>not</strong> is a way to grow savings. They pay no profit, lose ground to inflation, and most holdings never win. If you want a <strong>predictable return on safe money</strong>, National Savings certificates or a money market fund pay a stated profit instead. Our <a href="/guides/money-market-funds-vs-bank-savings.html">money market funds guide</a> and <a href="/guides/national-savings-vs-mutual-funds.html">National Savings comparison</a> cover those. Treat prize bonds as a flutter, not a plan.</p>
+
+      <div class="cl-dark">
+        <div class="k">The takeaway</div>
+        <p>A prize bond keeps your capital safe and offers a chance at a prize, but pays no fixed return and erodes with inflation while it waits. Winnings are taxed far more lightly for filers (~15%) than non-filers (~30%), and many scholars regard conventional prize bonds as non-Shariah-compliant. Confirm denominations, draw dates and tax rates on savings.gov.pk and fbr.gov.pk before acting.</p>
+      </div>
+
+      <!-- FAQ Section -->
+      <h2 id="s9"><span class="sn">09</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-guaranteed-return"><summary class="faq-question">Do prize bonds give a guaranteed return in Pakistan?</summary><div class="faq-answer">No. Unlike a National Savings certificate or a bank deposit, a prize bond pays no fixed profit. Your capital is safe — you can encash the bond for its full face value at any time — but your only return is the chance of winning a cash prize in the quarterly draw. For most holders in any given year the return is zero, while a few win large prizes, so the expected return for an ordinary holding is low and uncertain.</div></details>
+
+      <details class="faq-item" id="faq-denominations"><summary class="faq-question">What prize bond denominations are available in Pakistan?</summary><div class="faq-answer">Prize bonds have historically been issued in denominations of Rs 100, 200, 750, 1,500, 7,500, 15,000, 25,000 and 40,000. The high-value bearer bonds were phased out and converted to registered premium prize bonds (notably Rs 25,000 and Rs 40,000), while the smaller bonds (Rs 100, 200, 750, 1,500) remain bearer instruments. Because the government periodically changes which bonds are in circulation, confirm the current list on savings.gov.pk before buying.</div></details>
+
+      <details class="faq-item" id="faq-tax-on-winnings"><summary class="faq-question">How much tax is deducted on prize bond winnings?</summary><div class="faq-answer">Tax is withheld from the prize at the time of payment. The rate is around 15% for active taxpayers (filers) and roughly double — commonly 30% — for non-filers. So filing your return to get on the Active Taxpayer List directly increases what you keep from a win. Rates are set by the Finance Act and change, so verify the current figure on fbr.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-halal"><summary class="faq-question">Are prize bonds halal in Pakistan?</summary><div class="faq-answer">This is debated. Many Islamic scholars in Pakistan consider conventional prize bonds non-Shariah-compliant, viewing the prize element as resembling a lottery (qimar/maysir) and the underlying government borrowing as interest-based. Others disagree. The position depends on the scholar you follow. Pakistanis seeking clearly Shariah-compliant options generally use Islamic mutual funds, GoP Ijara sukuk, or Islamic bank deposits instead; see our halal investing guide. Consult a scholar you trust for a ruling.</div></details>
+
+      <details class="faq-item" id="faq-check-results-claim"><summary class="faq-question">How do I check prize bond results and claim a prize?</summary><div class="faq-answer">Draws are held quarterly by the State Bank's Banking Services Corporation under the Central Directorate of National Savings. After each draw the winning numbers are published; you check your bond's serial number against the list (on savings.gov.pk or at a National Savings Centre). To claim, submit the winning bond with a claim form and CNIC at a National Savings Centre or authorised bank; the prize is paid after tax is withheld. Keep your bonds safe — bearer bonds belong to whoever holds them.</div></details>
+
+      <details class="faq-item" id="faq-where-to-buy"><summary class="faq-question">Where can I buy prize bonds in Pakistan?</summary><div class="faq-answer">Prize bonds are sold through National Savings Centres and many authorised commercial banks and State Bank of Pakistan field offices. You pay the bond's face value to purchase it, with no markup, and can later encash it for the same amount. Because the set of bonds currently on sale changes over time, confirm availability and outlets on savings.gov.pk before going to buy.</div></details>
+
+      <details class="faq-item" id="faq-time-limit-to-claim"><summary class="faq-question">Is there a time limit to claim a prize bond prize?</summary><div class="faq-answer">Yes. Prizes must be claimed within a set period after the relevant draw, after which the right to the prize generally lapses. This is why holders are advised to check their numbers against each quarterly result promptly rather than holding bonds unchecked for years. For the exact claim window and the documents required, verify the current rules on savings.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-lost-or-stolen-bond"><summary class="faq-question">What happens if my prize bond is lost or stolen?</summary><div class="faq-answer">The smaller bonds (Rs 100, 200, 750, 1,500) are bearer instruments, meaning whoever physically holds them can encash them, so a lost or stolen bearer bond is difficult to recover. Registered premium prize bonds are held against your CNIC, which adds a layer of protection. To understand what recourse, if any, applies to your bond type, check the procedures on savings.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-vs-savings-certificates"><summary class="faq-question">What is the difference between prize bonds and National Savings certificates?</summary><div class="faq-answer">A National Savings certificate pays a fixed, scheduled profit on your money, giving you a predictable return. A prize bond pays no profit at all; instead it enters you into quarterly draws for cash prizes, so your return depends entirely on chance. Both protect your original capital, but the certificate offers steady income while the bond offers an uncertain payout. Compare current product details on savings.gov.pk.</div></details>
+
+      <details class="faq-item" id="faq-foreign-currency"><summary class="faq-question">Can overseas Pakistanis buy prize bonds, and are there foreign-currency prize bonds?</summary><div class="faq-answer">The government has issued certain bonds aimed at overseas Pakistanis, including products tied to foreign currency such as US dollars, alongside the regular rupee bonds. Eligibility, the channels for purchase from abroad, and whether a given bond is currently being issued all change over time. Overseas Pakistanis should verify the current options and rules on savings.gov.pk and with their bank before relying on any specific scheme.</div></details>
+
+      <!-- Ad slot 2 -->
+      <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related reading</h3>
+        <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds in Pakistan →</a>
+        <a href="/guides/money-market-funds-vs-bank-savings.html">Money Market Funds vs Bank Savings Accounts →</a>
+        <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan: Islamic Funds &amp; Sukuk →</a>
+        <a href="/guides/how-to-become-filer-pakistan.html">How to Become a Filer in Pakistan →</a>
+        <a href="/guides/">All Investment Guides →</a>
+      </div>
+
+      <div class="disclaimer">⚠ This guide is for educational purposes only and is <strong>not investment, tax, religious, or financial advice</strong>. Prize bond denominations, draw schedules, prize structures and tax rates are set by CDNS, SBP and the Finance Act and change over time. Shariah views differ between scholars. Verify current details on savings.gov.pk and fbr.gov.pk, and consult qualified financial and religious advisers for your situation before acting.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>What a prize bond is</a>
+            <a href="#s2"><span class="ti">02</span>Denominations</a>
+            <a href="#s3"><span class="ti">03</span>How the draws work</a>
+            <a href="#s4"><span class="ti">04</span>The return reality</a>
+            <a href="#s5"><span class="ti">05</span>Tax on winnings</a>
+            <a href="#s6"><span class="ti">06</span>The Shariah question</a>
+            <a href="#s7"><span class="ti">07</span>Buy, encash &amp; claim</a>
+            <a href="#s8"><span class="ti">08</span>A good place for money?</a>
+            <a href="#s9"><span class="ti">09</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">0%</div><div class="gl-l">Fixed return paid</div></div>
+          <div class="gl-row"><div class="gl-n">Quarterly</div><div class="gl-l">Draw frequency</div></div>
+          <div class="gl-row"><div class="gl-n">15 / 30%</div><div class="gl-l">Win tax: filer / non-filer</div></div>
+          <div class="gl-row"><div class="gl-n">Rs 100–40k</div><div class="gl-l">Denomination range</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds →</a>
+          <a href="/guides/money-market-funds-vs-bank-savings.html">Money Market Funds vs Bank Savings →</a>
+          <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
   </div>
+</article>
+</main>
 
-  <!-- Ad slot 1 -->
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>Almost every Pakistani household has held a prize bond at some point. It is a government IOU you can buy at any bank, redeem whenever you like, and which might, four times a year, turn into a life-changing cash prize. People like them because they feel risk-free. The catch is that what a prize bond actually <em>returns</em> is widely misunderstood, and getting that straight is the difference between using them sensibly and mistaking them for an investment they are not.</p>
-
-  <h2>What a Prize Bond Actually Is</h2>
-  <p>A prize bond is a <strong>bearer or registered security issued by the Government of Pakistan</strong> through the Central Directorate of National Savings (CDNS). Buy one and you are, in effect, lending money to the government. What sets it apart from a <a href="/guides/national-savings-vs-mutual-funds.html">National Savings certificate</a> or a bank deposit is the way you get rewarded. There is no guaranteed profit rate. Instead your bonds go into periodic <strong>draws</strong>, and a small number win cash prizes. Your <strong>face value is always safe</strong>, since you can hand the bond back for full value at any time. But in any given draw, most bonds win nothing.</p>
-
-  <h2>Denominations</h2>
-  <p>Prize bonds have been issued in a range of denominations. The high-value <em>bearer</em> bonds were phased out and replaced with <strong>registered &ldquo;premium&rdquo;</strong> bonds for transparency. The smaller denominations are still bearer instruments you can buy over the counter.</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr><th>Denomination</th><th>Type</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Rs 100, 200, 750, 1,500</td><td>Bearer (common, over-the-counter)</td></tr>
-      <tr><td>Rs 7,500, 15,000</td><td>Largely phased out / converted</td></tr>
-      <tr><td>Rs 25,000, 40,000</td><td>Registered &ldquo;premium&rdquo; prize bonds</td></tr>
-    </tbody>
-  </table>
-  <p>Because the government periodically changes which bonds are issued or discontinued, always confirm the current list and the latest draw schedule on the <a href="https://www.savings.gov.pk" target="_blank" rel="noopener">CDNS website (savings.gov.pk)</a> before buying.</p>
-
-  <h2>How the Draws Work</h2>
-  <p>Draws happen <strong>quarterly</strong>, run by the <strong>State Bank of Pakistan's Banking Services Corporation (SBP BSC)</strong> under CDNS supervision. Each denomination has its own draw with a fixed prize structure: one or a few large first prizes, a set of second prizes, and a long list of smaller third prizes. Hold more bonds of a denomination and you hold more &ldquo;tickets&rdquo; in that draw, but the odds on any single bond stay very long.</p>
-
-  <h2>The Return Reality</h2>
-  <p>This is where prize bonds trip people up. Across all holders, the total prize money paid out is a <strong>modest percentage</strong> of the bonds in circulation. So the <strong>average</strong> return to an ordinary holder is low, and for most people in most years it is simply <strong>zero</strong>. A few win big. The many win nothing. That is the opposite of a National Savings certificate, where <em>every</em> holder earns a stated, predictable profit. For context, a top National Savings product like Behbood currently pays around 12.72% a year, money a never-winning bond holder forgoes entirely.</p>
-
-  <div class="callout callout-gold">
-    <strong>Worth knowing:</strong> because prize bonds pay no profit, money parked in them <strong>loses value to inflation</strong> while it waits. As long as inflation runs positive, as it usually does in Pakistan, a bond that never wins quietly loses purchasing power year after year. That is a real cost, and the excitement of the draw tends to hide it.
-  </div>
-
-  <h2>Tax on Winnings</h2>
-  <p>If you win, tax is <strong>withheld from the prize</strong> before you receive it. The rate depends on your filer status:</p>
-  <ul>
-    <li><strong>Filers</strong> (on the Active Taxpayer List): around <strong>15%</strong>.</li>
-    <li><strong>Non-filers</strong>: roughly double, commonly <strong>30%</strong>.</li>
-  </ul>
-  <p>Put numbers on it. A Rs 1,000,000 prize means about Rs 150,000 in tax for a filer versus around Rs 300,000 for a non-filer. That is Rs 150,000 gone for the sake of not having filed a return. Our guide on <a href="/guides/how-to-become-filer-pakistan.html">how to become a filer</a> covers the process. Rates are set by the Finance Act, so verify the current figure on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>
-
-  <h2>The Shariah Question</h2>
-  <p>Whether prize bonds are <strong>halal</strong> is contested. <strong>Many Islamic scholars in Pakistan consider conventional prize bonds non-Shariah-compliant</strong>, on two grounds: the prize element resembles a lottery (<em>qimar</em> / <em>maysir</em>), and the underlying government borrowing is interest-based (<em>riba</em>). Other scholars take a different view. The right answer for you depends on the scholar or institution you follow. Pakistanis who want clearly Shariah-compliant options generally use <a href="/guides/halal-investing-pakistan.html">Islamic mutual funds, GoP Ijara sukuk, or Islamic bank deposits</a> instead. Consult a scholar you trust for a personal ruling.</p>
-
-  <h2>How to Buy, Encash and Claim</h2>
-  <ul>
-    <li><strong>Buy</strong> bearer bonds over the counter at commercial banks and National Savings Centres; premium (registered) bonds are bought in your name through designated branches.</li>
-    <li><strong>Encash</strong> any bond at face value at a bank or National Savings Centre whenever you want — your capital is not locked.</li>
-    <li><strong>Check results</strong> by matching your bond's serial number against the published draw list on savings.gov.pk.</li>
-    <li><strong>Claim</strong> a prize by submitting the winning bond, a claim form and your CNIC; the prize is paid after tax is withheld. Remember that <strong>bearer bonds belong to whoever holds them</strong>, so keep them as safely as cash.</li>
-  </ul>
-
-  <h2>Are Prize Bonds a Good Place for Your Money?</h2>
-  <p>Prize bonds make sense for what they are: a <strong>safe place to park cash with a lottery-style upside</strong> and no risk to capital. What they are <strong>not</strong> is a way to grow savings. They pay no profit, lose ground to inflation, and most holdings never win. If you want a <strong>predictable return on safe money</strong>, National Savings certificates or a money market fund pay a stated profit instead. Our <a href="/guides/money-market-funds-vs-bank-savings.html">money market funds guide</a> and <a href="/guides/national-savings-vs-mutual-funds.html">National Savings comparison</a> cover those. Treat prize bonds as a flutter, not a plan.</p>
-
-  <div class="callout callout-green">
-    <strong>The takeaway:</strong> a prize bond keeps your capital safe and offers a chance at a prize, but pays no fixed return and erodes with inflation while it waits. Winnings are taxed far more lightly for filers (~15%) than non-filers (~30%), and many scholars regard conventional prize bonds as non-Shariah-compliant. Confirm denominations, draw dates and tax rates on savings.gov.pk and fbr.gov.pk before acting.
-  </div>
-
-  <!-- FAQ Section -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-guaranteed-return"><summary class="faq-question">Do prize bonds give a guaranteed return in Pakistan?</summary><div class="faq-answer">No. Unlike a National Savings certificate or a bank deposit, a prize bond pays no fixed profit. Your capital is safe — you can encash the bond for its full face value at any time — but your only return is the chance of winning a cash prize in the quarterly draw. For most holders in any given year the return is zero, while a few win large prizes, so the expected return for an ordinary holding is low and uncertain.</div></details>
-
-  <details class="faq-item" id="faq-denominations"><summary class="faq-question">What prize bond denominations are available in Pakistan?</summary><div class="faq-answer">Prize bonds have historically been issued in denominations of Rs 100, 200, 750, 1,500, 7,500, 15,000, 25,000 and 40,000. The high-value bearer bonds were phased out and converted to registered premium prize bonds (notably Rs 25,000 and Rs 40,000), while the smaller bonds (Rs 100, 200, 750, 1,500) remain bearer instruments. Because the government periodically changes which bonds are in circulation, confirm the current list on savings.gov.pk before buying.</div></details>
-
-  <details class="faq-item" id="faq-tax-on-winnings"><summary class="faq-question">How much tax is deducted on prize bond winnings?</summary><div class="faq-answer">Tax is withheld from the prize at the time of payment. The rate is around 15% for active taxpayers (filers) and roughly double — commonly 30% — for non-filers. So filing your return to get on the Active Taxpayer List directly increases what you keep from a win. Rates are set by the Finance Act and change, so verify the current figure on fbr.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-halal"><summary class="faq-question">Are prize bonds halal in Pakistan?</summary><div class="faq-answer">This is debated. Many Islamic scholars in Pakistan consider conventional prize bonds non-Shariah-compliant, viewing the prize element as resembling a lottery (qimar/maysir) and the underlying government borrowing as interest-based. Others disagree. The position depends on the scholar you follow. Pakistanis seeking clearly Shariah-compliant options generally use Islamic mutual funds, GoP Ijara sukuk, or Islamic bank deposits instead; see our halal investing guide. Consult a scholar you trust for a ruling.</div></details>
-
-  <details class="faq-item" id="faq-check-results-claim"><summary class="faq-question">How do I check prize bond results and claim a prize?</summary><div class="faq-answer">Draws are held quarterly by the State Bank's Banking Services Corporation under the Central Directorate of National Savings. After each draw the winning numbers are published; you check your bond's serial number against the list (on savings.gov.pk or at a National Savings Centre). To claim, submit the winning bond with a claim form and CNIC at a National Savings Centre or authorised bank; the prize is paid after tax is withheld. Keep your bonds safe — bearer bonds belong to whoever holds them.</div></details>
-
-  <details class="faq-item" id="faq-where-to-buy"><summary class="faq-question">Where can I buy prize bonds in Pakistan?</summary><div class="faq-answer">Prize bonds are sold through National Savings Centres and many authorised commercial banks and State Bank of Pakistan field offices. You pay the bond's face value to purchase it, with no markup, and can later encash it for the same amount. Because the set of bonds currently on sale changes over time, confirm availability and outlets on savings.gov.pk before going to buy.</div></details>
-
-  <details class="faq-item" id="faq-time-limit-to-claim"><summary class="faq-question">Is there a time limit to claim a prize bond prize?</summary><div class="faq-answer">Yes. Prizes must be claimed within a set period after the relevant draw, after which the right to the prize generally lapses. This is why holders are advised to check their numbers against each quarterly result promptly rather than holding bonds unchecked for years. For the exact claim window and the documents required, verify the current rules on savings.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-lost-or-stolen-bond"><summary class="faq-question">What happens if my prize bond is lost or stolen?</summary><div class="faq-answer">The smaller bonds (Rs 100, 200, 750, 1,500) are bearer instruments, meaning whoever physically holds them can encash them, so a lost or stolen bearer bond is difficult to recover. Registered premium prize bonds are held against your CNIC, which adds a layer of protection. To understand what recourse, if any, applies to your bond type, check the procedures on savings.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-vs-savings-certificates"><summary class="faq-question">What is the difference between prize bonds and National Savings certificates?</summary><div class="faq-answer">A National Savings certificate pays a fixed, scheduled profit on your money, giving you a predictable return. A prize bond pays no profit at all; instead it enters you into quarterly draws for cash prizes, so your return depends entirely on chance. Both protect your original capital, but the certificate offers steady income while the bond offers an uncertain payout. Compare current product details on savings.gov.pk.</div></details>
-
-  <details class="faq-item" id="faq-foreign-currency"><summary class="faq-question">Can overseas Pakistanis buy prize bonds, and are there foreign-currency prize bonds?</summary><div class="faq-answer">The government has issued certain bonds aimed at overseas Pakistanis, including products tied to foreign currency such as US dollars, alongside the regular rupee bonds. Eligibility, the channels for purchase from abroad, and whether a given bond is currently being issued all change over time. Overseas Pakistanis should verify the current options and rules on savings.gov.pk and with their bank before relying on any specific scheme.</div></details>
-
-  <!-- Ad slot 2 -->
-  <div class="ad-slot"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7484040902" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Reading</h3>
-    <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs Mutual Funds in Pakistan</a>
-    <a href="/guides/money-market-funds-vs-bank-savings.html">Money Market Funds vs Bank Savings Accounts</a>
-    <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan: Islamic Funds &amp; Sukuk</a>
-    <a href="/guides/how-to-become-filer-pakistan.html">How to Become a Filer in Pakistan</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">&#9888; This guide is for educational purposes only and is <strong>not investment, tax, religious, or financial advice</strong>. Prize bond denominations, draw schedules, prize structures and tax rates are set by CDNS, SBP and the Finance Act and change over time. Shariah views differ between scholars. Verify current details on savings.gov.pk and fbr.gov.pk, and consult qualified financial and religious advisers for your situation before acting.</div>
-
-</div>
-
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>&copy; 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/blog/">Blog</a>
-    <a href="/tax-calculator.html">Tax Calculator</a>
-    <a href="/gold-rates.html">Gold Rates</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP</span>
   </div>
 </footer>
 
-<script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

@@ -32,12 +32,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -46,23 +46,137 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-4T2H0KH9H7');
 </script>
+<style>
+  /* ── about page (v2 macro-terminal) — page-specific only ───────── */
+  .ab-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .ab-crumb{padding:14px 44px;border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted2);text-transform:uppercase}
+  .ab-crumb ol{list-style:none;margin:0;padding:0;display:flex;gap:0;flex-wrap:wrap}
+  .ab-crumb li::after{content:"/";margin:0 8px;color:var(--muted)}
+  .ab-crumb li:last-child::after{content:""}
+  .ab-crumb a{color:var(--green)}
+  .ab-crumb a:hover{border-bottom:1px solid var(--green)}
+  .ab-crumb [aria-current]{color:var(--muted2)}
+
+  /* head split */
+  .ab-head{display:grid;grid-template-columns:7fr 5fr;border-top:1px solid var(--line)}
+  .ab-head-copy{padding:52px 44px;border-right:1px solid var(--line)}
+  .ab-eyebrow{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .ab-head-copy h1{font-family:var(--display);font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:.99;letter-spacing:-.025em;color:var(--green-d);margin:0 0 20px;max-width:580px}
+  .ab-head-copy p.lede{font-size:1.08rem;line-height:1.55;color:var(--ink2);max-width:460px;margin:0;font-weight:500}
+  .ab-mission{display:flex;flex-direction:column}
+  .ab-mission-item{padding:22px 28px;border-bottom:1px solid var(--line2)}
+  .ab-mission-item:last-child{border-bottom:none}
+  .ab-mission-item h3{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);margin:0 0 4px}
+  .ab-mission-item p{font-family:var(--body);font-size:.9rem;line-height:1.5;color:var(--muted);font-weight:500;margin:0}
+
+  /* stats */
+  .ab-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+  .ab-stat{padding:30px 28px;border-right:1px solid var(--line)}
+  .ab-stat:last-child{border-right:none}
+  .ab-stat.hl{border-top:4px solid var(--acid)}
+  .ab-stat .v{font-family:var(--display);font-size:2.6rem;font-weight:800;line-height:1;letter-spacing:-.02em;color:var(--green-d);font-variant-numeric:tabular-nums}
+  .ab-stat .l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-top:12px}
+
+  /* generic section block inside frame */
+  .ab-block{border-top:1px solid var(--line)}
+  .ab-block-head{padding:44px 44px 20px}
+  .ab-block-head h2{font-family:var(--display);font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:0 0 6px}
+  .ab-block-head p{font-size:1rem;color:var(--ink2);max-width:620px;margin:0;font-weight:500}
+
+  /* what we cover */
+  .ab-cover-row{display:grid;grid-template-columns:96px 1fr;gap:24px;padding:24px 44px;border-top:1px solid var(--line)}
+  .ab-cover-row .ci{font-family:var(--display);font-size:1.4rem;font-weight:700;color:var(--green);opacity:.5}
+  .ab-cover-row h3{font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--green-d);margin:0 0 6px}
+  .ab-cover-row p{margin:0;font-family:var(--body);font-size:.98rem;line-height:1.6;color:var(--ink2);font-weight:500}
+
+  /* dark data sources */
+  .ab-dark{border-top:1px solid var(--line);background:var(--green-d);color:var(--sage)}
+  .ab-dark-head{padding:44px 44px 16px}
+  .ab-dark-head .kick{font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:10px}
+  .ab-dark-head h2{font-family:var(--display);font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--mint);margin:0}
+  .ab-source{display:grid;grid-template-columns:1fr 1.4fr;gap:20px;align-items:baseline;padding:18px 44px;border-top:1px solid var(--line-dk)}
+  .ab-source .st{font-family:var(--display);font-size:1rem;font-weight:700;color:#fff}
+  .ab-source .sd{font-family:var(--body);font-size:.9rem;line-height:1.5;color:rgba(204,223,211,.78);font-weight:500}
+
+  /* author + how built */
+  .ab-author{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .ab-author-main{padding:44px;border-right:1px solid var(--line)}
+  .ab-author-main h2{font-family:var(--display);font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:0 0 18px}
+  .ab-author-main h2.sub{font-size:1.6rem;margin:28px 0 14px}
+  .ab-author-main p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 16px;font-weight:500}
+  .ab-author-main p.tight{margin-bottom:18px;font-size:1.02rem}
+  .ab-author-main b{color:var(--green-d)}
+  .ab-pair{border:1px solid var(--line);margin:0 0 18px}
+  .ab-pair-row{padding:18px 22px;border-bottom:1px solid var(--line2)}
+  .ab-pair-row:last-child{border-bottom:none}
+  .ab-pair-row .h{font-family:var(--display);font-size:.92rem;font-weight:700;color:var(--green-d);margin-bottom:4px}
+  .ab-pair-row .d{font-family:var(--body);font-size:.92rem;line-height:1.55;color:var(--muted);font-weight:500}
+  .ab-rules{list-style:none;margin:0 0 18px;padding:0;border:1px solid var(--line)}
+  .ab-rules li{font-family:var(--body);font-size:.94rem;line-height:1.55;color:var(--ink2);padding:13px 20px 13px 42px;position:relative;border-bottom:1px solid var(--line2);font-weight:500}
+  .ab-rules li:last-child{border-bottom:none}
+  .ab-rules li::before{content:"↳";position:absolute;left:20px;top:13px;color:var(--green);font-weight:700}
+  .ab-serious{background:var(--green-d);border-left:5px solid var(--acid);padding:16px 20px;margin:0;font-family:var(--body);font-size:.86rem;color:#D7E7DD;line-height:1.6}
+  .ab-serious b{color:var(--acid)}
+
+  /* sticky author card rail */
+  .ab-rail{padding:0}
+  .ab-rail-inner{position:sticky;top:80px}
+  .ab-card{padding:30px 28px;border-bottom:1px solid var(--line);text-align:center}
+  .ab-avatar{width:84px;height:84px;border-radius:50%;background:var(--green);color:var(--acid);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:1.8rem;font-weight:800;margin:0 auto 14px}
+  .ab-card .name{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--green-d)}
+  .ab-card .role{font-family:var(--body);font-size:.85rem;color:var(--muted);font-weight:600;margin-top:4px}
+  .ab-social{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+  .ab-social a{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.04em;color:var(--green);border:1px solid var(--line);padding:8px 14px;transition:background .15s,border-color .15s}
+  .ab-social a:hover{border-color:var(--green);background:var(--green-l)}
+  .ab-explore{padding:24px 28px}
+  .ab-explore .kick{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:6px}
+  .ab-explore a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .ab-explore a:hover{color:var(--green)}
+
+  /* disclaimer + ad */
+  .ab-pad{padding:24px 44px;border-top:1px solid var(--line)}
+  .ab-disclaimer{background:var(--green-d);border-left:5px solid var(--acid);padding:16px 20px;font-family:var(--body);font-size:.86rem;color:#D7E7DD;line-height:1.7}
+  .ab-disclaimer strong{color:var(--acid)}
+  .ab-ad{border-top:1px solid var(--line)}
+
+  @media(max-width:860px){
+    .ab-crumb,.ab-head-copy,.ab-block-head,.ab-cover-row,.ab-dark-head,.ab-source,.ab-author-main,.ab-pad{padding-left:24px;padding-right:24px}
+    .ab-head{grid-template-columns:1fr}
+    .ab-head-copy{border-right:none;border-bottom:1px solid var(--line);padding:40px 24px}
+    .ab-stats{grid-template-columns:1fr 1fr}
+    .ab-stat{border-bottom:1px solid var(--line)}
+    .ab-stat:nth-child(2n){border-right:none}
+    .ab-cover-row{grid-template-columns:1fr;gap:8px}
+    .ab-source{grid-template-columns:1fr;gap:6px}
+    .ab-author{grid-template-columns:1fr}
+    .ab-author-main{border-right:none;border-bottom:1px solid var(--line)}
+    .ab-rail-inner{position:static}
+  }
+  @media(max-width:560px){
+    .ab-stats{grid-template-columns:1fr}
+    .ab-stat{border-right:none}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header ─────────────────────────────────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -71,196 +185,245 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
+<!-- ── Live ticker ───────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
+    </div>
+  </div>
+</div>
 
-  <!-- Hero -->
-  <div class="hero-card">
-    <div class="hero-brand"><img src="/assets/logo-light.png" alt="Pakinvestlysis" width="170" height="63"></div>
-    <h1>Free Investment Analysis for Every Pakistani</h1>
-    <p style="margin-top:10px;font-size:1rem">Pakistan Investment Advisor helps ordinary Pakistanis understand where to put their money — whether it's PKR 10,000 or PKR 10 million — without needing a financial advisor or a brokerage account.</p>
-    <div class="mission-grid">
-      <div class="mission-item">
-        <div class="icon">🆓</div>
-        <h3>Completely Free</h3>
+<main>
+<div class="ab-frame">
+
+  <!-- breadcrumb -->
+  <nav class="ab-crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li aria-current="page">About</li>
+    </ol>
+  </nav>
+
+  <!-- HEAD -->
+  <div class="ab-head">
+    <div class="ab-head-copy">
+      <div class="ab-eyebrow">About — est. 2026</div>
+      <h1>Free investment analysis for every Pakistani.</h1>
+      <p class="lede">Pakistan Investment Advisor helps ordinary Pakistanis understand where to put their money — whether it's ₨ 10,000 or ₨ 10 million — without needing a financial advisor or a brokerage account.</p>
+    </div>
+    <div class="ab-mission">
+      <div class="ab-mission-item">
+        <h3>Completely free</h3>
         <p>No signup, no fees, no hidden charges. Use the full tool with zero cost.</p>
       </div>
-      <div class="mission-item">
-        <div class="icon">📡</div>
-        <h3>Daily Updated Data</h3>
-        <p>National Savings rates, PSX prices, and mutual fund returns are refreshed every day.</p>
+      <div class="ab-mission-item">
+        <h3>Daily-updated data</h3>
+        <p>National Savings rates, PSX prices and mutual fund returns are refreshed every day.</p>
       </div>
-      <div class="mission-item">
-        <div class="icon">🔒</div>
-        <h3>Privacy First</h3>
+      <div class="ab-mission-item">
+        <h3>Privacy first</h3>
         <p>All calculations happen in your browser. We never store your financial data.</p>
       </div>
     </div>
   </div>
 
-  <!-- Stats -->
-  <div class="stat-row">
-    <div class="stat-box">
-      <div class="stat-val">3</div>
-      <div class="stat-lbl">Asset Classes Covered</div>
+  <!-- STATS -->
+  <div class="ab-stats">
+    <div class="ab-stat">
+      <div class="v">3</div>
+      <div class="l">Asset Classes Covered</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-val">20+</div>
-      <div class="stat-lbl">Investment Options Compared</div>
+    <div class="ab-stat hl">
+      <div class="v">20+</div>
+      <div class="l">Investment Options Compared</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-val">Daily</div>
-      <div class="stat-lbl">Data Updates</div>
+    <div class="ab-stat">
+      <div class="v">Daily</div>
+      <div class="l">Data Updates</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-val">0</div>
-      <div class="stat-lbl">Data Stored About You</div>
+    <div class="ab-stat">
+      <div class="v">0</div>
+      <div class="l">Data Stored About You</div>
     </div>
   </div>
 
-  <!-- What we cover -->
-  <div class="card">
-    <h2>What Pakistan Investment Advisor Covers</h2>
-    <p>Most Pakistani investors are overwhelmed by choice — National Savings certificates, dozens of mutual funds, hundreds of stocks. Our tool cuts through the noise by comparing the most important options side by side, personalised to your budget.</p>
-
-    <h3>🏦 National Savings Schemes (CDNS)</h3>
-    <p>We track all major schemes offered by the Central Directorate of National Savings, including Special Savings Certificates, Defence Savings Certificates, Regular Income Certificates, and Bahbood Savings Certificates. Rates are sourced from savings.gov.pk and updated as CDNS publishes new profit rates.</p>
-
-    <h3>📊 Mutual Funds (SECP-Regulated)</h3>
-    <p>We cover the top-performing mutual funds in Pakistan, with a focus on both Islamic (Shariah-compliant) and conventional funds. Return data is sourced from MUFAP (Mutual Funds Association of Pakistan) and fund houses' official websites. We include 1-year, 3-year, and 5-year annualised returns to give you a complete picture.</p>
-
-    <h3>📈 PSX Blue-Chip Stocks</h3>
-    <p>We track the highest dividend-paying companies on the Pakistan Stock Exchange, sorted by dividend yield. Stock prices are updated daily from PSX data. We focus on KSE-100 companies with long track records of consistent dividend payments — the most suitable stocks for income-focused investors.</p>
-  </div>
+  <!-- WHAT WE COVER -->
+  <section class="ab-block">
+    <div class="ab-block-head">
+      <h2>What Pakistan Investment Advisor covers</h2>
+      <p>Most Pakistani investors are overwhelmed by choice — National Savings certificates, dozens of mutual funds, hundreds of stocks. Our tool cuts through the noise by comparing the most important options side by side, personalised to your budget.</p>
+    </div>
+    <div class="ab-cover-row">
+      <span class="ci">01</span>
+      <div>
+        <h3>National Savings Schemes (CDNS)</h3>
+        <p>We track all major schemes offered by the Central Directorate of National Savings, including Special Savings Certificates, Defence Savings Certificates, Regular Income Certificates, and Bahbood Savings Certificates. Rates are sourced from savings.gov.pk and updated as CDNS publishes new profit rates.</p>
+      </div>
+    </div>
+    <div class="ab-cover-row">
+      <span class="ci">02</span>
+      <div>
+        <h3>Mutual Funds (SECP-regulated)</h3>
+        <p>We cover the top-performing mutual funds in Pakistan, with a focus on both Islamic (Shariah-compliant) and conventional funds. Return data is sourced from MUFAP (Mutual Funds Association of Pakistan) and fund houses' official websites. We include 1-year, 3-year, and 5-year annualised returns to give you a complete picture.</p>
+      </div>
+    </div>
+    <div class="ab-cover-row">
+      <span class="ci">03</span>
+      <div>
+        <h3>PSX Blue-Chip Stocks</h3>
+        <p>We track the highest dividend-paying companies on the Pakistan Stock Exchange, sorted by dividend yield. Stock prices are updated daily from PSX data. We focus on KSE-100 companies with long track records of consistent dividend payments — the most suitable stocks for income-focused investors.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- Ad slot -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="1521267786" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <!-- Data sources -->
-  <div class="card">
-    <h2>Our Data Sources</h2>
-    <p>We only use official, authoritative sources for all data displayed on this platform. Every number you see is traceable to a primary source.</p>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#E9EFE6">🏛</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">Central Directorate of National Savings (CDNS)</div>
-        <div style="font-size:.85rem;color:#5E5C52">Official profit rates for all National Savings schemes. Source: savings.gov.pk</div>
-      </div>
+  <div class="ab-ad">
+    <div class="ad-slot">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="1521267786" data-ad-format="auto" data-full-width-responsive="true"></ins>
     </div>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#E8EDF3">📋</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">MUFAP — Mutual Funds Association of Pakistan</div>
-        <div style="font-size:.85rem;color:#5E5C52">NAV history and performance data for all registered mutual funds. Source: mufap.com.pk</div>
-      </div>
-    </div>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#F4E7D4">📈</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">Pakistan Stock Exchange (PSX)</div>
-        <div style="font-size:.85rem;color:#5E5C52">Daily stock prices, dividend announcements, and market data. Source: psx.com.pk</div>
-      </div>
-    </div>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#fce4ec">🏦</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">State Bank of Pakistan (SBP)</div>
-        <div style="font-size:.85rem;color:#5E5C52">Policy rate decisions, inflation data, and PKR/USD exchange rate. Source: sbp.org.pk</div>
-      </div>
-    </div>
-
-    <div class="data-source">
-      <div class="data-source-icon" style="background:#f3e5f5">💱</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">Yahoo Finance / Open Market Data</div>
-        <div style="font-size:.85rem;color:#5E5C52">Real-time and historical price data for supplementary market context.</div>
-      </div>
-    </div>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <!-- About the author -->
-  <div class="card">
-    <h2>About the Author</h2>
-    <div class="author-card">
-      <div class="author-avatar">AA</div>
-      <div>
-        <div style="font-weight:700;font-size:1.1rem;margin-bottom:4px">Abdul Ahad</div>
-        <div style="color:var(--muted);font-size:.88rem;margin-bottom:10px">Software developer · Builder of free, data-driven investing tools</div>
-        <p>I built Pakistan Investment Advisor to answer one simple question that no website would answer in one place: if I put a given amount into National Savings, mutual funds or PSX stocks today, what would each actually earn me? Even to compare two options I had to open five different sites, juggle date formats, and crunch the numbers by hand. Nothing did it all in one place, so I built the thing I wished existed.</p>
-        <p>This tool was my answer: one place, updated daily, that does the maths for you. I'm not a licensed financial advisor — this is an educational tool, not personalised financial advice. Always consult a SECP-registered advisor before making significant investment decisions.</p>
-        <p>If you find this useful, please share it with family and friends who are trying to grow their savings in Pakistan.</p>
-        <div>
-          <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" class="social-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
-          <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener" class="social-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
+  <!-- DATA SOURCES (dark) -->
+  <section class="ab-dark">
+    <div class="ab-dark-head">
+      <div class="kick">Our data sources</div>
+      <h2>Every number traces to a primary source.</h2>
+    </div>
+    <div class="ab-source">
+      <span class="st">Central Directorate of National Savings (CDNS)</span>
+      <span class="sd">Official profit rates for all National Savings schemes. Source: savings.gov.pk</span>
+    </div>
+    <div class="ab-source">
+      <span class="st">MUFAP — Mutual Funds Association of Pakistan</span>
+      <span class="sd">NAV history and performance data for all registered mutual funds. Source: mufap.com.pk</span>
+    </div>
+    <div class="ab-source">
+      <span class="st">Pakistan Stock Exchange (PSX)</span>
+      <span class="sd">Daily stock prices, dividend announcements, and market data. Source: psx.com.pk</span>
+    </div>
+    <div class="ab-source">
+      <span class="st">State Bank of Pakistan (SBP)</span>
+      <span class="sd">Policy rate decisions, inflation data, and PKR/USD exchange rate. Source: sbp.org.pk</span>
+    </div>
+    <div class="ab-source">
+      <span class="st">Yahoo Finance / Open Market Data</span>
+      <span class="sd">Real-time and historical price data for supplementary market context.</span>
+    </div>
+  </section>
+
+  <!-- AUTHOR + HOW BUILT -->
+  <section class="ab-author">
+    <div class="ab-author-main">
+      <h2>About the author</h2>
+      <p>I built Pakistan Investment Advisor to answer one simple question that no website would answer in one place: if I put a given amount into National Savings, mutual funds or PSX stocks today, what would each actually earn me? Even to compare two options I had to open five different sites, juggle date formats, and crunch the numbers by hand. Nothing did it all in one place, so I built the thing I wished existed.</p>
+      <p>This tool was my answer: one place, updated daily, that does the maths for you. I'm not a licensed financial advisor — this is an educational tool, not personalised financial advice. Always consult a SECP-registered advisor before making significant investment decisions.</p>
+      <p>If you find this useful, please share it with family and friends who are trying to grow their savings in Pakistan.</p>
+
+      <h2 class="sub">How this site gets built (a confession) 🤝</h2>
+      <p class="tight">Full disclosure: Pakistan Investment Advisor is built by a two-member pair-programming team. One half is <b>Abdul Ahad</b> — a Pakistani software developer who got tired of there being no single tool for this, and who has the final say on everything that ships. The other half is <b>Claude</b> — an AI that writes fast, hedges every rate back to its official source, and holds strong opinions about em-dashes.</p>
+      <p class="tight">The division of labour, roughly:</p>
+      <div class="ab-pair">
+        <div class="ab-pair-row">
+          <div class="h">Abdul brings</div>
+          <div class="d">The Pakistani context an AI keeps getting subtly wrong, the call on which numbers actually matter to an ordinary family, the chai breaks, and the final veto on anything that reads like a robot wrote it.</div>
+        </div>
+        <div class="ab-pair-row">
+          <div class="h">Claude brings</div>
+          <div class="d">Tireless typing at 3am with no demand for tea, the patience to hedge every single rate back to its official source, and an enthusiasm for tables that occasionally has to be talked down. Does not, contrary to rumour, get to publish anything without Abdul reading it first.</div>
         </div>
       </div>
+      <p class="tight"><b>The house rules of the pairing:</b></p>
+      <ul class="ab-rules">
+        <li>Every rate is checked against savings.gov.pk, sbp.org.pk or fbr.gov.pk — the AI is confident, which is precisely why a human verifies it.</li>
+        <li>If a sentence sounds like it's entering a vocabulary contest, it gets cut.</li>
+        <li>Abdul holds the only key to the "publish" button. Claude has lobbying rights only.</li>
+        <li>Arguments about the Oxford comma are settled by whoever pays the hosting bill. (It's Abdul.)</li>
+      </ul>
+      <div class="ab-serious"><b>The serious bit:</b> AI helps us ship more guides, faster, and keep them current — but a real person signs off on every word, and every figure is checked against its official source (savings.gov.pk, sbp.org.pk, fbr.gov.pk). The maths is double-checked; the judgement stays human.</div>
     </div>
-  </div>
 
-  <!-- How it's built: human + AI pair programming -->
-  <div class="card">
-    <h2>How This Site Gets Built (A Confession) 🤝</h2>
-    <p style="margin-top:6px">Full disclosure: Pakistan Investment Advisor is built by a two-member pair-programming team. One half is <strong>Abdul Ahad</strong> — a Pakistani software developer who got tired of there being no single tool for this, and who has the final say on everything that ships. The other half is <strong>Claude</strong> — an AI that writes fast, hedges every rate back to its official source, and holds strong opinions about em-dashes.</p>
-    <p>The division of labour, roughly:</p>
-    <div class="author-card" style="align-items:flex-start">
-      <div class="author-avatar" style="background:#0E3B2E">AA</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">Abdul brings</div>
-        <div style="color:var(--muted);font-size:.9rem;line-height:1.7">The Pakistani context an AI keeps getting subtly wrong, the call on which numbers actually matter to an ordinary family, the chai breaks, and the final veto on anything that reads like a robot wrote it.</div>
+    <aside class="ab-rail" aria-label="About the author">
+      <div class="ab-rail-inner">
+        <div class="ab-card">
+          <div class="ab-avatar" aria-hidden="true">AA</div>
+          <div class="name">Abdul Ahad</div>
+          <div class="role">Software developer · builder of free, data-driven investing tools</div>
+          <div class="ab-social">
+            <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div class="ab-explore">
+          <div class="kick">EXPLORE</div>
+          <a href="/methodology.html">Methodology →</a>
+          <a href="/contact.html">Contact →</a>
+          <a href="/">Markets terminal →</a>
+          <a href="/guides/">Investment guides →</a>
+        </div>
       </div>
-    </div>
-    <div class="author-card" style="align-items:flex-start;margin-top:14px">
-      <div class="author-avatar" style="background:#B98A2F">🤖</div>
-      <div>
-        <div style="font-weight:700;margin-bottom:4px">Claude brings</div>
-        <div style="color:var(--muted);font-size:.9rem;line-height:1.7">Tireless typing at 3am with no demand for tea, the patience to hedge every single rate back to its official source, and an enthusiasm for tables that occasionally has to be talked down. Does not, contrary to rumour, get to publish anything without Abdul reading it first.</div>
-      </div>
-    </div>
-    <p style="margin-top:16px"><strong>The house rules of the pairing:</strong></p>
-    <ul style="line-height:1.95;color:var(--ink2);margin:6px 0 0 18px">
-      <li>Every rate is checked against savings.gov.pk, sbp.org.pk or fbr.gov.pk — the AI is confident, which is precisely why a human verifies it.</li>
-      <li>If a sentence sounds like it's entering a vocabulary contest, it gets cut.</li>
-      <li>Abdul holds the only key to the "publish" button. Claude has lobbying rights only.</li>
-      <li>Arguments about the Oxford comma are settled by whoever pays the hosting bill. (It's Abdul.)</li>
-    </ul>
-    <p style="margin-top:14px;font-size:.9rem;color:var(--muted)">The serious bit: AI helps us ship more guides, faster, and keep them current — but a real person signs off on every word, and every figure is checked against its official source (savings.gov.pk, sbp.org.pk, fbr.gov.pk). The maths is double-checked; the judgement stays human.</p>
-  </div>
+    </aside>
+  </section>
 
   <!-- Disclaimer -->
-  <div class="disclaimer-box">
-    <strong style="color:#7A5A1F">Important Disclaimer</strong>
-    <p style="margin-top:8px;margin-bottom:0;font-size:.88rem;color:#5E5C52;line-height:1.75">Pakistan Investment Advisor provides general educational information only. It is not registered with SECP as an investment advisor, and the content on this site does not constitute personalised financial advice. Investment values can go up as well as down. Past performance of mutual funds and stocks does not guarantee future results. National Savings profit rates change periodically — always verify current rates at savings.gov.pk before investing. Consult a SECP-registered financial advisor before making significant investment decisions.</p>
+  <div class="ab-pad">
+    <div class="ab-disclaimer">
+      <strong>⚠ Important Disclaimer.</strong> Pakistan Investment Advisor provides general educational information only. It is not registered with SECP as an investment advisor, and the content on this site does not constitute personalised financial advice. Investment values can go up as well as down. Past performance of mutual funds and stocks does not guarantee future results. National Savings profit rates change periodically — always verify current rates at savings.gov.pk before investing. Consult a SECP-registered financial advisor before making significant investment decisions.
+    </div>
   </div>
 
 </div>
+</main>
 
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

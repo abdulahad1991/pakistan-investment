@@ -131,12 +131,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -158,23 +158,197 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.4vw,3.3rem);font-weight:800;line-height:1.02;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px;text-transform:uppercase}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose em{font-style:italic}
+  .prose a{color:var(--green);font-weight:600;border-bottom:1px solid var(--line)}
+  .prose a:hover{color:var(--green2)}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:0 0 6px}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.06em;color:var(--green-d);margin-bottom:8px}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p,.cl-dark li{color:#E4F2EA}
+  .cl-dark strong{color:var(--acid)!important;font-weight:700}
+
+  /* live snapshot widget target (article.js fills #live-snap; keep id) */
+  #live-snap{border:1px solid var(--line);border-top:3px solid var(--acid);background:var(--mint);padding:18px;margin:0 0 28px}
+
+  /* figure / data cards */
+  .fig-card{background:var(--paper);border:1px solid var(--line);padding:22px 24px;margin:24px 0}
+  .fig-kicker{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .fig-title{font-family:var(--display);font-weight:700;font-size:1.1rem;color:var(--green-d);margin-bottom:16px}
+  .fig-note{font-size:.78rem;color:var(--muted);margin-top:14px;line-height:1.6}
+  .fig-note a{color:var(--green);font-weight:600;border-bottom:1px solid var(--line)}
+
+  /* funding-cost bars */
+  .cost-row{margin-bottom:14px}
+  .cost-row:last-child{margin-bottom:0}
+  .cost-lbl{display:flex;justify-content:space-between;font-family:var(--body);font-size:.88rem;margin-bottom:4px}
+  .cost-lbl b{font-weight:700;color:var(--ink)}
+  .cost-val{font-family:var(--mono);font-weight:600}
+  .cost-track{background:var(--paper3);height:18px;overflow:hidden}
+  .cost-fill{height:100%}
+
+  /* balance-sheet split bar */
+  .split-bar{display:flex;height:46px;overflow:hidden;border:1px solid var(--line)}
+  .split-bar .seg{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.82rem;font-weight:700;text-align:center;padding:0 6px}
+  .split-bar .seg-a{background:var(--green-d);color:#fff}
+  .split-bar .seg-b{background:var(--acid);color:var(--green-d)}
+  .split-cap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-top:8px}
+
+  /* earnings ladder */
+  .ladder{display:flex;flex-direction:column;gap:9px;font-family:var(--body);font-size:.9rem}
+  .ladder-row{display:flex;align-items:center;gap:10px}
+  .ladder-row .desc{flex:1;color:var(--ink2)}
+  .ladder-row .desc small{color:var(--muted);font-size:.8rem}
+  .ladder-row .bar{height:16px;width:100%;max-width:300px}
+  .ladder-row .amt{font-family:var(--mono);font-weight:600;width:64px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink2)}
+  .ladder-row.neg .bar{background:var(--red)}
+  .ladder-row.neg .amt{color:var(--red)}
+  .ladder-row.pos .bar{background:var(--green-d)}
+  .ladder-row.sub{border-top:1px dashed var(--line);padding-top:9px}
+  .ladder-row.sub .desc{font-weight:700;color:var(--green-d)}
+  .ladder-row.sub .bar{background:var(--green2)}
+  .ladder-row.sub .amt{font-weight:700;color:var(--green-d)}
+  .ladder-row.net{border-top:2px solid var(--green-d);padding-top:10px}
+  .ladder-row.net .desc{font-weight:800;color:var(--green-d)}
+  .ladder-row.net .bar{background:var(--green-d);height:20px}
+  .ladder-row.net .amt{font-weight:800;color:var(--green-d)}
+  .ladder-eps{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+  .ladder-eps .mono{font-family:var(--mono);color:var(--muted)}
+  .ladder-eps .res{font-family:var(--mono);font-weight:700;color:var(--green-d);font-size:1.05rem}
+
+  /* sensitivity svg note */
+  .sens-svg{max-width:520px;height:auto}
+
+  /* data table */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);margin:0 0 8px}
+  .data-table{width:100%;border-collapse:collapse;min-width:520px}
+  .data-table th{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-d);text-align:left;padding:13px 16px;background:var(--mint);border-bottom:2px solid var(--acid)}
+  .data-table td{font-family:var(--body);font-size:.92rem;color:var(--ink2);padding:13px 16px;border-bottom:1px solid var(--line2);vertical-align:top}
+  .data-table td strong{color:var(--green-d)}
+  .data-table tr:last-child td{border-bottom:none}
+  .data-table tr:hover td{background:var(--paper)}
+  .data-table td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tbl-note{font-size:.78rem;color:var(--muted);margin:0 0 18px;line-height:1.6}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7}
+
+  /* related links block */
+  .related-links{border-top:1px solid var(--line);margin-top:32px;padding-top:8px}
+  .related-links h3{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-d);margin:16px 0 4px}
+  .related-links a{display:block;padding:11px 0;border-bottom:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d)}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+    .fig-card{padding:18px 16px}
+    .ladder-row .bar{display:none}
+  }
+</style>
 </head>
 <body>
 
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -183,342 +357,445 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="breadcrumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › How to Value a Bank Stock</div>
-
-  <h1>How to Value a Bank Stock in Pakistan: A Step-by-Step Walkthrough</h1>
-  <div class="byline">By Abdul Ahad &nbsp;·&nbsp; Last updated: 20 June 2026 &nbsp;·&nbsp; 12 min read</div>
-
-  <p class="quick-answer" style="font-family:Newsreader,serif;font-size:1.12rem;line-height:1.65;color:#0E3B2E;border-left:4px solid #B98A2F;background:#FDFBF4;padding:12px 18px;margin:0 0 22px;border-radius:0 6px 6px 0"><strong>In one breath:</strong> A bank stock is valued from the balance sheet up: estimate deposits, split them into loans and investments, work out the spread, subtract costs and tax to get net profit and earnings per share, then apply a price-to-earnings multiple to reach a fair-value range.</p>
-
-  <!-- Author bio card -->
-  <div class="author-bio" style="display:flex;gap:14px;align-items:flex-start;background:#EFEAD9;border:1px solid #C9D6C0;border-radius:10px;padding:16px 20px;margin-bottom:24px">
-    <div style="background:#0E3B2E;color:#fff;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0">AA</div>
-    <div>
-      <div style="font-weight:700;font-size:.95rem">Abdul Ahad</div>
-      <div style="font-size:.82rem;color:#5E5C52;line-height:1.6;margin-top:3px">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
-      <div style="margin-top:6px;font-size:.8rem"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" style="color:#0E3B2E;font-weight:600">LinkedIn →</a> &nbsp;·&nbsp; <span style="color:#888">Last updated: 20 June 2026</span></div>
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
   </div>
-
-  <!-- Summary box -->
-  <div class="callout callout-green" style="margin-bottom:20px">
-    <strong>The four steps, boiled down:</strong>
-    <ul style="margin:8px 0 0 18px;line-height:2">
-      <li>A bank is valued from the <strong>balance sheet up</strong>. Estimate deposits, split them into loans and investments, and work out the <strong>spread</strong> between what the bank earns and what it pays.</li>
-      <li>That spread, minus the cost of running the bank and minus tax, becomes <strong>net profit</strong>. Divide by the share count and you have <strong>earnings per share (EPS)</strong>.</li>
-      <li>EPS turns into a <strong>fair-value estimate</strong> when you apply a price-to-earnings (P/E) multiple, then stress-test it with a sensitivity analysis.</li>
-      <li>This is a <strong>framework, not a forecast</strong>. Every number below is rounded and illustrative; this site does not publish price targets or buy/sell calls.</li>
-    </ul>
-  </div>
-
-  <!-- Ad slot 1 — after summary, before main content -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <p>Ask most people how they pick a bank stock and the answer is a dividend yield or a gut feeling. A bank is one of the few businesses you can actually model from the ground up, because its raw material is money, and money sits on a single page: the balance sheet. Estimate how much a bank will take in as deposits and what spread it will earn on that money, and you can build its profit, its earnings per share, and a defensible <em>fair-value range</em>, the price the shares would be worth if your assumptions hold.</p>
-
-  <p>This walkthrough lays out that method the way a brokerage analyst would, one line at a time. I'll use <strong>Meezan Bank (MEBL)</strong> as the reference point. It's Pakistan's largest Islamic bank and a stock plenty of retail investors already hold. One thing up front: <strong>every rupee figure below is deliberately rounded and illustrative</strong>, chosen to show how the arithmetic flows, not to forecast any company. This site does not publish price targets. The goal is that you can build and stress-test your own numbers.</p>
-
-  <div id="live-snap" style="background:#FDFBF4;border:1px solid #D9D1BE;border-top:3px solid #B98A2F;border-radius:6px;padding:18px;margin:0 0 26px"></div>
-
-  <h2>Why a Bank Is Valued Differently</h2>
-
-  <p>For a normal company you forecast sales, subtract costs, and arrive at profit. A bank is different because both its costs <em>and</em> its revenue come from money. It pays depositors and lenders to raise funds (its cost of funds), then earns a return by lending that money out or investing it in government securities. The difference between the two is the <strong>net spread</strong>. At a conventional bank that's net interest income; at an Islamic bank like Meezan it's net profit on a profit-and-loss-sharing basis. Either way, it's the engine of the whole business.</p>
-
-  <p>So the lever that matters most is the <strong>cost of funding</strong>, and not all funding costs the same. This is where current accounts earn their reputation as a bank's most prized asset.</p>
-
-  <div class="chart-card" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:10px;padding:22px 24px;margin:24px 0">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#6B6A60;margin-bottom:4px">Figure 1 · Illustrative cost of funding</div>
-    <div style="font-family:Fraunces,serif;font-weight:600;font-size:1.1rem;color:#0E3B2E;margin-bottom:16px">Where a bank's money comes from — and what each source costs</div>
-
-    <div style="display:flex;flex-direction:column;gap:14px">
-      <div>
-        <div style="display:flex;justify-content:space-between;font-size:.86rem;margin-bottom:4px"><span><strong>Current accounts</strong> (CASA)</span><span style="font-family:'IBM Plex Mono',monospace;color:#175A41;font-weight:600">~0% cost</span></div>
-        <div style="background:#EFE8D8;border-radius:4px;height:18px"><div style="width:2%;min-width:6px;height:100%;background:#175A41;border-radius:4px"></div></div>
-      </div>
-      <div>
-        <div style="display:flex;justify-content:space-between;font-size:.86rem;margin-bottom:4px"><span><strong>Savings deposits</strong></span><span style="font-family:'IBM Plex Mono',monospace;color:#7A5A1F;font-weight:600">~9%</span></div>
-        <div style="background:#EFE8D8;border-radius:4px;height:18px"><div style="width:78%;height:100%;background:#B98A2F;border-radius:4px"></div></div>
-      </div>
-      <div>
-        <div style="display:flex;justify-content:space-between;font-size:.86rem;margin-bottom:4px"><span><strong>Borrowings &amp; term deposits</strong></span><span style="font-family:'IBM Plex Mono',monospace;color:#A4452F;font-weight:600">~11.5% (policy rate)</span></div>
-        <div style="background:#EFE8D8;border-radius:4px;height:18px"><div style="width:100%;height:100%;background:#A4452F;border-radius:4px"></div></div>
-      </div>
-    </div>
-    <div style="font-size:.78rem;color:#8a887d;margin-top:14px;line-height:1.6">Current-account balances earn the depositor no profit, so they cost the bank almost nothing to hold. The larger their share of total deposits, the cheaper the bank's blended cost of funds. Rates shown are illustrative and track the prevailing <a href="/guides/sbp-policy-rate-investments.html">SBP policy rate</a> environment of mid-2026.</div>
-  </div>
-
-  <p>This is why analysts obsess over the <strong>CASA ratio</strong>, the share of cheap current and savings deposits in the funding mix. A bank that funds itself largely with zero-cost current accounts keeps far more of what it earns on its assets. When you read that a bank is targeting a "50% current-account share," that's management telling you they intend to protect the cheapest part of their funding.</p>
-
-  <h2>Step 1 — Write Down Your Assumptions</h2>
-
-  <p>A valuation is only as good as the assumptions under it, so the first move is to write them down. Spell them out and anyone reading your model (including you, six months later) can see exactly which lever to pull when reality turns out differently. For a Pakistani bank, a handful of assumptions drive almost the entire result.</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Assumption</th>
-        <th>What it controls</th>
-        <th>Illustrative value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>Policy rate</strong></td><td>The yield on assets and the cost of borrowings; the single biggest swing factor</td><td>11.5%</td></tr>
-      <tr><td><strong>Deposit growth</strong></td><td>How fast the balance sheet, and therefore earning assets, expands</td><td>~12% a year</td></tr>
-      <tr><td><strong>Current-account share</strong></td><td>The blended cost of funds (more current accounts = cheaper)</td><td>~45% of deposits</td></tr>
-      <tr><td><strong>Advances-to-deposit ratio (ADR)</strong></td><td>How deposits split between loans and investments, plus the tax rate</td><td>~50%</td></tr>
-      <tr><td><strong>Tax rate</strong></td><td>How much profit survives to shareholders</td><td>~50% (ADR-linked)</td></tr>
-    </tbody>
-  </table>
-  <div style="font-size:.78rem;color:#8a887d;margin:-6px 0 18px;line-height:1.6">Illustrative inputs chosen to demonstrate the method, not any company's actual figures or published guidance. Change any one and the result moves, which is exactly why it pays to write them down.</div>
-
-  <p>Notice the policy rate sits at the top. Because a bank earns on assets and pays on funding, a change in the <a href="/guides/sbp-policy-rate-investments.html">State Bank's policy rate</a> moves both sides of the spread at once. That's why a single rate decision can reshape an entire bank model. The SBP has held its rate at 11.5% through mid-2026 with CPI inflation around 7%, so the bigger question for any model right now is which way the next move goes. More on that in the risk section.</p>
-
-  <h2>Step 2 — Build the Balance Sheet</h2>
-
-  <p>With assumptions in hand, grow the deposit base by your assumed rate, then decide what the bank does with that money. This is where the ADR comes in. It splits deposits into <strong>advances</strong> (loans to households and businesses) and <strong>investments</strong> (government securities, or for an Islamic bank, sovereign <em>sukuk</em> rather than conventional T-bills). Together, advances and investments make up the bank's <strong>earning assets</strong>: the pool of money on which it actually earns a return.</p>
-
-  <div class="chart-card" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:10px;padding:22px 24px;margin:24px 0">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#6B6A60;margin-bottom:4px">Figure 2 · Illustrative balance-sheet split at 50% ADR</div>
-    <div style="font-family:Fraunces,serif;font-weight:600;font-size:1.1rem;color:#0E3B2E;margin-bottom:16px">How deposits become earning assets</div>
-
-    <div style="display:flex;height:46px;border-radius:6px;overflow:hidden;border:1px solid #C9D6C0">
-      <div style="width:50%;background:#0E3B2E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:600;text-align:center;padding:0 6px">Advances 50%</div>
-      <div style="width:50%;background:#B98A2F;color:#191D1A;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:600;text-align:center;padding:0 6px">Investments 50%</div>
-    </div>
-    <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:#6B6A60;margin-top:8px">
-      <span>Loans to customers</span>
-      <span>Government securities &amp; sukuk</span>
-    </div>
-    <div style="font-size:.78rem;color:#8a887d;margin-top:14px;line-height:1.6">A bank lends out a portion of deposits (the ADR) and invests the rest in government paper, which is low-risk but lower-yielding. The split shown is illustrative. A higher ADR generally means more lending and, under Pakistan's framework, a potentially lower tax rate.</div>
-  </div>
-
-  <p>Two things deserve a pause here. First, money never sits idle. Whatever is not lent out is invested, so the bank earns on essentially its whole deposit base. Second, the ADR is not just an operational choice. In Pakistan it has historically carried a <strong>tax consequence</strong>, with banks below a threshold ADR taxed at a higher rate to nudge them toward lending. That's why the ratio shows up twice in our assumptions: once for revenue, once for tax.</p>
-
-  <h2>Step 3 — Build the Profit &amp; Loss: the Earnings Engine</h2>
-
-  <p>This is the heart of the model. Take the earning assets, apply a blended yield to get revenue, subtract the cost of funding and running the bank, subtract tax, and what survives is profit attributable to shareholders. Laid out as a ledger, each line follows from the one above it.</p>
-
-  <div class="chart-card" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:10px;padding:22px 24px;margin:24px 0">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#6B6A60;margin-bottom:4px">Figure 3 · Illustrative earnings ladder (Rs billions)</div>
-    <div style="font-family:Fraunces,serif;font-weight:600;font-size:1.1rem;color:#0E3B2E;margin-bottom:16px">From the spread to earnings per share</div>
-
-    <div style="display:flex;flex-direction:column;gap:9px;font-size:.88rem">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="flex:1">Profit / mark-up revenue <span style="color:#8a887d;font-size:.8rem">(earning assets × blended yield)</span></div>
-        <div style="background:#0E3B2E;height:16px;border-radius:3px;width:100%;max-width:300px"></div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;width:64px;text-align:right">360</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="flex:1">− Cost of funds <span style="color:#8a887d;font-size:.8rem">(profit paid to depositors &amp; lenders)</span></div>
-        <div style="background:#A4452F;height:16px;border-radius:3px;width:50%;max-width:150px"></div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;width:64px;text-align:right;color:#A4452F">−180</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;border-top:1px dashed #D9D1BE;padding-top:9px">
-        <div style="flex:1"><strong>= Net spread income</strong></div>
-        <div style="background:#175A41;height:16px;border-radius:3px;width:50%;max-width:150px"></div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-weight:700;width:64px;text-align:right">180</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="flex:1">+ Fee &amp; other income <span style="color:#8a887d;font-size:.8rem">(cards, transfers, charges)</span></div>
-        <div style="background:#0E3B2E;height:16px;border-radius:3px;width:8.3%;max-width:25px"></div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;width:64px;text-align:right">+30</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="flex:1">− Provisions for bad loans</div>
-        <div style="background:#A4452F;height:16px;border-radius:3px;width:1.1%;min-width:4px"></div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;width:64px;text-align:right;color:#A4452F">−4</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="flex:1">− Operating expenses <span style="color:#8a887d;font-size:.8rem">(staff, branches, admin)</span></div>
-        <div style="background:#A4452F;height:16px;border-radius:3px;width:19.4%;max-width:58px"></div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;width:64px;text-align:right;color:#A4452F">−70</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;border-top:1px dashed #D9D1BE;padding-top:9px">
-        <div style="flex:1"><strong>= Profit before tax</strong></div>
-        <div style="background:#175A41;height:16px;border-radius:3px;width:37.8%;max-width:113px"></div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-weight:700;width:64px;text-align:right">136</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="flex:1">− Tax <span style="color:#8a887d;font-size:.8rem">(~50%, ADR-linked)</span></div>
-        <div style="background:#A4452F;height:16px;border-radius:3px;width:18.9%;max-width:57px"></div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;width:64px;text-align:right;color:#A4452F">−68</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;border-top:2px solid #0E3B2E;padding-top:10px">
-        <div style="flex:1"><strong>= Net profit (to shareholders)</strong></div>
-        <div style="background:#0E3B2E;height:20px;border-radius:3px;width:18.9%;max-width:57px"></div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-weight:800;width:64px;text-align:right;color:#0E3B2E">68</div>
-      </div>
-    </div>
-
-    <div style="margin-top:16px;padding-top:14px;border-top:1px solid #D9D1BE;display:flex;flex-wrap:wrap;gap:6px;align-items:baseline">
-      <span style="font-size:.86rem">Net profit ÷ shares outstanding</span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:.86rem;color:#6B6A60">(Rs 68 bn ÷ 1,500 mn shares)</span>
-      <span style="font-size:.86rem">=</span>
-      <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:#0E3B2E;font-size:1.05rem">EPS ≈ Rs 45</span>
-    </div>
-    <div style="font-size:.78rem;color:#8a887d;margin-top:12px;line-height:1.6">Illustrative figures, rounded for clarity, not the accounts or a forecast of any company. A full model also adjusts for items such as a repricing-lag effect when rates move sharply, income from associated companies, and the minority share of profit the bank does not own.</div>
-  </div>
-
-  <p>A few lines in that ladder are where bank models get their nuance:</p>
-
-  <ul>
-    <li><strong>Cost of funds is not one number.</strong> It blends the profit paid on savings deposits (tied to the minimum deposit rate that regulation sets relative to the policy rate), the cost of any borrowings (close to the policy rate), and the zero cost of current accounts. Improve the current-account mix and this line shrinks.</li>
-    <li><strong>The repricing lag.</strong> When the policy rate jumps, a bank's assets don't all reprice instantly. Some loans are locked at older rates while funding costs rise immediately. Because assets and liabilities reprice on different schedules, a sharp rate move can briefly compress the spread until the book catches up. That's a normal asset-liability timing effect, not a one-off loss.</li>
-    <li><strong>Provisions</strong> set aside an estimate of loans that may not be repaid. For a well-managed bank in a stable year this is often a small line. It can spike in a downturn.</li>
-    <li><strong>Operating expenses</strong> grow with inflation and with branch expansion. A bank opening hundreds of new branches carries higher costs before those branches mature into deposits.</li>
-    <li><strong>The tax line is unusually heavy</strong> for Pakistani banks and, as noted, is linked to the ADR. That's why two banks with identical pre-tax profit can deliver different earnings to shareholders.</li>
-  </ul>
-
-  <!-- Ad slot 2 — mid-article -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <h2>Step 4 — Turn Earnings Into a Value</h2>
-
-  <p>Now you have an estimate of earnings per share. The final step is to decide what those earnings are worth. Two routes are common.</p>
-
-  <table class="transmission-table">
-    <thead>
-      <tr>
-        <th>Method</th>
-        <th>How it works</th>
-        <th>When it fits</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Dividend yield</strong></td>
-        <td>Value the share from the cash dividend it pays, relative to a target yield</td>
-        <td>High-payout stocks that distribute most of their profit</td>
-      </tr>
-      <tr>
-        <td><strong>Price-to-earnings (P/E)</strong></td>
-        <td>Apply an earnings multiple to estimated EPS to get a share price</td>
-        <td>Banks that retain a large share of earnings to grow (low payout)</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>The choice hinges on the <strong>payout ratio</strong>, the slice of profit handed out as dividends. Take a bank earning around Rs 45 of EPS but paying only about Rs 18 a year in dividends, a payout ratio near 40%. Value that share on its dividend alone and you ignore the retained profit still building the business, so the dividend-yield method tends to <em>understate</em> a lower-payout bank. For that reason analysts usually lean on the <strong>P/E method</strong> for banks like this and treat dividend yield as a cross-check, not the main tool.</p>
-
-  <p>The P/E method is simple arithmetic: estimated EPS times a chosen earnings multiple. All the judgement sits in the multiple. A point either way changes the answer materially, so the honest move is to show a <strong>range</strong> rather than a single number.</p>
-
-  <div class="chart-card" style="background:#FDFBF4;border:1px solid #D9D1BE;border-radius:10px;padding:22px 24px;margin:24px 0">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:#6B6A60;margin-bottom:4px">Figure 4 · Illustrative P/E sensitivity (EPS ≈ Rs 45)</div>
-    <div style="font-family:Fraunces,serif;font-weight:600;font-size:1.1rem;color:#0E3B2E;margin-bottom:8px">The same earnings, three multiples, three values</div>
-    <svg viewBox="0 0 480 250" width="100%" style="max-width:520px;height:auto" role="img" aria-label="Bar chart showing illustrative fair value of about 315 rupees at a 7 times P/E, 360 rupees at 8 times, and 405 rupees at 9 times, for an EPS of about 45 rupees">
-      <line x1="60" y1="205" x2="455" y2="205" stroke="#C9D6C0" stroke-width="1.5"></line>
-      <!-- 7x -->
-      <rect x="95" y="88" width="78" height="117" rx="3" fill="#B98A2F"></rect>
-      <text x="134" y="78" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="17" font-weight="600" fill="#0E3B2E">Rs 315</text>
-      <text x="134" y="225" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#6B6A60">7× P/E</text>
-      <!-- 8x -->
-      <rect x="211" y="72" width="78" height="133" rx="3" fill="#0E3B2E"></rect>
-      <text x="250" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="17" font-weight="700" fill="#0E3B2E">Rs 360</text>
-      <text x="250" y="225" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#6B6A60">8× P/E</text>
-      <!-- 9x -->
-      <rect x="327" y="55" width="78" height="150" rx="3" fill="#175A41"></rect>
-      <text x="366" y="45" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="17" font-weight="600" fill="#0E3B2E">Rs 405</text>
-      <text x="366" y="225" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#6B6A60">9× P/E</text>
-    </svg>
-    <div style="font-size:.78rem;color:#8a887d;margin-top:8px;line-height:1.6">Illustrative only. The fair-value estimate moves about Rs 45 for every one-point change in the multiple. That's exactly why a single "target price" is false precision, and why a sensitivity range is more honest.</div>
-  </div>
-
-  <p>What multiple is reasonable? That depends on the market's mood and the bank's quality. Pakistani banks have generally traded at modest single-digit-to-low-double-digit earnings multiples, partly a reflection of the macro risk premium investors attach to the market. With the KSE-100 around 181,000 in mid-2026, multiples have recovered from their worst but stayed well short of historic peaks. A stronger franchise tends to command the upper end of the range. A more uncertain backdrop, higher rates or geopolitical stress, compresses multiples across the board. The point of the sensitivity table is to make that judgement <em>visible</em> instead of burying it inside one number.</p>
-
-  <div class="callout callout-gold">
-    <strong>Trailing vs forward: don't mix them up.</strong> A stock screener shows a <em>trailing</em> P/E based on the last twelve months' reported earnings. The valuation above uses a <em>forward</em> P/E applied to <em>estimated future</em> earnings. If earnings are growing, the forward number looks different from the trailing one. They answer different questions, so never compare them directly.
-  </div>
-
-  <h2>Step 5 — Total Return, and the Risks That Move the Answer</h2>
-
-  <p>A share's payoff isn't just the price moving. It's the price change <em>plus</em> the dividends collected along the way. So the last piece is to add the expected dividend back to your price estimate for a <strong>total return</strong>. A bank paying a meaningful dividend can deliver a respectable total return even when the share price barely moves. For context, the larger PSX banks currently yield anywhere from MEBL's 5.5% up to MCB's 8.8% in our daily dataset, with UBL at 7.2% and HBL at 7.1% in between.</p>
-
-  <p>Every figure rests on the assumptions from Step 1, and some matter far more than others. Ranked roughly by impact:</p>
-
-  <ul>
-    <li><strong>The policy rate, by far the biggest.</strong> Because it moves both the yield on assets and the cost of funds, a single <a href="/guides/sbp-policy-rate-investments.html">SBP rate decision</a> can rebuild the entire model. Stress-test this one first.</li>
-    <li><strong>Deposit growth.</strong> Faster growth expands earning assets and profit; a slowdown does the reverse. Model it conservatively to protect yourself from over-optimism.</li>
-    <li><strong>Current-account share.</strong> A few points either way shifts the cost of funds and the spread, though a well-run bank tends to keep this stable.</li>
-    <li><strong>The ADR.</strong> It affects both how much the bank lends and the tax rate it pays, so it touches the result twice.</li>
-    <li><strong>Operating costs and inflation.</strong> Usually a smaller swing, but worth flexing if inflation runs hot or branch expansion accelerates.</li>
-  </ul>
-
-  <p>Run your model at a few different policy-rate and deposit-growth assumptions and you'll quickly see that a bank valuation is a <em>range of plausible outcomes</em>, not a single right answer. That humility is the most useful thing the exercise gives you.</p>
-
-  <div class="callout callout-green">
-    <strong>Where this leaves you:</strong> valuing a bank is a chain. Deposits, then earning assets, then spread, then net profit, then EPS, then a P/E-based fair value, then total return, with each link resting on a stated assumption. Build it yourself, stress-test the policy-rate and growth lines, and present a range rather than a point. The arithmetic is the easy part. The discipline is being honest about the assumptions. Nothing here is a recommendation to buy or sell any share, and the worked numbers are illustrative throughout.
-  </div>
-
-  <!-- FAQ Section -->
-  <h2>Frequently Asked Questions</h2>
-
-  <details class="faq-item" id="faq-why-banks-are-different"><summary class="faq-question">Why can't you value a bank like a normal company?</summary><div class="faq-answer">A bank's raw material is money itself. It raises funds from depositors and lenders, then puts that money to work in loans and government securities, earning the spread between what it earns on assets and what it pays on funding. So the balance sheet is the business: you cannot value a bank without first estimating how big its deposits and earning assets will be and what spread they will produce. That is why a bank valuation starts from the balance sheet rather than from revenue.</div></details>
-
-  <details class="faq-item" id="faq-what-is-casa"><summary class="faq-question">What is CASA and why do current accounts matter so much to a bank?</summary><div class="faq-answer">CASA stands for Current Account and Savings Account deposits. Current accounts are the most valuable funding a bank has because, in Pakistan, banks pay no profit on current-account balances — that money is effectively free to lend out. The higher the share of low-cost current and savings deposits in the funding mix, the cheaper the bank's overall cost of funds and the wider its spread. A rising current-account share is one of the strongest drivers of bank profitability.</div></details>
-
-  <details class="faq-item" id="faq-what-is-adr"><summary class="faq-question">What is the advances-to-deposit ratio (ADR) and why does it affect a bank's tax in Pakistan?</summary><div class="faq-answer">The advances-to-deposit ratio measures how much of a bank's deposits are lent out as advances (loans) versus parked in investments such as government securities. Pakistan's tax framework has historically applied a higher tax rate to banks whose ADR falls below a set threshold, to encourage lending to the real economy. Because the tax rate can change with the ADR, the ratio a bank targets feeds directly into its after-tax profit — so it is an assumption worth getting right in any model.</div></details>
-
-  <details class="faq-item" id="faq-dividend-yield-vs-pe"><summary class="faq-question">Should I use dividend yield or the P/E ratio to value a bank stock?</summary><div class="faq-answer">It depends on the payout ratio — the share of profit paid out as dividends. A dividend-yield valuation only captures the cash actually distributed, so for a bank that retains a large part of its earnings to grow, valuing it purely on dividend yield understates the value of the retained profit. For low-payout banks, a price-to-earnings (P/E) approach — applying a sensible earnings multiple to estimated earnings per share — usually gives a more complete picture. High-payout names are where a dividend-based view is more reliable.</div></details>
-
-  <details class="faq-item" id="faq-does-this-tell-me-to-buy"><summary class="faq-question">Does this article tell me whether to buy a particular bank stock?</summary><div class="faq-answer">No. This is an educational walkthrough of the method analysts use to estimate a bank's earnings and fair value. It does not publish a price target, a buy or sell call, or a forecast for any specific company. Every figure in the worked example is deliberately rounded and illustrative. Real assumptions, market multiples, and results change constantly — the goal here is to teach the framework so you can build and stress-test your own numbers, then verify everything against a company's audited accounts.</div></details>
-
-  <details class="faq-item" id="faq-what-is-net-interest-margin"><summary class="faq-question">What is net interest margin and how is it different from the spread?</summary><div class="faq-answer">The spread is simply the difference between the average rate a bank earns on its assets and the average rate it pays on its funding. Net interest margin (NIM) takes net interest income — interest earned minus interest paid — and divides it by the bank's average earning assets, so it expresses the same idea as a percentage of the asset base actually generating income. NIM is widely used because it lets you compare profitability across banks of very different sizes. Both measures move with the policy rate, the deposit mix, and how much of the balance sheet is in higher-yielding loans versus lower-yielding securities.</div></details>
-
-  <details class="faq-item" id="faq-where-to-find-bank-financials"><summary class="faq-question">Where can I find a Pakistani bank's deposits, advances, and earnings data?</summary><div class="faq-answer">Listed banks publish quarterly and annual financial statements that include the balance sheet, profit and loss account, and notes detailing deposits, advances, investments, and net interest income. These are typically available on the Pakistan Stock Exchange website, the bank's own investor-relations page, and in filings collected by the SECP. For a valuation, the audited annual accounts are the most reliable starting point, and you can cross-check any figure against the source documents on psx.com.pk or the bank's official disclosures.</div></details>
-
-  <details class="faq-item" id="faq-how-policy-rate-affects-banks"><summary class="faq-question">How does the State Bank's policy rate affect bank earnings?</summary><div class="faq-answer">The policy rate set by the State Bank of Pakistan is the anchor for the rates banks earn on government securities and charge on many loans, as well as the minimum profit they must pay on savings deposits. When the policy rate rises, asset yields often reprice faster than funding costs, which can temporarily widen spreads, while a falling rate can compress them. Because the current rate changes over time, treat any specific figure as something to verify against the latest monetary policy statement on sbp.org.pk. The direction and timing of rate changes is one of the biggest swing factors in any bank earnings model.</div></details>
-
-  <details class="faq-item" id="faq-what-is-npl-coverage"><summary class="faq-question">What are non-performing loans and the coverage ratio?</summary><div class="faq-answer">Non-performing loans (NPLs) are advances on which a borrower has stopped paying interest or principal for long enough that the bank classifies them as impaired. The infection ratio measures NPLs as a share of total advances, and the coverage ratio measures how much of those bad loans the bank has already set aside provisions against. A high coverage ratio means future losses are largely absorbed already, while a rising infection ratio can signal pressure on future earnings. Both ratios appear in a bank's audited accounts and are worth tracking alongside the spread when judging earnings quality.</div></details>
-
-  <details class="faq-item" id="faq-is-this-shariah-compliant-investing"><summary class="faq-question">Does valuing a conventional bank stock relate to Islamic or halal investing?</summary><div class="faq-answer">This article explains the general valuation method analysts use and does not address whether any particular bank stock is Shariah-compliant. Conventional banks earn interest-based income, which raises questions some investors weigh against Islamic finance principles, and Pakistan also has full-fledged Islamic banks and Islamic windows that operate on different structures. Screening for Shariah compliance is a separate exercise based on a company's business mix and financial ratios. For guidance on that, consult a qualified Shariah scholar or recognised screening standards rather than treating a valuation walkthrough as a compliance opinion.</div></details>
-
-  <!-- Ad slot 3 — after FAQ section -->
-  <div class="ad-slot">
-    <span class="ad-label">Advertisement</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  </div>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-  <div class="related-links">
-    <h3>Related Reading</h3>
-    <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
-    <a href="/guides/sbp-policy-rate-investments.html">How the SBP Policy Rate Moves Your Investments</a>
-    <a href="/blog/budget-2026-27-stock-market-impact.html">Can Budget 2026-27 Push the PSX Higher? The Bull and Bear Case</a>
-    <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan: Islamic Funds, Sukuk &amp; Shariah Stocks</a>
-    <a href="/guides/open-brokerage-account-psx.html">How to Open a Brokerage Account for PSX</a>
-    <a href="/guides/">All Investment Guides</a>
-  </div>
-
-  <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not investment, tax, or financial advice</strong>. It explains a valuation method in general terms; it does not contain a price target, forecast, or buy/sell recommendation for any company, including any mentioned by name. Every rupee figure in the worked example is deliberately rounded and illustrative — chosen to show the arithmetic, not to represent the actual accounts or projected results of any bank. Market data referenced reflects our dataset as of June 2026 and will be out of date. Tax rules, the ADR framework, and regulatory rates change and must be verified against current law and a company's audited financial statements. The PSX involves real risk of loss; consult a licensed financial adviser before making investment decisions.</div>
-
 </div>
 
+<main>
+<article class="art-frame">
+
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li aria-current="page">How to Value a Bank Stock</li>
+    </ol>
+  </nav>
+
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">Desk 07 — PSX Equities · Valuation Method</div>
+      <h1>How to value a bank stock in Pakistan, step by step.</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated 20 June 2026</span>
+        <span>· 12 min read</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">In one breath</div>
+      <p>A bank stock is valued <b>from the balance sheet up</b>: estimate deposits, split them into loans and investments, work out the spread, subtract costs and tax to get net profit and <b>EPS</b>, then apply a <b class="acc">price-to-earnings multiple</b> to reach a fair-value range.</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Last updated: 20 June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Key callout -->
+      <div class="cl-key">
+        <div class="k">The four steps, boiled down</div>
+        <ul>
+          <li>A bank is valued from the <strong>balance sheet up</strong>. Estimate deposits, split them into loans and investments, and work out the <strong>spread</strong> between what the bank earns and what it pays.</li>
+          <li>That spread, minus the cost of running the bank and minus tax, becomes <strong>net profit</strong>. Divide by the share count and you have <strong>earnings per share (EPS)</strong>.</li>
+          <li>EPS turns into a <strong>fair-value estimate</strong> when you apply a price-to-earnings (P/E) multiple, then stress-test it with a sensitivity analysis.</li>
+          <li>This is a <strong>framework, not a forecast</strong>. Every number below is rounded and illustrative; this site does not publish price targets or buy/sell calls.</li>
+        </ul>
+      </div>
+
+      <!-- Ad slot 1 — after summary, before main content -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <p>Ask most people how they pick a bank stock and the answer is a dividend yield or a gut feeling. A bank is one of the few businesses you can actually model from the ground up, because its raw material is money, and money sits on a single page: the balance sheet. Estimate how much a bank will take in as deposits and what spread it will earn on that money, and you can build its profit, its earnings per share, and a defensible <em>fair-value range</em>, the price the shares would be worth if your assumptions hold.</p>
+
+      <p>This walkthrough lays out that method the way a brokerage analyst would, one line at a time. I'll use <strong>Meezan Bank (MEBL)</strong> as the reference point. It's Pakistan's largest Islamic bank and a stock plenty of retail investors already hold. One thing up front: <strong>every rupee figure below is deliberately rounded and illustrative</strong>, chosen to show how the arithmetic flows, not to forecast any company. This site does not publish price targets. The goal is that you can build and stress-test your own numbers.</p>
+
+      <!-- Live snapshot (article.js fills #live-snap from data.json) -->
+      <div id="live-snap"></div>
+
+      <h2 id="s1"><span class="sn">01</span>Why a bank is valued differently</h2>
+
+      <p>For a normal company you forecast sales, subtract costs, and arrive at profit. A bank is different because both its costs <em>and</em> its revenue come from money. It pays depositors and lenders to raise funds (its cost of funds), then earns a return by lending that money out or investing it in government securities. The difference between the two is the <strong>net spread</strong>. At a conventional bank that's net interest income; at an Islamic bank like Meezan it's net profit on a profit-and-loss-sharing basis. Either way, it's the engine of the whole business.</p>
+
+      <p>So the lever that matters most is the <strong>cost of funding</strong>, and not all funding costs the same. This is where current accounts earn their reputation as a bank's most prized asset.</p>
+
+      <div class="fig-card">
+        <div class="fig-kicker">Figure 1 · Illustrative cost of funding</div>
+        <div class="fig-title">Where a bank's money comes from — and what each source costs</div>
+
+        <div class="cost-row">
+          <div class="cost-lbl"><span><b>Current accounts</b> (CASA)</span><span class="cost-val" style="color:var(--green2)">~0% cost</span></div>
+          <div class="cost-track"><div class="cost-fill" style="width:2%;min-width:6px;background:var(--green-d)"></div></div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-lbl"><span><b>Savings deposits</b></span><span class="cost-val" style="color:var(--gold2)">~9%</span></div>
+          <div class="cost-track"><div class="cost-fill" style="width:78%;background:var(--gold2)"></div></div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-lbl"><span><b>Borrowings &amp; term deposits</b></span><span class="cost-val" style="color:var(--red)">~11.5% (policy rate)</span></div>
+          <div class="cost-track"><div class="cost-fill" style="width:100%;background:var(--red)"></div></div>
+        </div>
+        <div class="fig-note">Current-account balances earn the depositor no profit, so they cost the bank almost nothing to hold. The larger their share of total deposits, the cheaper the bank's blended cost of funds. Rates shown are illustrative and track the prevailing <a href="/guides/sbp-policy-rate-investments.html">SBP policy rate</a> environment of mid-2026.</div>
+      </div>
+
+      <p>This is why analysts obsess over the <strong>CASA ratio</strong>, the share of cheap current and savings deposits in the funding mix. A bank that funds itself largely with zero-cost current accounts keeps far more of what it earns on its assets. When you read that a bank is targeting a "50% current-account share," that's management telling you they intend to protect the cheapest part of their funding.</p>
+
+      <h2 id="s2"><span class="sn">02</span>Step 1 — Write down your assumptions</h2>
+
+      <p>A valuation is only as good as the assumptions under it, so the first move is to write them down. Spell them out and anyone reading your model (including you, six months later) can see exactly which lever to pull when reality turns out differently. For a Pakistani bank, a handful of assumptions drive almost the entire result.</p>
+
+      <div class="tbl-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Assumption</th>
+              <th>What it controls</th>
+              <th>Illustrative value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Policy rate</strong></td><td>The yield on assets and the cost of borrowings; the single biggest swing factor</td><td class="num">11.5%</td></tr>
+            <tr><td><strong>Deposit growth</strong></td><td>How fast the balance sheet, and therefore earning assets, expands</td><td class="num">~12% a year</td></tr>
+            <tr><td><strong>Current-account share</strong></td><td>The blended cost of funds (more current accounts = cheaper)</td><td class="num">~45% of deposits</td></tr>
+            <tr><td><strong>Advances-to-deposit ratio (ADR)</strong></td><td>How deposits split between loans and investments, plus the tax rate</td><td class="num">~50%</td></tr>
+            <tr><td><strong>Tax rate</strong></td><td>How much profit survives to shareholders</td><td class="num">~50% (ADR-linked)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tbl-note">Illustrative inputs chosen to demonstrate the method, not any company's actual figures or published guidance. Change any one and the result moves, which is exactly why it pays to write them down.</div>
+
+      <p>Notice the policy rate sits at the top. Because a bank earns on assets and pays on funding, a change in the <a href="/guides/sbp-policy-rate-investments.html">State Bank's policy rate</a> moves both sides of the spread at once. That's why a single rate decision can reshape an entire bank model. The SBP has held its rate at 11.5% through mid-2026 with CPI inflation around 7%, so the bigger question for any model right now is which way the next move goes. More on that in the risk section.</p>
+
+      <h2 id="s3"><span class="sn">03</span>Step 2 — Build the balance sheet</h2>
+
+      <p>With assumptions in hand, grow the deposit base by your assumed rate, then decide what the bank does with that money. This is where the ADR comes in. It splits deposits into <strong>advances</strong> (loans to households and businesses) and <strong>investments</strong> (government securities, or for an Islamic bank, sovereign <em>sukuk</em> rather than conventional T-bills). Together, advances and investments make up the bank's <strong>earning assets</strong>: the pool of money on which it actually earns a return.</p>
+
+      <div class="fig-card">
+        <div class="fig-kicker">Figure 2 · Illustrative balance-sheet split at 50% ADR</div>
+        <div class="fig-title">How deposits become earning assets</div>
+
+        <div class="split-bar">
+          <div class="seg seg-a" style="width:50%">Advances 50%</div>
+          <div class="seg seg-b" style="width:50%">Investments 50%</div>
+        </div>
+        <div class="split-cap">
+          <span>Loans to customers</span>
+          <span>Government securities &amp; sukuk</span>
+        </div>
+        <div class="fig-note">A bank lends out a portion of deposits (the ADR) and invests the rest in government paper, which is low-risk but lower-yielding. The split shown is illustrative. A higher ADR generally means more lending and, under Pakistan's framework, a potentially lower tax rate.</div>
+      </div>
+
+      <p>Two things deserve a pause here. First, money never sits idle. Whatever is not lent out is invested, so the bank earns on essentially its whole deposit base. Second, the ADR is not just an operational choice. In Pakistan it has historically carried a <strong>tax consequence</strong>, with banks below a threshold ADR taxed at a higher rate to nudge them toward lending. That's why the ratio shows up twice in our assumptions: once for revenue, once for tax.</p>
+
+      <h2 id="s4"><span class="sn">04</span>Step 3 — Build the P&amp;L: the earnings engine</h2>
+
+      <p>This is the heart of the model. Take the earning assets, apply a blended yield to get revenue, subtract the cost of funding and running the bank, subtract tax, and what survives is profit attributable to shareholders. Laid out as a ledger, each line follows from the one above it.</p>
+
+      <div class="fig-card">
+        <div class="fig-kicker">Figure 3 · Illustrative earnings ladder (Rs billions)</div>
+        <div class="fig-title">From the spread to earnings per share</div>
+
+        <div class="ladder">
+          <div class="ladder-row pos">
+            <div class="desc">Profit / mark-up revenue <small>(earning assets × blended yield)</small></div>
+            <div class="bar" style="width:100%;max-width:300px"></div>
+            <div class="amt">360</div>
+          </div>
+          <div class="ladder-row neg">
+            <div class="desc">− Cost of funds <small>(profit paid to depositors &amp; lenders)</small></div>
+            <div class="bar" style="width:50%;max-width:150px"></div>
+            <div class="amt">−180</div>
+          </div>
+          <div class="ladder-row sub">
+            <div class="desc">= Net spread income</div>
+            <div class="bar" style="width:50%;max-width:150px"></div>
+            <div class="amt">180</div>
+          </div>
+          <div class="ladder-row pos">
+            <div class="desc">+ Fee &amp; other income <small>(cards, transfers, charges)</small></div>
+            <div class="bar" style="width:8.3%;max-width:25px"></div>
+            <div class="amt">+30</div>
+          </div>
+          <div class="ladder-row neg">
+            <div class="desc">− Provisions for bad loans</div>
+            <div class="bar" style="width:1.1%;min-width:4px"></div>
+            <div class="amt">−4</div>
+          </div>
+          <div class="ladder-row neg">
+            <div class="desc">− Operating expenses <small>(staff, branches, admin)</small></div>
+            <div class="bar" style="width:19.4%;max-width:58px"></div>
+            <div class="amt">−70</div>
+          </div>
+          <div class="ladder-row sub">
+            <div class="desc">= Profit before tax</div>
+            <div class="bar" style="width:37.8%;max-width:113px"></div>
+            <div class="amt">136</div>
+          </div>
+          <div class="ladder-row neg">
+            <div class="desc">− Tax <small>(~50%, ADR-linked)</small></div>
+            <div class="bar" style="width:18.9%;max-width:57px"></div>
+            <div class="amt">−68</div>
+          </div>
+          <div class="ladder-row net">
+            <div class="desc">= Net profit (to shareholders)</div>
+            <div class="bar" style="width:18.9%;max-width:57px"></div>
+            <div class="amt">68</div>
+          </div>
+        </div>
+
+        <div class="ladder-eps">
+          <span>Net profit ÷ shares outstanding</span>
+          <span class="mono">(Rs 68 bn ÷ 1,500 mn shares)</span>
+          <span>=</span>
+          <span class="res">EPS ≈ Rs 45</span>
+        </div>
+        <div class="fig-note">Illustrative figures, rounded for clarity, not the accounts or a forecast of any company. A full model also adjusts for items such as a repricing-lag effect when rates move sharply, income from associated companies, and the minority share of profit the bank does not own.</div>
+      </div>
+
+      <p>A few lines in that ladder are where bank models get their nuance:</p>
+
+      <ul>
+        <li><strong>Cost of funds is not one number.</strong> It blends the profit paid on savings deposits (tied to the minimum deposit rate that regulation sets relative to the policy rate), the cost of any borrowings (close to the policy rate), and the zero cost of current accounts. Improve the current-account mix and this line shrinks.</li>
+        <li><strong>The repricing lag.</strong> When the policy rate jumps, a bank's assets don't all reprice instantly. Some loans are locked at older rates while funding costs rise immediately. Because assets and liabilities reprice on different schedules, a sharp rate move can briefly compress the spread until the book catches up. That's a normal asset-liability timing effect, not a one-off loss.</li>
+        <li><strong>Provisions</strong> set aside an estimate of loans that may not be repaid. For a well-managed bank in a stable year this is often a small line. It can spike in a downturn.</li>
+        <li><strong>Operating expenses</strong> grow with inflation and with branch expansion. A bank opening hundreds of new branches carries higher costs before those branches mature into deposits.</li>
+        <li><strong>The tax line is unusually heavy</strong> for Pakistani banks and, as noted, is linked to the ADR. That's why two banks with identical pre-tax profit can deliver different earnings to shareholders.</li>
+      </ul>
+
+      <!-- Ad slot 2 — mid-article -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <h2 id="s5"><span class="sn">05</span>Step 4 — Turn earnings into a value</h2>
+
+      <p>Now you have an estimate of earnings per share. The final step is to decide what those earnings are worth. Two routes are common.</p>
+
+      <div class="tbl-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>How it works</th>
+              <th>When it fits</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Dividend yield</strong></td>
+              <td>Value the share from the cash dividend it pays, relative to a target yield</td>
+              <td>High-payout stocks that distribute most of their profit</td>
+            </tr>
+            <tr>
+              <td><strong>Price-to-earnings (P/E)</strong></td>
+              <td>Apply an earnings multiple to estimated EPS to get a share price</td>
+              <td>Banks that retain a large share of earnings to grow (low payout)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The choice hinges on the <strong>payout ratio</strong>, the slice of profit handed out as dividends. Take a bank earning around Rs 45 of EPS but paying only about Rs 18 a year in dividends, a payout ratio near 40%. Value that share on its dividend alone and you ignore the retained profit still building the business, so the dividend-yield method tends to <em>understate</em> a lower-payout bank. For that reason analysts usually lean on the <strong>P/E method</strong> for banks like this and treat dividend yield as a cross-check, not the main tool.</p>
+
+      <p>The P/E method is simple arithmetic: estimated EPS times a chosen earnings multiple. All the judgement sits in the multiple. A point either way changes the answer materially, so the honest move is to show a <strong>range</strong> rather than a single number.</p>
+
+      <div class="fig-card">
+        <div class="fig-kicker">Figure 4 · Illustrative P/E sensitivity (EPS ≈ Rs 45)</div>
+        <div class="fig-title">The same earnings, three multiples, three values</div>
+        <svg viewBox="0 0 480 250" width="100%" class="sens-svg" role="img" aria-label="Bar chart showing illustrative fair value of about 315 rupees at a 7 times P/E, 360 rupees at 8 times, and 405 rupees at 9 times, for an EPS of about 45 rupees">
+          <line x1="60" y1="205" x2="455" y2="205" stroke="#C9D6C0" stroke-width="1.5"></line>
+          <!-- 7x -->
+          <rect x="95" y="88" width="78" height="117" rx="3" fill="#B7791F"></rect>
+          <text x="134" y="78" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="17" font-weight="600" fill="#053C30">Rs 315</text>
+          <text x="134" y="225" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#436055">7× P/E</text>
+          <!-- 8x -->
+          <rect x="211" y="72" width="78" height="133" rx="3" fill="#053C30"></rect>
+          <text x="250" y="62" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="17" font-weight="700" fill="#053C30">Rs 360</text>
+          <text x="250" y="225" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#436055">8× P/E</text>
+          <!-- 9x -->
+          <rect x="327" y="55" width="78" height="150" rx="3" fill="#075E4B"></rect>
+          <text x="366" y="45" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="17" font-weight="600" fill="#053C30">Rs 405</text>
+          <text x="366" y="225" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#436055">9× P/E</text>
+        </svg>
+        <div class="fig-note">Illustrative only. The fair-value estimate moves about Rs 45 for every one-point change in the multiple. That's exactly why a single "target price" is false precision, and why a sensitivity range is more honest.</div>
+      </div>
+
+      <p>What multiple is reasonable? That depends on the market's mood and the bank's quality. Pakistani banks have generally traded at modest single-digit-to-low-double-digit earnings multiples, partly a reflection of the macro risk premium investors attach to the market. With the KSE-100 around 181,000 in mid-2026, multiples have recovered from their worst but stayed well short of historic peaks. A stronger franchise tends to command the upper end of the range. A more uncertain backdrop, higher rates or geopolitical stress, compresses multiples across the board. The point of the sensitivity table is to make that judgement <em>visible</em> instead of burying it inside one number.</p>
+
+      <div class="cl-dark">
+        <p><strong>Trailing vs forward: don't mix them up.</strong> A stock screener shows a <em>trailing</em> P/E based on the last twelve months' reported earnings. The valuation above uses a <em>forward</em> P/E applied to <em>estimated future</em> earnings. If earnings are growing, the forward number looks different from the trailing one. They answer different questions, so never compare them directly.</p>
+      </div>
+
+      <h2 id="s6"><span class="sn">06</span>Step 5 — Total return, and the risks that move the answer</h2>
+
+      <p>A share's payoff isn't just the price moving. It's the price change <em>plus</em> the dividends collected along the way. So the last piece is to add the expected dividend back to your price estimate for a <strong>total return</strong>. A bank paying a meaningful dividend can deliver a respectable total return even when the share price barely moves. For context, the larger PSX banks currently yield anywhere from MEBL's 5.5% up to MCB's 8.8% in our daily dataset, with UBL at 7.2% and HBL at 7.1% in between.</p>
+
+      <p>Every figure rests on the assumptions from Step 1, and some matter far more than others. Ranked roughly by impact:</p>
+
+      <ul>
+        <li><strong>The policy rate, by far the biggest.</strong> Because it moves both the yield on assets and the cost of funds, a single <a href="/guides/sbp-policy-rate-investments.html">SBP rate decision</a> can rebuild the entire model. Stress-test this one first.</li>
+        <li><strong>Deposit growth.</strong> Faster growth expands earning assets and profit; a slowdown does the reverse. Model it conservatively to protect yourself from over-optimism.</li>
+        <li><strong>Current-account share.</strong> A few points either way shifts the cost of funds and the spread, though a well-run bank tends to keep this stable.</li>
+        <li><strong>The ADR.</strong> It affects both how much the bank lends and the tax rate it pays, so it touches the result twice.</li>
+        <li><strong>Operating costs and inflation.</strong> Usually a smaller swing, but worth flexing if inflation runs hot or branch expansion accelerates.</li>
+      </ul>
+
+      <p>Run your model at a few different policy-rate and deposit-growth assumptions and you'll quickly see that a bank valuation is a <em>range of plausible outcomes</em>, not a single right answer. That humility is the most useful thing the exercise gives you.</p>
+
+      <div class="cl-key">
+        <div class="k">Where this leaves you</div>
+        <p style="font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);margin:0;font-weight:500">Valuing a bank is a chain. Deposits, then earning assets, then spread, then net profit, then EPS, then a P/E-based fair value, then total return, with each link resting on a stated assumption. Build it yourself, stress-test the policy-rate and growth lines, and present a range rather than a point. The arithmetic is the easy part. The discipline is being honest about the assumptions. Nothing here is a recommendation to buy or sell any share, and the worked numbers are illustrative throughout.</p>
+      </div>
+
+      <!-- FAQ Section -->
+      <h2 id="s7"><span class="sn">07</span>Frequently asked questions</h2>
+
+      <details class="faq-item" id="faq-why-banks-are-different"><summary class="faq-question">Why can't you value a bank like a normal company?</summary><div class="faq-answer">A bank's raw material is money itself. It raises funds from depositors and lenders, then puts that money to work in loans and government securities, earning the spread between what it earns on assets and what it pays on funding. So the balance sheet is the business: you cannot value a bank without first estimating how big its deposits and earning assets will be and what spread they will produce. That is why a bank valuation starts from the balance sheet rather than from revenue.</div></details>
+
+      <details class="faq-item" id="faq-what-is-casa"><summary class="faq-question">What is CASA and why do current accounts matter so much to a bank?</summary><div class="faq-answer">CASA stands for Current Account and Savings Account deposits. Current accounts are the most valuable funding a bank has because, in Pakistan, banks pay no profit on current-account balances — that money is effectively free to lend out. The higher the share of low-cost current and savings deposits in the funding mix, the cheaper the bank's overall cost of funds and the wider its spread. A rising current-account share is one of the strongest drivers of bank profitability.</div></details>
+
+      <details class="faq-item" id="faq-what-is-adr"><summary class="faq-question">What is the advances-to-deposit ratio (ADR) and why does it affect a bank's tax in Pakistan?</summary><div class="faq-answer">The advances-to-deposit ratio measures how much of a bank's deposits are lent out as advances (loans) versus parked in investments such as government securities. Pakistan's tax framework has historically applied a higher tax rate to banks whose ADR falls below a set threshold, to encourage lending to the real economy. Because the tax rate can change with the ADR, the ratio a bank targets feeds directly into its after-tax profit — so it is an assumption worth getting right in any model.</div></details>
+
+      <details class="faq-item" id="faq-dividend-yield-vs-pe"><summary class="faq-question">Should I use dividend yield or the P/E ratio to value a bank stock?</summary><div class="faq-answer">It depends on the payout ratio — the share of profit paid out as dividends. A dividend-yield valuation only captures the cash actually distributed, so for a bank that retains a large part of its earnings to grow, valuing it purely on dividend yield understates the value of the retained profit. For low-payout banks, a price-to-earnings (P/E) approach — applying a sensible earnings multiple to estimated earnings per share — usually gives a more complete picture. High-payout names are where a dividend-based view is more reliable.</div></details>
+
+      <details class="faq-item" id="faq-does-this-tell-me-to-buy"><summary class="faq-question">Does this article tell me whether to buy a particular bank stock?</summary><div class="faq-answer">No. This is an educational walkthrough of the method analysts use to estimate a bank's earnings and fair value. It does not publish a price target, a buy or sell call, or a forecast for any specific company. Every figure in the worked example is deliberately rounded and illustrative. Real assumptions, market multiples, and results change constantly — the goal here is to teach the framework so you can build and stress-test your own numbers, then verify everything against a company's audited accounts.</div></details>
+
+      <details class="faq-item" id="faq-what-is-net-interest-margin"><summary class="faq-question">What is net interest margin and how is it different from the spread?</summary><div class="faq-answer">The spread is simply the difference between the average rate a bank earns on its assets and the average rate it pays on its funding. Net interest margin (NIM) takes net interest income — interest earned minus interest paid — and divides it by the bank's average earning assets, so it expresses the same idea as a percentage of the asset base actually generating income. NIM is widely used because it lets you compare profitability across banks of very different sizes. Both measures move with the policy rate, the deposit mix, and how much of the balance sheet is in higher-yielding loans versus lower-yielding securities.</div></details>
+
+      <details class="faq-item" id="faq-where-to-find-bank-financials"><summary class="faq-question">Where can I find a Pakistani bank's deposits, advances, and earnings data?</summary><div class="faq-answer">Listed banks publish quarterly and annual financial statements that include the balance sheet, profit and loss account, and notes detailing deposits, advances, investments, and net interest income. These are typically available on the Pakistan Stock Exchange website, the bank's own investor-relations page, and in filings collected by the SECP. For a valuation, the audited annual accounts are the most reliable starting point, and you can cross-check any figure against the source documents on psx.com.pk or the bank's official disclosures.</div></details>
+
+      <details class="faq-item" id="faq-how-policy-rate-affects-banks"><summary class="faq-question">How does the State Bank's policy rate affect bank earnings?</summary><div class="faq-answer">The policy rate set by the State Bank of Pakistan is the anchor for the rates banks earn on government securities and charge on many loans, as well as the minimum profit they must pay on savings deposits. When the policy rate rises, asset yields often reprice faster than funding costs, which can temporarily widen spreads, while a falling rate can compress them. Because the current rate changes over time, treat any specific figure as something to verify against the latest monetary policy statement on sbp.org.pk. The direction and timing of rate changes is one of the biggest swing factors in any bank earnings model.</div></details>
+
+      <details class="faq-item" id="faq-what-is-npl-coverage"><summary class="faq-question">What are non-performing loans and the coverage ratio?</summary><div class="faq-answer">Non-performing loans (NPLs) are advances on which a borrower has stopped paying interest or principal for long enough that the bank classifies them as impaired. The infection ratio measures NPLs as a share of total advances, and the coverage ratio measures how much of those bad loans the bank has already set aside provisions against. A high coverage ratio means future losses are largely absorbed already, while a rising infection ratio can signal pressure on future earnings. Both ratios appear in a bank's audited accounts and are worth tracking alongside the spread when judging earnings quality.</div></details>
+
+      <details class="faq-item" id="faq-is-this-shariah-compliant-investing"><summary class="faq-question">Does valuing a conventional bank stock relate to Islamic or halal investing?</summary><div class="faq-answer">This article explains the general valuation method analysts use and does not address whether any particular bank stock is Shariah-compliant. Conventional banks earn interest-based income, which raises questions some investors weigh against Islamic finance principles, and Pakistan also has full-fledged Islamic banks and Islamic windows that operate on different structures. Screening for Shariah compliance is a separate exercise based on a company's business mix and financial ratios. For guidance on that, consult a qualified Shariah scholar or recognised screening standards rather than treating a valuation walkthrough as a compliance opinion.</div></details>
+
+      <!-- Ad slot 3 — after FAQ section -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links">
+        <h3>Related Reading</h3>
+        <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX for Passive Income</a>
+        <a href="/guides/sbp-policy-rate-investments.html">How the SBP Policy Rate Moves Your Investments</a>
+        <a href="/blog/budget-2026-27-stock-market-impact.html">Can Budget 2026-27 Push the PSX Higher? The Bull and Bear Case</a>
+        <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan: Islamic Funds, Sukuk &amp; Shariah Stocks</a>
+        <a href="/guides/open-brokerage-account-psx.html">How to Open a Brokerage Account for PSX</a>
+        <a href="/guides/">All Investment Guides</a>
+      </div>
+
+      <div class="disclaimer">⚠ This article is for educational purposes only and is <strong>not investment, tax, or financial advice</strong>. It explains a valuation method in general terms; it does not contain a price target, forecast, or buy/sell recommendation for any company, including any mentioned by name. Every rupee figure in the worked example is deliberately rounded and illustrative — chosen to show the arithmetic, not to represent the actual accounts or projected results of any bank. Market data referenced reflects our dataset as of June 2026 and will be out of date. Tax rules, the ADR framework, and regulatory rates change and must be verified against current law and a company's audited financial statements. The PSX involves real risk of loss; consult a licensed financial adviser before making investment decisions.</div>
+
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">In this brief</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>Why a bank is valued differently</a>
+            <a href="#s2"><span class="ti">02</span>Step 1 — Assumptions</a>
+            <a href="#s3"><span class="ti">03</span>Step 2 — Balance sheet</a>
+            <a href="#s4"><span class="ti">04</span>Step 3 — The P&amp;L engine</a>
+            <a href="#s5"><span class="ti">05</span>Step 4 — Earnings into value</a>
+            <a href="#s6"><span class="ti">06</span>Step 5 — Total return &amp; risks</a>
+            <a href="#s7"><span class="ti">07</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          <div class="gl-row"><div class="gl-n">EPS ≈ ₨ 45</div><div class="gl-l">Illustrative worked example</div></div>
+          <div class="gl-row"><div class="gl-n">7–9×</div><div class="gl-l">Typical PSX bank P/E range</div></div>
+          <div class="gl-row"><div class="gl-n">11.5%</div><div class="gl-l">SBP policy rate, mid-2026</div></div>
+          <div class="gl-row"><div class="gl-n">Balance sheet</div><div class="gl-l">Where the model starts</div></div>
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          <a href="/guides/best-dividend-stocks-psx.html">Best Dividend Stocks on PSX →</a>
+          <a href="/guides/sbp-policy-rate-investments.html">SBP Policy Rate Explained →</a>
+          <a href="/guides/halal-investing-pakistan.html">Halal Investing in Pakistan →</a>
+          <a href="/guides/">All investment guides →</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</article>
+</main>
+
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
-  <script src="/assets/share.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

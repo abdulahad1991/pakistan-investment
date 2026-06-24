@@ -29,12 +29,12 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -55,23 +55,102 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+
+<!-- page-specific styling (v2 macro-terminal listing) -->
+<style>
+  /* ── blog listing: bordered "newspaper" frame ─────────────────── */
+  .blog-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb-bar{border-bottom:1px solid var(--line);background:var(--sage)}
+  .crumb{max-width:var(--maxw);margin:0 auto;padding:10px var(--pad)}
+  .crumb ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:var(--muted)}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li+li::before{content:"/";color:var(--line);margin-right:0}
+  .crumb a{color:var(--green);border-bottom:1px solid transparent}
+  .crumb a:hover{border-color:var(--acid)}
+  .crumb [aria-current="page"]{color:var(--green-d);font-weight:600}
+
+  /* hero: copy column + DESK READOUT */
+  .blog-hero{display:grid;grid-template-columns:7fr 5fr}
+  .blog-hero-copy{padding:52px 44px 44px;border-right:1px solid var(--line)}
+  .blog-eyebrow{font-family:var(--display);font-size:.7rem;font-weight:600;letter-spacing:.22em;color:var(--green);margin-bottom:24px;text-transform:uppercase}
+  .blog-hero-copy h1{font-family:var(--display);font-size:clamp(2.1rem,5.2vw,4.2rem);font-weight:800;line-height:.95;letter-spacing:-.025em;color:var(--green-d);margin:0 0 20px;max-width:620px;overflow-wrap:break-word}
+  .blog-hero-copy h1 .mark{color:var(--green);background:linear-gradient(180deg,transparent 62%,var(--acid) 62%,var(--acid) 90%,transparent 90%)}
+  .blog-hero-copy p{font-size:1.08rem;line-height:1.55;color:var(--ink2);max-width:460px;margin:0;font-weight:500}
+  #manifest-stamp{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:22px}
+
+  /* desk readout (live ticker row, JS hooks t-kse … t-date) */
+  .desk-readout{display:flex;flex-direction:column}
+  .desk-head{padding:18px 28px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .desk-head .dh-k{font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--green-d)}
+  .desk-head .dh-t{font-family:var(--display);font-size:.6rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .ticker-row{display:flex;flex-direction:column}
+  .ticker-cell{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:14px;padding:16px 28px;border-bottom:1px solid var(--line2)}
+  .ticker-cell:last-child{border-bottom:none}
+  .ticker-cell .tk-lbl{font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--ink)}
+  .ticker-cell .tk-val{font-family:var(--display);font-size:1.15rem;font-weight:700;color:var(--green-d);font-variant-numeric:tabular-nums;text-align:right;order:2}
+
+  /* search row */
+  .list-search{display:flex;align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--mint)}
+  .list-search .ls-ic{padding:0 16px;font-size:1.05rem;color:var(--muted)}
+  #card-filter{flex:1;min-width:0;border:none;background:transparent;padding:18px 8px;font-family:var(--body);font-size:1.02rem;font-weight:600;color:var(--green-d);outline:none}
+  #card-filter::placeholder{color:var(--muted)}
+  .ls-count{padding:0 22px;font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);border-left:1px solid var(--line);align-self:stretch;display:flex;align-items:center;white-space:nowrap}
+
+  /* card grid (cards injected/queried by listing.js) */
+  .guides-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+  .guide-card{display:flex;flex-direction:column;padding:28px 32px;border-right:1px solid var(--line2);border-bottom:1px solid var(--line2);background:var(--paper);color:var(--ink);transition:background .18s,color .18s,box-shadow .18s,border-color .18s;position:relative}
+  .guide-card:nth-child(2n){border-right:none}
+  .guide-card:hover{background:var(--green);color:var(--mint);box-shadow:inset 5px 0 0 var(--acid)}
+  .guide-icon{font-size:1.6rem;line-height:1;margin-bottom:12px}
+  .guide-title{font-family:var(--display);font-size:1.2rem;font-weight:700;letter-spacing:-.01em;line-height:1.18;color:inherit;margin-bottom:10px}
+  .guide-desc{font-family:var(--body);font-size:.92rem;font-weight:500;line-height:1.5;color:inherit;opacity:.84;margin-bottom:16px;flex:1}
+  .guide-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+  .guide-meta .read-time{font-family:var(--display);font-size:.62rem;font-weight:600;letter-spacing:.06em;color:inherit;opacity:.7;text-transform:uppercase}
+  .topic-tag{font-family:var(--display);font-size:.58rem;font-weight:700;letter-spacing:.06em;color:var(--green);background:var(--green-l);padding:3px 8px;border-radius:2px;text-transform:uppercase;transition:background .18s,color .18s}
+  .guide-card:hover .topic-tag{background:rgba(255,255,255,.16);color:var(--mint)}
+  .topic-tag.tag-new{color:var(--green-d);background:var(--acid)}
+  .guide-card:hover .topic-tag.tag-new{color:var(--green-d);background:var(--acid)}
+  .guide-link{font-family:var(--display);font-size:.82rem;font-weight:700;color:var(--green);border-bottom:2px solid var(--acid);align-self:flex-start;padding-bottom:1px}
+  .guide-card:hover .guide-link{color:var(--mint)}
+
+  /* empty state */
+  .filter-empty{display:none;padding:48px var(--pad);text-align:center;font-family:var(--body);font-size:1rem;color:var(--ink2);border-top:1px solid var(--line);background:var(--mint)}
+  .filter-empty a{color:var(--green);border-bottom:1px solid var(--acid)}
+
+  @media(max-width:860px){
+    .blog-hero{grid-template-columns:1fr}
+    .blog-hero-copy{border-right:none;border-bottom:1px solid var(--line);padding:40px 24px 32px}
+    .blog-hero-copy h1{max-width:none}
+    .guides-grid{grid-template-columns:1fr}
+    .guide-card{border-right:none}
+  }
+  @media(max-width:560px){
+    .blog-hero-copy h1{font-size:2.2rem}
+    .guide-card{padding:24px 20px}
+    .ticker-cell,.desk-head{padding-left:20px;padding-right:20px}
+    .ls-count{display:none}
+  }
+</style>
 </head>
 <body data-listing="posts">
 
+<div class="accent-bar"></div>
+
+<!-- ── Header ─────────────────────────────────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -80,27 +159,66 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="hero-card">
-    <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:8px">Analysis · refreshed daily</div>
-    <h1>Analysis &amp; Blog</h1>
-    <p>Timely, data-backed analysis of what's moving Pakistani markets right now — federal budgets, policy rate decisions, and what they mean for your savings. Every post pulls today's live numbers automatically.</p>
-    <div class="ticker-row">
-      <div class="ticker-cell"><span class="tk-val" id="t-kse">—</span><span class="tk-lbl">KSE-100</span></div>
-      <div class="ticker-cell"><span class="tk-val" id="t-sbp">—</span><span class="tk-lbl">SBP Rate</span></div>
-      <div class="ticker-cell"><span class="tk-val" id="t-inf">—</span><span class="tk-lbl">Inflation</span></div>
-      <div class="ticker-cell"><span class="tk-val" id="t-pkr">—</span><span class="tk-lbl">PKR / USD</span></div>
-      <div class="ticker-cell"><span class="tk-val" id="t-date">—</span><span class="tk-lbl">Data Date</span></div>
+<!-- ── Live ticker ───────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
-    <div id="manifest-stamp" style="font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;opacity:.6;margin-top:10px"></div>
+  </div>
+</div>
+
+<main>
+
+<div class="blog-frame">
+
+  <!-- breadcrumb -->
+  <nav class="crumb-bar" aria-label="Breadcrumb">
+    <div class="crumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><span aria-current="page">Blog</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- hero + desk readout -->
+  <div class="blog-hero">
+    <div class="blog-hero-copy">
+      <div class="blog-eyebrow">Analysis — refreshed daily</div>
+      <h1>Analysis &amp;<span class="mark"> the brief.</span></h1>
+      <p>Timely, data-backed analysis of what's moving Pakistani markets right now — federal budgets, policy-rate decisions, and what they mean for your savings. Every post pulls today's live numbers automatically.</p>
+      <div id="manifest-stamp"></div>
+    </div>
+
+    <div class="desk-readout" aria-label="Market readout">
+      <div class="desk-head">
+        <span class="dh-k">DESK READOUT</span>
+        <span class="dh-t">Data refreshed daily</span>
+      </div>
+      <div class="ticker-row">
+        <div class="ticker-cell"><span class="tk-lbl">KSE-100</span><span class="tk-val" id="t-kse">—</span></div>
+        <div class="ticker-cell"><span class="tk-lbl">SBP Rate</span><span class="tk-val" id="t-sbp">—</span></div>
+        <div class="ticker-cell"><span class="tk-lbl">Inflation (CPI)</span><span class="tk-val" id="t-inf">—</span></div>
+        <div class="ticker-cell"><span class="tk-lbl">PKR / USD</span><span class="tk-val" id="t-pkr">—</span></div>
+        <div class="ticker-cell"><span class="tk-lbl">Data Date</span><span class="tk-val" id="t-date">—</span></div>
+      </div>
+    </div>
   </div>
 
+  <!-- search -->
   <div class="list-search">
-    <span class="ls-ic" aria-hidden="true">🔍</span>
-    <input type="text" id="card-filter" placeholder="Search blog posts — e.g. budget, tax, housing…" autocomplete="off" aria-label="Search blog posts">
+    <span class="ls-ic" aria-hidden="true">⌕</span>
+    <input type="text" id="card-filter" placeholder="Search analysis — budget, tax, housing, PSX…" autocomplete="off" aria-label="Search blog posts">
+    <span class="ls-count">ANALYSIS · REFRESHED DAILY</span>
   </div>
 
+  <!-- grid (cards injected/filtered by listing.js) -->
   <div class="guides-grid">
 
     <div class="guide-card">
@@ -216,21 +334,45 @@ gtag('config', 'G-4T2H0KH9H7');
 
 </div>
 
+</main>
+
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/blog/">Blog</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
 <script src="/assets/listing.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

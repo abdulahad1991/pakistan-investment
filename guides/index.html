@@ -60,12 +60,12 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/v2.css">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
 <script>
@@ -94,23 +94,114 @@ gtag('config', 'G-4T2H0KH9H7');
   ]
 }
 </script>
+<style>
+/* ── Guides listing — v2 page-specific (chrome + shared comps live in v2.css) ── */
+.lib-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+/* breadcrumb */
+.crumbs{max-width:var(--maxw);margin:0 auto;padding:14px var(--pad) 0}
+.crumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.crumbs a{color:var(--green);border-bottom:1px solid var(--line)}
+.crumbs li::after{content:"/";margin-left:8px;color:var(--muted)}
+.crumbs li:last-child::after{content:""}
+
+/* hero (split: copy + reading desk) */
+.lib-hero{display:grid;grid-template-columns:7fr 5fr}
+.lib-copy{padding:52px 44px 44px;border-right:1px solid var(--line)}
+.lib-kicker{font-family:var(--display);font-size:.7rem;font-weight:600;letter-spacing:.2em;color:var(--green);margin-bottom:24px;text-transform:uppercase}
+.lib-copy h1{font-family:var(--display);font-weight:800;line-height:.96;letter-spacing:-.025em;color:var(--green-d);font-size:clamp(2rem,5vw,4rem);margin:0 0 20px;max-width:620px;overflow-wrap:break-word}
+.lib-copy h1 .mark{color:var(--green);background:linear-gradient(180deg,transparent 62%,var(--acid) 62%,var(--acid) 90%,transparent 90%)}
+.lib-copy p{font-size:1.08rem;line-height:1.55;color:var(--ink2);max-width:460px;margin:0;font-weight:500}
+
+.lib-desk{display:flex;flex-direction:column;background:var(--paper)}
+.desk-head{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;border-bottom:1px solid var(--line)}
+.desk-head .dh-k{font-family:var(--display);font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--green-d)}
+.desk-head .dh-t{font-family:var(--display);font-size:.6rem;font-weight:600;color:var(--muted)}
+.desk-row{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:14px;padding:16px 28px;border-bottom:1px solid var(--line2)}
+.desk-row .dr-k{font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--ink)}
+.desk-row .dr-v{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--green-d);font-variant-numeric:tabular-nums;text-align:right}
+#manifest-stamp{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:14px 28px;margin-top:auto}
+
+/* filter bar */
+.lib-filter{border:1px solid var(--line);border-top:none}
+.list-search{display:flex;align-items:center;border-bottom:1px solid var(--line);background:var(--mint)}
+.ls-ic{padding:0 16px;font-size:1.05rem;color:var(--muted);line-height:1}
+#card-filter{flex:1;border:none;background:transparent;padding:17px 0;font-family:var(--body);font-size:1.02rem;font-weight:600;color:var(--green-d);outline:none;min-width:0}
+#card-filter::placeholder{color:var(--muted)}
+.shown-count{padding:0 20px;font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);border-left:1px solid var(--line);align-self:stretch;display:flex;align-items:center;white-space:nowrap}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;padding:14px 18px;background:var(--mint)}
+.chip{border-radius:0;border:1px solid rgba(7,94,75,.3);background:transparent;color:var(--green);cursor:pointer;padding:8px 14px;font-family:var(--display);font-size:.74rem;font-weight:700;letter-spacing:.02em;transition:background .15s,color .15s,border-color .15s}
+.chip:hover{border-color:var(--green)}
+.chip.active{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* guides grid */
+.guides-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-top:none}
+.guide-card{display:flex;flex-direction:column;padding:26px 30px;border-right:1px solid var(--line2);border-bottom:1px solid var(--line2);background:var(--paper);border-left:5px solid transparent;transition:background .18s,border-left-color .18s,box-shadow .18s}
+.guide-card:nth-child(2n){border-right:none}
+.guide-card:hover{background:var(--green-l);border-left-color:var(--acid)}
+.guide-icon{font-size:1.5rem;line-height:1;margin-bottom:14px}
+.guide-title{font-family:var(--display);font-size:1.18rem;font-weight:700;letter-spacing:-.01em;line-height:1.14;color:var(--green-d);margin-bottom:10px}
+.guide-desc{font-family:var(--body);font-size:.92rem;font-weight:500;line-height:1.5;color:var(--ink2);margin-bottom:16px;flex:1}
+.guide-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
+.topic-tag{font-family:var(--display);font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);background:var(--green-l);padding:4px 8px;border-radius:2px}
+.topic-tag.tag-new{color:var(--green-d);background:var(--acid)}
+.read-time{font-family:var(--mono);font-size:.68rem;font-weight:600;color:var(--muted)}
+.guide-link{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);align-self:flex-start;border-bottom:2px solid var(--acid);padding-bottom:1px;transition:color .15s}
+.guide-card:hover .guide-link{color:var(--green-d)}
+
+/* empty state */
+.filter-empty{display:none;padding:48px var(--pad);text-align:center;font-family:var(--body);font-size:1rem;color:var(--ink2);border:1px solid var(--line);border-top:none;background:var(--paper)}
+.filter-empty a{color:var(--green);border-bottom:1px solid var(--line)}
+
+/* primer (inverted dark panel) */
+.lib-primer{border:1px solid var(--line);border-top:none;background:var(--green-d);color:var(--sage)}
+.lib-primer summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 40px;font-family:var(--display);font-weight:800;font-size:1.4rem;letter-spacing:-.01em;color:var(--mint)}
+.lib-primer summary::-webkit-details-marker{display:none}
+.lib-primer summary .pk{font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--acid);display:block;margin-bottom:10px;text-transform:uppercase}
+.lib-primer summary::after{content:"+";font-family:var(--display);font-size:1.6rem;font-weight:700;color:var(--acid);flex-shrink:0}
+.lib-primer[open] summary::after{content:"–"}
+.primer-body{padding:0 40px 40px;display:flex;flex-direction:column;gap:16px}
+.primer-body p{font-size:.98rem;line-height:1.6;color:rgba(204,223,211,.85);margin:0}
+.primer-body strong{color:#fff}
+.primer-body .acc{color:var(--acid)}
+
+/* byline */
+.author-byline{max-width:var(--maxw);margin:0 auto;padding:22px var(--pad) 8px;font-family:var(--body);font-size:.9rem;color:var(--muted2);border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.author-byline strong{color:var(--green-d)}
+.author-byline a{color:var(--green);border-bottom:1px solid var(--line);font-weight:700}
+
+@media(max-width:860px){
+  .lib-hero{grid-template-columns:1fr}
+  .lib-copy{border-right:none;border-bottom:1px solid var(--line);padding:40px 24px 32px}
+  .lib-copy h1{max-width:none}
+  .guides-grid{grid-template-columns:1fr}
+  .guide-card{border-right:none}
+  .lib-primer summary{padding:22px 24px;font-size:1.15rem}
+  .primer-body{padding:0 24px 32px}
+}
+@media(max-width:560px){
+  .shown-count{padding:0 12px;font-size:.58rem}
+  .lib-copy h1{font-size:2.2rem}
+}
+</style>
 </head>
 <body data-listing="guides">
 
+<div class="accent-bar"></div>
+
+<!-- ── Header ─────────────────────────────────────────── -->
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Pakinvestlysis — home">
-      <img class="brand-logo" src="/assets/logo-light.png" alt="" width="170" height="63">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="/">Home</a>
       <a href="/guides/">Guides</a>
       <a href="/blog/">Blog</a>
-      <a href="/tax-calculator.html">Tax Calculator</a>
-      <a href="/gold-rates.html">Gold Rates</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
       <a href="/about.html">About</a>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
@@ -119,196 +210,260 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </header>
 
-<div class="container">
-
-  <div class="hero-card">
-    <div style="font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:8px">The Library · 11 guides · refreshed daily</div>
-    <h1>Investment Guides for Pakistanis</h1>
-    <p>Practical, jargon-free, step-by-step. Pick a topic — every guide pulls today&rsquo;s live rates automatically.</p>
-    <div class="ticker-row">
-      <div class="ticker-cell"><span class="tk-val" id="t-kse">—</span><span class="tk-lbl">KSE-100</span></div>
-      <div class="ticker-cell"><span class="tk-val" id="t-sbp">—</span><span class="tk-lbl">SBP Rate</span></div>
-      <div class="ticker-cell"><span class="tk-val" id="t-inf">—</span><span class="tk-lbl">Inflation</span></div>
-      <div class="ticker-cell"><span class="tk-val" id="t-pkr">—</span><span class="tk-lbl">PKR / USD</span></div>
-      <div class="ticker-cell"><span class="tk-val" id="t-date">—</span><span class="tk-lbl">Data Date</span></div>
+<!-- ── Live ticker ───────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">—</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">—</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">—</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">—</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">—</b></span>
     </div>
-    <div id="manifest-stamp" style="font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;opacity:.6;margin-top:10px"></div>
+  </div>
+</div>
+
+<!-- ── Breadcrumb ────────────────────────────────────── -->
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li>Guides</li>
+  </ol>
+</nav>
+
+<main>
+
+  <!-- ── HERO: copy + reading desk ──────────────────── -->
+  <div class="lib-frame">
+    <div class="lib-hero">
+      <div class="lib-copy">
+        <div class="lib-kicker">The Library · 15 guides · refreshed daily</div>
+        <h1>Investment guides for<span class="mark"> Pakistanis.</span></h1>
+        <p>Practical, jargon-free, step-by-step. Pick a topic — every guide pulls today&rsquo;s live rates automatically and is researched from official sources.</p>
+      </div>
+
+      <div class="lib-desk" aria-label="Reading desk — live market data">
+        <div class="desk-head">
+          <span class="dh-k">READING DESK</span>
+          <span class="dh-t">Data · <span id="t-date">—</span></span>
+        </div>
+        <div class="desk-row"><span class="dr-k">KSE-100 index</span><span class="dr-v" id="t-kse">—</span></div>
+        <div class="desk-row"><span class="dr-k">SBP policy rate</span><span class="dr-v" id="t-sbp">—</span></div>
+        <div class="desk-row"><span class="dr-k">CPI inflation</span><span class="dr-v" id="t-inf">—</span></div>
+        <div class="desk-row"><span class="dr-k">PKR / USD</span><span class="dr-v" id="t-pkr">—</span></div>
+        <div id="manifest-stamp"></div>
+      </div>
+    </div>
   </div>
 
-  <div class="chip-row">
-    <button class="chip active" data-filter="all">All topics</button>
-    <button class="chip" data-filter="start">Getting started</button>
-    <button class="chip" data-filter="safe">Safe income</button>
-    <button class="chip" data-filter="stocks">Stocks</button>
-    <button class="chip" data-filter="funds">Funds</button>
-    <button class="chip" data-filter="tax">Tax</button>
-    <button class="chip" data-filter="islamic">Islamic</button>
-    <button class="chip" data-filter="overseas">Overseas</button>
-    <button class="chip" data-filter="gold">Gold</button>
+  <!-- ── FILTER BAR: search + topic chips ──────────────── -->
+  <div class="lib-frame">
+    <div class="lib-filter">
+      <div class="list-search">
+        <span class="ls-ic" aria-hidden="true">⌕</span>
+        <input type="text" id="card-filter" placeholder="Search guides — e.g. mutual funds, tax, gold, T-bills…" autocomplete="off" aria-label="Search guides">
+        <span class="shown-count" aria-hidden="true">15 GUIDES</span>
+      </div>
+      <div class="chip-row" role="group" aria-label="Filter guides by topic">
+        <button class="chip active" data-filter="all">All topics</button>
+        <button class="chip" data-filter="start">Getting started</button>
+        <button class="chip" data-filter="safe">Safe income</button>
+        <button class="chip" data-filter="stocks">Stocks</button>
+        <button class="chip" data-filter="funds">Funds</button>
+        <button class="chip" data-filter="tax">Tax</button>
+        <button class="chip" data-filter="islamic">Islamic</button>
+        <button class="chip" data-filter="overseas">Overseas</button>
+        <button class="chip" data-filter="gold">Gold</button>
+      </div>
+    </div>
   </div>
 
-  <div class="list-search">
-    <span class="ls-ic" aria-hidden="true">🔍</span>
-    <input type="text" id="card-filter" placeholder="Search guides — e.g. mutual funds, tax, gold, T-bills…" autocomplete="off" aria-label="Search guides">
+  <!-- ── GUIDES GRID ───────────────────────────────────── -->
+  <div class="lib-frame">
+    <div class="guides-grid">
+
+      <div class="guide-card" data-cat="tax start">
+        <div class="guide-icon">🪪</div>
+        <div class="guide-title">How to Become a Filer in Pakistan (FBR IRIS)</div>
+        <div class="guide-desc">Register a free NTN on IRIS, file your return and wealth statement, and land on the Active Taxpayer List — the step-by-step route to filer status, which roughly halves the withholding tax non-filers pay on bank profit, dividends, property and vehicles.</div>
+        <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">FBR filer</span></div>
+        <a href="/guides/how-to-become-filer-pakistan.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="tax">
+        <div class="guide-icon">💻</div>
+        <div class="guide-title">Freelancer &amp; IT Exporter Tax in Pakistan</div>
+        <div class="guide-desc">How freelancers and IT exporters are taxed — the 0.25% concessional final tax for PSEB-registered exporters versus 1%, the Section 65F conditions, repatriation and remittance rules, and how local-client income is taxed on the normal slabs.</div>
+        <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Freelancers</span></div>
+        <a href="/guides/freelancer-tax-pakistan.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="safe">
+        <div class="guide-icon">🎟️</div>
+        <div class="guide-title">Prize Bonds in Pakistan: How They Work, Draws &amp; Tax</div>
+        <div class="guide-desc">Capital-safe but no fixed return — your only gain is the chance of a prize in the quarterly draw. Denominations, how draws work, tax on winnings (filer vs non-filer), the Shariah question, and how prize bonds really compare to National Savings.</div>
+        <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 8 min</span><span class="topic-tag">Savings</span></div>
+        <a href="/guides/prize-bonds-pakistan.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="gold">
+        <div class="guide-icon">🪙</div>
+        <div class="guide-title">Gold Investment in Pakistan: Physical, Digital &amp; Gold Funds</div>
+        <div class="guide-desc">Why gold has been the default store of value for Pakistani households as the rupee slid from 160 to 278 per dollar — and how to buy it without getting burned. Tola pricing, purity, making charges, gold funds, PMEX.</div>
+        <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Inflation hedge</span></div>
+        <a href="/guides/gold-investment-pakistan.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="safe macro">
+        <div class="guide-icon">🏛️</div>
+        <div class="guide-title">How to Buy T-Bills &amp; PIBs Through an IPS Account</div>
+        <div class="guide-desc">Hold government T-bills and Pakistan Investment Bonds directly through an Investor Portfolio Securities account at your own bank — auctions, documents, yields, and when a money market fund is honestly the smarter route.</div>
+        <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Government-backed</span></div>
+        <a href="/guides/treasury-bills-pakistan.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="tax start">
+        <div class="guide-icon">🧾</div>
+        <div class="guide-title">How Investments Are Taxed: Filer vs Non-Filer</div>
+        <div class="guide-desc">Becoming a filer on FBR&rsquo;s Active Taxpayer List is the single biggest &ldquo;return boost&rdquo; available — non-filers pay roughly double the withholding tax. Every income stream explained, plus step-by-step IRIS filing.</div>
+        <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">FBR filer</span></div>
+        <a href="/guides/investment-tax-pakistan.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="safe funds start">
+        <div class="guide-icon">💵</div>
+        <div class="guide-title">Money Market Funds vs Bank Savings Accounts</div>
+        <div class="guide-desc">Most bank savings accounts pay well below the SBP policy rate — idle cash quietly loses to inflation. Returns, redemption speed, deposit protection and tax compared side by side, plus a practical emergency-fund split.</div>
+        <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Cash management</span></div>
+        <a href="/guides/money-market-funds-vs-bank-savings.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="stocks start">
+        <div class="guide-icon">📋</div>
+        <div class="guide-title">How to Open a PSX Brokerage Account (CDC &amp; Sahulat)</div>
+        <div class="guide-desc">Zero to first trade: choosing a licensed TREC-holder broker, why your shares live in a CDC sub-account in your own name, the Sahulat account for beginners, full online KYC, and the WhatsApp &ldquo;broker&rdquo; scams to avoid.</div>
+        <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Step-by-step</span></div>
+        <a href="/guides/open-brokerage-account-psx.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="islamic funds stocks">
+        <div class="guide-icon">🕌</div>
+        <div class="guide-title">Halal Investing: Islamic Funds, Sukuk &amp; Shariah Stocks</div>
+        <div class="guide-desc">Pakistan&rsquo;s full Shariah-compliant universe mapped: how Islamic funds earn profit without interest, the KMI-30 as a ready-made screen, government Ijara sukuk, dividend purification, and a worked halal portfolio.</div>
+        <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Shariah-compliant</span></div>
+        <a href="/guides/halal-investing-pakistan.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="funds start">
+        <div class="guide-icon">📊</div>
+        <div class="guide-title">How to Invest in Mutual Funds in Pakistan (2026)</div>
+        <div class="guide-desc">Open a fund account online, choose between Islamic and conventional funds, and start a SIP from PKR 1,000 — with SECP protections, expense ratios and NAV history explained for every risk appetite.</div>
+        <div class="guide-meta"><span class="read-time">⏱ 9 min</span><span class="topic-tag">Step-by-step</span><span class="topic-tag">SIP</span></div>
+        <a href="/guides/how-to-invest-mutual-funds-pakistan.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="safe funds start">
+        <div class="guide-icon">⚖️</div>
+        <div class="guide-title">National Savings vs Mutual Funds: Which Is Better?</div>
+        <div class="guide-desc">CDNS certificates and SECP-regulated funds compared head-to-head — profit rates, risk, liquidity and tax — mapped to three investor personas so you can see exactly where your situation fits.</div>
+        <div class="guide-meta"><span class="read-time">⏱ 10 min</span><span class="topic-tag">Comparison</span></div>
+        <a href="/guides/national-savings-vs-mutual-funds.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="stocks">
+        <div class="guide-icon">📈</div>
+        <div class="guide-title">Best Dividend Stocks on PSX for Passive Income</div>
+        <div class="guide-desc">Build a dividend income portfolio on the PSX — which sectors have the most reliable payout histories, how to calculate yield, ex-dividend dates, and how to avoid yield traps in structural decline.</div>
+        <div class="guide-meta"><span class="read-time">⏱ 9 min</span><span class="topic-tag">Passive income</span></div>
+        <a href="/guides/best-dividend-stocks-psx.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="macro safe">
+        <div class="guide-icon">🏦</div>
+        <div class="guide-title">SBP Policy Rate Explained: What It Means for Your Savings</div>
+        <div class="guide-desc">The single most important number for Pakistani investors — how the Monetary Policy Committee sets it, how fast savings and deposit rates respond, and how to position before the market prices each move.</div>
+        <div class="guide-meta"><span class="read-time">⏱ 8 min</span><span class="topic-tag">Monetary policy</span></div>
+        <a href="/guides/sbp-policy-rate-investments.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="overseas">
+        <div class="guide-icon">🌍</div>
+        <div class="guide-title">Roshan Digital Account — Complete Guide for Overseas Pakistanis</div>
+        <div class="guide-desc">Invest in PSX stocks, funds and Naya Pakistan Certificates from abroad — remote KYC, funding in foreign currency, which banks do RDA best, and free profit repatriation without SBP approval.</div>
+        <div class="guide-meta"><span class="read-time">⏱ 9 min</span><span class="topic-tag">Remittances</span></div>
+        <a href="/guides/roshan-digital-account-guide.html" class="guide-link">Read guide →</a>
+      </div>
+
+      <div class="guide-card" data-cat="start">
+        <div class="guide-icon">🧮</div>
+        <div class="guide-title">Try the Free Investment Analyzer</div>
+        <div class="guide-desc">Enter your amount on the home page and get an instant, personalised split across National Savings, mutual funds and PSX dividend stocks — using today&rsquo;s live rates, refreshed every morning.</div>
+        <div class="guide-meta"><span class="read-time">⏱ 2 min</span><span class="topic-tag">Interactive</span></div>
+        <a href="/" class="guide-link">Open the tool →</a>
+      </div>
+
+    </div>
+
+    <div class="filter-empty" id="filter-empty">No guides match your search. Try a broader term, or <a href="/blog/">check the blog</a>.</div>
   </div>
 
-  <div class="guides-grid">
-
-    <div class="guide-card" data-cat="tax start">
-      <div class="guide-icon">🪪</div>
-      <div class="guide-title">How to Become a Filer in Pakistan (FBR IRIS)</div>
-      <div class="guide-desc">Register a free NTN on IRIS, file your return and wealth statement, and land on the Active Taxpayer List — the step-by-step route to filer status, which roughly halves the withholding tax non-filers pay on bank profit, dividends, property and vehicles.</div>
-      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">FBR filer</span></div>
-      <a href="/guides/how-to-become-filer-pakistan.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="tax">
-      <div class="guide-icon">💻</div>
-      <div class="guide-title">Freelancer &amp; IT Exporter Tax in Pakistan</div>
-      <div class="guide-desc">How freelancers and IT exporters are taxed — the 0.25% concessional final tax for PSEB-registered exporters versus 1%, the Section 65F conditions, repatriation and remittance rules, and how local-client income is taxed on the normal slabs.</div>
-      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Freelancers</span></div>
-      <a href="/guides/freelancer-tax-pakistan.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="safe">
-      <div class="guide-icon">🎟️</div>
-      <div class="guide-title">Prize Bonds in Pakistan: How They Work, Draws &amp; Tax</div>
-      <div class="guide-desc">Capital-safe but no fixed return — your only gain is the chance of a prize in the quarterly draw. Denominations, how draws work, tax on winnings (filer vs non-filer), the Shariah question, and how prize bonds really compare to National Savings.</div>
-      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 8 min</span><span class="topic-tag">Savings</span></div>
-      <a href="/guides/prize-bonds-pakistan.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="gold">
-      <div class="guide-icon">🪙</div>
-      <div class="guide-title">Gold Investment in Pakistan: Physical, Digital &amp; Gold Funds</div>
-      <div class="guide-desc">Why gold has been the default store of value for Pakistani households as the rupee slid from 160 to 278 per dollar — and how to buy it without getting burned. Tola pricing, purity, making charges, gold funds, PMEX.</div>
-      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Inflation hedge</span></div>
-      <a href="/guides/gold-investment-pakistan.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="safe macro">
-      <div class="guide-icon">🏛️</div>
-      <div class="guide-title">How to Buy T-Bills &amp; PIBs Through an IPS Account</div>
-      <div class="guide-desc">Hold government T-bills and Pakistan Investment Bonds directly through an Investor Portfolio Securities account at your own bank — auctions, documents, yields, and when a money market fund is honestly the smarter route.</div>
-      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Government-backed</span></div>
-      <a href="/guides/treasury-bills-pakistan.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="tax start">
-      <div class="guide-icon">🧾</div>
-      <div class="guide-title">How Investments Are Taxed: Filer vs Non-Filer</div>
-      <div class="guide-desc">Becoming a filer on FBR&rsquo;s Active Taxpayer List is the single biggest &ldquo;return boost&rdquo; available — non-filers pay roughly double the withholding tax. Every income stream explained, plus step-by-step IRIS filing.</div>
-      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">FBR filer</span></div>
-      <a href="/guides/investment-tax-pakistan.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="safe funds start">
-      <div class="guide-icon">💵</div>
-      <div class="guide-title">Money Market Funds vs Bank Savings Accounts</div>
-      <div class="guide-desc">Most bank savings accounts pay well below the SBP policy rate — idle cash quietly loses to inflation. Returns, redemption speed, deposit protection and tax compared side by side, plus a practical emergency-fund split.</div>
-      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Cash management</span></div>
-      <a href="/guides/money-market-funds-vs-bank-savings.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="stocks start">
-      <div class="guide-icon">📋</div>
-      <div class="guide-title">How to Open a PSX Brokerage Account (CDC &amp; Sahulat)</div>
-      <div class="guide-desc">Zero to first trade: choosing a licensed TREC-holder broker, why your shares live in a CDC sub-account in your own name, the Sahulat account for beginners, full online KYC, and the WhatsApp &ldquo;broker&rdquo; scams to avoid.</div>
-      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Step-by-step</span></div>
-      <a href="/guides/open-brokerage-account-psx.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="islamic funds stocks">
-      <div class="guide-icon">🕌</div>
-      <div class="guide-title">Halal Investing: Islamic Funds, Sukuk &amp; Shariah Stocks</div>
-      <div class="guide-desc">Pakistan&rsquo;s full Shariah-compliant universe mapped: how Islamic funds earn profit without interest, the KMI-30 as a ready-made screen, government Ijara sukuk, dividend purification, and a worked halal portfolio.</div>
-      <div class="guide-meta"><span class="topic-tag tag-new">New</span><span class="read-time">⏱ 9 min</span><span class="topic-tag">Shariah-compliant</span></div>
-      <a href="/guides/halal-investing-pakistan.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="funds start">
-      <div class="guide-icon">📊</div>
-      <div class="guide-title">How to Invest in Mutual Funds in Pakistan (2026)</div>
-      <div class="guide-desc">Open a fund account online, choose between Islamic and conventional funds, and start a SIP from PKR 1,000 — with SECP protections, expense ratios and NAV history explained for every risk appetite.</div>
-      <div class="guide-meta"><span class="read-time">⏱ 9 min</span><span class="topic-tag">Step-by-step</span><span class="topic-tag">SIP</span></div>
-      <a href="/guides/how-to-invest-mutual-funds-pakistan.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="safe funds start">
-      <div class="guide-icon">⚖️</div>
-      <div class="guide-title">National Savings vs Mutual Funds: Which Is Better?</div>
-      <div class="guide-desc">CDNS certificates and SECP-regulated funds compared head-to-head — profit rates, risk, liquidity and tax — mapped to three investor personas so you can see exactly where your situation fits.</div>
-      <div class="guide-meta"><span class="read-time">⏱ 10 min</span><span class="topic-tag">Comparison</span></div>
-      <a href="/guides/national-savings-vs-mutual-funds.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="stocks">
-      <div class="guide-icon">📈</div>
-      <div class="guide-title">Best Dividend Stocks on PSX for Passive Income</div>
-      <div class="guide-desc">Build a dividend income portfolio on the PSX — which sectors have the most reliable payout histories, how to calculate yield, ex-dividend dates, and how to avoid yield traps in structural decline.</div>
-      <div class="guide-meta"><span class="read-time">⏱ 9 min</span><span class="topic-tag">Passive income</span></div>
-      <a href="/guides/best-dividend-stocks-psx.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="macro safe">
-      <div class="guide-icon">🏦</div>
-      <div class="guide-title">SBP Policy Rate Explained: What It Means for Your Savings</div>
-      <div class="guide-desc">The single most important number for Pakistani investors — how the Monetary Policy Committee sets it, how fast savings and deposit rates respond, and how to position before the market prices each move.</div>
-      <div class="guide-meta"><span class="read-time">⏱ 8 min</span><span class="topic-tag">Monetary policy</span></div>
-      <a href="/guides/sbp-policy-rate-investments.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="overseas">
-      <div class="guide-icon">🌍</div>
-      <div class="guide-title">Roshan Digital Account — Complete Guide for Overseas Pakistanis</div>
-      <div class="guide-desc">Invest in PSX stocks, funds and Naya Pakistan Certificates from abroad — remote KYC, funding in foreign currency, which banks do RDA best, and free profit repatriation without SBP approval.</div>
-      <div class="guide-meta"><span class="read-time">⏱ 9 min</span><span class="topic-tag">Remittances</span></div>
-      <a href="/guides/roshan-digital-account-guide.html" class="guide-link">Read guide →</a>
-    </div>
-
-    <div class="guide-card" data-cat="start" style="border-left-color:var(--gold)">
-      <div class="guide-icon">🧮</div>
-      <div class="guide-title">Try the Free Investment Analyzer</div>
-      <div class="guide-desc">Enter your amount on the home page and get an instant, personalised split across National Savings, mutual funds and PSX dividend stocks — using today&rsquo;s live rates, refreshed every morning.</div>
-      <div class="guide-meta"><span class="read-time">⏱ 2 min</span><span class="topic-tag">Interactive</span></div>
-      <a href="/" class="guide-link">Open the tool →</a>
-    </div>
-
+  <!-- ── PRIMER (inverted dark panel) ─────────────────── -->
+  <div class="lib-frame">
+    <details class="lib-primer">
+      <summary><span><span class="pk">The 60-second primer</span>Why investing matters more than ever for Pakistanis in 2026</span></summary>
+      <div class="primer-body">
+        <p>Pakistan&rsquo;s headline inflation ran at roughly <strong>7% in early 2026</strong>, which means money sitting idle in a zero-interest wallet or an underperforming savings account loses real purchasing power every single month. Even with the <strong>SBP policy rate now at 11.5%</strong> — sharply lower than the 22% peak of 2023 — the environment still rewards investors who understand which instruments to use and when to use them.</p>
+        <p>Every investment decision in Pakistan ultimately traces back to three pillars: <strong class="acc">National Savings (CDNS)</strong> — government-backed certificates with zero credit risk, the safe anchor of any portfolio; <strong class="acc">SECP-regulated mutual funds</strong> — professionally managed money-market, fixed-income and equity strategies from PKR 1,000; and <strong class="acc">PSX dividend stocks</strong> — blue chips that have paid consistent dividends for decades and can outpace inflation over a full cycle.</p>
+        <p>This library serves the salaried professional making a first investment, the overseas Pakistani deploying remittances through a Roshan Digital Account, and the experienced investor benchmarking returns. Every guide is researched from official sources and human-checked, and all rates shown across the site are <strong>updated daily</strong> from official SBP and CDNS sources.</p>
+      </div>
+    </details>
   </div>
-
-  <div class="filter-empty" id="filter-empty">No guides match your search. Try a broader term, or <a href="/blog/">check the blog</a>.</div>
-
-  <details style="background:var(--green-light);border:1px solid var(--border2);border-radius:var(--radius);margin-top:30px;padding:0">
-    <summary style="cursor:pointer;list-style:none;padding:16px 22px;font-family:var(--display);font-weight:600;font-size:1.05rem;color:var(--green)">Why investing matters more than ever for Pakistanis in 2026 — the 60-second primer ▾</summary>
-    <div style="padding:4px 22px 20px">
-      <p style="font-size:.95rem">Pakistan&rsquo;s headline inflation ran at roughly <strong>7% in early 2026</strong>, which means money sitting idle in a zero-interest wallet or an underperforming savings account loses real purchasing power every single month. Even with the <strong>SBP policy rate now at 11.5%</strong> — sharply lower than the 22% peak of 2023 — the environment still rewards investors who understand which instruments to use and when to use them.</p>
-      <p style="font-size:.95rem">Every investment decision in Pakistan ultimately traces back to three pillars: <strong>National Savings (CDNS)</strong> — government-backed certificates with zero credit risk, the safe anchor of any portfolio; <strong>SECP-regulated mutual funds</strong> — professionally managed money-market, fixed-income and equity strategies from PKR 1,000; and <strong>PSX dividend stocks</strong> — blue chips that have paid consistent dividends for decades and can outpace inflation over a full cycle.</p>
-      <p style="font-size:.95rem;margin-bottom:0">This library serves the salaried professional making a first investment, the overseas Pakistani deploying remittances through a Roshan Digital Account, and the experienced investor benchmarking returns. Every guide is researched from official sources and human-checked, and all rates shown across the site are <strong>updated daily</strong> from official SBP and CDNS sources.</p>
-    </div>
-  </details>
 
   <div class="author-byline">
-    Written by <strong>Abdul Ahad</strong> — software engineer and personal PSX/mutual fund investor.
+    Written by <strong>Abdul Ahad</strong> — software engineer who invests in PSX and mutual funds; not an investment professional.
     <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a>
   </div>
 
-</div>
+</main>
 
 <footer>
-  <a class="footer-brand" href="/" aria-label="Pakinvestlysis — home"><img src="/assets/logo-light.png" alt="" width="170" height="63"></a>
-  <div>© 2026 Pakistan Investment Advisor &nbsp;|&nbsp; Educational content only — not financial advice</div>
-  <div style="margin-top:8px">
-    <a href="/">Home</a>
-    <a href="/guides/">Guides</a>
-    <a href="/blog/">Blog</a>
-    <a href="/about.html">About</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/privacy-policy.html">Privacy Policy</a>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice — for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
 <script src="/assets/listing.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
 </body>
 </html>

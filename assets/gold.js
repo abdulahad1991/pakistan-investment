@@ -1,4 +1,4 @@
-// ── Gold rates page — live rates, history chart, forecast calculator ──
+// ── Gold rates page - live rates, history chart, forecast calculator ──
 const TOLA_G = 11.6638;
 let GDATA = null;
 let gCharts = {};
@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(d => { GDATA = d; initGold(); })
     .catch(() => {
       const el = document.getElementById("gr-source");
-      if (el) el.textContent = "Live rate unavailable right now — please refresh.";
+      if (el) el.textContent = "Live rate unavailable right now - please refresh.";
     });
 });
 
 // Pakistani comma formatting: X,XX,XXX
 function fmtPKR(n) {
-  if (n == null || isNaN(n)) return "—";
+  if (n == null || isNaN(n)) return "-";
   n = Math.round(n);
   const s = String(Math.abs(n));
   let out;
@@ -107,7 +107,7 @@ function computeCAGR() {
   cagrYears = (d1 - d0) / (365.25 * 24 * 3600 * 1000);
   if (cagrYears < 0.5) return null;
   const cagr = (Math.pow(last / first, 1 / cagrYears) - 1) * 100;
-  setT("gr-cagr", `Over the last ${cagrYears.toFixed(1)} years, 24K gold rose from ${rs(first)} to ${rs(last)} per tola — a compound average of about ${cagr.toFixed(1)}% per year (in rupee terms, currency depreciation included).`);
+  setT("gr-cagr", `Over the last ${cagrYears.toFixed(1)} years, 24K gold rose from ${rs(first)} to ${rs(last)} per tola - a compound average of about ${cagr.toFixed(1)}% per year (in rupee terms, currency depreciation included).`);
   return Math.max(0, cagr);
 }
 
@@ -174,7 +174,7 @@ function calcGold() {
     <p style="font-size:.86rem;color:var(--ink2);margin:14px 0 0;line-height:1.6">
       At the current ${karat}K rate of <strong>${rs(tolaRate)}/tola</strong>, <strong>${rs(amount)}</strong> buys about <strong>${tolas.toFixed(2)} tola</strong>.
       At ${rate}%/yr it could be worth <strong>${rs(future)}</strong> in ${years} years.
-      The same amount in a National Savings certificate at <strong>${nsRate}%</strong> would reach <strong>${rs(nsFuture)}</strong> —
+      The same amount in a National Savings certificate at <strong>${nsRate}%</strong> would reach <strong>${rs(nsFuture)}</strong> -
       ${future >= nsFuture ? "gold ahead by " + rs(future - nsFuture) : "savings ahead by " + rs(nsFuture - future)}, before tax, charges and zakat.
       Unlike savings, gold pays no income while you hold it.
     </p>`;

@@ -1,4 +1,4 @@
-/* FAQ hub — live search + topic filter over server-rendered FAQ accordions.
+/* FAQ hub - live search + topic filter over server-rendered FAQ accordions.
    Filters the existing DOM (.faq-item with data-topic) so all content stays
    crawlable without JS. */
 (function () {

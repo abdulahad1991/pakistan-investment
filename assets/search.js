@@ -1,4 +1,4 @@
-/* Global site search — command palette.
+/* Global site search - command palette.
    Index is built from manifest.json (guides + posts, rebuilt every morning
    by the GitHub Action) plus a small static list of top-level pages, so new
    guides and blog posts become searchable automatically without editing this
@@ -10,7 +10,7 @@
     { url: '/',                    title: 'Investment Comparison Tool',  description: 'Compare National Savings, mutual funds and PSX stocks side by side with live daily data.', type: 'Tool' },
     { url: '/tax-calculator.html', title: 'Pakistan Tax Calculator 2026-27', description: 'Calculate income tax (salaried & business), GST, sales tax on services and restaurant tax, with a year-on-year comparison.', type: 'Tool' },
     { url: '/zakat-calculator.html', title: 'Zakat Calculator Pakistan 2026', description: 'Work out your 2.5% Zakat from cash, gold, silver, investments and business assets, with the nisab from gold or silver.', type: 'Tool' },
-    { url: '/faq.html', title: 'FAQ — Pakistan Investing & Tax', description: '223 answered questions on tax, mutual funds, stocks, savings, prize bonds and Zakat, searchable and filterable by topic.', type: 'Page' },
+    { url: '/faq.html', title: 'FAQ - Pakistan Investing & Tax', description: '223 answered questions on tax, mutual funds, stocks, savings, prize bonds and Zakat, searchable and filterable by topic.', type: 'Page' },
     { url: '/guides/',             title: 'All Investment Guides',       description: 'Step-by-step guides to every major investment route in Pakistan.', type: 'Guide' },
     { url: '/blog/',               title: 'Analysis & Blog',             description: 'Budget breakdowns, policy-rate analysis and salaried-class money moves.', type: 'Blog' },
     { url: '/about.html',          title: 'About',                       description: 'Who runs Pakistan Investment Advisor and why.', type: 'Page' },

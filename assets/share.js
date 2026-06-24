@@ -1,6 +1,6 @@
 /* Lightweight social share bar. Self-injects after the byline (or first H1)
    using the page's canonical URL + title. No dependencies, no tracking beyond
-   an optional GA4 event. WhatsApp is first — it's how most of Pakistan shares. */
+   an optional GA4 event. WhatsApp is first - it's how most of Pakistan shares. */
 (function () {
   'use strict';
   document.addEventListener('DOMContentLoaded', function () {

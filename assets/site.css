@@ -1,4 +1,4 @@
-/* Pakistan Investment Advisor — professional dashboard system.
+/* Pakistan Investment Advisor - professional dashboard system.
    Uses Proxima Nova when available, with Inter as the web fallback. */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
@@ -109,7 +109,7 @@ article .container,body>.container{padding-top:40px;padding-bottom:40px}
 .site-header .site-nav a:hover{color:#fff;text-decoration:none;background:rgba(255,255,255,.1)}
 .site-header .site-nav a.active{color:#0C4536;background:var(--gold)}
 
-/* Actions group (search + menu toggle) — always visible */
+/* Actions group (search + menu toggle) - always visible */
 .site-header .header-actions{display:flex;align-items:center;gap:10px;flex:0 0 auto}
 
 .site-header .nav-search{
@@ -252,7 +252,7 @@ footer .footer-brand img{display:block;height:44px;width:auto;margin:0 auto}
 .macro-val{font-family:var(--mono);font-size:1.35rem;font-weight:700;color:var(--green);font-variant-numeric:tabular-nums}
 .macro-lbl{font-family:var(--mono);font-size:.62rem;letter-spacing:0;text-transform:uppercase;color:var(--muted);margin-top:4px}
 
-/* ── Tables — ledger style ──────────────────────────────── */
+/* ── Tables - ledger style ──────────────────────────────── */
 .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 table{width:100%;border-collapse:collapse;font-size:.9rem}
 th{background:var(--green);color:var(--paper2);padding:10px 13px;text-align:left;font-family:var(--mono);font-weight:500;font-size:.68rem;letter-spacing:0;text-transform:uppercase;white-space:nowrap}
@@ -348,7 +348,7 @@ tr.rec-row td{background:var(--green-light)}
 .btn-back{background:var(--paper2);color:var(--green);border:1px solid var(--green)}
 .btn-back:hover{background:var(--green-light)}
 
-/* ── Ad slots — collapse until filled ───────────────────── */
+/* ── Ad slots - collapse until filled ───────────────────── */
 .ad-slot{text-align:center;margin:24px 0;position:relative}
 .ad-label{display:none;font-family:var(--mono);font-size:.58rem;letter-spacing:0;text-transform:uppercase;color:var(--border2);position:absolute;top:-14px;left:50%;transform:translateX(-50%);white-space:nowrap}
 .ad-slot:has(ins[data-ad-status="filled"]) .ad-label{display:block}

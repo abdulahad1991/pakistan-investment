@@ -1,9 +1,9 @@
-/* Zakat Calculator — interactive engine.
+/* Zakat Calculator - interactive engine.
    Educational only; not a religious ruling. Zakat is 2.5% of zakatable net
    wealth held for one lunar year (hawl), payable if that wealth is at or above
    the nisab. Nisab = value of 87.48g (7.5 tola) of gold OR 612.36g (52.5 tola)
    of silver; many scholars recommend the lower (silver) nisab. Rulings on what
-   is zakatable vary — consult a scholar you trust. */
+   is zakatable vary - consult a scholar you trust. */
 (function () {
   'use strict';
 
@@ -68,7 +68,7 @@
       var rows = [
         ['Total zakatable assets', rs(r.assets), '#0E3B2E'],
         ['Net after liabilities', rs(r.net), '#0E3B2E'],
-        ['Nisab threshold', nisab > 0 ? rs(nisab) : '—', '#7A5A1F']
+        ['Nisab threshold', nisab > 0 ? rs(nisab) : '-', '#7A5A1F']
       ];
       var html = '<div class="tax-result-grid">' + rows.map(function (x) {
         return '<div class="tax-cell"><div class="tax-cell-val" style="color:' + x[2] + '">' + x[1] + '</div><div class="tax-cell-lbl">' + x[0] + '</div></div>';
@@ -86,7 +86,7 @@
           '<div style="font-weight:700;color:#7A5A1F">No Zakat due on these figures</div>' +
           '<div style="font-size:.82rem;color:#5E5C52;margin-top:3px">Your net zakatable wealth (' + rs(r.net) + ') is below the nisab (' + rs(nisab) + '). Zakat becomes due once it reaches the nisab and a lunar year passes.</div></div>';
       }
-      html += '<p class="tax-note">Estimate only, based on the figures and metal price you entered — not a religious ruling. What counts as zakatable, and which nisab to use, can vary by scholar. Verify with a scholar you trust.</p>';
+      html += '<p class="tax-note">Estimate only, based on the figures and metal price you entered - not a religious ruling. What counts as zakatable, and which nisab to use, can vary by scholar. Verify with a scholar you trust.</p>';
       out.innerHTML = html;
       if (window.gtag) try { gtag('event', 'zakat_calc', { basis: basis, due: r.due }); } catch (e) {}
     }

@@ -1,4 +1,4 @@
-/* Pakistan Tax Calculator — interactive engine.
+/* Pakistan Tax Calculator - interactive engine.
    Educational only; not tax advice. Rates are as reported for FY2026-27
    (salaried slabs reflect the Budget 2026-27 cuts, effective 1 July 2026
    pending the Finance Act); non-salaried/AOP and sales-tax rates reflect the
@@ -9,7 +9,7 @@
 
   /* ── Rate tables ─────────────────────────────────────────── */
 
-  // Salaried — annual taxable income (FY2026-27, post-budget cuts, surcharge abolished)
+  // Salaried - annual taxable income (FY2026-27, post-budget cuts, surcharge abolished)
   var SALARIED = [
     { upTo: 600000, from: 0, base: 0, rate: 0 },
     { upTo: 1200000, from: 600000, base: 0, rate: 0.01 },
@@ -21,7 +21,7 @@
     { upTo: Infinity, from: 7000000, base: 1424000, rate: 0.35 }
   ];
 
-  // Salaried — PREVIOUS year (FY2025-26, pre-budget) for comparison. 9% surcharge over Rs 10m.
+  // Salaried - PREVIOUS year (FY2025-26, pre-budget) for comparison. 9% surcharge over Rs 10m.
   var SALARIED_OLD = [
     { upTo: 600000, from: 0, base: 0, rate: 0 },
     { upTo: 1200000, from: 600000, base: 0, rate: 0.01 },
@@ -31,7 +31,7 @@
     { upTo: Infinity, from: 4100000, base: 616000, rate: 0.35 }
   ];
 
-  // Non-salaried individual & AOP — annual taxable income (current published slabs)
+  // Non-salaried individual & AOP - annual taxable income (current published slabs)
   var NONSAL = [
     { upTo: 600000, from: 0, base: 0, rate: 0 },
     { upTo: 1200000, from: 600000, base: 0, rate: 0.15 },
@@ -44,10 +44,10 @@
   // GST on goods (federal). Standard 18%.
   var GST_STANDARD = 18;
 
-  // Provincial sales tax on services — standard rates (%)
+  // Provincial sales tax on services - standard rates (%)
   var SERVICE_RATES = { Punjab: 16, Sindh: 15, KPK: 15, Balochistan: 15, Islamabad: 15 };
 
-  // Restaurant sales tax (%) — cash vs card/digital. Punjab & Islamabad give a
+  // Restaurant sales tax (%) - cash vs card/digital. Punjab & Islamabad give a
   // large reduced rate for digital payments; other provinces verify with their board.
   var RESTAURANT_RATES = {
     Punjab: { cash: 16, card: 5 },
@@ -156,7 +156,7 @@
         var saving = old.total - r.total;
         if (saving > 0.5) {
           compare = '<p class="tax-note" style="border-left:4px solid #175A41;background:#E9EFE6;padding:10px 14px;border-radius:0 6px 6px 0">' +
-            'Under the previous FY2025-26 slabs you would have paid <strong>' + rs(old.total) + '</strong> — the Budget 2026-27 cut saves you about <strong>' + rs(saving) + '</strong> a year (' + rs(saving / 12) + '/month).</p>';
+            'Under the previous FY2025-26 slabs you would have paid <strong>' + rs(old.total) + '</strong> - the Budget 2026-27 cut saves you about <strong>' + rs(saving) + '</strong> a year (' + rs(saving / 12) + '/month).</p>';
         }
       }
       incOut.innerHTML =
@@ -237,10 +237,10 @@
       if (saving > 0) {
         html += '<p class="tax-note">' + (pay === 'card'
           ? 'Paying by card/digital here saves <strong>' + rs(saving) + '</strong> versus cash (' + rates.cash + '%) on this bill.'
-          : 'Paying by <strong>card/digital</strong> instead would cost only ' + rates.card + '% — a saving of <strong>' + rs(saving) + '</strong> on this bill.');
+          : 'Paying by <strong>card/digital</strong> instead would cost only ' + rates.card + '% - a saving of <strong>' + rs(saving) + '</strong> on this bill.');
         html += '</p>';
       } else {
-        html += '<p class="tax-note">In ' + prov + ', the documented rate is ' + rate + '%. A reduced card/digital rate may apply — verify with the provincial revenue authority.</p>';
+        html += '<p class="tax-note">In ' + prov + ', the documented rate is ' + rate + '%. A reduced card/digital rate may apply - verify with the provincial revenue authority.</p>';
       }
       rOut.innerHTML = html;
       if (window.gtag) try { gtag('event', 'tax_calc', { kind: 'restaurant', province: prov, pay: pay }); } catch (e) {}
@@ -255,7 +255,7 @@
       }).join('') + '</div>';
     }
 
-    /* History comparison chart — salaried tax: FY2025-26 (old) vs FY2026-27 (new) */
+    /* History comparison chart - salaried tax: FY2025-26 (old) vs FY2026-27 (new) */
     function rsShort(n) {
       n = Math.round(n);
       if (n >= 1000000) return (n / 1000000).toFixed(n >= 10000000 ? 1 : 2) + 'm';

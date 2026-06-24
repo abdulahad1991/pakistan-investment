@@ -1,6 +1,6 @@
 /* Site-wide GA4 engagement tracking (loaded on every page).
    Sends custom events to the existing gtag (G-4T2H0KH9H7) so we can mark
-   them as Key Events in GA4 and see what visitors actually DO — not just
+   them as Key Events in GA4 and see what visitors actually DO - not just
    that they showed up. Calculator-specific events live in app.js. */
 (function () {
   "use strict";

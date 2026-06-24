@@ -351,7 +351,7 @@ tr.rec-row td{background:var(--green-l)}
 .faq-question::-webkit-details-marker{display:none}
 .faq-question::after{content:"+";font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--green)}
 details[open] .faq-question{background:var(--green-l);border-bottom:1px solid var(--line)}
-details[open] .faq-question::after{content:"–"}
+details[open] .faq-question::after{content:"-"}
 .faq-answer{font-family:var(--body);font-size:.9rem;color:var(--ink2);padding:14px 18px;line-height:1.6}
 .faq-answer a{color:var(--green);border-bottom:1px solid var(--line)}
 

@@ -74,3 +74,21 @@ def test_template_has_all_tokens():
     assert "assets/v2.css" in t
     assert 'id="site-nav"' in t
     assert "</html>" in t
+
+
+def test_parse_google_news_rss():
+    import fetch_news
+    sample = '''<?xml version="1.0"?><rss><channel>
+      <item><title>Auto sales rise - Business Recorder</title>
+      <link>https://news.google.com/x</link>
+      <pubDate>Wed, 25 Jun 2026 06:00:00 GMT</pubDate>
+      <source url="https://brecorder.com">Business Recorder</source></item>
+    </channel></rss>'''
+    items = fetch_news.parse_rss(sample, limit=5)
+    assert items[0]["title"].startswith("Auto sales rise")
+    assert items[0]["source"] == "Business Recorder"
+    assert items[0]["url"].startswith("http")
+    # title-suffix fallback when <source> is absent
+    s2 = ('<rss><channel><item><title>Tax news - Dawn</title>'
+          '<link>http://d</link></item></channel></rss>')
+    assert fetch_news.parse_rss(s2)[0]["source"] == "Dawn"

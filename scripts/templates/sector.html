@@ -257,37 +257,115 @@ gtag('config', 'G-4T2H0KH9H7');
 
 <main>
 <article class="art-frame">
-  <nav class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / {{H1}}</nav>
-  <div class="sector-body">
-    <h1>{{H1}}</h1>
-    <p class="sector-meta">As of {{AS_OF}} - figures update automatically through the week.</p>
 
-    <div class="tldr-box"><strong>In short.</strong> {{TLDR}}</div>
+  <!-- breadcrumb -->
+  <nav class="crumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li aria-current="page">{{H1}}</li>
+    </ol>
+  </nav>
 
-    <section>
-      <h2>Live PSX figures for this sector</h2>
-      {{PERF_TABLE}}
-      <p class="sector-movers">{{MOVERS}}</p>
-    </section>
+  <!-- HEAD -->
+  <div class="art-head">
+    <div class="head-l">
+      <div class="desk">{{DESK}}</div>
+      <h1>{{H1}}</h1>
+      <div class="art-byline">
+        <span>By Abdul Ahad</span>
+        <span class="hl">· Updated {{AS_OF}}</span>
+        <span>· Living page</span>
+      </div>
+    </div>
+    <div class="head-r">
+      <div class="lbl">In one line</div>
+      <p>{{TLDR}}</p>
+    </div>
+  </div>
 
-    <section>
-      <h2>Latest sector news</h2>
+  <!-- BODY -->
+  <div class="art-body">
+
+    <!-- MAIN COLUMN -->
+    <div class="prose">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="av">AA</div>
+        <div>
+          <div class="nm">Abdul Ahad</div>
+          <div class="bd">Software engineer. He built this site to answer one question no other tool did in one place: if you invest a set amount today, what would it earn across National Savings, mutual funds and PSX stocks? Every figure comes from official data and is human-checked; the content is AI-assisted.</div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated {{AS_OF}}</span></div>
+        </div>
+      </div>
+
+      <p class="lead"><strong>In one line:</strong> {{TLDR}}</p>
+
+      <!-- At a glance -->
+      <div class="cl-key">
+        <div class="k">At a glance</div>
+        <ul>{{GLANCE}}</ul>
+      </div>
+
+      <!-- Ad slot 1 -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <h2 id="s1"><span class="sn">01</span>Live PSX figures for this sector</h2>
+      <div class="tbl-wrap">{{PERF_TABLE}}</div>
+      <p class="tbl-note">{{MOVERS}}</p>
+
+      <h2 id="s2"><span class="sn">02</span>Latest sector news</h2>
       <ul class="news-list">{{NEWS_LIST}}</ul>
-    </section>
 
-    {{EVERGREEN_BODY}}
+      <section id="s3">
+        {{EVERGREEN_BODY}}
+      </section>
 
-    <section>
-      <h2>Weekly snapshots</h2>
+      <h2 id="s4"><span class="sn">04</span>Weekly snapshots</h2>
       <div class="changelog">{{CHANGELOG}}</div>
-    </section>
 
-    <section class="faq-section">
-      <h2>Frequently asked questions</h2>
+      <h2 id="s5"><span class="sn">05</span>Frequently asked questions</h2>
       {{FAQ_HTML}}
-    </section>
 
-    <div class="related-links"><h3>Related guides</h3><ul>{{RELATED}}</ul></div>
+      <!-- Ad slot 2 -->
+      <div class="ad-slot">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6115369516591859" data-ad-slot="7744995430" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <div class="related-links"><h3>Related guides</h3>{{RELATED}}</div>
+    </div>
+
+    <!-- RIGHT RAIL -->
+    <aside class="art-rail">
+      <div class="rail-sticky">
+        <div class="rail-sec">
+          <div class="rail-h">On this page</div>
+          <nav class="rail-toc" aria-label="On this page">
+            <a href="#s1"><span class="ti">01</span>Live PSX figures</a>
+            <a href="#s2"><span class="ti">02</span>Latest news</a>
+            <a href="#s3"><span class="ti">03</span>The sector explained</a>
+            <a href="#s4"><span class="ti">04</span>Weekly snapshots</a>
+            <a href="#s5"><span class="ti">05</span>FAQ</a>
+          </nav>
+        </div>
+        <div class="rail-sec rail-glance">
+          <div class="rail-h">At a glance</div>
+          {{RAIL_GLANCE}}
+        </div>
+        <div class="rail-sec rail-next">
+          <div class="rail-h">Read next</div>
+          {{RAIL_NEXT}}
+        </div>
+      </div>
+    </aside>
+
   </div>
 </article>
 </main>

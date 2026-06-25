@@ -549,3 +549,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,.
 .perf-table th:first-child,.perf-table td:first-child{text-align:left}
 .perf-up{color:var(--green)}
 .perf-down{color:var(--red)}
+
+/* Guide/blog cards: whole card is clickable (stretched link over the card) */
+.guide-card{position:relative;cursor:pointer}
+.guide-card .guide-link::after{content:"";position:absolute;inset:0;z-index:1}

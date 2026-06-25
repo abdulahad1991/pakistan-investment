@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
       items += '<a href="#' + h.id + '" style="display:block;padding:7px 0;border-bottom:1px solid rgba(7,94,75,.14);font-size:.92rem;color:#053C30">' + h.textContent + '</a>';
     });
     toc.innerHTML =
-      '<summary style="cursor:pointer;list-style:none;padding:13px 18px;font-family:\'IBM Plex Mono\',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#436055">☰ On this page • ' + heads.length + ' sections</summary>' +
+      '<summary style="cursor:pointer;list-style:none;padding:13px 18px;font-family:\'IBM Plex Mono\',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#436055">On this page • ' + heads.length + ' sections</summary>' +
       '<div style="padding:4px 18px 14px">' + items + '</div>';
     byline.parentNode.insertBefore(toc, byline.nextSibling);
   }

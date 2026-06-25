@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
           card.className = 'guide-card';
           card.setAttribute('data-cat', 'all');
           card.innerHTML =
-            '<div class="guide-icon">🆕</div>' +
             '<div class="guide-title">' + it.title + '</div>' +
             '<div class="guide-desc">' + it.description + '</div>' +
             '<div class="guide-meta"><span class="topic-tag tag-new">New</span>' +
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (meta && !meta.querySelector('.tag-new')) {
             var s = document.createElement('span');
             s.className = 'topic-tag tag-new';
-            s.textContent = '★ Newest';
+            s.textContent = 'Newest';
             meta.insertBefore(s, meta.firstChild);
           }
         }

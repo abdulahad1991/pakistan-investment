@@ -34,7 +34,7 @@
   ov.innerHTML =
     '<div class="search-modal" role="dialog" aria-modal="true" aria-label="Search the site">' +
       '<div class="search-box">' +
-        '<span class="s-ic" aria-hidden="true">🔍</span>' +
+        '<span class="s-ic" aria-hidden="true"></span>' +
         '<input type="text" id="gs-input" placeholder="Search guides, blog posts, tools…" autocomplete="off" spellcheck="false" aria-label="Search">' +
         '<span class="s-esc">ESC</span>' +
       '</div>' +

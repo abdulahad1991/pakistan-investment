@@ -479,7 +479,7 @@ gtag('config', 'G-4T2H0KH9H7');
         <a href="/blog/">All blog articles</a>
       </div>
 
-      <div class="disclaimer">⚠ This page is for educational purposes only and is <strong>not financial advice</strong>. The author is a software engineer, not an investment or mortgage professional. Scheme terms are summarised from government, State Bank and bank sources as of June 2026 and can change; the "after year 10" figures depend on future KIBOR and are estimates. Always verify the binding terms in your bank's offer letter and with the official scheme documents before deciding.</div>
+      <div class="disclaimer">This page is for educational purposes only and is <strong>not financial advice</strong>. The author is a software engineer, not an investment or mortgage professional. Scheme terms are summarised from government, State Bank and bank sources as of June 2026 and can change; the "after year 10" figures depend on future KIBOR and are estimates. Always verify the binding terms in your bank's offer letter and with the official scheme documents before deciding.</div>
 
     </div>
 
@@ -656,7 +656,7 @@ gtag('config', 'G-4T2H0KH9H7');
     if(dbr !== null){
       dbrRow.style.display = "flex";
       var dbrEl = el("o-dbr");
-      dbrEl.textContent = dbr.toFixed(1) + "%" + (dbr <= 45 ? " ✓" : " ✗");
+      dbrEl.textContent = dbr.toFixed(1) + "%" + (dbr <= 45 ? " (within 45%)" : " (over 45%)");
       dbrEl.className = "ov " + (dbr <= 45 ? "dbr-ok" : "dbr-bad");
     } else {
       dbrRow.style.display = "none";

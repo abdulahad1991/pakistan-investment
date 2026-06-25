@@ -364,7 +364,12 @@ function renderStocks() {
   const tbody = document.getElementById("stocks-tbody");
   tbody.innerHTML = "";
 
-  const sorted = [...DATA.stocks].sort((a, b) => b.yield - a.yield);
+  // Universe is comprehensive (~100+ names); show only priced stocks and cap
+  // the homepage table to the top 15 by dividend yield to keep it readable.
+  const sorted = [...DATA.stocks]
+    .filter(s => s.price > 0)
+    .sort((a, b) => b.yield - a.yield)
+    .slice(0, 15);
   sorted.forEach(s => {
     const up = s.chg1y >= 0;
     tbody.innerHTML += `

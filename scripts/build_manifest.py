@@ -21,7 +21,7 @@ def extract(path: Path, section: str):
     modified = re.search(r'"dateModified":\s*"([^"]+)"', html)
     published = re.search(r'"datePublished":\s*"([^"]+)"', html)
     t = title.group(1) if title else path.stem
-    t = re.sub(r"\s*[—|–]\s*Pakistan Investment Advisor\s*$", "", t.strip())
+    t = re.sub(r"\s*[—|–]\s*Pakistan Investment Education\s*$", "", t.strip())
     return {
         "url": f"/{section}/{path.name}",
         "title": t,

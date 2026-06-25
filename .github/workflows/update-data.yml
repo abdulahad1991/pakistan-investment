@@ -38,6 +38,14 @@ jobs:
       - name: Fetch live data
         run: python fetch_data.py
 
+      - name: Refresh living dividend page (weekly, Mondays)
+        run: |
+          if [ "$(date -u +%u)" = "1" ]; then
+            python scripts/build_dividends.py "$(date -u +%F)"
+          else
+            echo "Not Monday (UTC) - skipping weekly dividend rebuild"
+          fi
+
       - name: Rebuild guide/blog manifest
         run: python scripts/build_manifest.py
 
@@ -45,7 +53,7 @@ jobs:
         run: |
           git config user.name  "Abdul Ahad"
           git config user.email "abdulahad1991@users.noreply.github.com"
-          git add data.json manifest.json
+          git add data.json manifest.json data/stock_history.json blog/top-dividend-stocks-pakistan.html
           git diff --cached --quiet || (
             true &&
             git commit -m "chore: update investment data $(date -u +'%Y-%m-%d')" &&

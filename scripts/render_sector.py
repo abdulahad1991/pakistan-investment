@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://pakinvestlysis.com"
-OG_DEFAULT = f"{SITE}/assets/og/blog-index.png?v=2"   # reuse an existing OG png (?v bust cache)
+OG_DEFAULT = f"{SITE}/assets/og/blog-index.png?v=3"   # reuse an existing OG png (?v bust cache)
 
 
 def fmt_pkr(n):
@@ -169,7 +169,7 @@ def build_jsonld(meta, faq_ld):
                "headline": meta["h1"], "datePublished": meta["published"],
                "dateModified": meta["modified"],
                "author": {"@type": "Person", "name": "Abdul Ahad"},
-               "publisher": {"@type": "Organization", "name": "Pakistan Investment Advisor"},
+               "publisher": {"@type": "Organization", "name": "Pakistan Investment Education"},
                "mainEntityOfPage": meta["canonical"]}
     faqpage = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faq_ld}
     crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList",

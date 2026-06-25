@@ -150,6 +150,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "scripts"))
 from stock_universe import ensure_seeds
 STOCK_TICKERS = ensure_seeds(data)   # yahoo -> short; mutates data["stocks"]
 live_count = 0
+stock_hist = {}                      # short ticker -> {labels, values} monthly close
 for yahoo_ticker, short in STOCK_TICKERS.items():
     try:
         stk  = yf.Ticker(yahoo_ticker)
@@ -175,10 +176,25 @@ for yahoo_ticker, short in STOCK_TICKERS.items():
                            "div": ann_d, "yield": dy, "pe": pe})
                 live_count += 1
                 break
+        try:    # persist ~13 monthly closes for the dividend page sparklines
+            mc = hist["Close"].dropna().resample("ME").last().tail(13)
+            if len(mc) >= 2:
+                stock_hist[short] = {
+                    "labels": [d.strftime("%Y-%m") for d in mc.index],
+                    "values": [round(float(v), 2) for v in mc.values]}
+        except Exception:
+            pass
     except Exception:
         pass
 if live_count:
     fetched.append(f"Stocks live: {live_count}/{len(STOCK_TICKERS)}")
+if stock_hist:
+    try:
+        (Path(__file__).resolve().parent / "data" / "stock_history.json").write_text(
+            json.dumps(stock_hist, ensure_ascii=False), encoding="utf-8")
+        fetched.append(f"Stock history: {len(stock_hist)} tickers")
+    except Exception as e:
+        print(f"  Stock history write failed: {e}")
 
 # ── 6. Mutual fund returns (finhisaab — server-rendered, requests-scrapable) ──
 # Each fund page renders rows like "<N> Year(s) <cumulative>% <annualized>%";

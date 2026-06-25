@@ -128,3 +128,33 @@ def test_render_writes_page():
     finally:
         if p.exists():
             p.unlink()                                  # do not leave an artifact
+
+
+def test_audit_flags_thin_and_tokens(tmp_path):
+    import audit_post as ap
+    bad = tmp_path / "x.html"
+    bad.write_text("<html><body>short {{TLDR}}</body></html>")
+    res = ap.audit(bad)
+    assert res["ok"] is False
+    assert any("token" in f for f in res["flags"])
+    assert any("word" in f for f in res["flags"])
+    assert any("disclaimer" in f for f in res["flags"])
+
+
+def test_register_idempotent(tmp_path):
+    import register_post as rp
+    sm = tmp_path / "sitemap.xml"
+    sm.write_text('<?xml version="1.0"?>\n<urlset>\n</urlset>\n')
+    rp.upsert_sitemap(sm, "https://pakinvestlysis.com/blog/x.html", "2026-06-25")
+    rp.upsert_sitemap(sm, "https://pakinvestlysis.com/blog/x.html", "2026-06-27")
+    s = sm.read_text()
+    assert s.count("blog/x.html") == 1                  # upsert, not duplicate
+    assert "2026-06-27" in s and "2026-06-25" not in s  # lastmod updated
+    # llms.txt: creates section once, then upserts the line
+    lm = tmp_path / "llms.txt"
+    lm.write_text("# Site\n\nintro\n\n## Tools\n\n- [a](b): c\n")
+    rp.upsert_llms(lm, "Auto", "https://pakinvestlysis.com/blog/x.html", "desc1")
+    rp.upsert_llms(lm, "Auto", "https://pakinvestlysis.com/blog/x.html", "desc2")
+    t = lm.read_text()
+    assert t.count("## Sector Outlooks") == 1
+    assert t.count("blog/x.html") == 1 and "desc2" in t and "desc1" not in t

@@ -92,3 +92,39 @@ def test_parse_google_news_rss():
     s2 = ('<rss><channel><item><title>Tax news - Dawn</title>'
           '<link>http://d</link></item></channel></rss>')
     assert fetch_news.parse_rss(s2)[0]["source"] == "Dawn"
+
+
+def test_perf_table_skips_zero_price():
+    import render_sector as rs
+    rows = [{"ticker": "INDU", "name": "Indus Motor", "price": 1500.5,
+             "chg1y": 12.3, "yield": 4.1, "pe": 7.2},
+            {"ticker": "ZERO", "name": "Unfilled", "price": 0,
+             "chg1y": 0, "yield": 0, "pe": 0}]
+    html = rs.perf_table(rows)
+    assert "INDU" in html and "ZERO" not in html      # price==0 skipped
+    assert "1,500" in html                             # Pakistani grouping
+    assert rs.fmt_pkr(1234567) == "12,34,567"          # X,XX,XXX grouping
+
+
+def test_changelog_prepends_and_caps():
+    import render_sector as rs
+    existing = '<div class="snap">old</div>'
+    out = rs.changelog_append(existing, '<div class="snap">new</div>', cap=8)
+    assert out.index("new") < out.index("old")         # newest first
+    many = "".join(f'<div class="snap">s{i}</div>' for i in range(20))
+    capped = rs.changelog_append(many, '<div class="snap">fresh</div>', cap=8)
+    assert capped.count('class="snap"') == 8           # capped
+
+
+def test_render_writes_page():
+    import render_sector as rs
+    p = rs.render("automotive-sector-pakistan", "2026-06-25")
+    try:
+        html = p.read_text()
+        assert "{{" not in html                        # all tokens filled
+        assert "<title>" in html
+        assert "FAQPage" in html and "BreadcrumbList" in html and "Article" in html
+        assert "assets/v2.css" in html                 # chrome survived
+    finally:
+        if p.exists():
+            p.unlink()                                  # do not leave an artifact

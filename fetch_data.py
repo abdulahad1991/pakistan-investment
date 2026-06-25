@@ -154,7 +154,7 @@ stock_hist = {}                      # short ticker -> {labels, values} monthly 
 for yahoo_ticker, short in STOCK_TICKERS.items():
     try:
         stk  = yf.Ticker(yahoo_ticker)
-        hist = stk.history(period="2y")
+        hist = stk.history(period="3y")
         if hist.empty or len(hist) < 30:
             continue
         cp   = round(float(hist["Close"].dropna().iloc[-1]), 2)
@@ -176,8 +176,8 @@ for yahoo_ticker, short in STOCK_TICKERS.items():
                            "div": ann_d, "yield": dy, "pe": pe})
                 live_count += 1
                 break
-        try:    # persist ~13 monthly closes for the dividend page sparklines
-            mc = hist["Close"].dropna().resample("ME").last().tail(13)
+        try:    # persist ~36 monthly closes for the dividend page charts
+            mc = hist["Close"].dropna().resample("ME").last().tail(37)
             if len(mc) >= 2:
                 stock_hist[short] = {
                     "labels": [d.strftime("%Y-%m") for d in mc.index],

@@ -2,7 +2,7 @@
 """Render the living 'Top 10 PSX dividend stocks' page from data.json + stock_history.json.
 
 One canonical page (no new URLs). Each run swaps the live ranking, redraws the
-12-month SVG charts, prepends a dated weekly snapshot, and bumps dateModified.
+SVG charts, prepends a dated weekly snapshot, and bumps dateModified.
 Pure string composition - no AI, no network.
 """
 import json, re, html as _html, sys
@@ -55,7 +55,7 @@ def sparkline(values, w=150, h=36):
     pts = _pts(values, w, h)
     poly = " ".join(f"{x},{y}" for x, y in pts)
     return (f'<svg class="spark" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-            f'role="img" aria-label="12-month price trend">'
+            f'role="img" aria-label="3-year price trend">'
             f'<polyline fill="none" stroke="{col}" stroke-width="2" '
             f'stroke-linejoin="round" stroke-linecap="round" points="{poly}"/>'
             f'<circle cx="{pts[-1][0]}" cy="{pts[-1][1]}" r="2.6" fill="{col}"/></svg>')
@@ -71,7 +71,7 @@ def chart(values, w=300, h=92):
     poly = " ".join(f"{x},{y}" for x, y in pts)
     area = f"6,{h-6} " + poly + f" {w-6},{h-6}"
     return (f'<svg width="{w}" height="{h}" viewBox="0 0 {w} {h}" preserveAspectRatio="none" '
-            f'role="img" aria-label="12-month monthly close">'
+            f'role="img" aria-label="monthly close">'
             f'<polygon fill="{fill}" points="{area}"/>'
             f'<polyline fill="none" stroke="{col}" stroke-width="2.2" '
             f'stroke-linejoin="round" stroke-linecap="round" points="{poly}"/>'
@@ -81,7 +81,7 @@ def chart(values, w=300, h=92):
 def table_html(rows, hist):
     out = ['<table class="div-table"><thead><tr>'
            '<th>#</th><th>Company</th><th>Price</th><th>Div/share</th>'
-           '<th>Yield</th><th>1Y</th><th>P/E</th><th>12-mo trend</th>'
+           '<th>Yield</th><th>1Y</th><th>P/E</th><th>3-yr trend</th>'
            '</tr></thead><tbody>']
     for i, s in enumerate(rows, 1):
         chg = s.get("chg1y", 0); cls = "pos" if chg >= 0 else "neg"
@@ -114,7 +114,7 @@ def cards_html(rows, hist):
             f'<div class="hc-yld">{s.get("yield",0):.1f}%<span>yield</span></div></div>'
             f'{chart(vals)}'
             f'<div class="hc-foot"><span>&#8360; {fmt_pkr(start)}</span>'
-            f'<span class="{cls}">{sign}{chg:.1f}% 1y</span>'
+            f'<span class="{cls}">{sign}{chg:.1f}% 3y</span>'
             f'<span>&#8360; {fmt_pkr(s["price"])}</span></div></div>')
     return "".join(out)
 

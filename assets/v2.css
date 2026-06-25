@@ -393,6 +393,9 @@ details[open] .faq-question::after{content:"-"}
 .fig-video video{display:block;width:100%;height:100%;aspect-ratio:16/9;object-fit:cover}
 .fig-video .live-badge{position:absolute;top:16px;left:16px;display:inline-flex;align-items:center;gap:7px;font-family:var(--display);font-size:.6rem;font-weight:700;letter-spacing:.1em;color:var(--green-d);background:var(--acid);padding:5px 10px}
 .fig-video .live-badge .dot{width:6px;height:6px;background:var(--green-d);display:inline-block;animation:pulse 1.4s infinite}
+.vid-fs{position:absolute;top:14px;right:14px;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;background:rgba(5,60,48,.72);color:#fff;border:1px solid rgba(255,255,255,.25);cursor:pointer;z-index:3;transition:background .15s,transform .15s}
+.vid-fs:hover{background:var(--acid);color:var(--green-d);transform:scale(1.06)}
+.vid-fs:focus-visible{outline:2px solid var(--acid);outline-offset:2px}
 
 /* ── gold card ─────────────────────────────────────────────────── */
 #gold-card .gold-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}

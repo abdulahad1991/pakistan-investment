@@ -8,11 +8,29 @@
   if (!v) return;
   var gestured = false, inView = false;
 
+  // Play a touch slower than rendered - easier for viewers to follow.
+  var RATE = 0.8;
+  function applyRate() { try { v.defaultPlaybackRate = RATE; v.playbackRate = RATE; } catch (e) {} }
+  applyRate();
+  v.addEventListener('loadedmetadata', applyRate);
+  v.addEventListener('play', applyRate);   // some browsers reset rate on play
+
+  // Cross-browser fullscreen (Chrome/Firefox/Edge, desktop Safari, iOS Safari).
+  function goFull() {
+    if (v.requestFullscreen) v.requestFullscreen();
+    else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();   // older desktop Safari
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();       // iOS Safari (video only)
+    else if (v.msRequestFullscreen) v.msRequestFullscreen();
+  }
+  var fsBtn = document.getElementById('brief-fs');
+  if (fsBtn) fsBtn.addEventListener('click', function (e) { e.preventDefault(); goFull(); });
+
   function tryPlay() {
     if (!inView) return;
     if (gestured) v.muted = false;
     var p = v.play();
     if (p && p.catch) p.catch(function () { v.muted = true; v.play().catch(function () {}); });
+    applyRate();
   }
   function onGesture() { gestured = true; tryPlay(); }
   ['pointerdown', 'keydown', 'touchstart'].forEach(function (e) {

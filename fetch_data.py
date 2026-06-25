@@ -5,6 +5,7 @@ Run by GitHub Actions daily at 06:00 PKT (01:00 UTC).
 """
 import json, re, sys, subprocess
 from datetime import datetime, timezone
+from pathlib import Path
 
 def install(pkg):
     subprocess.check_call([sys.executable, "-m", "pip", "install", pkg,
@@ -142,11 +143,12 @@ except Exception as e:
     print(f"  SBP rate failed: {e}")
 
 # ── 5. Live stock prices ──────────────────────────────────────────
-STOCK_TICKERS = {
-    "FFC.KA": "FFC", "MCB.KA": "MCB", "HUBC.KA": "HUBC", "UBL.KA": "UBL",
-    "HBL.KA": "HBL", "OGDC.KA": "OGDC", "PPL.KA": "PPL",  "MEBL.KA": "MEBL",
-    "ENGRO.KA": "ENGRO", "LUCK.KA": "LUCK", "FATIMA.KA": "FATIMA", "PSO.KA": "PSO",
-}
+# Universe lives in scripts/psx_universe.json so adding a stock is a one-file
+# edit. ensure_seeds() auto-seeds any missing ticker at zero (so the loop below
+# can fill it) and normalises sector/name; graceful fallback keeps last good value.
+sys.path.insert(0, str(Path(__file__).resolve().parent / "scripts"))
+from stock_universe import ensure_seeds
+STOCK_TICKERS = ensure_seeds(data)   # yahoo -> short; mutates data["stocks"]
 live_count = 0
 for yahoo_ticker, short in STOCK_TICKERS.items():
     try:

@@ -72,4 +72,28 @@
   window.addEventListener("scroll", function () {
     if (!ticking) { ticking = true; window.requestAnimationFrame(checkDepth); }
   }, { passive: true });
+
+  /* ── Genuine-engagement signal ──────────────────────────────
+     Fire `page_engaged` once after 15s of *foreground* time on the page.
+     GA4 already auto-marks sessions of 10s+ as engaged, but this is a clean,
+     reliable signal you can mark as a Key Event in GA4 (Admin > Events) so a
+     real reader counts as an engaged session even on a single-page visit -
+     which pulls a noisy "100% bounce" down to a true figure. */
+  var ENGAGE_MS = 15000, engaged = false, fgStart = null, accum = 0, timer;
+  function fgStartNow() { if (fgStart === null) fgStart = Date.now(); }
+  function fgStop() { if (fgStart !== null) { accum += Date.now() - fgStart; fgStart = null; } }
+  function checkEngaged() {
+    if (engaged) return;
+    var total = accum + (fgStart !== null ? Date.now() - fgStart : 0);
+    if (total >= ENGAGE_MS) {
+      engaged = true;
+      track("page_engaged", { page_path: location.pathname });
+      clearInterval(timer);
+    }
+  }
+  if (document.visibilityState === "visible") fgStartNow();
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") fgStartNow(); else fgStop();
+  });
+  timer = setInterval(checkEngaged, 5000);
 })();

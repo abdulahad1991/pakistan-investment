@@ -45,3 +45,19 @@ def test_ensure_seeds_real_function():
     assert ffc["price"] == 555.6            # live value preserved
     assert ffc["sector"] == "Fertilizer"   # normalised from universe
     assert ffc["name"] == "Fauji Fertilizer"
+
+
+def test_sectors_config():
+    cfg = json.loads((ROOT / "scripts/sectors.json").read_text())
+    uni = json.loads((ROOT / "scripts/psx_universe.json").read_text())
+    slugs = set()
+    for s in cfg:
+        assert {"slug", "title", "h1", "data_sector", "news_query",
+                "tldr", "faq", "body"} <= s.keys()
+        assert s["data_sector"] in uni, f"{s['data_sector']} not in universe"
+        assert (ROOT / "scripts" / s["body"]).exists(), s["body"]
+        assert len(s["faq"]) >= 3
+        assert s["slug"] not in slugs
+        slugs.add(s["slug"])
+    assert {"automotive-sector-pakistan", "it-sector-pakistan",
+            "fmcg-sector-pakistan", "exporters-sector-pakistan"} == slugs

@@ -206,8 +206,9 @@ function goPage(n) {
     el.classList.toggle("active", i === n);
   });
 
-  // Progress bar
-  document.getElementById("progress-bar").style.width = ((n + 1) / 5 * 100) + "%";
+  // Progress bar (optional - removed from homepage)
+  const _pb = document.getElementById("progress-bar");
+  if (_pb) _pb.style.width = ((n + 1) / 5 * 100) + "%";
 
   currentPage = n;
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -260,8 +261,9 @@ function clearAmountError() {
   el.classList.remove("visible");
 }
 
-// Step pill click
-document.getElementById("step-nav").addEventListener("click", e => {
+// Step pill click (step-nav removed from homepage - guard if absent)
+const _stepNav = document.getElementById("step-nav");
+if (_stepNav) _stepNav.addEventListener("click", e => {
   const pill = e.target.closest(".step-pill");
   if (!pill) return;
   const step = parseInt(pill.dataset.step, 10);

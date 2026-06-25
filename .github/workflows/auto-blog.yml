@@ -1,0 +1,45 @@
+name: Auto Sector Blog
+
+on:
+  schedule:
+    # Mon/Wed/Fri 06:00 UTC = 11:00 PKT - after the 04:45 UTC data cron, so data.json is fresh.
+    - cron: "0 6 * * 1,3,5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+      - name: Sync dev with main
+        run: |
+          git config user.name "Abdul Ahad"
+          git config user.email "abdulahad1991@users.noreply.github.com"
+          git fetch origin main
+          git merge --ff-only origin/main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Run sector blog engine
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/run_blog_engine.py "$(date -u +%F)"
+      - name: Rebuild manifest
+        run: python scripts/build_manifest.py
+      - name: Commit to dev
+        run: |
+          git config user.name "Abdul Ahad"
+          git config user.email "abdulahad1991@users.noreply.github.com"
+          git add blog/ sitemap.xml llms.txt manifest.json data/blog_state.json data/news_queue.json
+          git diff --cached --quiet || (
+            git commit -m "chore(blog): sector refresh $(date -u +%F)" &&
+            git push origin dev
+          )

@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://pakinvestlysis.com"
-OG_DEFAULT = f"{SITE}/assets/og/blog-index.png"   # reuse an existing OG png
+OG_DEFAULT = f"{SITE}/assets/og/blog-index.png?v=2"   # reuse an existing OG png (?v bust cache)
 
 
 def fmt_pkr(n):

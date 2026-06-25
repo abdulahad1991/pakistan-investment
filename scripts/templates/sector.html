@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{META_DESC}}">
+<link rel="canonical" href="{{CANONICAL}}">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{META_DESC}}">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:site_name" content="Pakistan Investment Advisor">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{TITLE}}">
+<meta name="twitter:image" content="{{OG_IMAGE}}">
+<meta name="twitter:description" content="{{META_DESC}}">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/v2.css">
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4T2H0KH9H7"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-4T2H0KH9H7');
+</script>
+
+<!-- ── article-specific v2 styling ─────────────────────────────────── -->
+<style>
+  /* editorial article frame */
+  .art-frame{max-width:var(--maxw);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  /* breadcrumb */
+  .crumb{padding:14px var(--pad);border-bottom:1px solid var(--line2);font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .crumb li{display:flex;align-items:center;gap:8px}
+  .crumb li:not(:last-child)::after{content:"/";color:var(--line);font-weight:700}
+  .crumb a{color:var(--green)}
+  .crumb a:hover{color:var(--green2)}
+
+  /* masthead head block */
+  .art-head{display:grid;grid-template-columns:7fr 5fr}
+  .art-head .head-l{padding:48px 44px;border-right:1px solid var(--line)}
+  .art-head .desk{font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.18em;color:var(--green);margin-bottom:22px;text-transform:uppercase}
+  .art-head h1{font-family:var(--display);font-size:clamp(2rem,4.4vw,3.3rem);font-weight:800;line-height:1.02;letter-spacing:-.025em;color:var(--green-d);margin:0 0 22px;max-width:640px}
+  .art-byline{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;color:var(--muted);padding-top:18px;border-top:1px solid var(--line);text-transform:uppercase}
+  .art-byline .hl{color:var(--green)}
+  .art-head .head-r{background:var(--green-d);color:var(--sage);padding:40px;display:flex;flex-direction:column;justify-content:center}
+  .art-head .head-r .lbl{font-family:var(--display);font-size:.64rem;font-weight:600;letter-spacing:.16em;color:var(--acid);margin-bottom:14px;text-transform:uppercase}
+  .art-head .head-r p{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:#E4F2EA;margin:0;font-weight:500}
+  .art-head .head-r b{color:#fff;font-weight:700}
+  .art-head .head-r .acc{color:var(--acid)}
+
+  /* body two-column */
+  .art-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;border-top:1px solid var(--line)}
+  .prose{padding:48px 44px;border-right:1px solid var(--line);min-width:0}
+
+  /* prose typography */
+  .prose p{font-family:var(--body);font-size:1.04rem;line-height:1.7;color:var(--ink2);margin:0 0 18px;font-weight:500}
+  .prose p strong{color:var(--green-d);font-weight:700}
+  .prose em{font-style:italic}
+  .prose a{color:var(--green);font-weight:600;border-bottom:1px solid var(--line)}
+  .prose a:hover{color:var(--green2)}
+  .prose ul{margin:0 0 18px;padding-left:0;list-style:none}
+  .prose li{font-family:var(--body);font-size:1.02rem;line-height:1.6;color:var(--ink2);font-weight:500;padding:10px 0 10px 26px;border-bottom:1px solid var(--line2);position:relative}
+  .prose li:last-child{border-bottom:none}
+  .prose li::before{content:"→";position:absolute;left:0;color:var(--green);font-family:var(--display);font-weight:700}
+  .prose li strong{color:var(--green-d);font-weight:700}
+
+  /* numbered section heads */
+  .prose h2{font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;color:var(--green-d);margin:36px 0 18px}
+  .prose h2:first-of-type{margin-top:8px}
+  .prose h2 .sn{font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--green);display:block;letter-spacing:.1em;margin-bottom:8px}
+  .prose h3{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em;color:var(--green-d);margin:0 0 6px}
+
+  /* callouts */
+  .cl-key{background:var(--mint);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 32px}
+  .cl-key .k{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.06em;color:var(--green-d);margin-bottom:8px}
+  .cl-key ul{margin:0}
+  .cl-dark{background:var(--green-d);border-left:4px solid var(--acid);padding:18px 22px;margin:0 0 24px}
+  .cl-dark p,.cl-dark li{color:#E4F2EA}
+  .cl-dark strong{color:var(--acid)!important;font-weight:700}
+
+  /* live snapshot widget target (article.js fills #live-snap; keep id) */
+  #live-snap{border:1px solid var(--line);border-top:3px solid var(--acid);background:var(--mint);padding:18px;margin:0 0 28px}
+
+  /* figure / data cards */
+  .fig-card{background:var(--paper);border:1px solid var(--line);padding:22px 24px;margin:24px 0}
+  .fig-kicker{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .fig-title{font-family:var(--display);font-weight:700;font-size:1.1rem;color:var(--green-d);margin-bottom:16px}
+  .fig-note{font-size:.78rem;color:var(--muted);margin-top:14px;line-height:1.6}
+  .fig-note a{color:var(--green);font-weight:600;border-bottom:1px solid var(--line)}
+
+  /* funding-cost bars */
+  .cost-row{margin-bottom:14px}
+  .cost-row:last-child{margin-bottom:0}
+  .cost-lbl{display:flex;justify-content:space-between;font-family:var(--body);font-size:.88rem;margin-bottom:4px}
+  .cost-lbl b{font-weight:700;color:var(--ink)}
+  .cost-val{font-family:var(--mono);font-weight:600}
+  .cost-track{background:var(--paper3);height:18px;overflow:hidden}
+  .cost-fill{height:100%}
+
+  /* balance-sheet split bar */
+  .split-bar{display:flex;height:46px;overflow:hidden;border:1px solid var(--line)}
+  .split-bar .seg{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.82rem;font-weight:700;text-align:center;padding:0 6px}
+  .split-bar .seg-a{background:var(--green-d);color:#fff}
+  .split-bar .seg-b{background:var(--acid);color:var(--green-d)}
+  .split-cap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-top:8px}
+
+  /* earnings ladder */
+  .ladder{display:flex;flex-direction:column;gap:9px;font-family:var(--body);font-size:.9rem}
+  .ladder-row{display:flex;align-items:center;gap:10px}
+  .ladder-row .desc{flex:1;color:var(--ink2)}
+  .ladder-row .desc small{color:var(--muted);font-size:.8rem}
+  .ladder-row .bar{height:16px;width:100%;max-width:300px}
+  .ladder-row .amt{font-family:var(--mono);font-weight:600;width:64px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink2)}
+  .ladder-row.neg .bar{background:var(--red)}
+  .ladder-row.neg .amt{color:var(--red)}
+  .ladder-row.pos .bar{background:var(--green-d)}
+  .ladder-row.sub{border-top:1px dashed var(--line);padding-top:9px}
+  .ladder-row.sub .desc{font-weight:700;color:var(--green-d)}
+  .ladder-row.sub .bar{background:var(--green2)}
+  .ladder-row.sub .amt{font-weight:700;color:var(--green-d)}
+  .ladder-row.net{border-top:2px solid var(--green-d);padding-top:10px}
+  .ladder-row.net .desc{font-weight:800;color:var(--green-d)}
+  .ladder-row.net .bar{background:var(--green-d);height:20px}
+  .ladder-row.net .amt{font-weight:800;color:var(--green-d)}
+  .ladder-eps{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+  .ladder-eps .mono{font-family:var(--mono);color:var(--muted)}
+  .ladder-eps .res{font-family:var(--mono);font-weight:700;color:var(--green-d);font-size:1.05rem}
+
+  /* sensitivity svg note */
+  .sens-svg{max-width:520px;height:auto}
+
+  /* data table */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);margin:0 0 8px}
+  .data-table{width:100%;border-collapse:collapse;min-width:520px}
+  .data-table th{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-d);text-align:left;padding:13px 16px;background:var(--mint);border-bottom:2px solid var(--acid)}
+  .data-table td{font-family:var(--body);font-size:.92rem;color:var(--ink2);padding:13px 16px;border-bottom:1px solid var(--line2);vertical-align:top}
+  .data-table td strong{color:var(--green-d)}
+  .data-table tr:last-child td{border-bottom:none}
+  .data-table tr:hover td{background:var(--paper)}
+  .data-table td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tbl-note{font-size:.78rem;color:var(--muted);margin:0 0 18px;line-height:1.6}
+
+  /* faq */
+  .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
+  .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0}
+  .prose details[open] .faq-question{background:transparent;border-bottom:none}
+  .prose .faq-answer{padding:0 0 18px;font-size:1rem;line-height:1.7}
+
+  /* related links block */
+  .related-links{border-top:1px solid var(--line);margin-top:32px;padding-top:8px}
+  .related-links h3{font-family:var(--display);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-d);margin:16px 0 4px}
+  .related-links a{display:block;padding:11px 0;border-bottom:1px solid var(--line2);font-family:var(--body);font-size:.95rem;font-weight:700;color:var(--green-d)}
+  .related-links a:hover{color:var(--green)}
+
+  /* right rail */
+  .art-rail{padding:0}
+  .rail-sticky{position:sticky;top:78px}
+  .rail-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+  .rail-sec:last-child{border-bottom:none}
+  .rail-h{font-family:var(--display);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:var(--green-d);margin-bottom:14px;text-transform:uppercase}
+  .rail-toc a{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-family:var(--body);font-size:.86rem;font-weight:600;color:var(--ink2);transition:color .15s}
+  .rail-toc a:hover{color:var(--green)}
+  .rail-toc .ti{font-family:var(--display);font-size:.62rem;font-weight:700;color:var(--green)}
+  .rail-glance{background:var(--green-d);color:var(--sage)}
+  .rail-glance .rail-h{color:var(--acid)}
+  .gl-row{padding:10px 0;border-bottom:1px solid var(--line-dk)}
+  .gl-row:last-child{border-bottom:none}
+  .gl-n{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .gl-l{font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:rgba(204,223,211,.7);margin-top:2px;text-transform:uppercase}
+  .rail-next a{display:block;padding:11px 0;border-top:1px solid var(--line2);font-family:var(--body);font-size:.9rem;font-weight:700;color:var(--green-d);transition:color .15s}
+  .rail-next a:first-child{border-top:none}
+  .rail-next a:hover{color:var(--green)}
+
+  /* author bio */
+  .author-bio{display:flex;gap:14px;align-items:flex-start;background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin:0 0 28px}
+  .author-bio .av{background:var(--green-d);color:#fff;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1rem;flex-shrink:0}
+  .author-bio .nm{font-family:var(--display);font-weight:700;font-size:.95rem;color:var(--green-d)}
+  .author-bio .bd{font-family:var(--body);font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:3px}
+  .author-bio .ln{margin-top:6px;font-size:.8rem}
+  .author-bio .ln a{color:var(--green);font-weight:700}
+  .author-bio .ln .dt{color:var(--muted)}
+
+  @media(max-width:960px){
+    .art-head,.art-body{grid-template-columns:1fr}
+    .art-head .head-l{border-right:none;border-bottom:1px solid var(--line);padding:36px 24px}
+    .art-head .head-r{padding:32px 24px}
+    .prose{border-right:none;padding:36px 24px}
+    .art-rail{border-top:1px solid var(--line)}
+    .rail-sticky{position:static}
+  }
+  @media(max-width:560px){
+    .art-head h1{font-size:2rem}
+    .fig-card{padding:18px 16px}
+    .ladder-row .bar{display:none}
+  }
+</style>
+
+{{JSONLD}}
+</head>
+<body>
+
+<div class="accent-bar"></div>
+
+<!-- ── Header (v2 chrome, from index.html) ───────────────── -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Pakinvestlysis - home">
+      <img class="brand-logo" src="/assets/logo.png" alt="Pakinvestlysis" width="170" height="63">
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="/guides/">Guides</a>
+      <a href="/blog/">Blog</a>
+      <a href="/tax-calculator.html">Tax</a>
+      <a href="/gold-rates.html">Gold</a>
+      <a href="/about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button class="nav-search" type="button" data-search-open aria-label="Search (press /)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="20" y1="20" x2="16.65" y2="16.65"></line></svg><span>Search</span><kbd>/</kbd></button>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="site-nav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Live ticker ───────────────────────────────────────── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <div class="ticker-feed">
+      <span class="tk">KSE-100 <b id="tk-kse">-</b></span>
+      <span class="tk">POLICY <b id="tk-sbp">-</b></span>
+      <span class="tk">USD/PKR <b id="tk-pkr">-</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">-</b> <span class="up" id="tkc-gold"></span></span>
+      <span class="tk">CPI <b id="tk-inf">-</b></span>
+    </div>
+  </div>
+</div>
+
+<main>
+<article class="art-frame">
+  <nav class="crumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / {{H1}}</nav>
+  <div class="sector-body">
+    <h1>{{H1}}</h1>
+    <p class="sector-meta">As of {{AS_OF}} - figures update automatically through the week.</p>
+
+    <div class="tldr-box"><strong>In short.</strong> {{TLDR}}</div>
+
+    <section>
+      <h2>Live PSX figures for this sector</h2>
+      {{PERF_TABLE}}
+      <p class="sector-movers">{{MOVERS}}</p>
+    </section>
+
+    <section>
+      <h2>Latest sector news</h2>
+      <ul class="news-list">{{NEWS_LIST}}</ul>
+    </section>
+
+    {{EVERGREEN_BODY}}
+
+    <section>
+      <h2>Weekly snapshots</h2>
+      <div class="changelog">{{CHANGELOG}}</div>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently asked questions</h2>
+      {{FAQ_HTML}}
+    </section>
+
+    <div class="related-links"><h3>Related guides</h3><ul>{{RELATED}}</ul></div>
+  </div>
+</article>
+</main>
+
+
+<!-- ── Footer (v2 dark) ──────────────────────────────────── -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="/assets/logo-light.png" alt="Pakinvestlysis">
+      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice - for educational purposes only.</p>
+    </div>
+    <div class="foot-col">
+      <h4>DESKS</h4>
+      <a href="/">Markets</a>
+      <a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a>
+      <a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a>
+      <a href="/gold-rates.html">Gold &amp; Metals</a>
+    </div>
+    <div class="foot-col">
+      <h4>TOOLS</h4>
+      <a href="/tax-calculator.html">Tax Calculator</a>
+      <a href="/zakat-calculator.html">Zakat Calculator</a>
+      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/faq.html">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <h4>SITE</h4>
+      <a href="/about.html">About</a>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span>
+    <span>Sources: PSX · SBP · CDNS · MUFAP · <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/abdulahad1991" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</footer>
+
+<script src="/assets/article.js" defer></script>
+<script src="/assets/analytics.js" defer></script>
+<script src="/assets/search.js" defer></script>
+<script src="/assets/share.js" defer></script>
+<script src="/assets/ticker.js" defer></script>
+</body>
+</html>

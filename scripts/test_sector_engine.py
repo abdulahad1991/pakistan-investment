@@ -61,3 +61,16 @@ def test_sectors_config():
         slugs.add(s["slug"])
     assert {"automotive-sector-pakistan", "it-sector-pakistan",
             "fmcg-sector-pakistan", "exporters-sector-pakistan"} == slugs
+
+
+def test_template_has_all_tokens():
+    t = (ROOT / "scripts/templates/sector.html").read_text()
+    for tok in ["{{TITLE}}", "{{META_DESC}}", "{{CANONICAL}}", "{{OG_IMAGE}}",
+                "{{H1}}", "{{TLDR}}", "{{AS_OF}}", "{{PERF_TABLE}}", "{{MOVERS}}",
+                "{{NEWS_LIST}}", "{{CHANGELOG}}", "{{EVERGREEN_BODY}}",
+                "{{FAQ_HTML}}", "{{RELATED}}", "{{JSONLD}}"]:
+        assert tok in t, f"template missing {tok}"
+    # live site chrome must survive the templating
+    assert "assets/v2.css" in t
+    assert 'id="site-nav"' in t
+    assert "</html>" in t

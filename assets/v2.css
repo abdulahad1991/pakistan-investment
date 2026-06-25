@@ -527,3 +527,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,.
   .section-heading h2,.coverage-head h2{font-size:1.6rem}
   .hero-proof span{flex:1 0 50%}
 }
+
+/* ── sector hub pages (auto-blog engine) ─────────────────── */
+.sector-body{padding:24px var(--pad);max-width:var(--maxw);margin:0 auto}
+.sector-body h1{margin:.2em 0 .15em}
+.sector-meta{color:var(--muted);font-size:.85rem;margin:0 0 1.2rem}
+.sector-movers{color:var(--muted);font-size:.9rem;font-style:italic}
+.tldr-box{border-left:4px solid var(--gold);background:rgba(242,185,75,.08);padding:1rem 1.25rem;margin:1.2rem 0;border-radius:4px}
+.news-list{padding-left:1.1rem}
+.news-list li{margin:.4rem 0}
+.news-list .src{color:var(--muted);font-size:.82em}
+.changelog{display:flex;flex-direction:column;gap:.75rem}
+.changelog .snap{border-left:3px solid var(--green);padding-left:.9rem;font-size:.92rem}
+.perf-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin:.5rem 0}
+.perf-table th,.perf-table td{padding:.45rem .6rem;text-align:right;border-bottom:1px solid var(--line2)}
+.perf-table th:first-child,.perf-table td:first-child{text-align:left}
+.perf-up{color:var(--green)}
+.perf-down{color:var(--red)}

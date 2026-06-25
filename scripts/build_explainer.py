@@ -18,6 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUTDIR = ROOT / "assets" / "blog-audio"
 VOICE = "ur-PK-AsadNeural"
+RATE = "-15%"            # slower than default so it's easy to follow
 MAX_LINES = 7
 MAX_WORDS = 22
 
@@ -107,6 +108,35 @@ def _leaky(s):
     return len(re.findall(r"[A-Za-z]{3,}", s)) >= 3
 
 
+# Latin letter -> Urdu phonetic (for spelling out any leftover acronym)
+_LAT = {"A": "اے", "B": "بی", "C": "سی", "D": "ڈی", "E": "ای", "F": "ایف",
+        "G": "جی", "H": "ایچ", "I": "آئی", "J": "جے", "K": "کے", "L": "ایل",
+        "M": "ایم", "N": "این", "O": "او", "P": "پی", "Q": "کیو", "R": "آر",
+        "S": "ایس", "T": "ٹی", "U": "یو", "V": "وی", "W": "ڈبلیو", "X": "ایکس",
+        "Y": "وائی", "Z": "زیڈ"}
+# Known brand / finance terms -> Urdu phonetic (so the Urdu voice can say them)
+_SPEAK = {
+    "pakinvestlysis": "پاک انویسٹلائسز", "kibor": "کائبور",
+    "p/e": "پی ای ریشو", "emi": "ای ایم آئی", "psx": "پی ایس ایکس",
+    "fbr": "ایف بی آر", "npc": "نیا پاکستان سرٹیفکیٹ", "rda": "روشن ڈیجیٹل اکاؤنٹ",
+}
+
+
+def for_speech(s):
+    """Make text fully Urdu-script so the ur-PK voice reads everything (no
+    skipped Latin words). Used only for the audio, not the on-screen caption."""
+    s = s.replace("₨", " روپے ").replace("%", " فیصد ").replace("&", " اور ")
+    s = re.sub(r"\b(Rs|PKR)\b", " روپے ", s, flags=re.I)
+    s = re.sub(r"(\d+)\s*:\s*(\d+)", r"\1 بٹا \2", s)        # 90:10 -> 90 بٹا 10
+    s = re.sub(r"\s\+\s", " جمع ", s)                         # + -> plus
+    for k, v in sorted(_SPEAK.items(), key=lambda x: -len(x[0])):
+        s = re.sub(re.escape(k), v, s, flags=re.I)
+    # spell out any remaining Latin run (acronyms / stray tokens) letter by letter
+    s = re.sub(r"[A-Za-z]{2,}", lambda m: " ".join(_LAT.get(c.upper(), "") for c in m.group(0)), s)
+    s = re.sub(r"[A-Za-z]", lambda m: _LAT.get(m.group(0).upper(), ""), s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
 def translate(texts):
     from deep_translator import GoogleTranslator
     tr = GoogleTranslator(source="en", target="ur")
@@ -124,9 +154,9 @@ def translate(texts):
     return out
 
 
-async def _tts(text, path, voice):
+async def _tts(text, path, voice, rate=RATE):
     import edge_tts
-    await edge_tts.Communicate(text, voice=voice).save(str(path))
+    await edge_tts.Communicate(text, voice=voice, rate=rate).save(str(path))
 
 
 def _dur(path):
@@ -143,7 +173,8 @@ def build(slug, voice=VOICE):
     htmltext = page.read_text(encoding="utf-8")
     title = og_title(htmltext)
     en = extract_lines(htmltext)
-    ur = translate(en)
+    ur = translate(en)                       # display captions
+    speak = [for_speech(u) for u in ur]      # all-Urdu-script for the voice
     labels = chip_labels(len(en))
 
     OUTDIR.mkdir(parents=True, exist_ok=True)
@@ -151,7 +182,7 @@ def build(slug, voice=VOICE):
     chapters, parts, start = [], [], 0.0
     for i, (u, e) in enumerate(zip(ur, en)):
         clip = tmp / f"l{i:02d}.mp3"
-        asyncio.run(_tts(u, clip, voice))
+        asyncio.run(_tts(speak[i], clip, voice))
         d = _dur(clip)
         chapters.append({"i": i, "label": labels[i], "ur": u, "en": e,
                          "start": round(start, 2), "dur": round(d, 2)})

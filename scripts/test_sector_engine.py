@@ -158,3 +158,18 @@ def test_register_idempotent(tmp_path):
     t = lm.read_text()
     assert t.count("## Sector Outlooks") == 1
     assert t.count("blog/x.html") == 1 and "desc2" in t and "desc1" not in t
+
+
+def test_pick_next_round_robin():
+    import run_blog_engine as rb
+    secs = [{"slug": "a"}, {"slug": "b"}, {"slug": "c"}, {"slug": "d"}]
+    st = {"index": 0, "history": []}
+    slug1, st = rb.pick_next(st, secs)
+    assert slug1 == "a" and st["index"] == 1
+    slug2, st = rb.pick_next(st, secs)
+    assert slug2 == "b" and st["index"] == 2
+    st["index"] = 3
+    slug, st = rb.pick_next(st, secs)
+    assert slug == "d" and st["index"] == 4
+    slug, st = rb.pick_next(st, secs)
+    assert slug == "a" and st["index"] == 5            # wraps

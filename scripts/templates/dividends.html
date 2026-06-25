@@ -107,8 +107,12 @@ gtag('config', 'G-4T2H0KH9H7');
   .hist-card .hc-name span{display:block;font-family:var(--mono);font-size:.72rem;color:var(--muted);font-weight:500}
   .hist-card .hc-yld{font-family:var(--display);font-weight:800;color:var(--green);font-size:1.1rem}
   .hist-card .hc-yld span{display:block;font-family:var(--display);font-size:.56rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;text-align:right}
+  .hist-card{position:relative}
   .hist-card svg{display:block;width:100%;height:auto}
   .hist-card .hc-foot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-top:8px}
+  .ix-chart{cursor:crosshair;touch-action:none}
+  .chart-tip{position:fixed;z-index:60;pointer-events:none;display:none;background:var(--green-d);color:#fff;font-family:var(--mono);font-size:.74rem;font-weight:600;padding:5px 9px;border:1px solid var(--acid);white-space:nowrap;box-shadow:0 6px 18px -6px rgba(0,0,0,.4)}
+  .chart-tip b{color:var(--acid);font-weight:700}
 
   .prose .faq-item{margin-bottom:0;border:none;border-top:1px solid var(--line);background:transparent}
   .prose .faq-question{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--green-d);padding:18px 0;cursor:pointer;list-style:none}
@@ -363,6 +367,51 @@ gtag('config', 'G-4T2H0KH9H7');
   </div>
 </footer>
 
+<div id="chart-tip" class="chart-tip" role="status" aria-live="polite"></div>
+<script>
+/* Interactive hover for the dividend price charts (no dependency). */
+(function(){
+  var tip = document.getElementById("chart-tip");
+  if(!tip) return;
+  function fmtPKR(n){
+    n = Math.round(n); var s = String(Math.abs(n));
+    if(s.length > 3){ var head = s.slice(0,-3), tail = s.slice(-3);
+      head = head.replace(/\B(?=(\d\d)+(?!\d))/g, ","); s = head + "," + tail; }
+    return (n<0?"-":"") + "₨ " + s;
+  }
+  function wire(svg){
+    var vals = (svg.dataset.v||"").split("|").map(Number);
+    var labs = (svg.dataset.l||"").split("|");
+    if(vals.length < 2) return;
+    var vb = svg.viewBox.baseVal, W = vb.width, H = vb.height;
+    var pad = +svg.dataset.pad || 6;
+    var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), rng = (hi-lo)||1;
+    var n = vals.length, step = (W - 2*pad)/(n-1);
+    var dot = svg.querySelector(".hov-dot"), line = svg.querySelector(".hov-line");
+    function at(i){ return [pad + i*step, H - pad - (vals[i]-lo)/rng*(H - 2*pad)]; }
+    function show(cx, cy){
+      var r = svg.getBoundingClientRect();
+      var vx = (cx - r.left)/r.width*W;
+      var i = Math.round((vx - pad)/step); i = Math.max(0, Math.min(n-1, i));
+      var p = at(i);
+      dot.setAttribute("cx", p[0]); dot.setAttribute("cy", p[1]); dot.style.display = "";
+      line.setAttribute("x1", p[0]); line.setAttribute("x2", p[0]); line.style.display = "";
+      tip.innerHTML = (labs[i]||"") + " &middot; <b>" + fmtPKR(vals[i]) + "</b>";
+      tip.style.display = "block";
+      var tw = tip.offsetWidth, left = cx + 14;
+      if(left + tw > window.innerWidth - 8) left = cx - tw - 14;
+      tip.style.left = left + "px"; tip.style.top = (cy - 12) + "px";
+    }
+    function hide(){ dot.style.display = "none"; line.style.display = "none"; tip.style.display = "none"; }
+    svg.addEventListener("mousemove", function(e){ show(e.clientX, e.clientY); });
+    svg.addEventListener("mouseleave", hide);
+    svg.addEventListener("touchstart", function(e){ var t=e.touches[0]; show(t.clientX, t.clientY); }, {passive:true});
+    svg.addEventListener("touchmove",  function(e){ var t=e.touches[0]; show(t.clientX, t.clientY); }, {passive:true});
+    svg.addEventListener("touchend", hide);
+  }
+  document.querySelectorAll(".ix-chart").forEach(wire);
+})();
+</script>
 <script src="/assets/article.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>

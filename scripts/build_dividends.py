@@ -47,34 +47,41 @@ def _pts(values, w, h, pad=4):
     return pts
 
 
-def sparkline(values, w=150, h=36):
+def sparkline(values, w=150, h=36, tip=None):
     if not values or len(values) < 2:
         return ""
     up = values[-1] >= values[0]
     col = "#0B755F" if up else "#C24132"
     pts = _pts(values, w, h)
     poly = " ".join(f"{x},{y}" for x, y in pts)
+    title = f"<title>{_html.escape(tip)}</title>" if tip else ""
     return (f'<svg class="spark" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-            f'role="img" aria-label="3-year price trend">'
+            f'role="img" aria-label="3-year price trend">{title}'
             f'<polyline fill="none" stroke="{col}" stroke-width="2" '
             f'stroke-linejoin="round" stroke-linecap="round" points="{poly}"/>'
             f'<circle cx="{pts[-1][0]}" cy="{pts[-1][1]}" r="2.6" fill="{col}"/></svg>')
 
 
-def chart(values, w=300, h=92):
+def chart(values, labels=None, w=300, h=92, pad=6):
     if not values or len(values) < 2:
         return '<p class="tbl-note">History backfills on the next refresh.</p>'
     up = values[-1] >= values[0]
     col = "#0B755F" if up else "#C24132"
     fill = "rgba(11,117,95,.10)" if up else "rgba(194,65,50,.10)"
-    pts = _pts(values, w, h, pad=6)
+    pts = _pts(values, w, h, pad=pad)
     poly = " ".join(f"{x},{y}" for x, y in pts)
-    area = f"6,{h-6} " + poly + f" {w-6},{h-6}"
-    return (f'<svg width="{w}" height="{h}" viewBox="0 0 {w} {h}" preserveAspectRatio="none" '
-            f'role="img" aria-label="monthly close">'
+    area = f"{pad},{h-pad} " + poly + f" {w-pad},{h-pad}"
+    dv = "|".join(f"{v:g}" for v in values)
+    dl = "|".join(labels) if labels else ""
+    return (f'<svg class="ix-chart" data-v="{dv}" data-l="{dl}" data-pad="{pad}" '
+            f'width="{w}" height="{h}" viewBox="0 0 {w} {h}" preserveAspectRatio="none" '
+            f'role="img" aria-label="monthly close, hover for values">'
             f'<polygon fill="{fill}" points="{area}"/>'
             f'<polyline fill="none" stroke="{col}" stroke-width="2.2" '
             f'stroke-linejoin="round" stroke-linecap="round" points="{poly}"/>'
+            f'<line class="hov-line" x1="0" y1="{pad}" x2="0" y2="{h-pad}" stroke="{col}" '
+            f'stroke-width="1" stroke-dasharray="3 3" style="display:none"/>'
+            f'<circle class="hov-dot" r="3.6" fill="{col}" stroke="#fff" stroke-width="1.4" style="display:none"/>'
             f'<circle cx="{pts[-1][0]}" cy="{pts[-1][1]}" r="3" fill="{col}"/></svg>')
 
 
@@ -87,6 +94,8 @@ def table_html(rows, hist):
         chg = s.get("chg1y", 0); cls = "pos" if chg >= 0 else "neg"
         sign = "+" if chg >= 0 else ""
         vals = (hist.get(s["ticker"]) or {}).get("values", [])
+        tip = (f'{s["ticker"]}: ₨{fmt_pkr(vals[0])} → ₨{fmt_pkr(vals[-1])} '
+               f'(3-yr)') if vals else None
         out.append(
             f'<tr><td class="rk">{i}</td>'
             f'<td class="co"><b>{_html.escape(s["name"])}</b><span>{s["ticker"]}</span></td>'
@@ -95,7 +104,7 @@ def table_html(rows, hist):
             f'<td class="yld">{s.get("yield", 0):.2f}%</td>'
             f'<td class="{cls}">{sign}{chg:.1f}%</td>'
             f'<td>{s.get("pe", 0):.1f}</td>'
-            f'<td>{sparkline(vals)}</td></tr>')
+            f'<td>{sparkline(vals, tip=tip)}</td></tr>')
     out.append("</tbody></table>")
     return "".join(out)
 
@@ -104,7 +113,7 @@ def cards_html(rows, hist):
     out = []
     for s in rows:
         h = hist.get(s["ticker"]) or {}
-        vals = h.get("values", [])
+        vals = h.get("values", []); labs = h.get("labels", [])
         start = vals[0] if vals else s["price"]
         chg = ((s["price"] - start) / start * 100) if start else 0
         cls = "pos" if chg >= 0 else "neg"; sign = "+" if chg >= 0 else ""
@@ -112,7 +121,7 @@ def cards_html(rows, hist):
             f'<div class="hist-card"><div class="hc-top">'
             f'<div class="hc-name">{_html.escape(s["name"])}<span>{s["ticker"]}</span></div>'
             f'<div class="hc-yld">{s.get("yield",0):.1f}%<span>yield</span></div></div>'
-            f'{chart(vals)}'
+            f'{chart(vals, labs)}'
             f'<div class="hc-foot"><span>&#8360; {fmt_pkr(start)}</span>'
             f'<span class="{cls}">{sign}{chg:.1f}% 3y</span>'
             f'<span>&#8360; {fmt_pkr(s["price"])}</span></div></div>')

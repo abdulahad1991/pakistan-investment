@@ -34,7 +34,7 @@ def extract(path: Path, section: str):
 def scan(section: str):
     items = []
     for f in sorted((ROOT / section).glob("*.html")):
-        if f.name == "index.html":
+        if f.name == "index.html" or "backup" in f.name:
             continue
         try:
             items.append(extract(f, section))

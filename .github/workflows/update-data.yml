@@ -60,6 +60,20 @@ jobs:
             git push origin dev
           )
 
+      # Habit: every blog gets a 60s Urdu explainer. Idempotent - only new blogs
+      # generate audio. Soft-fails so it never blocks the data deploy.
+      - name: Ensure blog explainers (Urdu 60s)
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg || true
+          pip install -q edge-tts deep-translator mutagen || true
+          python scripts/ensure_explainers.py || true
+          git add assets/blog-audio blog/*.html || true
+          git diff --cached --quiet || (
+            git commit -m "chore: blog Urdu explainers $(date -u +'%Y-%m-%d')" &&
+            git push origin dev
+          )
+
   merge-to-main:
     name: Merge dev into main
     needs: scrape

@@ -19,8 +19,9 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTDIR = ROOT / "assets" / "blog-audio"
 VOICE = "ur-PK-AsadNeural"
 RATE = "-15%"            # slower than default so it's easy to follow
-MAX_LINES = 7
-MAX_WORDS = 22
+MAX_LINES = 6            # keep the whole thing inside ~60 seconds (the USP)
+MAX_WORDS = 17
+CAP_SEC = 60             # hard ceiling: drop trailing lines past this
 
 
 def _clean(text):
@@ -188,6 +189,15 @@ def build(slug, voice=VOICE):
                          "start": round(start, 2), "dur": round(d, 2)})
         parts.append(clip)
         start += d
+
+    # Hard cap: keep only the leading lines that fit inside CAP_SEC.
+    if start > CAP_SEC and len(chapters) > 2:
+        keep, t = 0, 0.0
+        for ch in chapters:
+            if t + ch["dur"] > CAP_SEC and keep >= 2:
+                break
+            t += ch["dur"]; keep += 1
+        chapters, parts = chapters[:keep], parts[:keep]
 
     listf = tmp / "list.txt"
     listf.write_text("".join(f"file '{p}'\n" for p in parts))

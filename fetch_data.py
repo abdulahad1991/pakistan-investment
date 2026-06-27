@@ -288,14 +288,24 @@ def _intl_gold_tola_24k():
         print(f"  Gold intl spot failed: {e}")
     return None
 
+_MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
 def _build_gold_history():
-    """Real PKR/tola 24K monthly history from GC=F × PKR=X (last ~6 years)."""
+    """Real PKR/tola 24K monthly history from GC=F × PKR=X (last ~6 years).
+
+    yfinance occasionally drops a monthly bar (NaN Close). Charting the
+    surviving points against evenly-spaced category labels would distort the
+    time axis (a 3-month gap renders the same width as a 1-month step). So we
+    key points by calendar month and walk a *continuous* monthly index,
+    forward-filling any dropped month — the x-axis is then even in real time.
+    """
     try:
         oz = yf.Ticker("GC=F").history(period="6y", interval="1mo")["Close"].dropna()
         if oz.empty:
             return None
         fx = yf.Ticker("PKR=X").history(period="6y", interval="1mo")["Close"].dropna()
-        labels, values = [], []
+        raw = {}
         for ts, usd_oz in oz.items():
             if not fx.empty:
                 prior = fx[fx.index <= ts]
@@ -304,8 +314,22 @@ def _build_gold_history():
                 rate = data["macro"]["pkr_usd"]
             tola = round(float(usd_oz) / 31.1035 * rate * TOLA_G)
             if 50000 <= tola <= 2000000:
-                labels.append(ts.strftime("%b'%y"))
-                values.append(tola)
+                raw[(ts.year, ts.month)] = tola
+        if len(raw) < 6:
+            return None
+        keys = sorted(raw)
+        y, m = keys[0]
+        (y1, m1) = keys[-1]
+        labels, values, last = [], [], None
+        while (y, m) <= (y1, m1):
+            if (y, m) in raw:
+                last = raw[(y, m)]
+            if last is not None:
+                labels.append("%s'%02d" % (_MON[m - 1], y % 100))
+                values.append(last)
+            m += 1
+            if m > 12:
+                m, y = 1, y + 1
         return {"labels": labels, "values": values} if len(values) >= 6 else None
     except Exception as e:
         print(f"  Gold history failed: {e}")
@@ -342,10 +366,28 @@ if hist:
     gold["history"] = hist
     fetched.append(f"Gold history: {len(hist['values'])} months")
 
-# 1-year change from monthly history (-13 = 12 months back)
+# Anchor the chart's most-recent point to the live headline rate. History is
+# international-spot-derived (GC=F × PKR/USD); the headline is the local gold.pk
+# Sarafa rate. Without this the chart ends a few percent off the big number on
+# the same page. Setting the last point = headline makes the graph end exactly
+# where the headline says (the last point IS "now").
+if gold.get("history", {}).get("values") and gold.get("tola_24k"):
+    gold["history"]["values"][-1] = gold["tola_24k"]
+
+# 1-year change: compare the latest point with the one ~12 *calendar* months
+# back (found by label), not 13 array positions — a dropped month would
+# otherwise make the window 13+ months and overstate the yearly change.
+labels = gold.get("history", {}).get("labels", [])
 hv = gold.get("history", {}).get("values", [])
-if len(hv) >= 13 and hv[-13]:
-    gold["chg1y_pct"] = round((hv[-1] - hv[-13]) / hv[-13] * 100, 1)
+if len(hv) >= 13 and labels:
+    _mn = {m: i for i, m in enumerate(_MON, 1)}
+    def _mi(lbl):
+        a, b = lbl.split("'")
+        return (2000 + int(b)) * 12 + _mn[a]
+    tgt = _mi(labels[-1]) - 12
+    j = min(range(len(labels)), key=lambda i: abs(_mi(labels[i]) - tgt))
+    if hv[j]:
+        gold["chg1y_pct"] = round((hv[-1] - hv[j]) / hv[j] * 100, 1)
 
 # ── Write updated data.json ───────────────────────────────────────
 data["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

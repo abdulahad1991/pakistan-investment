@@ -35,8 +35,25 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Fetch live data
-        run: python fetch_data.py
+      - name: Install optional fetch deps (gold spot cross-check)
+        run: pip install -q yfinance || true
+
+      - name: Fetch live data (cadence-aware) + merge
+        run: |
+          # 04:45 UTC run = "open" (fast price refresh); 11:30 UTC = "close"
+          # (full refresh incl. per-stock fundamentals + dividends).
+          HOUR=$(date -u +%H)
+          if [ "$HOUR" -lt 8 ]; then GROUP=open; else GROUP=close; fi
+          echo "Fetcher group: $GROUP"
+          python run_fetchers.py "$GROUP"
+
+      - name: Rebuild stock history from PSX EOD (weekly, Mondays)
+        run: |
+          if [ "$(date -u +%u)" = "1" ]; then
+            python run_fetchers.py history
+          else
+            echo "Not Monday (UTC) - skipping weekly stock-history rebuild"
+          fi
 
       - name: Refresh living dividend page (weekly, Mondays)
         run: |
@@ -53,7 +70,7 @@ jobs:
         run: |
           git config user.name  "Abdul Ahad"
           git config user.email "abdulahad1991@users.noreply.github.com"
-          git add data.json manifest.json data/stock_history.json blog/top-dividend-stocks-pakistan.html
+          git add data.json manifest.json data/stock_history.json data/partitions blog/top-dividend-stocks-pakistan.html
           git diff --cached --quiet || (
             true &&
             git commit -m "chore: update investment data $(date -u +'%Y-%m-%d')" &&
@@ -95,6 +112,33 @@ jobs:
           git fetch origin dev
           git merge --ff-only origin/dev
           git push origin main
+
+  # The `social` job commits the homepage daily-brief video to dev AFTER
+  # merge-to-main has already fast-forwarded main — so without this, the video
+  # (which embeds the session's market numbers) reaches production one session
+  # late, sitting next to fresh live cards. This final fast-forward republishes
+  # main to dev's HEAD once both jobs finish. if:always() so a Remotion render
+  # failure in `social` can never block the data deploy.
+  republish-main:
+    name: Republish main after social
+    needs: [merge-to-main, social]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Fast-forward main to dev HEAD
+        run: |
+          git config user.name  "Abdul Ahad"
+          git config user.email "abdulahad1991@users.noreply.github.com"
+          git fetch origin dev
+          git merge --ff-only origin/dev && git push origin main || \
+            echo "main already up to date with dev"
 
   social:
     name: Render daily social assets

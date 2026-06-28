@@ -28,15 +28,31 @@ Educational only; **never financial advice**. Audience: Pakistani retail savers.
   is labelled by `session` ("Market open"/"Market close") so the two daily posts differ.
 - User works autonomously with skip-permissions; pushing to deploy is expected.
 
-## Data pipeline
-- `fetch_data.py` → writes **`data.json`** (the single live dataset). Sources: yfinance
-  (PKR/USD, PSX stock prices, gold spot GC=F + PKR=X history), and HTML scrapes
-  (PSX KSE-100, CDNS savings rates, SBP policy rate, finhisaab fund returns, **gold.pk** gold rates).
-  Every section is best-effort: on failure it keeps the existing `data.json` value (graceful fallback).
-- `data.json` is fetched client-side by `app.js` (homepage) and `assets/gold.js` (gold page).
-  It is committed with **seed values** so the site works before the next cron run.
+## Data pipeline (rebuilt 2026-06-28 — single-responsibility fetchers + merge)
+- **`fetchers/*.py`** — one module per data category, each from the AUTHORITATIVE source:
+  `cpi`→PBS SDMX (real CPI YoY, was a hardcoded 7.0 seed), `stocks`+`kse`+`dividends`→**PSX Data
+  Portal** (dps.psx.com.pk; replaces unreliable yfinance — fixes 0.0 dividends, garbage P/E,
+  the open-vs-close KSE bug), `reserves`/`forex`/`policy`→SBP, `savings`→CDNS banner,
+  `funds`→MUFAP (tags income=annualized vs equity=absolute), `gold`→gold.pk, `macro`→PBS GDP + curated IMF.
+  Each exposes a **pure `parse_*`** (unit-tested against real captured responses in `tests/fixtures/`,
+  run via `pytest`) and a `fetch()` that writes a provenance partition to `data/partitions/<name>.json`
+  `{value, as_of, source, ok, fetched_at, cadence}`. Graceful fallback: a failure keeps the prior
+  partition flagged `ok:false` (never silently serves stale as current).
+- **`run_fetchers.py [open|close|history|all]`** — orchestrator (cadence groups), then **`build_data.py`**
+  overlays partitions onto the curated **`data.json`** (preserving hand-authored content), adds `_asof`
+  fields + a `data_health` block + staleness flags, and asserts consistency (e.g. gold gram==tola/11.6638).
+  `fetch_data.py` is now a deprecation shim → `run_fetchers`.
+- `data/partitions/*.json` are **committed** (audit trail + lets `policy.py` derive the rate STANCE by
+  diffing against the prior run — stance was previously hardcoded "Holding").
+- CI (`update-data.yml`): 04:45 UTC run = `open` (fast prices), 11:30 UTC = `close` (full incl. per-stock
+  fundamentals + dividends); Mondays also `run_fetchers.py history` (rebuilds `data/stock_history.json`
+  from PSX EOD for the dividend page + backtester).
+- `data.json` is fetched client-side by `app.js` (homepage) and `assets/gold.js` (gold page); committed
+  with seed values so the site works before the next cron run.
 - `scripts/build_manifest.py` → **`manifest.json`** (auto-listing of `guides/` + `blog/` for
   the index pages and site search). New guide/blog HTML files appear automatically next run.
+- **When adding a live metric:** add a `fetchers/<x>.py` (pure parser + fixture test), map it in
+  `build_data.py`, seed `data.json`, render it (with its `_asof`) in the page JS.
 
 ## Key files
 - `index.html` — homepage: 5-step investment wizard (pages 0–4) + static SEO section + **live gold card**.

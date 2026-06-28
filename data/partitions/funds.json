@@ -1,0 +1,37 @@
+{
+  "name": "funds",
+  "value": {
+    "Meezan Islamic Income Fund": {
+      "nav": 51.8643,
+      "ret_1y": 8.46,
+      "return_type": "annualized"
+    },
+    "Al Meezan Mutual Fund": {
+      "nav": 50.6802,
+      "ret_1y": 30.15,
+      "return_type": "absolute"
+    },
+    "NBP Islamic Stock Fund": {
+      "nav": 26.1405,
+      "ret_1y": 37.17,
+      "return_type": "absolute"
+    },
+    "NBP Savings Fund": {
+      "nav": 9.9313,
+      "ret_1y": 13.11,
+      "return_type": "annualized"
+    },
+    "JS Islamic Fund": {
+      "nav": 257.37,
+      "ret_1y": 22.28,
+      "return_type": "absolute"
+    }
+  },
+  "as_of": "2026-06-28",
+  "source": "Mutual Funds Association of Pakistan (MUFAP)",
+  "ok": true,
+  "fetched_at": "2026-06-28T09:15:25Z",
+  "cadence": "daily",
+  "count": 5,
+  "source_url": "https://www.mufap.com.pk/Industry/IndustryStatDaily?tab=1"
+}

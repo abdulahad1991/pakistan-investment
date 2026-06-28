@@ -234,3 +234,13 @@ jobs:
           LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
           LINKEDIN_VERSION: ${{ secrets.LINKEDIN_VERSION }}
         run: python scripts/post_linkedin.py
+
+      - name: Auto-post Short to TikTok
+        continue-on-error: true
+        env:
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          TIKTOK_MODE: ${{ secrets.TIKTOK_MODE }}        # direct|inbox (default direct)
+          TIKTOK_PRIVACY: ${{ secrets.TIKTOK_PRIVACY }}  # default PUBLIC_TO_EVERYONE
+        run: python scripts/post_tiktok.py

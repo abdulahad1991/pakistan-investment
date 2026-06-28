@@ -1,14 +1,16 @@
-# Auto-posting setup — YouTube + LinkedIn
+# Auto-posting setup — YouTube + LinkedIn + TikTok
 
 The daily `update-data.yml` job renders the brief, then runs
-`scripts/post_youtube.py` and `scripts/post_linkedin.py`. Both **no-op when
-their secrets are missing**, so nothing posts until you complete the setup
-below. Posting is `continue-on-error`: a failure never blocks the data/homepage
-pipeline.
+`scripts/post_youtube.py`, `scripts/post_linkedin.py` and `scripts/post_tiktok.py`.
+All three **no-op when their secrets are missing**, so nothing posts until you
+complete the setup below. Posting is `continue-on-error`: a failure never blocks
+the data/homepage pipeline.
 
 What posts, twice every weekday (Market open ~09:45 PKT, Market close ~16:30 PKT):
 - **YouTube** ← `video/out/daily/short.mp4` (9:16), **public** Short.
 - **LinkedIn** ← `video/out/daily/linkedin.mp4` (1:1), to the **company page**.
+- **TikTok** ← `video/out/daily/short.mp4` (9:16), public once the app is audited
+  (private/draft before that — see the TikTok section).
 
 Caption text comes from `social-kit/daily/<date>.json` (built by `build_daily.py`).
 
@@ -85,6 +87,59 @@ only — don't commit it.
 
 ---
 
+## TikTok (one-time + ~yearly token refresh)
+
+> ⚠️ **The big difference from YouTube/LinkedIn:** TikTok will **not let an
+> unaudited app post publicly**. Until TikTok audits your app, a "direct" post
+> can only be **private (SELF_ONLY)**, or you push it to your **drafts inbox** to
+> publish by hand. To get fully-automatic **public** posting you must submit the
+> app for audit (below). The poster handles both states automatically.
+
+1. **developer.tiktok.com → Manage apps → Connect an app.** Create the app.
+2. **Add product → "Content Posting API".** (Also add **Login Kit** for OAuth.)
+3. **Request scopes:** `video.publish` (public direct post) **and** `video.upload`
+   (drafts). `user.info.basic` is added automatically.
+4. **Add a Redirect URI** under Login Kit — TikTok requires **https** and a
+   registered domain (localhost is rejected). Use a URL on your own site, e.g.
+   `https://pakinvestlysis.com/tiktok`. The page doesn't need to do anything —
+   the token script just reads the `?code=` TikTok appends to it.
+5. **Mint the refresh token locally:**
+   ```bash
+   pip install requests
+   export TIKTOK_CLIENT_KEY=...        # app "Client key"
+   export TIKTOK_CLIENT_SECRET=...     # app "Client secret"
+   export TIKTOK_REDIRECT_URI=https://pakinvestlysis.com/tiktok   # EXACTLY as registered
+   python scripts/get_tiktok_token.py
+   ```
+   Open the printed URL, log in **as the posting account**, approve, then paste
+   the redirected URL back. It prints `TIKTOK_REFRESH_TOKEN` (valid ~365 days).
+6. **Add repo secrets:**
+   ```bash
+   gh secret set TIKTOK_CLIENT_KEY --body '...'
+   gh secret set TIKTOK_CLIENT_SECRET --body '...'
+   gh secret set TIKTOK_REFRESH_TOKEN --body '...'
+   # until the app is audited, push to drafts instead of posting privately:
+   gh secret set TIKTOK_MODE --body 'inbox'      # switch to 'direct' (or unset) after audit
+   ```
+7. **Go public (after testing):** in the app dashboard, **submit for review /
+   audit** of the Content Posting API. Once approved, `PUBLIC_TO_EVERYONE`
+   becomes available — set `TIKTOK_MODE=direct` (or delete the secret; direct is
+   the default) and posts go out publicly with no further changes.
+
+**Maintenance:**
+- **~once a year:** re-run step 5 and `gh secret set TIKTOK_REFRESH_TOKEN ...`
+  (refresh token lasts ~365 days; daily posting does not auto-extend it).
+- A 401/expired-token error in the TikTok step = re-mint the refresh token.
+
+**Modes at a glance:**
+| `TIKTOK_MODE` | App audited? | Result |
+|---|---|---|
+| `inbox` | not needed | Lands in your TikTok **drafts** — tap publish in the app |
+| `direct` (default) | **no** | Posts **privately** (SELF_ONLY) + warns |
+| `direct` (default) | **yes** | Posts **publicly**, fully automatic |
+
+---
+
 ## Secrets summary
 
 | Secret | Platform | Notes |
@@ -94,5 +149,9 @@ only — don't commit it.
 | `LINKEDIN_ACCESS_TOKEN` | LinkedIn | ~60-day; re-mint periodically |
 | `LINKEDIN_ORG_ID` | LinkedIn | numeric page id; never changes |
 | `LINKEDIN_VERSION` | LinkedIn | optional, default `202606` |
+| `TIKTOK_CLIENT_KEY` / `TIKTOK_CLIENT_SECRET` | TikTok | from the TikTok app |
+| `TIKTOK_REFRESH_TOKEN` | TikTok | ~365-day; re-mint yearly |
+| `TIKTOK_MODE` | TikTok | optional: `inbox` (drafts) or `direct` (default) |
+| `TIKTOK_PRIVACY` | TikTok | optional, default `PUBLIC_TO_EVERYONE` |
 
 Missing any platform's secrets → that platform is simply skipped.

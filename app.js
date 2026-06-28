@@ -75,11 +75,23 @@ function applyData() {
   setText("h-pkr", "₨" + m.pkr_usd);
   setText("h-inf", m.inflation_cpi + "%");
 
+  // Per-metric provenance on hover (source + the data's own 'as of' date), so a
+  // reader can see exactly how current each live number is.
+  const setTitle = (id, t) => { const e = document.getElementById(id); if (e && t) e.title = t; };
+  const prov = {
+    "inf": "CPI inflation YoY · PBS" + (m.inflation_cpi_asof ? " · " + m.inflation_cpi_asof : ""),
+    "kse": "KSE-100 close · PSX" + (m.kse100_asof ? " · " + m.kse100_asof : ""),
+    "pkr": "Interbank USD/PKR · SBP" + (m.pkr_usd_asof ? " · " + m.pkr_usd_asof : ""),
+    "sbp": "SBP policy rate" + (m.sbp_direction ? " · " + m.sbp_direction : ""),
+  };
+  Object.entries(prov).forEach(([k, t]) => { setTitle("m-" + k, t); setTitle("h-" + k, t); });
+
   const snap = document.getElementById("snapshot-date");
   if (snap) {
     const d = new Date(DATA.updated);
     snap.textContent =
-      "As of " + d.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
+      "As of " + d.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" }) +
+      " · Sources: PBS, SBP, PSX, MUFAP, National Savings";
   }
 
   // Live ticker tape (v2 masthead) - best-effort, only if present
@@ -344,7 +356,7 @@ function renderMutualFunds() {
     `;
     grid.appendChild(card);
   });
-  grid.insertAdjacentHTML("beforeend", '<p style="grid-column:1/-1;font-size:.74rem;color:var(--muted);margin:6px 0 0">Fund returns are annualized and refreshed with the daily data update. Confirm the latest NAV and returns with the AMC or MUFAP before investing.</p>');
+  grid.insertAdjacentHTML("beforeend", '<p style="grid-column:1/-1;font-size:.74rem;color:var(--muted);margin:6px 0 0">1-year returns are sourced from MUFAP — annualized for income/money-market funds, total (absolute) return for equity funds. Refreshed with the daily update; confirm the latest NAV with the AMC or MUFAP before investing.</p>');
 }
 
 function riskBadge(risk) {
@@ -749,10 +761,12 @@ function renderInsightStrip() {
   const el = document.getElementById("insight-strip");
   if (!el) return;
   const { m, ssc, eq, topStock } = dashboardInputs();
-  const real = (ssc.rate - m.inflation_cpi).toFixed(1);
+  const real = +(ssc.rate - m.inflation_cpi).toFixed(1);
+  const beat = real >= 0;
+  const cpiAsOf = m.inflation_cpi_asof ? ` (CPI ${m.inflation_cpi_asof})` : "";
   el.innerHTML = `
-    <div class="insight-cell"><div class="insight-num">+${real} pts</div>
-      <div class="insight-lbl">Real return on ${ssc.name} (${ssc.rate}%) after ${m.inflation_cpi}% inflation - savers are beating inflation</div></div>
+    <div class="insight-cell"><div class="insight-num">${beat ? "+" : ""}${real} pts</div>
+      <div class="insight-lbl">Real return on ${ssc.name} (${ssc.rate}%) after ${m.inflation_cpi}% inflation${cpiAsOf} - ${beat ? "savers stay just ahead of inflation" : "savers are losing to inflation"}</div></div>
     <div class="insight-cell"><div class="insight-num">${topStock.yield}%</div>
       <div class="insight-lbl">${topStock.name} dividend yield vs ${m.sbp_rate}% policy rate - but dividends carry market risk</div></div>
     <div class="insight-cell"><div class="insight-num">${eq.ret_5y}%/yr</div>

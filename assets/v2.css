@@ -533,6 +533,32 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,.
   .hero-proof span{flex:1 0 50%}
 }
 
+/* ── Homepage FIG.04 interactive-tools grid ──────────────────────────
+   3 tool cards -> stack on phones; the inter-card border-right becomes a
+   bottom rule when stacked so a card never overflows its frame. */
+.tools3{display:grid;grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){
+  .tools3{grid-template-columns:1fr}
+  .tools3>a{border-right:none!important;border-bottom:1px solid var(--line)}
+  .tools3>a:last-child{border-bottom:none}
+}
+
+/* ── Responsive safety-net for CLASS-LESS inline grids ───────────────
+   Some content pages hardcode `style="...grid-template-columns:repeat(N,1fr)"`
+   with no class, so the breakpoints above can't reach them and the columns
+   stay 3–4 wide on a phone — content then overflows its card ("beyond the
+   borders"). These attribute selectors + !important collapse any such inline
+   grid: 3–4 cols -> 2 up to 860px, everything -> 1 col by 560px. */
+@media(max-width:860px){
+  [style*="grid-template-columns:repeat(3,"],
+  [style*="grid-template-columns:repeat(4,"]{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:560px){
+  [style*="grid-template-columns:repeat(2,"],
+  [style*="grid-template-columns:repeat(3,"],
+  [style*="grid-template-columns:repeat(4,"]{grid-template-columns:1fr!important}
+}
+
 /* ── sector hub pages (auto-blog engine) ─────────────────── */
 .sector-body{padding:24px var(--pad);max-width:var(--maxw);margin:0 auto}
 .sector-body h1{margin:.2em 0 .15em}

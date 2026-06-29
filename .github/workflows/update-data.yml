@@ -143,12 +143,10 @@ jobs:
   social:
     name: Render daily social assets
     needs: scrape
-    # PAUSED 2026-06-29 for AdSense / indexing recovery. The twice-daily brief
-    # re-render committed assets/daily-brief.mp4 + a caption to the repo on every
-    # run — a machine-generation footprint that worked against the site during
-    # review. The silent data refresh (scrape job) keeps the live tools current
-    # without this churn. Re-enable by removing the line below once approved.
-    if: ${{ false }}
+    # Renders the daily-brief video (homepage mp4 + social) and auto-posts.
+    # NOTE re AdSense recovery (2026-06-29): this only commits an .mp4 + caption —
+    # no HTML/sitemap change — so it does NOT affect crawling/indexing. The thing
+    # that hurt was the templated sector HTML pages (deleted), not this video.
     runs-on: ubuntu-latest
     permissions:
       contents: write

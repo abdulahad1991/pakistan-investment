@@ -143,6 +143,12 @@ jobs:
   social:
     name: Render daily social assets
     needs: scrape
+    # PAUSED 2026-06-29 for AdSense / indexing recovery. The twice-daily brief
+    # re-render committed assets/daily-brief.mp4 + a caption to the repo on every
+    # run — a machine-generation footprint that worked against the site during
+    # review. The silent data refresh (scrape job) keeps the live tools current
+    # without this churn. Re-enable by removing the line below once approved.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

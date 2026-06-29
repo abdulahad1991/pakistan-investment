@@ -1,11 +1,11 @@
 {
-  "updated": "2026-06-29T11:09:20Z",
+  "updated": "2026-06-29T15:10:02Z",
   "macro": {
-    "pkr_usd": 278.2,
+    "pkr_usd": 278.17,
     "sbp_rate": 11.5,
     "sbp_direction": "Holding",
     "inflation_cpi": 11.7,
-    "kse100_level": 178115,
+    "kse100_level": 179458,
     "fx_reserves_bn_usd": 17.22,
     "fx_reserves_total_bn_usd": 22.74,
     "gdp_growth_pct": 3.7,
@@ -13,12 +13,12 @@
     "imf_status": "Active — $7B Extended Fund Facility + $1.4B Resilience & Sustainability Facility; 3rd EFF / 2nd RSF review completed 8 May 2026 (~$4.8B disbursed)",
     "sbp_floor": 10.5,
     "sbp_ceiling": 12.5,
-    "kse100_change": -1192.33,
-    "kse100_change_pct": -0.66,
+    "kse100_change": 1342.49,
+    "kse100_change_pct": 0.75,
     "inflation_cpi_asof": "May 2026",
     "fx_reserves_asof": "18 Jun 2026",
     "pkr_usd_asof": "23 Jun 2026",
-    "kse100_asof": "24 Jun 2026",
+    "kse100_asof": "29 Jun 2026",
     "stocks_asof": "29 Jun 2026"
   },
   "national_savings": [
@@ -96,14 +96,14 @@
       "type": "Islamic Income",
       "risk": "Low",
       "shariah": true,
-      "ret_1y": 8.46,
+      "ret_1y": 8.45,
       "ret_3y": 16.2,
       "ret_5y": 21.3,
       "min_pkr": 1000,
       "recommended": true,
       "verdict": "Safest Islamic fund — stable income, minimal risk",
       "url": "https://www.almeezangroup.com",
-      "nav": 51.8643,
+      "nav": 51.8779,
       "return_type": "annualized"
     },
     {
@@ -160,14 +160,14 @@
       "type": "Islamic Equity",
       "risk": "Medium",
       "shariah": true,
-      "ret_1y": 22.28,
+      "ret_1y": 18.41,
       "ret_3y": 48.1,
       "ret_5y": 19.6,
       "min_pkr": 5000,
       "recommended": false,
       "verdict": "Decent — 5-year return lower than Meezan funds",
       "url": "https://www.jsil.com",
-      "nav": 257.37,
+      "nav": 257.25,
       "return_type": "absolute"
     }
   ],
@@ -224,13 +224,13 @@
       "chg1y": -34.1,
       "hi52": 951.0,
       "lo52": 365.0,
-      "div": 10.0,
-      "yield": 1.81,
+      "div": 15.0,
+      "yield": 2.72,
       "pe": 15.11,
       "chg": -1.21,
       "eps": 79.09,
-      "div_latest": 10.0,
-      "div_asof": "June 30, 2025 4:36 PM"
+      "div_latest": 5.0,
+      "div_asof": "June 29, 2026 4:06 PM"
     },
     {
       "ticker": "GHNI",
@@ -2058,7 +2058,7 @@
       147743.68,
       164357.47,
       172118.01,
-      178115.36
+      179457.85
     ]
   },
   "sbp_history": {
@@ -2098,12 +2098,12 @@
   "gold": {
     "source": "gold.pk",
     "source_type": "local",
-    "tola_24k": 432000,
-    "tola_22k": 396000,
-    "g10_24k": 370377,
-    "g10_22k": 339512,
-    "gram_24k": 37038,
-    "gram_22k": 33951,
+    "tola_24k": 431500,
+    "tola_22k": 395542,
+    "g10_24k": 369948,
+    "g10_22k": 339119,
+    "gram_24k": 36995,
+    "gram_22k": 33912,
     "chg1y_pct": 25.5,
     "history": {
       "labels": [
@@ -2304,11 +2304,11 @@
     },
     "kse": {
       "ok": true,
-      "as_of": "2026-06-24",
+      "as_of": "2026-06-29",
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 5,
+      "age_days": 0,
       "last_error": null
     },
     "macro": {

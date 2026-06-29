@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TikTok Integration — Pakistan Investment Education</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>
+  :root{ --green:#075E4B; --gold:#B98A2F; --ink:#1c2b27; --paper:#F5F7FA; --line:#e3e8ec; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;
+       background:var(--paper);color:var(--ink);line-height:1.6;
+       display:flex;min-height:100vh;align-items:center;justify-content:center;padding:24px}
+  .card{max-width:640px;width:100%;background:#fff;border:1px solid var(--line);
+        border-radius:16px;padding:40px 36px;box-shadow:0 6px 28px rgba(7,94,75,.08)}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .brand img{height:34px;width:auto}
+  .brand span{font-weight:800;color:var(--green);letter-spacing:.02em}
+  h1{font-size:1.45rem;margin:0 0 6px}
+  .kicker{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 4px}
+  p{margin:0 0 14px}
+  ul{margin:0 0 16px;padding-left:20px}
+  li{margin:6px 0}
+  .note{font-size:.9rem;color:#5a6b66;background:#f3f6f5;border-left:3px solid var(--green);
+        padding:12px 14px;border-radius:0 8px 8px 0;margin:18px 0}
+  a.home{display:inline-block;margin-top:8px;color:var(--green);font-weight:700;text-decoration:none}
+  a.home:hover{text-decoration:underline}
+  code{background:#eef2f1;padding:1px 6px;border-radius:5px;font-size:.88em}
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">
+      <img src="/assets/logo.png" alt="Pakistan Investment Education" onerror="this.style.display='none'">
+      <span>Pakistan Investment Education</span>
+    </div>
+    <p class="kicker">TikTok Integration</p>
+    <h1>Daily Market Brief → TikTok</h1>
+    <p><a href="https://pakinvestlysis.com">pakinvestlysis.com</a> is a free educational
+       site of daily-updated investing tools and guides for Pakistani savers. Each market
+       session it auto-generates a short <strong>Daily Market Brief</strong> video
+       (KSE-100, USD/PKR, gold, SBP policy rate, inflation).</p>
+    <p>This page is the OAuth redirect endpoint for our TikTok integration, which uses:</p>
+    <ul>
+      <li><strong>Login Kit</strong> (<code>user.info.basic</code>) — one-time
+          authorization of our own brand TikTok account.</li>
+      <li><strong>Content Posting API</strong> (<code>video.upload</code>) — sends the
+          rendered brief to the authorized account for publishing.</li>
+    </ul>
+    <p>We post only our own first-party educational videos, only to the single account
+       that authorized the app.</p>
+    <div class="note">If you reached this page during sign-in, the authorization
+       <code>code</code> is in your browser's address bar — that completes the one-time
+       setup. Nothing else is needed here.</div>
+    <a class="home" href="https://pakinvestlysis.com">← Back to pakinvestlysis.com</a>
+  </main>
+</body>
+</html>

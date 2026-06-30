@@ -181,11 +181,20 @@ def main():
     date_str = today.strftime("%-d %b %Y")
     file_str = today.strftime("%Y-%m-%d")
 
-    # Two runs a day: morning (~04:45 UTC, just after the PSX 9:30 PKT open) and
-    # evening (~11:30 UTC, an hour after the 15:30 close). Tag the brief by
+    # Two runs a day: morning (cron hour 04 UTC, just after the PSX 9:30 PKT open)
+    # and evening (cron hour 11 UTC, ~1h after the 15:30 close). Tag the brief by
     # session so the two daily videos read as distinct posts, not duplicates.
-    utc_hour = datetime.datetime.now(datetime.timezone.utc).hour
-    session = "Market open" if utc_hour < 9 else "Market close"
+    # Derive the session from the *scheduled* cron (TRIGGER_CRON, "min hour ..."),
+    # NOT wall-clock: GitHub Actions can delay a scheduled run by hours, which
+    # would otherwise mislabel a delayed morning brief as "Market close". Fall
+    # back to wall-clock for manual workflow_dispatch runs (no schedule set).
+    cron = os.environ.get("TRIGGER_CRON", "").split()
+    cron_hour = cron[1] if len(cron) >= 2 else None
+    if cron_hour is not None and cron_hour.isdigit():
+        session = "Market open" if int(cron_hour) < 9 else "Market close"
+    else:
+        utc_hour = datetime.datetime.now(datetime.timezone.utc).hour
+        session = "Market open" if utc_hour < 9 else "Market close"
 
     with open(os.path.join(ROOT, "data.json"), encoding="utf-8") as f:
         data = json.load(f)

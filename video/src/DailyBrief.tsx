@@ -44,9 +44,10 @@ export const SCENES = {
   movers: 108,
   pie: 114,
   cta: 72,
+  outro: 84,
 } as const;
 type SceneKey = keyof typeof SCENES;
-const ORDER: SceneKey[] = ["title", "board", "psx", "gold", "movers", "pie", "cta"];
+const ORDER: SceneKey[] = ["title", "board", "psx", "gold", "movers", "pie", "cta", "outro"];
 
 export const dailyTotal = () => ORDER.reduce((s, k) => s + SCENES[k], 0);
 const starts = (): Record<SceneKey, number> => {
@@ -454,6 +455,97 @@ const Cta: React.FC<{ data: DailyProps }> = ({ data }) => {
 };
 
 // =========================================================================
+// 8 — Outro (engagement + next-session teaser)
+// Session teaser is keyed off data.session ("Market open" -> tease the close,
+// "Market close" -> tease the next open). Pure text + styled pills (no emoji),
+// so it renders identically in headless CI; no narration on these briefs.
+// =========================================================================
+const Outro: React.FC<{ data: DailyProps }> = ({ data }) => {
+  const frame = useCurrentFrame();
+  const C = useColors();
+  const { u } = useU();
+  const open = data.session === "Market open";
+  const pills = ["Like", "Subscribe", "Share"];
+  return (
+    <Scene dur={SCENES.outro} u={u}>
+      <div style={{ display: "flex", justifyContent: "center", ...reveal(frame, 0) }}>
+        <Kicker u={u}>{open ? "Coming up next" : "Same time tomorrow"}</Kicker>
+      </div>
+      <div style={{ height: 40 * u }} />
+      <div
+        style={{
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 80 * u,
+          lineHeight: 1.05,
+          letterSpacing: -2,
+          color: C.ink,
+          textAlign: "center",
+          ...reveal(frame, 8),
+        }}
+      >
+        {open ? (
+          <>
+            Stay tuned for the
+            <br />
+            <span style={{ color: C.green }}>market close</span>.
+          </>
+        ) : (
+          <>
+            Back for the next
+            <br />
+            <span style={{ color: C.green }}>market open</span>.
+          </>
+        )}
+      </div>
+      <div style={{ height: 56 * u }} />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 22 * u,
+          flexWrap: "wrap",
+          ...reveal(frame, 22),
+        }}
+      >
+        {pills.map((p, i) => (
+          <div
+            key={p}
+            style={{
+              fontFamily: MONO,
+              fontWeight: 600,
+              fontSize: 42 * u,
+              color: i === 1 ? C.paper : C.green,
+              background: i === 1 ? C.green : "transparent",
+              border: `3px solid ${C.green}`,
+              padding: `${16 * u}px ${36 * u}px`,
+              borderRadius: 14,
+              letterSpacing: 1,
+              boxShadow: i === 1 ? "0 14px 32px -16px rgba(7,94,75,0.7)" : "none",
+            }}
+          >
+            {p}
+          </div>
+        ))}
+      </div>
+      <div
+        style={{
+          fontFamily: MONO,
+          fontSize: 28 * u,
+          color: C.muted,
+          textAlign: "center",
+          marginTop: 44 * u,
+          letterSpacing: 3,
+          ...reveal(frame, 34),
+        }}
+      >
+        SUBSCRIBE FOR MORE · PAKINVESTLYSIS.COM
+      </div>
+    </Scene>
+  );
+};
+
+// =========================================================================
 // Audio — frame-synced SFX, reusing the shared kit.
 // =========================================================================
 const Sfx: React.FC<{ data: DailyProps }> = ({ data }) => {
@@ -476,6 +568,8 @@ const Sfx: React.FC<{ data: DailyProps }> = ({ data }) => {
   // cta pop + payoff
   cues.push({ at: s.cta + 6, src: "pop.wav", vol: 0.55 });
   cues.push({ at: s.cta + 40, src: "chime.wav", vol: 0.45 });
+  // outro: engagement pills land with a pop
+  cues.push({ at: s.outro + 22, src: "pop.wav", vol: 0.5 });
   return (
     <>
       {cues.map((c, i) => (
@@ -531,6 +625,7 @@ export const DailyBrief: React.FC<DailyProps> = (props) => {
         {scene("movers", <Movers data={props} />)}
         {scene("pie", <Pie data={props} />)}
         {scene("cta", <Cta data={props} />)}
+        {scene("outro", <Outro data={props} />)}
       </AbsoluteFill>
     </ColorProvider>
   );

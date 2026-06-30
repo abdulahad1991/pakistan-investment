@@ -3,10 +3,14 @@ name: Update Investment Data
 on:
   schedule:
     # Twice a weekday, mirroring PSX hours (Mon–Fri; market is shut weekends).
-    # 04:45 UTC = 09:45 PKT — "Market open", just after the 09:30 PSX open.
-    - cron: "45 4 * * 1-5"
-    # 11:30 UTC = 16:30 PKT — "Market close", ~1h after the 15:30 PSX close.
-    - cron: "30 11 * * 1-5"
+    # Off-peak minutes (:37 / :41) to dodge GitHub's top-of-hour scheduler
+    # backlog, which was delaying runs by hours. The open/close SESSION is keyed
+    # off the cron HOUR (build_daily.py / the GROUP step below), so changing the
+    # minute never affects which session a run is treated as.
+    # 04:37 UTC = 09:37 PKT — "Market open", just after the 09:30 PSX open.
+    - cron: "37 4 * * 1-5"
+    # 11:41 UTC = 16:41 PKT — "Market close", ~1h after the 15:30 PSX close.
+    - cron: "41 11 * * 1-5"
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
 
 jobs:
@@ -178,6 +182,11 @@ jobs:
         run: npm ci
 
       - name: Build daily props + caption
+        # Pass the scheduled cron through so the session (open/close) is keyed to
+        # the cron HOUR, not wall-clock — GitHub can delay a run by hours, which
+        # would otherwise mislabel a delayed morning brief as "Market close".
+        env:
+          TRIGGER_CRON: ${{ github.event.schedule }}
         run: python scripts/build_daily.py
 
       - name: Render YouTube Short (9:16)

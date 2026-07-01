@@ -193,6 +193,22 @@ jobs:
         working-directory: video
         run: npx remotion render DailyBrief-9x16 --props=daily-props.json out/daily/short.mp4
 
+      # Guard: a full brief incl. the Like/Subscribe/Share outro is ~25.8s
+      # (774f @30fps). If the outro scene is ever dropped (stale checkout, a
+      # scene crash truncating the render), duration falls to ~23s — refuse to
+      # post rather than push an outro-less Short. Skips silently if ffprobe is
+      # unavailable so it can never wedge the pipeline on tooling alone.
+      - name: Guard — outro present before posting
+        working-directory: video
+        run: |
+          command -v ffprobe >/dev/null || { echo "ffprobe unavailable — skipping outro guard"; exit 0; }
+          dur=$(ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 out/daily/short.mp4)
+          echo "short.mp4 = ${dur}s (expect ~25.8s with outro; <25s ⇒ outro dropped)"
+          awk -v d="$dur" 'BEGIN{ exit (d+0 >= 25.0) ? 0 : 1 }' || {
+            echo "::error::Short is ${dur}s (<25s) — outro (Like/Subscribe/Share) missing. Refusing to post.";
+            exit 1;
+          }
+
       - name: Render LinkedIn video (1:1)
         working-directory: video
         run: npx remotion render DailyBrief-1x1 --props=daily-props.json out/daily/linkedin.mp4

@@ -6,10 +6,12 @@
   },
   "as_of": "June 29, 2026",
   "source": "State Bank of Pakistan (SBP)",
-  "ok": true,
+  "ok": false,
   "fetched_at": "2026-06-30T13:38:47Z",
   "cadence": "weekly",
   "metric": "FX reserves (US$ bn)",
   "banks_bn": 5.57,
-  "source_url": "https://www.sbp.org.pk/dfmd/ferm.asp"
+  "source_url": "https://www.sbp.org.pk/dfmd/ferm.asp",
+  "last_error": "ValueError: SBP reserves table not found on ferm.asp",
+  "last_attempt": "2026-07-01T08:45:39Z"
 }

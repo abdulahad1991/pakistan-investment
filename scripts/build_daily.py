@@ -10,13 +10,24 @@ The props carry the whole day at a glance: the macro board (KSE-100, PKR/USD,
 gold, policy rate, inflation), the PSX + gold trend series (for the line graphs),
 the top PSX 1-year movers, and an illustrative allocation (for the donut).
 
-Stdlib only. Deterministic for a given date. Honest, non-advisory copy:
-never a buy/sell call, price target, or first-hand investing claim.
+Also emitted (all optional, graceful when data is missing):
+  * `headline` prop — the day's biggest % move (KSE-100 / gold / USDPKR) as a
+    hook card: {"text","kicker","sub"} per the Remotion contract.
+  * `voiceover` prop + video/public/voiceover.mp3 — a 25-35s Urdu narration
+    (edge-tts ur-PK-AsadNeural). Skipped with a warning when edge-tts/mutagen
+    aren't installed (local runs) or the TTS call fails.
+  * a `metrics` block in the social-kit JSON so the NEXT run (and the weekly
+    review) can derive day/week changes without re-parsing copy text.
+
+Stdlib only for the core copy (TTS deps optional). Deterministic for a given
+date. Honest, non-advisory copy: never a buy/sell call, price target, or
+first-hand investing claim.
 Re-run: python3 scripts/build_daily.py
 """
 import datetime
 import json
 import os
+import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FOOTER = "Not financial advice · pakinvestlysis.com"
@@ -25,6 +36,18 @@ HASHTAGS = "#Pakistan #Investing #PSX #Gold #PersonalFinance"
 YT_TAGS = ["Pakistan", "investing", "PSX", "KSE-100", "gold",
            "mutual funds", "national savings", "personal finance"]
 YT_TITLE_MAX = 100  # YouTube hard limit on snippet.title
+
+# Headline (hook) selection: a move under this |%| on every metric = "FLAT DAY".
+FLAT_EPS = 0.15
+# Voiceover: same Urdu neural voice as the blog explainers (build_explainer.py).
+VOICE = "ur-PK-AsadNeural"
+VO_RATE_DAILY = "+0%"     # natural speed — the daily budget is tight (see below)
+VO_RATE_WEEKLY = "-8%"    # weekly has room, slow down so numbers land clearly
+# The DailyBrief video is only ~25.8s total (774 frames @ 30fps), so the daily
+# narration gets a HARD 25.0s ceiling: script targets ~20-23s; over the cap we
+# re-render faster, and if it STILL overruns we drop the least important middle
+# sentences and re-render until it fits.
+VO_MAX_SEC_DAILY = 25.0
 
 # Mirrors video/src/schema.ts defaultColors so Studio defaults and CI renders match.
 DEFAULT_COLORS = {
@@ -92,6 +115,267 @@ def _series(hist, take, end_value=None):
     }
 
 
+# ---------------------------------------------------------------------------
+# Headline (hook) selection — pure, never raises.
+# ---------------------------------------------------------------------------
+# Fallback parsers for pre-`metrics` social-kit payloads: we control both the
+# hook format and these regexes, so this only ever parses our own output.
+_RX_KSE = re.compile(r"KSE-100 at ([\d,]+)")
+_RX_GOLD = re.compile(r"gold ₨([\d,]+)/tola")
+_RX_USD = re.compile(r"₨([\d.]+)/\$")
+
+
+def _short_date(date_str):
+    """'2 Jul 2026' -> '2 Jul' (drop a trailing 4-digit year token)."""
+    parts = str(date_str or "").split()
+    if len(parts) >= 2 and parts[-1].isdigit() and len(parts[-1]) == 4:
+        return " ".join(parts[:-1])
+    return str(date_str or "")
+
+
+def _metrics_from_payload(payload):
+    """Raw {kse100, gold_tola, pkr_usd} numbers from a prior day's social-kit
+    JSON. Prefers the structured `metrics` block (emitted since 2026-07-03),
+    falls back to regex-parsing our own hook copy for older files."""
+    if not isinstance(payload, dict):
+        return {}
+    met = payload.get("metrics") if isinstance(payload.get("metrics"), dict) else {}
+    hook = str(payload.get("hook", "") or "")
+    out = {}
+    for key, rx in (("kse100", _RX_KSE), ("gold_tola", _RX_GOLD), ("pkr_usd", _RX_USD)):
+        v = met.get(key)
+        if not v:
+            m = rx.search(hook)
+            v = m.group(1).replace(",", "") if m else None
+        try:
+            v = float(v)
+        except (TypeError, ValueError):
+            v = None
+        if v:
+            out[key] = v
+    return out
+
+
+def day_candidates(data, prev_props=None):
+    """Day-change candidates [{metric, value, pct}] for KSE-100 / gold / USDPKR.
+    KSE uses data.json's own kse100_change_pct; gold + USD (no day-change field
+    and only monthly history in data.json) diff against the previous trading
+    day's social-kit payload. Underivable metrics are skipped; never raises."""
+    try:
+        macro = data.get("macro") or {}
+        gold = data.get("gold") or {}
+        prev = _metrics_from_payload(prev_props)
+        out = []
+
+        kse = macro.get("kse100_level") or 0
+        pct = macro.get("kse100_change_pct")
+        if pct is None and kse and prev.get("kse100"):
+            pct = (kse - prev["kse100"]) / prev["kse100"] * 100
+        if kse and pct is not None:
+            out.append({"metric": "kse", "value": kse, "pct": float(pct)})
+
+        tola = gold.get("tola_24k") or 0
+        if tola and prev.get("gold_tola"):
+            out.append({"metric": "gold", "value": tola,
+                        "pct": (tola - prev["gold_tola"]) / prev["gold_tola"] * 100})
+
+        usd = macro.get("pkr_usd") or 0
+        if usd and prev.get("pkr_usd"):
+            out.append({"metric": "usd", "value": usd,
+                        "pct": (usd - prev["pkr_usd"]) / prev["pkr_usd"] * 100})
+        return out
+    except Exception as e:  # never let the hook sink the brief
+        print(f"[headline] WARNING: candidates failed ({e})")
+        return []
+
+
+def pick_headline(data, prev_props=None, date_str="", session=""):
+    """The day's biggest |%| move as the Remotion `headline` prop:
+    {"text": "GOLD ₨4,33,300", "kicker": "+2.1% TODAY", "sub": "2 Jul · Market close"}
+    Returns None (prop omitted) when no day change is derivable. Never raises."""
+    try:
+        cands = day_candidates(data, prev_props)
+        if not cands:
+            return None
+        top = max(cands, key=lambda c: abs(c["pct"]))
+        if top["metric"] == "gold":
+            text = f"GOLD ₨{grp(top['value'])}"
+        elif top["metric"] == "usd":
+            text = f"USD/PKR ₨{top['value']:.2f}"
+        else:
+            text = f"KSE-100 {grp(top['value'], locale_in=False)}"
+        if all(abs(c["pct"]) < FLAT_EPS for c in cands):
+            kicker = "FLAT DAY"
+        else:
+            kicker = f"{top['pct']:+.1f}% TODAY"
+        sub = " · ".join(x for x in (_short_date(date_str), str(session or "")) if x)
+        return {"text": text, "kicker": kicker, "sub": sub}
+    except Exception as e:
+        print(f"[headline] WARNING: skipped ({e})")
+        return None
+
+
+def build_yt_title(p, cands=None, date_str=None):
+    """Searchable, story-first YouTube title, hard-capped at YT_TITLE_MAX.
+    Leads with whichever metric moved most today (falls back to KSE-100)."""
+    m, g = p["macro"], p["gold"]
+    sess = "close" if "close" in str(p.get("session", "")).lower() else "open"
+    day = _short_date(date_str or p.get("date", ""))
+    by = {c["metric"]: c for c in (cands or [])}
+    lead = max(cands, key=lambda c: abs(c["pct"]))["metric"] if cands else "kse"
+
+    def pctp(metric):
+        c = by.get(metric)
+        return f" ({c['pct']:+.1f}%)" if c else ""
+
+    kse_txt = grp(m["kse100"], locale_in=False)
+    gold_txt = f"₨{grp(g['tola'])}"
+    if lead == "gold":
+        title = (f"Gold rate today {gold_txt}{pctp('gold')} — "
+                 f"KSE-100 {kse_txt}{pctp('kse')} | {day} {sess} brief")
+    elif lead == "usd":
+        title = (f"USD/PKR today ₨{m['pkrUsd']:.2f}{pctp('usd')} — "
+                 f"KSE-100 {kse_txt} | {day} {sess} brief")
+    else:
+        title = (f"KSE-100 today {kse_txt}{pctp('kse')} — "
+                 f"gold rate {gold_txt}/tola | {day} {sess} brief")
+    return title[:YT_TITLE_MAX]
+
+
+def build_yt_description(p, body, cands=None):
+    """First line carries the search phrases ("KSE 100 today", "gold rate today
+    Pakistan") with the day's numbers, then the unique daily story line, then
+    the existing static snapshot/disclaimer block."""
+    m, g = p["macro"], p["gold"]
+    by = {c["metric"]: c for c in (cands or [])}
+    kse_pct = f" ({by['kse']['pct']:+.1f}%)" if "kse" in by else ""
+    line1 = (f"KSE 100 today: {grp(m['kse100'], locale_in=False)}{kse_pct} · "
+             f"gold rate today Pakistan: ₨{grp(g['tola'])}/tola 24k "
+             f"({str(p.get('session', '')).lower()}).")
+    return (
+        f"{line1}\n\n{body}\n\n"
+        "Daily Pakistan market snapshot — PSX, rupee, gold, top movers. "
+        "Educational, not financial advice. pakinvestlysis.com\n\n"
+        f"#Shorts {HASHTAGS}"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Voiceover — optional; warn-and-skip when deps/network are unavailable.
+# ---------------------------------------------------------------------------
+def daily_vo_lines(p, cands=None):
+    """(lines, drop_order) for the daily narration: short spoken-Urdu sentences
+    (~20-23s total; digits stay Latin — the ur-PK voice reads them natively,
+    same as build_explainer). Session-aware, always ends on the site+subscribe
+    line. drop_order lists the indices to trim (least important first) if the
+    take overruns the 25s ceiling even after a faster re-render."""
+    m, g = p["macro"], p["gold"]
+    by = {c["metric"]: c for c in (cands or [])}
+    kse = int(round(m["kse100"]))
+    lines = []
+    if "close" in str(p.get("session", "")).lower():
+        lines.append(f"السلام علیکم! مارکیٹ کلوز پر آج کے ایس ای سو انڈیکس {kse} پوائنٹس پر رہا۔")
+    else:
+        lines.append(f"السلام علیکم! مارکیٹ اوپن پر کے ایس ای سو انڈیکس {kse} پوائنٹس پر ہے۔")
+    drop_order = []
+    c = by.get("kse")
+    if c and abs(c["pct"]) >= 0.05:
+        word = "زیادہ" if c["pct"] > 0 else "کم"
+        # least important spoken — the headline card already shows this kicker
+        drop_order.append(len(lines))
+        lines.append(f"یعنی پچھلے دن سے {abs(round(c['pct'], 1))} فیصد {word}۔")
+    if g.get("tola"):
+        lines.append(f"سونا آج {int(g['tola'])} روپے فی تولہ۔")
+    # second trim candidate — the rates board is on screen the whole time
+    drop_order.append(len(lines))
+    lines.append(f"ڈالر {int(round(m['pkrUsd']))} روپے، پالیسی ریٹ {m['sbpRate']} فیصد، "
+                 f"مہنگائی {m['inflation']} فیصد۔")
+    lines.append("Poori tafseel pakinvestlysis dot com par. Subscribe zaroor karein.")
+    return lines, drop_order
+
+
+def render_voiceover_capped(lines, drop_order, out_path, max_sec, rate=VO_RATE_DAILY):
+    """Render, then enforce the hard cap: faster re-render happens inside
+    render_voiceover; if the take STILL overruns, drop the least important
+    middle sentence(s) and re-render until it fits. Returns duration or None."""
+    dur = render_voiceover(" ".join(lines), out_path, max_sec, rate=rate)
+    if dur is None:
+        return None
+    trimmed = list(lines)
+    victims = [lines[i] for i in drop_order]  # least important first
+    while dur > max_sec and victims:
+        victim = victims.pop(0)
+        print(f"[voiceover] still {dur:.1f}s > {max_sec}s — trimming sentence: "
+              f"{victim[:40]}…")
+        trimmed.remove(victim)
+        dur = render_voiceover(" ".join(trimmed), out_path, max_sec, rate=rate)
+        if dur is None:
+            return None
+    if dur > max_sec:
+        print(f"[voiceover] WARNING: {dur:.1f}s still over the {max_sec}s ceiling "
+              "after trimming — disabling narration for this run.")
+        try:
+            os.remove(out_path)
+        except OSError:
+            pass
+        return None
+    return dur
+
+
+def render_voiceover(text, out_path, max_sec, rate=VO_RATE_DAILY):
+    """edge-tts -> mp3 at out_path; returns duration (sec) or None on skip.
+    Mirrors build_explainer's cap approach: if the take runs past max_sec,
+    re-render once at a proportionally faster rate. Never raises — local runs
+    without edge-tts/mutagen just print a warning and go voiceless."""
+    try:
+        import asyncio
+        import edge_tts
+        from mutagen.mp3 import MP3
+    except ImportError as e:
+        print(f"[voiceover] WARNING: skipped — deps unavailable ({e}). "
+              "pip install edge-tts mutagen to enable narration.")
+        return None
+    try:
+        os.makedirs(os.path.dirname(out_path), exist_ok=True)
+
+        def _take(r):
+            asyncio.run(edge_tts.Communicate(text, voice=VOICE, rate=r).save(out_path))
+            return MP3(out_path).info.length
+
+        dur = _take(rate)
+        if dur > max_sec:
+            # duration at default speed ≈ dur * (1 + rate/100); pick the +% that
+            # lands ~2s inside the cap, clamped so it still sounds human.
+            base = 1 + int(rate.rstrip("%")) / 100.0
+            faster = min(50, max(5, int(round((dur * base / (max_sec - 2) - 1) * 100))))
+            print(f"[voiceover] {dur:.1f}s > {max_sec}s cap — re-rendering at +{faster}%")
+            dur = _take(f"+{faster}%")
+        print(f"[voiceover] wrote {out_path} ({dur:.1f}s)")
+        return dur
+    except Exception as e:
+        print(f"[voiceover] WARNING: TTS failed ({e}); continuing without narration.")
+        try:
+            if os.path.exists(out_path):
+                os.remove(out_path)  # never leave a half-written take behind
+        except OSError:
+            pass
+        return None
+
+
+def load_prev_daily_payload(daily_dir, today_file_str):
+    """Most recent social-kit/daily/YYYY-MM-DD.json strictly before today
+    (Friday's file on a Monday). None when absent/unreadable."""
+    try:
+        names = [n for n in os.listdir(daily_dir)
+                 if n.endswith(".json") and len(n) == 15 and n[:10] < today_file_str]
+        if not names:
+            return None
+        with open(os.path.join(daily_dir, sorted(names)[-1]), encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
 def build_props(data, date_str, session):
     macro = data.get("macro", {})
     gold = data.get("gold", {})
@@ -126,10 +410,13 @@ def build_props(data, date_str, session):
     }
 
 
-def social_payload(date_str, p):
+def social_payload(date_str, p, cands=None):
     """Single source of truth for the day's copy. Both the human-readable .md
     and the machine-readable .json (consumed by the auto-post scripts) derive
-    from this, so LinkedIn/YouTube never re-parse markdown."""
+    from this, so LinkedIn/YouTube never re-parse markdown. `cands` (from
+    day_candidates) makes the YouTube title/description story-first; LinkedIn
+    copy is unchanged. The `metrics` block is what tomorrow's run (and the
+    weekly review) diff against."""
     m, g = p["macro"], p["gold"]
     top = p["movers"][0] if p["movers"] else {"ticker": "", "name": "", "change1y": 0}
     hook = (
@@ -139,31 +426,30 @@ def social_payload(date_str, p):
     body = (
         f"On the board today: policy rate {m['sbpRate']:.2f}%, inflation {m['inflation']:.1f}%. "
         f"PSX's biggest 1-year mover here is {top['ticker']} ({top['name']}) at {top['change1y']:+.1f}%. "
-        "The full 60-second brief walks the PSX and gold trends, the top movers, and one "
+        "The full brief — your market day in under 60 seconds — walks the PSX and gold "
+        "trends, the top movers, and one "
         "illustrative way to split a rupee across savings, funds, stocks and gold. "
         "Compare every option with daily data and real-return charts on the site."
     )
     linkedin_text = f"{hook}\n\n{body}\n\n{FOOTER} — free live tools at pakinvestlysis.com\n\n{HASHTAGS}"
 
-    yt_title = f"Pakistan market brief {date_str}: KSE-100 {grp(m['kse100'], locale_in=False)}, gold ₨{grp(g['tola'])}/tola"
-    yt_title = yt_title[:YT_TITLE_MAX]
-    yt_desc = (
-        "Daily Pakistan market snapshot — PSX, rupee, gold, top movers. "
-        "Educational, not financial advice. pakinvestlysis.com\n\n"
-        f"#Shorts {HASHTAGS}"
-    )
     return {
         "date": date_str,
         "session": p["session"],
         "hook": hook,
         "body": body,
+        "metrics": {"kse100": m["kse100"], "gold_tola": g["tola"], "pkr_usd": m["pkrUsd"]},
         "linkedin": {"text": linkedin_text},
-        "youtube": {"title": yt_title, "description": yt_desc, "tags": YT_TAGS},
+        "youtube": {
+            "title": build_yt_title(p, cands, date_str),
+            "description": build_yt_description(p, body, cands),
+            "tags": YT_TAGS,
+        },
     }
 
 
-def caption_md(date_str, p):
-    s = social_payload(date_str, p)
+def caption_md(date_str, p, cands=None):
+    s = social_payload(date_str, p, cands)
     headline = f"Pakistan market brief · {p['session']}"
     return f"""# {date_str} · {headline}
 
@@ -199,26 +485,45 @@ def main():
     with open(os.path.join(ROOT, "data.json"), encoding="utf-8") as f:
         data = json.load(f)
 
+    daily_dir = os.path.join(ROOT, "social-kit", "daily")
+    os.makedirs(daily_dir, exist_ok=True)
+
+    # Day changes: KSE from data.json itself; gold/USD by diffing the previous
+    # trading day's payload. Feeds the headline hook + the searchable YT copy.
+    prev_payload = load_prev_daily_payload(daily_dir, file_str)
+    cands = day_candidates(data, prev_payload)
+
     props = build_props(data, date_str, session)
+    headline = pick_headline(data, prev_payload, date_str=date_str, session=session)
+    if headline:
+        props["headline"] = headline
+
+    # Optional Urdu narration (hard 25s cap — the video is only ~25.8s).
+    # Warn-and-skip on missing deps/TTS failure; the prop is simply omitted.
+    vo_lines, vo_drop = daily_vo_lines(props, cands)
+    vo_path = os.path.join(ROOT, "video", "public", "voiceover.mp3")
+    vo_dur = render_voiceover_capped(vo_lines, vo_drop, vo_path, VO_MAX_SEC_DAILY)
+    if vo_dur:
+        props["voiceover"] = {"file": "voiceover.mp3", "enabled": True}
 
     props_path = os.path.join(ROOT, "video", "daily-props.json")
     with open(props_path, "w", encoding="utf-8") as f:
         json.dump(props, f, ensure_ascii=False, indent=2)
 
-    daily_dir = os.path.join(ROOT, "social-kit", "daily")
-    os.makedirs(daily_dir, exist_ok=True)
     cap_path = os.path.join(daily_dir, f"{file_str}.md")
     with open(cap_path, "w", encoding="utf-8") as f:
-        f.write(caption_md(date_str, props))
+        f.write(caption_md(date_str, props, cands))
 
     # Structured copy for the auto-post scripts (post_youtube.py / post_linkedin.py).
     payload_path = os.path.join(daily_dir, f"{file_str}.json")
     with open(payload_path, "w", encoding="utf-8") as f:
-        json.dump(social_payload(date_str, props), f, ensure_ascii=False, indent=2)
+        json.dump(social_payload(date_str, props, cands), f, ensure_ascii=False, indent=2)
 
     print(f"  props:   {os.path.relpath(props_path, ROOT)}")
     print(f"  caption: {os.path.relpath(cap_path, ROOT)}")
     print(f"  movers:  {', '.join(m['ticker'] for m in props['movers'])}")
+    print(f"  headline: {headline if headline else '(omitted — no day change derivable)'}")
+    print(f"  voiceover: {f'{vo_dur:.1f}s' if vo_dur else '(skipped)'}")
 
 
 if __name__ == "__main__":

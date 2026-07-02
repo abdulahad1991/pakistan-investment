@@ -64,6 +64,16 @@ export const audioSchema = z.object({
   volume: z.number().min(0).max(2), // multiplies every cue's level
 });
 
+// Optional narration track (DailyBrief + WeeklyBrief). When enabled, the
+// composition plays `file` (from public/) under the whole video and ducks
+// the music bed; when absent/disabled the render is byte-identical to before.
+export const voiceoverSchema = z.object({
+  file: z.string(), // filename inside public/, e.g. "voiceover.mp3"
+  enabled: z.boolean(),
+});
+
+export type Voiceover = z.infer<typeof voiceoverSchema>;
+
 export const promoSchema = z.object({
   // ---- Brand palette (live-editable color pickers) --------------------
   colors: colorsSchema,

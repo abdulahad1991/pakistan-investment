@@ -4,7 +4,7 @@
 // compositions: DailyBrief-9x16, DailyBrief-1x1 (videos) and DailyCard-1x1 (the
 // still image). build_daily.py emits this shape from data.json.
 import { z } from "zod";
-import { colorsSchema, audioSchema, defaultColors } from "./schema";
+import { colorsSchema, audioSchema, voiceoverSchema, defaultColors } from "./schema";
 
 const series = z.object({
   values: z.array(z.number()),
@@ -48,6 +48,20 @@ export const dailySchema = z.object({
 
   movers: z.array(mover), // top PSX 1-year movers
   allocation: z.array(slice), // illustrative balanced mix (not advice)
+
+  // Optional (build_daily.py emits these since 2026-07; older props files
+  // lack them and must render exactly as before — hence .optional()).
+  // headline: turns scene 1 into a full-bleed hook (kicker chip + huge
+  // count-up number + sub line). Absent -> classic title scene.
+  headline: z
+    .object({
+      text: z.string(), // e.g. "GOLD ₨4,33,300" — numeric part counts up
+      kicker: z.string(), // e.g. "+2.1% TODAY"
+      sub: z.string(), // e.g. "2 Jul · Market close"
+    })
+    .optional(),
+  // voiceover: narration file under public/, ducks the music bed when enabled.
+  voiceover: voiceoverSchema.optional(),
 });
 
 export type DailyProps = z.infer<typeof dailySchema>;

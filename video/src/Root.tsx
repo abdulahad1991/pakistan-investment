@@ -14,6 +14,8 @@ import { statCardSchema, defaultStatProps, type StatCardProps } from "./statSche
 import { DailyBrief, dailyTotal } from "./DailyBrief";
 import { DailyCard } from "./DailyCard";
 import { dailySchema, defaultDailyProps } from "./dailySchema";
+import { WeeklyBrief, weeklyTotal } from "./WeeklyBrief";
+import { weeklySchema, defaultWeeklyProps } from "./weeklySchema";
 
 // Promo total duration is derived from the per-scene durations in the props.
 const promoMetadata: CalculateMetadataFunction<PromoProps> = ({ props }) => ({
@@ -130,6 +132,20 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={90}
         schema={dailySchema}
         defaultProps={defaultDailyProps}
+      />
+
+      {/* Weekly market review — long-form 16:9 (~160s) for YouTube proper.
+          Reuses the DailyBrief building blocks at a slower pace; props come
+          from the weekly props file (see weeklySchema.ts for the contract). */}
+      <Composition
+        id="WeeklyBrief-16x9"
+        component={WeeklyBrief}
+        fps={FPS}
+        width={1920}
+        height={1080}
+        durationInFrames={weeklyTotal()}
+        schema={weeklySchema}
+        defaultProps={defaultWeeklyProps}
       />
     </>
   );

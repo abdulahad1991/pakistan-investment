@@ -12,6 +12,11 @@ on:
     # 11:41 UTC = 16:41 PKT — "Market close", ~1h after the 15:30 PSX close.
     - cron: "41 11 * * 1-5"
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
+    inputs:
+      run_weekly:
+        description: "Also build + post the weekly Week-in-Review (normally Friday close only)"
+        type: boolean
+        default: false
 
 jobs:
   scrape:
@@ -181,6 +186,16 @@ jobs:
         working-directory: video
         run: npm ci
 
+      # Narration deps for build_daily.py / build_weekly.py (edge-tts + mutagen).
+      # Soft-install: the builders warn-and-skip the voiceover when these are
+      # missing, so this step can never block the pipeline.
+      - name: Install voiceover dependencies
+        continue-on-error: true
+        run: pip install -q edge-tts mutagen || true
+
+      # MUST run before the Remotion renders: it writes video/daily-props.json
+      # AND video/public/voiceover.mp3, which the compositions pick up via
+      # staticFile() at render time.
       - name: Build daily props + caption
         # Pass the scheduled cron through so the session (open/close) is keyed to
         # the cron HOUR, not wall-clock — GitHub can delay a run by hours, which
@@ -273,3 +288,62 @@ jobs:
           TIKTOK_MODE: ${{ secrets.TIKTOK_MODE }}        # direct|inbox (default direct)
           TIKTOK_PRIVACY: ${{ secrets.TIKTOK_PRIVACY }}  # default PUBLIC_TO_EVERYONE
         run: python scripts/post_tiktok.py
+
+      # ---- Weekly Week-in-Review (Fridays, close session only) ---------------
+      # Runs AFTER all daily posting so a weekly failure can never cost the
+      # daily pipeline. Gated on the close cron + Friday (cron hour, not
+      # wall-clock, same delay-proof logic as the session label), with a
+      # workflow_dispatch override for manual runs.
+      - name: Decide whether to run the weekly review
+        id: weekly
+        env:
+          FORCE_WEEKLY: ${{ inputs.run_weekly }}
+          TRIGGER_CRON: ${{ github.event.schedule }}
+        run: |
+          GO=false
+          if [ "$FORCE_WEEKLY" = "true" ]; then
+            GO=true
+          elif [ "$TRIGGER_CRON" = "41 11 * * 1-5" ] && [ "$(date -u +%u)" = "5" ]; then
+            GO=true
+          fi
+          echo "go=$GO" >> "$GITHUB_OUTPUT"
+          echo "Weekly review: $GO"
+
+      # Writes video/weekly-props.json + video/public/voiceover-weekly.mp3
+      # (must precede the WeeklyBrief render, mirroring the daily flow).
+      - name: Build weekly props + caption
+        if: steps.weekly.outputs.go == 'true'
+        run: python scripts/build_weekly.py
+
+      - name: Render weekly review (16:9)
+        if: steps.weekly.outputs.go == 'true'
+        continue-on-error: true
+        working-directory: video
+        run: npx remotion render WeeklyBrief-16x9 --props=weekly-props.json out/weekly/review.mp4 --crf=23
+
+      - name: Commit weekly caption to dev
+        if: steps.weekly.outputs.go == 'true'
+        continue-on-error: true
+        run: |
+          git config user.name  "Abdul Ahad"
+          git config user.email "abdulahad1991@users.noreply.github.com"
+          git add social-kit/weekly
+          git diff --cached --quiet || (
+            git commit -m "chore: weekly market review $(date -u +'%Y-%m-%d')" &&
+            git push origin dev
+          )
+
+      # Same secrets-missing no-op + continue-on-error pattern as the daily
+      # posts. Long-form 16:9 upload — post_youtube.py skips cleanly if the
+      # render above failed (no file), and never adds #Shorts to weekly copy.
+      - name: Auto-post weekly review to YouTube (public)
+        if: steps.weekly.outputs.go == 'true'
+        continue-on-error: true
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          python scripts/post_youtube.py \
+            --video video/out/weekly/review.mp4 \
+            --caption "social-kit/weekly/$(date -u +%F).json"

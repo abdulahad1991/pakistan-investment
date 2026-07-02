@@ -215,3 +215,25 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
+/* ── Ad-slot reveal ─────────────────────────────────────────────────
+   .ad-slot is display:none by default (v2.css) so unapproved/unfilled
+   AdSense units never render as empty dashed "Advertisement" boxes.
+   Reveal a slot only when its <ins.adsbygoogle> actually fills. */
+(function () {
+  'use strict';
+  function revealFilledAds() {
+    try {
+      var units = document.querySelectorAll('ins.adsbygoogle');
+      Array.prototype.forEach.call(units, function (ins) {
+        var filled = ins.getAttribute('data-ad-status') === 'filled' || !!ins.querySelector('iframe');
+        if (!filled) return;
+        var slot = ins.closest ? ins.closest('.ad-slot') : null;
+        if (slot) slot.classList.add('ad-filled');
+      });
+    } catch (e) { /* ads must never break the page */ }
+  }
+  function schedule() { revealFilledAds(); setTimeout(revealFilledAds, 3500); }
+  if (document.readyState === 'complete') schedule();
+  else window.addEventListener('load', schedule);
+})();

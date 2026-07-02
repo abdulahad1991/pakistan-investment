@@ -299,7 +299,7 @@ function renderNationalSavings() {
     tr.innerHTML = `
       <td>
         <strong>${s.name}</strong>
-        ${rec ? '<span class="badge badge-gold" style="margin-left:6px">Recommended</span>' : ""}
+        ${rec ? '<span class="badge badge-gold" style="margin-left:6px">Example</span>' : ""}
         ${s.shariah ? '<span class="badge badge-green" style="margin-left:4px">Shariah</span>' : ""}
       </td>
       <td class="num yield-hi">${s.rate}%</td>
@@ -336,7 +336,7 @@ function renderMutualFunds() {
     card.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
         <div class="fund-name">${f.name}</div>
-        ${f.recommended ? '<span class="badge badge-gold">Recommended</span>' : ""}
+        ${f.recommended ? '<span class="badge badge-gold">Example</span>' : ""}
       </div>
       <div class="fund-mgr">${f.manager} &nbsp;·&nbsp; ${f.type}</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
@@ -351,8 +351,8 @@ function renderMutualFunds() {
       <div style="font-size:.78rem;color:var(--muted)">Min: PKR ${formatPKR(f.min_pkr)}</div>
       <div class="fund-verdict">${f.verdict}</div>
       ${full ? `<div class="fund-earn">Your PKR ${formatPKR(AMOUNT)} in this fund ≈ ~PKR ${formatPKR(full)}/yr <span style="color:var(--muted);font-weight:400">based on its ${f.ret_1y}% 1-year return</span></div>` : ""}
-      ${alloc ? `<div style="font-size:.75rem;color:var(--muted);margin-top:2px">Suggested portfolio slice: PKR ${formatPKR(alloc)} (${allocPct}%) &rarr; ~PKR ${formatPKR(allocEarn)}/yr</div>` : ""}
-      <a href="${f.url}" target="_blank" rel="noopener" class="btn-cta btn-primary" style="margin-top:12px;font-size:.78rem;display:inline-flex">Invest Now →</a>
+      ${alloc ? `<div style="font-size:.75rem;color:var(--muted);margin-top:2px">Example portfolio slice: PKR ${formatPKR(alloc)} (${allocPct}%) &rarr; ~PKR ${formatPKR(allocEarn)}/yr</div>` : ""}
+      <a href="${f.url}" target="_blank" rel="noopener" class="btn-cta btn-primary" style="margin-top:12px;font-size:.78rem;display:inline-flex">Visit provider →</a>
     `;
     grid.appendChild(card);
   });
@@ -465,12 +465,12 @@ function renderPortfolio() {
     `;
   });
 
-  // Action steps
+  // Example steps (illustrative walkthrough, not a recommendation)
   const steps = [
-    { n: 1, title: "Open CDNS / National Savings Account", body: `Visit any Pakistan Post Office with your CNIC. Deposit PKR ${formatPKR(Math.round(AMOUNT * 0.30))} into a Special Savings Certificate.`, color: "#0E3B2E" },
-    { n: 2, title: "Register on Al Meezan Online Portal",  body: `Go to almeezangroup.com → Register → upload CNIC → KYC online (~15 mins). Invest PKR ${formatPKR(Math.round(AMOUNT * 0.25))} in Meezan Islamic Income Fund and PKR ${formatPKR(Math.round(AMOUNT * 0.20))} in Al Meezan Mutual Fund.`, color: "#23415E" },
-    { n: 3, title: "Open a PSX Brokerage + CDC Account",   body: `Choose a broker (Arif Habib, MCB FSL, or Akseer). Register online. Transfer PKR ${formatPKR(Math.round(AMOUNT * 0.20))} and split: 60% into FFC, 40% into MCB Bank shares.`, color: "#A4452F" },
-    { n: 4, title: "Keep Emergency Buffer Liquid",          body: `At the same CDNS visit, open a Savings Account with PKR ${formatPKR(Math.round(AMOUNT * 0.05))}. No lock-in - withdraw anytime.`, color: "#5E5C52" },
+    { n: 1, title: "CDNS / National Savings Account",      body: `Example: an allocation like this could place PKR ${formatPKR(Math.round(AMOUNT * 0.30))} in a Special Savings Certificate. Accounts are opened at any Pakistan Post Office with a CNIC.`, color: "#0E3B2E" },
+    { n: 2, title: "Al Meezan Online Portal",              body: `Example: an allocation like this could put PKR ${formatPKR(Math.round(AMOUNT * 0.25))} into an income fund such as Meezan Islamic Income Fund and PKR ${formatPKR(Math.round(AMOUNT * 0.20))} into an equity fund such as Al Meezan Mutual Fund. Registration is online at almeezangroup.com (CNIC upload + KYC, ~15 mins).`, color: "#23415E" },
+    { n: 3, title: "PSX Brokerage + CDC Account",          body: `Example: PKR ${formatPKR(Math.round(AMOUNT * 0.20))} could be split across blue-chip shares - for instance 60% FFC, 40% MCB Bank - through a licensed broker (e.g. Arif Habib, MCB FSL, or Akseer; all register online).`, color: "#A4452F" },
+    { n: 4, title: "Emergency Buffer Kept Liquid",         body: `Example: keeping PKR ${formatPKR(Math.round(AMOUNT * 0.05))} in a CDNS Savings Account leaves a buffer with no lock-in - withdrawable anytime.`, color: "#5E5C52" },
   ];
   const stepsEl = document.getElementById("action-steps");
   stepsEl.innerHTML = steps.map(s => `
@@ -481,7 +481,7 @@ function renderPortfolio() {
         <div style="font-size:.84rem;color:#444">${s.body}</div>
       </div>
     </div>
-  `).join("");
+  `).join("") + '<p style="font-size:.78rem;color:var(--muted);margin:4px 0 0"><strong>This is an illustration, not a recommendation.</strong> It shows how an allocation could be executed, for educational purposes only. Do your own research or consult a SECP-registered advisor before investing.</p>';
 
   // Render charts after a tick so canvas is visible
   setTimeout(() => {

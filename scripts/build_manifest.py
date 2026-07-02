@@ -31,10 +31,23 @@ def extract(path: Path, section: str):
     }
 
 
+def is_redirect_stub(path: Path) -> bool:
+    """Consolidated/merged pages are reduced to a meta-refresh stub; keep them
+    out of the manifest so listing pages and site search never surface them."""
+    try:
+        head = path.read_text(encoding="utf-8")
+        head = head.split("</head>", 1)[0]
+        return 'http-equiv="refresh"' in head
+    except Exception:
+        return False
+
+
 def scan(section: str):
     items = []
     for f in sorted((ROOT / section).glob("*.html")):
         if f.name == "index.html" or "backup" in f.name:
+            continue
+        if is_redirect_stub(f):
             continue
         try:
             items.append(extract(f, section))

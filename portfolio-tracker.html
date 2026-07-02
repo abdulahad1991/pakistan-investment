@@ -47,12 +47,22 @@
   .tx-content{padding:26px var(--pad);border-top:1px solid var(--line)}
   .tx-content h2{font-family:var(--display);font-size:1.5rem;font-weight:800;color:var(--green-d);margin:0 0 14px}
   .tx-content p{font-family:var(--body);font-size:1rem;line-height:1.7;color:var(--ink2);margin:0 0 16px;max-width:760px}
+  .tx-content .faq-item{border-top:1px solid var(--line2)}
+  .tx-content summary{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--green-d);padding:16px 0;cursor:pointer;list-style:none}
+  .tx-content summary::-webkit-details-marker{display:none}
+  .tx-content summary::before{content:"+";color:var(--green);font-weight:800;margin-right:10px}
+  .tx-content details[open] summary::before{content:"-"}
+  .tx-content .faq-a{padding:0 0 16px;font-size:.98rem;line-height:1.7;color:var(--ink2)}
+  .tx-content ul{font-family:var(--body);font-size:1rem;line-height:1.7;color:var(--ink2);margin:0 0 16px;padding-left:20px;max-width:760px}
+  .tx-content li{margin:0 0 10px}
+  .tx-content li b{color:var(--green-d)}
   .tool-disc{font-family:var(--body);font-size:.82rem;line-height:1.6;color:var(--muted);background:var(--mint);border:1px solid var(--line);padding:16px 20px;margin-top:8px}
   .tool-disc strong{color:var(--green-d)}
   .pf-chart{position:relative;height:230px}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Pakistan Portfolio Tracker","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"PKR"},"url":"https://pakinvestlysis.com/portfolio-tracker.html"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pakinvestlysis.com/"},{"@type":"ListItem","position":2,"name":"Portfolio Tracker","item":"https://pakinvestlysis.com/portfolio-tracker.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my portfolio data uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Your holdings are saved in your browser's local storage on your own device. There is no login, no account and no server-side storage - nothing you enter is transmitted to us or anyone else. The flip side is that if you clear your browsing data or use a private window, the list is gone and cannot be recovered."}},{"@type":"Question","name":"Will my holdings appear on my other devices?","acceptedAnswer":{"@type":"Answer","text":"No. Local storage is specific to one browser on one device, so a portfolio entered on your laptop will not appear on your phone. Since the tracker stores only holding types and quantities, re-entering them on another device takes about a minute."}},{"@type":"Question","name":"Why is my total different from my broker app?","acceptedAnswer":{"@type":"Answer","text":"Prices here refresh twice each trading weekday from automatically scraped data, while your broker shows live exchange prices, so small gaps are normal and larger ones can appear on fast-moving days. The tracker also covers only the hundred-plus liquid PSX stocks in our data set, values cash at face value with no profit accrual, and ignores fees and taxes. Treat your broker and CDC statements as the authoritative record."}},{"@type":"Question","name":"Can I track mutual funds or National Savings certificates?","acceptedAnswer":{"@type":"Answer","text":"Not directly - the tracker supports PSX stocks, gold and cash. A common workaround is to add a fund's or certificate's current value as a cash entry and update it manually every so often. Mutual fund unit prices (NAVs) are published daily by MUFAP, and National Savings profit rates by CDNS."}}]}</script>
 </head>
 <body>
 <div class="accent-bar"></div>
@@ -117,7 +127,26 @@
   <div class="tx-content">
     <h2>About this tracker</h2>
     <p>This is a private, no-login tracker: your holdings are saved in your browser's local storage, never sent to a server, so only you can see them. Prices come from the same daily market data the rest of the site uses, so values refresh roughly once a day rather than tick by tick. It's meant to give you a quick, honest picture of where your money sits and how it's split - not a brokerage statement.</p>
-    <div class="tool-disc"><strong>Educational only, not investment advice.</strong> Prices are scraped daily and may lag or differ from your broker. Cash and savings are shown at face value (no profit accrual). Verify exact holdings and values with your broker, bank and CDC account.</div>
+
+    <h2>How the numbers are worked out</h2>
+    <p>Each holding is valued from the site's data file, which our automated pipeline refreshes twice every trading weekday - once shortly after the PSX opens and once after the close - from sources such as the PSX data portal, SBP and daily gold rates (scheduled runs can occasionally be delayed, so check how the "as of" feel of a price matches your broker). Stocks are marked at the latest scraped share price, gold at the current 24K per-gram rate, and cash simply at the rupee figure you typed. The total is the sum of those values, the donut splits that total by holding, and "Biggest slice" names whichever holding takes the largest share.</p>
+    <p>The "1-year change" is the value-weighted average of each holding's own one-year move: ₨3,00,000 of a stock that rose 20% blended with ₨1,00,000 of cash (counted as 0%) shows +15%. Two honest caveats follow. Cash always counts as zero, even though a savings account would have paid some profit, so cash-heavy portfolios show a flatter year than they really had. And the figure describes what the assets did over the last year, not your personal return - that depends on when you bought, which the tracker never asks. There is no cost-basis field at all: it shows what your holdings are worth now, not your profit or loss against what you paid.</p>
+
+    <h2>How to read the numbers</h2>
+    <ul>
+      <li><b>Watch the biggest slice.</b> If one stock is more than half your total, one company's bad year decides your whole year. Concentration, not the market, is usually what hurts small portfolios most.</li>
+      <li><b>A positive year can still be a real loss.</b> Compare the 1-year change with the CPI figure in the ticker above - a +5% portfolio during 10% inflation lost buying power even though the rupee number grew.</li>
+      <li><b>Cash at face value is quietly shrinking.</b> The tracker shows cash flat at 0%, but idle rupees lose value to inflation every month. That "safe" slice has a cost too.</li>
+      <li><b>These are twice-a-day estimates, not live ticks.</b> Before any actual decision, confirm prices with your broker and holdings with your CDC account statement.</li>
+    </ul>
+
+    <h2>Common questions</h2>
+    <details class="faq-item"><summary>Is my portfolio data uploaded anywhere?</summary><div class="faq-a">No. Holdings live in your browser's local storage on your own device - no login, no account, no server. Nothing you enter is transmitted to us or anyone else. The flip side: clearing browsing data (or using a private window) deletes the list, and there is no way to recover it.</div></details>
+    <details class="faq-item"><summary>Will my holdings appear on my other devices?</summary><div class="faq-a">No. Local storage belongs to one browser on one device, so a portfolio entered on your laptop won't show on your phone. The tracker only stores types and quantities, so re-entering them elsewhere takes about a minute.</div></details>
+    <details class="faq-item"><summary>Why is my total different from my broker app?</summary><div class="faq-a">Prices here refresh twice each trading weekday from scraped data, while your broker shows live exchange prices - small gaps are normal, bigger ones can appear on fast-moving days. We also track only the hundred-plus liquid PSX stocks in our data set, value cash at face value, and ignore fees and taxes. Your broker and CDC statements are the authoritative record.</div></details>
+    <details class="faq-item"><summary>Can I track mutual funds or National Savings certificates?</summary><div class="faq-a">Not directly - the tracker supports PSX stocks, gold and cash. A common workaround is to add a fund's or certificate's current value as a cash entry and update it manually now and then. See our <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual funds guide</a> for where to find daily NAVs.</div></details>
+
+    <div class="tool-disc"><strong>Educational only, not investment advice.</strong> The author is a software engineer, not an investment professional. Prices are scraped twice each weekday and may lag or differ from your broker. Cash and savings are shown at face value (no profit accrual). Verify exact holdings and values with your broker, bank and CDC account.</div>
     <div style="margin-top:18px;font-family:var(--display);font-weight:700"><a href="/backtester.html" style="color:var(--green);border-bottom:2px solid var(--acid)">See what your picks did over time →</a></div>
   </div>
 </div>

@@ -438,7 +438,10 @@ details[open] .faq-question::after{content:"-"}
 .insight-lbl{font-family:var(--body);font-size:.84rem;color:rgba(204,223,211,.82);margin-top:6px;line-height:1.45}
 
 /* ── ad slot ───────────────────────────────────────────────────── */
-.ad-slot{margin:20px 0;border:1px dashed var(--line);background:var(--paper);padding:10px}
+/* Hidden by default so unfilled AdSense units never show an empty labelled
+   box; search.js adds .ad-filled once the <ins> actually renders an ad. */
+.ad-slot{display:none;margin:20px 0;border:1px dashed var(--line);background:var(--paper);padding:10px}
+.ad-slot.ad-filled{display:block}
 .ad-label{display:block;font-family:var(--display);font-size:.6rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:6px;text-align:center}
 
 /* ── SEO band ──────────────────────────────────────────────────── */

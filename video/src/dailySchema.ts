@@ -62,6 +62,19 @@ export const dailySchema = z.object({
       sub: z.string(), // e.g. "2 Jul · Market close"
     })
     .optional(),
+  // spotlight: the rotating bonus scene (replaced the allocation donut
+  // 2026-07-04) — a free-tool promo, a live-rate check, or an engagement
+  // question. build_daily.py rotates the kind per (day, session). Absent
+  // (older props) -> the scene falls back to a default tool promo.
+  spotlight: z
+    .object({
+      kind: z.enum(["tool", "rate", "question"]),
+      kicker: z.string(), // e.g. "Free tool" / "Rate check" / "Your take"
+      heading: z.string(), // e.g. "SIP Calculator" / "12.4%" / "KSE +2.3% aaj"
+      body: z.string(), // one supporting line
+      cta: z.string(), // chip text: a URL or "COMMENT BELOW"
+    })
+    .optional(),
 });
 
 export type DailyProps = z.infer<typeof dailySchema>;
@@ -96,4 +109,11 @@ export const defaultDailyProps: DailyProps = {
     { label: "Equity / stocks", pct: 30, color: "#F2B94B" },
     { label: "Gold", pct: 20, color: "#B7791F" },
   ],
+  spotlight: {
+    kind: "tool",
+    kicker: "Free tool",
+    heading: "SIP Calculator",
+    body: "Monthly bachat, 10 saal — kitna banega?",
+    cta: "pakinvestlysis.com/sip-calculator",
+  },
 };

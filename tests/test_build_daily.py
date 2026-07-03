@@ -164,3 +164,71 @@ def test_social_payload_carries_metrics_and_restrained_tags():
     # LinkedIn copy stays on the existing honest format
     assert "Not financial advice" in s["linkedin"]["text"]
     assert "Market close" in s["linkedin"]["text"]
+
+
+# ---------------------------------------------------------------------------
+# build_spotlight — the rotating bonus scene (tool / rate / question)
+# ---------------------------------------------------------------------------
+SPOT_KEYS = {"kind", "kicker", "heading", "body", "cta"}
+
+
+def _spot_data():
+    d = _data()
+    d["national_savings"] = [
+        {"name": "Special Savings Certificate", "rate": 12.4, "recommended": True},
+        {"name": "Behbood Savings Certificate", "rate": 13.9},
+    ]
+    d["mutual_funds"] = [
+        {"name": "Meezan Islamic Income Fund", "type": "Islamic Income", "ret_1y": 9.03},
+        {"name": "Al Meezan Mutual Fund", "type": "Islamic Equity", "ret_1y": 33.7},
+    ]
+    return d
+
+
+def test_spotlight_rotates_all_three_kinds_across_sessions():
+    d = _spot_data()
+    cands = bd.day_candidates(d, PREV)
+    # (ordinal*2 + sess) % 3 -> consecutive sessions walk tool -> rate -> question
+    kinds = [bd.build_spotlight(d, cands, s, o)["kind"]
+             for o in (738709, 738710) for s in ("Market open", "Market close")]
+    assert set(kinds) == {"tool", "rate", "question"}
+    # same (day, session) is deterministic
+    a = bd.build_spotlight(d, cands, "Market open", 738709)
+    assert a == bd.build_spotlight(d, cands, "Market open", 738709)
+    assert set(a) == SPOT_KEYS
+
+
+def test_spotlight_rate_prefers_recommended_savings_vs_inflation():
+    d = _spot_data()  # inflation_cpi = 11.7 < 12.4 -> "se oopar"
+    s = bd._spotlight_rate(d)
+    assert s["kind"] == "rate"
+    assert s["heading"] == "12.4%"          # recommended cert wins over 13.9%
+    assert "Special Savings" in s["body"]
+    assert "11.7" in s["body"] and "oopar" in s["body"]
+
+
+def test_spotlight_rate_falls_back_to_income_fund_then_tool():
+    d = _spot_data()
+    d["national_savings"] = []
+    s = bd._spotlight_rate(d)
+    assert s["heading"] == "9.03%"          # income fund only, never equity
+    assert "Meezan Islamic Income" in s["body"]
+    d["mutual_funds"] = []
+    assert bd._spotlight_rate(d) is None
+    # a rate SLOT with no rate data promotes the tool promo instead
+    spot = bd.build_spotlight(d, None, "Market open", 738710)  # slot 1 = rate
+    assert spot["kind"] == "tool"
+
+
+def test_spotlight_question_uses_kse_move_or_generic():
+    d = _spot_data()
+    q = bd._spotlight_question(bd.day_candidates(d, PREV))
+    assert q["heading"] == "KSE +2.3% aaj"
+    assert q["cta"] == "COMMENT BELOW"
+    assert bd._spotlight_question(None)["heading"] == "Sona ya stocks?"
+
+
+def test_spotlight_never_raises_on_garbage():
+    spot = bd.build_spotlight({"national_savings": "x", "mutual_funds": None},
+                              None, None, 738711)
+    assert set(spot) == SPOT_KEYS and spot["kind"] in {"tool", "rate", "question"}

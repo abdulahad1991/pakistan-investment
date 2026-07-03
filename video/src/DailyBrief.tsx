@@ -20,9 +20,11 @@ import { Counter, reveal, fadeInOut } from "./components/Ledger";
 import { AreaChart } from "./components/Charts";
 
 // Daily market brief — one short walks through the whole day's snapshot:
-// macro board → PSX trend → gold trend → top movers → CTA → outro.
-// Music/SFX only — no narration (the TTS voiceover was removed 2026-07-03),
-// and no allocation scene (the "sample mix" donut lives only on DailyCard).
+// macro board → PSX trend → gold trend → top movers → spotlight → CTA → outro.
+// Music/SFX only — no narration (the TTS voiceover was removed 2026-07-03).
+// The spotlight is a rotating bonus scene (tool promo / rate check / comment
+// question) that replaced the "sample mix" allocation donut, which now lives
+// only on the DailyCard still.
 // Responsive: the same component renders 9:16 (Shorts) and 1:1 (LinkedIn); all
 // sizes scale off u = min(w,h)/1080, and every scene is laid out to fit the
 // tighter square frame, then centered (so it just breathes more when vertical).
@@ -46,11 +48,12 @@ export const SCENES = {
   psx: 102,
   gold: 102,
   movers: 108,
+  spot: 114,
   cta: 72,
   outro: 84,
 } as const;
 type SceneKey = keyof typeof SCENES;
-const ORDER: SceneKey[] = ["title", "board", "psx", "gold", "movers", "cta", "outro"];
+const ORDER: SceneKey[] = ["title", "board", "psx", "gold", "movers", "spot", "cta", "outro"];
 
 export const dailyTotal = () => ORDER.reduce((s, k) => s + SCENES[k], 0);
 const starts = (): Record<SceneKey, number> => {
@@ -491,7 +494,88 @@ const Movers: React.FC<{ data: DailyProps }> = ({ data }) => {
 };
 
 // =========================================================================
-// 6 — CTA
+// 6 — Spotlight (rotating bonus scene: tool promo / rate check / question)
+// One uniform layout for all three kinds — kicker, big heading with a spring
+// punch-in, one body line, a CTA chip. The chip goes gold for `question`
+// (comment prompt) and green for the site-link kinds. Falls back to a default
+// tool promo when the prop is absent (older props files must never leave a
+// blank 3.8s hole).
+// =========================================================================
+const SPOT_FALLBACK: NonNullable<DailyProps["spotlight"]> = {
+  kind: "tool",
+  kicker: "Free tool",
+  heading: "SIP Calculator",
+  body: "Monthly bachat, 10 saal — kitna banega?",
+  cta: "pakinvestlysis.com/sip-calculator",
+};
+
+const Spotlight: React.FC<{ data: DailyProps }> = ({ data }) => {
+  const frame = useCurrentFrame();
+  const C = useColors();
+  const { u } = useU();
+  const { fps } = useVideoConfig();
+  const s = data.spotlight ?? SPOT_FALLBACK;
+  const gold = s.kind === "question";
+  const pop = spring({ frame: frame - 8, fps, config: { damping: 14 }, durationInFrames: 30 });
+  return (
+    <Scene dur={SCENES.spot} u={u}>
+      <div style={{ display: "flex", justifyContent: "center", ...reveal(frame, 0) }}>
+        <Kicker u={u}>{s.kicker}</Kicker>
+      </div>
+      <div style={{ height: 36 * u }} />
+      <div
+        style={{
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 96 * u,
+          lineHeight: 1.04,
+          letterSpacing: -2,
+          color: C.ink,
+          textAlign: "center",
+          opacity: Math.min(1, pop * 1.6),
+          transform: `scale(${0.85 + pop * 0.15})`,
+        }}
+      >
+        {s.heading}
+      </div>
+      <div
+        style={{
+          fontFamily: SANS,
+          fontWeight: 600,
+          fontSize: 42 * u,
+          color: C.ink,
+          textAlign: "center",
+          marginTop: 30 * u,
+          ...reveal(frame, 24),
+        }}
+      >
+        {s.body}
+      </div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 40 * u, ...reveal(frame, 38) }}>
+        <div
+          style={{
+            fontFamily: MONO,
+            fontWeight: 600,
+            fontSize: 38 * u,
+            color: gold ? C.ink : C.paper,
+            background: gold ? C.gold : C.green,
+            padding: `${18 * u}px ${44 * u}px`,
+            borderRadius: 14,
+            letterSpacing: 1,
+            boxShadow: gold
+              ? "0 16px 36px -18px rgba(242,185,75,0.9)"
+              : "0 16px 36px -18px rgba(7,94,75,0.7)",
+          }}
+        >
+          {s.cta}
+        </div>
+      </div>
+    </Scene>
+  );
+};
+
+// =========================================================================
+// 7 — CTA
 // =========================================================================
 const Cta: React.FC<{ data: DailyProps }> = ({ data }) => {
   const frame = useCurrentFrame();
@@ -534,7 +618,7 @@ const Cta: React.FC<{ data: DailyProps }> = ({ data }) => {
 };
 
 // =========================================================================
-// 7 — Outro (engagement + next-session teaser)
+// 8 — Outro (engagement + next-session teaser)
 // Session teaser is keyed off data.session ("Market open" -> tease the close,
 // "Market close" -> tease the next open). Pure text + styled pills (no emoji),
 // so it renders identically in headless CI.
@@ -655,6 +739,9 @@ const Sfx: React.FC<{ data: DailyProps }> = ({ data }) => {
   cues.push({ at: s.gold + 16, src: "sweep.wav", vol: 0.5 });
   // movers ticks
   data.movers.forEach((_, i) => cues.push({ at: s.movers + 14 + i * 8, src: "tick.wav", vol: 0.3, rate: 1 + i * 0.06 }));
+  // spotlight: heading pops in, chip lands with a click
+  cues.push({ at: s.spot + 8, src: "pop.wav", vol: 0.5 });
+  cues.push({ at: s.spot + 38, src: "click.wav", vol: 0.5 });
   // cta pop + payoff
   cues.push({ at: s.cta + 6, src: "pop.wav", vol: 0.55 });
   cues.push({ at: s.cta + 40, src: "chime.wav", vol: 0.45 });
@@ -747,6 +834,7 @@ export const DailyBrief: React.FC<DailyProps> = (props) => {
         {scene("psx", <Psx data={props} />)}
         {scene("gold", <Gold data={props} />)}
         {scene("movers", <Movers data={props} />)}
+        {scene("spot", <Spotlight data={props} />)}
         {scene("cta", <Cta data={props} />)}
         {scene("outro", <Outro data={props} />)}
         <BrandMarkAuto />

@@ -39,6 +39,24 @@ YT_TITLE_MAX = 100  # YouTube hard limit on snippet.title
 # Headline (hook) selection: a move under this |%| on every metric = "FLAT DAY".
 FLAT_EPS = 0.15
 
+# Spotlight scene (replaced the allocation donut 2026-07-04): each video gets
+# ONE rotating bonus scene — free-tool promo / live-rate check / engagement
+# question — cycling per session so the day's open and close videos differ.
+SPOTLIGHT_TOOLS = [
+    {"heading": "SIP Calculator",
+     "body": "Monthly bachat, 10 saal — kitna banega?",
+     "cta": "pakinvestlysis.com/sip-calculator"},
+    {"heading": "PSX Backtester",
+     "body": "Sona vs stocks vs savings — 5 saal ka test.",
+     "cta": "pakinvestlysis.com/backtester"},
+    {"heading": "Tax Calculator",
+     "body": "Aap ki salary par tax kitna? 30 second.",
+     "cta": "pakinvestlysis.com/tax-calculator"},
+    {"heading": "Portfolio Tracker",
+     "body": "Apna pura portfolio aik jagah track karein.",
+     "cta": "pakinvestlysis.com/portfolio-tracker"},
+]
+
 # Mirrors video/src/schema.ts defaultColors so Studio defaults and CI renders match.
 DEFAULT_COLORS = {
     "paper": "#F5F7FA",
@@ -250,6 +268,76 @@ def build_yt_description(p, body, cands=None):
     )
 
 
+# ---------------------------------------------------------------------------
+# Spotlight — the rotating bonus scene. Pure + deterministic, never raises.
+# ---------------------------------------------------------------------------
+def _spotlight_rate(data):
+    """The `rate` spotlight: a live National Savings rate (preferred) or the
+    top annualized income fund, framed against inflation. None when neither
+    is derivable (caller falls back to a tool promo)."""
+    infl = (data.get("macro") or {}).get("inflation_cpi")
+    savings = [s for s in (data.get("national_savings") or [])
+               if isinstance(s, dict) and s.get("rate")]
+    if savings:
+        top = next((s for s in savings if s.get("recommended")), None) \
+            or max(savings, key=lambda s: s["rate"])
+        body = str(top.get("name", "National Savings"))
+        if infl:
+            word = "se oopar" if top["rate"] > infl else "se neeche"
+            body += f" — mehngai {infl}% {word}"
+        return {"kind": "rate", "kicker": "Rate check",
+                "heading": f"{top['rate']}%", "body": body,
+                "cta": "sab rates: pakinvestlysis.com"}
+    funds = [f for f in (data.get("mutual_funds") or [])
+             if isinstance(f, dict) and f.get("ret_1y")
+             and "income" in str(f.get("type", "")).lower()]
+    if funds:
+        top = max(funds, key=lambda f: f["ret_1y"])
+        return {"kind": "rate", "kicker": "Rate check",
+                "heading": f"{top['ret_1y']}%",
+                "body": f"{top['name']} — 1 saal (annualized)",
+                "cta": "compare: pakinvestlysis.com"}
+    return None
+
+
+def _spotlight_question(cands):
+    """The `question` spotlight: today's KSE move as a comment prompt, or a
+    generic either/or when no day change is derivable."""
+    kse = next((c for c in (cands or []) if c["metric"] == "kse"), None)
+    if kse and abs(kse["pct"]) >= 0.05:
+        return {"kind": "question", "kicker": "Your take",
+                "heading": f"KSE {kse['pct']:+.1f}% aaj",
+                "body": "Aap ke funds ne match kiya? Comment mein batayein.",
+                "cta": "COMMENT BELOW"}
+    return {"kind": "question", "kicker": "Your take",
+            "heading": "Sona ya stocks?",
+            "body": "Aap pehle kya check karte hain? Comment mein batayein.",
+            "cta": "COMMENT BELOW"}
+
+
+def build_spotlight(data, cands, session, day_ordinal):
+    """The `spotlight` prop for the bonus scene. Slot rotation: tool -> rate ->
+    question, keyed on (day, session) so the two daily videos never repeat a
+    slot and every kind appears ~every 1.5 days. Tool promos additionally
+    cycle through SPOTLIGHT_TOOLS. Falls back to a tool promo when the rate
+    slot has no live data. Pure; never raises."""
+    try:
+        sess = 1 if "close" in str(session or "").lower() else 0
+        slot = (day_ordinal * 2 + sess) % 3
+        if slot == 1:
+            rate = _spotlight_rate(data)
+            if rate:
+                return rate
+            slot = 0  # no live rates -> promote the tool slot
+        if slot == 2:
+            return _spotlight_question(cands)
+        tool = SPOTLIGHT_TOOLS[(day_ordinal * 2 + sess) % len(SPOTLIGHT_TOOLS)]
+        return {"kind": "tool", "kicker": "Free tool", **tool}
+    except Exception as e:  # never let the bonus scene sink the brief
+        print(f"[spotlight] WARNING: fell back to default tool ({e})")
+        return {"kind": "tool", "kicker": "Free tool", **SPOTLIGHT_TOOLS[0]}
+
+
 def load_prev_daily_payload(daily_dir, today_file_str):
     """Most recent social-kit/daily/YYYY-MM-DD.json strictly before today
     (Friday's file on a Monday). None when absent/unreadable."""
@@ -384,6 +472,7 @@ def main():
     headline = pick_headline(data, prev_payload, date_str=date_str, session=session)
     if headline:
         props["headline"] = headline
+    props["spotlight"] = build_spotlight(data, cands, session, today.toordinal())
 
     props_path = os.path.join(ROOT, "video", "daily-props.json")
     with open(props_path, "w", encoding="utf-8") as f:
@@ -402,6 +491,7 @@ def main():
     print(f"  caption: {os.path.relpath(cap_path, ROOT)}")
     print(f"  movers:  {', '.join(m['ticker'] for m in props['movers'])}")
     print(f"  headline: {headline if headline else '(omitted — no day change derivable)'}")
+    print(f"  spotlight: {props['spotlight']['kind']} — {props['spotlight']['heading']}")
 
 
 if __name__ == "__main__":

@@ -1,11 +1,10 @@
 // Schema for the long-form WeeklyBrief (16:9, ~160s) — "Pakistan Market —
 // Week in Review". A weekly sibling of build_daily.py emits this shape once a
 // week. colors/audio reuse the shared schemas (same contract as the daily
-// brief); voiceover is the same optional narration contract. `series` are
-// plain number arrays (5-6 daily points); if fewer than 2 points arrive the
-// scenes fall back to a straight [open, close] line.
+// brief). `series` are plain number arrays (5-6 daily points); if fewer than
+// 2 points arrive the scenes fall back to a straight [open, close] line.
 import { z } from "zod";
-import { colorsSchema, audioSchema, voiceoverSchema, defaultColors } from "./schema";
+import { colorsSchema, audioSchema, defaultColors } from "./schema";
 
 const weekSeries = z.object({
   open: z.number(),
@@ -23,7 +22,6 @@ const weeklyMover = z.object({
 export const weeklySchema = z.object({
   colors: colorsSchema.default(defaultColors),
   audio: audioSchema.default({ sfx: true, volume: 1 }),
-  voiceover: voiceoverSchema.optional(),
 
   dateRange: z.string(), // "30 Jun – 4 Jul 2026" (en dash splits the labels)
   kse: weekSeries,

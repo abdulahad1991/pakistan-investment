@@ -4,7 +4,7 @@
 // compositions: DailyBrief-9x16, DailyBrief-1x1 (videos) and DailyCard-1x1 (the
 // still image). build_daily.py emits this shape from data.json.
 import { z } from "zod";
-import { colorsSchema, audioSchema, segmentedVoiceoverSchema, defaultColors } from "./schema";
+import { colorsSchema, audioSchema, defaultColors } from "./schema";
 
 const series = z.object({
   values: z.array(z.number()),
@@ -47,10 +47,12 @@ export const dailySchema = z.object({
   goldSeries: series,
 
   movers: z.array(mover), // top PSX 1-year movers
-  allocation: z.array(slice), // illustrative balanced mix (not advice)
+  // illustrative balanced mix (not advice) — shown ONLY on the DailyCard
+  // still image; the video brief dropped its allocation scene 2026-07-03.
+  allocation: z.array(slice),
 
-  // Optional (build_daily.py emits these since 2026-07; older props files
-  // lack them and must render exactly as before — hence .optional()).
+  // Optional (build_daily.py emits this since 2026-07; older props files
+  // lack it and must render exactly as before — hence .optional()).
   // headline: turns scene 1 into a full-bleed hook (kicker chip + huge
   // count-up number + sub line). Absent -> classic title scene.
   headline: z
@@ -60,10 +62,6 @@ export const dailySchema = z.object({
       sub: z.string(), // e.g. "2 Jul · Market close"
     })
     .optional(),
-  // voiceover: per-scene narration segments (vo-<scene>.mp3, each cued to its
-  // scene's first frame) or a legacy single `file` laid from frame 0; either
-  // way the music bed ducks while narration is enabled.
-  voiceover: segmentedVoiceoverSchema.optional(),
 });
 
 export type DailyProps = z.infer<typeof dailySchema>;

@@ -186,16 +186,10 @@ jobs:
         working-directory: video
         run: npm ci
 
-      # Narration deps for build_daily.py / build_weekly.py (edge-tts + mutagen).
-      # Soft-install: the builders warn-and-skip the voiceover when these are
-      # missing, so this step can never block the pipeline.
-      - name: Install voiceover dependencies
-        continue-on-error: true
-        run: pip install -q edge-tts mutagen || true
-
-      # MUST run before the Remotion renders: it writes video/daily-props.json
-      # AND video/public/voiceover.mp3, which the compositions pick up via
-      # staticFile() at render time.
+      # MUST run before the Remotion renders: it writes video/daily-props.json,
+      # which the compositions pick up at render time. (No narration deps —
+      # the briefs are music/SFX only since 2026-07-03; blog explainers keep
+      # their own edge-tts install in the explainers job.)
       - name: Build daily props + caption
         # Pass the scheduled cron through so the session (open/close) is keyed to
         # the cron HOUR, not wall-clock — GitHub can delay a run by hours, which
@@ -208,19 +202,20 @@ jobs:
         working-directory: video
         run: npx remotion render DailyBrief-9x16 --props=daily-props.json out/daily/short.mp4
 
-      # Guard: a full brief incl. the Like/Subscribe/Share outro is ~25.8s
-      # (774f @30fps). If the outro scene is ever dropped (stale checkout, a
-      # scene crash truncating the render), duration falls to ~23s — refuse to
-      # post rather than push an outro-less Short. Skips silently if ffprobe is
-      # unavailable so it can never wedge the pipeline on tooling alone.
+      # Guard: a full brief incl. the Like/Subscribe/Share outro is ~22.0s
+      # (660f @30fps, pie scene removed 2026-07-03). If the outro scene is ever
+      # dropped (stale checkout, a scene crash truncating the render), duration
+      # falls to ~19s — refuse to post rather than push an outro-less Short.
+      # Skips silently if ffprobe is unavailable so it can never wedge the
+      # pipeline on tooling alone.
       - name: Guard — outro present before posting
         working-directory: video
         run: |
           command -v ffprobe >/dev/null || { echo "ffprobe unavailable — skipping outro guard"; exit 0; }
           dur=$(ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 out/daily/short.mp4)
-          echo "short.mp4 = ${dur}s (expect ~25.8s with outro; <25s ⇒ outro dropped)"
-          awk -v d="$dur" 'BEGIN{ exit (d+0 >= 25.0) ? 0 : 1 }' || {
-            echo "::error::Short is ${dur}s (<25s) — outro (Like/Subscribe/Share) missing. Refusing to post.";
+          echo "short.mp4 = ${dur}s (expect ~22.0s with outro; <21s ⇒ outro dropped)"
+          awk -v d="$dur" 'BEGIN{ exit (d+0 >= 21.0) ? 0 : 1 }' || {
+            echo "::error::Short is ${dur}s (<21s) — outro (Like/Subscribe/Share) missing. Refusing to post.";
             exit 1;
           }
 
@@ -309,8 +304,8 @@ jobs:
           echo "go=$GO" >> "$GITHUB_OUTPUT"
           echo "Weekly review: $GO"
 
-      # Writes video/weekly-props.json + video/public/voiceover-weekly.mp3
-      # (must precede the WeeklyBrief render, mirroring the daily flow).
+      # Writes video/weekly-props.json (must precede the WeeklyBrief render,
+      # mirroring the daily flow). Music/SFX only — no narration.
       - name: Build weekly props + caption
         if: steps.weekly.outputs.go == 'true'
         run: python scripts/build_weekly.py

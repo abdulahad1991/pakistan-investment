@@ -3,12 +3,13 @@
 
 Outputs:
   <root>/video/weekly-props.json             -> Remotion --props for WeeklyBrief-16x9
-  <root>/video/public/voiceover-weekly.mp3   -> ~60-90s Urdu narration (optional)
   <root>/social-kit/weekly/YYYY-MM-DD.json   -> props + "youtube" metadata block
                                                 (fed to post_youtube.py --caption)
   <root>/social-kit/weekly/YYYY-MM-DD.md     -> human-readable caption
 
-Sources (all already in the repo — no network except the optional TTS):
+No narration — music/SFX only (TTS voiceover removed 2026-07-03).
+
+Sources (all already in the repo — no network):
   * KSE + gold week series: the Mon-Fri social-kit/daily/*.json payloads of the
     current ISO week (structured `metrics` block, regex fallback for older
     files), with today's live data.json values pinned as the final point.
@@ -19,8 +20,8 @@ Sources (all already in the repo — no network except the optional TTS):
     point is this week's Monday baseline.
   * Rates: data.json macro (policy / inflation / USDPKR).
 
-Graceful degradation everywhere: missing files/deps shrink the output (empty
-movers, fallback series, no voiceover prop) but never crash.
+Graceful degradation everywhere: missing files shrink the output (empty
+movers, fallback series) but never crash.
 Run from repo root: python3 scripts/build_weekly.py
 """
 import datetime
@@ -32,11 +33,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 from build_daily import (  # noqa: E402  (path bootstrap above)
-    FOOTER, HASHTAGS, VO_RATE_WEEKLY, YT_TAGS, YT_TITLE_MAX,
-    _metrics_from_payload, grp, render_voiceover,
+    FOOTER, HASHTAGS, YT_TAGS, YT_TITLE_MAX,
+    _metrics_from_payload, grp,
 )
 
-VO_MAX_SEC_WEEKLY = 92   # target 60-90s; re-render faster past this
 MOVERS_TOP_N = 5
 MOVER_SANITY_PCT = 80    # a >80% week move in this universe is a data glitch
 
@@ -187,36 +187,6 @@ def youtube_meta(props, friday):
     return {"title": title, "description": desc, "tags": YT_TAGS + ["weekly review"]}
 
 
-def weekly_vo_script(props):
-    """~60-90s spoken-Urdu week recap (digits stay Latin, same as the daily VO).
-    Ends on the mandated site + subscribe line."""
-    kse, gold, r = props["kse"], props["gold"], props["rates"]
-    lines = ["السلام علیکم! یہ ہے اس ہفتے کا پاکستان مارکیٹ ریویو۔"]
-    if kse["close"]:
-        word = "اوپر" if kse["chgPct"] >= 0 else "نیچے"
-        lines.append(f"اس ہفتے کے ایس ای سو انڈیکس {int(round(kse['open']))} سے "
-                     f"{int(round(kse['close']))} پوائنٹس پر پہنچا، یعنی "
-                     f"{abs(kse['chgPct'])} فیصد {word}۔")
-    if gold["close"]:
-        word = "بڑھ کر" if gold["chgPct"] >= 0 else "گر کر"
-        lines.append(f"سونے کا ریٹ اس ہفتے {abs(gold['chgPct'])} فیصد {word} "
-                     f"{int(round(gold['close']))} روپے فی تولہ پر آ گیا۔")
-    movers = props["movers"][:2]
-    if movers:
-        parts = []
-        for m in movers:
-            word = "اوپر" if m["chgPct"] >= 0 else "نیچے"
-            parts.append(f"{m['name']}، {abs(m['chgPct'])} فیصد {word}")
-        lines.append("اسٹاکس میں اس ہفتے نمایاں رہے " + "، اور ".join(parts) + "۔")
-    lines.append(f"پالیسی ریٹ {r['policy']} فیصد، مہنگائی {r['inflation']} فیصد، "
-                 f"اور ڈالر تقریباً {int(round(r['usd']))} روپے پر رہا۔")
-    lines.append("اگلے ہفتے نئی شرحیں، سونے کا رجحان اور مارکیٹ کی سمت، سب کچھ "
-                 "روزانہ اپڈیٹ ہوتا ہے۔")
-    lines.append("یاد رہے، یہ صرف تعلیمی جائزہ ہے، مالی مشورہ نہیں۔")
-    lines.append("Poori tafseel pakinvestlysis dot com par. Subscribe zaroor karein.")
-    return " ".join(lines)
-
-
 def caption_md(file_str, props, meta):
     return f"""# {file_str} · Pakistan week in review ({props['dateRange']})
 
@@ -242,13 +212,6 @@ def main():
     daily_dir = os.path.join(ROOT, "social-kit", "daily")
     props, monday, friday = build_weekly_props(data, stock_history, daily_dir, today)
 
-    # Optional narration — omit the prop entirely when TTS is unavailable.
-    vo_path = os.path.join(ROOT, "video", "public", "voiceover-weekly.mp3")
-    vo_dur = render_voiceover(weekly_vo_script(props), vo_path,
-                              VO_MAX_SEC_WEEKLY, rate=VO_RATE_WEEKLY)
-    if vo_dur:
-        props["voiceover"] = {"file": "voiceover-weekly.mp3", "enabled": True}
-
     props_path = os.path.join(ROOT, "video", "weekly-props.json")
     with open(props_path, "w", encoding="utf-8") as f:
         json.dump(props, f, ensure_ascii=False, indent=2)
@@ -273,7 +236,6 @@ def main():
     print(f"  range:   {props['dateRange']}  kse {props['kse']['chgPct']:+.1f}%  "
           f"gold {props['gold']['chgPct']:+.1f}%")
     print(f"  movers:  {', '.join(m['sym'] for m in props['movers']) or '(none)'}")
-    print(f"  voiceover: {f'{vo_dur:.1f}s' if vo_dur else '(skipped)'}")
 
 
 if __name__ == "__main__":

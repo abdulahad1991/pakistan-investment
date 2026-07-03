@@ -13,17 +13,14 @@ the top PSX 1-year movers, and an illustrative allocation (for the donut).
 Also emitted (all optional, graceful when data is missing):
   * `headline` prop — the day's biggest % move (KSE-100 / gold / USDPKR) as a
     hook card: {"text","kicker","sub"} per the Remotion contract.
-  * `voiceover` prop + video/public/vo-<scene>.mp3 — per-scene Urdu narration
-    segments (edge-tts ur-PK-AsadNeural), each hard-budgeted to its scene so
-    the words stay in sync with what's on screen. Skipped with a warning when
-    edge-tts/mutagen aren't installed (local runs) or the TTS call fails; an
-    over-budget segment is dropped individually, never the whole narration.
   * a `metrics` block in the social-kit JSON so the NEXT run (and the weekly
     review) can derive day/week changes without re-parsing copy text.
 
-Stdlib only for the core copy (TTS deps optional). Deterministic for a given
-date. Honest, non-advisory copy: never a buy/sell call, price target, or
-first-hand investing claim.
+No narration: the briefs are music/SFX only (the robotic TTS voiceover was
+removed 2026-07-03; blog explainers keep theirs — see build_explainer.py).
+
+Stdlib only. Deterministic for a given date. Honest, non-advisory copy: never
+a buy/sell call, price target, or first-hand investing claim.
 Re-run: python3 scripts/build_daily.py
 """
 import datetime
@@ -41,26 +38,6 @@ YT_TITLE_MAX = 100  # YouTube hard limit on snippet.title
 
 # Headline (hook) selection: a move under this |%| on every metric = "FLAT DAY".
 FLAT_EPS = 0.15
-# Voiceover: same Urdu neural voice as the blog explainers (build_explainer.py).
-VOICE = "ur-PK-AsadNeural"
-VO_RATE_DAILY = "+0%"     # natural speed per daily segment (budgets are tight)
-VO_RATE_WEEKLY = "-8%"    # weekly has room, slow down so numbers land clearly
-VO_RATE_MAX_BOOST = 35    # cap on the faster re-render (+%) so it stays human
-# Per-scene narration budgets (sec): the DailyBrief SCENES frame lengths
-# (video/src/DailyBrief.tsx, @30fps) minus ~0.3s breathing room, so a segment
-# never talks over the next scene. The narration used to be ONE 20-23s track
-# laid from frame 0, which drifted out of sync as the video advanced; now each
-# scene gets its own short clip cued to that scene's first frame by Remotion.
-# `cta` is deliberately absent — music/SFX only there gives the ear a break.
-VO_SCENE_BUDGETS = {
-    "title": 1.9,   # 66f  = 2.2s
-    "board": 3.9,   # 126f = 4.2s
-    "psx": 3.1,     # 102f = 3.4s
-    "gold": 3.1,    # 102f = 3.4s
-    "movers": 3.3,  # 108f = 3.6s
-    "pie": 3.5,     # 114f = 3.8s
-    "outro": 2.5,   # 84f  = 2.8s
-}
 
 # Mirrors video/src/schema.ts defaultColors so Studio defaults and CI renders match.
 DEFAULT_COLORS = {
@@ -273,196 +250,6 @@ def build_yt_description(p, body, cands=None):
     )
 
 
-# ---------------------------------------------------------------------------
-# Voiceover — optional; warn-and-skip when deps/network are unavailable.
-# ---------------------------------------------------------------------------
-def daily_vo_scripts(p, cands=None):
-    """Per-scene narration scripts, keyed by Remotion scene name (always a
-    subset of VO_SCENE_BUDGETS — `cta` stays music-only on purpose). Natural
-    spoken Urdu / Roman-Urdu mix; digits stay Latin (the ur-PK voice reads
-    them natively, same as build_explainer). Each value is
-    {"text": natural take, "short": pre-trimmed fallback} — the short form
-    drops adjectives/framing first and is only rendered when the faster
-    re-render still overruns that scene's budget. Pure: no TTS, no I/O.
-    Scenes whose number isn't derivable (no movers, no gold rate) are omitted
-    rather than narrated empty."""
-    m, g = p["macro"], p["gold"]
-    by = {c["metric"]: c for c in (cands or [])}
-    kse = int(round(m["kse100"]))
-    scripts = {}
-
-    # title — the hook: today's KSE-100 move, or a plain session hello.
-    c = by.get("kse")
-    if c and abs(c["pct"]) >= 0.05:
-        word = "charha" if c["pct"] > 0 else "gira"
-        pct = abs(round(c["pct"], 1))
-        scripts["title"] = {"text": f"KSE-100 aaj {pct} fisad {word}!",
-                            "short": f"KSE-100 {pct} fisad {word}."}
-    else:
-        sess = "close" if "close" in str(p.get("session", "")).lower() else "open"
-        scripts["title"] = {"text": f"Aaj ka market {sess} brief!",
-                            "short": "Aaj ka market brief."}
-
-    # board — 2 rates max, terse; the other rows are on screen anyway.
-    scripts["board"] = {
-        "text": f"Policy rate {m['sbpRate']} fisad, mehngai {m['inflation']} fisad.",
-        "short": f"Policy rate {m['sbpRate']}, mehngai {m['inflation']} fisad.",
-    }
-
-    # psx — the level plus a one-word trend.
-    vals = (p.get("kseSeries") or {}).get("values") or []
-    if c and c["pct"]:
-        trend = "oopar" if c["pct"] > 0 else "neeche"
-    elif len(vals) >= 2 and vals[-1] != vals[-2]:
-        trend = "oopar" if vals[-1] > vals[-2] else "neeche"
-    else:
-        trend = "barqarar"
-    scripts["psx"] = {"text": f"KSE-100 index {kse} points, rujhan {trend}.",
-                      "short": f"KSE-100 {kse}, rujhan {trend}."}
-
-    # gold — the tola rate.
-    if g.get("tola"):
-        tola = int(g["tola"])
-        scripts["gold"] = {"text": f"Sona aaj {tola} rupay fi tola.",
-                           "short": f"Sona {tola} rupay tola."}
-
-    # movers — top mover symbol + %.
-    if p.get("movers"):
-        t = p["movers"][0]
-        word = "oopar" if t["change1y"] >= 0 else "neeche"
-        pct = abs(t["change1y"])
-        scripts["movers"] = {
-            "text": f"Top mover {t['ticker']}, aik saal mein {pct} fisad {word}.",
-            "short": f"{t['ticker']} {pct} fisad {word}.",
-        }
-
-    # pie — illustrative allocation framing, never advice.
-    scripts["pie"] = {
-        "text": "Bachat, funds, stocks aur sonay mein taqseem ki aik misaal.",
-        "short": "Taqseem ki sirf aik misaal.",
-    }
-
-    # outro — site + subscribe. (cta scene stays music/SFX only.)
-    scripts["outro"] = {
-        "text": "Poori tafseel pakinvestlysis dot com par. Subscribe zaroor karein.",
-        "short": "pakinvestlysis dot com. Subscribe karein.",
-    }
-    return scripts
-
-
-def voiceover_prop(segments):
-    """The props `voiceover` block from rendered segments; None -> omit the
-    prop entirely (older props files must keep rendering silently)."""
-    if not segments:
-        return None
-    return {"enabled": True, "segments": segments}
-
-
-def render_voiceover_segments(scripts, out_dir, budgets=None):
-    """Render each per-scene script to out_dir/vo-<scene>.mp3 under its hard
-    budget. Per-segment ladder: natural rate -> proportionally faster
-    re-render (capped at +VO_RATE_MAX_BOOST%) -> the pre-shortened text once
-    more at that rate -> drop just that segment (never fail the brief).
-    Returns the ordered [{"scene","file"}] list for the props, or None when
-    the TTS deps are unavailable (warn-and-skip, same graceful degradation as
-    before) or no segment survived."""
-    budgets = budgets or VO_SCENE_BUDGETS
-    try:
-        import asyncio
-        import edge_tts
-        from mutagen.mp3 import MP3
-    except ImportError as e:
-        print(f"[voiceover] WARNING: skipped — deps unavailable ({e}). "
-              "pip install edge-tts mutagen to enable narration.")
-        return None
-    os.makedirs(out_dir, exist_ok=True)
-
-    def _take(text, path, rate):
-        asyncio.run(edge_tts.Communicate(text, voice=VOICE, rate=rate).save(path))
-        return MP3(path).info.length
-
-    segments = []
-    for scene, script in scripts.items():
-        budget = budgets.get(scene)
-        if budget is None:  # defensive: never narrate an unbudgeted scene
-            print(f"[voiceover] WARNING: no budget for scene '{scene}' — skipping.")
-            continue
-        fname = f"vo-{scene}.mp3"
-        path = os.path.join(out_dir, fname)
-        try:
-            rate = VO_RATE_DAILY
-            dur = _take(script["text"], path, rate)
-            if dur > budget:
-                # duration at default speed ≈ dur * (1 + rate/100); pick the +%
-                # that lands ~8% inside the budget, capped so it stays human.
-                base = 1 + int(rate.rstrip("%")) / 100.0
-                boost = min(VO_RATE_MAX_BOOST,
-                            max(5, int(round((dur * base / (budget * 0.92) - 1) * 100))))
-                rate = f"+{boost}%"
-                print(f"[voiceover] {scene}: {dur:.2f}s > {budget}s — re-rendering at {rate}")
-                dur = _take(script["text"], path, rate)
-            if dur > budget and script.get("short") and script["short"] != script["text"]:
-                print(f"[voiceover] {scene}: still {dur:.2f}s — shortening the line")
-                dur = _take(script["short"], path, rate)
-            if dur > budget:
-                print(f"[voiceover] {scene}: {dur:.2f}s > {budget}s even shortened "
-                      f"at {rate} — dropping this segment.")
-                os.remove(path)
-                continue
-            print(f"[voiceover] {scene}: wrote {fname} ({dur:.2f}s / {budget}s)")
-            segments.append({"scene": scene, "file": fname})
-        except Exception as e:
-            print(f"[voiceover] WARNING: {scene} TTS failed ({e}); skipping segment.")
-            try:
-                if os.path.exists(path):
-                    os.remove(path)  # never leave a half-written take behind
-            except OSError:
-                pass
-    return segments or None
-
-
-def render_voiceover(text, out_path, max_sec, rate=VO_RATE_DAILY):
-    """Single-track edge-tts -> mp3 at out_path; returns duration (sec) or
-    None on skip. Used by build_weekly.py (the long-form brief keeps one
-    continuous track); the daily brief uses render_voiceover_segments. If the
-    take runs past max_sec, re-render once at a proportionally faster rate.
-    Never raises — local runs without edge-tts/mutagen just print a warning
-    and go voiceless."""
-    try:
-        import asyncio
-        import edge_tts
-        from mutagen.mp3 import MP3
-    except ImportError as e:
-        print(f"[voiceover] WARNING: skipped — deps unavailable ({e}). "
-              "pip install edge-tts mutagen to enable narration.")
-        return None
-    try:
-        os.makedirs(os.path.dirname(out_path), exist_ok=True)
-
-        def _take(r):
-            asyncio.run(edge_tts.Communicate(text, voice=VOICE, rate=r).save(out_path))
-            return MP3(out_path).info.length
-
-        dur = _take(rate)
-        if dur > max_sec:
-            # duration at default speed ≈ dur * (1 + rate/100); pick the +% that
-            # lands ~2s inside the cap, clamped so it still sounds human.
-            base = 1 + int(rate.rstrip("%")) / 100.0
-            faster = min(50, max(5, int(round((dur * base / (max_sec - 2) - 1) * 100))))
-            print(f"[voiceover] {dur:.1f}s > {max_sec}s cap — re-rendering at +{faster}%")
-            dur = _take(f"+{faster}%")
-        print(f"[voiceover] wrote {out_path} ({dur:.1f}s)")
-        return dur
-    except Exception as e:
-        print(f"[voiceover] WARNING: TTS failed ({e}); continuing without narration.")
-        try:
-            if os.path.exists(out_path):
-                os.remove(out_path)  # never leave a half-written take behind
-        except OSError:
-            pass
-        return None
-
-
 def load_prev_daily_payload(daily_dir, today_file_str):
     """Most recent social-kit/daily/YYYY-MM-DD.json strictly before today
     (Friday's file on a Monday). None when absent/unreadable."""
@@ -528,8 +315,7 @@ def social_payload(date_str, p, cands=None):
         f"On the board today: policy rate {m['sbpRate']:.2f}%, inflation {m['inflation']:.1f}%. "
         f"PSX's biggest 1-year mover here is {top['ticker']} ({top['name']}) at {top['change1y']:+.1f}%. "
         "The full brief — your market day in under 60 seconds — walks the PSX and gold "
-        "trends, the top movers, and one "
-        "illustrative way to split a rupee across savings, funds, stocks and gold. "
+        "trends and the top movers. "
         "Compare every option with daily data and real-return charts on the site."
     )
     linkedin_text = f"{hook}\n\n{body}\n\n{FOOTER} — free live tools at pakinvestlysis.com\n\n{HASHTAGS}"
@@ -599,17 +385,6 @@ def main():
     if headline:
         props["headline"] = headline
 
-    # Optional per-scene Urdu narration: one short clip per scene, cued by
-    # Remotion to that scene's first frame so the words match the screen
-    # (the old single 20-23s track started at frame 0 and drifted out of
-    # sync). Warn-and-skip on missing deps/TTS failure; the prop is omitted.
-    vo_scripts = daily_vo_scripts(props, cands)
-    vo_segments = render_voiceover_segments(
-        vo_scripts, os.path.join(ROOT, "video", "public"))
-    vo = voiceover_prop(vo_segments)
-    if vo:
-        props["voiceover"] = vo
-
     props_path = os.path.join(ROOT, "video", "daily-props.json")
     with open(props_path, "w", encoding="utf-8") as f:
         json.dump(props, f, ensure_ascii=False, indent=2)
@@ -627,10 +402,6 @@ def main():
     print(f"  caption: {os.path.relpath(cap_path, ROOT)}")
     print(f"  movers:  {', '.join(m['ticker'] for m in props['movers'])}")
     print(f"  headline: {headline if headline else '(omitted — no day change derivable)'}")
-    vo_note = (f"{len(vo_segments)} segments "
-               f"({', '.join(s['scene'] for s in vo_segments)})"
-               if vo_segments else "(skipped)")
-    print(f"  voiceover: {vo_note}")
 
 
 if __name__ == "__main__":

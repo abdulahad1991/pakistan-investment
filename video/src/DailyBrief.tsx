@@ -2,6 +2,7 @@ import React from "react";
 import {
   AbsoluteFill,
   Audio,
+  Img,
   Sequence,
   staticFile,
   useCurrentFrame,
@@ -16,10 +17,12 @@ import { type DailyProps } from "./dailySchema";
 import { ColorProvider, useColors } from "./schema";
 import { PaperBg } from "./components/PaperBg";
 import { Counter, reveal, fadeInOut } from "./components/Ledger";
-import { AreaChart, Donut } from "./components/Charts";
+import { AreaChart } from "./components/Charts";
 
 // Daily market brief — one short walks through the whole day's snapshot:
-// macro board → PSX trend → gold trend → top movers → a sample allocation.
+// macro board → PSX trend → gold trend → top movers → CTA → outro.
+// Music/SFX only — no narration (the TTS voiceover was removed 2026-07-03),
+// and no allocation scene (the "sample mix" donut lives only on DailyCard).
 // Responsive: the same component renders 9:16 (Shorts) and 1:1 (LinkedIn); all
 // sizes scale off u = min(w,h)/1080, and every scene is laid out to fit the
 // tighter square frame, then centered (so it just breathes more when vertical).
@@ -43,12 +46,11 @@ export const SCENES = {
   psx: 102,
   gold: 102,
   movers: 108,
-  pie: 114,
   cta: 72,
   outro: 84,
 } as const;
 type SceneKey = keyof typeof SCENES;
-const ORDER: SceneKey[] = ["title", "board", "psx", "gold", "movers", "pie", "cta", "outro"];
+const ORDER: SceneKey[] = ["title", "board", "psx", "gold", "movers", "cta", "outro"];
 
 export const dailyTotal = () => ORDER.reduce((s, k) => s + SCENES[k], 0);
 const starts = (): Record<SceneKey, number> => {
@@ -489,67 +491,7 @@ const Movers: React.FC<{ data: DailyProps }> = ({ data }) => {
 };
 
 // =========================================================================
-// 6 — Allocation donut
-// =========================================================================
-const Pie: React.FC<{ data: DailyProps }> = ({ data }) => {
-  const frame = useCurrentFrame();
-  const C = useColors();
-  const { u, width, height } = useU();
-  const size = Math.min(width, height) * 0.5;
-  const vertical = height > width * 1.2; // 9:16 -> stack donut over legend
-  return (
-    <Scene dur={SCENES.pie} u={u}>
-      <div style={{ ...reveal(frame, 0) }}>
-        <Kicker u={u}>One way to split a rupee</Kicker>
-      </div>
-      <div style={{ height: 14 * u }} />
-      <div style={{ fontFamily: SANS, fontWeight: 800, fontSize: 64 * u, color: C.ink, letterSpacing: -1.5, ...reveal(frame, 4) }}>
-        A balanced mix.
-      </div>
-      <div style={{ height: 36 * u }} />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: vertical ? "column" : "row",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 48 * u,
-          ...reveal(frame, 10),
-        }}
-      >
-        <div style={{ position: "relative", width: size, height: size, flexShrink: 0 }}>
-          <Donut
-            slices={data.allocation.map((a) => ({ pct: a.pct, color: a.color }))}
-            size={size}
-            thickness={size * 0.22}
-            start={14}
-            dur={46}
-            track={C.border}
-          />
-          <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ fontFamily: SANS, fontWeight: 800, fontSize: 30 * u, color: C.muted }}>SAMPLE</div>
-            <div style={{ fontFamily: SANS, fontWeight: 800, fontSize: 26 * u, color: C.muted }}>mix</div>
-          </div>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 18 * u }}>
-          {data.allocation.map((a, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 16 * u, ...reveal(frame, 22 + i * 5) }}>
-              <span style={{ width: 26 * u, height: 26 * u, borderRadius: 6, background: a.color, flexShrink: 0 }} />
-              <span style={{ fontFamily: MONO, fontWeight: 600, fontSize: 38 * u, color: C.ink, minWidth: 90 * u }}>{a.pct}%</span>
-              <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 36 * u, color: C.ink }}>{a.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div style={{ fontFamily: MONO, fontSize: 24 * u, color: C.muted, textAlign: "center", marginTop: 32 * u, ...reveal(frame, 50) }}>
-        Illustrative only · not financial advice
-      </div>
-    </Scene>
-  );
-};
-
-// =========================================================================
-// 7 — CTA
+// 6 — CTA
 // =========================================================================
 const Cta: React.FC<{ data: DailyProps }> = ({ data }) => {
   const frame = useCurrentFrame();
@@ -561,10 +503,8 @@ const Cta: React.FC<{ data: DailyProps }> = ({ data }) => {
     <Scene dur={SCENES.cta} u={u}>
       <div style={{ transform: `scale(${0.9 + pop * 0.1})`, textAlign: "center" }}>
         <div style={{ position: "relative", display: "inline-block" }}>
-          <span style={{ fontFamily: SANS, fontWeight: 800, fontSize: 92 * u, color: C.green, letterSpacing: -2 }}>
-            Pakinvestlysis
-          </span>
-          <div style={{ position: "absolute", left: 0, bottom: -6 * u, height: 10 * u, width: `${underline}%`, background: C.gold, borderRadius: 6 }} />
+          <Img src={staticFile("logo.png")} style={{ height: 132 * u, display: "block" }} />
+          <div style={{ position: "absolute", left: 0, bottom: -14 * u, height: 10 * u, width: `${underline}%`, background: C.gold, borderRadius: 6 }} />
         </div>
       </div>
       <div style={{ fontFamily: SANS, fontSize: 40 * u, color: C.ink, fontWeight: 600, textAlign: "center", marginTop: 48 * u, ...reveal(frame, 26) }}>
@@ -594,7 +534,7 @@ const Cta: React.FC<{ data: DailyProps }> = ({ data }) => {
 };
 
 // =========================================================================
-// 8 — Outro (engagement + next-session teaser)
+// 7 — Outro (engagement + next-session teaser)
 // Session teaser is keyed off data.session ("Market open" -> tease the close,
 // "Market close" -> tease the next open). Pure text + styled pills (no emoji),
 // so it renders identically in headless CI.
@@ -715,9 +655,6 @@ const Sfx: React.FC<{ data: DailyProps }> = ({ data }) => {
   cues.push({ at: s.gold + 16, src: "sweep.wav", vol: 0.5 });
   // movers ticks
   data.movers.forEach((_, i) => cues.push({ at: s.movers + 14 + i * 8, src: "tick.wav", vol: 0.3, rate: 1 + i * 0.06 }));
-  // pie sweep + slice clicks
-  cues.push({ at: s.pie + 14, src: "sweep.wav", vol: 0.45 });
-  data.allocation.forEach((_, i) => cues.push({ at: s.pie + 22 + i * 5, src: "click.wav", vol: 0.4, rate: 1 + i * 0.08 }));
   // cta pop + payoff
   cues.push({ at: s.cta + 6, src: "pop.wav", vol: 0.55 });
   cues.push({ at: s.cta + 40, src: "chime.wav", vol: 0.45 });
@@ -742,7 +679,6 @@ const Sfx: React.FC<{ data: DailyProps }> = ({ data }) => {
 // Defaults reproduce the daily brief exactly (single un-looped clip).
 const MUSIC_BASE = 0.14;
 const MUSIC_CLIP_FRAMES = 720; // public/music.mp3 ≈ 24.0s @ 30fps
-export const VOICE_DUCK = 0.35; // music multiplier while a voiceover plays
 export const MusicBed: React.FC<{ volume: number; total?: number; loop?: boolean }> = ({
   volume,
   total,
@@ -777,6 +713,20 @@ export const MusicBed: React.FC<{ volume: number; total?: number; loop?: boolean
 };
 
 // =========================================================================
+// Brand mark — the site logo (public/logo.png, copied from assets/logo.png),
+// pinned top-center for the whole video so every frame is branded. Shared
+// with WeeklyBrief. `h` is the logo height in u-units.
+// =========================================================================
+export const BrandMark: React.FC<{ u: number; h?: number }> = ({ u, h = 44 }) => (
+  <AbsoluteFill style={{ alignItems: "center", justifyContent: "flex-start", pointerEvents: "none" }}>
+    <Img
+      src={staticFile("logo.png")}
+      style={{ height: h * u, marginTop: 36 * u, opacity: 0.95 }}
+    />
+  </AbsoluteFill>
+);
+
+// =========================================================================
 // Master
 // =========================================================================
 export const DailyBrief: React.FC<DailyProps> = (props) => {
@@ -786,37 +736,31 @@ export const DailyBrief: React.FC<DailyProps> = (props) => {
       {node}
     </Sequence>
   );
-  // Optional narration: per-scene segments each start on their scene's first
-  // frame (so the words always match the screen); a legacy single `file` prop
-  // still lays one track from frame 0. Unknown scene names are ignored safely.
-  // Music ducks by a constant factor whenever narration is enabled; SFX are
-  // untouched either way.
-  const vo = props.voiceover?.enabled ? props.voiceover : null;
-  const voSegments = (vo?.segments ?? []).filter((seg) => seg.scene in SCENES);
   return (
     <ColorProvider value={props.colors}>
       <AbsoluteFill style={{ backgroundColor: props.colors.paper }}>
         <PaperBg />
-        {props.audio.sfx ? <MusicBed volume={props.audio.volume * (vo ? VOICE_DUCK : 1)} /> : null}
-        {voSegments.length > 0
-          ? voSegments.map((seg, i) => (
-              <Sequence key={`vo-${seg.scene}-${i}`} from={s[seg.scene as SceneKey]} layout="none">
-                <Audio src={staticFile(seg.file)} />
-              </Sequence>
-            ))
-          : vo?.file
-            ? <Audio src={staticFile(vo.file)} />
-            : null}
+        {props.audio.sfx ? <MusicBed volume={props.audio.volume} /> : null}
         <Sfx data={props} />
         {scene("title", <Title data={props} />)}
         {scene("board", <Board data={props} />)}
         {scene("psx", <Psx data={props} />)}
         {scene("gold", <Gold data={props} />)}
         {scene("movers", <Movers data={props} />)}
-        {scene("pie", <Pie data={props} />)}
         {scene("cta", <Cta data={props} />)}
         {scene("outro", <Outro data={props} />)}
+        <BrandMarkAuto />
       </AbsoluteFill>
     </ColorProvider>
   );
+};
+
+// u depends on useVideoConfig, which needs a component inside the tree.
+// Hidden during the CTA scene — that scene shows the logo full-size already.
+const BrandMarkAuto: React.FC = () => {
+  const { u } = useU();
+  const frame = useCurrentFrame();
+  const s = starts();
+  if (frame >= s.cta && frame < s.cta + SCENES.cta) return null;
+  return <BrandMark u={u} />;
 };

@@ -16,7 +16,6 @@ import {
   SANS,
   MONO,
   GOLD_DARK,
-  VOICE_DUCK,
   useU,
   Kicker,
   Scene,
@@ -25,12 +24,14 @@ import {
   MoverBar,
   EngagePills,
   MusicBed,
+  BrandMark,
 } from "./DailyBrief";
 
 // Weekly market review — the long-form 16:9 sibling of the DailyBrief Short.
 // Same design language and building blocks (Scene wrapper, TrendScene charts,
 // board rows, mover bars, outro pills all imported from DailyBrief), paced
-// much slower: six scenes over 160s so a voiceover can talk through each one.
+// much slower: six scenes over 160s. Music/SFX only — no narration (the TTS
+// voiceover was removed 2026-07-03).
 
 // Fixed scene lengths (frames @30fps). Total = 4800 = 160s.
 export const WEEKLY_SCENES = {
@@ -366,17 +367,13 @@ export const WeeklyBrief: React.FC<WeeklyProps> = (props) => {
       {node}
     </Sequence>
   );
-  // Same narration contract as the daily brief: full-length track + a
-  // constant duck on the music bed. SFX are untouched.
-  const vo = props.voiceover?.enabled ? props.voiceover : null;
   return (
     <ColorProvider value={props.colors}>
       <AbsoluteFill style={{ backgroundColor: props.colors.paper }}>
         <PaperBg />
         {props.audio.sfx ? (
-          <MusicBed volume={props.audio.volume * (vo ? VOICE_DUCK : 1)} total={weeklyTotal()} loop />
+          <MusicBed volume={props.audio.volume} total={weeklyTotal()} loop />
         ) : null}
-        {vo ? <Audio src={staticFile(vo.file)} /> : null}
         <WSfx data={props} />
         {scene("title", <WTitle data={props} />)}
         {scene("kse", <WKse data={props} />)}
@@ -384,7 +381,15 @@ export const WeeklyBrief: React.FC<WeeklyProps> = (props) => {
         {scene("movers", <WMovers data={props} />)}
         {scene("board", <WBoard data={props} />)}
         {scene("outro", <WOutro />)}
+        <WBrandMark />
       </AbsoluteFill>
     </ColorProvider>
   );
+};
+
+// Site logo pinned top-center for the whole review (16:9 -> slightly smaller
+// than the Short's, relative to frame height).
+const WBrandMark: React.FC = () => {
+  const { u } = useU();
+  return <BrandMark u={u} h={40} />;
 };

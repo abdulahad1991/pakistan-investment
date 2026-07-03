@@ -4,7 +4,7 @@
 // compositions: DailyBrief-9x16, DailyBrief-1x1 (videos) and DailyCard-1x1 (the
 // still image). build_daily.py emits this shape from data.json.
 import { z } from "zod";
-import { colorsSchema, audioSchema, voiceoverSchema, defaultColors } from "./schema";
+import { colorsSchema, audioSchema, segmentedVoiceoverSchema, defaultColors } from "./schema";
 
 const series = z.object({
   values: z.array(z.number()),
@@ -60,8 +60,10 @@ export const dailySchema = z.object({
       sub: z.string(), // e.g. "2 Jul · Market close"
     })
     .optional(),
-  // voiceover: narration file under public/, ducks the music bed when enabled.
-  voiceover: voiceoverSchema.optional(),
+  // voiceover: per-scene narration segments (vo-<scene>.mp3, each cued to its
+  // scene's first frame) or a legacy single `file` laid from frame 0; either
+  // way the music bed ducks while narration is enabled.
+  voiceover: segmentedVoiceoverSchema.optional(),
 });
 
 export type DailyProps = z.infer<typeof dailySchema>;

@@ -4,6 +4,8 @@
   * build_yt_title — story-first ordering, hard <=100-char cap
   * build_yt_description — searchable first line ("KSE 100 today" +
     "gold rate today Pakistan" with the day's numbers)
+  * daily_vo_scripts / voiceover_prop — the per-scene narration script builder
+    (scene keys, content beats, omissions) and the props contract shape
 
 No network, no TTS, no filesystem — these functions are pure by design.
 """
@@ -151,6 +153,85 @@ def test_description_reuses_story_then_static_block():
     assert "not financial advice" in desc.lower()
     assert "pakinvestlysis.com" in desc
     assert "#Shorts" in desc                       # daily Short keeps the tag
+
+
+# ---------------------------------------------------------------------------
+# daily_vo_scripts — per-scene narration builder (pure: no TTS, no I/O)
+# ---------------------------------------------------------------------------
+def _rich_data():
+    d = _data()
+    d["stocks"] = [{"ticker": "FFC", "name": "Fauji Fertilizer", "chg1y": 56.8}]
+    return d
+
+
+def test_vo_scripts_cover_expected_scenes_only():
+    data = _rich_data()
+    scripts = bd.daily_vo_scripts(_props(data), bd.day_candidates(data, PREV))
+    # full data -> every narrated scene present, in on-screen order
+    assert list(scripts) == ["title", "board", "psx", "gold", "movers", "pie", "outro"]
+    # every narrated scene must have a frame budget in the Remotion SCENES map
+    assert set(scripts) <= set(bd.VO_SCENE_BUDGETS)
+    assert "cta" not in scripts  # music/SFX-only breather, by design
+    for scene, s in scripts.items():
+        assert s["text"].strip(), scene
+        assert s["short"].strip(), scene
+
+
+def test_vo_scripts_content_beats():
+    data = _rich_data()
+    scripts = bd.daily_vo_scripts(_props(data), bd.day_candidates(data, PREV))
+    # title hook: today's KSE move (+2.27 -> "2.3 fisad charha")
+    assert "2.3" in scripts["title"]["text"]
+    assert "charha" in scripts["title"]["text"]
+    # board: exactly the two rates (policy + inflation), terse
+    assert "11.5" in scripts["board"]["text"]
+    assert "11.7" in scripts["board"]["text"]
+    # psx: level + one-word trend
+    assert "184841" in scripts["psx"]["text"]
+    assert "oopar" in scripts["psx"]["text"]
+    # gold: tola rate
+    assert "433300" in scripts["gold"]["text"]
+    assert "tola" in scripts["gold"]["text"]
+    # movers: top mover sym + %
+    assert "FFC" in scripts["movers"]["text"]
+    assert "56.8" in scripts["movers"]["text"]
+    # pie: illustrative allocation framing, never advice
+    assert "misaal" in scripts["pie"]["text"]
+    # outro: site + subscribe
+    assert "pakinvestlysis dot com" in scripts["outro"]["text"]
+    assert "Subscribe" in scripts["outro"]["text"]
+
+
+def test_vo_scripts_title_negative_move_says_gira():
+    data = _data(kse_pct=-1.24)
+    scripts = bd.daily_vo_scripts(_props(data), bd.day_candidates(data, None))
+    assert "gira" in scripts["title"]["text"]
+    assert "1.2" in scripts["title"]["text"]
+    assert "neeche" in scripts["psx"]["text"]
+
+
+def test_vo_scripts_omit_underivable_scenes():
+    # No movers, no gold rate, no day change -> those scenes are omitted
+    # (not narrated empty); the rest still narrate and stay in the SCENES set.
+    data = _data(tola=0)
+    scripts = bd.daily_vo_scripts(_props(data), None)
+    assert "movers" not in scripts
+    assert "gold" not in scripts
+    assert set(scripts) <= set(bd.VO_SCENE_BUDGETS)
+    assert scripts["title"]["text"].strip()  # session-based hook fallback
+    assert scripts["outro"]["text"].strip()
+
+
+# ---------------------------------------------------------------------------
+# voiceover_prop — the emitted props contract
+# ---------------------------------------------------------------------------
+def test_voiceover_prop_shape():
+    segs = [{"scene": "title", "file": "vo-title.mp3"},
+            {"scene": "board", "file": "vo-board.mp3"}]
+    assert bd.voiceover_prop(segs) == {"enabled": True, "segments": segs}
+    # no/empty segments -> prop omitted entirely (legacy props stay silent)
+    assert bd.voiceover_prop(None) is None
+    assert bd.voiceover_prop([]) is None
 
 
 def test_social_payload_carries_metrics_and_restrained_tags():

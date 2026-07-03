@@ -597,7 +597,7 @@ const Cta: React.FC<{ data: DailyProps }> = ({ data }) => {
 // 8 — Outro (engagement + next-session teaser)
 // Session teaser is keyed off data.session ("Market open" -> tease the close,
 // "Market close" -> tease the next open). Pure text + styled pills (no emoji),
-// so it renders identically in headless CI; no narration on these briefs.
+// so it renders identically in headless CI.
 // =========================================================================
 // Engagement pill row (Like / Subscribe / Share) — shared with WeeklyBrief.
 export const EngagePills: React.FC<{ u: number; start: number }> = ({ u, start }) => {
@@ -786,15 +786,27 @@ export const DailyBrief: React.FC<DailyProps> = (props) => {
       {node}
     </Sequence>
   );
-  // Optional narration (new prop): lay the file under the whole video from
-  // frame 0 and duck the music bed by a constant factor. SFX are untouched.
+  // Optional narration: per-scene segments each start on their scene's first
+  // frame (so the words always match the screen); a legacy single `file` prop
+  // still lays one track from frame 0. Unknown scene names are ignored safely.
+  // Music ducks by a constant factor whenever narration is enabled; SFX are
+  // untouched either way.
   const vo = props.voiceover?.enabled ? props.voiceover : null;
+  const voSegments = (vo?.segments ?? []).filter((seg) => seg.scene in SCENES);
   return (
     <ColorProvider value={props.colors}>
       <AbsoluteFill style={{ backgroundColor: props.colors.paper }}>
         <PaperBg />
         {props.audio.sfx ? <MusicBed volume={props.audio.volume * (vo ? VOICE_DUCK : 1)} /> : null}
-        {vo ? <Audio src={staticFile(vo.file)} /> : null}
+        {voSegments.length > 0
+          ? voSegments.map((seg, i) => (
+              <Sequence key={`vo-${seg.scene}-${i}`} from={s[seg.scene as SceneKey]} layout="none">
+                <Audio src={staticFile(seg.file)} />
+              </Sequence>
+            ))
+          : vo?.file
+            ? <Audio src={staticFile(vo.file)} />
+            : null}
         <Sfx data={props} />
         {scene("title", <Title data={props} />)}
         {scene("board", <Board data={props} />)}

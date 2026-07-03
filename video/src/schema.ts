@@ -64,15 +64,33 @@ export const audioSchema = z.object({
   volume: z.number().min(0).max(2), // multiplies every cue's level
 });
 
-// Optional narration track (DailyBrief + WeeklyBrief). When enabled, the
-// composition plays `file` (from public/) under the whole video and ducks
+// Optional narration track (WeeklyBrief — one continuous take). When enabled,
+// the composition plays `file` (from public/) under the whole video and ducks
 // the music bed; when absent/disabled the render is byte-identical to before.
 export const voiceoverSchema = z.object({
-  file: z.string(), // filename inside public/, e.g. "voiceover.mp3"
+  file: z.string(), // filename inside public/, e.g. "voiceover-weekly.mp3"
   enabled: z.boolean(),
 });
 
 export type Voiceover = z.infer<typeof voiceoverSchema>;
+
+// Per-scene narration (DailyBrief since 2026-07): each segment is a short clip
+// cued to its scene's first frame, so the words always match what's on screen
+// (a single frame-0 track drifted out of sync as the video advanced). `file`
+// stays accepted for legacy single-track props; segment scenes that don't
+// exist in the composition are ignored safely.
+export const voiceoverSegmentSchema = z.object({
+  scene: z.string(), // SCENES key in the composition, e.g. "title"
+  file: z.string(), // filename inside public/, e.g. "vo-title.mp3"
+});
+
+export const segmentedVoiceoverSchema = z.object({
+  enabled: z.boolean(),
+  file: z.string().optional(), // legacy: one track laid from frame 0
+  segments: z.array(voiceoverSegmentSchema).optional(),
+});
+
+export type SegmentedVoiceover = z.infer<typeof segmentedVoiceoverSchema>;
 
 export const promoSchema = z.object({
   // ---- Brand palette (live-editable color pickers) --------------------

@@ -1,7 +1,7 @@
 /* Pakistan Tax Calculator - interactive engine.
-   Educational only; not tax advice. Rates are as reported for FY2026-27
-   (salaried slabs reflect the Budget 2026-27 cuts, effective 1 July 2026
-   pending the Finance Act); non-salaried/AOP and sales-tax rates reflect the
+   Educational only; not tax advice. Rates are the enacted FY2026-27 position
+   (salaried slabs per the Finance Act 2026-27, effective 1 July 2026);
+   non-salaried/AOP and sales-tax rates reflect the
    current published position. Verify the enacted figures on fbr.gov.pk and the
    relevant provincial revenue authority before relying on any result. */
 (function () {
@@ -166,13 +166,14 @@
           ['Annual income tax', rs(r.tax), '#0E3B2E'],
           r.surcharge > 0 ? ['+ Surcharge', rs(r.surcharge), '#A4452F'] : null,
           ['Total tax / year', rs(r.total), '#A4452F'],
+          ['Tax / month', rs(r.total / 12), '#A4452F'],
           ['Take-home / year', rs(r.afterTax), '#175A41'],
           ['Take-home / month', rs(r.monthlyTakeHome), '#175A41'],
           ['Effective tax rate', pct(r.effective), '#7A5A1F']
         ]) + compare +
         '<p class="tax-note">Marginal rate on the top slice of your income: <strong>' + r.marginalRate + '%</strong>. ' +
         (type === 'salaried'
-          ? 'Salaried slabs shown are the Budget 2026-27 rates (effective 1 July 2026, pending the Finance Act).'
+          ? 'Salaried slabs shown are the enacted Finance Act 2026-27 rates (effective 1 July 2026).'
           : 'Non-salaried / business individual &amp; AOP slabs; a 10% surcharge applies on tax where annual income exceeds Rs 10 million.') +
         ' Verify the enacted slabs on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>';
       if (window.gtag) try { gtag('event', 'tax_calc', { kind: 'income', type: type }); } catch (e) {}

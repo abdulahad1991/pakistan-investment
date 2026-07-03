@@ -175,7 +175,7 @@ def youtube_meta(props, friday):
              f"gold rate today Pakistan: ₨{grp(gold['close'])}/tola "
              f"({gold['chgPct']:+.1f}% this week).")
     body = (f"Week in review ({props['dateRange']}) — the whole week in under "
-            f"3 minutes: the KSE-100 moved {kse['chgPct']:+.1f}% and gold "
+            f"a minute: the KSE-100 moved {kse['chgPct']:+.1f}% and gold "
             f"{gold['chgPct']:+.1f}%. Notable movers: {mtxt or 'n/a'}. "
             f"Policy rate {r['policy']:.2f}%, inflation {r['inflation']:.1f}%, "
             f"USD/PKR ₨{r['usd']:.2f}.")

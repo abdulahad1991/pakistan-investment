@@ -25,25 +25,30 @@ import {
   EngagePills,
   MusicBed,
   BrandMark,
+  Cta,
 } from "./DailyBrief";
 
-// Weekly market review — the long-form 16:9 sibling of the DailyBrief Short.
-// Same design language and building blocks (Scene wrapper, TrendScene charts,
-// board rows, mover bars, outro pills all imported from DailyBrief), paced
-// much slower: six scenes over 160s. Music/SFX only — no narration (the TTS
-// voiceover was removed 2026-07-03).
+// Weekly market review — the 16:9 sibling of the DailyBrief Short. Same
+// design language and building blocks (Scene wrapper, TrendScene charts,
+// board rows, mover bars, the Short's logo CTA, outro pills — all imported
+// from DailyBrief). Music/SFX only — no narration. Re-paced 2026-07-04 to the
+// user's exact cut (old 160s narration pacing dragged): 5/7/7/10/8s scenes +
+// the Short's 3.4s logo CTA + a 4s outro = 44.4s.
 
-// Fixed scene lengths (frames @30fps). Total = 4800 = 160s.
+// Fixed scene lengths (frames @30fps). Total = 1332 = 44.4s.
 export const WEEKLY_SCENES = {
-  title: 450, // 15s
-  kse: 900, // 30s
-  gold: 900, // 30s
-  movers: 1050, // 35s
-  board: 900, // 30s
-  outro: 600, // 20s
+  title: 150, // 5s
+  kse: 210, // 7s
+  gold: 210, // 7s
+  movers: 300, // 10s
+  board: 240, // 8s
+  cta: 102, // 3.4s — the Short's logo scene, same length
+  outro: 120, // 4s
 } as const;
 type WSceneKey = keyof typeof WEEKLY_SCENES;
-const WORDER: WSceneKey[] = ["title", "kse", "gold", "movers", "board", "outro"];
+const WORDER: WSceneKey[] = ["title", "kse", "gold", "movers", "board", "cta", "outro"];
+
+const WEEKLY_FOOTER = "Not financial advice · pakinvestlysis.com";
 
 export const weeklyTotal = () => WORDER.reduce((s, k) => s + WEEKLY_SCENES[k], 0);
 const wStarts = (): Record<WSceneKey, number> => {
@@ -344,6 +349,9 @@ const WSfx: React.FC<{ data: WeeklyProps }> = ({ data }) => {
   BOARD_STEPS.forEach((f, i) =>
     cues.push({ at: s.board + f, src: i === 2 ? "chime.wav" : "tick.wav", vol: i === 2 ? 0.4 : 0.3 }),
   );
+  // cta pop + payoff (same cues as the Short's logo scene)
+  cues.push({ at: s.cta + 6, src: "pop.wav", vol: 0.55 });
+  cues.push({ at: s.cta + 40, src: "chime.wav", vol: 0.45 });
   // outro: engagement pills land with a pop
   cues.push({ at: s.outro + 38, src: "pop.wav", vol: 0.5 });
   return (
@@ -380,6 +388,7 @@ export const WeeklyBrief: React.FC<WeeklyProps> = (props) => {
         {scene("gold", <WGold data={props} />)}
         {scene("movers", <WMovers data={props} />)}
         {scene("board", <WBoard data={props} />)}
+        {scene("cta", <Cta footer={WEEKLY_FOOTER} dur={WEEKLY_SCENES.cta} />)}
         {scene("outro", <WOutro />)}
         <WBrandMark />
       </AbsoluteFill>
@@ -388,8 +397,12 @@ export const WeeklyBrief: React.FC<WeeklyProps> = (props) => {
 };
 
 // Site logo pinned top-center for the whole review (16:9 -> slightly smaller
-// than the Short's, relative to frame height).
+// than the Short's, relative to frame height). Hidden during the CTA scene,
+// which shows the logo full-size already (same rule as the Short).
 const WBrandMark: React.FC = () => {
   const { u } = useU();
+  const frame = useCurrentFrame();
+  const s = wStarts();
+  if (frame >= s.cta && frame < s.cta + WEEKLY_SCENES.cta) return null;
   return <BrandMark u={u} h={40} />;
 };

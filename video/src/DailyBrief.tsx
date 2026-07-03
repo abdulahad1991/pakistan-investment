@@ -575,16 +575,18 @@ const Spotlight: React.FC<{ data: DailyProps }> = ({ data }) => {
 };
 
 // =========================================================================
-// 7 — CTA
+// 7 — CTA (logo + site button + not-advice footer). Exported for WeeklyBrief,
+// which renders the identical scene at its own duration — hence the dur/footer
+// props (daily defaults keep this file's callsite unchanged).
 // =========================================================================
-const Cta: React.FC<{ data: DailyProps }> = ({ data }) => {
+export const Cta: React.FC<{ footer: string; dur?: number }> = ({ footer, dur = SCENES.cta }) => {
   const frame = useCurrentFrame();
   const C = useColors();
   const { u, fps } = { ...useU(), fps: useVideoConfig().fps };
   const pop = spring({ frame: frame - 6, fps, config: { damping: 14 }, durationInFrames: 30 });
   const underline = interpolate(frame, [16, 40], [0, 100], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: easeOut });
   return (
-    <Scene dur={SCENES.cta} u={u}>
+    <Scene dur={dur} u={u}>
       <div style={{ transform: `scale(${0.9 + pop * 0.1})`, textAlign: "center" }}>
         <div style={{ position: "relative", display: "inline-block" }}>
           <Img src={staticFile("logo.png")} style={{ height: 132 * u, display: "block" }} />
@@ -611,7 +613,7 @@ const Cta: React.FC<{ data: DailyProps }> = ({ data }) => {
         </div>
       </div>
       <div style={{ fontFamily: MONO, fontSize: 24 * u, color: C.muted, textAlign: "center", marginTop: 40 * u, ...reveal(frame, 48) }}>
-        {data.footer}
+        {footer}
       </div>
     </Scene>
   );
@@ -835,7 +837,7 @@ export const DailyBrief: React.FC<DailyProps> = (props) => {
         {scene("gold", <Gold data={props} />)}
         {scene("movers", <Movers data={props} />)}
         {scene("spot", <Spotlight data={props} />)}
-        {scene("cta", <Cta data={props} />)}
+        {scene("cta", <Cta footer={props.footer} />)}
         {scene("outro", <Outro data={props} />)}
         <BrandMarkAuto />
       </AbsoluteFill>

@@ -134,7 +134,7 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={defaultDailyProps}
       />
 
-      {/* Weekly market review — long-form 16:9 (~160s) for YouTube proper.
+      {/* Weekly market review — 16:9 (~45s) for YouTube proper.
           Reuses the DailyBrief building blocks at a slower pace; props come
           from the weekly props file (see weeklySchema.ts for the contract). */}
       <Composition

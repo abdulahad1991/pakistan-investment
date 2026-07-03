@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-03T13:33:37Z",
+  "updated": "2026-07-03T19:32:27Z",
   "macro": {
     "pkr_usd": 278.15,
     "sbp_rate": 11.5,
@@ -160,14 +160,14 @@
       "type": "Islamic Equity",
       "risk": "Medium",
       "shariah": true,
-      "ret_1y": 18.73,
+      "ret_1y": 18.9,
       "ret_3y": 48.1,
       "ret_5y": 19.6,
       "min_pkr": 5000,
       "recommended": false,
       "verdict": "Decent — 5-year return lower than Meezan funds",
       "url": "https://www.jsil.com",
-      "nav": 261.58,
+      "nav": 262.83,
       "return_type": "absolute"
     }
   ],
@@ -2098,12 +2098,12 @@
   "gold": {
     "source": "gold.pk",
     "source_type": "local",
-    "tola_24k": 442800,
-    "tola_22k": 405900,
-    "g10_24k": 379636,
-    "g10_22k": 348000,
-    "gram_24k": 37964,
-    "gram_22k": 34800,
+    "tola_24k": 441000,
+    "tola_22k": 404250,
+    "g10_24k": 378093,
+    "g10_22k": 346585,
+    "gram_24k": 37809,
+    "gram_22k": 34659,
     "chg1y_pct": 25.5,
     "history": {
       "labels": [
@@ -2277,11 +2277,11 @@
     },
     "funds": {
       "ok": true,
-      "as_of": "2026-07-03",
+      "as_of": "2026-07-04",
       "source": "Mutual Funds Association of Pakistan (MUFAP)",
       "cadence": "daily",
       "stale": false,
-      "age_days": 0,
+      "age_days": -1,
       "last_error": null
     },
     "gold": {

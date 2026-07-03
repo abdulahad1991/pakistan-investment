@@ -5,9 +5,11 @@
   },
   "as_of": "Apr 28, 2026",
   "source": "State Bank of Pakistan (SBP) interbank M2M",
-  "ok": true,
+  "ok": false,
   "fetched_at": "2026-07-02T13:21:28Z",
   "cadence": "intraday",
   "metric": "Interbank USD/PKR",
-  "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp"
+  "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp",
+  "last_error": "ValueError: no 'Mon DD, YYYY' date found on SBP M2M page",
+  "last_attempt": "2026-07-03T07:48:25Z"
 }

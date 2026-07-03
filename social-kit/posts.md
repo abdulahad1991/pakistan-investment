@@ -15,7 +15,7 @@ No signup, no ads-wall. Educational, not advice.
 👉 https://pakinvestlysis.com/tax-calculator.html
 
 **Facebook / groups**
-Free Pakistan Tax Calculator (2026-27) — work out your income tax, GST, and even how much sales tax you're paying at restaurants (paying by card is ~5% vs 16% cash in Punjab 👀). Takes 10 seconds: https://pakinvestlysis.com/tax-calculator.html
+Free Pakistan Tax Calculator (2026-27) — work out your income tax, GST, and even how much sales tax you're paying at restaurants (paying by card is 8% vs 16% cash in Punjab 👀). Takes 10 seconds: https://pakinvestlysis.com/tax-calculator.html
 
 **WhatsApp / X**
 Free Pakistan tax calculator (2026-27): income tax, GST & restaurant tax in 10 sec → https://pakinvestlysis.com/tax-calculator.html

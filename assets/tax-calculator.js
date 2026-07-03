@@ -48,10 +48,12 @@
   var SERVICE_RATES = { Punjab: 16, Sindh: 15, KPK: 15, Balochistan: 15, Islamabad: 15 };
 
   // Restaurant sales tax (%) - cash vs card/digital. Punjab & Islamabad give a
-  // large reduced rate for digital payments; other provinces verify with their board.
+  // reduced rate for digital payments; other provinces verify with their board.
+  // Punjab card rate 5% -> 8% per Punjab Finance Act 2026-27 (1 Jul 2026);
+  // ICT (Islamabad) keeps 5% digital / 15% cash (FBR).
   var RESTAURANT_RATES = {
-    Punjab: { cash: 16, card: 5 },
-    Islamabad: { cash: 16, card: 5 },
+    Punjab: { cash: 16, card: 8 },
+    Islamabad: { cash: 15, card: 5 },
     Sindh: { cash: 15, card: 15 },
     KPK: { cash: 15, card: 15 },
     Balochistan: { cash: 15, card: 15 }

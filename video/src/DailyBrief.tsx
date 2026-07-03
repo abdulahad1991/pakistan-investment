@@ -49,7 +49,7 @@ export const SCENES = {
   gold: 102,
   movers: 108,
   spot: 114,
-  cta: 72,
+  cta: 102, // +1s 2026-07-04: logo + "Not financial advice" read too fast at 72f
   outro: 84,
 } as const;
 type SceneKey = keyof typeof SCENES;

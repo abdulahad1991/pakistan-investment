@@ -40,6 +40,15 @@ Educational only; **never financial advice**. Audience: Pakistani retail savers.
   run via `pytest`) and a `fetch()` that writes a provenance partition to `data/partitions/<name>.json`
   `{value, as_of, source, ok, fetched_at, cadence}`. Graceful fallback: a failure keeps the prior
   partition flagged `ok:false` (never silently serves stale as current).
+- **Failover crawl (`base.crawl_first`)** — the three SBP-sourced fetchers (`forex`/`policy`/`reserves`)
+  all read ONE SBP page (`ecodata/rates/m2m/m2m-current.asp`, the "Economic Data snapshot"), so a single
+  SBP redesign froze all three (see the 2026-07 incident). `crawl_first(name, [(label, thunk), ...])` tries
+  an ordered source chain and returns the FIRST valid partition, tagging it `via`/`failover`/`primary_errors`:
+  **forex** = SBP m2m → recrawl SBP homepage (same snapshot) → `open.er-api.com` keyless USD/PKR (tagged
+  `approx`); **policy**/**reserves** = SBP m2m → recrawl SBP homepage (no clean non-SBP source, and their
+  event/weekly cadence makes carry-forward correct). Only when EVERY source fails does it raise
+  `AllSourcesFailed` → `run()` carries the prior value forward `ok:false`. `data_health[name]` surfaces
+  `via`/`failover` so the UI can show "primary down, served via <fallback>".
 - **`run_fetchers.py [open|close|history|all]`** — orchestrator (cadence groups), then **`build_data.py`**
   overlays partitions onto the curated **`data.json`** (preserving hand-authored content), adds `_asof`
   fields + a `data_health` block + staleness flags, and asserts consistency (e.g. gold gram==tola/11.6638).

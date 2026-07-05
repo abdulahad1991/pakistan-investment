@@ -22,9 +22,13 @@ equal => Holding. Policy changes are EVENT-driven (MPC meetings), not scheduled.
 """
 import re
 import html as _html
-from .base import http_get, partition, run, in_band, load_partition
+from .base import (http_get, partition, run, in_band, load_partition,
+                   crawl_first)
 
 SOURCE = "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp"
+# Recrawl target: the same Economic Data snapshot (corridor included) is
+# server-rendered on the SBP homepage — the failover when the M2M path dies.
+HOME_URL = "https://www.sbp.org.pk/"
 NAME = "policy"
 
 
@@ -63,10 +67,29 @@ def parse_policy(html_text):
     return {"rate": rate, "floor": floor, "ceiling": ceiling}
 
 
+def _policy_from(url, label):
+    """A crawl_first thunk: fetch an SBP page, parse + sanity-check the corridor."""
+    def _thunk():
+        parsed = parse_policy(http_get(url))
+        if not in_band(parsed["rate"], 5, 25):  # realistically 5-25%
+            raise ValueError(f"SBP policy rate out of sanity band: {parsed['rate']}")
+        return partition(
+            NAME, parsed, as_of=None, source=label, cadence="event",
+            source_url=url)
+    return _thunk
+
+
 def fetch():
-    parsed = parse_policy(http_get(SOURCE))
-    if not in_band(parsed["rate"], 5, 25):  # SBP policy rate realistically 5-25%
-        raise ValueError(f"SBP policy rate out of sanity band: {parsed['rate']}")
+    # Priority: SBP M2M snapshot -> recrawl SBP homepage (same corridor). If
+    # both are down crawl_first raises and run() carries the last corridor
+    # forward flagged ok=False — correct here, since the policy rate only moves
+    # at an MPC meeting, so a stale corridor is almost always still the truth.
+    payload = crawl_first(NAME, [
+        ("sbp-m2m", _policy_from(SOURCE, "State Bank of Pakistan (SBP)")),
+        ("sbp-home", _policy_from(HOME_URL,
+                                  "State Bank of Pakistan (SBP) homepage snapshot")),
+    ])
+    parsed = payload["value"]
 
     # Direction is not on the page — derive it from the prior partition, and
     # PERSIST it until the rate actually changes. base.run() overwrites the
@@ -94,9 +117,8 @@ def fetch():
         except (TypeError, ValueError):
             pass
 
-    return partition(
-        NAME, parsed, as_of=None, source="State Bank of Pakistan (SBP)",
-        cadence="event", sbp_direction=direction, source_url=SOURCE)
+    payload["sbp_direction"] = direction
+    return payload
 
 
 if __name__ == "__main__":

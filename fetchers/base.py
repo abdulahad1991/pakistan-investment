@@ -48,6 +48,52 @@ def http_get(url, headers=None, data=None, timeout=30, retries=3, backoff=2.0):
     raise last
 
 
+class AllSourcesFailed(Exception):
+    """Every source in a crawl_first() chain failed — the signal for run() to
+    carry the prior value forward flagged ok=False (rather than a fetcher just
+    dying because ONE upstream page changed shape)."""
+
+    def __init__(self, name, errors):
+        self.name = name
+        self.errors = errors  # list of (label, message)
+        joined = "; ".join(f"[{lbl}] {msg}" for lbl, msg in errors)
+        super().__init__(f"{name}: all {len(errors)} sources failed: {joined}")
+
+
+def crawl_first(name, attempts):
+    """Failover crawl: return the first source that yields a valid partition.
+
+    ``attempts`` is an ordered ``[(label, thunk), ...]``. Each thunk does its
+    own http_get + parse and returns a ``partition(...)`` dict (or raises). We
+    try them in priority order — typically: primary source, then a re-crawl of
+    an alternate URL carrying the same data, then a cross-provider fallback —
+    and return the FIRST that succeeds, annotated with provenance:
+
+      * ``via``            — the label of the source that produced the value.
+      * ``failover``       — True when a non-primary source had to step in.
+      * ``primary_errors`` — the earlier sources' errors (for the health block).
+
+    Raises AllSourcesFailed only when EVERY attempt fails; run() then carries
+    the prior partition forward flagged ok=False. This is what stops a single
+    upstream redesign from taking three fetchers stale at once.
+    """
+    errors = []
+    for label, thunk in attempts:
+        try:
+            payload = thunk()
+            if not isinstance(payload, dict) or "value" not in payload:
+                raise ValueError("source returned a malformed partition")
+            payload = dict(payload)
+            payload["via"] = label
+            if errors:  # a fallback won — record that the primary was down
+                payload["failover"] = True
+                payload["primary_errors"] = [f"[{l}] {m}" for l, m in errors]
+            return payload
+        except Exception as e:  # noqa: BLE001 - try the next source on any error
+            errors.append((label, f"{type(e).__name__}: {e}"[:160]))
+    raise AllSourcesFailed(name, errors)
+
+
 def in_band(v, lo, hi):
     """Sanity band — reject absurd parsed values before they reach the site."""
     try:

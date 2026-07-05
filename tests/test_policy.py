@@ -26,6 +26,14 @@ def test_parses_redesigned_2026_07_snapshot():
     assert result == {"rate": 11.5, "floor": 10.5, "ceiling": 12.5}
 
 
+def test_homepage_recrawl_yields_same_corridor():
+    # Failover tier: the same snapshot is server-rendered on the SBP homepage,
+    # so the recrawl parses identically to the primary M2M page.
+    home = Path(__file__).parent / "fixtures" / "sbp_home_snapshot_2026-07.html"
+    result = parse_policy(home.read_text(encoding="utf-8", errors="replace"))
+    assert result == {"rate": 11.5, "floor": 10.5, "ceiling": 12.5}
+
+
 def test_rate_is_between_floor_and_ceiling():
     html = FIX.read_text(encoding="utf-8")
     r = parse_policy(html)

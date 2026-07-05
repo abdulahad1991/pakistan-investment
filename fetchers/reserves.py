@@ -16,9 +16,12 @@ We divide by 1000 to express each in US$ BILLIONS, and read the card's own
 fallback. Reserves are WEEKLY, so this runs weekly.
 """
 import re
-from .base import http_get, partition, run, in_band
+from .base import http_get, partition, run, in_band, crawl_first
 
 URL = "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp"
+# Recrawl target: the same Economic Data snapshot (reserves card included) is
+# server-rendered on the SBP homepage — the failover when the M2M path dies.
+HOME_URL = "https://www.sbp.org.pk/"
 NAME = "reserves"
 
 # A money figure like 17,221.0 or 5,520.7 or 22,741.7
@@ -91,19 +94,30 @@ def parse_reserves(html):
     }
 
 
+def _reserves_from(url, label):
+    """A crawl_first thunk: fetch an SBP page, parse + sanity-check reserves."""
+    def _thunk():
+        d = parse_reserves(http_get(url))
+        if not in_band(d["sbp_bn"], 1, 80):  # PK SBP reserves realistically 1-80 bn
+            raise ValueError(f"SBP reserves out of sanity band: {d['sbp_bn']}")
+        return partition(
+            NAME,
+            {"sbp_bn": d["sbp_bn"], "total_bn": d["total_bn"]},
+            d["as_of"], label,
+            cadence="weekly", metric="FX reserves (US$ bn)",
+            banks_bn=d["banks_bn"], source_url=url)
+    return _thunk
+
+
 def fetch():
-    d = parse_reserves(http_get(URL))
-    if not in_band(d["sbp_bn"], 1, 80):  # PK SBP reserves realistically 1-80 bn
-        raise ValueError(f"SBP reserves out of sanity band: {d['sbp_bn']}")
-    return partition(
-        NAME,
-        {"sbp_bn": d["sbp_bn"], "total_bn": d["total_bn"]},
-        d["as_of"],
-        "State Bank of Pakistan (SBP)",
-        cadence="weekly",
-        metric="FX reserves (US$ bn)",
-        banks_bn=d["banks_bn"],
-        source_url=URL)
+    # Priority: SBP M2M snapshot -> recrawl SBP homepage (same reserves card).
+    # If both are down crawl_first raises and run() carries the last weekly
+    # figure forward flagged ok=False.
+    return crawl_first(NAME, [
+        ("sbp-m2m", _reserves_from(URL, "State Bank of Pakistan (SBP)")),
+        ("sbp-home", _reserves_from(HOME_URL,
+                                    "State Bank of Pakistan (SBP) homepage snapshot")),
+    ])
 
 
 if __name__ == "__main__":

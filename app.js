@@ -81,7 +81,13 @@ function applyData() {
   const prov = {
     "inf": "CPI inflation YoY · PBS" + (m.inflation_cpi_asof ? " · " + m.inflation_cpi_asof : ""),
     "kse": "KSE-100 close · PSX" + (m.kse100_asof ? " · " + m.kse100_asof : ""),
-    "pkr": "Interbank USD/PKR · SBP" + (m.pkr_usd_asof ? " · " + m.pkr_usd_asof : ""),
+    // When the SBP interbank M2M rate is unreachable, forex fails over to a
+    // third-party reference rate (m.pkr_usd_approx) — label it honestly rather
+    // than attributing a non-SBP number to SBP interbank.
+    "pkr": (m.pkr_usd_approx
+              ? "USD/PKR reference rate (SBP unavailable) · " + (m.pkr_usd_source || "fallback")
+              : "Interbank USD/PKR · SBP")
+           + (m.pkr_usd_asof ? " · " + m.pkr_usd_asof : ""),
     "sbp": "SBP policy rate" + (m.sbp_direction ? " · " + m.sbp_direction : ""),
   };
   Object.entries(prov).forEach(([k, t]) => { setTitle("m-" + k, t); setTitle("h-" + k, t); });

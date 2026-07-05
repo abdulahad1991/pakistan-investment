@@ -164,6 +164,14 @@ def merge():
     if (p := part("forex")):
         macro["pkr_usd"] = round(p["value"]["interbank"], 2)
         macro["pkr_usd_asof"] = _fmt(p.get("as_of"))
+        # Provenance for the display layer: a crawl_first fallback tagged
+        # `approx` means the authoritative SBP interbank M2M rate was
+        # unreachable and this is a third-party REFERENCE rate. Surface it so
+        # the UI never attributes a non-SBP number to "SBP interbank". An
+        # `sbp-home` recrawl is still authoritative SBP, so only `approx` (the
+        # er-api tier) trips this — not `failover` in general.
+        macro["pkr_usd_approx"] = bool(p.get("approx"))
+        macro["pkr_usd_source"] = p.get("source")
     if (p := part("kse")):
         v = p["value"]
         macro["kse100_level"] = round(v["level"])
@@ -271,6 +279,13 @@ def merge():
             "age_days": age,
             "last_error": pp.get("last_error"),
         }
+        # Failover provenance: which source in the crawl chain actually served
+        # this value, and (when a non-primary won) that the primary was down.
+        if pp.get("via"):
+            health[name]["via"] = pp["via"]
+        if pp.get("failover"):
+            health[name]["failover"] = True
+            health[name]["primary_errors"] = pp.get("primary_errors")
     data["data_health"] = health
     data["updated"] = datetime.datetime.now(
         datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

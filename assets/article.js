@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cell(m.sbp_rate + '%', 'SBP Policy Rate', m.sbp_direction, '#075E4B') +
         cell(m.inflation_cpi + '%', 'CPI Inflation', 'Real rate ' + (realRate >= 0 ? '+' : '') + realRate.toFixed(1) + '%', realRate >= 0 ? '#0B7C5E' : '#C24132') +
         cell(m.kse100_level.toLocaleString(), 'KSE-100', 'Index level', '#075E4B') +
-        cell(m.pkr_usd, 'PKR / USD', 'Interbank', '#075E4B') +
+        cell(m.pkr_usd, 'PKR / USD', m.pkr_usd_approx ? 'Reference rate' : 'Interbank', '#075E4B') +
         (ssc ? cell(ssc.rate + '%', 'Top NSS Rate', ssc.name.replace(' Certificate', ''), '#0B7C5E') : '') +
         '</div>';
     }).catch(function () { slot.style.display = 'none'; });

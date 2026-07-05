@@ -28,6 +28,16 @@ def test_parses_redesigned_2026_07_snapshot():
     assert d["as_of"] == "June 24, 2026"
 
 
+def test_homepage_recrawl_yields_same_reserves():
+    # Failover tier: the same reserves card is server-rendered on the SBP
+    # homepage, so the recrawl parses identically to the primary M2M page.
+    home = Path(__file__).parent / "fixtures" / "sbp_home_snapshot_2026-07.html"
+    d = parse_reserves(home.read_text(encoding="utf-8", errors="replace"))
+    assert d["sbp_bn"] == 16.53
+    assert d["total_bn"] == 22.04
+    assert d["as_of"] == "June 24, 2026"
+
+
 def test_parses_sbp_banks_total_and_week_ended_date():
     d = parse_reserves(FIX.read_text(encoding="utf-8"))
     # 17,221.0 / 5,520.7 / 22,741.7 US$ millions -> billions (2dp)

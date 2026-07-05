@@ -11,6 +11,12 @@ on:
     - cron: "37 4 * * 1-5"
     # 11:41 UTC = 16:41 PKT — "Market close", ~1h after the 15:30 PSX close.
     - cron: "41 11 * * 1-5"
+    # Weekend rate refresh (Sat+Sun, morning + afternoon PKT): gold + fx only.
+    # The Sarafa market fixes a gold rate on Saturday, so without these the
+    # site served Friday's gold price all weekend. Data-only — the `social`
+    # job is gated to the weekday crons and never posts on weekends.
+    - cron: "37 4 * * 6,0"
+    - cron: "41 11 * * 6,0"
   workflow_dispatch:  # allow manual trigger from GitHub Actions tab
     inputs:
       run_weekly:
@@ -48,11 +54,24 @@ jobs:
         run: pip install -q yfinance || true
 
       - name: Fetch live data (cadence-aware) + merge
+        env:
+          TRIGGER_CRON: ${{ github.event.schedule }}
         run: |
-          # 04:45 UTC run = "open" (fast price refresh); 11:30 UTC = "close"
-          # (full refresh incl. per-stock fundamentals + dividends).
-          HOUR=$(date -u +%H)
-          if [ "$HOUR" -lt 8 ]; then GROUP=open; else GROUP=close; fi
+          # Weekend crons -> "weekend" group (gold + fx only). Keyed to the
+          # trigger cron, not wall-clock, so a scheduler-delayed run can't be
+          # misrouted. Weekday morning run = "open" (fast price refresh);
+          # afternoon = "close" (full refresh incl. fundamentals + dividends).
+          # Manual runs (no cron) fall back to the UTC clock.
+          case "$TRIGGER_CRON" in
+            *"6,0") GROUP=weekend ;;
+            "37 4 * * 1-5") GROUP=open ;;
+            "41 11 * * 1-5") GROUP=close ;;
+            *)
+              HOUR=$(date -u +%H); DOW=$(date -u +%u)
+              if [ "$DOW" -ge 6 ]; then GROUP=weekend
+              elif [ "$HOUR" -lt 8 ]; then GROUP=open
+              else GROUP=close; fi ;;
+          esac
           echo "Fetcher group: $GROUP"
           python run_fetchers.py "$GROUP"
 
@@ -152,6 +171,11 @@ jobs:
   social:
     name: Render daily social assets
     needs: scrape
+    # Weekday sessions + manual runs only: weekend crons are a data-only
+    # gold/fx refresh — PSX is shut, so there is no market brief to post.
+    if: ${{ github.event_name == 'workflow_dispatch' ||
+            github.event.schedule == '37 4 * * 1-5' ||
+            github.event.schedule == '41 11 * * 1-5' }}
     # Renders the daily-brief video (homepage mp4 + social) and auto-posts.
     # NOTE re AdSense recovery (2026-06-29): this only commits an .mp4 + caption —
     # no HTML/sitemap change — so it does NOT affect crawling/indexing. The thing

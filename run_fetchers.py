@@ -4,10 +4,12 @@
 Usage:  python run_fetchers.py [group]
 
 Groups (cadence-aware so we don't hammer slow/monthly sources):
-  open   — fast intraday refresh (market open): prices, fx, gold, kse
-  close  — full refresh (market close): everything, incl. per-stock
-           fundamentals + dividends + monthly/event sources
-  all    — run every fetcher (default; used for manual/backfill runs)
+  open    — fast intraday refresh (market open): prices, fx, gold, kse
+  close   — full refresh (market close): everything, incl. per-stock
+            fundamentals + dividends + monthly/event sources
+  weekend — Sat/Sun refresh: only sources that move while PSX is shut
+            (gold — Sarafa fixes a rate on Saturday — and open-market fx)
+  all     — run every fetcher (default; used for manual/backfill runs)
 
 Each fetcher runs through base.run(), which writes its partition with graceful
 fallback (a failure keeps the prior value, flagged ok=False). build_data.merge()
@@ -55,10 +57,11 @@ def _registry():
 
 
 GROUPS = {
-    "open":  [forex.NAME, gold.NAME, kse.NAME, stocks.NAME],
-    "close": [forex.NAME, gold.NAME, kse.NAME, stocks.NAME, dividends.NAME,
-              funds.NAME, reserves.NAME, cpi.NAME, policy.NAME, savings.NAME,
-              macro.NAME],
+    "open":    [forex.NAME, gold.NAME, kse.NAME, stocks.NAME],
+    "close":   [forex.NAME, gold.NAME, kse.NAME, stocks.NAME, dividends.NAME,
+                funds.NAME, reserves.NAME, cpi.NAME, policy.NAME, savings.NAME,
+                macro.NAME],
+    "weekend": [forex.NAME, gold.NAME],
 }
 
 

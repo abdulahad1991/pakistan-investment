@@ -1,13 +1,13 @@
 {
-  "updated": "2026-07-03T19:32:27Z",
+  "updated": "2026-07-05T18:34:13Z",
   "macro": {
-    "pkr_usd": 278.15,
+    "pkr_usd": 278.12,
     "sbp_rate": 11.5,
     "sbp_direction": "Holding",
     "inflation_cpi": 11.7,
     "kse100_level": 184841,
-    "fx_reserves_bn_usd": 15.92,
-    "fx_reserves_total_bn_usd": 21.48,
+    "fx_reserves_bn_usd": 16.53,
+    "fx_reserves_total_bn_usd": 22.04,
     "gdp_growth_pct": 3.7,
     "gdp_growth_fy": "2025-26",
     "imf_status": "Active — $7B Extended Fund Facility + $1.4B Resilience & Sustainability Facility; 3rd EFF / 2nd RSF review completed 8 May 2026 (~$4.8B disbursed)",
@@ -16,8 +16,8 @@
     "kse100_change": 4107.11,
     "kse100_change_pct": 2.27,
     "inflation_cpi_asof": "May 2026",
-    "fx_reserves_asof": "29 Jun 2026",
-    "pkr_usd_asof": "28 Apr 2026",
+    "fx_reserves_asof": "24 Jun 2026",
+    "pkr_usd_asof": "3 Jul 2026",
     "kse100_asof": "2 Jul 2026",
     "stocks_asof": "3 Jul 2026"
   },
@@ -38,7 +38,7 @@
     },
     {
       "name": "Regular Income Certificate",
-      "rate": 11.82,
+      "rate": 12.24,
       "rate_effective": "10-06-2026",
       "tenure": "5 Years",
       "payout": "Monthly",
@@ -2098,12 +2098,12 @@
   "gold": {
     "source": "gold.pk",
     "source_type": "local",
-    "tola_24k": 441000,
-    "tola_22k": 404250,
-    "g10_24k": 378093,
-    "g10_22k": 346585,
-    "gram_24k": 37809,
-    "gram_22k": 34659,
+    "tola_24k": 442900,
+    "tola_22k": 405992,
+    "g10_24k": 379722,
+    "g10_22k": 348079,
+    "gram_24k": 37972,
+    "gram_22k": 34808,
     "chg1y_pct": 25.5,
     "history": {
       "labels": [
@@ -2267,13 +2267,13 @@
       "last_error": null
     },
     "forex": {
-      "ok": false,
-      "as_of": "Apr 28, 2026",
+      "ok": true,
+      "as_of": "Jul 03, 2026",
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
-      "stale": true,
-      "age_days": 66,
-      "last_error": "ValueError: no 'Mon DD, YYYY' date found on SBP M2M page"
+      "stale": false,
+      "age_days": 2,
+      "last_error": null
     },
     "funds": {
       "ok": true,
@@ -2281,7 +2281,7 @@
       "source": "Mutual Funds Association of Pakistan (MUFAP)",
       "cadence": "daily",
       "stale": false,
-      "age_days": -1,
+      "age_days": 1,
       "last_error": null
     },
     "gold": {
@@ -2299,7 +2299,7 @@
       "source": "Pakistan Bureau of Statistics (PBS)",
       "cadence": "monthly",
       "stale": false,
-      "age_days": 63,
+      "age_days": 65,
       "last_error": null
     },
     "kse": {
@@ -2308,7 +2308,7 @@
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 3,
       "last_error": null
     },
     "macro": {
@@ -2317,35 +2317,35 @@
       "source": "Pakistan Bureau of Statistics (PBS) + IMF",
       "cadence": "event",
       "stale": false,
-      "age_days": 3,
+      "age_days": 5,
       "last_error": null
     },
     "policy": {
-      "ok": false,
+      "ok": true,
       "as_of": null,
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "event",
-      "stale": true,
+      "stale": false,
       "age_days": null,
-      "last_error": "ValueError: SBP policy rate box not found: rate=None floor=None ceiling=None"
+      "last_error": null
     },
     "reserves": {
-      "ok": false,
-      "as_of": "June 29, 2026",
+      "ok": true,
+      "as_of": "June 24, 2026",
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "weekly",
-      "stale": true,
-      "age_days": 4,
-      "last_error": "ValueError: SBP reserves table not found on ferm.asp"
+      "stale": false,
+      "age_days": 11,
+      "last_error": null
     },
     "savings": {
-      "ok": false,
+      "ok": true,
       "as_of": "10-06-2026",
       "source": "Central Directorate of National Savings (CDNS)",
       "cadence": "event",
-      "stale": true,
-      "age_days": 23,
-      "last_error": "URLError: <urlopen error timed out>"
+      "stale": false,
+      "age_days": 25,
+      "last_error": null
     },
     "stocks": {
       "ok": true,
@@ -2353,7 +2353,7 @@
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 2,
       "last_error": null
     }
   }

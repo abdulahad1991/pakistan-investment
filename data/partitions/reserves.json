@@ -1,17 +1,15 @@
 {
   "name": "reserves",
   "value": {
-    "sbp_bn": 15.92,
-    "total_bn": 21.48
+    "sbp_bn": 16.53,
+    "total_bn": 22.04
   },
-  "as_of": "June 29, 2026",
+  "as_of": "June 24, 2026",
   "source": "State Bank of Pakistan (SBP)",
-  "ok": false,
-  "fetched_at": "2026-06-30T13:38:47Z",
+  "ok": true,
+  "fetched_at": "2026-07-05T18:34:06Z",
   "cadence": "weekly",
   "metric": "FX reserves (US$ bn)",
-  "banks_bn": 5.57,
-  "source_url": "https://www.sbp.org.pk/dfmd/ferm.asp",
-  "last_error": "ValueError: SBP reserves table not found on ferm.asp",
-  "last_attempt": "2026-07-03T19:30:37Z"
+  "banks_bn": 5.52,
+  "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp"
 }

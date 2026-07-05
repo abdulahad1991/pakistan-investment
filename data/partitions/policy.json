@@ -7,11 +7,9 @@
   },
   "as_of": null,
   "source": "State Bank of Pakistan (SBP)",
-  "ok": false,
-  "fetched_at": "2026-06-30T13:38:52Z",
+  "ok": true,
+  "fetched_at": "2026-07-05T18:34:04Z",
   "cadence": "event",
   "sbp_direction": "Holding",
-  "source_url": "https://www.sbp.org.pk/ecodata/index2.asp",
-  "last_error": "ValueError: SBP policy rate box not found: rate=None floor=None ceiling=None",
-  "last_attempt": "2026-07-03T19:30:46Z"
+  "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp"
 }

@@ -6,11 +6,23 @@ from pathlib import Path
 from fetchers.policy import parse_policy
 
 FIX = Path(__file__).parent / "fixtures" / "sbp_ecodata.html"
+# SBP redesign (2026-07): the legacy ecodata box is gone; the corridor now
+# lives in the "Economic Data snapshot" served on m2m-current.asp, with the
+# ceiling/floor labels re-worded ("... (Repo) Ceiling Rate 12.50% p.a.").
+FIX_2026_07 = Path(__file__).parent / "fixtures" / "sbp_m2m_2026-07.html"
 
 
 def test_parses_policy_rate_corridor():
     html = FIX.read_text(encoding="utf-8")
     result = parse_policy(html)
+    assert result == {"rate": 11.5, "floor": 10.5, "ceiling": 12.5}
+
+
+def test_parses_redesigned_2026_07_snapshot():
+    html = FIX_2026_07.read_text(encoding="utf-8", errors="replace")
+    result = parse_policy(html)
+    # Must NOT confuse the corridor with the snapshot's weighted-average
+    # overnight repo rate (11.25%) or the KIBOR tenors right after it.
     assert result == {"rate": 11.5, "floor": 10.5, "ceiling": 12.5}
 
 

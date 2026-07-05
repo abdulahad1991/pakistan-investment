@@ -1,15 +1,20 @@
 """SBP Policy Rate corridor — State Bank of Pakistan (SBP), the official source.
 
-The SBP /ecodata/index2.asp page carries a small rate box with three numbers:
-  - SBP Policy Rate            (the headline target rate)
-  - SBP Overnight Reverse Repo (Ceiling) Rate   = policy rate + 100bps
-  - SBP Overnight Repo (Floor) Rate             = policy rate - 100bps
+SBP's 2026-07 site redesign killed the legacy /ecodata/index2.asp rate box
+(the URL now serves a generic shell; /economic-data is JS-rendered, empty
+server-side). The corridor now ships in the server-rendered "Economic Data
+snapshot" on the M2M page (ecodata/rates/m2m/m2m-current.asp):
+  - SBP Policy Rate 11.50% p.a.                    (the headline target rate)
+  - SBP Overnight Reverse (Repo) Ceiling Rate      = policy rate + 100bps
+  - SBP Overnight Reverse (Floor) Rate             = policy rate - 100bps
 
-The labels are wrapped in nested <strong>/<br> tags and the percentages live in
-separate <td> cells, so we strip tags + collapse whitespace, then anchor on the
-distinctive label text. The page also shows a "Weighted-average Overnight Repo
-Rate" (e.g. 11.67%) which we must NOT confuse with the corridor — we only match
-values that immediately follow our three labels.
+The labels are wrapped in nested tags and the percentages live in separate
+cells, so we strip tags + collapse whitespace, then anchor on the distinctive
+label text (paren placement differs between the old box and the new snapshot,
+so 'Ceiling/Floor ... Rate' tolerates an optional ')'). Both layouts also show
+a "Weighted-average Overnight Repo Rate" (e.g. 11.25%) which we must NOT
+confuse with the corridor — we only match values that immediately follow our
+three labels.
 
 STANCE/direction is NOT on this page. It is derived in fetch() by comparing the
 freshly parsed rate to the prior partition: up => Tightening, down => Easing,
@@ -19,7 +24,7 @@ import re
 import html as _html
 from .base import http_get, partition, run, in_band, load_partition
 
-SOURCE = "https://www.sbp.org.pk/ecodata/index2.asp"
+SOURCE = "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp"
 NAME = "policy"
 
 
@@ -46,8 +51,10 @@ def parse_policy(html_text):
     # "SBP Policy <strong>Rat</strong>e" tag-strips to "SBP Policy Rat e", so we
     # anchor on "SBP Policy" and grab the first percentage that closely follows.
     rate = _num(r"SBP Policy.{0,40}?(\d+(?:\.\d+)?)\s*%")
-    ceiling = _num(r"Ceiling\)\s*Rate\s*(\d+(?:\.\d+)?)\s*%")
-    floor = _num(r"Floor\)\s*Rate\s*(\d+(?:\.\d+)?)\s*%")
+    # Legacy box prints "(Ceiling) Rate"; the 2026-07 snapshot "(Repo) Ceiling
+    # Rate" — hence the optional ')' between the keyword and "Rate".
+    ceiling = _num(r"Ceiling\)?\s*Rate\s*(\d+(?:\.\d+)?)\s*%")
+    floor = _num(r"Floor\)?\s*Rate\s*(\d+(?:\.\d+)?)\s*%")
 
     if rate is None or ceiling is None or floor is None:
         raise ValueError(

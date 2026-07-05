@@ -1,21 +1,24 @@
 """FX reserves — State Bank of Pakistan (SBP), the official source.
 
-SBP publishes the weekly foreign-exchange reserves position on the Foreign
-Exchange Reserves / Management page (dfmd/ferm.asp). The headline table reports
-three lines in US$ MILLIONS:
+SBP's 2026-07 site redesign emptied the old Foreign Exchange Reserves page
+(dfmd/ferm.asp now serves a generic shell). The weekly position now ships in
+the server-rendered "Economic Data snapshot" on the M2M page
+(ecodata/rates/m2m/m2m-current.asp), in US$ MILLIONS:
 
-    SBP's Reserves      17,221.0   (the SBP-held reserves — the number markets watch)
-    Bank's Reserves      5,520.7   (commercial banks' FX holdings)
-    Total Reserves      22,741.7   (the two added together)
+    Liquid Foreign Exchange Reserves (USD million)  As on 24- June - 2026
+    SBP's Reserves      16,527.2   (the SBP-held reserves — the number markets watch)
+    Bank's Reserves      5,517.4   (commercial banks' FX holdings)
+    Total Reserves      22,044.6   (the two added together)
 
-We divide by 1000 to express each in US$ BILLIONS, and read the week-ended
-"Date Updated" off the Foreign Exchange Reserves row (e.g. 'June 18, 2026').
-Reserves are WEEKLY (typically printed Thursday/Friday), so this runs weekly.
+We divide by 1000 to express each in US$ BILLIONS, and read the card's own
+"As on" date (normalised to 'Month DD, YYYY'). The legacy ferm.asp layout
+(labels + 'Foreign Exchange Reserves Archive <date>' row) is kept as a
+fallback. Reserves are WEEKLY, so this runs weekly.
 """
 import re
 from .base import http_get, partition, run, in_band
 
-URL = "https://www.sbp.org.pk/dfmd/ferm.asp"
+URL = "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp"
 NAME = "reserves"
 
 # A money figure like 17,221.0 or 5,520.7 or 22,741.7
@@ -25,7 +28,9 @@ _NUM = r"([\d][\d,]*\.\d+)"
 def _strip(html):
     """Tags out, common entities normalised, whitespace collapsed."""
     txt = (html.replace("&rsquo;", "'").replace("&lsquo;", "'")
-               .replace("&nbsp;", " ").replace("&amp;", "&"))
+               .replace("’", "'").replace("‘", "'")
+               .replace("&nbsp;", " ").replace("\xa0", " ")
+               .replace("&amp;", "&"))
     txt = re.sub(r"<[^>]+>", " ", txt)
     txt = re.sub(r"\s+", " ", txt)
     return txt.strip()
@@ -57,15 +62,26 @@ def parse_reserves(html):
     banks = _to_num(m_banks.group(1))
     total = _to_num(m_total.group(1))
 
-    # Week-ended date: anchor on the Foreign Exchange Reserves / Archive row so we
-    # pick its 'Date Updated' (June 18, 2026), not the ticker's "As on" date.
+    # Date, newest layout first: the 2026-07 snapshot card's own "As on
+    # 24- June - 2026" (anchored on the card title so we can't pick up the
+    # USD/PKR or KIBOR cards' "As on" dates elsewhere on the page).
+    as_of = None
     m_date = re.search(
-        r"Foreign\s+Exchange\s+Reserves\s+Archive\s+"
-        r"([A-Z][a-z]+\.?\s+\d{1,2},\s*\d{4})", txt)
-    if not m_date:
-        # Fallback: first "Month DD, YYYY" anywhere on the page.
-        m_date = re.search(r"([A-Z][a-z]+\.?\s+\d{1,2},\s*\d{4})", txt)
-    as_of = re.sub(r"\s+", " ", m_date.group(1)).strip() if m_date else None
+        r"Liquid\s+Foreign\s+Exchange\s+Reserves\s*\(USD\s*million\)\s*"
+        r"As\s+on\s+(\d{1,2})\s*-\s*([A-Za-z]+)\s*-\s*(\d{4})", txt, re.I)
+    if m_date:
+        day, mon, year = m_date.groups()
+        as_of = f"{mon.capitalize()} {int(day):02d}, {year}"
+    if not as_of:
+        # Legacy ferm.asp: the Foreign Exchange Reserves / Archive row's
+        # 'Date Updated' (June 18, 2026), not the ticker's "As on" date.
+        m_date = re.search(
+            r"Foreign\s+Exchange\s+Reserves\s+Archive\s+"
+            r"([A-Z][a-z]+\.?\s+\d{1,2},\s*\d{4})", txt)
+        if not m_date:
+            # Fallback: first "Month DD, YYYY" anywhere on the page.
+            m_date = re.search(r"([A-Z][a-z]+\.?\s+\d{1,2},\s*\d{4})", txt)
+        as_of = re.sub(r"\s+", " ", m_date.group(1)).strip() if m_date else None
 
     return {
         "sbp_bn": round(sbp / 1000, 2),

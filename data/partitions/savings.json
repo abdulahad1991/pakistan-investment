@@ -10,9 +10,11 @@
   },
   "as_of": "10-06-2026",
   "source": "Central Directorate of National Savings (CDNS)",
-  "ok": true,
+  "ok": false,
   "fetched_at": "2026-07-15T13:06:05Z",
   "cadence": "event",
   "effective": "10-06-2026",
-  "source_url": "https://savings.gov.pk/latest-profit-rates/"
+  "source_url": "https://savings.gov.pk/latest-profit-rates/",
+  "last_error": "HTTPError: HTTP Error 301: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x error message was:\nMoved Permanently",
+  "last_attempt": "2026-07-16T13:15:58Z"
 }

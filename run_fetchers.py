@@ -23,7 +23,7 @@ from pathlib import Path
 
 from fetchers.base import run, ROOT
 from fetchers import (cpi, reserves, policy, savings, forex, funds, gold, kse,
-                      stocks, dividends, macro)
+                      stocks, dividends, macro, petrol)
 import build_data
 
 
@@ -49,6 +49,7 @@ def _registry():
         gold.NAME:      (gold,      lambda: gold.fetch()),
         kse.NAME:       (kse,       lambda: kse.fetch()),
         macro.NAME:     (macro,     lambda: macro.fetch()),
+        petrol.NAME:    (petrol,    lambda: petrol.fetch()),
         # stocks: open run = prices + a few headline fundamentals (fast);
         #         close run = prices + fundamentals for the whole universe.
         stocks.NAME:    (stocks,    lambda: stocks.fetch()),
@@ -57,11 +58,12 @@ def _registry():
 
 
 GROUPS = {
-    "open":    [forex.NAME, gold.NAME, kse.NAME, stocks.NAME],
+    "open":    [forex.NAME, gold.NAME, kse.NAME, stocks.NAME, petrol.NAME],
     "close":   [forex.NAME, gold.NAME, kse.NAME, stocks.NAME, dividends.NAME,
                 funds.NAME, reserves.NAME, cpi.NAME, policy.NAME, savings.NAME,
-                macro.NAME],
-    "weekend": [forex.NAME, gold.NAME],
+                macro.NAME, petrol.NAME],
+    # Fuel is govt-set daily and PSX-independent, so it refreshes on weekends too.
+    "weekend": [forex.NAME, gold.NAME, petrol.NAME],
 }
 
 

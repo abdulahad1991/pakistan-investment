@@ -23,19 +23,21 @@ const { fontFamily: MONO } = loadMono("normal", {
 });
 const GOLD_DARK = "#B7791F";
 
-const Pill: React.FC<{ label: string; value: React.ReactNode; u: number; start: number; accent?: boolean }> = ({
-  label,
-  value,
-  u,
-  start,
-  accent,
-}) => {
+const Pill: React.FC<{
+  label: string;
+  value: React.ReactNode;
+  u: number;
+  start: number;
+  accent?: boolean;
+  vSize?: number;
+}> = ({ label, value, u, start, accent, vSize = 42 }) => {
   const frame = useCurrentFrame();
   const C = useColors();
   return (
     <div
       style={{
         flex: 1,
+        minWidth: 0, // let the flex item shrink instead of overflowing the card
         background: C.paper,
         border: `2px solid ${C.border}`,
         borderRadius: 16 * u,
@@ -43,10 +45,30 @@ const Pill: React.FC<{ label: string; value: React.ReactNode; u: number; start: 
         ...reveal(frame, start, 12),
       }}
     >
-      <div style={{ fontFamily: MONO, fontSize: 20 * u, letterSpacing: 1, textTransform: "uppercase", color: C.muted }}>
+      <div
+        style={{
+          fontFamily: MONO,
+          fontSize: 20 * u,
+          letterSpacing: 1,
+          textTransform: "uppercase",
+          color: C.muted,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        }}
+      >
         {label}
       </div>
-      <div style={{ fontFamily: MONO, fontWeight: 600, fontSize: 42 * u, color: accent ? C.green : C.ink, marginTop: 6 * u }}>
+      <div
+        style={{
+          fontFamily: MONO,
+          fontWeight: 600,
+          fontSize: vSize * u,
+          color: accent ? C.green : C.ink,
+          marginTop: 6 * u,
+          whiteSpace: "nowrap",
+        }}
+      >
         {value}
       </div>
     </div>
@@ -82,6 +104,33 @@ const Card: React.FC<{ data: DailyProps }> = ({ data }) => {
         <Pill label="SBP rate" u={u} start={10} value={<Counter to={data.macro.sbpRate} decimals={2} suffix="%" start={10} dur={26} />} />
         <Pill label="Inflation" u={u} start={13} value={<Counter to={data.macro.inflation} decimals={1} suffix="%" start={13} dur={26} />} />
       </div>
+
+      {/* fuel pills — OGRA retail rates, same weight as the macro row so petrol
+          reads as one metric among many, not the headline */}
+      {data.fuel && (
+        <div style={{ display: "flex", gap: 16 * u }}>
+          {(
+            [
+              ["Petrol ₨/L", data.fuel.petrol],
+              ["Diesel HSD", data.fuel.hsd],
+              ["Kerosene", data.fuel.kerosene],
+              ["LDO", data.fuel.ldo],
+            ] as [string, number | null | undefined][]
+          )
+            .filter(([, v]) => v != null)
+            .map(([label, v], i) => (
+              <Pill
+                key={label}
+                label={label}
+                u={u}
+                start={5 + i}
+                accent
+                vSize={34}
+                value={<Counter to={v as number} decimals={2} prefix="₨" start={5 + i} dur={22} />}
+              />
+            ))}
+        </div>
+      )}
 
       {/* PSX trend graph */}
       <div style={{ background: C.paper, border: `2px solid ${C.border}`, borderRadius: 20 * u, padding: 24 * u, ...reveal(frame, 16, 12) }}>

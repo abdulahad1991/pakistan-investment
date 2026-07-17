@@ -1,16 +1,19 @@
-# Auto-posting setup — YouTube + LinkedIn + TikTok
+# Auto-posting setup — YouTube + LinkedIn + TikTok + Facebook
 
 The daily `update-data.yml` job renders the brief, then runs
-`scripts/post_youtube.py`, `scripts/post_linkedin.py` and `scripts/post_tiktok.py`.
-All three **no-op when their secrets are missing**, so nothing posts until you
-complete the setup below. Posting is `continue-on-error`: a failure never blocks
-the data/homepage pipeline.
+`scripts/post_youtube.py`, `scripts/post_linkedin.py`, `scripts/post_tiktok.py`
+and `scripts/post_facebook.py`. All **no-op when their secrets are missing**, so
+nothing posts until you complete the setup below. Posting is `continue-on-error`:
+a failure never blocks the data/homepage pipeline.
 
 What posts, twice every weekday (Market open ~09:45 PKT, Market close ~16:30 PKT):
 - **YouTube** ← `video/out/daily/short.mp4` (9:16), **public** Short.
 - **LinkedIn** ← `video/out/daily/linkedin.mp4` (1:1), to the **company page**.
 - **TikTok** ← `video/out/daily/short.mp4` (9:16), public once the app is audited
   (private/draft before that — see the TikTok section).
+- **Facebook** (page) ← **two** posts: a **Reel** (`short.mp4`, 9:16) and a **feed
+  data-board post** (`card.png` still + a caption listing petrol/HSD/kerosene/LDO
+  + KSE-100/USD/rate/inflation/gold). See the Facebook section.
 
 Caption text comes from `social-kit/daily/<date>.json` (built by `build_daily.py`).
 
@@ -140,6 +143,54 @@ only — don't commit it.
 
 ---
 
+## Facebook page (one-time — then permanent)
+
+> The nicest of the four: a Page token minted from a long-lived user token
+> **does not expire** (it lives as long as you stay a page admin) — set it once,
+> no periodic refresh chore. And posting to **your own** page needs **no App
+> Review**.
+
+Two posts go out per run: a **Reel** (the 9:16 Short) and a **feed data-board
+post** (the DailyCard still + a caption listing petrol, HSD, kerosene, LDO,
+KSE-100, USD/PKR, policy rate, inflation and gold).
+
+1. **Have a Facebook Page** (a business Page, not a personal profile). You must
+   be a Page **admin**.
+2. **developers.facebook.com → My Apps → Create app → type "Business".** Add the
+   **Facebook Login** product.
+3. **App → Settings → Basic:** copy the **App ID** and **App Secret**.
+4. **Facebook Login → Settings → Valid OAuth Redirect URIs:** add
+   `http://localhost:8000/callback` (localhost is accepted while the app is in
+   Development mode).
+5. Locally:
+   ```bash
+   pip install requests
+   export FB_APP_ID=...        # Settings → Basic → App ID
+   export FB_APP_SECRET=...    # Settings → Basic → App Secret
+   python scripts/get_facebook_token.py   # browser opens; log in as a page admin
+   ```
+   It prints, for each page you admin, its **FB_PAGE_ID** and a long-lived
+   **FB_PAGE_ACCESS_TOKEN**.
+6. Add **repo secrets**:
+   ```bash
+   gh secret set FB_PAGE_ID --body '1234567890'
+   gh secret set FB_PAGE_ACCESS_TOKEN --body '...'
+   # optional; both|reel|feed, defaults to posting both:
+   gh secret set FB_MODE --body 'both'
+   ```
+
+**Why no App Review:** `pages_manage_posts`, `pages_read_engagement` and
+`pages_show_list` are available with **Standard Access** to an app
+admin/developer/tester acting on a page they administer. App Review is only
+needed to act on pages where you are not a role on the app.
+
+**Maintenance:** essentially none — the page token does not expire. If you change
+your Facebook password, remove the app, or lose admin on the page, re-run step 5
+and update `FB_PAGE_ACCESS_TOKEN`. A `190 / OAuthException` in the Facebook step
+= re-mint the token.
+
+---
+
 ## Secrets summary
 
 | Secret | Platform | Notes |
@@ -153,5 +204,9 @@ only — don't commit it.
 | `TIKTOK_REFRESH_TOKEN` | TikTok | ~365-day; re-mint yearly |
 | `TIKTOK_MODE` | TikTok | optional: `inbox` (drafts) or `direct` (default) |
 | `TIKTOK_PRIVACY` | TikTok | optional, default `PUBLIC_TO_EVERYONE` |
+| `FB_PAGE_ID` | Facebook | numeric page id; never changes |
+| `FB_PAGE_ACCESS_TOKEN` | Facebook | long-lived / non-expiring; set once |
+| `FB_MODE` | Facebook | optional: `both` (default), `reel`, or `feed` |
+| `FB_API_VERSION` | Facebook | optional, default `v21.0` |
 
 Missing any platform's secrets → that platform is simply skipped.

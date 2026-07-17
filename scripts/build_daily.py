@@ -31,6 +31,8 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FOOTER = "Not financial advice · pakinvestlysis.com"
 HASHTAGS = "#Pakistan #Investing #PSX #Gold #PersonalFinance"
+# Facebook leans on fuel-price search intent, so its tags add the fuel terms.
+FB_HASHTAGS = HASHTAGS + " #PetrolPrice #FuelPrice #PetrolPriceInPakistan"
 # YouTube keyword tags (the API takes a flat list, no '#').
 YT_TAGS = ["Pakistan", "investing", "PSX", "KSE-100", "gold",
            "mutual funds", "national savings", "personal finance"]
@@ -379,6 +381,8 @@ def build_props(data, date_str, session):
             "inflation": macro.get("inflation_cpi", 0),
         },
         "gold": {"tola": tola, "change1y": round(gold.get("chg1y_pct", 0), 1)},
+        "fuel": {k: data.get("fuel", {}).get(k)
+                 for k in ("petrol", "hsd", "kerosene", "ldo", "asof")},
         "kseSeries": _series(data.get("kse100_history", {}), 6, end_value=kse100),
         "goldSeries": _series(gold.get("history", {}), 7, end_value=tola),
         "movers": movers_out,
@@ -408,6 +412,34 @@ def social_payload(date_str, p, cands=None):
     )
     linkedin_text = f"{hook}\n\n{body}\n\n{FOOTER} — free live tools at pakinvestlysis.com\n\n{HASHTAGS}"
 
+    # Facebook FEED post = the full data board (the user's ask: "petrol + rest
+    # data as in our daily videos"). Fuel leads because it's the highest-intent
+    # line. Only fuels actually present are listed.
+    fuel = p.get("fuel", {}) or {}
+    fb = [f"🇵🇰 Pakistan Market Brief — {date_str} · {p['session']}", ""]
+    fuel_rows = [(lbl, fuel.get(k)) for lbl, k in
+                 (("Petrol", "petrol"), ("Diesel (HSD)", "hsd"),
+                  ("Kerosene", "kerosene"), ("LDO", "ldo"))]
+    fuel_rows = [(lbl, v) for lbl, v in fuel_rows if v is not None]
+    if fuel_rows:
+        eff = f" · effective {fuel['asof']}" if fuel.get("asof") else ""
+        fb.append(f"⛽ Fuel prices — OGRA, per litre{eff}")
+        fb += [f"• {lbl}: ₨{v:.2f}" for lbl, v in fuel_rows]
+        fb.append("")
+    fb.append("📊 Markets & macro")
+    fb.append(f"• KSE-100: {grp(m['kse100'], locale_in=False)}")
+    fb.append(f"• USD/PKR: ₨{m['pkrUsd']:.2f}")
+    fb.append(f"• SBP policy rate: {m['sbpRate']:.2f}%")
+    fb.append(f"• CPI inflation: {m['inflation']:.1f}%")
+    fb.append(f"• Gold 24k/tola: ₨{grp(g['tola'])}")
+    fb += ["", "▶ Full 60-second brief + free calculators → pakinvestlysis.com",
+           "", "Not financial advice · educational only", "", FB_HASHTAGS]
+    facebook_feed = "\n".join(fb)
+    # Facebook REEL caption = the 9:16 video's copy (punchy, video-first).
+    facebook_reel = (f"{hook}\n\nYour Pakistan market day in 60 seconds — petrol, "
+                     f"PSX, gold and the rupee.\n\n{FOOTER} — free live tools at "
+                     f"pakinvestlysis.com\n\n{FB_HASHTAGS}")
+
     return {
         "date": date_str,
         "session": p["session"],
@@ -415,6 +447,7 @@ def social_payload(date_str, p, cands=None):
         "body": body,
         "metrics": {"kse100": m["kse100"], "gold_tola": g["tola"], "pkr_usd": m["pkrUsd"]},
         "linkedin": {"text": linkedin_text},
+        "facebook": {"feed": facebook_feed, "reel": facebook_reel},
         "youtube": {
             "title": build_yt_title(p, cands, date_str),
             "description": build_yt_description(p, body, cands),

@@ -110,6 +110,9 @@ function applyData() {
   // Live gold rates card
   renderGold();
 
+  // Live fuel prices card (OGRA-notified petrol/HSD/kerosene/LDO)
+  renderFuel();
+
   // Dashboard section (below the tool)
   renderInsightStrip();
   renderGrowChart();
@@ -884,6 +887,24 @@ function renderGold() {
   }
 
   renderGoldChart();
+}
+
+// ── Live fuel prices (homepage card) ─────────────────────────────
+function renderFuel() {
+  const f = DATA && DATA.fuel;
+  if (!f) return;
+  const px = v => (v == null ? "-" : "₨" + Number(v).toFixed(2));
+  setText("f-petrol", px(f.petrol));
+  setText("f-hsd",    px(f.hsd));
+  setText("f-kero",   px(f.kerosene));
+  setText("f-ldo",    px(f.ldo));
+  const badge = document.getElementById("fuel-asof");
+  if (badge && f.asof) badge.textContent = "w.e.f " + f.asof;
+  const srcEl = document.getElementById("fuel-src");
+  if (srcEl) {
+    srcEl.textContent = "OGRA-notified retail rates" +
+      (f.asof ? " · effective " + f.asof : "");
+  }
 }
 
 function renderGoldChart() {

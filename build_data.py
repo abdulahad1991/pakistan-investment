@@ -224,6 +224,14 @@ def merge():
         if p.get("as_of"):
             g["asof"] = p["as_of"]
 
+    # ── fuel (OGRA-notified retail petrol/HSD/kerosene/LDO, PKR/L) ────
+    if (p := part("petrol")):
+        fuel = data.setdefault("fuel", {})
+        fuel.update(p["value"])                       # petrol/hsd/kerosene/ldo
+        if p.get("as_of"):
+            fuel["asof"] = _fmt(p.get("as_of"))
+        fuel["source"] = p.get("source")
+
     # ── stocks: prices for all, fundamentals where enriched ──────────
     if (p := part("stocks")):
         prices = p["value"].get("prices", {})
@@ -319,6 +327,10 @@ def _assert_consistency(data):
             f"gold gram!=tola/11.6638: {g['gram_24k']} vs {expect}"
     for s in data.get("national_savings", []):
         assert 3 <= s["rate"] <= 25, f"NSS {s['name']} rate insane: {s['rate']}"
+    f = data.get("fuel", {})
+    for k in ("petrol", "hsd", "kerosene", "ldo"):
+        if f.get(k) is not None:
+            assert 40 <= f[k] <= 2000, f"fuel {k} insane: {f[k]}"
 
 
 if __name__ == "__main__":

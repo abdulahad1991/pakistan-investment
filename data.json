@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17T12:56:22Z",
+  "updated": "2026-07-17T22:24:59Z",
   "macro": {
     "pkr_usd": 277.96,
     "sbp_rate": 11.5,
@@ -2258,6 +2258,14 @@
       ]
     }
   },
+  "fuel": {
+    "petrol": 315.71,
+    "hsd": 353.3,
+    "kerosene": 233.71,
+    "ldo": 199.98,
+    "asof": "18 Jul 2026",
+    "source": "PakWheels (OGRA-notified rates)"
+  },
   "data_health": {
     "dividends": {
       "ok": true,
@@ -2274,7 +2282,7 @@
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2284,7 +2292,7 @@
       "source": "Mutual Funds Association of Pakistan (MUFAP)",
       "cadence": "daily",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null
     },
     "gold": {
@@ -2302,7 +2310,7 @@
       "source": "Pakistan Bureau of Statistics (PBS)",
       "cadence": "monthly",
       "stale": false,
-      "age_days": 46,
+      "age_days": 47,
       "last_error": null
     },
     "kse": {
@@ -2311,7 +2319,7 @@
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null
     },
     "macro": {
@@ -2320,8 +2328,18 @@
       "source": "Pakistan Bureau of Statistics (PBS) + IMF",
       "cadence": "event",
       "stale": false,
-      "age_days": 17,
+      "age_days": 18,
       "last_error": null
+    },
+    "petrol": {
+      "ok": true,
+      "as_of": "2026-07-18",
+      "source": "PakWheels (OGRA-notified rates)",
+      "cadence": "daily",
+      "stale": false,
+      "age_days": 0,
+      "last_error": null,
+      "via": "pakwheels"
     },
     "policy": {
       "ok": true,
@@ -2339,7 +2357,7 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "weekly",
       "stale": false,
-      "age_days": 7,
+      "age_days": 8,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2349,7 +2367,7 @@
       "source": "Central Directorate of National Savings (CDNS)",
       "cadence": "event",
       "stale": false,
-      "age_days": 37,
+      "age_days": 38,
       "last_error": null
     },
     "stocks": {
@@ -2358,7 +2376,7 @@
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null
     }
   }

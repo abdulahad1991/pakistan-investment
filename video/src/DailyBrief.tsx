@@ -44,7 +44,7 @@ export const GOLD_DARK = "#B7791F"; // matches site --gold2 (not in the shared p
 // Fixed scene lengths (frames @30fps). Total drives calculateMetadata.
 export const SCENES = {
   title: 66,
-  board: 126,
+  board: 150, // +24f 2026-07-18: room for the fuel strip under the 5 rate rows
   psx: 102,
   gold: 102,
   movers: 108,
@@ -305,6 +305,14 @@ const Board: React.FC<{ data: DailyProps }> = ({ data }) => {
   const frame = useCurrentFrame();
   const C = useColors();
   const { u } = useU();
+  const fuelCells = (
+    [
+      ["Petrol", data.fuel?.petrol],
+      ["HSD", data.fuel?.hsd],
+      ["Kerosene", data.fuel?.kerosene],
+      ["LDO", data.fuel?.ldo],
+    ] as [string, number | null | undefined][]
+  ).filter(([, v]) => v != null) as [string, number][];
   return (
     <Scene dur={SCENES.board} u={u}>
       <div style={{ fontFamily: SANS, fontWeight: 800, fontSize: 72 * u, color: C.ink, letterSpacing: -1.5, ...reveal(frame, 0) }}>
@@ -324,6 +332,37 @@ const Board: React.FC<{ data: DailyProps }> = ({ data }) => {
         value={<Counter to={data.macro.sbpRate} decimals={2} suffix="%" start={50} dur={26} />} />
       <BoardRow label="CPI inflation" start={62} u={u}
         value={<Counter to={data.macro.inflation} decimals={1} suffix="%" start={62} dur={26} />} />
+      {fuelCells.length > 0 && (
+        <>
+          <div style={{ height: 22 * u }} />
+          <div style={{ fontFamily: MONO, fontSize: 24 * u, letterSpacing: 1, textTransform: "uppercase", color: C.muted, ...reveal(frame, 72) }}>
+            ⛽ Fuel · OGRA · per litre
+          </div>
+          <div style={{ height: 12 * u }} />
+          <div style={{ display: "flex", gap: 16 * u }}>
+            {fuelCells.map(([label, v], i) => (
+              <div
+                key={label}
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  background: C.greenLight,
+                  borderRadius: 14 * u,
+                  padding: `${16 * u}px ${18 * u}px`,
+                  ...reveal(frame, 76 + i * 4),
+                }}
+              >
+                <div style={{ fontFamily: MONO, fontSize: 22 * u, letterSpacing: 1, textTransform: "uppercase", color: C.muted, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {label}
+                </div>
+                <div style={{ fontFamily: MONO, fontWeight: 600, fontSize: 40 * u, color: C.green, marginTop: 4 * u, whiteSpace: "nowrap" }}>
+                  <Counter to={v} decimals={2} prefix="₨" start={76 + i * 4} dur={22} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </Scene>
   );
 };

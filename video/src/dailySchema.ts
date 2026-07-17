@@ -43,6 +43,18 @@ export const dailySchema = z.object({
     change1y: z.number(), // %
   }),
 
+  // Live OGRA retail fuel prices (PKR/L). Optional so older props render
+  // unchanged; drawn as a 4-pill row on the DailyCard still (the FB feed image).
+  fuel: z
+    .object({
+      petrol: z.number().nullable().optional(),
+      hsd: z.number().nullable().optional(),
+      kerosene: z.number().nullable().optional(),
+      ldo: z.number().nullable().optional(),
+      asof: z.string().nullable().optional(),
+    })
+    .optional(),
+
   kseSeries: series,
   goldSeries: series,
 
@@ -87,6 +99,7 @@ export const defaultDailyProps: DailyProps = {
   footer: "Not financial advice · pakinvestlysis.com",
   macro: { kse100: 178471, pkrUsd: 277.9, sbpRate: 11.5, inflation: 7.0 },
   gold: { tola: 448000, change1y: 34.7 },
+  fuel: { petrol: 315.71, hsd: 353.3, kerosene: 233.71, ldo: 199.98, asof: "18 Jul 2026" },
   kseSeries: {
     values: [115000, 170000, 167360, 162994, 173001, 178471],
     firstLabel: "Jan'25",

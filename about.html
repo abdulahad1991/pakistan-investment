@@ -25,8 +25,18 @@
   "name": "About Pakistan Investment Education",
   "url": "https://pakinvestlysis.com/about.html",
   "description": "A free tool to help Pakistani investors compare National Savings, Mutual Funds, and PSX Stocks.",
-  "author": {"@type": "Person", "name": "Abdul Ahad", "url": "https://www.linkedin.com/in/abdulahad1991/"},
-  "publisher": {"@type": "Organization", "name": "Pakistan Investment Education", "url": "https://pakinvestlysis.com"}
+  "author": {"@type": "Person", "name": "Abdul Ahad", "url": "https://pakinvestlysis.com/about.html", "sameAs": ["https://www.linkedin.com/in/abdulahad1991/", "https://github.com/abdulahad1991"]},
+  "publisher": {"@type": "Organization", "name": "Pakistan Investment Education", "url": "https://pakinvestlysis.com"},
+  "mainEntity": {
+    "@type": "Person",
+    "@id": "https://pakinvestlysis.com/about.html#abdul-ahad",
+    "name": "Abdul Ahad",
+    "jobTitle": "Software Engineer",
+    "url": "https://pakinvestlysis.com/about.html",
+    "sameAs": ["https://www.linkedin.com/in/abdulahad1991/", "https://github.com/abdulahad1991"],
+    "knowsAbout": ["Pakistan Stock Exchange", "National Savings Pakistan", "Mutual Funds Pakistan", "Gold investment Pakistan", "Pakistan income tax", "Zakat calculation"],
+    "description": "Software engineer who builds and maintains the automated data pipeline behind pakinvestlysis.com, reading primary sources (PSX, SBP, CDNS, MUFAP, PBS) twice every trading day. Writes educational guides on saving and investing in Pakistan. Not a licensed financial advisor."
+  }
 }
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
@@ -315,8 +325,12 @@ gtag('config', 'G-4T2H0KH9H7');
       <span class="sd">Policy rate decisions, inflation data, and PKR/USD exchange rate. Source: sbp.org.pk</span>
     </div>
     <div class="ab-source">
-      <span class="st">Yahoo Finance / Open Market Data</span>
-      <span class="sd">Real-time and historical price data for supplementary market context.</span>
+      <span class="st">Pakistan Bureau of Statistics (PBS)</span>
+      <span class="sd">Official CPI inflation (via the PBS SDMX feed) and GDP figures. Source: pbs.gov.pk</span>
+    </div>
+    <div class="ab-source">
+      <span class="st">Karachi Sarafa Market rates</span>
+      <span class="sd">Daily 24K gold rates per tola and per gram, cross-checked so gram and tola figures always reconcile.</span>
     </div>
   </section>
 
@@ -326,6 +340,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <h2>About the author</h2>
       <p>I built Pakistan Investment Education to answer one simple question that no website would answer in one place: if I put a given amount into National Savings, mutual funds or PSX stocks today, what would each actually earn me? Even to compare two options I had to open five different sites, juggle date formats, and crunch the numbers by hand. Nothing did it all in one place, so I built the thing I wished existed.</p>
       <p>This tool was my answer: one place, updated daily, that does the maths for you. I'm not a licensed financial advisor - this is an educational tool, not personalised financial advice. Always consult a SECP-registered advisor before making significant investment decisions.</p>
+      <p>What I am is a software engineer, and that shapes how this site works in a way worth spelling out. I don't type rates into these pages - I write the code that fetches them from the primary source itself: the PSX data portal for share prices and dividends, SBP for the policy rate and reserves, CDNS for National Savings rates, MUFAP for fund returns, and the Pakistan Bureau of Statistics' own data feed for inflation. That pipeline runs twice every trading day, stamps every figure with when and where it was fetched, and flags anything stale instead of quietly serving old numbers as current. When a source breaks - as SBP's website did after a redesign in July 2026 - the failure is visible and fixed in code, not papered over. You can audit every fetch in the site's <a href="https://github.com/abdulahad1991/pakistan-investment" target="_blank" rel="noopener">public repository</a>. My credential isn't a finance licence; it's that nothing here depends on my opinion about a number.</p>
       <p>If you find this useful, please share it with family and friends who are trying to grow their savings in Pakistan.</p>
 
       <h2 class="sub">How this site gets built (a confession) </h2>

@@ -33,7 +33,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 from build_daily import (  # noqa: E402  (path bootstrap above)
-    FOOTER, HASHTAGS, YT_TAGS, YT_TITLE_MAX,
+    FOOTER, HASHTAGS, MARKET_HASHTAGS, YT_TAGS, YT_TITLE_MAX,
     _metrics_from_payload, grp,
 )
 
@@ -159,6 +159,8 @@ def build_weekly_props(data, stock_history, daily_dir, today):
             "inflation": float(macro.get("inflation_cpi") or 0),
             "usd": float(macro.get("pkr_usd") or 0),
         },
+        "fuel": {k: (data.get("fuel") or {}).get(k)
+                 for k in ("petrol", "hsd", "kerosene", "ldo", "asof")},
     }
     return props, monday, friday
 
@@ -185,6 +187,37 @@ def youtube_meta(props, friday):
             "https://pakinvestlysis.com\n"
             f"{FOOTER}\n\n{HASHTAGS}")
     return {"title": title, "description": desc, "tags": YT_TAGS + ["weekly review"]}
+
+
+def facebook_meta(props, friday):
+    """Facebook weekly digest copy: an image-post caption + a video caption."""
+    kse, gold, r = props["kse"], props["gold"], props["rates"]
+    fuel = props.get("fuel") or {}
+    movers = props.get("movers") or []
+    mtxt = ", ".join(f"{m['sym']} {m['chgPct']:+.1f}%" for m in movers[:3]) or "n/a"
+    img = [
+        f"📅 Pakistan Market — Week in Review ({props['dateRange']})", "",
+        f"• KSE-100: {grp(kse['open'], locale_in=False)} → "
+        f"{grp(kse['close'], locale_in=False)} ({kse['chgPct']:+.1f}% this week)",
+        f"• Gold 24k/tola: ₨{grp(gold['close'])} ({gold['chgPct']:+.1f}%)",
+        f"• SBP rate: {r['policy']:.2f}% · Inflation: {r['inflation']:.1f}% · "
+        f"USD/PKR: ₨{r['usd']:.2f}",
+    ]
+    if fuel.get("petrol") is not None:
+        img.append(f"• Petrol: ₨{fuel['petrol']:.2f}/L")
+    img += [
+        f"• Top movers: {mtxt}", "",
+        "Full weekly review + free calculators → pakinvestlysis.com",
+        "", "Not financial advice · educational only", "",
+        MARKET_HASHTAGS + " #WeekInReview",
+    ]
+    video = (
+        f"Pakistan market — the week in review ({props['dateRange']}): "
+        f"KSE-100 {kse['chgPct']:+.1f}%, gold {gold['chgPct']:+.1f}% this week. "
+        f"The whole week in under a minute.\n\n"
+        f"{FOOTER} — free live tools at pakinvestlysis.com\n\n"
+        f"{MARKET_HASHTAGS} #WeekInReview")
+    return {"image": "\n".join(img), "video": video}
 
 
 def caption_md(file_str, props, meta):
@@ -223,6 +256,7 @@ def main():
     payload = dict(props)
     payload["date"] = file_str
     payload["youtube"] = meta
+    payload["facebook"] = facebook_meta(props, friday)
     payload_path = os.path.join(weekly_dir, f"{file_str}.json")
     with open(payload_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)

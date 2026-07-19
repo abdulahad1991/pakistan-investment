@@ -251,6 +251,10 @@ jobs:
         working-directory: video
         run: npx remotion still DailyCard-1x1 --props=daily-props.json out/daily/card.png --frame=60
 
+      - name: Render Petrol card (1:1)
+        working-directory: video
+        run: npx remotion still PetrolCard-1x1 --props=daily-props.json out/daily/petrol.png --frame=60
+
       # Homepage video — DailyBrief in 16:9, committed to the repo (Pages serves
       # only committed files). Fixed filename: overwritten each run, never piles up.
       - name: Render homepage daily brief (16:9)
@@ -348,6 +352,12 @@ jobs:
         working-directory: video
         run: npx remotion render WeeklyBrief-16x9 --props=weekly-props.json out/weekly/review.mp4 --crf=23
 
+      - name: Render weekly digest still (1:1)
+        if: steps.weekly.outputs.go == 'true'
+        continue-on-error: true
+        working-directory: video
+        run: npx remotion still WeeklyCard-1x1 --props=weekly-props.json out/weekly/digest.png --frame=60
+
       - name: Commit weekly caption to dev
         if: steps.weekly.outputs.go == 'true'
         continue-on-error: true
@@ -374,3 +384,11 @@ jobs:
           python scripts/post_youtube.py \
             --video video/out/weekly/review.mp4 \
             --caption "social-kit/weekly/$(date -u +%F).json"
+
+      - name: Auto-post weekly digest to Facebook page (image + video)
+        if: steps.weekly.outputs.go == 'true'
+        continue-on-error: true
+        env:
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+        run: python scripts/post_facebook.py --weekly

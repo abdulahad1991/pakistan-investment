@@ -33,6 +33,10 @@ FOOTER = "Not financial advice · pakinvestlysis.com"
 HASHTAGS = "#Pakistan #Investing #PSX #Gold #PersonalFinance"
 # Facebook leans on fuel-price search intent, so its tags add the fuel terms.
 FB_HASHTAGS = HASHTAGS + " #PetrolPrice #FuelPrice #PetrolPriceInPakistan"
+# The FB posts split by intent — a market brief and a dedicated petrol post.
+MARKET_HASHTAGS = "#Pakistan #Investing #PSX #KSE100 #Gold #Economy #PersonalFinance"
+PETROL_HASHTAGS = ("#PetrolPrice #PetrolPriceInPakistan #FuelPrice #Diesel "
+                   "#OGRA #Pakistan #PetrolPriceToday")
 # YouTube keyword tags (the API takes a flat list, no '#').
 YT_TAGS = ["Pakistan", "investing", "PSX", "KSE-100", "gold",
            "mutual funds", "national savings", "personal finance"]
@@ -412,29 +416,37 @@ def social_payload(date_str, p, cands=None):
     )
     linkedin_text = f"{hook}\n\n{body}\n\n{FOOTER} — free live tools at pakinvestlysis.com\n\n{HASHTAGS}"
 
-    # Facebook FEED post = the full data board (the user's ask: "petrol + rest
-    # data as in our daily videos"). Fuel leads because it's the highest-intent
-    # line. Only fuels actually present are listed.
+    # Facebook = THREE separate posts (user's structure): a market-only brief,
+    # a dedicated petrol post, and the Reel — each with its own image + caption.
+    facebook_market = "\n".join([
+        f"🇵🇰 Pakistan Market Brief — {date_str} · {p['session']}", "",
+        "📊 Markets & macro",
+        f"• KSE-100: {grp(m['kse100'], locale_in=False)}",
+        f"• USD/PKR: ₨{m['pkrUsd']:.2f}",
+        f"• SBP policy rate: {m['sbpRate']:.2f}%",
+        f"• CPI inflation: {m['inflation']:.1f}%",
+        f"• Gold 24k/tola: ₨{grp(g['tola'])}",
+        "", "▶ Full market brief + free calculators → pakinvestlysis.com",
+        "", "Not financial advice · educational only", "", MARKET_HASHTAGS,
+    ])
+
     fuel = p.get("fuel", {}) or {}
-    fb = [f"🇵🇰 Pakistan Market Brief — {date_str} · {p['session']}", ""]
     fuel_rows = [(lbl, fuel.get(k)) for lbl, k in
                  (("Petrol", "petrol"), ("Diesel (HSD)", "hsd"),
                   ("Kerosene", "kerosene"), ("LDO", "ldo"))]
     fuel_rows = [(lbl, v) for lbl, v in fuel_rows if v is not None]
-    if fuel_rows:
-        eff = f" · effective {fuel['asof']}" if fuel.get("asof") else ""
-        fb.append(f"⛽ Fuel prices — OGRA, per litre{eff}")
-        fb += [f"• {lbl}: ₨{v:.2f}" for lbl, v in fuel_rows]
-        fb.append("")
-    fb.append("📊 Markets & macro")
-    fb.append(f"• KSE-100: {grp(m['kse100'], locale_in=False)}")
-    fb.append(f"• USD/PKR: ₨{m['pkrUsd']:.2f}")
-    fb.append(f"• SBP policy rate: {m['sbpRate']:.2f}%")
-    fb.append(f"• CPI inflation: {m['inflation']:.1f}%")
-    fb.append(f"• Gold 24k/tola: ₨{grp(g['tola'])}")
-    fb += ["", "▶ Full 60-second brief + free calculators → pakinvestlysis.com",
-           "", "Not financial advice · educational only", "", FB_HASHTAGS]
-    facebook_feed = "\n".join(fb)
+    eff = f" (effective {fuel['asof']})" if fuel.get("asof") else ""
+    petrol_lines = [
+        f"⛽ Petrol Price in Pakistan Today — {date_str}", "",
+        f"OGRA-notified retail rates{eff}, per litre:",
+    ]
+    petrol_lines += [f"• {lbl}: ₨{v:.2f}" for lbl, v in fuel_rows]
+    petrol_lines += [
+        "", "Daily-updated fuel rates + free calculators → pakinvestlysis.com",
+        "", "Not financial advice · educational only", "", PETROL_HASHTAGS,
+    ]
+    facebook_petrol = "\n".join(petrol_lines)
+
     # Facebook REEL caption = the 9:16 video's copy (punchy, video-first).
     facebook_reel = (f"{hook}\n\nYour Pakistan market day in 60 seconds — petrol, "
                      f"PSX, gold and the rupee.\n\n{FOOTER} — free live tools at "
@@ -447,7 +459,8 @@ def social_payload(date_str, p, cands=None):
         "body": body,
         "metrics": {"kse100": m["kse100"], "gold_tola": g["tola"], "pkr_usd": m["pkrUsd"]},
         "linkedin": {"text": linkedin_text},
-        "facebook": {"feed": facebook_feed, "reel": facebook_reel},
+        "facebook": {"market": facebook_market, "petrol": facebook_petrol,
+                     "reel": facebook_reel},
         "youtube": {
             "title": build_yt_title(p, cands, date_str),
             "description": build_yt_description(p, body, cands),

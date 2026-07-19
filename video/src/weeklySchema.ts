@@ -32,6 +32,17 @@ export const weeklySchema = z.object({
     inflation: z.number(), // CPI YoY %
     usd: z.number(), // PKR per USD
   }),
+
+  // Current OGRA fuel prices (optional) — shown on the weekly digest card.
+  fuel: z
+    .object({
+      petrol: z.number().nullable().optional(),
+      hsd: z.number().nullable().optional(),
+      kerosene: z.number().nullable().optional(),
+      ldo: z.number().nullable().optional(),
+      asof: z.string().nullable().optional(),
+    })
+    .optional(),
 });
 
 export type WeeklyProps = z.infer<typeof weeklySchema>;
@@ -60,4 +71,5 @@ export const defaultWeeklyProps: WeeklyProps = {
     { sym: "OGDC", name: "Oil & Gas Dev", chgPct: -2.4 },
   ],
   rates: { policy: 11.5, inflation: 11.7, usd: 278.15 },
+  fuel: { petrol: 315.71, hsd: 353.3, kerosene: 233.71, ldo: 199.98, asof: "18 Jul 2026" },
 };

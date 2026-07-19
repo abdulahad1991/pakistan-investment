@@ -13,8 +13,10 @@ import { StatCard } from "./StatCard";
 import { statCardSchema, defaultStatProps, type StatCardProps } from "./statSchema";
 import { DailyBrief, dailyTotal } from "./DailyBrief";
 import { DailyCard } from "./DailyCard";
+import { PetrolCard } from "./PetrolCard";
 import { dailySchema, defaultDailyProps } from "./dailySchema";
 import { WeeklyBrief, weeklyTotal } from "./WeeklyBrief";
+import { WeeklyCard } from "./WeeklyCard";
 import { weeklySchema, defaultWeeklyProps } from "./weeklySchema";
 
 // Promo total duration is derived from the per-scene durations in the props.
@@ -133,6 +135,17 @@ export const RemotionRoot: React.FC = () => {
         schema={dailySchema}
         defaultProps={defaultDailyProps}
       />
+      {/* Dedicated Petrol Prices still — the FB "Petrol Prices" post image. */}
+      <Composition
+        id="PetrolCard-1x1"
+        component={PetrolCard}
+        fps={FPS}
+        width={1080}
+        height={1080}
+        durationInFrames={90}
+        schema={dailySchema}
+        defaultProps={defaultDailyProps}
+      />
 
       {/* Weekly market review — 16:9 (~45s) for YouTube proper.
           Reuses the DailyBrief building blocks at a slower pace; props come
@@ -144,6 +157,17 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         durationInFrames={weeklyTotal()}
+        schema={weeklySchema}
+        defaultProps={defaultWeeklyProps}
+      />
+      {/* Weekly digest still — the FB "Weekly Digest" image post. */}
+      <Composition
+        id="WeeklyCard-1x1"
+        component={WeeklyCard}
+        fps={FPS}
+        width={1080}
+        height={1080}
+        durationInFrames={90}
         schema={weeklySchema}
         defaultProps={defaultWeeklyProps}
       />

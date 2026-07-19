@@ -23,11 +23,29 @@
   p{margin:0 0 14px}
   ul{margin:0 0 16px;padding-left:20px}
   li{margin:6px 0}
+  .scopes{list-style:none;padding:0;margin:0 0 20px}
+  .scopes li{display:flex;gap:10px;align-items:flex-start;margin:10px 0;padding:12px 14px;
+             background:#f7faf9;border:1px solid var(--line);border-radius:10px}
+  .scopes code{font-weight:700;color:var(--green)}
+  .scopes small{display:block;color:#5a6b66}
+  .btn{display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:0;
+       background:var(--green);color:#fff;font-weight:700;font-size:1rem;
+       padding:14px 22px;border-radius:12px;text-decoration:none;transition:filter .15s}
+  .btn:hover{filter:brightness(1.08)}
+  .btn svg{height:20px;width:20px}
   .note{font-size:.9rem;color:#5a6b66;background:#f3f6f5;border-left:3px solid var(--green);
         padding:12px 14px;border-radius:0 8px 8px 0;margin:18px 0}
-  a.home{display:inline-block;margin-top:8px;color:var(--green);font-weight:700;text-decoration:none}
+  a.home{display:inline-block;margin-top:18px;color:var(--green);font-weight:700;text-decoration:none}
   a.home:hover{text-decoration:underline}
   code{background:#eef2f1;padding:1px 6px;border-radius:5px;font-size:.88em}
+  .ok{background:#e9f6f0;border:1px solid #b9e2d1;border-radius:12px;padding:18px 20px;margin:6px 0 18px}
+  .ok h2{margin:0 0 6px;font-size:1.1rem;color:var(--green);display:flex;align-items:center;gap:8px}
+  .ok .grant{font-size:.85rem;color:#3f544d;margin:8px 0 0;word-break:break-all}
+  .err{background:#fdecea;border:1px solid #f3c6bf;color:#9a2b1c;border-radius:12px;padding:16px 18px;margin:6px 0 18px}
+  .ckwrap{margin:14px 0 4px;display:none}
+  .ckwrap input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-size:.95rem}
+  .ckwrap small{color:#5a6b66}
+  .hidden{display:none}
 </style>
 </head>
 <body>
@@ -38,23 +56,139 @@
     </div>
     <p class="kicker">TikTok Integration</p>
     <h1>Daily Market Brief → TikTok</h1>
-    <p><a href="https://pakinvestlysis.com">pakinvestlysis.com</a> is a free educational
-       site of daily-updated investing tools and guides for Pakistani savers. Each market
-       session it auto-generates a short <strong>Daily Market Brief</strong> video
-       (KSE-100, USD/PKR, gold, SBP policy rate, inflation).</p>
-    <p>This page is the OAuth redirect endpoint for our TikTok integration, which uses:</p>
-    <ul>
-      <li><strong>Login Kit</strong> (<code>user.info.basic</code>) — one-time
-          authorization of our own brand TikTok account.</li>
-      <li><strong>Content Posting API</strong> (<code>video.upload</code>) — sends the
-          rendered brief to the authorized account for publishing.</li>
-    </ul>
-    <p>We post only our own first-party educational videos, only to the single account
-       that authorized the app.</p>
-    <div class="note">If you reached this page during sign-in, the authorization
-       <code>code</code> is in your browser's address bar — that completes the one-time
-       setup. Nothing else is needed here.</div>
+    <p><a href="https://pakinvestlysis.com">pakinvestlysis.com</a> is a free educational site of
+       daily-updated investing tools for Pakistani savers. Each market session it auto-generates a
+       short <strong>Daily Market Brief</strong> video (KSE-100, USD/PKR, gold, SBP policy rate,
+       inflation) and posts it to our own brand TikTok account.</p>
+
+    <!-- ── Connect view (no ?code) ─────────────────────────────── -->
+    <section id="connect">
+      <p>Connect the brand TikTok account once to authorize automated posting. We use:</p>
+      <ul class="scopes">
+        <li><span>🔐</span><div><code>user.info.basic</code> — Login Kit
+            <small>Identify the account that authorized the app.</small></div></li>
+        <li><span>⬆️</span><div><code>video.upload</code> — Content Posting API
+            <small>Upload the rendered brief to the account as a draft.</small></div></li>
+        <li><span>📣</span><div><code>video.publish</code> — Content Posting API
+            <small>Publish the brief directly once the app is approved.</small></div></li>
+      </ul>
+      <div class="ckwrap" id="ckwrap">
+        <input id="ckinput" type="text" placeholder="TikTok Client Key (starts with sbaw… / aw…)" autocomplete="off">
+        <small>Public key — appears in the authorize URL. The client <em>secret</em> is never used here.</small>
+      </div>
+      <button class="btn" id="connectBtn">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 3c.3 2 1.5 3.6 3.5 4v2.4c-1.4 0-2.7-.4-3.9-1.1v6.7c0 3.4-2.6 5.9-5.9 5.9S4.3 18.4 4.3 15s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.1-.9-.1-1.8 0-3.2 1.5-3.2 3.3s1.4 3.3 3.2 3.3 3.2-1.5 3.2-3.3V3h3.1z"/></svg>
+        Connect TikTok account
+      </button>
+      <div class="note">You'll be sent to TikTok to log in as the brand account and approve the
+        scopes above, then returned to this page. We post only our own first-party educational
+        videos, only to the single account that authorizes the app.</div>
+    </section>
+
+    <!-- ── Authorized view (?code present) ─────────────────────── -->
+    <section id="authorized" class="hidden">
+      <div class="ok">
+        <h2>✅ Authorized</h2>
+        <p style="margin:0">TikTok returned an authorization <code>code</code> to
+           <code>pakinvestlysis.com/tiktok</code>. The refresh token is exchanged and stored
+           server-side to post the Daily Market Brief automatically.</p>
+        <p class="grant" id="grant"></p>
+      </div>
+      <p>Setup complete — nothing else is needed on this page. The daily job now uploads each
+         rendered brief to the authorized TikTok account via the Content Posting API.</p>
+    </section>
+
+    <!-- ── Error view (?error present) ─────────────────────────── -->
+    <section id="errored" class="hidden">
+      <div class="err" id="errbox"></div>
+    </section>
+
     <a class="home" href="https://pakinvestlysis.com">← Back to pakinvestlysis.com</a>
   </main>
+
+<script>
+(function () {
+  // TikTok Client Key is PUBLIC (it appears in every authorize URL) — safe to embed here.
+  // The client SECRET is NEVER placed in frontend code; token exchange runs server-side.
+  var CLIENT_KEY   = "sbaw1ypbbw2cb1m9rm";   // sandbox app key — PUBLIC (shown in every authorize URL)
+  var REDIRECT_URI = "https://pakinvestlysis.com/tiktok";   // must EXACTLY match the registered URI
+  var SCOPES       = "video.publish,video.upload,user.info.basic";
+  var AUTHORIZE    = "https://www.tiktok.com/v2/auth/authorize/";
+
+  var qs = new URLSearchParams(location.search);
+  var code = qs.get("code");
+  var error = qs.get("error") || qs.get("errCode");
+  var $ = function (id) { return document.getElementById(id); };
+  var show = function (id) { $(id).classList.remove("hidden"); };
+  var hide = function (id) { $(id).classList.add("hidden"); };
+
+  if (code) {
+    // Returned from TikTok with an authorization code. If THIS browser started the flow
+    // (a session state was stored), the returned state MUST match it — otherwise the
+    // callback is forged/CSRF and we refuse it. (A code arriving with no stored state,
+    // e.g. an operator-initiated mint via get_tiktok_token.py, is shown without the check.)
+    var stored = null;
+    try { stored = sessionStorage.getItem("tt_state"); } catch (e) {}
+    var returnedState = qs.get("state");
+    if (stored && stored !== returnedState) {
+      try { sessionStorage.removeItem("tt_state"); } catch (e) {}
+      hide("connect");
+      show("errored");
+      $("errbox").textContent = "Authorization state mismatch — the value TikTok returned " +
+        "did not match the one this browser generated. For your security the sign-in was not " +
+        "completed. Please start again from Connect.";
+      return;
+    }
+    try { sessionStorage.removeItem("tt_state"); } catch (e) {}
+    hide("connect");
+    show("authorized");
+    var granted = qs.get("scopes") || SCOPES;
+    var masked = code.length > 12 ? code.slice(0, 8) + "…" + code.slice(-4) : code;
+    $("grant").textContent = "Granted scopes: " + granted + "  ·  code: " + masked;
+    return;
+  }
+  if (error) {
+    hide("connect");
+    show("errored");
+    $("errbox").textContent = "TikTok returned an error: " + error +
+      (qs.get("error_description") ? " — " + qs.get("error_description") : "");
+    return;
+  }
+
+  // Connect view: resolve the client key (const → ?ck= override → inline input).
+  var ck = qs.get("ck") || (CLIENT_KEY.indexOf("__") === 0 ? "" : CLIENT_KEY);
+  if (!ck) { $("ckwrap").style.display = "block"; }   // no key baked in yet — allow manual entry
+
+  function makeState() {
+    // Cryptographically random, unguessable — bound to this session in sessionStorage
+    // and verified on the callback above to defend the OAuth flow against CSRF.
+    try {
+      var buf = new Uint8Array(16);
+      crypto.getRandomValues(buf);
+      return Array.prototype.map.call(buf, function (b) {
+        return ("0" + b.toString(16)).slice(-2);
+      }).join("");
+    } catch (e) {
+      return "pk-fallback-" + REDIRECT_URI.length + "-" + SCOPES.length;
+    }
+  }
+
+  function authorize() {
+    var key = ck || ($("ckinput") && $("ckinput").value.trim());
+    if (!key) { $("ckinput") && $("ckinput").focus(); return; }
+    var state = makeState();
+    try { sessionStorage.setItem("tt_state", state); } catch (e) {}
+    var url = AUTHORIZE + "?" + new URLSearchParams({
+      client_key: key,
+      scope: SCOPES,
+      response_type: "code",
+      redirect_uri: REDIRECT_URI,
+      state: state
+    }).toString();
+    location.href = url;
+  }
+  $("connectBtn").addEventListener("click", authorize);
+})();
+</script>
 </body>
 </html>

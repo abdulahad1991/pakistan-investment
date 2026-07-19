@@ -32,7 +32,19 @@ Have ready before hitting record:
 - A terminal at the repo root with a **fresh render present**: run `cd video && npm run daily`
   (or just re-render the short) so `video/out/daily/short.mp4` + `social-kit/daily/<today>.json`
   are today's. (Already rendered for 2026-07-19.)
-- `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET`, `TIKTOK_REDIRECT_URI` exported in that shell.
+- **Mint the refresh token OFF-camera, then export it** in the shell you'll record:
+  ```bash
+  export TIKTOK_CLIENT_KEY='...'; export TIKTOK_CLIENT_SECRET='...'
+  export TIKTOK_REDIRECT_URI='https://pakinvestlysis.com/tiktok'
+  python scripts/get_tiktok_token.py         # prints TIKTOK_REFRESH_TOKEN
+  export TIKTOK_REFRESH_TOKEN='<printed value>'
+  clear                                      # wipe the exports off the screen
+  ```
+
+> ⚠️ **Never record `get_tiktok_token.py` or the `export` lines.** The script prints your
+> **client secret** and refresh token; the exports show the secret. Do all of that before
+> recording and `clear` the terminal. The poster (`post_tiktok.py`) prints no secrets — safe
+> to record. Test the whole thing once as a silent dry run before the real take.
 
 ---
 
@@ -46,17 +58,17 @@ Record at 1080×~ with QuickTime or macOS **⌘⇧5**. Speak the narration or ad
 | 1 | **pakinvestlysis.com** homepage — scroll to the Daily Market Brief video | "This is pakinvestlysis.com, a free educational site. Each market session we auto-generate this Daily Market Brief video." |
 | 2 | Go to **pakinvestlysis.com/tiktok** → click **"Connect TikTok account"** | "To post it to our own TikTok, the site starts TikTok Login Kit here." |
 | 3 | **TikTok consent screen** — pause 2–3 s so the app name + the three scopes are readable → **Approve** | "TikTok asks the account to approve our scopes: user.info.basic, video.upload and video.publish." |
-| 4 | Redirect back to **pakinvestlysis.com/tiktok** → **"✅ Authorized"** panel (granted scopes shown) | "The account is returned to our site, authorized." |
-| 5 | Terminal: `python scripts/get_tiktok_token.py` → paste the redirected URL → it prints `TIKTOK_REFRESH_TOKEN` | "That authorization mints a refresh token, stored server-side." |
-| 6 | Terminal: `TIKTOK_MODE=inbox python scripts/post_tiktok.py` → prints `uploaded to inbox … publish_id=…` | "Using the Content Posting API video.upload scope, we send today's brief to the account as a draft." |
-| 7 | Terminal: `TIKTOK_MODE=direct python scripts/post_tiktok.py` → prints `published (SELF_ONLY) publish_id=…` | "And the video.publish scope posts it directly — private here in sandbox, public once approved." |
-| 8 | Open **TikTok app/web** on the brand account → show the brief in **Drafts/Inbox** and the **SELF_ONLY post** | "Here's the same brief now on TikTok — the draft from video.upload and the private post from video.publish." |
+| 4 | Redirect back to **pakinvestlysis.com/tiktok** → **"✅ Authorized"** panel (granted scopes shown) | "The account is returned to our site, authorized — the refresh token is exchanged and stored server-side." |
+| 5 | Terminal (token already exported off-camera): `TIKTOK_MODE=inbox python scripts/post_tiktok.py` → prints `uploaded to inbox … publish_id=…` | "Using the Content Posting API video.upload scope, we send today's brief to the account as a draft." |
+| 6 | Terminal: `TIKTOK_MODE=direct python scripts/post_tiktok.py` → prints `published (SELF_ONLY) publish_id=…` | "And the video.publish scope posts it directly — private here in sandbox, public once approved." |
+| 7 | Open **TikTok app/web** on the brand account → show the brief in **Drafts/Inbox** and the **SELF_ONLY post** | "Here's the same brief now on TikTok — the draft from video.upload and the private post from video.publish." |
 
 That covers: the **matching domain**, **Login Kit** (2–4), **user.info.basic** (consent),
-**video.upload** (6, 8), **video.publish** (7, 8), **Content Posting API** result (8).
+**video.upload** (5, 7), **video.publish** (6, 7), **Content Posting API** result (7).
 
-Shots 5–7 are terminal because posting is server-side automation — that's fine; the
-interactive on-domain UI (2–4) is what reviewers most want to see.
+Shots 5–6 are terminal because posting is server-side automation — that's fine; the
+interactive on-domain UI (2–4) is what reviewers most want to see. The token mint is done
+off-camera (it prints secrets) — the "Authorized" panel in shot 4 already proves the auth.
 
 ---
 

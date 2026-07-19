@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-18T12:37:29Z",
+  "updated": "2026-07-19T07:07:48Z",
   "macro": {
     "pkr_usd": 277.96,
     "sbp_rate": 11.5,
@@ -2100,12 +2100,12 @@
   "gold": {
     "source": "gold.pk",
     "source_type": "local",
-    "tola_24k": 424600,
-    "tola_22k": 389217,
-    "g10_24k": 364032,
-    "g10_22k": 333697,
-    "gram_24k": 36403,
-    "gram_22k": 33370,
+    "tola_24k": 424200,
+    "tola_22k": 388850,
+    "g10_24k": 363689,
+    "g10_22k": 333382,
+    "gram_24k": 36369,
+    "gram_22k": 33338,
     "chg1y_pct": 25.5,
     "history": {
       "labels": [
@@ -2282,7 +2282,7 @@
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2292,7 +2292,7 @@
       "source": "Mutual Funds Association of Pakistan (MUFAP)",
       "cadence": "daily",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null
     },
     "gold": {
@@ -2310,7 +2310,7 @@
       "source": "Pakistan Bureau of Statistics (PBS)",
       "cadence": "monthly",
       "stale": false,
-      "age_days": 47,
+      "age_days": 48,
       "last_error": null
     },
     "kse": {
@@ -2319,7 +2319,7 @@
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null
     },
     "macro": {
@@ -2328,7 +2328,7 @@
       "source": "Pakistan Bureau of Statistics (PBS) + IMF",
       "cadence": "event",
       "stale": false,
-      "age_days": 18,
+      "age_days": 19,
       "last_error": null
     },
     "petrol": {
@@ -2337,7 +2337,7 @@
       "source": "PakWheels (OGRA-notified rates)",
       "cadence": "daily",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
       "via": "pakwheels"
     },
@@ -2357,7 +2357,7 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "weekly",
       "stale": false,
-      "age_days": 8,
+      "age_days": 9,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2367,7 +2367,7 @@
       "source": "Central Directorate of National Savings (CDNS)",
       "cadence": "event",
       "stale": false,
-      "age_days": 38,
+      "age_days": 39,
       "last_error": null
     },
     "stocks": {
@@ -2376,7 +2376,7 @@
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null
     }
   }

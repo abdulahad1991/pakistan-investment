@@ -1,20 +1,14 @@
 {
   "name": "forex",
   "value": {
-    "interbank": 277.8724
+    "interbank": 277.921
   },
   "as_of": "Jul 21, 2026",
-  "source": "open.er-api.com (reference rate — SBP unavailable)",
+  "source": "State Bank of Pakistan (SBP) interbank M2M",
   "ok": true,
-  "fetched_at": "2026-07-21T07:14:28Z",
+  "fetched_at": "2026-07-21T13:03:57Z",
   "cadence": "intraday",
-  "metric": "USD/PKR (reference)",
-  "source_url": "https://open.er-api.com/v6/latest/USD",
-  "approx": true,
-  "via": "er-api",
-  "failover": true,
-  "primary_errors": [
-    "[sbp-m2m] ValueError: no 'As on DD-Mon-YYYY' or 'Mon DD, YYYY' date found on SBP M2M page",
-    "[sbp-home] ValueError: no 'As on DD-Mon-YYYY' or 'Mon DD, YYYY' date found on SBP M2M page"
-  ]
+  "metric": "Interbank USD/PKR",
+  "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp",
+  "via": "sbp-m2m"
 }

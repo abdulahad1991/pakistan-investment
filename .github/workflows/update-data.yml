@@ -94,11 +94,20 @@ jobs:
       - name: Rebuild guide/blog manifest
         run: python scripts/build_manifest.py
 
+      # Bake the fresh figures into the static HTML. Without this the served
+      # markup carries "-" for every live value and only fills in once JS runs,
+      # so any non-rendering crawler (AdSense review, first-pass Googlebot,
+      # answer engines, share previews) sees an empty page. Runs last, after
+      # data.json and any regenerated pages exist.
+      - name: Prerender live values into HTML
+        run: python scripts/prerender.py
+
       - name: Commit updated data.json to dev
         run: |
           git config user.name  "Abdul Ahad"
           git config user.email "abdulahad1991@users.noreply.github.com"
           git add data.json manifest.json data/stock_history.json data/partitions blog/top-dividend-stocks-pakistan.html
+          git add -u '*.html'
           git diff --cached --quiet || (
             true &&
             git commit -m "chore: update investment data $(date -u +'%Y-%m-%d')" &&

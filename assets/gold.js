@@ -50,8 +50,14 @@ function initGold() {
   setT("gr-gram24", rs(g.gram_24k));
   setT("gr-10g22",  rs(g.g10_22k));
   setT("gr-gram22", rs(g.gram_22k));
-  setT("gr-tola21", rs(Math.round(g.tola_24k * 21 / 24)));
-  setT("gr-tola18", rs(Math.round(g.tola_24k * 18 / 24)));
+  setT("gr-tola24-m", rs(g.tola_24k));
+  // 21K and 18K are estimated off the 24K rate; a tola is 11.6638 g.
+  [21, 18].forEach(k => {
+    const tola = Math.round(g.tola_24k * k / 24);
+    setT("gr-tola" + k, rs(tola));
+    setT("gr-10g" + k,  rs(Math.round(tola / 11.6638 * 10)));
+    setT("gr-gram" + k, rs(Math.round(tola / 11.6638)));
+  });
 
   // Change badge
   const chg = document.getElementById("gr-chg");

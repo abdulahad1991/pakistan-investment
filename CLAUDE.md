@@ -62,6 +62,14 @@ Educational only; **never financial advice**. Audience: Pakistani retail savers.
   with seed values so the site works before the next cron run.
 - `scripts/build_manifest.py` → **`manifest.json`** (auto-listing of `guides/` + `blog/` for
   the index pages and site search). New guide/blog HTML files appear automatically next run.
+- **`scripts/prerender.py`** (runs last in CI, after `build_data`/`build_manifest`) bakes the live
+  figures from `data.json` into the static HTML — the ticker on all ~40 pages, the homepage macro
+  pills / gold card / fuel card, and the whole `gold-rates.html` rate grid. Every one of those was
+  authored as `-` and filled in only by JS, so anything that doesn't execute JS (AdSense review
+  crawler, first-pass Googlebot, answer engines, share previews) received a page promising live
+  rates and containing none. Substitution is text-only, idempotent, and skips elements with child
+  tags; `--check` exits 1 on drift. **When adding a new live figure to a page, add its element id
+  to `build_values()`** or it ships as `-`. Unit tests: `tests/test_prerender.py`.
 - **When adding a live metric:** add a `fetchers/<x>.py` (pure parser + fixture test), map it in
   `build_data.py`, seed `data.json`, render it (with its `_asof`) in the page JS.
 

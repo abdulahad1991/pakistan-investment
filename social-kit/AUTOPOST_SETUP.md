@@ -53,11 +53,15 @@ only — don't commit it.
 
 ---
 
-## LinkedIn company page (one-time + ~60-day token refresh)
+## LinkedIn company page (one-time; unattended if you get a refresh token)
 
-> Heads-up: LinkedIn access tokens **expire in ~60 days** and refresh tokens are
-> gated. Plan to re-run the token grab (step 5) roughly every 50 days. A 401 in
-> the LinkedIn step = token lapsed.
+> Heads-up: LinkedIn access tokens **expire in ~60 days**. If your app is
+> approved for **programmatic refresh tokens**, step 5 also prints a
+> `LINKEDIN_REFRESH_TOKEN` (~1 year) and `post_linkedin.py` mints a fresh access
+> token every run — no babysitting. If it doesn't, you're on the static token:
+> re-run step 5 roughly every 50 days. A 401 in the LinkedIn step = token lapsed,
+> and because the step is `continue-on-error` it fails **silently** — nothing
+> posts and the workflow still goes green.
 
 1. **developer.linkedin.com → Create app.** Associate it with your **company
    page** (the app's company = that page). You must be a **page admin**.
@@ -74,19 +78,38 @@ only — don't commit it.
    export LINKEDIN_CLIENT_SECRET=...
    python scripts/get_linkedin_token.py # browser opens; log in as a page admin
    ```
-   It prints `LINKEDIN_ACCESS_TOKEN` and lists the org URNs you administer.
-6. Add **repo secrets**:
+   It prints `LINKEDIN_ACCESS_TOKEN`, a `LINKEDIN_REFRESH_TOKEN` if the app is
+   approved for one, and the org URNs you administer.
+6. Add **repo secrets**. `gh secret set` with no `--body` prompts for the value,
+   which keeps the token out of your shell history:
    ```bash
-   gh secret set LINKEDIN_ACCESS_TOKEN --body '...'
+   gh secret set LINKEDIN_ACCESS_TOKEN               # paste at the prompt
    gh secret set LINKEDIN_ORG_ID --body '12345678'   # numeric id from the org URN
+   # if step 5 printed a refresh token, add these three and posting runs
+   # unattended for ~a year instead of ~60 days:
+   gh secret set LINKEDIN_REFRESH_TOKEN
+   gh secret set LINKEDIN_CLIENT_ID --body '...'
+   gh secret set LINKEDIN_CLIENT_SECRET
    # optional; defaults to 202606 if unset:
    gh secret set LINKEDIN_VERSION --body '202606'
    ```
 
+**Verifying it works without waiting for the cron:** `scripts/demo_linkedin_api.py`
+does a read-only walkthrough (admin role → page → published posts) and prints each
+HTTP status, so you can confirm auth before a posting window.
+`scripts/record_linkedin_demo.sh` drives the whole thing end to end and screen-records
+it — that exists for LinkedIn's Standard Tier review, which wants a screencast.
+
 **Maintenance:**
-- **~every 50 days:** re-run step 5, then `gh secret set LINKEDIN_ACCESS_TOKEN ...`.
+- **With a refresh token:** nothing, until the refresh token expires (~1 year).
+- **Static token only:** re-run step 5 every ~50 days, then
+  `gh secret set LINKEDIN_ACCESS_TOKEN`. Nothing alerts you when it lapses —
+  check the LinkedIn page, not the workflow's green tick.
 - **~once a year:** bump `LINKEDIN_VERSION` before the pinned value is sunset
   (LinkedIn supports each `YYYYMM` for ≥1 year).
+- **Development vs Standard Tier:** Development Tier grants `w_organization_social`
+  and 500 calls/app/day — verified working for this pipeline (~15 calls/day).
+  Standard Tier is not required for posting to a page you administer.
 
 ---
 

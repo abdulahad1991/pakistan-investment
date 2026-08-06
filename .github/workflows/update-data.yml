@@ -306,6 +306,12 @@ jobs:
       - name: Auto-post video to LinkedIn company page
         continue-on-error: true
         env:
+          # Preferred: refresh-token flow (mints a fresh access token per run,
+          # so posting doesn't stop dead when the ~60-day access token lapses).
+          # Falls back to the static LINKEDIN_ACCESS_TOKEN when those aren't set.
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
           LINKEDIN_VERSION: ${{ secrets.LINKEDIN_VERSION }}

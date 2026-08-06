@@ -13,10 +13,16 @@ Safe in CI (same contract as post_youtube.py):
     (the workflow step is `continue-on-error`, so posting never blocks the
     rest of the pipeline).
 
-LinkedIn access tokens last ~60 days; re-mint with scripts/get_linkedin_token.py
-and update the LINKEDIN_ACCESS_TOKEN secret. Full setup: social-kit/AUTOPOST_SETUP.md
+Auth, in preference order (see _access_token):
+  1. LINKEDIN_CLIENT_ID + LINKEDIN_CLIENT_SECRET + LINKEDIN_REFRESH_TOKEN —
+     mints a fresh access token per run, same shape as post_youtube.py. The
+     refresh token lasts ~1 year, so CI keeps posting unattended.
+  2. LINKEDIN_ACCESS_TOKEN — a static ~60-day token. Works, but goes stale
+     silently (this step is continue-on-error), so we warn as expiry nears.
+Re-mint either with scripts/get_linkedin_token.py.
+Full setup: social-kit/AUTOPOST_SETUP.md
 
-Env (GitHub secrets): LINKEDIN_ACCESS_TOKEN, LINKEDIN_ORG_ID
+Env (GitHub secrets): LINKEDIN_ORG_ID, plus one of the two auth sets above.
                       LINKEDIN_VERSION (optional, default 202606)
 Run: python scripts/post_linkedin.py
 """
@@ -41,12 +47,51 @@ def _fail(msg):
     sys.exit(1)
 
 
+def _access_token():
+    """Return a usable access token, preferring the refresh-token flow.
+
+    A static LINKEDIN_ACCESS_TOKEN dies after ~60 days and, because the CI step
+    is continue-on-error, it dies *quietly* — posting just stops. So if the app
+    is approved for programmatic refresh tokens we mint a fresh access token on
+    every run instead (post_youtube.py has done this with YT_REFRESH_TOKEN all
+    along). Returns None when neither auth set is configured, so the caller can
+    skip rather than fail.
+    """
+    cid = os.environ.get("LINKEDIN_CLIENT_ID")
+    csecret = os.environ.get("LINKEDIN_CLIENT_SECRET")
+    refresh = os.environ.get("LINKEDIN_REFRESH_TOKEN")
+    static = os.environ.get("LINKEDIN_ACCESS_TOKEN")
+
+    if cid and csecret and refresh:
+        import requests
+        r = requests.post("https://www.linkedin.com/oauth/v2/accessToken", data={
+            "grant_type": "refresh_token", "refresh_token": refresh,
+            "client_id": cid, "client_secret": csecret,
+        }, timeout=30)
+        if r.status_code == 200:
+            print("[post_linkedin] auth: minted a fresh access token from the refresh token")
+            return r.json()["access_token"]
+        # A dead refresh token is worth shouting about, but don't lose the run
+        # if a static token is still sitting there and might work.
+        print(f"[post_linkedin] refresh_token exchange failed {r.status_code}: {r.text[:200]}")
+        if not static:
+            _fail("refresh failed and no LINKEDIN_ACCESS_TOKEN fallback — "
+                  "re-run scripts/get_linkedin_token.py")
+
+    if static:
+        print("[post_linkedin] auth: static LINKEDIN_ACCESS_TOKEN "
+              "(expires ~60 days after it was minted — set LINKEDIN_REFRESH_TOKEN "
+              "+ LINKEDIN_CLIENT_ID/SECRET to stop babysitting it)")
+    return static
+
+
 def main():
-    token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
+    token = _access_token()
     org_id = os.environ.get("LINKEDIN_ORG_ID")
     version = os.environ.get("LINKEDIN_VERSION") or "202606"  # unset secret -> "" -> default
     if not (token and org_id):
-        _skip("LINKEDIN_ACCESS_TOKEN / LINKEDIN_ORG_ID not set")
+        _skip("LinkedIn auth (LINKEDIN_REFRESH_TOKEN or LINKEDIN_ACCESS_TOKEN) "
+              "/ LINKEDIN_ORG_ID not set")
 
     owner = f"urn:li:organization:{org_id.split(':')[-1]}"  # accept id or full URN
     headers = {

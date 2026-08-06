@@ -3,8 +3,11 @@
 
 Run on your laptop. A browser opens; log in as a LinkedIn user who is an
 ADMINISTRATOR of the company page and approve. It prints:
-  * LINKEDIN_ACCESS_TOKEN  (~60-day token — store as a GitHub secret; re-run
-                            this ~every 50 days to refresh it)
+  * LINKEDIN_ACCESS_TOKEN  (~60-day token — store as a GitHub secret)
+  * LINKEDIN_REFRESH_TOKEN (~1-year token, only if the app is approved for
+                            programmatic refresh; store it and post_linkedin.py
+                            mints a fresh access token every run, so CI stops
+                            dying every 60 days — same shape as YT_REFRESH_TOKEN)
   * LINKEDIN_ORG_ID        (numeric id of each page you admin — pick yours)
 
 Prereqs (see social-kit/AUTOPOST_SETUP.md):
@@ -17,6 +20,7 @@ Prereqs (see social-kit/AUTOPOST_SETUP.md):
   pip install requests
   python scripts/get_linkedin_token.py
 """
+import datetime
 import os
 import sys
 import webbrowser
@@ -64,10 +68,31 @@ def main():
         "client_id": cid, "client_secret": csecret, "redirect_uri": REDIRECT,
     }, timeout=30)
     tok.raise_for_status()
-    access = tok.json()["access_token"]
+    body = tok.json()
+    access = body["access_token"]
+    refresh = body.get("refresh_token")
 
-    print("\n=== store as GitHub repo secret ===")
+    print("\n=== store as GitHub repo secrets ===")
     print("LINKEDIN_ACCESS_TOKEN =", access)
+    expires = body.get("expires_in")
+    if expires:
+        dead = datetime.date.today() + datetime.timedelta(seconds=int(expires))
+        print(f"  (access token expires {dead:%d %b %Y})")
+
+    if refresh:
+        print("\nLINKEDIN_REFRESH_TOKEN =", refresh)
+        r_exp = body.get("refresh_token_expires_in")
+        if r_exp:
+            dead = datetime.date.today() + datetime.timedelta(seconds=int(r_exp))
+            print(f"  (refresh token expires {dead:%d %b %Y})")
+        print("  Store this one too — post_linkedin.py prefers it and mints a\n"
+              "  fresh access token each run, so CI keeps posting unattended.\n"
+              "  It also needs LINKEDIN_CLIENT_ID + LINKEDIN_CLIENT_SECRET as secrets.")
+    else:
+        print("\nNo refresh_token issued — this app isn't approved for programmatic\n"
+              "refresh tokens, so the access token above is all you get. Re-run this\n"
+              "script roughly every 50 days and update the secret, or request refresh\n"
+              "token access from LinkedIn developer support.")
 
     # Look up which org pages this member administers.
     acl = requests.get(

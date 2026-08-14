@@ -1,13 +1,13 @@
 {
-  "updated": "2026-08-14T06:01:23Z",
+  "updated": "2026-08-14T12:38:49Z",
   "macro": {
     "pkr_usd": 277.65,
     "sbp_rate": 11.5,
     "sbp_direction": "Holding",
     "inflation_cpi": 9.2,
     "kse100_level": 180761,
-    "fx_reserves_bn_usd": 17.04,
-    "fx_reserves_total_bn_usd": 22.47,
+    "fx_reserves_bn_usd": 17.06,
+    "fx_reserves_total_bn_usd": 22.5,
     "gdp_growth_pct": 3.7,
     "gdp_growth_fy": "2025-26",
     "imf_status": "Active — $7B Extended Fund Facility + $1.4B Resilience & Sustainability Facility; 3rd EFF / 2nd RSF review completed 8 May 2026 (~$4.8B disbursed)",
@@ -18,7 +18,7 @@
     "pkr_usd_approx": false,
     "pkr_usd_source": "State Bank of Pakistan (SBP) interbank M2M",
     "inflation_cpi_asof": "Jul 2026",
-    "fx_reserves_asof": "31 Jul 2026",
+    "fx_reserves_asof": "7 Aug 2026",
     "pkr_usd_asof": "13 Aug 2026",
     "kse100_asof": "13 Aug 2026",
     "stocks_asof": "13 Aug 2026"
@@ -1605,9 +1605,9 @@
       "lo52": 23.2,
       "div": 0.0,
       "yield": 0.0,
-      "pe": 4.03,
+      "pe": 3.06,
       "chg": 8.38,
-      "eps": 15.78
+      "eps": 25.05
     },
     {
       "ticker": "ALNRS",
@@ -2355,11 +2355,11 @@
     },
     "reserves": {
       "ok": true,
-      "as_of": "July 31, 2026",
+      "as_of": "August 07, 2026",
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "weekly",
-      "stale": true,
-      "age_days": 14,
+      "stale": false,
+      "age_days": 7,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2374,7 +2374,7 @@
     },
     "stocks": {
       "ok": true,
-      "as_of": "Thu, Aug 13, 2026 3:49 PM",
+      "as_of": "Thu, Aug 13, 2026 3:44 PM",
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
       "stale": false,

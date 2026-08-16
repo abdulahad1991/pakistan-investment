@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T11:54:54Z",
+  "updated": "2026-08-16T05:02:47Z",
   "macro": {
     "pkr_usd": 277.65,
     "sbp_rate": 11.5,
@@ -2284,7 +2284,7 @@
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 2,
+      "age_days": 3,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2294,7 +2294,7 @@
       "source": "Mutual Funds Association of Pakistan (MUFAP)",
       "cadence": "daily",
       "stale": true,
-      "age_days": 22,
+      "age_days": 23,
       "last_error": "HTTPError: HTTP Error 403: Forbidden"
     },
     "gold": {
@@ -2312,7 +2312,7 @@
       "source": "Pakistan Bureau of Statistics (PBS)",
       "cadence": "monthly",
       "stale": false,
-      "age_days": 45,
+      "age_days": 46,
       "last_error": null
     },
     "kse": {
@@ -2321,7 +2321,7 @@
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 2,
+      "age_days": 3,
       "last_error": null
     },
     "macro": {
@@ -2330,7 +2330,7 @@
       "source": "Pakistan Bureau of Statistics (PBS) + IMF",
       "cadence": "event",
       "stale": false,
-      "age_days": 46,
+      "age_days": 47,
       "last_error": null
     },
     "petrol": {
@@ -2339,7 +2339,7 @@
       "source": "PakWheels (OGRA-notified rates)",
       "cadence": "daily",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null,
       "via": "pakwheels"
     },
@@ -2359,7 +2359,7 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "weekly",
       "stale": false,
-      "age_days": 8,
+      "age_days": 9,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2369,7 +2369,7 @@
       "source": "Central Directorate of National Savings (CDNS)",
       "cadence": "event",
       "stale": true,
-      "age_days": 28,
+      "age_days": 29,
       "last_error": "URLError: <urlopen error timed out>"
     },
     "stocks": {
@@ -2378,7 +2378,7 @@
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 2,
+      "age_days": 3,
       "last_error": null
     }
   }

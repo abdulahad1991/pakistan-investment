@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-20T05:06:44Z",
+  "updated": "2026-08-20T12:16:48Z",
   "macro": {
-    "pkr_usd": 277.6,
+    "pkr_usd": 277.57,
     "sbp_rate": 11.5,
     "sbp_direction": "Holding",
     "inflation_cpi": 9.2,
@@ -19,7 +19,7 @@
     "pkr_usd_source": "State Bank of Pakistan (SBP) interbank M2M",
     "inflation_cpi_asof": "Jul 2026",
     "fx_reserves_asof": "7 Aug 2026",
-    "pkr_usd_asof": "19 Aug 2026",
+    "pkr_usd_asof": "20 Aug 2026",
     "kse100_asof": "19 Aug 2026",
     "stocks_asof": "20 Aug 2026"
   },
@@ -2102,12 +2102,12 @@
   "gold": {
     "source": "gold.pk",
     "source_type": "local",
-    "tola_24k": 461500,
-    "tola_22k": 423042,
-    "g10_24k": 395669,
-    "g10_22k": 362697,
-    "gram_24k": 39567,
-    "gram_22k": 36270,
+    "tola_24k": 462500,
+    "tola_22k": 423958,
+    "g10_24k": 396526,
+    "g10_22k": 363482,
+    "gram_24k": 39653,
+    "gram_22k": 36348,
     "chg1y_pct": 25.5,
     "history": {
       "labels": [
@@ -2270,21 +2270,21 @@
   },
   "data_health": {
     "dividends": {
-      "ok": true,
+      "ok": false,
       "as_of": null,
       "source": "Pakistan Stock Exchange (PSX Data Portal) — company/payouts",
       "cadence": "daily",
-      "stale": false,
+      "stale": true,
       "age_days": null,
-      "last_error": null
+      "last_error": "ValueError: no payouts parsed for any requested symbol"
     },
     "forex": {
       "ok": true,
-      "as_of": "Aug 19, 2026",
+      "as_of": "Aug 20, 2026",
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 0,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2316,13 +2316,13 @@
       "last_error": null
     },
     "kse": {
-      "ok": true,
+      "ok": false,
       "as_of": "2026-08-19",
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
-      "stale": false,
+      "stale": true,
       "age_days": 1,
-      "last_error": null
+      "last_error": "RemoteDisconnected: Remote end closed connection without response"
     },
     "macro": {
       "ok": true,
@@ -2373,13 +2373,13 @@
       "last_error": null
     },
     "stocks": {
-      "ok": true,
+      "ok": false,
       "as_of": "Thu, Aug 20, 2026 10:04 AM",
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
-      "stale": false,
+      "stale": true,
       "age_days": 0,
-      "last_error": null
+      "last_error": "RemoteDisconnected: Remote end closed connection without response"
     }
   }
 }

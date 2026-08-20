@@ -136,9 +136,11 @@
   },
   "as_of": "2026-08-19",
   "source": "Pakistan Stock Exchange (PSX Data Portal)",
-  "ok": true,
+  "ok": false,
   "fetched_at": "2026-08-20T05:06:24Z",
   "cadence": "intraday",
   "metric": "KSE-100 index level (close)",
-  "source_url": "https://dps.psx.com.pk/timeseries/eod/KSE100"
+  "source_url": "https://dps.psx.com.pk/timeseries/eod/KSE100",
+  "last_error": "RemoteDisconnected: Remote end closed connection without response",
+  "last_attempt": "2026-08-20T11:59:28Z"
 }

@@ -94,9 +94,9 @@
     "BAHL": {
       "latest_cash": 3.5,
       "latest_pct": 35.0,
-      "period": "31/03/2026(IQ)",
-      "announce": "April 23, 2026 4:04 PM",
-      "book_closure": "05/05/2026 - 07/05/2026",
+      "period": "30/06/2026(HYR)",
+      "announce": "August 20, 2026 3:47 PM",
+      "book_closure": "01/09/2026 - 03/09/2026",
       "ttm_cash": 18.5,
       "symbol": "BAHL",
       "face_value": 10
@@ -302,12 +302,12 @@
       "face_value": 10
     },
     "ISL": {
-      "latest_cash": 2.0,
-      "latest_pct": 20.0,
-      "period": "30/09/2025(HYR)",
-      "announce": "January 27, 2026 4:55 PM",
-      "book_closure": "10/02/2026 - 12/02/2026",
-      "ttm_cash": 4.5,
+      "latest_cash": 3.0,
+      "latest_pct": 30.0,
+      "period": "30/06/2026(YR)",
+      "announce": "August 20, 2026 3:40 PM",
+      "book_closure": "29/09/2026 - 05/10/2026",
+      "ttm_cash": 7.5,
       "symbol": "ISL",
       "face_value": 10
     },
@@ -764,11 +764,9 @@
   },
   "as_of": null,
   "source": "Pakistan Stock Exchange (PSX Data Portal) — company/payouts",
-  "ok": false,
-  "fetched_at": "2026-08-19T12:07:29Z",
+  "ok": true,
+  "fetched_at": "2026-08-21T12:07:20Z",
   "cadence": "daily",
   "count": 76,
-  "latest_announce": "2026-08-11",
-  "last_error": "ValueError: no payouts parsed for any requested symbol",
-  "last_attempt": "2026-08-20T12:16:24Z"
+  "latest_announce": "2026-08-20"
 }

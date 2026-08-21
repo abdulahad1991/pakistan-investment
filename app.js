@@ -1,4 +1,4 @@
-// ── Pakistan Investment Advisor - app.js ──────────────────────────
+// Pakistan investment education interface.
 
 let DATA = null;
 let AMOUNT = 0;
@@ -12,22 +12,22 @@ const PROFILE_MIXES = {
 };
 
 const PROFILE_LABELS = {
-  balanced: "Balanced",
-  income: "Income",
-  growth: "Growth",
+  balanced: "Mixed example",
+  income: "Income tilt",
+  growth: "Equity tilt",
 };
 
 const PORTFOLIO_ALLOC = [
-  { label: "National Savings Certificate", pct: 30, ret: null, color: "#075E4B", shariah: false,
-    type: "Government-backed Fixed Income", where: "Pakistan Post Office / CDNS branch" },
-  { label: "Meezan Islamic Income Fund",   pct: 25, ret: null, color: "#2854C5", shariah: true,
-    type: "Islamic Money Market Fund",     where: "almeezangroup.com" },
-  { label: "Al Meezan Mutual Fund",        pct: 20, ret: null, color: "#F2B94B", shariah: true,
-    type: "Islamic Equity Fund",           where: "almeezangroup.com" },
-  { label: "PSX Blue Chips (FFC + MCB)",   pct: 20, ret: 6.5,  color: "#C24132", shariah: false,
-    type: "Dividend Stocks",               where: "CDC account via PSX broker" },
-  { label: "Emergency Buffer (CDNS)",      pct: 5,  ret: null, color: "#667085", shariah: false,
-    type: "CDNS Savings Account",          where: "Pakistan Post Office / CDNS branch" },
+  { label: "Government savings", pct: 30, color: "#075E4B",
+    type: "National Savings or government securities", where: "Compare current rates, access rules and eligibility" },
+  { label: "Income or money-market funds", pct: 25, color: "#2854C5",
+    type: "Lower-volatility mutual fund category", where: "Compare MUFAP returns, fees and risk profiles" },
+  { label: "Diversified equity funds", pct: 20, color: "#F2B94B",
+    type: "Market-linked mutual fund category", where: "Review the fund manager, holdings and benchmark" },
+  { label: "PSX equity basket", pct: 20, color: "#C24132",
+    type: "Diversified listed shares", where: "Use a PSX-recognized, SECP-licensed broker" },
+  { label: "Liquid reserve", pct: 5, color: "#667085",
+    type: "Cash or accessible savings", where: "Keep access, fees and withdrawal time in view" },
 ];
 
 // ── Load data.json on startup ─────────────────────────────────────
@@ -60,9 +60,15 @@ function applyData() {
 
   // Header age
   const updated = new Date(DATA.updated);
-  const age = Math.round((Date.now() - updated) / 3600000);
-  document.getElementById("data-age").textContent =
-    age < 2 ? "Data: fresh today" : `Data: updated ${age}h ago`;
+  const staleSources = Object.entries(DATA.data_health || {})
+    .filter(([, health]) => health && health.stale)
+    .map(([name]) => name);
+  const ageEl = document.getElementById("data-age");
+  const cutoff = updated.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
+  ageEl.textContent = `Data cutoff: ${cutoff}` +
+    (staleSources.length ? ` · ${staleSources.length} source group${staleSources.length === 1 ? "" : "s"} stale` : "");
+  if (staleSources.length) ageEl.title = `Stale source groups: ${staleSources.join(", ")}`;
+  setText("hero-data-age", `Dataset: ${cutoff}`);
 
   // Macro pills
   const m = DATA.macro;
@@ -76,7 +82,7 @@ function applyData() {
   setText("h-inf", m.inflation_cpi + "%");
 
   // Per-metric provenance on hover (source + the data's own 'as of' date), so a
-  // reader can see exactly how current each live number is.
+  // Readers can inspect the source and the data's own cutoff on hover.
   const setTitle = (id, t) => { const e = document.getElementById(id); if (e && t) e.title = t; };
   const prov = {
     "inf": "CPI inflation YoY · PBS" + (m.inflation_cpi_asof ? " · " + m.inflation_cpi_asof : ""),
@@ -100,24 +106,18 @@ function applyData() {
       " · Sources: PBS, SBP, PSX, MUFAP, National Savings";
   }
 
-  // Live ticker tape (v2 masthead) - best-effort, only if present
+  // Dated ticker tape, best-effort and only if present.
   renderTicker();
 
   // Charts (page 0)
   renderKSEChart();
   renderSBPChart();
 
-  // Live gold rates card
+  // Dated gold-rate card
   renderGold();
 
-  // Live fuel prices card (OGRA-notified petrol/HSD/kerosene/LDO)
+  // Dated fuel-price card
   renderFuel();
-
-  // Dashboard section (below the tool)
-  renderInsightStrip();
-  renderGrowChart();
-  renderRealChart();
-  renderMixChart();
 
   // Re-render whichever page is already visible so data arrives even if
   // the user navigated before the fetch completed.
@@ -135,10 +135,10 @@ function formatAmountInput() {
     if (raw) inp.value = formatPKR(parseInt(raw, 10));
     else inp.value = "";
     clearAmountError();
-    updateHeroScore();
+    updateScenarioSummary();
   });
   inp.addEventListener("keydown", e => {
-    if (e.key === "Enter") startAnalysis();
+    if (e.key === "Enter") startComparison();
   });
 }
 
@@ -150,12 +150,12 @@ function initProfileToggle() {
         el.classList.toggle("active", el === btn);
       });
       applyProfileAllocation();
-      updateHeroScore();
+      updateScenarioSummary();
       if (currentPage === 2) renderMutualFunds();
       if (currentPage === 4) renderPortfolio();
     });
   });
-  updateHeroScore();
+  updateScenarioSummary();
 }
 
 function setText(id, value) {
@@ -168,24 +168,13 @@ function applyProfileAllocation() {
   PORTFOLIO_ALLOC.forEach((a, i) => { a.pct = mix[i]; });
 }
 
-function calculateReadinessScore(amount) {
-  if (!amount) return null;
-  const amountScore = amount >= 1000000 ? 30 : amount >= 500000 ? 24 : amount >= 100000 ? 18 : amount >= 25000 ? 12 : 7;
-  const diversificationScore = 36;
-  const emergencyScore = 14;
-  const dataScore = DATA ? 12 : 6;
-  const profileBonus = selectedProfile === "balanced" ? 8 : 6;
-  return Math.min(100, amountScore + diversificationScore + emergencyScore + dataScore + profileBonus);
-}
-
-function updateHeroScore() {
+function updateScenarioSummary() {
   const el = document.getElementById("hero-score");
   if (!el) return;
   const amount = parseAmount();
-  const score = calculateReadinessScore(amount);
-  el.innerHTML = score
-    ? `<span>${PROFILE_LABELS[selectedProfile]} readiness</span><strong>${score}/100</strong>`
-    : "<span>Readiness score</span><strong>Enter amount</strong>";
+  el.innerHTML = amount
+    ? `<span>Illustrative scenario</span><strong>${PROFILE_LABELS[selectedProfile]} mix · PKR ${formatPKR(amount)}</strong>`
+    : "<span>Illustrative scenario</span><strong>Enter an amount</strong>";
 }
 
 function formatPKR(n) {
@@ -234,9 +223,6 @@ function goPage(n) {
   currentPage = n;
   window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // Lazy-init AdSense for the newly visible page (pages 1-4 only)
-  if (n > 0) initPageAd(n);
-
   // Lazy-render page content
   if (n === 1) renderNationalSavings();
   if (n === 2) renderMutualFunds();
@@ -257,10 +243,10 @@ function amountBand(n) {
   return "1m_plus";
 }
 
-function startAnalysis() {
+function startComparison() {
   AMOUNT = parseAmount();
   if (AMOUNT < 1000) {
-    showAmountError("Enter at least PKR 1,000 to analyze.");
+    showAmountError("Enter at least PKR 1,000 to compare.");
     return;
   }
   clearAmountError();
@@ -289,7 +275,7 @@ if (_stepNav) _stepNav.addEventListener("click", e => {
   if (!pill) return;
   const step = parseInt(pill.dataset.step, 10);
   if (step === 0) { goPage(0); return; }
-  if (!AMOUNT) { startAnalysis(); return; }
+  if (!AMOUNT) { startComparison(); return; }
   goPage(step);
 });
 
@@ -301,14 +287,10 @@ function renderNationalSavings() {
 
   DATA.national_savings.forEach(s => {
     const earn = AMOUNT > 0 ? Math.round(AMOUNT * s.rate / 100) : null;
-    const rec = s.recommended;
-    const minOk = AMOUNT === 0 || AMOUNT >= s.min_pkr;
     const tr = document.createElement("tr");
-    if (rec) tr.className = "rec-row";
     tr.innerHTML = `
       <td>
         <strong>${s.name}</strong>
-        ${rec ? '<span class="badge badge-gold" style="margin-left:6px">Example</span>' : ""}
         ${s.shariah ? '<span class="badge badge-green" style="margin-left:4px">Shariah</span>' : ""}
       </td>
       <td class="num yield-hi">${s.rate}%</td>
@@ -318,7 +300,7 @@ function renderNationalSavings() {
         ${earn ? "PKR " + formatPKR(earn) + "/yr" : "-"}
       </td>
       <td>${s.eligible}</td>
-      <td style="font-size:.8rem;color:#555">${s.verdict}</td>
+      <td style="font-size:.8rem;color:#555">Rate effective ${s.rate_effective || "date not supplied"}; check tax and encashment terms.</td>
     `;
     tbody.appendChild(tr);
   });
@@ -329,23 +311,20 @@ function renderMutualFunds() {
   if (!DATA) return;
   const grid = document.getElementById("funds-grid");
   grid.innerHTML = "";
-
-  // Resolve portfolio returns from data
-  wirePortfolioReturns();
-  applyProfileAllocation();
+  const fundHealth = DATA.data_health && DATA.data_health.funds;
+  if (fundHealth && fundHealth.stale) {
+    const asOf = fundHealth.as_of ? ` Last successful source date: ${fundHealth.as_of}.` : "";
+    grid.insertAdjacentHTML("beforeend", `<div role="status" style="grid-column:1/-1;border:1px solid #D6A84B;background:#FFF8E6;padding:12px 14px;font-size:.82rem;color:#614A14"><strong>Stale fund data.</strong>${asOf} MUFAP refresh did not complete; use the linked MUFAP table for current figures.</div>`);
+  }
 
   DATA.mutual_funds.forEach(f => {
     const full = AMOUNT > 0 ? Math.round(AMOUNT * f.ret_1y / 100) : null;
-    const alloc = AMOUNT > 0 ? getPortfolioAlloc(f.name) : null;
-    const allocPct = alloc ? Math.round(alloc / AMOUNT * 100) : null;
-    const allocEarn = alloc ? Math.round(alloc * f.ret_1y / 100) : null;
 
     const card = document.createElement("div");
-    card.className = "fund-card" + (f.recommended ? " rec" : "");
+    card.className = "fund-card";
     card.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
         <div class="fund-name">${f.name}</div>
-        ${f.recommended ? '<span class="badge badge-gold">Example</span>' : ""}
       </div>
       <div class="fund-mgr">${f.manager} &nbsp;·&nbsp; ${f.type}</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
@@ -358,14 +337,12 @@ function renderMutualFunds() {
         <div class="ret-box best"><div class="ret-val">${f.ret_5y}%</div><div class="ret-lbl">5-Year</div></div>
       </div>
       <div style="font-size:.78rem;color:var(--muted)">Min: PKR ${formatPKR(f.min_pkr)}</div>
-      <div class="fund-verdict">${f.verdict}</div>
-      ${full ? `<div class="fund-earn">Your PKR ${formatPKR(AMOUNT)} in this fund ≈ ~PKR ${formatPKR(full)}/yr <span style="color:var(--muted);font-weight:400">based on its ${f.ret_1y}% 1-year return</span></div>` : ""}
-      ${alloc ? `<div style="font-size:.75rem;color:var(--muted);margin-top:2px">Example portfolio slice: PKR ${formatPKR(alloc)} (${allocPct}%) &rarr; ~PKR ${formatPKR(allocEarn)}/yr</div>` : ""}
-      <a href="${f.url}" target="_blank" rel="noopener" class="btn-cta btn-primary" style="margin-top:12px;font-size:.78rem;display:inline-flex">Visit provider →</a>
+      <div class="fund-verdict">Reported as a ${f.return_type || "historical"} return; compare only with the same period and category.</div>
+      ${full ? `<div class="fund-earn">A ${f.ret_1y}% historical return on PKR ${formatPKR(AMOUNT)} equals PKR ${formatPKR(full)} <span style="color:var(--muted);font-weight:400">for comparison only; it is not a forecast</span></div>` : ""}
     `;
     grid.appendChild(card);
   });
-  grid.insertAdjacentHTML("beforeend", '<p style="grid-column:1/-1;font-size:.74rem;color:var(--muted);margin:6px 0 0">1-year returns are sourced from MUFAP — annualized for income/money-market funds, total (absolute) return for equity funds. Refreshed with the daily update; confirm the latest NAV with the AMC or MUFAP before investing.</p>');
+  grid.insertAdjacentHTML("beforeend", '<p style="grid-column:1/-1;font-size:.74rem;color:var(--muted);margin:6px 0 0">Return periods are not directly comparable across every fund category. Confirm the latest NAV, calculation basis, risk profile and fees on the <a href="https://www.mufap.com.pk/Industry/IndustryStatDaily?tab=1" target="_blank" rel="noopener">MUFAP daily performance table</a> before making a decision.</p>');
 }
 
 function riskBadge(risk) {
@@ -374,18 +351,22 @@ function riskBadge(risk) {
   return "red";
 }
 
-function getPortfolioAlloc(fundName) {
-  const name = fundName.toLowerCase();
-  if (name.includes("meezan islamic income")) return Math.round(AMOUNT * PORTFOLIO_ALLOC[1].pct / 100);
-  if (name.includes("al meezan mutual"))      return Math.round(AMOUNT * PORTFOLIO_ALLOC[2].pct / 100);
-  return null;
-}
-
 // ── PAGE 3 - Stocks ───────────────────────────────────────────────
 function renderStocks() {
   if (!DATA) return;
   const tbody = document.getElementById("stocks-tbody");
   tbody.innerHTML = "";
+
+  const stockHealth = DATA.data_health && DATA.data_health.stocks;
+  const dividendHealth = DATA.data_health && DATA.data_health.dividends;
+  const staleParts = [stockHealth && stockHealth.stale ? "prices" : "", dividendHealth && dividendHealth.stale ? "dividends" : ""].filter(Boolean);
+  if (staleParts.length) {
+    const sourceDates = [stockHealth, dividendHealth]
+      .filter(health => health && health.as_of)
+      .map(health => health.as_of)
+      .join(" / ");
+    tbody.insertAdjacentHTML("beforeend", `<tr><td colspan="8" style="background:#FFF8E6;color:#614A14;font-size:.8rem"><strong>Stale ${staleParts.join(" and ")} data.</strong>${sourceDates ? ` Last successful source date: ${sourceDates}.` : ""} Verify company payouts and prices on the PSX Data Portal.</td></tr>`);
+  }
 
   // Universe is comprehensive (~100+ names); show only priced stocks and cap
   // the homepage table to the top 15 by dividend yield to keep it readable.
@@ -416,70 +397,40 @@ function renderStocks() {
 function renderPortfolio() {
   if (!DATA) {
     document.getElementById("alloc-grid").innerHTML =
-      '<div style="text-align:center;padding:32px;color:#888">⏳ Loading investment data…</div>';
+      '<div style="text-align:center;padding:32px;color:#888">Loading investment data...</div>';
     document.getElementById("action-steps").innerHTML = "";
     return;
   }
-  document.getElementById("alloc-grid").innerHTML = "";
-  wirePortfolioReturns();
   applyProfileAllocation();
 
   document.getElementById("port-subtitle").textContent =
-    `${PROFILE_LABELS[selectedProfile]} allocation for PKR ${formatPKR(AMOUNT)} across savings, funds and PSX dividends.`;
+    `${PROFILE_LABELS[selectedProfile]} educational scenario for PKR ${formatPKR(AMOUNT)}. Percentages are examples, not advice.`;
 
-  let totalIncome = 0;
-  PORTFOLIO_ALLOC.forEach(a => {
-    const amt = Math.round(AMOUNT * a.pct / 100);
-    const income = Math.round(amt * (a.ret || 0) / 100);
-    totalIncome += income;
-  });
-
-  const blended = AMOUNT > 0 ? ((totalIncome / AMOUNT) * 100).toFixed(1) : 0;
-  const monthly = Math.round(totalIncome / 12);
-
-  // 5-year projection
-  let bal = AMOUNT;
-  const projVals = [];
-  for (let i = 0; i < 5; i++) {
-    bal *= (1 + parseFloat(blended) / 100);
-    projVals.push(Math.round(bal));
-  }
-
-  document.getElementById("s-annual").textContent  = "PKR " + formatPKR(totalIncome);
-  document.getElementById("s-monthly").textContent = "PKR " + formatPKR(monthly);
-  document.getElementById("s-yield").textContent   = blended + "%";
-  document.getElementById("s-5y").textContent      = "PKR " + formatPKR(projVals[4]);
-  renderPortfolioGamification(totalIncome, blended, monthly);
-
-  // Allocation grid
   const grid = document.getElementById("alloc-grid");
   grid.innerHTML = "";
   PORTFOLIO_ALLOC.forEach(a => {
     const amt = Math.round(AMOUNT * a.pct / 100);
-    const income = Math.round(amt * (a.ret || 0) / 100);
     grid.innerHTML += `
       <div class="alloc-item">
         <div class="alloc-dot" style="background:${a.color}"></div>
         <div>
           <div class="alloc-label">${a.label}</div>
-          <div class="alloc-sub">${a.type} &nbsp;·&nbsp; ${a.shariah ? "Shariah" : "Conventional"}</div>
+          <div class="alloc-sub">${a.type}</div>
           <div style="font-size:.75rem;color:var(--muted);margin-top:2px">${a.where}</div>
         </div>
         <div class="alloc-amount">
           <div>PKR ${formatPKR(amt)}</div>
-          <div class="alloc-pct">${a.pct}% &nbsp;·&nbsp; ${a.ret ? a.ret + "% ret" : "-"}</div>
-          ${income ? `<div style="font-size:.75rem;color:var(--navy)">~PKR ${formatPKR(income)}/yr</div>` : ""}
+          <div class="alloc-pct">${a.pct}% of this scenario</div>
         </div>
       </div>
     `;
   });
 
-  // Example steps (illustrative walkthrough, not a recommendation)
   const steps = [
-    { n: 1, title: "CDNS / National Savings Account",      body: `Example: an allocation like this could place PKR ${formatPKR(Math.round(AMOUNT * 0.30))} in a Special Savings Certificate. Accounts are opened at any Pakistan Post Office with a CNIC.`, color: "#0E3B2E" },
-    { n: 2, title: "Al Meezan Online Portal",              body: `Example: an allocation like this could put PKR ${formatPKR(Math.round(AMOUNT * 0.25))} into an income fund such as Meezan Islamic Income Fund and PKR ${formatPKR(Math.round(AMOUNT * 0.20))} into an equity fund such as Al Meezan Mutual Fund. Registration is online at almeezangroup.com (CNIC upload + KYC, ~15 mins).`, color: "#23415E" },
-    { n: 3, title: "PSX Brokerage + CDC Account",          body: `Example: PKR ${formatPKR(Math.round(AMOUNT * 0.20))} could be split across blue-chip shares - for instance 60% FFC, 40% MCB Bank - through a licensed broker (e.g. Arif Habib, MCB FSL, or Akseer; all register online).`, color: "#A4452F" },
-    { n: 4, title: "Emergency Buffer Kept Liquid",         body: `Example: keeping PKR ${formatPKR(Math.round(AMOUNT * 0.05))} in a CDNS Savings Account leaves a buffer with no lock-in - withdrawable anytime.`, color: "#5E5C52" },
+    { n: 1, title: "Define the job of each bucket", body: "Separate money needed soon from long-term capital. A category can be unsuitable even when its recent return looks attractive.", color: "#0E3B2E" },
+    { n: 2, title: "Verify current primary-source data", body: "Check National Savings rates, MUFAP fund performance and PSX disclosures on their official websites. Do not treat the figures on this page as a quote or offer.", color: "#23415E" },
+    { n: 3, title: "Compare costs and access", body: "Record management fees, taxes, lock-ins, withdrawal time, account requirements and the possibility of loss before choosing an instrument.", color: "#A4452F" },
+    { n: 4, title: "Use regulated providers", body: "Confirm a fund manager or broker in the relevant SECP or PSX directory, and seek regulated advice where a decision depends on your personal circumstances.", color: "#5E5C52" },
   ];
   const stepsEl = document.getElementById("action-steps");
   stepsEl.innerHTML = steps.map(s => `
@@ -490,49 +441,9 @@ function renderPortfolio() {
         <div style="font-size:.84rem;color:#444">${s.body}</div>
       </div>
     </div>
-  `).join("") + '<p style="font-size:.78rem;color:var(--muted);margin:4px 0 0"><strong>This is an illustration, not a recommendation.</strong> It shows how an allocation could be executed, for educational purposes only. Do your own research or consult a SECP-registered advisor before investing.</p>';
+  `).join("") + '<p style="font-size:.78rem;color:var(--muted);margin:4px 0 0"><strong>This is an illustration, not a recommendation or suitability assessment.</strong> It does not account for your income, debts, time horizon, tax status, risk capacity or goals.</p>';
 
-  // Render charts after a tick so canvas is visible
-  setTimeout(() => {
-    renderDonutChart();
-    renderProjectionChart(projVals);
-    renderRiskChart();
-  }, 50);
-}
-
-function renderPortfolioGamification(totalIncome, blended, monthly) {
-  const score = calculateReadinessScore(AMOUNT) || 0;
-  setText("portfolio-score", score);
-  setText("portfolio-score-copy",
-    `${PROFILE_LABELS[selectedProfile]} profile: estimated ${blended}% blended return and PKR ${formatPKR(monthly)} monthly income.`
-  );
-  const badges = [
-    { label: "Diversified", unlocked: true },
-    { label: "Inflation-aware", unlocked: DATA ? parseFloat(blended) > DATA.macro.inflation_cpi : false },
-    { label: "Emergency buffer", unlocked: true },
-    { label: totalIncome > 0 ? "Income mapped" : "Income pending", unlocked: totalIncome > 0 },
-  ];
-  const badgeEl = document.getElementById("portfolio-badges");
-  if (!badgeEl) return;
-  badgeEl.innerHTML = badges.map(b =>
-    `<span class="score-badge ${b.unlocked ? "unlocked" : ""}">${b.label}</span>`
-  ).join("");
-}
-
-function wirePortfolioReturns() {
-  if (!DATA) return;
-  // Pull live rates from data.json into PORTFOLIO_ALLOC
-  const nsSSC = DATA.national_savings.find(n => n.name.includes("Special Savings"));
-  const nsCDNS = DATA.national_savings.find(n => n.name.includes("CDNS Savings"));
-  const fMIIF = DATA.mutual_funds.find(f => f.name.includes("Meezan Islamic Income"));
-  const fAMMF = DATA.mutual_funds.find(f => f.name.includes("Al Meezan Mutual"));
-
-  if (nsSSC)  PORTFOLIO_ALLOC[0].ret = nsSSC.rate;
-  if (fMIIF)  PORTFOLIO_ALLOC[1].ret = fMIIF.ret_1y;
-  if (fAMMF)  PORTFOLIO_ALLOC[2].ret = fAMMF.ret_1y;
-  // Stocks: fixed 6.5% dividend yield estimate
-  PORTFOLIO_ALLOC[3].ret = 6.5;
-  if (nsCDNS) PORTFOLIO_ALLOC[4].ret = nsCDNS.rate;
+  setTimeout(renderDonutChart, 50);
 }
 
 // ── Charts ────────────────────────────────────────────────────────
@@ -752,88 +663,7 @@ const LEDGER = { green:"#075E4B", green3:"#12A87D", gold:"#F2B94B", goldPale:"#F
                  navy:"#2854C5", red:"#C24132", ink:"#111827", muted:"#667085", paper:"#FFFFFF" };
 const MONO_FONT = { family:"'IBM Plex Mono', monospace", size: 11 };
 
-function bestOf(arr, key) {
-  return arr.reduce((a, b) => (b[key] > a[key] ? b : a), arr[0]);
-}
-function dashboardInputs() {
-  const m = DATA.macro;
-  const nssPublic = DATA.national_savings.filter(s => s.eligible === "All Pakistanis");
-  const ssc = bestOf(nssPublic, "rate");
-  const nssMax = bestOf(DATA.national_savings, "rate");           // e.g. Behbood
-  const mmf = bestOf(DATA.mutual_funds.filter(f => /money|income/i.test(f.type)), "ret_1y");
-  const eq  = bestOf(DATA.mutual_funds.filter(f => /equity|stock|mutual/i.test(f.type) || f.ret_5y > 14), "ret_5y");
-  const topStock = bestOf(DATA.stocks, "yield");
-  return { m, ssc, nssMax, mmf, eq, topStock };
-}
-
-function renderInsightStrip() {
-  const el = document.getElementById("insight-strip");
-  if (!el) return;
-  const { m, ssc, eq, topStock } = dashboardInputs();
-  const real = +(ssc.rate - m.inflation_cpi).toFixed(1);
-  const beat = real >= 0;
-  const cpiAsOf = m.inflation_cpi_asof ? ` (CPI ${m.inflation_cpi_asof})` : "";
-  el.innerHTML = `
-    <div class="insight-cell"><div class="insight-num">${beat ? "+" : ""}${real} pts</div>
-      <div class="insight-lbl">Real return on ${ssc.name} (${ssc.rate}%) after ${m.inflation_cpi}% inflation${cpiAsOf} - ${beat ? "savers stay just ahead of inflation" : "savers are losing to inflation"}</div></div>
-    <div class="insight-cell"><div class="insight-num">${topStock.yield}%</div>
-      <div class="insight-lbl">${topStock.name} dividend yield vs ${m.sbp_rate}% policy rate - but dividends carry market risk</div></div>
-    <div class="insight-cell"><div class="insight-num">${eq.ret_5y}%/yr</div>
-      <div class="insight-lbl">${eq.name} 5-year average vs ${ssc.rate}% on certificates - the reward for taking equity risk</div></div>`;
-}
-
-function renderGrowChart() {
-  const ctx = document.getElementById("chart-grow");
-  if (!ctx || typeof Chart === "undefined") return;
-  destroyChart("chart-grow");
-  const { m, ssc, mmf, eq } = dashboardInputs();
-  const fv = r => Math.round(100000 * Math.pow(1 + r / 100, 5));
-  const rows = [
-    { lbl: "Kept as cash (inflation-adjusted)", val: Math.round(100000 / Math.pow(1 + m.inflation_cpi / 100, 5)), col: LEDGER.red },
-    { lbl: ssc.name + " " + ssc.rate + "%", val: fv(ssc.rate), col: LEDGER.green },
-    { lbl: mmf.name + " " + mmf.ret_1y + "%", val: fv(mmf.ret_1y), col: LEDGER.navy },
-    { lbl: eq.name + " " + eq.ret_5y + "% (5y avg)", val: fv(eq.ret_5y), col: LEDGER.gold },
-  ];
-  chartInstances["chart-grow"] = new Chart(ctx, {
-    type: "bar",
-    data: { labels: rows.map(r => r.lbl),
-      datasets: [{ data: rows.map(r => r.val), backgroundColor: rows.map(r => r.col), borderRadius: 3 }] },
-    options: { responsive: true, maintainAspectRatio: false, indexAxis: "y",
-      plugins: { legend: { display: false },
-        tooltip: { callbacks: { label: c => "PKR " + c.raw.toLocaleString() } } },
-      scales: { x: { ticks: { font: MONO_FONT, callback: v => (v / 1000) + "K" }, grid: { color: "#EFE8D8" } },
-                y: { ticks: { font: { ...MONO_FONT, size: 10 } }, grid: { display: false } } } }
-  });
-}
-
-function renderRealChart() {
-  const ctx = document.getElementById("chart-real");
-  if (!ctx || typeof Chart === "undefined") return;
-  destroyChart("chart-real");
-  const { m, ssc, nssMax, mmf, eq, topStock } = dashboardInputs();
-  const rows = [
-    { lbl: "Bank current account (0%)", r: 0 },
-    { lbl: topStock.ticker + " dividend yield", r: topStock.yield },
-    { lbl: ssc.name, r: ssc.rate },
-    { lbl: nssMax.name + " (restricted)", r: nssMax.rate },
-    { lbl: mmf.name, r: mmf.ret_1y },
-    { lbl: eq.name + " (5y avg)", r: eq.ret_5y },
-  ].map(x => ({ ...x, real: +(x.r - m.inflation_cpi).toFixed(2) }))
-   .sort((a, b) => a.real - b.real);
-  chartInstances["chart-real"] = new Chart(ctx, {
-    type: "bar",
-    data: { labels: rows.map(x => x.lbl),
-      datasets: [{ data: rows.map(x => x.real),
-        backgroundColor: rows.map(x => x.real >= 0 ? LEDGER.green3 : LEDGER.red), borderRadius: 3 }] },
-    options: { responsive: true, maintainAspectRatio: false, indexAxis: "y",
-      plugins: { legend: { display: false },
-        tooltip: { callbacks: { label: c => (c.raw > 0 ? "+" : "") + c.raw + " pts vs inflation" } } },
-      scales: { x: { ticks: { font: MONO_FONT, callback: v => v + "%" }, grid: { color: "#EFE8D8" } },
-                y: { ticks: { font: { ...MONO_FONT, size: 10 } }, grid: { display: false } } } }
-  });
-}
-
-// ── Live ticker tape (v2 masthead) ───────────────────────────────
+// Dated ticker tape
 function renderTicker() {
   if (!DATA) return;
   const m = DATA.macro, g = DATA.gold;
@@ -858,7 +688,7 @@ function renderTicker() {
   }
 }
 
-// ── Live gold rates (homepage card) ──────────────────────────────
+// Dated gold rates (homepage card)
 function renderGold() {
   const g = DATA && DATA.gold;
   if (!g) return;
@@ -881,15 +711,15 @@ function renderGold() {
     const d = new Date(DATA.updated);
     const when = d.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
     const note = g.source_type === "local"
-      ? "local Sarafa rate via gold.pk"
-      : "international spot (gold futures × PKR/USD)";
-    srcEl.textContent = `As of ${when} · ${note}`;
+      ? "third-party local-rate reference via gold.pk"
+      : "derived international futures and PKR/USD fallback";
+    srcEl.textContent = `Collected ${when} · ${note}`;
   }
 
   renderGoldChart();
 }
 
-// ── Live fuel prices (homepage card) ─────────────────────────────
+// Dated fuel prices (homepage card)
 function renderFuel() {
   const f = DATA && DATA.fuel;
   if (!f) return;
@@ -902,7 +732,7 @@ function renderFuel() {
   if (badge && f.asof) badge.textContent = "w.e.f " + f.asof;
   const srcEl = document.getElementById("fuel-src");
   if (srcEl) {
-    srcEl.textContent = "OGRA-notified retail rates" +
+    srcEl.textContent = (f.source || "Public source reporting notified retail rates") +
       (f.asof ? " · effective " + f.asof : "");
   }
 }

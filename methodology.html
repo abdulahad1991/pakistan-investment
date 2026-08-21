@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Methodology &amp; Editorial Standards - Pakistan Investment Education</title>
-<meta name="description" content="How Pakistan Investment Education sources, updates, and verifies its data - official primary sources (SBP, CDNS, MUFAP, PSX), an automated daily pipeline, author background, and our advertising independence policy.">
+<meta name="description" content="How Pakistan Investment Education handles source dates, failed fetches, official data, labelled fallbacks, authorship, corrections and advertising independence.">
 <link rel="canonical" href="https://pakinvestlysis.com/methodology.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Methodology & Editorial Standards - Pakistan Investment Education">
-<meta property="og:description" content="How we source, update, and verify the data on Pakistan Investment Education - official primary sources, a daily automated pipeline, and an honest advertising disclosure.">
+<meta property="og:description" content="How we source data, expose stale fetches, label fallbacks and separate editorial decisions from advertising.">
 <meta property="og:url" content="https://pakinvestlysis.com/methodology.html">
 <meta property="og:site_name" content="Pakistan Investment Education">
 <meta property="og:image" content="https://pakinvestlysis.com/assets/og/methodology.png?v=3">
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Methodology & Editorial Standards - Pakistan Investment Education">
 <meta name="twitter:image" content="https://pakinvestlysis.com/assets/og/methodology.png?v=3">
-<meta name="twitter:description" content="How we source, update, and verify the data on Pakistan Investment Education - official primary sources and a daily automated pipeline.">
+<meta name="twitter:description" content="How we source data, expose stale fetches, label fallbacks and document editorial checks.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -214,7 +214,7 @@ gtag('config', 'G-4T2H0KH9H7');
 <!-- ── Live ticker ───────────────────────────────────── -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <span class="ticker-live"><span class="dot"></span>DATA</span>
     <div class="ticker-feed">
       <span class="tk">KSE-100 <b id="tk-kse">1,77,267</b></span>
       <span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
@@ -241,8 +241,8 @@ gtag('config', 'G-4T2H0KH9H7');
   <div class="meth-hero">
     <div class="inner">
       <div class="section-kicker">Methodology &amp; Editorial Standards</div>
-      <h1>How we source, check and update every number.</h1>
-      <p class="lede">How we source, update, and verify every figure on this site - who writes it, and how we keep our editorial decisions independent of our advertising. Money is a serious subject, and trust has to be earned. This page exists so you never have to take a number on Pakistan Investment Education at face value.</p>
+      <h1>How market data and editorial claims are sourced.</h1>
+      <p class="lede">This page documents update cadence, failed-source handling, calculations, authorship and advertising independence. Each displayed figure still needs to be checked against its linked source before money is committed.</p>
     </div>
   </div>
 
@@ -250,8 +250,8 @@ gtag('config', 'G-4T2H0KH9H7');
   <section class="meth-sec proof-shell" aria-labelledby="proof-h">
     <div class="pad">
       <div class="section-kicker">Proof, not promises</div>
-      <h2 id="proof-h">Today’s live pipeline output</h2>
-      <p class="proof-note">These numbers are the live output of the daily pipeline described below - fetched this morning, not typed by hand. If the date stamp ever looks stale, that is exactly the kind of thing we want you to <a href="/contact.html">report</a>.</p>
+      <h2 id="proof-h">Latest available pipeline output</h2>
+      <p class="proof-note">The widget reads the published dataset. Each source has its own date and cadence; a current dataset timestamp does not make every partition current. The homepage flags source groups that failed or exceeded their freshness threshold.</p>
       <div id="live-snap"></div>
     </div>
   </section>
@@ -269,22 +269,22 @@ gtag('config', 'G-4T2H0KH9H7');
   <section class="meth-sec dark" aria-labelledby="sources-h">
     <div class="pad">
       <div class="kicker">Primary sources</div>
-      <h2 id="sources-h">Five institutions. No middlemen.</h2>
-      <p style="color:rgba(204,223,211,.82);margin-top:14px;margin-bottom:0">Every figure on this site is traceable to an official, primary source - the institution that actually sets or publishes the number. We do not copy figures from other blogs, aggregators, or social media.</p>
+      <h2 id="sources-h">Core sources and labelled fallbacks</h2>
+      <p style="color:rgba(204,223,211,.82);margin-top:14px;margin-bottom:0">Official sources are used where they expose a reliable public page or dataset. When an official endpoint is unavailable, a fallback is retained only when the interface identifies the source and freshness status.</p>
     </div>
 
     <div class="source-row">
       <div>
         <div class="stitle">State Bank of Pakistan (SBP)</div>
-        <div class="ssrc"><a href="https://www.sbp.org.pk" target="_blank" rel="noopener">SBP.ORG.PK</a></div>
+        <div class="ssrc"><a href="https://www.sbp.org.pk/m_policy/mp-decision.asp" target="_blank" rel="noopener">SBP POLICY DECISIONS</a></div>
       </div>
-      <div class="sdesc">Provides the SBP policy (interest) rate set by the Monetary Policy Committee, official CPI inflation readings, and the PKR-USD interbank exchange rate. These feed our return comparisons and the macro context shown across the guides.</div>
+      <div class="sdesc">Provides the policy rate set by the Monetary Policy Committee, interbank PKR-USD data and reserve statistics. CPI is published by PBS, not SBP.</div>
     </div>
 
     <div class="source-row">
       <div>
         <div class="stitle">Central Directorate of National Savings (CDNS)</div>
-        <div class="ssrc"><a href="https://www.savings.gov.pk" target="_blank" rel="noopener">SAVINGS.GOV.PK</a></div>
+        <div class="ssrc"><a href="https://savings.gov.pk/profit-rates/" target="_blank" rel="noopener">CURRENT PROFIT RATES</a></div>
       </div>
       <div class="sdesc">Provides the official profit rates for every National Savings scheme - Special Savings Certificates, Defence Savings Certificates, Regular Income Certificates, Behbood Savings Certificates, and the Pensioners’ Benefit Account.</div>
     </div>
@@ -292,25 +292,41 @@ gtag('config', 'G-4T2H0KH9H7');
     <div class="source-row">
       <div>
         <div class="stitle">MUFAP - Mutual Funds Association of Pakistan</div>
-        <div class="ssrc"><a href="https://www.mufap.com.pk" target="_blank" rel="noopener">MUFAP.COM.PK</a></div>
+        <div class="ssrc"><a href="https://www.mufap.com.pk/Industry/IndustryStatDaily?tab=1" target="_blank" rel="noopener">MUFAP DAILY TABLE</a></div>
       </div>
-      <div class="sdesc">Provides daily Net Asset Values (NAVs) and standardised annualised return figures for SECP-registered mutual funds, both Islamic and conventional. MUFAP is the industry self-regulatory body, so its numbers are the closest thing to an official benchmark for fund performance.</div>
+      <div class="sdesc">Publishes daily NAV and performance tables for member funds. Return types and periods differ by fund category, so the site labels the calculation basis and flags a failed MUFAP refresh.</div>
     </div>
 
     <div class="source-row">
       <div>
         <div class="stitle">Pakistan Stock Exchange (PSX)</div>
-        <div class="ssrc"><a href="https://www.psx.com.pk" target="_blank" rel="noopener">PSX.COM.PK</a></div>
+        <div class="ssrc"><a href="https://dps.psx.com.pk/" target="_blank" rel="noopener">PSX DATA PORTAL</a></div>
       </div>
       <div class="sdesc">Provides closing stock prices, the KSE-100 index level, and dividend announcements used to calculate the dividend yields shown in our PSX guide.</div>
     </div>
 
     <div class="source-row">
       <div>
-        <div class="stitle">Gold - local Sarafa rate</div>
-        <div class="ssrc">+ INTL SPOT FALLBACK</div>
+        <div class="stitle">Pakistan Bureau of Statistics (PBS)</div>
+        <div class="ssrc"><a href="https://www.pbs.gov.pk/cpi" target="_blank" rel="noopener">PBS CPI RELEASES</a></div>
       </div>
-      <div class="sdesc">The 24K and 22K gold rates per tola, 10 gram and gram shown on the <a href="/gold-rates.html">gold rates page</a> are pulled daily from a public Pakistani market source that mirrors the Sarafa (jewellers’ association) rate. If that source is unreachable, we fall back to the international spot price - gold futures in US dollars per ounce converted at the live PKR/USD rate - so the page always shows a value, clearly labelled with which method produced it. The local rate is a reference price; jewellers add making charges, so the till price is usually a little higher. The 6-year history chart and forecast calculator are derived from these inputs.</div>
+      <div class="sdesc">Publishes CPI inflation. CPI is monthly and should be compared using its release month, not the dataset's overall refresh time.</div>
+    </div>
+
+    <div class="source-row">
+      <div>
+        <div class="stitle">Gold - third-party reference</div>
+        <div class="ssrc"><a href="https://gold.pk" target="_blank" rel="noopener">GOLD.PK</a></div>
+      </div>
+      <div class="sdesc">The <a href="/gold-rates.html">gold reference page</a> displays the latest successfully collected 24K value from gold.pk and derives 22K, 21K, 18K and smaller weight units from that observation. It is not a dealer quote. The page shows the collection date and source type; if the local fetch fails, the pipeline can retain the previous value or label an international spot conversion rather than presenting either as a current local quote. Historical observations and user-set scenarios are kept separate.</div>
+    </div>
+
+    <div class="source-row">
+      <div>
+        <div class="stitle">Fuel - public mirror of notified rates</div>
+        <div class="ssrc">SOURCE LABELLED IN DATASET</div>
+      </div>
+      <div class="sdesc">The fuel partition currently uses a public automotive source that reports government-notified retail rates. Because it is not the regulator itself, the interface names the source and users should verify a notified price with the government or OGRA.</div>
     </div>
 
     <div class="source-row" style="grid-template-columns:1fr">
@@ -322,14 +338,14 @@ gtag('config', 'G-4T2H0KH9H7');
   <section class="meth-sec" aria-labelledby="cadence-h">
     <div class="pad" style="padding-bottom:20px">
       <h2 id="cadence-h">How often data is updated</h2>
-      <p style="margin-bottom:0">The figures on this site are refreshed automatically <strong>every day</strong> by a scheduled GitHub Action - no lag while someone gets around to updating a spreadsheet, and far less room for transcription mistakes.</p>
+      <p style="margin-bottom:0">A scheduled GitHub Action attempts two weekday market refreshes and limited weekend updates. Each source still follows its own publication cadence, and a failed fetch retains the prior value with a stale status rather than inventing a replacement.</p>
     </div>
 
     <div class="pipe-grid">
       <div class="pipe-step">
         <div class="pipe-num">01</div>
-        <div class="pipe-t">06:00 PKT - Fetch</div>
-        <div class="pipe-d">A scheduled GitHub Action pulls today’s figures from SBP, CDNS, MUFAP, PSX and the daily gold market rate.</div>
+        <div class="pipe-t">Scheduled fetch</div>
+        <div class="pipe-d">The workflow requests market data after the open and after the close; slower series are checked at their appropriate cadence.</div>
       </div>
       <div class="pipe-step">
         <div class="pipe-num">02</div>
@@ -344,13 +360,13 @@ gtag('config', 'G-4T2H0KH9H7');
       <div class="pipe-step">
         <div class="pipe-num">04</div>
         <div class="pipe-t">You verify</div>
-        <div class="pipe-d">Every figure carries an “as of” date and links to its primary source, so you can always check it yourself.</div>
+        <div class="pipe-d">Read the source date and stale warning, then use the linked publisher page to verify any number that affects a decision.</div>
       </div>
     </div>
 
     <div class="pad" style="border-top:1px solid var(--line)">
-      <p>Every figure on the site carries an <strong>“as of” date</strong> so you can see exactly how fresh it is. Some data naturally moves faster than others: PSX prices and the PKR-USD rate change on every trading day, while the SBP policy rate only changes when the Monetary Policy Committee meets (roughly every six weeks) and CDNS profit rates change only when the government revises them. When a source has not published anything new, the “as of” date simply reflects the last time that source itself changed.</p>
-      <div class="meth-callout"><strong>Why this matters:</strong> rates in Pakistan can move sharply. An automated daily pipeline means the comparison you see today reflects today’s environment, not a snapshot from months ago that has quietly gone stale.</div>
+      <p>Data groups carry an <strong>“as of” date</strong> or health status. PSX prices and PKR-USD can change each trading day, CPI is monthly, the policy rate changes after MPC decisions, and CDNS rates change only after notification. A stale warning means the pipeline retained the last successful value and the publisher should be checked directly.</p>
+      <div class="meth-callout"><strong>Why this matters:</strong> the overall JSON file can be refreshed today while one source group is weeks old. Judge freshness from the relevant source date, not the page timestamp alone.</div>
     </div>
   </section>
 
@@ -359,38 +375,38 @@ gtag('config', 'G-4T2H0KH9H7');
     <div class="meth-split">
       <div class="main">
         <h2 id="verify-h">Verification &amp; corrections</h2>
-        <p>Automation reduces human error, but it does not eliminate it - a source can change a page layout, publish a typo, or briefly serve bad data. To guard against this, headline figures are cross-checked against the primary source before they are relied upon in the guides, and obviously implausible values (for example, a profit rate that suddenly doubles overnight) are flagged for review rather than published blindly.</p>
+        <p>Automation does not establish accuracy: a source can change a page layout, publish a typo or briefly serve bad data. Fetchers record source and status metadata, while time-sensitive editorial claims are checked against the documents linked on the page. Those controls can still fail, so a displayed number remains subject to verification.</p>
         <p>Even with these checks, this site is an <strong>educational tool, not a live trading terminal</strong>. Rates and prices can change between our last update and the moment you read a page. Before you actually invest, always confirm the current figure directly with the institution - the bank, the asset management company, the broker, CDNS, or the official source - because that number, not ours, is the one your money will be governed by.</p>
-        <p>If you spot a figure that looks wrong or out of date, please tell us. We genuinely want to know, and we correct verified errors promptly. You can report any issue through our <a class="inline" href="/contact.html">contact page</a>.</p>
+        <p>If a figure looks wrong or out of date, report the page, value and source through the <a class="inline" href="/contact.html">contact page</a>. Verified corrections are incorporated into the page or collection logic.</p>
 
         <h2 class="next" id="editorial">Editorial policy: how a guide gets written</h2>
-        <p>Every guide on this site follows the same five-step process, and none of it starts with an opinion. It starts with a document.</p>
+        <p>The current editorial workflow starts with a source document and records the limits of any calculation or dataset.</p>
         <div class="indep-list">
           <div class="indep-row">
             <span class="indep-i">01</span>
-            <span class="indep-t"><strong>Primary document first.</strong> Before a word is written we pull the governing text - the CDNS profit-rate notification, the SBP monetary policy statement, the relevant clause of the Income Tax Ordinance 2001, the MUFAP daily NAV sheet, the OGRA notification, or the PSX company announcement. Secondary reporting is used only to find the document, never as the source of a number.</span>
+            <span class="indep-t"><strong>Primary document first.</strong> A time-sensitive claim should begin with the governing document - for example a CDNS product notice, SBP statement, FBR law or rate card, MUFAP table or PSX filing. Secondary material can provide context but should not replace the cited issuer or regulator for the controlling number.</span>
           </div>
           <div class="indep-row">
             <span class="indep-i">02</span>
-            <span class="indep-t"><strong>Numbers come from the pipeline, not from memory.</strong> Rates, prices and slabs shown in a guide are the same values our <a class="inline" href="https://github.com/abdulahad1991/pakistan-investment" target="_blank" rel="noopener">open-source fetchers</a> read directly from the source, twice each trading day. Each fetcher has unit tests running against captured real responses, so a source changing its page layout fails loudly instead of silently publishing a wrong figure.</span>
+            <span class="indep-t"><strong>Automated data and editorial facts are separated.</strong> Market widgets use the <a class="inline" href="https://github.com/abdulahad1991/pakistan-investment" target="_blank" rel="noopener">open-source fetchers</a>; tax, legal and policy claims are checked against the specific document linked in the article. Failed fetches retain the prior partition and expose a stale flag.</span>
           </div>
           <div class="indep-row">
             <span class="indep-i">03</span>
-            <span class="indep-t"><strong>Worked examples are computed, not asserted.</strong> Where a guide says "on ₨ 10,00,000 you would receive X", that figure is produced by the same calculator code the site ships, not estimated in prose. Amortisation schedules, zakat nisab, filer versus non-filer withholding and real return after inflation are all calculated.</span>
+            <span class="indep-t"><strong>Worked examples state their inputs.</strong> Calculator pages expose the rate, timing convention and omissions used in their arithmetic. Historical screens identify observation dates and do not convert past performance into a forecast.</span>
           </div>
           <div class="indep-row">
             <span class="indep-i">04</span>
-            <span class="indep-t"><strong>Drafting is AI-assisted; publishing is not.</strong> We use AI tooling to draft and structure prose, exactly as we use it to write the site's code. Nothing publishes on that basis alone: a human reads every guide end to end, checks each figure against the primary document from step 01, and rewrites or removes anything that cannot be traced back to a source. We disclose this because you are entitled to know how the page in front of you was made.</span>
+            <span class="indep-t"><strong>AI assistance is disclosed.</strong> AI tooling is used for drafting, structure and code. The named author is responsible for reviewing the published page, checking material claims against its links, and removing claims that cannot be supported. Corrections are recorded in the page date or dataset build.</span>
           </div>
           <div class="indep-row">
             <span class="indep-i">05</span>
-            <span class="indep-t"><strong>Dated, and revisited when the source moves.</strong> Every guide carries a visible "Updated" date and every live figure carries its own "as of" stamp. When the SBP changes the policy rate, CDNS reprices a certificate, or a budget changes the tax slabs, the affected guides are revised rather than left standing.</span>
+            <span class="indep-t"><strong>Dated at the claim level.</strong> Guides show a source-check date, while datasets expose partition dates and failed-fetch status. A page date alone is not evidence that every displayed source has refreshed.</span>
           </div>
         </div>
-        <p style="margin-top:16px"><strong>What we will not do:</strong> we do not publish price targets, we do not tell you which specific stock or fund to buy, we do not claim first-hand investing returns, and we do not present any of this as personalised advice. Abdul Ahad is a software engineer and is <strong>not</strong> a SECP-registered financial advisor. The value this site offers is that the official numbers are gathered, computed and dated in one place - what you do with them is a decision for you and, where it matters, a licensed advisor.</p>
+        <p style="margin-top:16px"><strong>What we will not do:</strong> we do not publish price targets, tell a reader which specific stock or fund to buy, claim first-hand investing returns or present the material as personalised advice. Abdul Ahad is a software engineer and is <strong>not</strong> a SECP-registered financial advisor. The site contributes dated observations, source links and reproducible arithmetic; it does not decide how a reader should act.</p>
 
         <h2 class="next" id="indep-h">Independence &amp; advertising disclosure</h2>
-        <p>This site is free to use, and it is funded by <strong>display advertising</strong> - specifically Google AdSense, which serves the ads you see on the homepage and the guides. That is our only revenue stream. Throughout the guides we also link out to brokers, asset management companies, CDNS, and other institutions so you can find the official source or open an account easily. To be clear about what those links are and are not:</p>
+        <p>The site contains reserved programmatic-ad placements on selected long-form pages. Ads, when available, do not determine coverage or conclusions. Links to regulators, exchanges, government institutions and providers are included to identify a source or process. To be clear about those links:</p>
         <div class="indep-list">
           <div class="indep-row">
             <span class="indep-i">01</span>
@@ -402,12 +418,12 @@ gtag('config', 'G-4T2H0KH9H7');
           </div>
           <div class="indep-row">
             <span class="indep-i">03</span>
-            <span class="indep-t">We earn <strong>no commission</strong> if you click them, open an account, or invest. Our revenue is display advertising only.</span>
+            <span class="indep-t">We earn <strong>no commission</strong> if you click them, open an account, or invest.</span>
           </div>
         </div>
-        <p style="margin-top:16px">Because the ads are served programmatically by Google and we take no money from the institutions we write about, our editorial choices - which schemes we cover, how we compare them, what we caution against - are not influenced by who advertises or who we link to.</p>
+        <p style="margin-top:16px">Programmatic ads and editorial content are separated. No institution mentioned in a guide pays for its inclusion or ranking.</p>
 
-        <div class="meth-callout" style="margin-top:24px;font-size:.86rem"><strong> Important:</strong> Pakistan Investment Education provides general educational information only and is not registered with SECP as an investment advisor. Nothing on this site constitutes personalised financial advice. Investment values can go up as well as down, and past performance does not guarantee future results. Content is AI-assisted and human-checked; every figure traces to FBR, SBP, PSX, CDNS or MUFAP.</div>
+        <div class="meth-callout" style="margin-top:24px;font-size:.86rem"><strong>Important:</strong> Pakistan Investment Education provides general educational information only and is not registered with SECP as an investment advisor. Nothing on this site constitutes personalised financial advice. Investment values can go up as well as down, and past performance does not guarantee future results. Content is AI-assisted and human-checked; official sources and any non-official fallback are identified in the relevant page or dataset.</div>
       </div>
 
       <aside class="meth-rail" aria-label="Author and related links">
@@ -417,7 +433,7 @@ gtag('config', 'G-4T2H0KH9H7');
             <div class="author-name">Abdul Ahad</div>
             <div class="author-role">Software engineer · builder of this site &amp; its data pipeline</div>
             <div class="author-bio">
-              <p>I am a software engineer, and I built both this site and the automated pipeline that keeps its data current. I am not an investment professional, and the guides are research-led rather than personal testimony: the underlying numbers come from official sources (FBR, SBP, PSX, CDNS, MUFAP), the calculators are tested, and the content is AI-assisted and human-checked.</p>
+              <p>I am a software engineer, and I built this site and its collection pipeline. Pipeline outputs are dated and can be stale or wrong. Guides link the documents used for material claims, and AI-assisted drafts remain the named author's publishing responsibility.</p>
               <p>To be straight about my limits: <strong>I am not a SECP-registered or licensed financial advisor</strong>, and I do not present this as personal investing advice. For decisions that matter, please consult a SECP-registered advisor.</p>
             </div>
             <a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener" class="social-link">
@@ -452,7 +468,7 @@ gtag('config', 'G-4T2H0KH9H7');
   <div class="foot-grid">
     <div class="foot-brand">
       <img src="/assets/logo-light.png" alt="Pakinvestlysis">
-      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice - for educational purposes only.</p>
+      <p>Dated data, source-led guides and educational calculators for Pakistan. Not financial advice.</p>
     </div>
     <div class="foot-col">
       <h4>DESKS</h4>
@@ -465,7 +481,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <h4>TOOLS</h4>
       <a href="/tax-calculator.html">Tax Calculator</a>
       <a href="/zakat-calculator.html">Zakat Calculator</a>
-      <a href="/gold-rates.html">Gold Forecast</a>
+      <a href="/gold-rates.html">Gold Rate Reference</a>
       <a href="/faq.html">FAQ</a>
     </div>
     <div class="foot-col">

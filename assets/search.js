@@ -1,22 +1,21 @@
 /* Global site search - command palette.
-   Index is built from manifest.json (guides + posts, rebuilt every morning
-   by the GitHub Action) plus a small static list of top-level pages, so new
+   Index is built from manifest.json (guides + posts, rebuilt by the scheduled
+   data workflow) plus a small static list of top-level pages, so new
    guides and blog posts become searchable automatically without editing this
    file. Open with the header Search button, the "/" key, or Ctrl/Cmd-K. */
 (function () {
   'use strict';
 
   var STATIC = [
-    { url: '/',                    title: 'Investment Comparison Tool',  description: 'Compare National Savings, mutual funds and PSX stocks side by side with live daily data.', type: 'Tool' },
-    { url: '/tax-calculator.html', title: 'Pakistan Tax Calculator 2026-27', description: 'Calculate income tax (salaried & business), GST, sales tax on services and restaurant tax, with a year-on-year comparison.', type: 'Tool' },
-    { url: '/zakat-calculator.html', title: 'Zakat Calculator Pakistan 2026', description: 'Work out your 2.5% Zakat from cash, gold, silver, investments and business assets, with the nisab from gold or silver.', type: 'Tool' },
-    { url: '/faq.html', title: 'FAQ - Pakistan Investing & Tax', description: '223 answered questions on tax, mutual funds, stocks, savings, prize bonds and Zakat, searchable and filterable by topic.', type: 'Page' },
-    { url: '/guides/',             title: 'All Investment Guides',       description: 'Step-by-step guides to every major investment route in Pakistan.', type: 'Guide' },
-    { url: '/blog/',               title: 'Analysis & Blog',             description: 'Budget breakdowns, policy-rate analysis and salaried-class money moves.', type: 'Blog' },
-    { url: '/about.html',          title: 'About',                       description: 'Who runs Pakistan Investment Advisor and why.', type: 'Page' },
-    { url: '/methodology.html',    title: 'Methodology',                 description: 'How the figures, returns and rankings on this site are produced.', type: 'Page' },
-    { url: '/contact.html',        title: 'Contact',                     description: 'Get in touch with Pakistan Investment Advisor.', type: 'Page' },
-    { url: '/privacy-policy.html', title: 'Privacy Policy',              description: 'How this site handles your data (it does not store any).', type: 'Page' }
+    { url: '/',                    title: 'Investment Comparison Tool',  description: 'Compare National Savings, mutual funds and PSX data with educational allocation scenarios.', type: 'Tool' },
+    { url: '/tax-calculator.html', title: 'Pakistan Tax Calculator TY2027', description: 'Apply income-tax slabs to entered taxable income or split a price using a rate you provide.', type: 'Tool' },
+    { url: '/zakat-calculator.html', title: 'Zakat Arithmetic Calculator', description: 'Apply a common 2.5% arithmetic convention using asset, liability and user-entered nisab inputs.', type: 'Tool' },
+    { url: '/guides/',             title: 'Investment Guides',            description: 'Source-led guides to Pakistan investment products, market access and tax processes.', type: 'Guide' },
+    { url: '/blog/',               title: 'Research Notes and Datasets',  description: 'Dated notes on the Finance Act, bank-model auditing and PSX dividend data.', type: 'Blog' },
+    { url: '/about.html',          title: 'About',                        description: 'Site scope, author background and data limitations.', type: 'Page' },
+    { url: '/methodology.html',    title: 'Methodology',                  description: 'Source dates, failed-fetch handling, calculations and editorial review.', type: 'Page' },
+    { url: '/contact.html',        title: 'Contact',                      description: 'Report a data or content error.', type: 'Page' },
+    { url: '/privacy-policy.html', title: 'Privacy Policy',               description: 'How analytics, ads and browser-stored calculator inputs are handled.', type: 'Page' }
   ];
 
   var index = STATIC.slice();

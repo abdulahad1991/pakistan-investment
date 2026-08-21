@@ -1,9 +1,5 @@
-/* Pakistan Tax Calculator - interactive engine.
-   Educational only; not tax advice. Rates are the enacted FY2026-27 position
-   (salaried slabs per the Finance Act 2026-27, effective 1 July 2026);
-   non-salaried/AOP and sales-tax rates reflect the
-   current published position. Verify the enacted figures on fbr.gov.pk and the
-   relevant provincial revenue authority before relying on any result. */
+/* Pakistan Tax Calculator - independent arithmetic engine.
+   Verify the enacted figures on fbr.gov.pk before relying on a result. */
 (function () {
   'use strict';
 
@@ -41,23 +37,8 @@
     { upTo: Infinity, from: 5600000, base: 1610000, rate: 0.45 }
   ];
 
-  // GST on goods (federal). Standard 18%.
+  // Default input for user-rate sales-tax arithmetic.
   var GST_STANDARD = 18;
-
-  // Provincial sales tax on services - standard rates (%)
-  var SERVICE_RATES = { Punjab: 16, Sindh: 15, KPK: 15, Balochistan: 15, Islamabad: 15 };
-
-  // Restaurant sales tax (%) - cash vs card/digital. Punjab & Islamabad give a
-  // reduced rate for digital payments; other provinces verify with their board.
-  // Punjab card rate 5% -> 8% per Punjab Finance Act 2026-27 (1 Jul 2026);
-  // ICT (Islamabad) keeps 5% digital / 15% cash (FBR).
-  var RESTAURANT_RATES = {
-    Punjab: { cash: 16, card: 8 },
-    Islamabad: { cash: 15, card: 5 },
-    Sindh: { cash: 15, card: 15 },
-    KPK: { cash: 15, card: 15 },
-    Balochistan: { cash: 15, card: 15 }
-  };
 
   /* ── Pure compute functions (exposed for testing) ────────── */
 
@@ -104,8 +85,7 @@
   // expose for tests / verification
   var API = {
     computeIncomeTax: computeIncomeTax, computeGst: computeGst,
-    SALARIED: SALARIED, SALARIED_OLD: SALARIED_OLD, NONSAL: NONSAL,
-    SERVICE_RATES: SERVICE_RATES, RESTAURANT_RATES: RESTAURANT_RATES
+    SALARIED: SALARIED, SALARIED_OLD: SALARIED_OLD, NONSAL: NONSAL
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
   if (typeof window !== 'undefined') window.PakTax = API;
@@ -135,7 +115,6 @@
         t.classList.toggle('tax-tab-active', on);
       });
       panels.forEach(function (p) { p.hidden = p.getAttribute('data-tax-panel') !== id; });
-      if (window.gtag) try { gtag('event', 'tax_tab', { tab: id }); } catch (e) {}
     }
     tabs.forEach(function (t) { t.addEventListener('click', function () { activate(t.getAttribute('data-tax-tab')); }); });
 
@@ -155,10 +134,10 @@
       var compare = '';
       if (type === 'salaried') {
         var old = computeIncomeTax(annual, 'salaried', 'fy26');
-        var saving = old.total - r.total;
-        if (saving > 0.5) {
+        var difference = old.total - r.total;
+        if (difference > 0.5) {
           compare = '<p class="tax-note" style="border-left:4px solid #175A41;background:#E9EFE6;padding:10px 14px;border-radius:0 6px 6px 0">' +
-            'Under the previous FY2025-26 slabs you would have paid <strong>' + rs(old.total) + '</strong> - the Budget 2026-27 cut saves you about <strong>' + rs(saving) + '</strong> a year (' + rs(saving / 12) + '/month).</p>';
+            'The previous FY2025-26 schedule produces <strong>' + rs(old.total) + '</strong>. The modeled difference is <strong>' + rs(difference) + '</strong> a year (' + rs(difference / 12) + ' when divided by 12).</p>';
         }
       }
       incOut.innerHTML =
@@ -166,9 +145,9 @@
           ['Annual income tax', rs(r.tax), '#0E3B2E'],
           r.surcharge > 0 ? ['+ Surcharge', rs(r.surcharge), '#A4452F'] : null,
           ['Total tax / year', rs(r.total), '#A4452F'],
-          ['Tax / month', rs(r.total / 12), '#A4452F'],
-          ['Take-home / year', rs(r.afterTax), '#175A41'],
-          ['Take-home / month', rs(r.monthlyTakeHome), '#175A41'],
+          ['Annual tax / 12', rs(r.total / 12), '#A4452F'],
+          ['Income less modeled tax', rs(r.afterTax), '#175A41'],
+          ['Income less tax / 12', rs(r.monthlyTakeHome), '#175A41'],
           ['Effective tax rate', pct(r.effective), '#7A5A1F']
         ]) + compare +
         '<p class="tax-note">Marginal rate on the top slice of your income: <strong>' + r.marginalRate + '%</strong>. ' +
@@ -176,7 +155,6 @@
           ? 'Salaried slabs shown are the enacted Finance Act 2026-27 rates (effective 1 July 2026).'
           : 'Non-salaried / business individual &amp; AOP slabs; a 10% surcharge applies on tax where annual income exceeds Rs 10 million.') +
         ' Verify the enacted slabs on <a href="https://www.fbr.gov.pk" target="_blank" rel="noopener">fbr.gov.pk</a>.</p>';
-      if (window.gtag) try { gtag('event', 'tax_calc', { kind: 'income', type: type }); } catch (e) {}
     }
     [incAmt, incPeriod].forEach(function (el) { if (el) el.addEventListener('input', runIncome); });
     incTypeEls.forEach(function (el) { el.addEventListener('change', runIncome); });
@@ -185,21 +163,7 @@
     var gAmt = document.getElementById('gst-amount');
     var gRate = document.getElementById('gst-rate');
     var gMode = document.getElementById('gst-mode');
-    var gKind = document.getElementById('gst-kind');
-    var gProv = document.getElementById('gst-province');
     var gOut = document.getElementById('gst-result');
-    var gProvWrap = document.getElementById('gst-province-wrap');
-    function syncGstRate() {
-      if (!gKind || !gRate) return;
-      if (gKind.value === 'goods') {
-        if (gProvWrap) gProvWrap.style.display = 'none';
-        gRate.value = GST_STANDARD;
-      } else {
-        if (gProvWrap) gProvWrap.style.display = '';
-        gRate.value = SERVICE_RATES[gProv ? gProv.value : 'Punjab'];
-      }
-      runGst();
-    }
     function runGst() {
       if (!gAmt || !gOut) return;
       var amt = parseAmount(gAmt);
@@ -210,47 +174,8 @@
         ['Sales tax (' + r.rate + '%)', rs(r.tax), '#A4452F'],
         ['Total price', rs(r.gross), '#175A41']
       ]);
-      if (window.gtag) try { gtag('event', 'tax_calc', { kind: 'gst' }); } catch (e) {}
     }
-    if (gKind) gKind.addEventListener('change', syncGstRate);
-    if (gProv) gProv.addEventListener('change', syncGstRate);
     [gAmt, gRate, gMode].forEach(function (el) { if (el) el.addEventListener('input', runGst); });
-
-    /* Restaurant */
-    var rAmt = document.getElementById('rest-amount');
-    var rProv = document.getElementById('rest-province');
-    var rPayEls = Array.prototype.slice.call(document.querySelectorAll('input[name="rest-pay"]'));
-    var rOut = document.getElementById('rest-result');
-    function restPay() { var c = rPayEls.filter(function (e) { return e.checked; })[0]; return c ? c.value : 'card'; }
-    function runRest() {
-      if (!rAmt || !rOut) return;
-      var bill = parseAmount(rAmt);
-      var prov = rProv ? rProv.value : 'Punjab';
-      var rates = RESTAURANT_RATES[prov] || RESTAURANT_RATES.Punjab;
-      if (bill <= 0) { rOut.innerHTML = '<p class="tax-hint">Enter your food bill to see the sales tax.</p>'; return; }
-      var pay = restPay();
-      var rate = rates[pay];
-      var tax = bill * rate / 100;
-      var saving = (rates.cash - rates.card) / 100 * bill;
-      var html = resultGrid([
-        ['Food bill', rs(bill), '#0E3B2E'],
-        ['Sales tax (' + rate + '%)', rs(tax), '#A4452F'],
-        ['Total to pay', rs(bill + tax), '#175A41']
-      ]);
-      if (saving > 0) {
-        html += '<p class="tax-note">' + (pay === 'card'
-          ? 'Paying by card/digital here saves <strong>' + rs(saving) + '</strong> versus cash (' + rates.cash + '%) on this bill.'
-          : 'Paying by <strong>card/digital</strong> instead would cost only ' + rates.card + '% - a saving of <strong>' + rs(saving) + '</strong> on this bill.');
-        html += '</p>';
-      } else {
-        html += '<p class="tax-note">In ' + prov + ', the documented rate is ' + rate + '%. A reduced card/digital rate may apply - verify with the provincial revenue authority.</p>';
-      }
-      rOut.innerHTML = html;
-      if (window.gtag) try { gtag('event', 'tax_calc', { kind: 'restaurant', province: prov, pay: pay }); } catch (e) {}
-    }
-    if (rProv) rProv.addEventListener('change', runRest);
-    rPayEls.forEach(function (el) { el.addEventListener('change', runRest); });
-    if (rAmt) rAmt.addEventListener('input', runRest);
 
     function resultGrid(rows) {
       return '<div class="tax-result-grid">' + rows.filter(Boolean).map(function (r) {
@@ -300,6 +225,6 @@
     }
 
     // initial render
-    runIncome(); syncGstRate(); runRest(); renderHistoryChart();
+    runIncome(); runGst(); renderHistoryChart();
   });
 })();

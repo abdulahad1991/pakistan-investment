@@ -26,7 +26,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&amp;family=Nunito:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
@@ -196,7 +196,7 @@ gtag('config', 'G-4T2H0KH9H7');
 
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-live"><span class="dot"></span>LIVE</span>
+    <span class="ticker-live"><span class="dot"></span>DATA</span>
     <div class="ticker-feed">
       <span class="tk">KSE-100 <b id="tk-kse">1,77,267</b></span>
       <span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
@@ -214,18 +214,18 @@ gtag('config', 'G-4T2H0KH9H7');
     <ol>
       <li><a href="/">Home</a></li>
       <li><a href="/blog/">Blog</a></li>
-      <li aria-current="page">Top 10 Dividend Stocks</li>
+      <li aria-current="page">PSX Dividend-Yield Dataset</li>
     </ol>
   </nav>
 
   <div class="art-head">
     <div class="head-l">
-      <div class="desk">Markets Desk · PSX Dividends · Living page</div>
+      <div class="desk">Markets Desk · PSX Dividends · Dated dataset</div>
       <h1>{{H1}}</h1>
       <div class="art-byline">
         <span>By Abdul Ahad</span>
-        <span class="hl">· Updated {{AS_OF}}</span>
-        <span>· Refreshes weekly</span>
+        <span class="hl">· Reviewed {{AS_OF}}</span>
+        <span>· Price snapshot {{DATA_AS_OF}}</span>
       </div>
     </div>
     <div class="head-r">
@@ -241,7 +241,7 @@ gtag('config', 'G-4T2H0KH9H7');
         <div class="av">AA</div>
         <div>
           <div class="nm">Abdul Ahad</div>
-          <div class="bd">Software engineer, and the author of the open-source data pipeline behind this site. Every rate quoted here is pulled twice each trading day straight from its primary source - CDNS, SBP, PSX, MUFAP, FBR and PBS - carries its own &quot;as of&quot; date, and is flagged stale rather than served as current when a source goes down. Not a SECP-registered advisor: see the <a href="/methodology.html#editorial">editorial policy</a> for how these guides are researched, sourced and checked.</div>
+          <div class="bd">Software engineer and author of the open-source market-data pipeline behind this site. Automated widgets use dated data partitions and expose stale source status; tax, legal and policy claims are checked against the documents linked in each article. Not a SECP-registered advisor: see the <a href="/methodology.html#editorial">editorial policy</a> for the research and corrections process.</div>
           <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Updated {{AS_OF}}</span></div>
         </div>
       </div>
@@ -249,8 +249,12 @@ gtag('config', 'G-4T2H0KH9H7');
       <p class="lead"><strong>In one line:</strong> {{TLDR}}</p>
 
       <div class="cl-key">
-        <div class="k">At a glance</div>
+        <div class="k">Snapshot facts</div>
         <ul>{{GLANCE}}</ul>
+      </div>
+
+      <div class="cl-dark">
+        <p><strong>Source status:</strong> {{DATA_STATUS}}</p>
       </div>
 
       <div class="ad-slot">
@@ -259,33 +263,33 @@ gtag('config', 'G-4T2H0KH9H7');
       </div>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-      <h2 id="s1"><span class="sn">01</span>The top 10 by dividend yield</h2>
+      <h2 id="s1"><span class="sn">01</span>First 10 rows after the yield sort</h2>
       <div class="tbl-wrap">{{TABLE}}</div>
       <p class="tbl-note">{{TBL_NOTE}}</p>
 
       <h2 id="s2"><span class="sn">02</span>3-year price history</h2>
-      <p>Each chart is about three years of monthly closing prices. A high yield on a falling price can be a warning sign, so read the trend together with the yield.</p>
+      <p>Each chart uses the stored monthly closing-price series. The endpoints and percentage are price-only observations: they exclude dividends, tax, transaction costs and corporate-action adjustments unless those adjustments are already reflected in the source history.</p>
       <div class="hist-grid">{{CARDS}}</div>
 
-      <h2 id="s3"><span class="sn">03</span>Every dividend payer on the PSX</h2>
-      <p>All <strong>{{FULL_COUNT}}</strong> listed companies that currently pay a dividend, ranked by trailing yield, each with its 3-year price trend. A high yield on a falling line is the one to question.</p>
+      <h2 id="s3"><span class="sn">03</span>All positive-yield observations</h2>
+      <p>The stored dataset contains <strong>{{FULL_COUNT}}</strong> rows with both a positive share price and positive trailing cash-dividend value. Inclusion does not mean a company has declared a future dividend, is liquid, or passed a quality screen.</p>
       <div class="tbl-wrap">{{FULL_TABLE}}</div>
       <p class="tbl-note">{{TBL_NOTE}}</p>
 
-      <h2 id="s4"><span class="sn">04</span>How to read a dividend stock</h2>
-      <p>Dividend yield is the annual dividend divided by the current share price, shown as a percentage. A 10% yield means a company paid Rs 10 in dividends over the past year for every Rs 100 of share price today. It is attractive, but it is not free money, and a few checks matter more than the headline number.</p>
+      <h2 id="s4"><span class="sn">04</span>Method and verification</h2>
+      <p>The screen sums recorded cash dividends announced in the trailing period, converts percentage-of-par declarations to cash per share using the recorded face value, divides that amount by the dated market price, and sorts descending. That mixes a historical numerator with a point-in-time denominator, so it is a screen rather than a forecast.</p>
       <ul>
-        <li><strong>Is the yield high because the dividend is generous, or because the price has fallen?</strong> A collapsing share price mechanically lifts the yield. Pair the yield with the 12-month trend above.</li>
-        <li><strong>Can the company keep paying it?</strong> A payout funded by genuine, recurring profit is safer than one funded by one-off gains or borrowing. Cyclical sectors can cut dividends in a downturn.</li>
-        <li><strong>What does tax do to your take-home?</strong> Dividends from listed companies are subject to withholding tax, which is higher for non-filers. Our <a href="/guides/investment-tax-pakistan.html">investment tax guide</a> explains filer vs non-filer rates.</li>
-        <li><strong>Yield is not total return.</strong> A 10% yield with a falling price can still lose you money; a 6% yield on a rising, growing company can beat it. Look at both.</li>
+        <li><strong>Verify the numerator:</strong> open the issuer's PSX payout history and confirm each cash event, announcement date, financial period and whether it is final, interim or special.</li>
+        <li><strong>Verify face value:</strong> a declared percentage is applied to par value, not market price. A wrong face-value assumption produces a wrong cash dividend.</li>
+        <li><strong>Verify the denominator:</strong> use the same dated close shown by PSX, then account for splits, bonus issues or other corporate actions affecting comparability.</li>
+        <li><strong>Add missing dimensions:</strong> payout coverage, operating cash flow, leverage, liquidity, concentration, tax and subsequent company filings are outside this one-field sort.</li>
       </ul>
 
       <div class="cl-dark">
-        <p><strong>Not a buy list.</strong> This page ranks stocks by a single number - trailing dividend yield - from automatically scraped data. It is educational, not a recommendation. High yields can signal distress as often as value.</p>
+        <p><strong>Interpretation limit:</strong> the first row is not called &ldquo;best.&rdquo; A large trailing yield may reflect a special payout, a falling price, stale data, a corporate action or a conversion error. Reproduce the row from PSX issuer records before using it in further research.</p>
       </div>
 
-      <h2 id="s5"><span class="sn">05</span>Weekly snapshot</h2>
+      <h2 id="s5"><span class="sn">05</span>Stored snapshots</h2>
       <div class="changelog">{{CHANGELOG}}</div>
 
       <h2 id="s6"><span class="sn">06</span>Frequently asked questions</h2>
@@ -297,9 +301,17 @@ gtag('config', 'G-4T2H0KH9H7');
       </div>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
+      <div class="related-links">
+        <h3>Primary data sources</h3>
+        <a href="https://dps.psx.com.pk/market-watch" target="_blank" rel="noopener">PSX Data Portal - market prices →</a>
+        <a href="https://dps.psx.com.pk/company/payouts" target="_blank" rel="noopener">PSX Data Portal - issuer payout records →</a>
+        <a href="https://financials.psx.com.pk/" target="_blank" rel="noopener">PSX Financials Portal - company statements →</a>
+        <a href="/methodology.html#data-sources">Local collection, fallback and stale-data methodology →</a>
+      </div>
+
       <div class="related-links"><h3>Related reading</h3>{{RELATED}}</div>
 
-      <div class="disclaimer">This page is for educational purposes only and is <strong>not investment advice</strong>. The author is a software engineer, not an investment professional. Figures are scraped automatically and may lag or contain errors; dividend yields are trailing (past 12 months) and do not predict future payouts. Verify against the PSX and company sources before acting.</div>
+      <div class="disclaimer">This is a dated research dataset, not a recommendation or current quote service. Automated parsing, face-value assumptions, corporate actions and source outages can create errors. The issuer's PSX filings and payout records control.</div>
 
     </div>
 
@@ -308,11 +320,11 @@ gtag('config', 'G-4T2H0KH9H7');
         <div class="rail-sec">
           <div class="rail-h">On this page</div>
           <nav class="rail-toc" aria-label="On this page">
-            <a href="#s1"><span class="ti">01</span>Top 10 by yield</a>
+            <a href="#s1"><span class="ti">01</span>First 10 rows</a>
             <a href="#s2"><span class="ti">02</span>3-year history</a>
-            <a href="#s3"><span class="ti">03</span>Every payer</a>
-            <a href="#s4"><span class="ti">04</span>How to read it</a>
-            <a href="#s5"><span class="ti">05</span>Weekly snapshot</a>
+            <a href="#s3"><span class="ti">03</span>All positive rows</a>
+            <a href="#s4"><span class="ti">04</span>Method &amp; checks</a>
+            <a href="#s5"><span class="ti">05</span>Stored snapshots</a>
             <a href="#s6"><span class="ti">06</span>FAQ</a>
           </nav>
         </div>
@@ -322,7 +334,7 @@ gtag('config', 'G-4T2H0KH9H7');
         </div>
         <div class="rail-sec rail-next">
           <div class="rail-h">Read next</div>
-          <a href="/guides/best-dividend-stocks-psx.html">Dividend investing guide →</a>
+          <a href="/blog/how-to-value-bank-stocks-pakistan.html">Bank valuation guide →</a>
           <a href="/guides/investment-tax-pakistan.html">How dividends are taxed →</a>
           <a href="/guides/open-brokerage-account-psx.html">Open a PSX account →</a>
           <a href="/blog/">All blog articles →</a>
@@ -338,7 +350,7 @@ gtag('config', 'G-4T2H0KH9H7');
   <div class="foot-grid">
     <div class="foot-brand">
       <img src="/assets/logo-light.png" alt="Pakinvestlysis">
-      <p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice - for educational purposes only.</p>
+      <p>Dated data, source-led guides and educational calculators for Pakistan. Not financial advice.</p>
     </div>
     <div class="foot-col">
       <h4>DESKS</h4>

@@ -42,12 +42,26 @@ def is_redirect_stub(path: Path) -> bool:
         return False
 
 
+def is_noindex(path: Path) -> bool:
+    """Keep intentionally de-listed pages out of internal search and listings."""
+    try:
+        head = path.read_text(encoding="utf-8").split("</head>", 1)[0]
+        robots = re.search(
+            r'<meta\s+name=["\']robots["\']\s+content=["\']([^"\']+)',
+            head,
+            re.I,
+        )
+        return bool(robots and "noindex" in robots.group(1).lower())
+    except Exception:
+        return False
+
+
 def scan(section: str):
     items = []
     for f in sorted((ROOT / section).glob("*.html")):
         if f.name == "index.html" or "backup" in f.name:
             continue
-        if is_redirect_stub(f):
+        if is_redirect_stub(f) or is_noindex(f):
             continue
         try:
             items.append(extract(f, section))

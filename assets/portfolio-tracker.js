@@ -1,5 +1,4 @@
-/* Portfolio tracker: holdings in localStorage, valued from live data.json.
-   No login, nothing leaves the browser. */
+/* Portfolio scratchpad: holdings stay in localStorage and use dated data.json. */
 (function () {
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
@@ -25,11 +24,16 @@
     if (m.pkr_usd) set("tk-pkr", m.pkr_usd);
     if (m.inflation_cpi != null) set("tk-inf", m.inflation_cpi + "%");
     if (d.gold && d.gold.tola_24k) set("tk-gold", "₨" + d.gold.tola_24k.toLocaleString());
+    if (d.updated) {
+      var cutoff = new Date(d.updated).toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
+      var stockAsOf = d.data_health && d.data_health.stocks && d.data_health.stocks.as_of;
+      set("pf-asof", "Dataset cutoff: " + cutoff + (stockAsOf ? " · Stock source date: " + stockAsOf : "") + ". Values are not executable quotes.");
+    }
     var sel = $("pf-ticker");
     sel.innerHTML = Object.keys(STK).sort(function (a, b) { return STK[a].name.localeCompare(STK[b].name); })
       .map(function (t) { return '<option value="' + t + '">' + STK[t].name + " (" + t + ")</option>"; }).join("");
     render();
-  }).catch(function () { $("pf-emptymsg").textContent = "Could not load live prices. Try again shortly."; });
+  }).catch(function () { $("pf-emptymsg").textContent = "Could not load the dated price file. Try again shortly."; });
 
   function priceOf(h) {
     if (h.type === "stock") return (STK[h.ticker] || {}).price || 0;
@@ -117,7 +121,6 @@
       var arr = load(); arr.push(h); save(arr);
       $("pf-qty").value = "";
       render();
-      if (window.pkTrack) window.pkTrack("portfolio_add", { type: t });
     });
     document.querySelectorAll(".ip input,.ip select").forEach(function (i) {
       i.addEventListener("focus", function () { i.parentElement.classList.add("focus"); });

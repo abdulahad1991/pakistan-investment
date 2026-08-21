@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portfolio Tracker Pakistan: Live PSX, Gold &amp; Cash Value (No Login)</title>
-<meta name="description" content="Track your Pakistani investments in one place - add PSX stocks, gold and cash and see your live total value, allocation and 1-year change. Saved on your device, no login, free.">
+<title>Pakistan Portfolio Valuation Scratchpad | Dated Prices</title>
+<meta name="description" content="Value entered PSX shares, 24K gold grams and cash using a dated local dataset. Holdings remain in browser storage; no login or broker connection.">
 <link rel="canonical" href="https://pakinvestlysis.com/portfolio-tracker.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Portfolio Tracker Pakistan: Live PSX, Gold &amp; Cash">
-<meta property="og:description" content="Track PSX stocks, gold and cash in one place - live value, allocation, 1-year change. No login.">
+<meta property="og:title" content="Pakistan Portfolio Valuation Scratchpad">
+<meta property="og:description" content="A browser-local scratchpad using dated PSX and gold reference prices. No broker connection.">
 <meta property="og:url" content="https://pakinvestlysis.com/portfolio-tracker.html">
 <meta property="og:site_name" content="Pakistan Investment Education">
 <meta property="og:image" content="https://pakinvestlysis.com/assets/og/home.png?v=3">
@@ -16,8 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Portfolio Tracker Pakistan">
 <meta name="twitter:image" content="https://pakinvestlysis.com/assets/og/home.png?v=3">
-<meta name="twitter:description" content="Track PSX, gold and cash in one place. No login.">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
+<meta name="twitter:description" content="A browser-local valuation scratchpad using dated PSX and gold reference prices.">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +61,6 @@
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Pakistan Portfolio Tracker","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"PKR"},"url":"https://pakinvestlysis.com/portfolio-tracker.html"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pakinvestlysis.com/"},{"@type":"ListItem","position":2,"name":"Portfolio Tracker","item":"https://pakinvestlysis.com/portfolio-tracker.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my portfolio data uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Your holdings are saved in your browser's local storage on your own device. There is no login, no account and no server-side storage - nothing you enter is transmitted to us or anyone else. The flip side is that if you clear your browsing data or use a private window, the list is gone and cannot be recovered."}},{"@type":"Question","name":"Will my holdings appear on my other devices?","acceptedAnswer":{"@type":"Answer","text":"No. Local storage is specific to one browser on one device, so a portfolio entered on your laptop will not appear on your phone. Since the tracker stores only holding types and quantities, re-entering them on another device takes about a minute."}},{"@type":"Question","name":"Why is my total different from my broker app?","acceptedAnswer":{"@type":"Answer","text":"Prices here refresh twice each trading weekday from automatically scraped data, while your broker shows live exchange prices, so small gaps are normal and larger ones can appear on fast-moving days. The tracker also covers only the hundred-plus liquid PSX stocks in our data set, values cash at face value with no profit accrual, and ignores fees and taxes. Treat your broker and CDC statements as the authoritative record."}},{"@type":"Question","name":"Can I track mutual funds or National Savings certificates?","acceptedAnswer":{"@type":"Answer","text":"Not directly - the tracker supports PSX stocks, gold and cash. A common workaround is to add a fund's or certificate's current value as a cash entry and update it manually every so often. Mutual fund unit prices (NAVs) are published daily by MUFAP, and National Savings profit rates by CDNS."}},{"@type":"Question","name":"How do I change or remove a holding?","acceptedAnswer":{"@type":"Answer","text":"Each row in the holdings table has a remove button at the end. There is no in-place edit - to change a quantity, remove the row and re-add it with the new figure. The tracker has no link to your broker or CDC account, so after buying or selling, update it yourself."}},{"@type":"Question","name":"Does it account for bonus shares, splits or rights?","acceptedAnswer":{"@type":"Answer","text":"No. The tracker prices whatever share count you entered and has no awareness of corporate actions. After a bonus issue, split or rights subscription, update the quantity to match your CDC statement or the value shown will be wrong."}}]}</script>
 </head>
 <body>
 <div class="accent-bar"></div>
@@ -79,7 +77,7 @@
     </div>
   </div>
 </header>
-<div class="ticker"><div class="ticker-inner"><span class="ticker-live"><span class="dot"></span>LIVE</span><div class="ticker-feed">
+<div class="ticker"><div class="ticker-inner"><span class="ticker-live"><span class="dot"></span>DATA</span><div class="ticker-feed">
   <span class="tk">KSE-100 <b id="tk-kse">1,77,267</b></span><span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
   <span class="tk">USD/PKR <b id="tk-pkr">&#8360;277.57</b></span><span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,73,800</b></span>
   <span class="tk">CPI <b id="tk-inf">9.2%</b></span>
@@ -90,8 +88,8 @@
   <div class="tool-hd">
     <span class="badge60">Everything in 60 seconds</span>
     <div class="kick">Portfolio tracker</div>
-    <h1>Your investments, one live total.</h1>
-    <p>Add your PSX stocks, gold and cash. See the live value, how it's split, and the 1-year move - updated from daily market data. Saved on your device only; no login, nothing leaves your browser.</p>
+    <h1>A dated portfolio valuation scratchpad.</h1>
+    <p>Add tracked PSX shares, 24K gold grams and cash to calculate a value and allocation at the dataset cutoff. It is not connected to a broker, CDC, bank or fund account.</p>
   </div>
 
   <div class="tool-grid">
@@ -102,13 +100,13 @@
         <div class="fld"><label id="pf-qtylabel" for="pf-qty">Shares</label><div class="ip"><input type="text" id="pf-qty" inputmode="decimal" placeholder="100" autocomplete="off"></div></div>
         <button class="pf-btn" id="pf-add">+ Add</button>
       </div>
-      <p class="tool-note" style="margin-top:14px">Gold is entered in <b>grams</b> (24K). Cash is the rupee amount. Everything stays in your browser - clearing site data removes it.</p>
+      <p class="tool-note" style="margin-top:14px">Gold is entered in <b>grams</b> (24K). Cash is a rupee amount. Holdings and quantities are stored in this browser; clearing site data removes them.</p>
     </div>
 
     <div class="tool-out">
       <div class="res-grid">
         <div class="res hero"><div class="rl">Total value</div><div class="rv" id="pf-total">₨ 0</div></div>
-        <div class="res"><div class="rl">1-year change</div><div class="rv" id="pf-chg">-</div></div>
+        <div class="res"><div class="rl">Weighted source 1Y</div><div class="rv" id="pf-chg">-</div></div>
         <div class="res"><div class="rl">Holdings</div><div class="rv" id="pf-count">0</div></div>
         <div class="res"><div class="rl">Biggest slice</div><div class="rv" id="pf-top" style="font-size:1.1rem">-</div></div>
       </div>
@@ -121,52 +119,52 @@
       <thead><tr><th>Holding</th><th>Qty</th><th>Price</th><th>Value</th><th>1Y</th><th></th></tr></thead>
       <tbody id="pf-rows"></tbody>
     </table>
-    <div class="pf-empty" id="pf-emptymsg">No holdings yet. Add a stock, gold or cash above to see your live total.</div>
+    <div class="pf-empty" id="pf-emptymsg">No holdings yet. Add a stock, gold or cash above to calculate a dated total.</div>
+    <div class="tool-note" id="pf-asof">Dataset cutoff loads with the price file.</div>
   </div>
 
   <div class="tx-content">
     <h2>About this tracker</h2>
-    <p>This is a private, no-login tracker: your holdings are saved in your browser's local storage, never sent to a server, so only you can see them. Prices come from the same daily market data the rest of the site uses, so values refresh roughly once a day rather than tick by tick. It's meant to give you a quick, honest picture of where your money sits and how it's split - not a brokerage statement.</p>
+    <p>This no-login scratchpad saves holding types, tickers and quantities in this browser's local storage. The tracker code does not upload those fields, although ordinary site analytics can process page-usage data as described in the <a href="/privacy-policy.html">privacy policy</a>. Browser storage is not an encrypted investment-account record, and it disappears if site data is cleared.</p>
 
     <h2>How the numbers are worked out</h2>
-    <p>Each holding is valued from the site's data file, which our automated pipeline refreshes twice every trading weekday - once shortly after the PSX opens and once after the close - from sources such as the PSX data portal, SBP and daily gold rates (scheduled runs can occasionally be delayed, so check how the "as of" feel of a price matches your broker). Stocks are marked at the latest scraped share price, gold at the current 24K per-gram rate, and cash simply at the rupee figure you typed. The total is the sum of those values, the donut splits that total by holding, and "Biggest slice" names whichever holding takes the largest share.</p>
-    <p>The "1-year change" is the value-weighted average of each holding's own one-year move: ₨3,00,000 of a stock that rose 20% blended with ₨1,00,000 of cash (counted as 0%) shows +15%. Two honest caveats follow. Cash always counts as zero, even though a savings account would have paid some profit, so cash-heavy portfolios show a flatter year than they really had. And the figure describes what the assets did over the last year, not your personal return - that depends on when you bought, which the tracker never asks. There is no cost-basis field at all: it shows what your holdings are worth now, not your profit or loss against what you paid.</p>
+    <p>A stock value is quantity multiplied by the price in the loaded dataset. Gold uses the dataset's dated 24K per-gram reference, and cash remains at face value. The total and donut use those marked values. The dataset may be stale, incomplete or different from an executable quote; its cutoff appears in the note below the holdings table.</p>
+    <p>The weighted source 1Y field averages each holding's stored one-year price-change field using current marked values; cash is assigned 0%. It is not personal performance because the tracker has no purchase dates, cash flows, cost basis, dividends, charges or taxes. Current-value weighting also differs from a properly reconstructed start-of-period portfolio return.</p>
 
     <h2>How to read the numbers</h2>
     <ul>
-      <li><b>Watch the biggest slice.</b> If one stock is more than half your total, one company's bad year decides your whole year. Concentration, not the market, is usually what hurts small portfolios most.</li>
-      <li><b>A positive year can still be a real loss.</b> Compare the 1-year change with the CPI figure in the ticker above - a +5% portfolio during 10% inflation lost buying power even though the rupee number grew.</li>
-      <li><b>Cash at face value is quietly shrinking.</b> The tracker shows cash flat at 0%, but idle rupees lose value to inflation every month. That "safe" slice has a cost too.</li>
-      <li><b>These are twice-a-day estimates, not live ticks.</b> Before any actual decision, confirm prices with your broker and holdings with your CDC account statement.</li>
+      <li><b>Total value is a marked estimate.</b> It is not an executable sale value and excludes spreads, fees, tax and accrued income.</li>
+      <li><b>Biggest slice is descriptive.</b> It reports the largest current-value weight but does not measure sector, issuer, currency or factor exposure.</li>
+      <li><b>Cash is deliberately flat.</b> No deposit profit, inflation loss or account restriction is modeled.</li>
+      <li><b>The 1Y field is not your return.</b> Use dated transaction and distribution records for personal performance.</li>
     </ul>
 
     <h2>A worked example</h2>
-    <p>Suppose you enter three holdings: 500 shares of a bank stock trading at ₨600, twenty grams of gold with 24K at ₨30,000 per gram (illustrative rates - the tracker always uses the day's actual figures), and ₨2,00,000 sitting in a savings account. The tracker values them at ₨3,00,000, ₨6,00,000 and ₨2,00,000 - total ₨11,00,000 - and the donut immediately makes the point a list of numbers hides: gold is 55% of this portfolio. "Biggest slice: Gold" is not a warning, just a fact many people have never actually seen about their own money. If gold rose 25% over the past year, the stock 10%, and cash counts as 0%, the blended 1-year change works out to about +17% - dominated by the gold, because weights, not picks, decide the total.</p>
+    <p>Suppose the file marks 500 shares at PKR 600, 20 grams of 24K gold at PKR 30,000 per gram, and cash at PKR 200,000. The marked values are PKR 300,000, PKR 600,000 and PKR 200,000, for PKR 1,100,000 total. Gold is therefore 54.5% of this three-line snapshot. If the source 1Y fields are 10%, 25% and 0%, current-value weighting produces about 16.4%. That 16.4% still is not the portfolio's historical return.</p>
 
-    <h2>Why the split matters more than the picks</h2>
-    <p>Small portfolios rarely get hurt by choosing the second-best bank stock; they get hurt by concentration - one company or one asset carrying most of the total. The donut is the fastest honesty check there is: a "diversified" list of five stocks that are all banks is still one bet on banking spreads, and a portfolio that is 70% gold is a currency-and-metal position with a few shares attached. There is no correct split - that depends on your horizon and nerves - but knowing your actual split is the starting point for every other decision. Drift is the quieter effect worth watching: a strong gold year silently grows that slice without you buying a gram, so the portfolio you own next year is riskier or safer than the one you built, unless you occasionally rebalance back toward whatever mix you intended. Our <a href="/guides/national-savings-vs-mutual-funds.html">National Savings vs mutual funds</a> and <a href="/guides/gold-investment-pakistan.html">gold investment</a> guides cover what each slice is actually doing for you.</p>
-    <p>A practical rhythm: check the split quarterly, not daily. Twice-a-day prices make it tempting to watch the total wiggle, but day-to-day moves are noise you can do nothing useful about - and reacting to them is how tracking turns into trading.</p>
+    <h2>What the allocation chart cannot show</h2>
+    <p>The donut groups by each entered line. It does not detect that several shares belong to the same sector, that a fund already owns those shares, or that gold and foreign-currency assets can share exchange-rate exposure. It also has no target allocation, loss capacity or rebalancing rule. The <a href="/guides/national-savings-vs-mutual-funds.html">National Savings and fund comparison</a> and <a href="/guides/gold-investment-pakistan.html">gold guide</a> explain legal form and product-level risks; neither supplies a personalised split.</p>
 
     <h2>Entering gold: grams, tolas and jewellery</h2>
-    <p>The tracker takes gold in <b>grams of 24K</b>, while jewellers and most Pakistani households think in tolas - one tola is 11.6638 grams, so 5 tolas is about 58.3 grams. If your gold is jewellery rather than bars or coins, two honest adjustments apply before the number means anything: ornaments are usually 21K or 22K rather than 24K (multiply the weight by roughly 0.875 or 0.916 to get the 24K-equivalent), and making charges - often 5-15% of the purchase price - are not recoverable when you sell. A 22K, 10-gram bangle is therefore worth about 9.16 grams at the 24K rate, minus whatever the buyer deducts. The <a href="/gold-rates.html">gold page</a> shows today's per-gram and per-tola rates side by side if you'd rather do the conversion there.</p>
+    <p>The tracker accepts <b>grams of 24K-equivalent gold</b>. One tola is 11.6638 grams, so five tolas is about 58.32 grams. Nominal purity conversion multiplies weight by karats divided by 24: 10 grams of 22K contains about 9.17 grams of gold before testing loss or tolerance. Jewellery workmanship, stones, dealer deductions and buy/sell spread are not valued. The <a href="/gold-rates.html">gold page</a> provides the dated reference and source limitation.</p>
 
     <h2>Common questions</h2>
-    <details class="faq-item"><summary>Is my portfolio data uploaded anywhere?</summary><div class="faq-a">No. Holdings live in your browser's local storage on your own device - no login, no account, no server. Nothing you enter is transmitted to us or anyone else. The flip side: clearing browsing data (or using a private window) deletes the list, and there is no way to recover it.</div></details>
-    <details class="faq-item"><summary>Will my holdings appear on my other devices?</summary><div class="faq-a">No. Local storage belongs to one browser on one device, so a portfolio entered on your laptop won't show on your phone. The tracker only stores types and quantities, so re-entering them elsewhere takes about a minute.</div></details>
-    <details class="faq-item"><summary>Why is my total different from my broker app?</summary><div class="faq-a">Prices here refresh twice each trading weekday from scraped data, while your broker shows live exchange prices - small gaps are normal, bigger ones can appear on fast-moving days. We also track only the hundred-plus liquid PSX stocks in our data set, value cash at face value, and ignore fees and taxes. Your broker and CDC statements are the authoritative record.</div></details>
-    <details class="faq-item"><summary>Can I track mutual funds or National Savings certificates?</summary><div class="faq-a">Not directly - the tracker supports PSX stocks, gold and cash. A common workaround is to add a fund's or certificate's current value as a cash entry and update it manually now and then. See our <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual funds guide</a> for where to find daily NAVs.</div></details>
-    <details class="faq-item"><summary>How do I change or remove a holding?</summary><div class="faq-a">Each row in the holdings table has a remove button at the end. There is no in-place edit - to change a quantity, remove the row and re-add it with the new figure, which takes a few seconds. After you bought or sold through your broker, update the tracker the same way; it has no link to your broker or CDC account, so it only knows what you tell it.</div></details>
+    <details class="faq-item"><summary>Where are holdings stored?</summary><div class="faq-a">Holding types, tickers and quantities are stored in this browser's local storage. The tracker has no server-side portfolio account. Normal site analytics can still process page usage under the <a href="/privacy-policy.html">privacy policy</a>.</div></details>
+    <details class="faq-item"><summary>Will holdings appear on another device?</summary><div class="faq-a">No. Local storage is specific to a browser profile and does not sync through this site. Clearing site data or using a private session can remove the list.</div></details>
+    <details class="faq-item"><summary>Why can the total differ from a broker?</summary><div class="faq-a">The site uses dated collected references, while a broker can show a newer quote. Coverage, spreads, fees, taxes and unsettled trades also differ. A broker contract note and CDC statement are not replaced by this scratchpad.</div></details>
+    <details class="faq-item"><summary>Can it track mutual funds or National Savings?</summary><div class="faq-a">No. Cash entries remain at face value and do not model NAVs, profit accrual, distributions, tax or encashment terms, so relabeling one as a fund or certificate would be misleading.</div></details>
+    <details class="faq-item"><summary>How is a quantity changed?</summary><div class="faq-a">Remove the row and add it again. The tool does not import trades or reconcile a CDC account.</div></details>
     <details class="faq-item"><summary>Does it account for bonus shares, splits or rights?</summary><div class="faq-a">No. The tracker prices whatever share count you entered - it has no awareness of corporate actions. After a bonus issue or split, your share count changes while the price adjusts, so update the quantity to match your CDC statement or the value shown will be wrong. The same applies to rights shares you subscribe to.</div></details>
 
-    <div class="tool-disc"><strong>Educational only, not investment advice.</strong> The author is a software engineer, not an investment professional. Prices are scraped twice each weekday and may lag or differ from your broker. Cash and savings are shown at face value (no profit accrual). Verify exact holdings and values with your broker, bank and CDC account.</div>
-    <div style="margin-top:18px;font-family:var(--display);font-weight:700"><a href="/backtester.html" style="color:var(--green);border-bottom:2px solid var(--acid)">See what your picks did over time →</a></div>
+    <div class="tool-disc"><strong>Educational valuation scratchpad only.</strong> Prices can lag or contain errors. Cash has no accrual, and costs, tax, income and corporate actions are excluded. Use account records and executable quotes for an actual valuation.</div>
+    <div style="margin-top:18px;font-family:var(--display);font-weight:700"><a href="/backtester.html" style="color:var(--green);border-bottom:2px solid var(--acid)">Inspect a dated price-only history →</a></div>
   </div>
 </div>
 </main>
 
 <footer>
   <div class="foot-grid">
-    <div class="foot-brand"><img src="/assets/logo-light.png" alt="Pakinvestlysis"><p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice - for educational purposes only.</p></div>
+    <div class="foot-brand"><img src="/assets/logo-light.png" alt="Pakinvestlysis"><p>Dated data, source-led guides and educational calculators for Pakistan. Not financial advice.</p></div>
     <div class="foot-col"><h4>DESKS</h4><a href="/">Markets</a><a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a><a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a><a href="/gold-rates.html">Gold &amp; Metals</a></div>
     <div class="foot-col"><h4>TOOLS</h4><a href="/backtester.html">Backtester</a><a href="/sip-calculator.html">SIP Calculator</a><a href="/portfolio-tracker.html">Portfolio Tracker</a><a href="/tax-calculator.html">Tax Calculator</a></div>
     <div class="foot-col"><h4>SITE</h4><a href="/about.html">About</a><a href="/methodology.html">Methodology</a><a href="/privacy-policy.html">Privacy</a><a href="/contact.html">Contact</a></div>

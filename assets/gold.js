@@ -1,4 +1,4 @@
-// ── Gold rates page - live rates, history chart, forecast calculator ──
+// Gold reference page: dated rates, history and a user-defined scenario.
 const TOLA_G = 11.6638;
 let GDATA = null;
 let gCharts = {};
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(d => { GDATA = d; initGold(); })
     .catch(() => {
       const el = document.getElementById("gr-source");
-      if (el) el.textContent = "Live rate unavailable right now - please refresh.";
+      if (el) el.textContent = "The dated gold-rate dataset could not be loaded. Please check the source before relying on a price.";
     });
 });
 
@@ -43,7 +43,7 @@ function initGold() {
   const g = GDATA.gold;
   if (!g) { setT("gr-source", "Gold data unavailable."); return; }
 
-  // ── Live rate grid ──
+  // Rate grid
   setT("gr-tola24", rs(g.tola_24k));
   setT("gr-tola22", rs(g.tola_22k));
   setT("gr-10g24",  rs(g.g10_24k));
@@ -72,25 +72,17 @@ function initGold() {
   // Source + date
   const when = new Date(GDATA.updated).toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
   const note = g.source_type === "local"
-    ? "Source: local Sarafa rate via gold.pk."
-    : "Source: international spot (gold futures × PKR/USD).";
-  setT("gr-source", `As of ${when}. ${note} 21K and 18K are estimated from the 24K rate (×87.5% and ×75%). Local shop prices add making charges.`);
-  setT("gold-asof", "Updated " + when);
+    ? "Source: gold.pk, a third-party local-rate publisher."
+    : "Source: a derived international futures and PKR/USD fallback.";
+  setT("gr-source", `Collected ${when}. ${note} This is not a dealer quote. 21K and 18K are derived from 24K (×87.5% and ×75%); shop prices, spreads and making charges differ.`);
+  setT("gold-asof", "Collected " + when);
 
   // ── History chart + CAGR ──
   renderHistory();
-  const cagr = computeCAGR();
+  computeCAGR();
 
-  // ── Calculator ──
-  // Default growth stays at a defensible long-run assumption (~15% in PKR =
-  // long-run gold in USD + expected rupee depreciation), NOT the raw historical
-  // CAGR, which is depreciation-inflated and unlikely to repeat. We surface the
-  // historical figure as context and let the user edit.
-  if (cagr != null) {
-    setT("gc-rate-help", `Default 15%/yr ≈ long-run gold + expected rupee depreciation. For reference, gold averaged ~${cagr.toFixed(0)}%/yr over the last ${cagrYears.toFixed(1)} years (CPI inflation: ${GDATA.macro.inflation_cpi}%). Edit to your own view.`);
-  } else {
-    setT("gc-rate-help", `Default 15%/yr is a long-run assumption. CPI inflation is ${GDATA.macro.inflation_cpi}%. Edit to your own view.`);
-  }
+  // Scenario calculator. The neutral default is 0%; users supply any change.
+  setT("gc-rate-help", "The default assumes no price change. Enter your own hypothetical rate; this is not a forecast.");
 
   const amt = document.getElementById("gc-amount");
   amt.addEventListener("input", () => {
@@ -113,7 +105,7 @@ function computeCAGR() {
   cagrYears = (d1 - d0) / (365.25 * 24 * 3600 * 1000);
   if (cagrYears < 0.5) return null;
   const cagr = (Math.pow(last / first, 1 / cagrYears) - 1) * 100;
-  setT("gr-cagr", `Over the last ${cagrYears.toFixed(1)} years, 24K gold rose from ${rs(first)} to ${rs(last)} per tola - a compound average of about ${cagr.toFixed(1)}% per year (in rupee terms, currency depreciation included).`);
+  setT("gr-cagr", `Across these ${cagrYears.toFixed(1)} years of observations, 24K gold moved from ${rs(first)} to ${rs(last)} per tola. That is an annualized historical change of about ${cagr.toFixed(1)}% in nominal rupees, including currency effects; it is not a forecast.`);
   return Math.max(0, cagr);
 }
 
@@ -150,53 +142,44 @@ function calcGold() {
   const g = GDATA.gold;
   const amount = parseInt((document.getElementById("gc-amount").value || "").replace(/[^0-9]/g, ""), 10) || 0;
   const years = Math.min(30, Math.max(1, parseInt(document.getElementById("gc-years").value, 10) || 1));
-  const rate = Math.max(0, parseFloat(document.getElementById("gc-rate").value) || 0);
+  const rateInput = parseFloat(document.getElementById("gc-rate").value);
+  const rate = Math.max(-100, Math.min(100, Number.isFinite(rateInput) ? rateInput : 0));
   const karat = (document.querySelector('input[name="gc-karat"]:checked') || {}).value || "24";
   const tolaRate = karat === "22" ? g.tola_22k : g.tola_24k;
-  const infl = GDATA.macro.inflation_cpi || 0;
 
   const resEl = document.getElementById("gc-result");
-  if (!amount) { resEl.innerHTML = '<div style="color:#8a887d">Enter an amount to see the projection.</div>'; drawProjection([], []); return; }
+  if (!amount) { resEl.innerHTML = '<div style="color:#8a887d">Enter an amount to test a scenario.</div>'; drawProjection([], []); return; }
 
   const tolas = amount / tolaRate;
   const grams = tolas * TOLA_G;
   const future = amount * Math.pow(1 + rate / 100, years);
   const gain = future - amount;
   const gainPct = (gain / amount) * 100;
-  const real = future / Math.pow(1 + infl / 100, years);
-
-  // National Savings comparison (best rate open to all Pakistanis)
-  const pub = (GDATA.national_savings || []).filter(s => s.eligible === "All Pakistanis");
-  const nsRate = pub.length ? Math.max(...pub.map(s => s.rate)) : 11.5;
-  const nsFuture = amount * Math.pow(1 + nsRate / 100, years);
+  const futureTolaRate = tolaRate * Math.pow(1 + rate / 100, years);
 
   resEl.innerHTML = `
     <div class="gold-stat-grid">
-      <div class="gold-stat"><div class="v">${tolas.toFixed(2)} tola</div><div class="l">Gold bought now (${grams.toFixed(1)} g, ${karat}K)</div></div>
-      <div class="gold-stat"><div class="v">${rs(future)}</div><div class="l">Value after ${years} yr @ ${rate}%/yr</div></div>
-      <div class="gold-stat"><div class="v" style="color:${gain >= 0 ? "#0E3B2E" : "#C24132"}">${gain >= 0 ? "+" : ""}${rs(gain)}</div><div class="l">Total gain (${gainPct >= 0 ? "+" : ""}${gainPct.toFixed(0)}%)</div></div>
-      <div class="gold-stat"><div class="v">${rs(real)}</div><div class="l">Real value (today's rupees)</div></div>
+      <div class="gold-stat"><div class="v">${tolas.toFixed(2)} tola</div><div class="l">Gold equivalent now (${grams.toFixed(1)} g, ${karat}K)</div></div>
+      <div class="gold-stat"><div class="v">${rs(futureTolaRate)}</div><div class="l">Hypothetical rate per tola in year ${years}</div></div>
+      <div class="gold-stat"><div class="v">${rs(future)}</div><div class="l">Hypothetical holding value</div></div>
+      <div class="gold-stat"><div class="v" style="color:${gain >= 0 ? "#0E3B2E" : "#C24132"}">${gain >= 0 ? "+" : ""}${rs(gain)}</div><div class="l">Change from start (${gainPct >= 0 ? "+" : ""}${gainPct.toFixed(0)}%)</div></div>
     </div>
     <p style="font-size:.86rem;color:var(--ink2);margin:14px 0 0;line-height:1.6">
-      At the current ${karat}K rate of <strong>${rs(tolaRate)}/tola</strong>, <strong>${rs(amount)}</strong> buys about <strong>${tolas.toFixed(2)} tola</strong>.
-      At ${rate}%/yr it could be worth <strong>${rs(future)}</strong> in ${years} years.
-      The same amount in a National Savings certificate at <strong>${nsRate}%</strong> would reach <strong>${rs(nsFuture)}</strong> -
-      ${future >= nsFuture ? "gold ahead by " + rs(future - nsFuture) : "savings ahead by " + rs(nsFuture - future)}, before tax, charges and zakat.
-      Unlike savings, gold pays no income while you hold it.
+      At the dated ${karat}K reference of <strong>${rs(tolaRate)}/tola</strong>, <strong>${rs(amount)}</strong> is equivalent to about <strong>${tolas.toFixed(2)} tola</strong> before transaction costs.
+      If, purely as an assumption, that rate changed by <strong>${rate}% each year</strong>, the holding would have a nominal value of <strong>${rs(future)}</strong> after ${years} years.
+      This arithmetic does not estimate the future price and excludes spreads, making charges, storage, tax and zakat.
     </p>`;
 
-  // Projection series
-  const labels = [], goldS = [], nsS = [], cashS = [];
+  // Scenario series
+  const labels = [], goldS = [], startingS = [];
   for (let y = 0; y <= years; y++) {
     labels.push(y === 0 ? "Now" : "Yr " + y);
     goldS.push(Math.round(amount * Math.pow(1 + rate / 100, y)));
-    nsS.push(Math.round(amount * Math.pow(1 + nsRate / 100, y)));
-    cashS.push(Math.round(amount / Math.pow(1 + infl / 100, y)));
+    startingS.push(amount);
   }
   drawProjection(labels, [
-    { label: "Gold @ " + rate + "%", data: goldS, color: "#B7791F" },
-    { label: "National Savings @ " + nsRate + "%", data: nsS, color: "#075E4B" },
-    { label: "If kept as cash (real)", data: cashS, color: "#C24132" },
+    { label: "User scenario @ " + rate + "%", data: goldS, color: "#B7791F" },
+    { label: "Starting amount", data: startingS, color: "#6B7280" },
   ]);
 }
 

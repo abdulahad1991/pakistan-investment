@@ -1,5 +1,5 @@
 /* Listing pages (guides/blog): live ticker, manifest-driven auto-listing,
-   topic filters. manifest.json + data.json are rebuilt every morning by the
+   topic filters. manifest.json + data.json are rebuilt by the scheduled
    GitHub Action, so new guides appear here without editing this page. */
 document.addEventListener('DOMContentLoaded', function () {
 

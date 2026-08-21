@@ -9,10 +9,10 @@
     return (neg ? "-" : "") + "₨ " + s;
   }
   function groupPK(s) { s = s.replace(/\D/g, ""); if (s.length <= 3) return s; var h = s.slice(0, -3), t = s.slice(-3); return h.replace(/\B(?=(\d\d)+(?!\d))/g, ",") + "," + t; }
-  function num(id) { return Number(String($(id).value).replace(/[^0-9.]/g, "")) || 0; }
+  function num(id) { return Number(String($(id).value).replace(/[^0-9.-]/g, "")) || 0; }
   var chart = null;
 
-  // live ticker (best-effort)
+  // Dated ticker, best-effort.
   fetch("/data.json?v=" + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
     var m = d.macro || {}, set = function (id, v) { var e = $(id); if (e) e.textContent = v; };
     if (m.kse100_level) set("tk-kse", m.kse100_level.toLocaleString());
@@ -25,7 +25,7 @@
   function compute() {
     var P = num("sip-amount");
     var years = Math.max(1, Math.min(40, Math.round(num("sip-years")) || 1));
-    var r = num("sip-return") / 100;
+    var r = Math.max(-1, Math.min(1, num("sip-return") / 100));
     var step = num("sip-stepup") / 100;
     var i = r / 12;
     var bal = 0, invested = 0, contrib = P;
@@ -40,11 +40,13 @@
 
     $("o-fv").textContent = fmtPKR(bal);
     $("o-inv").textContent = fmtPKR(invested);
-    $("o-gain").textContent = "+" + fmtPKR(gains);
+    var gainEl = $("o-gain");
+    gainEl.textContent = (gains > 0 ? "+" : "") + fmtPKR(gains);
+    gainEl.className = "rv " + (gains >= 0 ? "pos" : "neg");
     $("o-mult").textContent = mult.toFixed(2) + "x";
-    $("sip-note").textContent = "Investing " + fmtPKR(P) + "/month" + (step > 0 ? " (rising " + (step * 100).toFixed(0) + "%/yr)" : "") +
-      " for " + years + " years at " + (r * 100).toFixed(1) + "% could grow to " + fmtPKR(bal) + " - of which " + fmtPKR(gains) +
-      " is growth on " + fmtPKR(invested) + " invested. Returns are assumptions, not guarantees. Not advice.";
+    $("sip-note").textContent = fmtPKR(P) + " contributed at each month-end" + (step > 0 ? ", with a " + (step * 100).toFixed(0) + "% yearly contribution step-up," : "") +
+      " for " + years + " years under a " + (r * 100).toFixed(1) + "% constant nominal annual-rate scenario produces " + fmtPKR(bal) +
+      ". Total contributions are " + fmtPKR(invested) + "; costs, tax and variable returns are excluded.";
 
     draw(labels, invSeries, valSeries);
     if (window.pkTrack) window.pkTrack("sip_calc", {});
@@ -59,8 +61,8 @@
       data: {
         labels: labels,
         datasets: [
-          { label: "Value", data: val, borderColor: "#075E4B", backgroundColor: "rgba(7,94,75,.10)", borderWidth: 2.4, fill: true, tension: .25, pointRadius: 0, pointHoverRadius: 4 },
-          { label: "You invested", data: inv, borderColor: "#B98A2F", borderWidth: 1.6, borderDash: [5, 4], fill: false, tension: .1, pointRadius: 0, pointHoverRadius: 3 }
+          { label: "Scenario value", data: val, borderColor: "#075E4B", backgroundColor: "rgba(7,94,75,.10)", borderWidth: 2.4, fill: true, tension: .25, pointRadius: 0, pointHoverRadius: 4 },
+          { label: "Total contributions", data: inv, borderColor: "#B98A2F", borderWidth: 1.6, borderDash: [5, 4], fill: false, tension: .1, pointRadius: 0, pointHoverRadius: 3 }
         ]
       },
       options: {

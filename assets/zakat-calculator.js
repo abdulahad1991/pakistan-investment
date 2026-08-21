@@ -1,9 +1,5 @@
-/* Zakat Calculator - interactive engine.
-   Educational only; not a religious ruling. Zakat is 2.5% of zakatable net
-   wealth held for one lunar year (hawl), payable if that wealth is at or above
-   the nisab. Nisab = value of 87.48g (7.5 tola) of gold OR 612.36g (52.5 tola)
-   of silver; many scholars recommend the lower (silver) nisab. Rulings on what
-   is zakatable vary - consult a scholar you trust. */
+/* User-input arithmetic for one common Zakat convention.
+   This engine does not determine asset treatment, hawl or the applicable view. */
 (function () {
   'use strict';
 
@@ -62,7 +58,7 @@
         liabilities: val('zk-liabilities'), nisab: nisab
       });
       if (r.assets <= 0 && nisab <= 0) {
-        out.innerHTML = '<p class="tax-hint">Enter your assets and the current ' + basis + ' price to calculate your Zakat.</p>';
+        out.innerHTML = '<p class="tax-hint">Enter asset values and a dated ' + basis + ' price to run the 2.5% scenario.</p>';
         return;
       }
       var rows = [
@@ -75,20 +71,19 @@
       }).join('') + '</div>';
 
       if (nisab <= 0) {
-        html += '<p class="tax-note">Enter the current ' + basis + ' price per tola to see whether your wealth reaches the nisab and what Zakat is due.</p>';
+        html += '<p class="tax-note">Enter a dated ' + basis + ' price per tola to calculate the selected threshold.</p>';
       } else if (r.due) {
         html += '<div class="zk-due" style="margin-top:14px;background:#E9EFE6;border:1px solid #C9D6C0;border-left:4px solid #175A41;border-radius:0 8px 8px 0;padding:14px 18px">' +
-          '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#6B6A60">Zakat payable (2.5%)</div>' +
+          '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#6B6A60">2.5% scenario amount</div>' +
           '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:1.7rem;font-weight:700;color:#0E3B2E;margin-top:2px">' + rs(r.zakat) + '</div>' +
-          '<div style="font-size:.82rem;color:#5E5C52;margin-top:4px">Your net wealth is at or above the nisab, so Zakat is due at 2.5% (about ' + rs(r.zakat / 12) + '/month if you set it aside monthly).</div></div>';
+          '<div style="font-size:.82rem;color:#5E5C52;margin-top:4px">The entered net amount meets the selected threshold, so this convention multiplies it by 2.5%. This is not a ruling.</div></div>';
       } else {
         html += '<div class="zk-due" style="margin-top:14px;background:#F4E7D4;border:1px solid #E4D3B0;border-left:4px solid #B98A2F;border-radius:0 8px 8px 0;padding:14px 18px">' +
-          '<div style="font-weight:700;color:#7A5A1F">No Zakat due on these figures</div>' +
-          '<div style="font-size:.82rem;color:#5E5C52;margin-top:3px">Your net zakatable wealth (' + rs(r.net) + ') is below the nisab (' + rs(nisab) + '). Zakat becomes due once it reaches the nisab and a lunar year passes.</div></div>';
+          '<div style="font-weight:700;color:#7A5A1F">Selected threshold not met</div>' +
+          '<div style="font-size:.82rem;color:#5E5C52;margin-top:3px">The entered net amount (' + rs(r.net) + ') is below the selected threshold (' + rs(nisab) + '), so this arithmetic returns zero.</div></div>';
       }
-      html += '<p class="tax-note">Estimate only, based on the figures and metal price you entered - not a religious ruling. What counts as zakatable, and which nisab to use, can vary by scholar. Verify with a scholar you trust.</p>';
+      html += '<p class="tax-note">Arithmetic only, based on the entered values and selected convention. Asset treatment, deductible liabilities, hawl and nisab can differ.</p>';
       out.innerHTML = html;
-      if (window.gtag) try { gtag('event', 'zakat_calc', { basis: basis, due: r.due }); } catch (e) {}
     }
 
     if (basisEl) basisEl.addEventListener('change', function () { syncLabel(); run(); });

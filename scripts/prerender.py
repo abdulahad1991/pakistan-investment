@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Bake data.json values into the static HTML placeholders.
+"""Bake dated data.json values into the static HTML placeholders.
 
-Why: every live figure on the site was authored as `-` and filled in by JS on
+Why: every data figure on the site was authored as `-` and filled in by JS on
 load. Anything that reads the HTML without executing JS - the AdSense review
 crawler, a first-pass Googlebot fetch, an LLM answer engine, a share preview -
-therefore saw a page titled "Gold rate in Pakistan today" containing no rates.
-That is exactly the thin/low-value signal we were being rejected on.
+therefore saw pages containing no rates or source dates.
 
 This runs after build_data.py, replaces each placeholder's text with the real
 value, and is idempotent (it overwrites whatever is currently there, not just
@@ -70,7 +69,7 @@ def data_age_label(iso: str) -> str:
     """Absolute, not relative. app.js swaps in the "updated Nh ago" form on load;
     baking a relative age into static HTML would freeze it at build time."""
     when = long_date(iso)
-    return f"Data: updated {when}" if when else "Data: updated daily"
+    return f"Data cutoff: {when}" if when else "Data cutoff unavailable"
 
 
 def chg_badge(pct_val, suffix: str) -> str:
@@ -105,6 +104,8 @@ def build_values(d: dict) -> dict[str, str]:
     v["m-pkr"] = v["h-pkr"] = v["tk-pkr"]
     v["m-inf"] = v["h-inf"] = v["tk-inf"]
     v["data-age"] = data_age_label(updated)
+    if long_date(updated):
+        v["hero-data-age"] = "Dataset: " + long_date(updated)
 
     # Homepage gold card.
     if g:
@@ -113,9 +114,9 @@ def build_values(d: dict) -> dict[str, str]:
         v["g-10g24"] = rs(g.get("g10_24k"))
         v["g-gram24"] = rs(g.get("gram_24k"))
         v["gold-chg"] = chg_badge(g.get("chg1y_pct"), "% / 1yr")
-        note = ("local Sarafa rate via gold.pk" if g.get("source_type") == "local"
-                else "international spot (gold futures &#215; PKR/USD)")
-        v["gold-src"] = f"As of {long_date(updated)} &#183; {note}"
+        note = ("third-party local-rate reference via gold.pk" if g.get("source_type") == "local"
+                else "derived international futures and PKR/USD fallback")
+        v["gold-src"] = f"Collected {long_date(updated)} &#183; {note}"
 
         # gold-rates.html rate grid. 21K/18K are derived from the 24K rate.
         v["gr-tola24"] = v["gr-tola24-m"] = rs(g.get("tola_24k"))
@@ -131,14 +132,15 @@ def build_values(d: dict) -> dict[str, str]:
                 v[f"gr-10g{k}"] = rs(round(tola / TOLA_GRAMS * 10))
                 v[f"gr-gram{k}"] = rs(round(tola / TOLA_GRAMS))
         v["gr-chg"] = chg_badge(g.get("chg1y_pct"), "% over 1 year")
-        src_note = ("Source: local Sarafa rate via gold.pk."
+        src_note = ("Source: gold.pk, a third-party local-rate publisher."
                     if g.get("source_type") == "local"
-                    else "Source: international spot (gold futures &#215; PKR/USD).")
+                    else "Source: a derived international futures and PKR/USD fallback.")
         v["gr-source"] = (
-            f"As of {long_date(updated)}. {src_note} 21K and 18K are estimated from "
-            "the 24K rate (&#215;87.5% and &#215;75%). Local shop prices add making charges."
+            f"Collected {long_date(updated)}. {src_note} This is not a dealer quote. "
+            "21K and 18K are derived from 24K (&#215;87.5% and &#215;75%); shop prices, "
+            "spreads and making charges differ."
         )
-        v["gold-asof"] = "Updated " + long_date(updated)
+        v["gold-asof"] = "Collected " + long_date(updated)
 
     # Homepage fuel card.
     if f:

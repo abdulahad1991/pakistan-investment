@@ -3,21 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SIP Calculator Pakistan: Monthly Investment Growth (Mutual Funds)</title>
-<meta name="description" content="See in 60 seconds what a monthly SIP could grow to in Pakistan - set the amount, years and expected return (with optional yearly step-up) and get the future value, total invested and gains on a live chart. Free, educational.">
+<title>Monthly Contribution Calculator | Pakistan Rupee Scenario</title>
+<meta name="description" content="Calculate a monthly contribution scenario in Pakistani rupees using a user-set annual rate and step-up, with exact timing assumptions and no preset return forecast.">
 <link rel="canonical" href="https://pakinvestlysis.com/sip-calculator.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="SIP Calculator Pakistan: Monthly Investment Growth">
-<meta property="og:description" content="What could a monthly SIP grow to? Set amount, years and return - 60-second answer with a chart.">
+<meta property="og:title" content="Monthly Contribution Scenario Calculator">
+<meta property="og:description" content="Apply a user-set annual rate and step-up to monthly Pakistani rupee contributions. Pure arithmetic, not a forecast.">
 <meta property="og:url" content="https://pakinvestlysis.com/sip-calculator.html">
 <meta property="og:site_name" content="Pakistan Investment Education">
 <meta property="og:image" content="https://pakinvestlysis.com/assets/og/home.png?v=3">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SIP Calculator Pakistan">
+<meta name="twitter:title" content="Monthly Contribution Scenario Calculator">
 <meta name="twitter:image" content="https://pakinvestlysis.com/assets/og/home.png?v=3">
-<meta name="twitter:description" content="What could a monthly SIP grow to? 60-second answer.">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115369516591859" crossorigin="anonymous"></script>
+<meta name="twitter:description" content="Monthly contribution arithmetic with a neutral 0% default and stated timing assumptions.">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +47,6 @@
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Pakistan SIP Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"PKR"},"url":"https://pakinvestlysis.com/sip-calculator.html"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://pakinvestlysis.com/"},{"@type":"ListItem","position":2,"name":"SIP Calculator","item":"https://pakinvestlysis.com/sip-calculator.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What return should I assume in a SIP calculator?","acceptedAnswer":{"@type":"Answer","text":"Be conservative. Returns are never guaranteed and Pakistani equity funds swing a lot year to year. Many people model a long-run number in the low-to-mid teens for equity funds and lower for income or money-market funds. Run a high and a low case to see the range, and remember inflation eats part of the nominal return."}},{"@type":"Question","name":"Does this SIP calculator use live market data?","acceptedAnswer":{"@type":"Answer","text":"No. The result is pure arithmetic on the numbers you enter: the annual return is divided by 12, the balance compounds monthly, your contribution is added each month, and any step-up raises the contribution once a year. The market strip at the top of the page shows live figures from our data feed, updated twice each trading weekday, but it does not affect the calculation."}},{"@type":"Question","name":"How do I actually start a SIP in Pakistan?","acceptedAnswer":{"@type":"Answer","text":"Most asset management companies let you open an account online and set up a recurring monthly investment starting from around PKR 1,000. You pick a fund, complete KYC, and instruct a monthly debit. Fund NAVs and categories are published by MUFAP."}},{"@type":"Question","name":"Is the future value before or after tax?","acceptedAnswer":{"@type":"Answer","text":"Before tax, and before fund costs. Returns on mutual funds can be subject to capital gains and withholding tax depending on the fund type and your filer status, and funds charge management fees plus a possible front-end load. The tool shows gross growth so you can compare scenarios on the same footing."}},{"@type":"Question","name":"Can I pause or change a SIP once started?","acceptedAnswer":{"@type":"Answer","text":"Yes. A SIP in a mutual fund is not a lock-in: you can raise, lower, pause or stop the monthly debit, and redeem units at the prevailing NAV, usually within a business day or two. Some funds charge a back-end load for very early exits, so check the offering document."}},{"@type":"Question","name":"How does a SIP compare with a committee (BC)?","acceptedAnswer":{"@type":"Answer","text":"A committee pools fixed monthly contributions and hands each member the pot once, by turn, with zero return: pay in PKR 120,000 over a year, receive PKR 120,000. A SIP invests the same monthly habit, so the money can grow or fall with the market and is always yours to redeem. Committees suit forced discipline and interest-free early access to a lump sum; a SIP suits money you want to grow over years."}}]}</script>
 </head>
 <body>
 <div class="accent-bar"></div>
@@ -65,7 +63,7 @@
     </div>
   </div>
 </header>
-<div class="ticker"><div class="ticker-inner"><span class="ticker-live"><span class="dot"></span>LIVE</span><div class="ticker-feed">
+<div class="ticker"><div class="ticker-inner"><span class="ticker-live"><span class="dot"></span>DATA</span><div class="ticker-feed">
   <span class="tk">KSE-100 <b id="tk-kse">1,77,267</b></span><span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
   <span class="tk">USD/PKR <b id="tk-pkr">&#8360;277.57</b></span><span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,73,800</b></span>
   <span class="tk">CPI <b id="tk-inf">9.2%</b></span>
@@ -75,9 +73,9 @@
 <div class="tool-wrap">
   <div class="tool-hd">
     <span class="badge60">Everything in 60 seconds</span>
-    <div class="kick">SIP calculator</div>
-    <h1>What could a monthly investment grow to?</h1>
-    <p>A SIP just means investing a fixed amount every month. Set the amount, how long, and a return - see the future value, what you put in, and the growth, with the magic of compounding on a chart.</p>
+    <div class="kick">Monthly contribution calculator</div>
+    <h1>Test a recurring-contribution scenario.</h1>
+    <p>Set a monthly amount, duration, annual rate and optional yearly contribution change. The calculator applies those inputs mechanically; it does not select a fund or predict a return.</p>
   </div>
 
   <div class="tool-grid">
@@ -91,9 +89,9 @@
         <div class="ip"><input type="number" id="sip-years" value="10" min="1" max="40" step="1"></div>
       </div>
       <div class="fld">
-        <label for="sip-return">Expected return per year (%)</label>
-        <div class="ip"><input type="number" id="sip-return" value="15" min="0" max="40" step="0.5"></div>
-        <div class="hint">PSX equity funds have varied widely; be realistic</div>
+        <label for="sip-return">Annual scenario rate (%)</label>
+        <div class="ip"><input type="number" id="sip-return" value="0" min="-100" max="100" step="0.5"></div>
+        <div class="hint">Neutral default; this is not an expected return</div>
       </div>
       <div class="fld">
         <label for="sip-stepup">Yearly step-up (%)</label>
@@ -104,10 +102,10 @@
 
     <div class="tool-out">
       <div class="res-grid">
-        <div class="res hero"><div class="rl">Future value</div><div class="rv" id="o-fv">-</div></div>
-        <div class="res"><div class="rl">You invest</div><div class="rv" id="o-inv">-</div></div>
-        <div class="res"><div class="rl">Total gains</div><div class="rv pos" id="o-gain">-</div></div>
-        <div class="res"><div class="rl">Growth multiple</div><div class="rv" id="o-mult">-</div></div>
+        <div class="res hero"><div class="rl">Scenario value</div><div class="rv" id="o-fv">-</div></div>
+        <div class="res"><div class="rl">Total contributions</div><div class="rv" id="o-inv">-</div></div>
+        <div class="res"><div class="rl">Change vs contributions</div><div class="rv" id="o-gain">-</div></div>
+        <div class="res"><div class="rl">Value / contributions</div><div class="rv" id="o-mult">-</div></div>
       </div>
       <div class="tool-chart"><canvas id="sip-chart"></canvas></div>
       <p class="tool-note" id="sip-note"></p>
@@ -115,66 +113,47 @@
   </div>
 
   <div class="tx-content">
-    <h2>How a SIP builds wealth</h2>
-    <p>Two forces do the work. First, you keep buying through ups and downs, so your average cost smooths out (rupee-cost averaging). Second, your returns earn returns - compounding - which is why the gap between what you put in and what it's worth widens fast in the later years. The yearly step-up lets you model raising your contribution as your income grows, which has an outsized effect over a long horizon.</p>
+    <h2>What this calculator does</h2>
+    <p>This is a recurring-cash-flow model, not a mutual-fund return model. It adds one contribution at the end of every month, applies one constant monthly rate to the existing balance, and can increase the contribution after each completed year. At 0%, the result equals total contributions.</p>
 
     <h2>How the calculation works</h2>
-    <p>The result is pure arithmetic on the three numbers you enter - no market data is involved. Your annual return is divided by 12 to get a monthly rate; each month the balance grows by that rate and then your contribution is added; and if you set a step-up, the monthly amount rises once at the end of every year. The chart plots the year-end balance against the total you have put in, which is why the green area pulls away from the dashed line over time. The live strip at the top of the page shows current market figures from our data feed (updated twice each trading weekday), but it does not affect the result.</p>
-    <p>Because the return is an assumption you choose, the output is a scenario, not a forecast. The figure is also gross: it ignores any front-end load deducted when you buy fund units, the management fee a fund charges inside its unit price, and taxes on gains or dividends. Real fund returns arrive unevenly too - a fund that averages 15% a year might do +40% one year and -20% the next - while this model spreads the growth perfectly smoothly.</p>
+    <p>The entered annual rate is divided by 12, so it is treated as a nominal annual rate with monthly compounding. For example, 12% becomes 1% per month; this is not the same convention as a 12% effective annual return. The contribution enters after that month's growth, and a step-up takes effect only after 12 contributions.</p>
+    <p>No market figure in the ticker affects the result. The model omits variable returns, NAV timing, loads, management fees, taxes, withholding, distributions, missed contributions and withdrawal restrictions. A product's actual cash flows must be reconstructed from its statements and terms.</p>
 
     <h2>How to read the numbers</h2>
     <ul>
-      <li><b>The future value is in tomorrow's rupees.</b> At 8% average inflation, ₨10,00,000 ten years from now buys roughly what ₨4,60,000 buys today. Judge the result against future prices, not today's.</li>
-      <li><b>The last years do most of the work.</b> ₨10,000 a month at 15% grows to roughly ₨27,50,000 in ten years on ₨12,00,000 invested - and more than half of that growth arrives in the final three years. Stopping early forfeits the steepest part of the curve.</li>
-      <li><b>Run a low case as well as a high one.</b> Try the same plan at 10% and again at 18%. The honest answer is a range, and the low end is the one to plan around.</li>
-      <li><b>The smooth line is a simplification.</b> A real equity-fund SIP will spend some years underwater. The averaging benefit only shows up if you keep contributing through the bad stretches.</li>
+      <li><b>Scenario value is nominal.</b> The tool does not calculate purchasing power because it has no matched future inflation path.</li>
+      <li><b>Total contributions include step-ups.</b> When the step-up is nonzero, later monthly contributions are larger than the starting input.</li>
+      <li><b>Change versus contributions can be negative.</b> A negative annual-rate assumption can produce a value below the money contributed.</li>
+      <li><b>The smooth line is artificial.</b> A constant monthly rate cannot represent the sequence risk and volatility of a market-linked product.</li>
     </ul>
 
-    <h2>What ₨10,000 a month actually becomes</h2>
-    <p>The table below runs the calculator at a deliberately moderate 12% a year — below what PSX equity funds returned in their best years, above a bank savings account — so the pattern is easy to see. Notice the growth multiple: the first five years barely beat the money you put in, and the jump from 15 to 20 years nearly doubles the outcome. Time in, not the monthly amount, is the lever that matters most.</p>
-    <div style="overflow-x:auto;max-width:760px"><table class="perf-table">
-      <thead><tr><th>Duration</th><th>You invest</th><th>Worth at 12%/yr</th><th>Multiple</th></tr></thead>
-      <tbody>
-        <tr><td>5 years</td><td>₨6,00,000</td><td>₨8,16,700</td><td>1.4×</td></tr>
-        <tr><td>10 years</td><td>₨12,00,000</td><td>₨23,00,400</td><td>1.9×</td></tr>
-        <tr><td>15 years</td><td>₨18,00,000</td><td>₨49,95,800</td><td>2.8×</td></tr>
-        <tr><td>20 years</td><td>₨24,00,000</td><td>₨98,92,600</td><td>4.1×</td></tr>
-      </tbody>
-    </table></div>
-    <p>The step-up field changes the picture more than most people expect. The same ₨10,000 plan over ten years with a 10% yearly step-up — roughly matching salary increments — ends at about ₨33,40,900 instead of ₨23,00,400. You do contribute more (₨19,12,500 against ₨12,00,000), but the habit of raising the debit with every increment is far easier than finding a lump sum later.</p>
-    <p>And because the return you type dominates everything, here is the same ₨15,000-a-month, 15-year plan at three assumptions — this spread is why we suggest planning around the low case:</p>
-    <div style="overflow-x:auto;max-width:760px"><table class="perf-table">
-      <thead><tr><th>Assumed return</th><th>You invest</th><th>Worth after 15 yrs</th></tr></thead>
-      <tbody>
-        <tr><td>10% (cautious)</td><td>₨27,00,000</td><td>₨62,17,100</td></tr>
-        <tr><td>14% (middle)</td><td>₨27,00,000</td><td>₨90,86,800</td></tr>
-        <tr><td>18% (optimistic)</td><td>₨27,00,000</td><td>₨1,35,84,400</td></tr>
-      </tbody>
-    </table></div>
+    <h2>Reproducible checks</h2>
+    <p>At a 0% annual rate and 0% step-up, PKR 10,000 per month for 10 years must produce PKR 1,200,000: 120 contributions multiplied by PKR 10,000. At 0% with a 10% yearly step-up, the first 12 contributions are PKR 10,000 each, the next 12 are PKR 11,000 each, and so on. These cases let a reader verify the contribution timing before testing any nonzero rate.</p>
+    <p>For a nonzero rate, the first contribution receives one fewer month of growth than it would in a beginning-of-month convention. A spreadsheet or provider illustration can therefore differ even when both use the same annual percentage. Confirm timing and rate convention before comparing outputs.</p>
 
-    <h2>SIP or lump sum?</h2>
-    <p>If you already hold a lump sum, mathematically it usually wins to invest it at once - more money spends more time compounding. But that argument assumes you can watch a large amount drop 20% the month after you invest and do nothing, which is precisely where most people break and sell at the bottom. Spreading a lump sum over six to twelve monthly instalments trades a little expected return for a much easier ride, and for money that arrives monthly anyway - a salary - the SIP is not a strategy choice at all, it is simply the only way the money exists. The honest rule: the best plan is the one you will actually continue through a bad year.</p>
+    <h2>What it cannot compare</h2>
+    <p>This tool cannot compare a lump sum with monthly contributions under actual market paths. That question depends on the sequence of returns, available dates, transaction costs and whether the money existed at the start. A constant-rate curve erases all of those differences.</p>
 
-    <h2>Which kind of fund suits a SIP?</h2>
-    <p>The calculator doesn't care where the money goes, but your return assumption should match the vehicle. In Pakistan the realistic menu is: <b>equity funds</b> (highest long-run potential, violent year-to-year swings — the kind of ride only a 10-year-plus horizon absorbs), <b>income and money-market funds</b> (returns that loosely track the SBP policy rate, far steadier, better for goals under five years), and <b>Shariah-compliant versions of both</b> — see our <a href="/guides/halal-investing-pakistan.html">halal investing guide</a>. Our <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual funds guide</a> walks through picking a fund and completing KYC, and <a href="/guides/money-market-funds-vs-bank-savings.html">money market funds vs bank savings</a> covers the low-risk end. If you'd rather see how a lump sum in gold or a specific PSX stock would actually have done, that's what the <a href="/backtester.html">backtester</a> is for.</p>
-    <p>One structural point favours the SIP habit itself: Pakistan's episodes of sharp rupee devaluation and double-digit inflation punish idle cash waiting for a "good time" to invest. A fixed monthly debit removes the timing decision entirely — some months you buy expensive, some cheap, and you never sit for years in cash that inflation is quietly taxing.</p>
+    <h2>A SIP is an instruction, not an asset class</h2>
+    <p>A recurring instruction can buy units in products with very different risks, fees and redemption rules. The calculator does not know the underlying asset, provider or Shariah classification. Use the <a href="/guides/how-to-invest-mutual-funds-pakistan.html">mutual-fund guide</a> to locate SECP, MUFAP and provider documents, and the <a href="/guides/money-market-funds-vs-bank-savings.html">money-market comparison</a> to distinguish fund units from bank deposits.</p>
 
     <h2>Common questions</h2>
-    <details class="faq-item"><summary>What return should I assume?</summary><div class="faq-a">Be conservative. Returns are never guaranteed and Pakistani equity funds swing a lot year to year. Many people model a long-run number in the low-to-mid teens for equity funds and lower for income/money-market funds. Run a high and a low case to see the range, and remember inflation eats part of the nominal return.</div></details>
-    <details class="faq-item"><summary>Does this calculator use live market data?</summary><div class="faq-a">No. It is deterministic maths on your inputs - monthly compounding at your annual rate divided by 12, contributions added each month, step-up applied yearly. Nothing is fetched to compute the result, and nothing you type is sent anywhere. The ticker strip is live, but purely informational.</div></details>
-    <details class="faq-item"><summary>How do I actually start a SIP in Pakistan?</summary><div class="faq-a">Most asset management companies let you open an account online and set up a recurring monthly investment from PKR 1,000. See our guide on <a href="/guides/how-to-invest-mutual-funds-pakistan.html">how to invest in mutual funds</a> for the step-by-step.</div></details>
-    <details class="faq-item"><summary>Is the future value before or after tax?</summary><div class="faq-a">Before tax, and before fund costs such as management fees or any front-end load. Returns on funds can be subject to capital gains and withholding tax depending on the fund type and your filer status - see <a href="/guides/investment-tax-pakistan.html">how investments are taxed</a>. This tool shows the gross growth so you can compare scenarios.</div></details>
-    <details class="faq-item"><summary>Can I pause or change a SIP once started?</summary><div class="faq-a">Yes. A SIP in a mutual fund is not a lock-in like a committee or an insurance plan - you can raise, lower, pause or stop the debit, and redeem units, usually within a business day or two at the prevailing NAV (some funds charge a back-end load if you exit very early; check the fund's offering document). The flexibility cuts both ways: nothing forces you to keep going, so the discipline has to be yours.</div></details>
-    <details class="faq-item"><summary>How does a SIP compare with a committee (BC)?</summary><div class="faq-a">A committee pools fixed monthly contributions and hands each member the pot once, by turn - it is a rotating loan among people you trust, with zero return: pay in ₨1,20,000 over a year, receive ₨1,20,000. A SIP invests the same monthly habit instead, so the money can grow (or fall) with the market and is always yours to redeem. Committees still make sense for forced discipline and interest-free early access to a lump sum; a SIP makes sense for money you genuinely want to grow over years.</div></details>
-    <div class="tool-disc"><strong>Educational only, not investment advice.</strong> The author is a software engineer, not an investment professional. Returns are assumptions you enter, not predictions; actual fund returns vary and can be negative. Verify with the fund's official documents before investing.</div>
-    <div style="margin-top:22px;font-family:var(--display);font-weight:700"><a href="/backtester.html" style="color:var(--green);border-bottom:2px solid var(--acid)">See what past investments actually did →</a></div>
+    <details class="faq-item"><summary>What annual rate should I enter?</summary><div class="faq-a">The calculator supplies no expected return. Its default is 0%. Any nonzero rate is a user-defined scenario and should not be attributed to a fund or market without independently sourced evidence and matching fee conventions.</div></details>
+    <details class="faq-item"><summary>Does this calculator use market data?</summary><div class="faq-a">No. The result depends only on the four inputs. The dated ticker is separate and does not affect any calculation.</div></details>
+    <details class="faq-item"><summary>When is each monthly contribution added?</summary><div class="faq-a">At the end of the month, after that month's constant growth or decline is applied to the prior balance.</div></details>
+    <details class="faq-item"><summary>Are costs and tax included?</summary><div class="faq-a">No. Loads, management fees, tax, withholding, distributions and transaction timing are all excluded. The <a href="/guides/investment-tax-pakistan.html">tax guide</a> links to current FBR sources but does not make this output net of tax.</div></details>
+    <details class="faq-item"><summary>Can the scenario rate be negative?</summary><div class="faq-a">Yes, down to -100% annually. A negative constant rate can reduce the balance below total contributions, though a real asset would not normally decline at one perfectly smooth monthly rate.</div></details>
+    <details class="faq-item"><summary>Does a recurring contribution guarantee averaging benefits?</summary><div class="faq-a">No. The outcome depends on the actual sequence of prices and costs. This calculator does not purchase units at changing NAVs, so it cannot demonstrate rupee-cost averaging.</div></details>
+    <div class="tool-disc"><strong>Educational arithmetic only.</strong> The annual rate and step-up are assumptions, not predictions. Actual product values can be negative or unavailable when needed, and provider terms control.</div>
+    <div style="margin-top:22px;font-family:var(--display);font-weight:700"><a href="/backtester.html" style="color:var(--green);border-bottom:2px solid var(--acid)">Inspect a dated price-only backtest →</a></div>
   </div>
 </div>
 </main>
 
 <footer>
   <div class="foot-grid">
-    <div class="foot-brand"><img src="/assets/logo-light.png" alt="Pakinvestlysis"><p>Educational technical analysis &amp; macro intelligence for the Pakistani market. Not financial advice - for educational purposes only.</p></div>
+    <div class="foot-brand"><img src="/assets/logo-light.png" alt="Pakinvestlysis"><p>Dated data, source-led guides and educational calculators for Pakistan. Not financial advice.</p></div>
     <div class="foot-col"><h4>DESKS</h4><a href="/">Markets</a><a href="/guides/national-savings-vs-mutual-funds.html">National Savings</a><a href="/guides/how-to-invest-mutual-funds-pakistan.html">Mutual Funds</a><a href="/gold-rates.html">Gold &amp; Metals</a></div>
     <div class="foot-col"><h4>TOOLS</h4><a href="/backtester.html">Backtester</a><a href="/sip-calculator.html">SIP Calculator</a><a href="/portfolio-tracker.html">Portfolio Tracker</a><a href="/tax-calculator.html">Tax Calculator</a></div>
     <div class="foot-col"><h4>SITE</h4><a href="/about.html">About</a><a href="/methodology.html">Methodology</a><a href="/privacy-policy.html">Privacy</a><a href="/contact.html">Contact</a></div>

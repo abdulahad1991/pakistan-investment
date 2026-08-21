@@ -1,44 +1,45 @@
-# Pakistan Investment Advisor
+# Pakinvestlysis
 
 **Live site: [pakinvestlysis.com](https://pakinvestlysis.com)**
 
-Free, daily-updated tools and guides for investing and saving money in Pakistan. Compare National Savings, mutual funds and PSX dividend stocks, calculate your tax and Zakat, and learn the how-to — with every figure traceable to a primary source (SBP, FBR, CDNS, MUFAP, PSX). Educational only; not financial advice.
+Independent educational tools, source-led guides and dated datasets about investing and saving in Pakistan. Source dates and failed fetches are exposed; users should verify a figure with the linked publisher before relying on it. Not financial advice.
 
 ## What's on the site
 
-- **[Investment Analyzer](https://pakinvestlysis.com/)** — enter an amount, get a personalised allocation across safe income, funds and stocks using today's live rates.
-- **[Pakistan Tax Calculator](https://pakinvestlysis.com/tax-calculator.html)** — income tax (salaried + business/AOP, FY2026-27 slabs), GST, provincial sales tax on services, and restaurant bill tax (card vs cash), with a year-on-year comparison chart.
-- **[Zakat Calculator](https://pakinvestlysis.com/zakat-calculator.html)** — 2.5% of net zakatable wealth (cash, gold, silver, investments, business assets − debts), with the nisab set from the current gold or silver price.
-- **[14 in-depth guides](https://pakinvestlysis.com/guides/)** — National Savings, mutual funds, PSX dividend stocks, T-bills via IPS, gold, halal investing, investment tax (filer vs non-filer), how to become a filer, freelancer/IT-export tax, prize bonds, brokerage account opening, Roshan Digital Account, the SBP policy rate.
-- **[Analysis & blog](https://pakinvestlysis.com/blog/)** — Budget 2026-27 breakdowns, PSX bull/bear cases, salaried-class action plans, and a bank-valuation walkthrough.
-- **[FAQ hub](https://pakinvestlysis.com/faq.html)** — 223 searchable, topic-filtered answers, each linking to its full guide.
+- **[Investment comparison](https://pakinvestlysis.com/)** - applies an entered amount to neutral educational categories and links to the underlying source material.
+- **[Pakistan tax calculator](https://pakinvestlysis.com/tax-calculator.html)** - Tax Year 2027 income-tax slab arithmetic and a user-rate sales-tax split.
+- **[Zakat arithmetic calculator](https://pakinvestlysis.com/zakat-calculator.html)** - applies a common 2.5% arithmetic convention to user-entered assets, liabilities and nisab inputs; it does not issue a religious ruling.
+- **[Investment guides](https://pakinvestlysis.com/guides/)** - 12 retained guides covering regulated funds, government instruments, market access, gold and tax processes.
+- **[Research notes and datasets](https://pakinvestlysis.com/blog/)** - the enacted Finance Act, a bank-model audit worksheet and a dated PSX dividend-yield screen.
 
 ## How it works
 
-A scheduled GitHub Action (`.github/workflows/update-data.yml`) runs every morning (~06:00 PKT):
+A scheduled GitHub Action (`.github/workflows/update-data.yml`) attempts two weekday refreshes and limited weekend gold/FX refreshes:
 
-1. `fetch_data.py` pulls live figures into `data.json` — SBP policy rate, CPI inflation, PKR/USD, KSE-100 (scraped from PSX), National Savings rates (CDNS), stock prices & dividend yields (Yahoo Finance), and mutual-fund 1y/3y/5y returns (finhisaab).
-2. `scripts/build_manifest.py` rebuilds `manifest.json` from `guides/` and `blog/`, so new articles list and become searchable automatically.
-3. Changes commit to `dev`; `.github/workflows/merge-dev-to-main.yml` fast-forwards `main` and pings **IndexNow** with any changed pages; GitHub Pages redeploys.
+1. `run_fetchers.py` writes provenance-wrapped source partitions and `build_data.py` merges them into `data.json`. A failed source retains its previous partition and records health/staleness metadata.
+2. `scripts/build_manifest.py` includes only indexable guide and research pages in `manifest.json`.
+3. `scripts/prerender.py` writes dated values and source notes into static HTML for non-JavaScript clients.
+4. Changes commit to `dev`; `.github/workflows/merge-dev-to-main.yml` fast-forwards `main`, submits changed URLs to IndexNow and lets GitHub Pages redeploy.
 
 Static HTML + vanilla JS + Chart.js. No build step, no framework.
 
-## Built for discoverability (SEO / GEO / AEO)
+## Search controls
 
-- JSON-LD on every page (Article / SoftwareApplication / HowTo / FAQPage / BreadcrumbList) and a site-wide Organization entity.
-- Answer-first "quick answer" leads and ~10 FAQs per page, kept exactly in sync between visible accordions and FAQPage schema.
-- `llms.txt`, branded Open Graph / Twitter share images, an explicit AI-crawler allowlist in `robots.txt`, and automatic IndexNow submission on deploy.
+- `sitemap.xml` lists only canonical, indexable pages.
+- Retired or consolidated pages use `noindex` and point to the retained page.
+- Structured data is limited to types supported by the visible page.
+- `robots.txt`, `llms.txt`, Open Graph metadata and IndexNow support machine discovery without creating search-only pages.
 
 ## Repository layout
 
 | Path | Purpose |
 |---|---|
-| `index.html` | Investment Analyzer (homepage app) |
-| `tax-calculator.html`, `zakat-calculator.html`, `faq.html` | Standalone tools + FAQ hub |
+| `index.html` | Educational investment comparison |
+| `tax-calculator.html`, `zakat-calculator.html` | Standalone arithmetic tools |
 | `guides/`, `blog/` | Educational articles |
 | `assets/` | `site.css`, page scripts, calculators, `og/` share images |
-| `data.json`, `manifest.json` | Daily-refreshed data + content index |
-| `fetch_data.py`, `scripts/` | Data scraper and manifest builder |
+| `data.json`, `manifest.json` | Dated data snapshot + content index |
+| `fetchers/`, `build_data.py`, `scripts/` | Source fetchers, merger and page builders |
 | `social-kit/` | Off-site distribution: Medium exports + social copy (not served) |
 
 ## Disclaimer

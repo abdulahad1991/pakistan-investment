@@ -1,4 +1,4 @@
-/* Investment backtester: "what if I'd invested?" Uses live data.json (gold + macro)
+/* Investment backtester: "what if I'd invested?" Uses dated data.json (gold + macro)
    and data/stock_history.json (monthly closes). No backend, no key. */
 (function () {
   "use strict";
@@ -10,7 +10,7 @@
     return (neg ? "-" : "") + "₨ " + s;
   }
   function groupPK(s) { s = s.replace(/\D/g, ""); if (s.length <= 3) return s; var h = s.slice(0, -3), t = s.slice(-3); return h.replace(/\B(?=(\d\d)+(?!\d))/g, ",") + "," + t; }
-  function num(id) { return Number(String($(id).value).replace(/[^0-9.]/g, "")) || 0; }
+  function num(id) { return Number(String($(id).value).replace(/[^0-9.-]/g, "")) || 0; }
 
   var DATA = null, HIST = null, ASSETS = [], chart = null, periodM = 36;
 
@@ -23,7 +23,7 @@
     buildAssets();
     wire();
     compute();
-  }).catch(function () { $("bt-note").textContent = "Could not load live data. Try again shortly."; });
+  }).catch(function () { $("bt-note").textContent = "Could not load the dated observations. Try again shortly."; });
 
   function fillTicker() {
     var m = DATA.macro || {};
@@ -75,7 +75,7 @@
     if (!ASSETS.length) { $("bt-note").textContent = "No price history available yet."; return; }
     var amount = num("bt-amount");
     var a = ASSETS[Math.max(0, Math.min(ASSETS.length - 1, +$("bt-asset").value))];
-    var nsRate = num("bt-ns") / 100;
+    var scenarioRate = Math.max(-1, Math.min(1, num("bt-ns") / 100));
     var labels = a.labels, vals = a.values, N = vals.length;
     var span = periodM > 0 ? Math.min(periodM + 1, N) : N;
     var start = N - span;
@@ -84,7 +84,7 @@
 
     var units = amount / V[0];
     var series = V.map(function (p) { return units * p; });
-    var ns = L.map(function (_, i) { return amount * Math.pow(1 + nsRate, i / 12); });
+    var scenario = L.map(function (_, i) { return amount * Math.pow(1 + scenarioRate, i / 12); });
     var final = series[series.length - 1];
     var ret = (final - amount) / amount * 100;
     var years = (V.length - 1) / 12;
@@ -95,15 +95,14 @@
     var pv = $("o-profit"); pv.textContent = (final - amount >= 0 ? "+" : "") + fmtPKR(final - amount); pv.className = "rv " + (final >= amount ? "pos" : "neg");
     var cv = $("o-cagr"); cv.textContent = (cagr >= 0 ? "+" : "") + cagr.toFixed(1) + "%"; cv.className = "rv " + (cagr >= 0 ? "pos" : "neg");
 
-    var beatNs = final >= ns[ns.length - 1];
-    $("bt-note").textContent = "₨ " + groupPK(String(Math.round(amount))) + " in " + a.name + " from " + L[0] + " would be " + fmtPKR(final) + " today (" +
-      (ret >= 0 ? "+" : "") + ret.toFixed(0) + "%). That " + (beatNs ? "beat" : "trailed") + " National Savings at " + (nsRate * 100).toFixed(1) + "% over the same time. Price only, dividends not included. Not advice.";
+    $("bt-note").textContent = "From " + L[0] + " to " + L[L.length - 1] + ", ₨ " + groupPK(String(Math.round(amount))) + " applied to " + a.name + " becomes " + fmtPKR(final) + " (" +
+      (ret >= 0 ? "+" : "") + ret.toFixed(0) + "% price-only). The dashed line applies your " + (scenarioRate * 100).toFixed(1) + "% constant-rate assumption. Dividends, costs and tax are excluded.";
 
-    draw(L, series, ns, a.name);
+    draw(L, series, scenario, a.name);
     if (window.pkTrack) window.pkTrack("backtest_run", { asset: a.key });
   }
 
-  function draw(labels, series, ns, name) {
+  function draw(labels, series, scenario, name) {
     if (typeof Chart === "undefined") return;
     var ctx = $("bt-chart").getContext("2d");
     if (chart) chart.destroy();
@@ -113,7 +112,7 @@
         labels: labels,
         datasets: [
           { label: name, data: series, borderColor: "#075E4B", backgroundColor: "rgba(7,94,75,.08)", borderWidth: 2.4, fill: true, tension: .25, pointRadius: 0, pointHoverRadius: 4 },
-          { label: "National Savings", data: ns, borderColor: "#B98A2F", borderWidth: 1.6, borderDash: [5, 4], fill: false, tension: .1, pointRadius: 0, pointHoverRadius: 3 }
+          { label: "User-set annual-rate scenario", data: scenario, borderColor: "#B98A2F", borderWidth: 1.6, borderDash: [5, 4], fill: false, tension: .1, pointRadius: 0, pointHoverRadius: 3 }
         ]
       },
       options: {

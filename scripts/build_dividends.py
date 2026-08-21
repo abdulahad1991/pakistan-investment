@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Render the living 'Top 10 PSX dividend stocks' page from data.json + stock_history.json.
+"""Render the dated PSX dividend-yield dataset from local source partitions.
 
-One canonical page (no new URLs). Each run swaps the live ranking, redraws the
-SVG charts, prepends a dated weekly snapshot, and bumps dateModified.
+One canonical page (no new URLs). Each run sorts the stored observations,
+redraws the SVG charts, exposes source cutoffs, and bumps dateModified.
 Pure string composition - no AI, no network.
 """
 import json, re, html as _html, sys
@@ -128,54 +128,52 @@ def cards_html(rows, hist):
     return "".join(out)
 
 
-def glance_html(rows, total):
+def glance_html(rows, total, data_date, payout_date):
     if not rows:
-        return "<li>Live figures are refreshing - check back shortly.</li>"
+        return "<li>No positive trailing-yield observations are available in this snapshot.</li>"
     top = rows[0]
     avg = sum(s["yield"] for s in rows) / len(rows)
     over8 = sum(1 for s in rows if s["yield"] >= 8)
     return "".join([
-        f"<li><strong>Highest trailing yield:</strong> {_html.escape(top['name'])} "
-        f"({top['ticker']}) at <strong>{top['yield']:.2f}%</strong>.</li>",
-        f"<li><strong>{total} listed companies</strong> currently pay a dividend; the full "
-        f"ranked list with charts is on this page.</li>",
-        f"<li><strong>{over8} of the top 10</strong> currently yield 8% or more; the "
-        f"top-10 average is about <strong>{avg:.1f}%</strong>.</li>",
-        "<li>Yields are <strong>trailing</strong> (past 12 months) and can change when "
-        "a company revises its payout or its price moves.</li>",
-        "<li>Dividends from listed shares are taxed (higher for non-filers). Educational "
-        "only, not investment advice.</li>",
+        f"<li><strong>First sorted row:</strong> {_html.escape(top['name'])} "
+        f"({top['ticker']}) at <strong>{top['yield']:.2f}%</strong> in the stored data.</li>",
+        f"<li><strong>{total} observations</strong> have a positive trailing cash-dividend "
+        f"value and price in the {data_date} snapshot.</li>",
+        f"<li><strong>{over8} of the first 10 rows</strong> are at least 8%; their simple "
+        f"average is <strong>{avg:.1f}%</strong>. Neither statistic is a portfolio return.</li>",
+        f"<li>Prices are dated <strong>{data_date}</strong>; the stored payout feed includes "
+        f"announcements through <strong>{payout_date or 'an unpublished cutoff'}</strong>.</li>",
+        "<li>The sort uses one backward-looking field. It does not test payout coverage, "
+        "liquidity, solvency, future distributions or total return.</li>",
     ])
 
 
-def rail_glance(rows, today, total):
+def rail_glance(rows, data_date, total):
     if not rows:
-        return f'<div class="gl-row"><div class="gl-n">{today}</div><div class="gl-l">Last refreshed</div></div>'
+        return f'<div class="gl-row"><div class="gl-n">{data_date}</div><div class="gl-l">Data snapshot</div></div>'
     top = rows[0]; over8 = sum(1 for s in rows if s["yield"] >= 8)
-    cells = [(f"{top['yield']:.1f}%", f"Top yield: {top['ticker']}"),
-             (str(total), "Dividend payers"),
-             (str(over8), "Top-10 yielding 8%+"),
-             (today, "Last refreshed")]
+    cells = [(top["ticker"], "First row, not a pick"),
+             (str(total), "Positive-yield rows"),
+             (str(over8), "First 10 at 8%+"),
+             (data_date, "Price snapshot")]
     return "".join(f'<div class="gl-row"><div class="gl-n">{_html.escape(n)}</div>'
                    f'<div class="gl-l">{_html.escape(l)}</div></div>' for n, l in cells)
 
 
 FAQ = [
-    ("What are the highest dividend-paying stocks on the PSX right now?",
-     "The table on this page ranks the top 10 listed companies by trailing dividend yield, "
-     "refreshed weekly from market data. As yields move with both the dividend and the share "
-     "price, the order changes over time - check the live table above for the current ranking."),
-    ("Is a higher dividend yield always better?",
-     "No. A very high yield can mean the share price has fallen sharply, which lifts the yield "
-     "mechanically, or that a one-off payout is not repeatable. Always read the yield alongside "
-     "the 12-month price trend and whether the payout is funded by recurring profit."),
-    ("How are dividends taxed in Pakistan?",
-     "Dividends from listed companies are subject to withholding tax, which is higher for people "
-     "who are not on the Active Taxpayers List (non-filers). The exact rate depends on the company "
-     "and your filer status - see our investment tax guide for current rates."),
-    ("How often is this list updated?",
-     "It refreshes automatically every week from the latest available prices and dividend data, "
-     "and a dated snapshot is added to the weekly log on this page each time."),
+    ("What does the first row mean?",
+     "Only that it has the largest stored trailing cash dividend divided by stored share price "
+     "among observations passing the screen. It is not a quality score, forecast or recommendation."),
+    ("Why can a trailing dividend yield be misleading?",
+     "The numerator can include special or non-recurring cash payouts, while the denominator can "
+     "fall sharply. The result says nothing by itself about future distributions or total return."),
+    ("How is the screen reproduced?",
+     "Sum cash dividends announced in the trailing period after converting declared percentages "
+     "using the recorded face value, divide by the dated market price, and sort descending. Verify "
+     "face value, announcements and price against each issuer's PSX records."),
+    ("Is this page live?",
+     "No. The page displays its stored price date and payout-announcement cutoff. It remains a "
+     "dated snapshot until both source partitions are collected and the page is rebuilt."),
 ]
 
 
@@ -190,17 +188,19 @@ def faq_html():
 
 
 def _snap_week(s):
-    m = re.search(r'Week of ([0-9-]+)', s); return m.group(1) if m else None
+    m = re.search(r'(?:Week of|Snapshot dated) ([0-9-]+)', s)
+    return m.group(1) if m else None
 
 
-def changelog(existing, today, rows):
+def changelog(existing, data_date, rows):
     top = rows[0] if rows else None
     over8 = sum(1 for s in rows if s["yield"] >= 8)
-    snap = (f'<div class="snap"><strong>Week of {today}.</strong> '
-            f'Highest yield: {_html.escape(top["name"])} ({top["ticker"]}) at '
-            f'{top["yield"]:.2f}%. {over8} of the top 10 yield 8% or more.</div>') if top else ""
+    snap = (f'<div class="snap"><strong>Snapshot dated {data_date}.</strong> '
+            f'First row after a descending trailing-yield sort: '
+            f'{_html.escape(top["name"])} ({top["ticker"]}) at '
+            f'{top["yield"]:.2f}%. {over8} of the first 10 rows are at least 8%.</div>') if top else ""
     snaps = re.findall(r'<div class="snap">.*?</div>', existing, re.S)
-    snaps = [s for s in snaps if _snap_week(s) != today]
+    snaps = [s for s in snaps if _snap_week(s) != data_date]
     return "".join(([snap] + snaps)[:8])
 
 
@@ -213,30 +213,31 @@ def _extract_published(html):
     m = re.search(r'"datePublished":\s*"([^"]+)"', html); return m.group(1) if m else None
 
 
-def build_jsonld(rows, faq_ld, published, today, canonical, h1):
+def build_jsonld(rows, published, today, canonical, h1):
     article = {"@context": "https://schema.org", "@type": "Article", "headline": h1,
                "datePublished": published, "dateModified": today,
                "author": {"@type": "Person", "name": "Abdul Ahad"},
                "publisher": {"@type": "Organization", "name": "Pakistan Investment Education"},
                "mainEntityOfPage": canonical}
     itemlist = {"@context": "https://schema.org", "@type": "ItemList",
-                "name": "Top 10 PSX dividend stocks", "itemListOrder": "Descending",
+                "name": "Dated PSX trailing dividend-yield screen", "itemListOrder": "Descending",
                 "numberOfItems": len(rows),
                 "itemListElement": [{"@type": "ListItem", "position": i,
                                      "name": f'{s["name"]} ({s["ticker"]})'}
                                     for i, s in enumerate(rows, 1)]}
-    faqpage = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faq_ld}
     crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList",
               "itemListElement": [
                   {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
                   {"@type": "ListItem", "position": 2, "name": "Blog", "item": SITE + "/blog/"},
                   {"@type": "ListItem", "position": 3, "name": h1, "item": canonical}]}
     return "\n".join(f'<script type="application/ld+json">{json.dumps(b, ensure_ascii=False)}</script>'
-                     for b in (article, itemlist, faqpage, crumbs))
+                     for b in (article, itemlist, crumbs))
 
 
 def render(today):
     data = json.loads((ROOT / "data.json").read_text())
+    partition_path = ROOT / "data" / "partitions" / "dividends.json"
+    partition = json.loads(partition_path.read_text()) if partition_path.exists() else {}
     hp = ROOT / "data" / "stock_history.json"
     hist = json.loads(hp.read_text()) if hp.exists() else {}
     full = all_payers(data)
@@ -250,34 +251,54 @@ def render(today):
         published = _extract_published(old) or today
         existing_cl = _extract_changelog(old)
 
-    h1 = "Top 10 Dividend Stocks on the Pakistan Stock Exchange"
+    data_date = (data.get("updated") or today)[:10]
+    payout_date = partition.get("latest_announce")
+    market_health = (data.get("data_health") or {}).get("stocks") or {}
+    payout_health = (data.get("data_health") or {}).get("dividends") or {}
+    market_label = market_health.get("as_of") or data_date
+    payout_label = payout_date or "not published in the partition"
+    status_bits = [
+        f"PSX price observation: {_html.escape(str(market_label))}.",
+        f"Cash-dividend announcements included through: {_html.escape(str(payout_label))}.",
+        f"Price collection status: {'successful' if market_health.get('ok') else 'failed or unavailable'}.",
+        f"Payout collection status: {'successful' if payout_health.get('ok') else 'failed or unavailable'}.",
+        "A failed refresh leaves the last stored observations in place; it does not make them current.",
+    ]
+    data_status = " ".join(status_bits)
+
+    h1 = "PSX trailing dividend-yield dataset"
     top = rows[0] if rows else None
-    tldr = (f"The PSX's highest-yielding listed shares, ranked weekly. Right now "
-            f"{top['name']} ({top['ticker']}) leads at {top['yield']:.1f}%. "
-            f"Yields are trailing and a high yield can signal a falling price as much as a "
-            f"generous payout - read each chart with the number.") if top else \
-           "The PSX's highest-yielding listed shares, ranked and charted weekly."
-    title = "Top 10 Dividend Stocks in Pakistan (PSX) 2026 - Live Yields & Charts"
+    tldr = (f"A dated mechanical sort, not a buy list. Prices are from {data_date}; "
+            f"stored cash-dividend announcements run through {payout_label}. "
+            f"{top['ticker']} is the first row, which means only that its stored trailing "
+            f"yield is largest in this dataset.") if top else \
+           f"A dated PSX dividend dataset as of {data_date}; no positive-yield rows are available."
+    title = "PSX Dividend-Yield Dataset 2026: Dated Payout & Price Screen"
+    meta_desc = (f"Dated PSX trailing dividend-yield dataset using prices from {data_date} "
+                 f"and cash-dividend records through {payout_label}, with formula and source checks.")
     canonical = f"{SITE}/blog/{SLUG}.html"
-    faq_h, faq_ld = faq_html()
+    faq_h, _faq_ld = faq_html()
     related = "".join(f'<a href="{h}">{t}</a>' for h, t in [
-        ("/guides/best-dividend-stocks-psx.html", "Best Dividend Stocks on the PSX: the full guide"),
+        ("/blog/how-to-value-bank-stocks-pakistan.html", "How to value a Pakistani bank stock"),
         ("/guides/investment-tax-pakistan.html", "How investments (and dividends) are taxed"),
         ("/guides/open-brokerage-account-psx.html", "How to open a PSX brokerage account"),
         ("/guides/how-to-invest-mutual-funds-pakistan.html", "Prefer a fund? Mutual funds explained"),
         ("/blog/", "All blog articles")])
 
     repl = {
-        "{{TITLE}}": title, "{{META_DESC}}": tldr[:155], "{{CANONICAL}}": canonical,
+        "{{TITLE}}": _html.escape(title, quote=True),
+        "{{META_DESC}}": _html.escape(meta_desc, quote=True),
+        "{{CANONICAL}}": canonical,
         "{{OG_IMAGE}}": OG, "{{H1}}": h1, "{{TLDR}}": _html.escape(tldr), "{{AS_OF}}": today,
-        "{{GLANCE}}": glance_html(rows, len(full)), "{{TABLE}}": table_html(rows, hist),
+        "{{DATA_AS_OF}}": data_date, "{{DATA_STATUS}}": data_status,
+        "{{GLANCE}}": glance_html(rows, len(full), data_date, payout_date), "{{TABLE}}": table_html(rows, hist),
         "{{FULL_TABLE}}": table_html(full, hist), "{{FULL_COUNT}}": str(len(full)),
-        "{{TBL_NOTE}}": (f"As of {today}. Ranked by trailing 12-month dividend yield from "
-                         f"automatically scraped prices and dividends. Refreshes weekly. "
-                         f"Past payouts do not guarantee future ones."),
-        "{{CARDS}}": cards_html(rows, hist), "{{CHANGELOG}}": changelog(existing_cl, today, rows),
-        "{{FAQ}}": faq_h, "{{RELATED}}": related, "{{RAIL_GLANCE}}": rail_glance(rows, today, len(full)),
-        "{{JSONLD}}": build_jsonld(rows, faq_ld, published, today, canonical, h1),
+        "{{TBL_NOTE}}": (f"Dated price snapshot: {data_date}. Stored cash-dividend announcements "
+                         f"through {payout_label}. Sorted by trailing cash dividend per share divided "
+                         f"by stored price. Values require issuer-level verification."),
+        "{{CARDS}}": cards_html(rows, hist), "{{CHANGELOG}}": changelog(existing_cl, data_date, rows),
+        "{{FAQ}}": faq_h, "{{RELATED}}": related, "{{RAIL_GLANCE}}": rail_glance(rows, data_date, len(full)),
+        "{{JSONLD}}": build_jsonld(rows, published, today, canonical, h1),
     }
     out = tmpl
     for k, v in repl.items():

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T12:09:10Z",
+  "updated": "2026-08-26T05:08:13Z",
   "macro": {
     "pkr_usd": 277.52,
     "sbp_rate": 11.5,
@@ -412,7 +412,7 @@
       "name": "Habib Bank",
       "sector": "Banking",
       "price": 318.63,
-      "chg1y": 21.75,
+      "chg1y": 23.18,
       "hi52": 369.99,
       "lo52": 235.55,
       "div": 23.0,
@@ -444,7 +444,7 @@
       "name": "Meezan Bank",
       "sector": "Banking",
       "price": 571.83,
-      "chg1y": 44.25,
+      "chg1y": 46.16,
       "hi52": 605.0,
       "lo52": 387.5,
       "div": 28.5,
@@ -476,7 +476,7 @@
       "name": "United Bank",
       "sector": "Banking",
       "price": 456.97,
-      "chg1y": 19.7,
+      "chg1y": 20.28,
       "hi52": 517.0,
       "lo52": 293.25,
       "div": 64.0,
@@ -602,7 +602,7 @@
       "name": "Lucky Cement",
       "sector": "Cement",
       "price": 442.69,
-      "chg1y": 7.04,
+      "chg1y": 6.56,
       "hi52": 529.5,
       "lo52": 339.0,
       "div": 9.0,
@@ -1038,7 +1038,7 @@
       "name": "Fauji Fertilizer",
       "sector": "Fertilizer",
       "price": 547.74,
-      "chg1y": 25.44,
+      "chg1y": 23.97,
       "hi52": 685.0,
       "lo52": 425.0,
       "div": 53.0,
@@ -1177,7 +1177,7 @@
       "name": "Mari Petroleum",
       "sector": "Oil & Gas Exploration",
       "price": 668.06,
-      "chg1y": 6.0,
+      "chg1y": 6.31,
       "hi52": 795.0,
       "lo52": 544.56,
       "div": 48.7,
@@ -1193,7 +1193,7 @@
       "name": "Oil & Gas Development",
       "sector": "Oil & Gas Exploration",
       "price": 327.43,
-      "chg1y": 25.47,
+      "chg1y": 25.73,
       "hi52": 352.0,
       "lo52": 238.2,
       "div": 19.0,
@@ -2261,11 +2261,11 @@
     }
   },
   "fuel": {
-    "petrol": 341.98,
-    "hsd": 370.69,
+    "petrol": 343.1,
+    "hsd": 371.8,
     "kerosene": 301.64,
     "ldo": 199.98,
-    "asof": "25 Aug 2026",
+    "asof": "26 Aug 2026",
     "source": "PakWheels (OGRA-notified rates)"
   },
   "data_health": {
@@ -2284,7 +2284,7 @@
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2294,7 +2294,7 @@
       "source": "Mutual Funds Association of Pakistan (MUFAP)",
       "cadence": "daily",
       "stale": true,
-      "age_days": 32,
+      "age_days": 33,
       "last_error": "HTTPError: HTTP Error 403: Forbidden"
     },
     "gold": {
@@ -2312,7 +2312,7 @@
       "source": "Pakistan Bureau of Statistics (PBS)",
       "cadence": "monthly",
       "stale": false,
-      "age_days": 55,
+      "age_days": 56,
       "last_error": null
     },
     "kse": {
@@ -2321,7 +2321,7 @@
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null
     },
     "macro": {
@@ -2330,12 +2330,12 @@
       "source": "Pakistan Bureau of Statistics (PBS) + IMF",
       "cadence": "event",
       "stale": false,
-      "age_days": 56,
+      "age_days": 57,
       "last_error": null
     },
     "petrol": {
       "ok": true,
-      "as_of": "2026-08-25",
+      "as_of": "2026-08-26",
       "source": "PakWheels (OGRA-notified rates)",
       "cadence": "daily",
       "stale": false,
@@ -2358,8 +2358,8 @@
       "as_of": "August 13, 2026",
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "weekly",
-      "stale": false,
-      "age_days": 12,
+      "stale": true,
+      "age_days": 13,
       "last_error": null,
       "via": "sbp-m2m"
     },
@@ -2369,16 +2369,16 @@
       "source": "Central Directorate of National Savings (CDNS)",
       "cadence": "event",
       "stale": false,
-      "age_days": 38,
+      "age_days": 39,
       "last_error": null
     },
     "stocks": {
       "ok": true,
-      "as_of": "Tue, Aug 25, 2026 3:44 PM",
+      "as_of": "Tue, Aug 25, 2026 3:49 PM",
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null
     }
   }

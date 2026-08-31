@@ -3,16 +3,20 @@
   "value": {
     "petrol": 342.02,
     "hsd": 371.44,
-    "kerosene": 301.64,
-    "ldo": 199.98
+    "kerosene": 286.44,
+    "ldo": 252.03
   },
   "as_of": "2026-08-29",
-  "source": "PakWheels (OGRA-notified rates)",
+  "source": "PetrolPrice.com.pk (OGRA)",
   "ok": true,
-  "fetched_at": "2026-08-31T11:06:27Z",
+  "fetched_at": "2026-08-31T18:16:53Z",
   "cadence": "daily",
   "metric": "retail fuel price",
   "unit": "PKR/L",
-  "source_url": "https://www.pakwheels.com/petroleum-prices-in-pakistan",
-  "via": "pakwheels"
+  "source_url": "https://petrolprice.com.pk/",
+  "via": "petrolprice.com.pk",
+  "failover": true,
+  "primary_errors": [
+    "[pakwheels] HTTPError: HTTP Error 403: Forbidden"
+  ]
 }

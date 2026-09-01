@@ -1,10 +1,10 @@
 {
   "name": "kse",
   "value": {
-    "level": 177616.96,
-    "prev_close": 177575.22,
-    "change": 41.74,
-    "change_pct": 0.02,
+    "level": 177353.62,
+    "prev_close": 177616.96,
+    "change": -263.34,
+    "change_pct": -0.15,
     "history": {
       "labels": [
         "Sep'21",
@@ -66,7 +66,8 @@
         "May'26",
         "Jun'26",
         "Jul'26",
-        "Aug'26"
+        "Aug'26",
+        "Sep'26"
       ],
       "values": [
         44291.3,
@@ -128,14 +129,15 @@
         172118.01,
         179020.11,
         176405.33,
-        177616.96
+        177616.96,
+        177353.62
       ]
     }
   },
-  "as_of": "2026-08-31",
+  "as_of": "2026-09-01",
   "source": "Pakistan Stock Exchange (PSX Data Portal)",
   "ok": true,
-  "fetched_at": "2026-09-01T09:33:59Z",
+  "fetched_at": "2026-09-01T15:32:26Z",
   "cadence": "intraday",
   "metric": "KSE-100 index level (close)",
   "source_url": "https://dps.psx.com.pk/timeseries/eod/KSE100"

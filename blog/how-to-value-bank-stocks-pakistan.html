@@ -33,7 +33,7 @@
   "author": {"@type": "Person", "name": "Abdul Ahad", "url": "https://pakinvestlysis.com/about.html", "sameAs": ["https://www.linkedin.com/in/abdulahad1991/", "https://github.com/abdulahad1991"]},
   "publisher": {"@type": "Organization", "name": "Pakistan Investment Education", "url": "https://pakinvestlysis.com"},
   "datePublished": "2026-06-20",
-  "dateModified": "2026-08-21",
+  "dateModified": "2026-09-07",
   "mainEntityOfPage": "https://pakinvestlysis.com/blog/how-to-value-bank-stocks-pakistan.html"
 }
 </script>
@@ -244,6 +244,8 @@ gtag('config', 'G-4T2H0KH9H7');
     .ladder-row .bar{display:none}
   }
 </style>
+<link rel="stylesheet" href="/assets/research.css">
+<meta name="audio-summary" content="review-required">
 </head>
 <body>
 
@@ -278,8 +280,8 @@ gtag('config', 'G-4T2H0KH9H7');
       <span class="tk">KSE-100 <b id="tk-kse">1,75,233</b></span>
       <span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
       <span class="tk">USD/PKR <b id="tk-pkr">&#8360;277.41</b></span>
-      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold"></span></span>
-      <span class="tk">CPI <b id="tk-inf">9.2%</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold">1Y unavailable</span></span>
+      <span class="tk">CPI <b id="tk-inf">11.1%</b></span>
     </div>
   </div>
 </div>
@@ -303,7 +305,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <h1>How to audit a Pakistani bank valuation model.</h1>
       <div class="art-byline">
         <span>By <a href="/about.html">Abdul Ahad</a></span>
-        <span class="hl">· Updated 21 August 2026</span>
+        <span class="hl">· Updated 7 September 2026</span>
         <span>· 12 min read</span>
       </div>
     </div>
@@ -325,7 +327,7 @@ gtag('config', 'G-4T2H0KH9H7');
         <div>
           <div class="nm">Abdul Ahad</div>
           <div class="bd">Software engineer and author of the open-source market-data pipeline behind this site. Automated widgets use dated data partitions and expose stale source status; tax, legal and policy claims are checked against the documents linked in each article. Not a SECP-registered advisor: see the <a href="/methodology.html#editorial">editorial policy</a> for the research and corrections process.</div>
-          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Last updated: 21 August 2026</span></div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Last updated: 7 September 2026</span></div>
         </div>
       </div>
 
@@ -349,9 +351,10 @@ gtag('config', 'G-4T2H0KH9H7');
 
       <p>A bank model is unusually sensitive to accounting consistency. Deposits fund only part of the asset base; equity, borrowings, cash, statutory reserves and other assets also matter. Income is earned over a period, so it should normally be compared with average rather than closing balances. A model that skips these reconciliations can produce a plausible-looking but unsupported output.</p>
 
-      <p>The figures below are an anonymous <strong>100-unit teaching model</strong>, not the accounts of any issuer. To reproduce the worksheet for a real bank, use its PSX-filed statements, notes, capital disclosures and payout notices, and retain the date and source beside every input.</p>
+      <p>The completed Bank Alfalah case below reconciles actual published per-share figures and provides a downloadable calculation. The later <strong>100-unit teaching model</strong> explains statement mechanics using separate, anonymous assumptions. Keep the two input sets distinct.</p>
 
-      <div class="blog-explainer" data-explainer="how-to-value-bank-stocks-pakistan"></div>
+
+      <!-- CASE_bafl-case-study_START --><section class="research-case" id="bafl-case-study"><p class="research-meta">Original calculation · Reviewed 7 September 2026 · Abdul Ahad, publisher</p><h2>Completed case: Bank Alfalah’s per-share reconciliation</h2><p>Bank Alfalah’s <a href="https://www.bankalfalah.com/news-room/annual-results-for-2025-and-2-for-1-stock-split/">FY2025 results release</a> reports EPS of PKR 17.97 and full-year cash dividends of PKR 10.50 per old share. Its <a href="https://dps.psx.com.pk/download/attachment/273940-1.pdf">PSX split notice</a> sets 20 April 2026 as the resumption date for two new shares per old share, with face value changing from PKR 10 to PKR 5.</p><div class="research-table"><table><thead><tr><th scope="col">FY2025 input</th><th scope="col">Per old share</th><th scope="col">Equivalent per new share</th></tr></thead><tbody><tr><td>Earnings</td><td>PKR 17.97</td><td>PKR 8.985</td></tr><tr><td>Full-year cash dividend</td><td>PKR 10.50</td><td>PKR 5.25</td></tr><tr><td>Dividend ÷ EPS</td><td>58.43%</td><td>58.43%</td></tr></tbody></table></div><p>A holder of 1,000 old shares becomes a holder of 2,000 new shares. The same historical gross dividend is PKR 10,500 on either representation: 1,000 × 10.50 or 2,000 × 5.25. The split changes units, while the payout ratio stays unchanged. Mixing the old EPS with a new-share price would understate the price/earnings multiple by half.</p><p>The <a href="https://www.bankalfalah.com/news-room/bank-alfalah-reports-39-rise-in-half-year-2026-profit-after-tax/">half-year 2026 release</a> provides a matched comparison: EPS of 6.76 versus restated 4.84 for the prior half-year. Our calculation, (6.76 ÷ 4.84 − 1) × 100, is 39.67%. The half-year dividend of 3.00 divided by 6.76 gives a 44.38% payout ratio. Small differences from reported growth can arise because these displayed EPS inputs are rounded.</p><p class="research-result">Use a consistent share basis and the same reporting period before interpreting growth or a valuation multiple.</p><p>This reconciliation is complete for the stated inputs. It does not estimate fair value. The issuer attributes much of the half-year profit increase to capital gains; annualizing that half-year EPS would embed a separate repeatability assumption. The teaching model below shows the additional balance-sheet, income and valuation checks needed before a forecast could be supported.</p><p><a href="/data/research/bafl-per-share-reconciliation.csv" download>Download the calculation (CSV)</a> · <a href="/data/research/case-inputs.json">Dated inputs and sources (JSON)</a></p></section><!-- CASE_bafl-case-study_END -->
 
       <h2 id="s1"><span class="sn">01</span>Why a bank is valued differently</h2>
 
@@ -454,32 +457,32 @@ gtag('config', 'G-4T2H0KH9H7');
           </div>
           <div class="ladder-row pos">
             <div class="desc">+ Fee &amp; other income <small>(cards, transfers, charges)</small></div>
-            <div class="bar" style="width:8.3%;max-width:25px"></div>
+            <div class="bar" style="width:8%;max-width:24px"></div>
             <div class="amt">+8</div>
           </div>
           <div class="ladder-row neg">
             <div class="desc">− Provisions for bad loans</div>
-            <div class="bar" style="width:1.1%;min-width:4px"></div>
+            <div class="bar" style="width:5%;max-width:15px"></div>
             <div class="amt">−5</div>
           </div>
           <div class="ladder-row neg">
             <div class="desc">− Operating expenses <small>(staff, branches, admin)</small></div>
-            <div class="bar" style="width:19.4%;max-width:58px"></div>
+            <div class="bar" style="width:25%;max-width:75px"></div>
             <div class="amt">−25</div>
           </div>
           <div class="ladder-row sub">
             <div class="desc">= Profit before tax</div>
-            <div class="bar" style="width:37.8%;max-width:113px"></div>
+            <div class="bar" style="width:28%;max-width:84px"></div>
             <div class="amt">28</div>
           </div>
           <div class="ladder-row neg">
             <div class="desc">− Tax <small>(illustrative current + deferred amount)</small></div>
-            <div class="bar" style="width:18.9%;max-width:57px"></div>
+            <div class="bar" style="width:12%;max-width:36px"></div>
             <div class="amt">−12</div>
           </div>
           <div class="ladder-row net">
             <div class="desc">= Net profit (to shareholders)</div>
-            <div class="bar" style="width:18.9%;max-width:57px"></div>
+            <div class="bar" style="width:16%;max-width:48px"></div>
             <div class="amt">16</div>
           </div>
         </div>
@@ -723,6 +726,5 @@ gtag('config', 'G-4T2H0KH9H7');
 <script src="/assets/search.js" defer></script>
 <script src="/assets/share.js" defer></script>
 <script src="/assets/ticker.js" defer></script>
-<script src="/assets/blog-explainer.js" defer></script>
 </body>
 </html>

@@ -24,6 +24,7 @@ import html as _html
 import datetime
 
 from .base import http_get, partition, run, in_band
+from .corporate_actions import load_ledger, dividend_basis
 
 NAME = "dividends"
 
@@ -39,7 +40,7 @@ CADENCE = "daily"
 DEFAULT_FACE = 10
 # Issuers that subdivided their shares away from Rs 10 par. Verified necessary:
 # Lucky Cement (LUCK) is Rs 2 par => 200% = Rs 4, NOT Rs 20.
-PAR_OVERRIDE = {"LUCK": 2}
+PAR_OVERRIDE = {"LUCK": 2, "SYS": 2, "BAFL": 5, "MTL": 5}
 
 # ---------------------------------------------------------------------------
 # Pure parser (what the test calls)
@@ -79,7 +80,7 @@ def face_value(symbol):
     return PAR_OVERRIDE.get((symbol or "").strip().upper(), DEFAULT_FACE)
 
 
-def parse_payouts(html, symbol):
+def parse_payouts(html, symbol, as_of=None):
     """Parse the PSX payouts table for ``symbol``, keeping only (D) cash rows.
 
     Returns::
@@ -88,9 +89,12 @@ def parse_payouts(html, symbol):
          ttm_cash, symbol, face_value}
 
     ``latest_*`` describe the most recent cash-dividend row; ``ttm_cash`` is the
-    sum of cash-dividend rows announced in the trailing ~12 months (anchored on
-    the most recent row's announce date). Money is PKR per share.
+    sum of cash-dividend rows announced in the 12 months ending ``as_of``
+    (today by default). Cash is normalized to the reviewed share basis at
+    that cutoff. Unknown or expired corporate-action coverage is not verified.
     """
+    anchor = datetime.date.fromisoformat(as_of) if as_of else datetime.date.today()
+    ledger = load_ledger()
     face = face_value(symbol)
     rows = []
     for rowhtml in _ROW.findall(html):
@@ -104,13 +108,19 @@ def parse_payouts(html, symbol):
         if not mpct:
             continue
         pct = float(mpct.group(1))
+        date = _announce_date(announce)
+        basis = dividend_basis(symbol, date.isoformat() if date else None, anchor.isoformat(), ledger)
+        row_face, share_factor = basis if basis else (face, 1)
         rows.append({
             "announce": announce,
             "period": period,
             "book_closure": book,
             "pct": pct,
-            "cash": round(pct / 100.0 * face, 4),
-            "date": _announce_date(announce),
+            "cash": round(pct / 100.0 * row_face / share_factor, 4),
+            "date": date,
+            "basis_verified": basis is not None and len(_TYPE.findall(details)) == 1,
+            "face_at_declaration": row_face,
+            "subsequent_share_factor": share_factor,
         })
 
     if not rows:
@@ -118,21 +128,19 @@ def parse_payouts(html, symbol):
             "latest_cash": None, "latest_pct": None, "period": None,
             "announce": None, "book_closure": None, "ttm_cash": 0.0,
             "symbol": (symbol or "").strip().upper(), "face_value": face,
+            "basis_verified": False, "window_end": anchor.isoformat(), "cash_rows": [],
         }
 
-    dated = [r for r in rows if r["date"] is not None]
+    dated = [r for r in rows if r["date"] is not None and r['date'] <= anchor]
     latest = max(dated, key=lambda r: r["date"]) if dated else rows[0]
 
-    # Trailing ~12 months, anchored on the most recent announce date.
-    if latest["date"] is not None:
-        anchor = latest["date"]
-        try:
-            cutoff = anchor.replace(year=anchor.year - 1)
-        except ValueError:  # Feb 29 anchor
-            cutoff = anchor.replace(year=anchor.year - 1, day=28)
-        ttm = round(sum(r["cash"] for r in dated if r["date"] >= cutoff), 4)
-    else:
-        ttm = round(sum(r["cash"] for r in rows), 4)
+    # Window follows the snapshot, never the last dividend announcement.
+    try:
+        cutoff = anchor.replace(year=anchor.year - 1)
+    except ValueError:
+        cutoff = anchor.replace(year=anchor.year - 1, day=28)
+    included = [r for r in dated if cutoff < r['date'] <= anchor]
+    ttm = round(sum(r['cash'] for r in included), 4)
 
     return {
         "latest_cash": latest["cash"],
@@ -143,6 +151,9 @@ def parse_payouts(html, symbol):
         "ttm_cash": ttm,
         "symbol": (symbol or "").strip().upper(),
         "face_value": face,
+        "basis_verified": bool(included) and all(r['basis_verified'] for r in included),
+        "window_start": cutoff.isoformat(), "window_end": anchor.isoformat(),
+        "cash_rows": [{**r, 'date': r['date'].isoformat()} for r in included],
     }
 
 
@@ -207,11 +218,9 @@ def fetch(symbols=None, throttle=0.3):
         raise ValueError("no payouts parsed for any requested symbol")
 
     # A payouts snapshot is a ROLLING dataset re-polled in full each run, so its
-    # freshness is the fetch time — NOT the most recent announcement, which is
-    # naturally weeks old between earnings seasons. as_of=None => the merge
-    # judges staleness by the ok flag, not by a months-old event date.
+    # freshness is the collection day, not the latest announcement date.
     latest_announce = latest_date.isoformat() if latest_date else None
-    return partition(NAME, out, None, SOURCE, cadence=CADENCE,
+    return partition(NAME, out, datetime.date.today().isoformat(), SOURCE, cadence=CADENCE,
                      count=len(out), latest_announce=latest_announce)
 
 

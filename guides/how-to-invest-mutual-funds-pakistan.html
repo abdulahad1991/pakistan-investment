@@ -33,7 +33,7 @@
   "author": {"@type": "Person", "name": "Abdul Ahad", "url": "https://pakinvestlysis.com/about.html", "sameAs": ["https://www.linkedin.com/in/abdulahad1991/", "https://github.com/abdulahad1991"]},
   "publisher": {"@type": "Organization", "name": "Pakistan Investment Education", "url": "https://pakinvestlysis.com"},
   "datePublished": "2026-05-06",
-  "dateModified": "2026-08-21",
+  "dateModified": "2026-09-07",
   "mainEntityOfPage": "https://pakinvestlysis.com/guides/how-to-invest-mutual-funds-pakistan.html"
 }
 </script>
@@ -217,6 +217,7 @@ gtag('config', 'G-4T2H0KH9H7');
     .step-block{grid-template-columns:36px 1fr;gap:12px}
   }
 </style>
+<link rel="stylesheet" href="/assets/research.css">
 </head>
 <body>
 
@@ -251,8 +252,8 @@ gtag('config', 'G-4T2H0KH9H7');
       <span class="tk">KSE-100 <b id="tk-kse">1,75,233</b></span>
       <span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
       <span class="tk">USD/PKR <b id="tk-pkr">&#8360;277.41</b></span>
-      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold"></span></span>
-      <span class="tk">CPI <b id="tk-inf">9.2%</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold">1Y unavailable</span></span>
+      <span class="tk">CPI <b id="tk-inf">11.1%</b></span>
     </div>
   </div>
 </div>
@@ -276,7 +277,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <h1>How to invest in mutual funds in Pakistan.</h1>
       <div class="art-byline">
         <span>By <a href="/about.html">Abdul Ahad</a></span>
-        <span class="hl">· Source-checked 21 August 2026</span>
+        <span class="hl">· Calculations and product terms reviewed 7 September 2026</span>
         <span>· 11 min read</span>
       </div>
     </div>
@@ -298,7 +299,7 @@ gtag('config', 'G-4T2H0KH9H7');
         <div>
           <div class="nm">Abdul Ahad</div>
           <div class="bd">Software engineer and author of the open-source market-data pipeline behind this site. Automated widgets use dated data partitions and expose stale source status; tax, legal and policy claims are checked against the documents linked in each article. Not a SECP-registered advisor: see the <a href="/methodology.html#editorial">editorial policy</a> for the research and corrections process.</div>
-          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Source-checked 21 August 2026</span></div>
+          <div class="ln"><a href="https://www.linkedin.com/in/abdulahad1991/" target="_blank" rel="noopener">LinkedIn →</a> &nbsp;·&nbsp; <span class="dt">Case study and corrections: 7 September 2026</span></div>
         </div>
       </div>
 
@@ -321,6 +322,8 @@ gtag('config', 'G-4T2H0KH9H7');
       <p>Mutual funds provide pooled exposure to money-market instruments, debt or equities without requiring the investor to select every security. Minimums and digital onboarding vary by AMC and fund, so confirm the current offering document rather than assuming a universal PKR 1,000 entry point.</p>
 
       <p>The sections below explain NAV, fund categories, account checks, recurring versus one-time contributions and the documents needed to reproduce a comparison.</p>
+
+      <!-- CASE_fund-case-study_START --><section class="research-case" id="fund-case-study"><p class="research-meta">Original calculation · Reviewed 7 September 2026 · Abdul Ahad, publisher</p><h2>Completed scenario: units, loads and three NAV outcomes</h2><p>Use this completed scenario to audit an AMC illustration while fresh comparative returns are unavailable. Assume PKR 100,000 contributed, a load deducted as exactly 2% of that gross amount, initial NAV of 100, and redemption after six months. These are explicit arithmetic assumptions, not the terms or performance of a named fund.</p><p>The load is PKR 2,000. The remaining PKR 98,000 buys 980 units. Assume no distributions, back-end charge or tax. Recurring fund expenses are already reflected in NAV and must not be deducted a second time.</p><div class="research-table"><table><thead><tr><th scope="col">Assumed final NAV</th><th scope="col">Units held</th><th scope="col">Redemption value</th><th scope="col">Gain / loss on PKR 100,000</th></tr></thead><tbody><tr><td>90.00</td><td>980</td><td>PKR 88,200</td><td>-11.80%</td></tr><tr><td>100.00</td><td>980</td><td>PKR 98,000</td><td>-2.00%</td></tr><tr><td>110.00</td><td>980</td><td>PKR 107,800</td><td>+7.80%</td></tr></tbody></table></div><p class="research-result">A 10% NAV increase produces a 7.80% gain on the contributed amount after this assumed load. Break-even NAV is 100,000 ÷ 980 = 102.0408.</p><p>A flat NAV still leaves a PKR 2,000 loss because the investor paid the load. If the document instead defines the load as an addition to the offer price, the unit calculation changes; our deduction convention must not be copied into that product. Check the actual offer/redemption price, load waiver and valuation cut-off.</p><p>The <a href="/guides/national-savings-vs-mutual-funds.html#ssc-case-study">SSC case</a> calculates PKR 5,600 gross profit for its first six-month period. The fund scenarios range from a PKR 11,800 loss to a PKR 7,800 gain. That range demonstrates sensitivity to NAV and fees, not which product will outperform. Tax, eligibility and access timing still need matched inputs.</p><p><a href="/data/research/fund-units-and-fees.csv" download>Download the calculation (CSV)</a> · <a href="/data/research/case-inputs.json">Dated inputs and sources (JSON)</a></p></section><!-- CASE_fund-case-study_END -->
 
       <h2 id="s1"><span class="sn">01</span>What is a mutual fund?</h2>
       <p>A mutual fund pools money from thousands of investors and hands it to a professional <strong>fund manager</strong>, who spreads it across stocks, bonds, or money-market instruments. Each investor owns "units" in the fund. The value of those units, called the <strong>Net Asset Value (NAV)</strong>, rises or falls with the underlying investments.</p>
@@ -350,21 +353,10 @@ gtag('config', 'G-4T2H0KH9H7');
           <span class="t">Fund return sample by category</span>
           <span class="v">Historical data only. Source status loads from data.json; verify the current MUFAP table.</span>
         </div>
-        <div id="mf-widget">Loading…</div>
-        <noscript>
-          <p style="font-family:var(--body);font-size:.82rem;color:var(--muted);padding:12px 14px;margin:0">Enable JavaScript to load the dated comparison. Current figures remain available from MUFAP.</p>
-        </noscript>
+        <div id="mf-widget"><!-- FUND_SNAPSHOT_START --><p role="status"><strong>Fund comparison unavailable.</strong> Last stored source date: 2026-07-24. The latest collection could not be verified; stale returns are excluded. <a href="https://www.mufap.com.pk/Industry/IndustryStatDaily?tab=1" target="_blank" rel="noopener">Check MUFAP</a> and the fund manager’s current report.</p><!-- FUND_SNAPSHOT_END --></div>
+
       </div>
-      <script>
-      fetch('/data.json?v=' + Date.now()).then(r=>r.json()).then(d=>{
-        const health=d.data_health&&d.data_health.funds;
-        const sample=d.mutual_funds.slice(0,5);
-        const rows=sample.map(f=>`<tr><td><div class="nm">${f.name}</div><div class="sub">${f.manager} · ${f.type}</div></td><td class="ret">${f.ret_1y}%</td><td class="fig">${f.ret_3y}%</td><td class="fig">${f.return_type||'historical'}</td></tr>`);
-        const warning=health&&health.stale?`<p style="padding:10px 14px;margin:0;background:#fff8e6;color:#614a14"><strong>Stale source:</strong> last successful MUFAP date ${health.as_of||'not supplied'}. Verify before use.</p>`:'';
-        document.getElementById('mf-widget').innerHTML=warning+`<table class="mf-tbl"><thead><tr><th>Fund</th><th>1-Year Return</th><th>3-Year Return</th><th>Basis</th></tr></thead><tbody>${rows.join('')}</tbody></table><p style="padding:8px 14px;margin:0;font-size:.76rem"><a href="https://www.mufap.com.pk/Industry/IndustryStatDaily?tab=1" target="_blank" rel="noopener">Open the current MUFAP daily table</a></p>`;
-        document.getElementById('mf-widget').style.padding='0';
-      }).catch(()=>{document.getElementById('mf-widget').textContent='Unable to load the dated snapshot.';});
-      </script>
+
 
       <h2 id="s3"><span class="sn">03</span>Islamic vs conventional funds</h2>
 
@@ -378,11 +370,11 @@ gtag('config', 'G-4T2H0KH9H7');
 
       <h2 id="s4"><span class="sn">04</span>How the NAV (Net Asset Value) works</h2>
 
-      <p>The Net Asset Value is the price at which you buy and sell mutual fund units. To get it, you take the total value of everything the fund owns (stocks, bonds, cash) and divide by the number of units outstanding. A fund holding assets worth PKR 100 million with 1 million units has an NAV of PKR 100 per unit.</p>
+      <p>Net asset value per unit equals total fund assets minus liabilities, divided by units outstanding. For example, assets of PKR 105 million less liabilities of PKR 5 million, divided by 1 million units, give NAV of PKR 100. An investor’s offer or redemption price can differ because of loads and the document’s pricing rules; NAV alone is not always the transaction price. See the AMC’s <a href="https://www.almeezangroup.com/investor-education/glossary/" target="_blank" rel="noopener">NAV and transaction-price definitions</a>.</p>
 
       <p>Open-end funds calculate NAV under their disclosed valuation and dealing rules. The applicable NAV and cut-off depend on when a valid request is received, so read the offering document rather than assuming every order receives the same day's closing value. AMCs and MUFAP publish the reported NAVs.</p>
 
-      <p>A simple example of how NAV movements turn into profit. Say you invest PKR 10,000 when the NAV is PKR 100, so you get 100 units. Three months on, the portfolio has done well and the NAV is PKR 115. Your 100 units are now worth PKR 11,500. That is a 15% return for doing nothing but staying put.</p>
+      <p>A simple example of how NAV movements turn into profit. Say you invest PKR 10,000 when the NAV is PKR 100, so you get 100 units. Three months on, the portfolio has done well and the NAV is PKR 115. Your 100 units are now worth PKR 11,500. That is a 15% change before charges, distributions and tax in this simplified illustration.</p>
 
       <p>The reverse holds too. If the NAV drops to PKR 88, the 100 units are worth PKR 8,800: an unrealised loss of PKR 1,200 before any fees or tax. A later recovery is possible but not guaranteed, and an equity drawdown can last longer than an investor expects.</p>
 
@@ -410,7 +402,7 @@ gtag('config', 'G-4T2H0KH9H7');
         <div class="step-num">3</div>
         <div class="step-body">
           <h3>Complete KYC (Know Your Customer)</h3>
-          <p>KYC is a regulatory must. You upload a photo of your CNIC (front and back), a recent selfie, and sometimes a utility bill for address verification. Most AMCs clear KYC within 24-48 hours.</p>
+          <p>The AMC applies identity and customer due-diligence checks under its account-opening process. Provide the evidence requested for your account type through the provider’s official channel. Ask the AMC for an expected completion date; there is no universal 24–48 hour turnaround.</p>
         </div>
       </div>
 
@@ -426,7 +418,7 @@ gtag('config', 'G-4T2H0KH9H7');
         <div class="step-num">5</div>
         <div class="step-body">
           <h3>Make Your First Investment</h3>
-          <p>Transfer money from your bank through online banking. The minimum lump-sum investment is usually PKR 5,000-10,000. For a <strong>Systematic Investment Plan (SIP)</strong>, where a fixed amount goes in every month, the minimum is often as low as PKR 1,000.</p>
+          <p>Use the funding method and account details stated by the verified AMC. Confirm the selected fund’s current minimum subscription, sales load and dealing cut-off before transferring. Keep the transaction confirmation and reconcile the units allotted against the applicable offer price.</p>
         </div>
       </div>
 
@@ -444,11 +436,11 @@ gtag('config', 'G-4T2H0KH9H7');
 
       <p>The big advantage of a SIP is <strong>rupee cost averaging</strong>. Since you invest a fixed amount every month, you automatically pick up more units when the NAV is low and fewer when it is high. Over time that evens out the effect of market swings on your average purchase price.</p>
 
-      <p>Here is a worked example. Say you put in PKR 5,000 a month for six months in a volatile equity fund. In January the NAV is 95, so you get 52.6 units. February rises to 105, giving you 47.6 units. March dips to 98 (51.0 units). April recovers to 110 (45.5 units). May pulls back to 100 (50.0 units). June closes at 108 (46.3 units). After six months you have put in PKR 30,000 and hold roughly 293 units at an average price of about PKR 102.4. With the NAV now at 108, your holding is worth PKR 31,644, a gain of 5.5% even though the NAV itself moved 13.7%, from 95 to 108. The averaging carried you through the choppy months.</p>
+      <p>Here is a worked example. Say you put in PKR 5,000 a month for six months in a volatile equity fund. In January the NAV is 95, so you get 52.6 units. February rises to 105, giving you 47.6 units. March dips to 98 (51.0 units). April recovers to 110 (45.5 units). May pulls back to 100 (50.0 units). June closes at 108 (46.3 units). After six months you have put in PKR 30,000 and hold roughly 293 units at an average price of about PKR 102.38. With the NAV now at 108, your holding is worth approximately PKR 31,646, a gain of 5.5% even though the NAV itself moved 13.7%, from 95 to 108. These are assumed NAVs, with no load, tax or distributions; the 5.49% simple gain on contributions is not a money-weighted annual return.</p>
 
       <p>A SIP spreads purchases across dates and can align with monthly cash flow. It does not guarantee a profit or ensure a lower average cost, especially in a steadily falling market.</p>
 
-      <p>A lump sum creates immediate market exposure, so it will outperform staggered purchases if prices subsequently rise and underperform them if prices fall. That outcome is known only afterwards.</p>
+      <p>A lump sum creates immediate market exposure. Compared with staggered purchases, its result depends on the full price path, cash availability, distributions, costs and the common end date. The final price alone is insufficient to compare the two strategies.</p>
 
       <p>Choose the funding pattern only after preserving money needed for near-term obligations. Compare any SIP illustration using several return assumptions, including a loss scenario, and include fees and tax.</p>
 
@@ -464,7 +456,7 @@ gtag('config', 'G-4T2H0KH9H7');
 
       <p><strong>Fees without category context.</strong> The Total Expense Ratio (TER) reduces the return investors keep. Compare TER and any sales or redemption load with other funds in the same category using the current MUFAP expense table and offering document.</p>
 
-      <p><strong>Frequent manager turnover.</strong> The numbers on a fund's 3-year or 5-year record came from one portfolio manager making one set of calls. If that person has left, those numbers may not predict what the new team delivers. Look for stable management, especially in active equity funds.</p>
+      <p><strong>Frequent manager turnover.</strong> Read the management history alongside the mandate and portfolio process. A multi-year record may span several managers and market conditions; it cannot establish how a new team will perform.</p>
 
       <h2 id="s8"><span class="sn">08</span>Tax treatment of mutual funds</h2>
 
@@ -500,9 +492,9 @@ gtag('config', 'G-4T2H0KH9H7');
 
       <p>Most AMCs email a monthly statement automatically. It lists your units held, the NAV on the statement date, total value, and every transaction during the month. Hang on to these. They help at tax time and for tracking your real cost basis.</p>
 
-      <p>Learn when to worry and when to sit tight. Equity fund NAVs can fall 10-20% in a correction, which is normal and temporary, not a cue to redeem. What does deserve attention: steady underperformance against the benchmark for 12 months or more, a large and lasting drop in the fund's assets (often a sign of heavy redemptions), or news of regulatory action against the AMC.</p>
+      <p>A decline in NAV does not establish when, or whether, a recovery will occur. Compare the portfolio’s risk, liquidity, costs and mandate with the documents you used when subscribing. A decision about continuing or redeeming depends on those facts and your cash-flow needs, rather than a universal market-loss threshold.</p>
 
-      <p>Redeeming is simple. Log into your portal, pick the fund, request a redemption, enter the units or rupee amount you want out, and confirm. The money lands in your registered bank account within T+2 for money market funds and T+3 for equity funds.</p>
+      <p>Submit a redemption through the AMC’s official process and retain its acknowledgement. The applicable NAV, request cut-off, payment period and any exit charge come from that fund’s offering document. Do not treat a general T+2 or T+3 statement as a promise for every fund.</p>
 
       <h2 id="s11"><span class="sn">11</span>How to verify a provider</h2>
       <ul>
@@ -518,7 +510,7 @@ gtag('config', 'G-4T2H0KH9H7');
 
       <details class="faq-item" id="faq-how-to-verify-shariah-compliant"><summary class="faq-question">How do I verify a fund's Shariah-compliant claim?</summary><div class="faq-answer">Check that the offering document describes the Shariah screen, names the supervisory board or adviser, and provides current compliance reporting. Confirm the fund in MUFAP records. This site does not make a religious ruling or endorse a provider.</div></details>
 
-      <details class="faq-item" id="faq-can-i-withdraw-anytime"><summary class="faq-question">Can I withdraw my mutual fund investment at any time?</summary><div class="faq-answer">For open-end mutual funds (the most common type), yes - you can submit a redemption request any business day. Money market and income funds typically settle in T+2 (2 business days). Equity funds settle in T+3. Some funds have a minimum holding period of 90 days with an exit load (fee) if you redeem earlier - check the fund's prospectus before investing.</div></details>
+      <details class="faq-item" id="faq-can-i-withdraw-anytime"><summary class="faq-question">Can I withdraw my mutual fund investment at any time?</summary><div class="faq-answer">Open-end funds accept redemption requests under their offering documents. Check dealing days, the request cut-off, applicable NAV, settlement period, exit load and any suspension provisions for the specific fund. Submission and receipt of cash are separate events.</div></details>
 
       <details class="faq-item" id="faq-money-market-fund-vs-savings-account"><summary class="faq-question">What is the difference between a money market fund and a bank savings account?</summary><div class="faq-answer">A bank account is a deposit governed by bank terms and applicable deposit protection. A money-market fund issues units in a portfolio and is not a deposit or guaranteed return. Compare current net yield, fees, settlement, risks and the Deposit Protection Corporation's current coverage directly at the relevant sources.</div></details>
 
@@ -570,9 +562,9 @@ gtag('config', 'G-4T2H0KH9H7');
         </div>
         <div class="rail-sec rail-glance">
           <div class="rail-h">At a glance</div>
-          <div class="gl-row"><div class="gl-n">PKR 1,000</div><div class="gl-l">Minimum SIP to start</div></div>
-          <div class="gl-row"><div class="gl-n">24-48 hr</div><div class="gl-l">Online KYC turnaround</div></div>
-          <div class="gl-row"><div class="gl-n">T+2 / T+3</div><div class="gl-l">Redemption settlement</div></div>
+          <div class="gl-row"><div class="gl-n">Fund-specific</div><div class="gl-l">Verify subscription minimum</div></div>
+          <div class="gl-row"><div class="gl-n">AMC-specific</div><div class="gl-l">Confirm KYC requirements</div></div>
+          <div class="gl-row"><div class="gl-n">Document terms</div><div class="gl-l">Check redemption cut-offs</div></div>
           <div class="gl-row"><div class="gl-n">FBR TY2027</div><div class="gl-l">Verify current withholding by income type</div></div>
         </div>
         <div class="rail-sec rail-next">

@@ -8,7 +8,7 @@
     if (s.length > 3) { var h = s.slice(0, -3), t = s.slice(-3); h = h.replace(/\B(?=(\d\d)+(?!\d))/g, ","); s = h + "," + t; }
     return (neg ? "-" : "") + "₨ " + s;
   }
-  function groupPK(s) { s = s.replace(/\D/g, ""); if (s.length <= 3) return s; var h = s.slice(0, -3), t = s.slice(-3); return h.replace(/\B(?=(\d\d)+(?!\d))/g, ",") + "," + t; }
+  function groupPK(s) { var negative = /^-/.test(s); s = s.replace(/\D/g, ""); if (s.length <= 3) return (negative ? "-" : "") + s; var h = s.slice(0, -3), t = s.slice(-3); return (negative ? "-" : "") + h.replace(/\B(?=(\d\d)+(?!\d))/g, ",") + "," + t; }
   function num(id) { return Number(String($(id).value).replace(/[^0-9.-]/g, "")) || 0; }
   var chart = null;
 
@@ -24,17 +24,18 @@
 
   function compute() {
     var P = num("sip-amount");
-    var years = Math.max(1, Math.min(40, Math.round(num("sip-years")) || 1));
-    var r = Math.max(-1, Math.min(1, num("sip-return") / 100));
+    var years = num("sip-years");
+    var r = num("sip-return") / 100;
     var step = num("sip-stepup") / 100;
-    var i = r / 12;
-    var bal = 0, invested = 0, contrib = P;
-    var labels = ["0"], valSeries = [0], invSeries = [0];
-    for (var y = 1; y <= years; y++) {
-      for (var m = 0; m < 12; m++) { bal = bal * (1 + i) + contrib; invested += contrib; }
-      labels.push("Yr " + y); valSeries.push(bal); invSeries.push(invested);
-      contrib = contrib * (1 + step);
+    var result;
+    try { result = PKFinanceMath.monthlyScenario(P, years, r, step); }
+    catch (error) {
+      ['o-fv','o-inv','o-gain','o-mult'].forEach(function (id) { $(id).textContent = '—'; });
+      if (chart) { chart.destroy(); chart = null; }
+      $('sip-note').textContent = error.message; return;
     }
+    var bal = result.balance, invested = result.invested;
+    var labels = result.labels, valSeries = result.values, invSeries = result.contributions;
     var gains = bal - invested;
     var mult = invested > 0 ? bal / invested : 0;
 

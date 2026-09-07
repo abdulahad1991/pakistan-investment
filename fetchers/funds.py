@@ -23,6 +23,7 @@ differ per fund); the only single page-level stamp is "Report Date: <date>",
 which we use as the partition ``as_of``.
 """
 import re
+import datetime
 from .base import http_get, partition, run, in_band
 
 NAME = "funds"
@@ -101,7 +102,8 @@ def parse_funds(html):
     i_name = col("Fund Name")
     i_nav = col("NAV")
     i_1y = col("365 Days")
-    need = max(i_cat, i_name, i_nav, i_1y)
+    i_date = col('Validity Date')
+    need = max(i_cat, i_name, i_nav, i_1y, i_date)
 
     # ---- scan body rows, keep target funds (first occurrence) ----
     found = {}
@@ -124,6 +126,7 @@ def parse_funds(html):
             "nav": _num(tds[i_nav]),
             "ret_1y": _num(tds[i_1y]),
             "return_type": return_type,
+            "as_of": _iso_date(_clean(tds[i_date])),
         }
 
     funds = [found[n] for n in TARGETS if n in found]
@@ -138,6 +141,10 @@ def fetch():
     if len(funds) < 3:
         raise ValueError(f"only {len(funds)} MUFAP funds parsed (<3)")
     for f in funds:
+        date = datetime.date.fromisoformat(f['as_of'])
+        age = (datetime.date.today() - date).days
+        if age < 0 or age > 5:
+            raise ValueError(f"{f['name']} observation is not current: {f['as_of']}")
         if not in_band(f["nav"], 1, 100000):
             raise ValueError(f"{f['name']} NAV out of band: {f['nav']}")
         if not in_band(f["ret_1y"], -99, 500):
@@ -145,7 +152,7 @@ def fetch():
         if f["return_type"] not in ("annualized", "absolute"):
             raise ValueError(f"{f['name']} unknown return_type")
     value = {f["name"]: {"nav": f["nav"], "ret_1y": f["ret_1y"],
-                         "return_type": f["return_type"]} for f in funds}
+                         "return_type": f["return_type"], 'as_of': f['as_of']} for f in funds}
     return partition(
         NAME, value, parsed["as_of"],
         "Mutual Funds Association of Pakistan (MUFAP)",

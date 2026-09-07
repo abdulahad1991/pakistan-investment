@@ -219,8 +219,8 @@ gtag('config', 'G-4T2H0KH9H7');
       <span class="tk">KSE-100 <b id="tk-kse">1,75,233</b></span>
       <span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
       <span class="tk">USD/PKR <b id="tk-pkr">&#8360;277.41</b></span>
-      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold"></span></span>
-      <span class="tk">CPI <b id="tk-inf">9.2%</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold">1Y unavailable</span></span>
+      <span class="tk">CPI <b id="tk-inf">11.1%</b></span>
     </div>
   </div>
 </div>
@@ -318,7 +318,7 @@ gtag('config', 'G-4T2H0KH9H7');
         <div class="stitle">Gold - third-party reference</div>
         <div class="ssrc"><a href="https://gold.pk" target="_blank" rel="noopener">GOLD.PK</a></div>
       </div>
-      <div class="sdesc">The <a href="/gold-rates.html">gold reference page</a> displays the latest successfully collected 24K value from gold.pk and derives 22K, 21K, 18K and smaller weight units from that observation. It is not a dealer quote. The page shows the collection date and source type; if the local fetch fails, the pipeline can retain the previous value or label an international spot conversion rather than presenting either as a current local quote. Historical observations and user-set scenarios are kept separate.</div>
+      <div class="sdesc">The <a href="/gold-rates.html">gold reference page</a> displays the latest successfully collected 24K value from gold.pk and derives 22K, 21K, 18K and smaller weight units from that observation. It is not a dealer quote. The page shows the collection date and source type; if the local fetch fails, the pipeline can retain the previous value or label an international spot conversion rather than presenting either as a current local quote. Historical gold returns are currently withheld; the calculator uses only user-set assumptions.</div>
     </div>
 
     <div class="source-row">
@@ -375,6 +375,17 @@ gtag('config', 'G-4T2H0KH9H7');
     <div class="meth-split">
       <div class="main">
         <h2 id="verify-h">Verification &amp; corrections</h2>
+        <div class="meth-callout" id="corrections-2026-09-07"><strong>Corrections published 7 September 2026.</strong>
+          <ul>
+            <li>PSX price scenarios now use documented splits and bonus issues, actual observation dates and elapsed-time CAGR. Coverage is limited to the five issuers and date windows in the <a href="/data/corporate_actions.json">corporate-action ledger</a>. Raw prices are preserved separately; later observations cannot extend the reviewed performance window automatically.</li>
+            <li>Dividend percentages are converted at the face value on declaration and normalized for later share-count changes. The trailing window ends on the snapshot date. The <a href="/blog/top-dividend-stocks-pakistan.html">reviewed dividend snapshot</a> preserves its original prices, payout rows and review date. A new live comparison requires current share-action review; unchecked yields are withheld.</li>
+            <li>MUFAP comparisons require each fund’s own Validity Date within five days. Failed or older observations are excluded, along with unsupported three- and five-year returns and seeded product ratings. The current feed is unavailable; a new page build does not refresh its source date.</li>
+            <li>The gold history and one-year return were removed because the pipeline had no reproducible dated source for them. Gold quote dates now use the source collection time, independently of the overall build time.</li>
+            <li>The national CPI headline is 11.1% year-on-year for August 2026 in <a href="https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-August-2026.pdf">PBS’s monthly review, Inflation in Brief, paragraph 1</a>. This dated report supersedes the lagging July SDMX observation; a newer feed month can supersede it.</li>
+            <li>Fund NAV now explicitly deducts liabilities, the six-month SIP example is recalculated, and SSC encashment and final-coupon terms are corrected. The new <a href="/#case-studies-title">four completed analyses</a> supply CSV calculations and source inputs; hypothetical amounts and future NAV paths are labelled as assumptions.</li>
+          </ul>
+        </div>
+
         <p>Automation does not establish accuracy: a source can change a page layout, publish a typo or briefly serve bad data. Fetchers record source and status metadata, while time-sensitive editorial claims are checked against the documents linked on the page. Those controls can still fail, so a displayed number remains subject to verification.</p>
         <p>Even with these checks, this site is an <strong>educational tool, not a live trading terminal</strong>. Rates and prices can change between our last update and the moment you read a page. Before you actually invest, always confirm the current figure directly with the institution - the bank, the asset management company, the broker, CDNS, or the official source - because that number, not ours, is the one your money will be governed by.</p>
         <p>If a figure looks wrong or out of date, report the page, value and source through the <a class="inline" href="/contact.html">contact page</a>. Verified corrections are incorporated into the page or collection logic.</p>

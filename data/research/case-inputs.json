@@ -1,0 +1,35 @@
+{
+  "reviewed_on": "2026-09-07",
+  "sys": {
+    "amount": 100000,
+    "before_date": "2025-05-27", "before_price": 539.94,
+    "after_date": "2025-06-30", "after_price": 107.00,
+    "share_factor": 5, "effective_date": "2025-06-02",
+    "prices_source": "https://dps.psx.com.pk/timeseries/eod/SYS",
+    "action_source": "https://dps.psx.com.pk/download/attachment/254268-1.pdf",
+    "credit_source": "https://dps.psx.com.pk/download/document/254645.pdf"
+  },
+  "bafl": {
+    "fy2025_eps_old_share": 17.97,
+    "fy2025_dividend_old_share": 10.50,
+    "split_factor": 2, "split_date": "2026-04-20",
+    "hy2025_eps_restated": 4.84, "hy2026_eps": 6.76,
+    "hy2026_dividend": 3.00,
+    "fy_source": "https://www.bankalfalah.com/news-room/annual-results-for-2025-and-2-for-1-stock-split/",
+    "hy_source": "https://www.bankalfalah.com/news-room/bank-alfalah-reports-39-rise-in-half-year-2026-profit-after-tax/",
+    "action_source": "https://dps.psx.com.pk/download/attachment/273940-1.pdf"
+  },
+  "ssc": {
+    "principal": 100000,
+    "rate_effective": "2026-07-18",
+    "annual_rates_percent": [11.2, 11.2, 11.2, 11.2, 11.2, 12.6],
+    "source": "https://savings.gov.pk/special-savings-certificates/",
+    "basis": "Gross hypothetical purchase under the stated rate schedule. Six-month coupons withdrawn, no reinvestment, tax or Zakat calculation."
+  },
+  "fund": {
+    "contribution": 100000, "assumed_load_percent_of_contribution": 2,
+    "initial_nav": 100, "ending_nav_scenarios": [90, 100, 110],
+    "months": 6,
+    "basis": "Explicit arithmetic assumptions, not an actual fund quote or observed investor result. Load is defined as a deduction from gross contribution; actual offer-price formulas may differ. NAV already reflects recurring fund expenses; no separate TER subtraction. No distributions, back-end load, tax or settlement adjustment."
+  }
+}

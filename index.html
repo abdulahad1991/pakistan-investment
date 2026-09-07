@@ -120,8 +120,8 @@ gtag('config', 'G-4T2H0KH9H7');
       <span class="tk">KSE-100 <b id="tk-kse">1,75,233</b></span>
       <span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
       <span class="tk">USD/PKR <b id="tk-pkr">&#8360;277.41</b></span>
-      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold"></span></span>
-      <span class="tk">CPI <b id="tk-inf">9.2%</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold">1Y unavailable</span></span>
+      <span class="tk">CPI <b id="tk-inf">11.1%</b></span>
     </div>
   </div>
 </div>
@@ -129,7 +129,7 @@ gtag('config', 'G-4T2H0KH9H7');
 <!-- ── Data freshness strip ───────────────────────────── -->
 <div class="step-shell">
   <div class="container">
-    <div class="data-age" id="data-age">Data cutoff: 6 September 2026</div>
+    <div class="data-age" id="data-age">Build date: 7 September 2026; observations have separate dates · Delayed: funds</div>
   </div>
 </div>
 
@@ -181,12 +181,12 @@ gtag('config', 'G-4T2H0KH9H7');
         <div class="hero-dashboard" aria-label="Market readout">
           <div class="readout-head">
             <span class="rk">MARKET READOUT</span>
-            <span class="rt" id="hero-data-age">Dataset: 6 September 2026</span>
+            <span class="rt" id="hero-data-age">Dataset: 7 September 2026</span>
           </div>
           <div class="hero-metric"><span>KSE-100 Index</span><strong id="h-kse">175K</strong></div>
           <div class="hero-metric"><span>SBP policy rate</span><strong id="h-sbp">11.5%</strong></div>
           <div class="hero-metric"><span>PKR / USD</span><strong id="h-pkr">&#8360;277.41</strong></div>
-          <div class="hero-metric"><span>CPI inflation</span><strong id="h-inf">9.2%</strong></div>
+          <div class="hero-metric"><span>CPI inflation</span><strong id="h-inf">11.1%</strong></div>
         </div>
       </div>
     </div>
@@ -213,6 +213,18 @@ gtag('config', 'G-4T2H0KH9H7');
     </div>
   </div>
 
+  <section class="container" style="padding-top:24px;padding-bottom:24px" aria-labelledby="case-studies-title">
+    <div class="section-kicker">Original calculations · 7 September 2026</div>
+    <h2 class="section-title" id="case-studies-title">Follow the numbers, from source to result.</h2>
+    <p class="section-sub">Completed calculations with downloadable inputs, formulas and stated limits.</p>
+    <div class="coverage-table">
+      <a class="coverage-row" href="/backtester.html#split-case-study"><span class="ci">01</span><span class="ct">Systems share split</span><span class="cd">Why a raw 80.18% price drop becomes a 0.91% decline after adjustment.</span><span class="ca">→</span></a>
+      <a class="coverage-row" href="/blog/how-to-value-bank-stocks-pakistan.html#bafl-case-study"><span class="ci">02</span><span class="ct">Bank Alfalah results</span><span class="cd">Reconcile EPS and dividends across a two-for-one split.</span><span class="ca">→</span></a>
+      <a class="coverage-row" href="/guides/national-savings-vs-mutual-funds.html#ssc-case-study"><span class="ci">03</span><span class="ct">SSC cash flows</span><span class="cd">Calculate all six coupons, including the higher final period.</span><span class="ca">→</span></a>
+      <a class="coverage-row" href="/guides/how-to-invest-mutual-funds-pakistan.html#fund-case-study"><span class="ci">04</span><span class="ct">Fund units and fees</span><span class="cd">Test three NAV outcomes after an explicitly assumed sales load.</span><span class="ca">→</span></a>
+    </div>
+  </section>
+
   <!-- FIG.04 - Interactive tools (everything in 60s) -->
   <div class="container" style="padding-top:24px">
     <div style="border:1px solid var(--line);background:var(--paper)">
@@ -223,7 +235,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <div class="tools3">
         <a href="/backtester.html" style="padding:24px 22px;border-right:1px solid var(--line);display:block">
           <div style="font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--green-d);margin-bottom:6px">What if you'd invested?</div>
-          <div style="font-family:var(--body);font-size:.9rem;color:var(--ink2);line-height:1.5">Backtest gold or a tracked PSX stock on dated price observations, with return and CAGR.</div>
+          <div style="font-family:var(--body);font-size:.9rem;color:var(--ink2);line-height:1.5">Backtest five reviewed PSX shares with documented split adjustments, dated observations and elapsed-time CAGR.</div>
         </a>
         <a href="/sip-calculator.html" style="padding:24px 22px;border-right:1px solid var(--line);display:block">
           <div style="font-family:var(--display);font-size:1.1rem;font-weight:800;color:var(--green-d);margin-bottom:6px">SIP calculator</div>
@@ -258,7 +270,7 @@ gtag('config', 'G-4T2H0KH9H7');
           <div class="macro-lbl">PKR / USD</div>
         </div>
         <div class="macro-pill">
-          <div class="macro-val" id="m-inf">9.2%</div>
+          <div class="macro-val" id="m-inf">11.1%</div>
           <div class="macro-lbl">CPI Inflation</div>
         </div>
       </div>
@@ -305,7 +317,7 @@ gtag('config', 'G-4T2H0KH9H7');
           <div class="section-title">Pakistan Gold Price Reference</div>
           <div class="section-sub" id="gold-src">Collected 6 September 2026 &#183; third-party local-rate reference via gold.pk</div>
         </div>
-        <span class="chart-badge" id="gold-chg">&#9650; 25.5% / 1yr</span>
+        <span class="chart-badge" id="gold-chg">1Y return unavailable</span>
       </div>
       <div class="macro-grid">
         <div class="macro-pill">
@@ -325,9 +337,9 @@ gtag('config', 'G-4T2H0KH9H7');
           <div class="macro-lbl">24K · per gram</div>
         </div>
       </div>
-      <div class="chart-wrap-sm" style="margin-top:16px"><canvas id="chart-gold"></canvas></div>
+      <p style="margin-top:16px">Historical gold returns are unavailable until a dated source series is verified.</p>
       <div class="cta-btns" style="margin-top:14px">
-        <a href="/gold-rates.html" class="btn-cta btn-gold">Gold history and scenario calculator →</a>
+        <a href="/gold-rates.html" class="btn-cta btn-gold">Gold rates and scenario calculator →</a>
       </div>
     </div>
 

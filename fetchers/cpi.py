@@ -9,10 +9,13 @@ compute YoY ourselves from the latest month vs the same month a year earlier.
 CPI is MONTHLY (next month prints ~1st), so this fetcher runs monthly, not daily.
 """
 import re
+import json
+from pathlib import Path
 from .base import http_get, partition, run, in_band
 
 CPI_URL = "https://www.pbs.gov.pk/cpi"
 NAME = "inflation"
+REVIEWED_PATH = Path(__file__).resolve().parent.parent / 'data/research/cpi-verified.json'
 
 # Match a whole <Obs .../> element, then pull each attribute out independently —
 # robust to attribute ORDER and to extra SDMX attributes (OBS_STATUS/OBS_CONF)
@@ -54,15 +57,35 @@ def parse_cpi(xml):
     return yoy, latest, obs[latest], obs[prior_key]
 
 
+def choose_latest(feed, reviewed):
+    """A reviewed release may be newer than SDMX; never downgrade its month."""
+    if reviewed and (not feed or reviewed['as_of'] >= feed['as_of']):
+        result = partition(NAME, reviewed['value'], reviewed['as_of'],
+                           'Pakistan Bureau of Statistics (PBS), reviewed monthly report',
+                           cadence='monthly', metric=reviewed['metric'],
+                           source_url=reviewed['source_url'], source_location=reviewed['source_location'],
+                           reviewed_on=reviewed['reviewed_on'], via='pbs-reviewed-report')
+        result['fetched_at'] = reviewed['reviewed_on'] + 'T00:00:00Z'
+        return result
+    return feed
+
+
 def fetch():
-    yoy, as_of, ix_now, ix_prev = parse_cpi(http_get(CPI_URL))
+    reviewed = json.loads(REVIEWED_PATH.read_text()) if REVIEWED_PATH.exists() else None
+    try:
+        yoy, as_of, ix_now, ix_prev = parse_cpi(http_get(CPI_URL))
+    except Exception:
+        if reviewed:
+            return choose_latest(None, reviewed)
+        raise
     if not in_band(yoy, 0, 60):  # Pakistan CPI realistically 0-60%
         raise ValueError(f"CPI YoY out of sanity band: {yoy}")
-    return partition(
+    feed = partition(
         NAME, yoy, as_of, "Pakistan Bureau of Statistics (PBS)",
         cadence="monthly", metric="CPI inflation YoY %",
         index_latest=round(ix_now, 4), index_year_ago=round(ix_prev, 4),
         source_url=CPI_URL)
+    return choose_latest(feed, reviewed)
 
 
 if __name__ == "__main__":

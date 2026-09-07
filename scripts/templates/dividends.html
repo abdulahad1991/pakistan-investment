@@ -169,6 +169,7 @@ gtag('config', 'G-4T2H0KH9H7');
 </style>
 
 {{JSONLD}}
+<meta name="audio-summary" content="review-required">
 </head>
 <body>
 
@@ -201,8 +202,8 @@ gtag('config', 'G-4T2H0KH9H7');
       <span class="tk">KSE-100 <b id="tk-kse">1,75,233</b></span>
       <span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
       <span class="tk">USD/PKR <b id="tk-pkr">&#8360;277.41</b></span>
-      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold"></span></span>
-      <span class="tk">CPI <b id="tk-inf">9.2%</b></span>
+      <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b> <span class="up" id="tkc-gold">1Y unavailable</span></span>
+      <span class="tk">CPI <b id="tk-inf">11.1%</b></span>
     </div>
   </div>
 </div>
@@ -224,7 +225,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <h1>{{H1}}</h1>
       <div class="art-byline">
         <span>By Abdul Ahad</span>
-        <span class="hl">· Reviewed {{AS_OF}}</span>
+        <span class="hl">· Dataset built {{AS_OF}}</span>
         <span>· Price snapshot {{DATA_AS_OF}}</span>
       </div>
     </div>
@@ -263,12 +264,12 @@ gtag('config', 'G-4T2H0KH9H7');
       </div>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
-      <h2 id="s1"><span class="sn">01</span>First 10 rows after the yield sort</h2>
+      <h2 id="s1"><span class="sn">01</span>Issuers with a reconciled dividend basis</h2>
       <div class="tbl-wrap">{{TABLE}}</div>
       <p class="tbl-note">{{TBL_NOTE}}</p>
 
-      <h2 id="s2"><span class="sn">02</span>3-year price history</h2>
-      <p>Each chart uses the stored monthly closing-price series. The endpoints and percentage are price-only observations: they exclude dividends, tax, transaction costs and corporate-action adjustments unless those adjustments are already reflected in the source history.</p>
+      <h2 id="s2"><span class="sn">02</span>Reviewed price histories</h2>
+      <p>Each chart uses only its reviewed window, with historical prices adjusted to a comparable share basis for documented splits and bonus issues. The percentage uses the two displayed endpoints. Cash dividends, tax and costs are excluded. Unreviewed histories are omitted. <a href="/backtester.html#split-case-study">See the Systems Limited worked example and source ledger</a>.</p>
       <div class="hist-grid">{{CARDS}}</div>
 
       <h2 id="s3"><span class="sn">03</span>All positive-yield observations</h2>
@@ -277,7 +278,7 @@ gtag('config', 'G-4T2H0KH9H7');
       <p class="tbl-note">{{TBL_NOTE}}</p>
 
       <h2 id="s4"><span class="sn">04</span>Method and verification</h2>
-      <p>The screen sums recorded cash dividends announced in the trailing period, converts percentage-of-par declarations to cash per share using the recorded face value, divides that amount by the dated market price, and sorts descending. That mixes a historical numerator with a point-in-time denominator, so it is a screen rather than a forecast.</p>
+      <p>The screen sums recorded cash dividends announced during the twelve months ending on the collection date, converts each declaration using the face value at its announcement date, adjusts earlier cash amounts for subsequent documented changes in share count, divides that amount by the dated market price, and sorts descending. That mixes a historical numerator with a point-in-time denominator, so it is a screen rather than a forecast.</p>
       <ul>
         <li><strong>Verify the numerator:</strong> open the issuer's PSX payout history and confirm each cash event, announcement date, financial period and whether it is final, interim or special.</li>
         <li><strong>Verify face value:</strong> a declared percentage is applied to par value, not market price. A wrong face-value assumption produces a wrong cash dividend.</li>
@@ -306,7 +307,7 @@ gtag('config', 'G-4T2H0KH9H7');
         <a href="https://dps.psx.com.pk/market-watch" target="_blank" rel="noopener">PSX Data Portal - market prices →</a>
         <a href="https://dps.psx.com.pk/company/payouts" target="_blank" rel="noopener">PSX Data Portal - issuer payout records →</a>
         <a href="https://financials.psx.com.pk/" target="_blank" rel="noopener">PSX Financials Portal - company statements →</a>
-        <a href="/methodology.html#data-sources">Local collection, fallback and stale-data methodology →</a>
+        <a href="/methodology.html#editorial">Local collection, fallback and stale-data methodology →</a>
       </div>
 
       <div class="related-links"><h3>Related reading</h3>{{RELATED}}</div>
@@ -320,8 +321,8 @@ gtag('config', 'G-4T2H0KH9H7');
         <div class="rail-sec">
           <div class="rail-h">On this page</div>
           <nav class="rail-toc" aria-label="On this page">
-            <a href="#s1"><span class="ti">01</span>First 10 rows</a>
-            <a href="#s2"><span class="ti">02</span>3-year history</a>
+            <a href="#s1"><span class="ti">01</span>Verified-basis rows</a>
+            <a href="#s2"><span class="ti">02</span>Reviewed histories</a>
             <a href="#s3"><span class="ti">03</span>All positive rows</a>
             <a href="#s4"><span class="ti">04</span>Method &amp; checks</a>
             <a href="#s5"><span class="ti">05</span>Stored snapshots</a>

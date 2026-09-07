@@ -20,6 +20,7 @@ import json
 import pathlib
 import re
 import sys
+import html as html_lib
 from datetime import datetime, timezone
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -69,7 +70,34 @@ def data_age_label(iso: str) -> str:
     """Absolute, not relative. app.js swaps in the "updated Nh ago" form on load;
     baking a relative age into static HTML would freeze it at build time."""
     when = long_date(iso)
-    return f"Data cutoff: {when}" if when else "Data cutoff unavailable"
+    return f"Build date: {when}; observations have separate dates" if when else "Build date unavailable"
+
+
+def fund_snapshot(data, today=None):
+    today = today or datetime.now().date()
+    def fresh(row):
+        try:
+            age = (today - datetime.fromisoformat(row.get('as_of', '')).date()).days
+            return 0 <= age <= 5
+        except (ValueError, TypeError):
+            return False
+    health = data.get('data_health', {}).get('funds', {})
+    rows = [f for f in data.get('mutual_funds', []) if f.get('available') and f.get('as_of')
+            and fresh(f) and isinstance(f.get('nav'), (int, float))
+            and isinstance(f.get('ret_1y'), (int, float))]
+    esc = lambda value: html_lib.escape(str(value), quote=True)
+    if not rows or health.get('stale') or not health.get('ok'):
+        date = esc(health.get('as_of') or 'not verified')
+        return ('<p role="status"><strong>Fund comparison unavailable.</strong> '
+                f'Last stored source date: {date}. The latest collection could not be verified; '
+                'stale returns are excluded. <a href="https://www.mufap.com.pk/Industry/IndustryStatDaily?tab=1" '
+                'target="_blank" rel="noopener">Check MUFAP</a> and the fund manager’s current report.</p>')
+    body = ''.join(f'<tr><td>{esc(f["name"])}</td><td>{esc(f["as_of"])}</td>'
+                   f'<td>{esc(f["nav"])}</td><td>{esc(f["ret_1y"])}%</td>'
+                   f'<td>{esc(f["return_type"])}</td></tr>' for f in rows)
+    return ('<div class="table-wrap"><table><thead><tr><th>Fund</th><th>Observation date</th>'
+            '<th>NAV (PKR)</th><th>365-day return</th><th>Basis</th></tr></thead>'
+            f'<tbody>{body}</tbody></table></div><p>Historical returns; no future return is implied.</p>')
 
 
 def chg_badge(pct_val, suffix: str) -> str:
@@ -85,6 +113,7 @@ def build_values(d: dict) -> dict[str, str]:
     g = d.get("gold") or {}
     f = d.get("fuel") or {}
     updated = d.get("updated", "")
+    gold_collected = d.get('data_health', {}).get('gold', {}).get('fetched_at') or ''
 
     v: dict[str, str] = {}
 
@@ -104,6 +133,9 @@ def build_values(d: dict) -> dict[str, str]:
     v["m-pkr"] = v["h-pkr"] = v["tk-pkr"]
     v["m-inf"] = v["h-inf"] = v["tk-inf"]
     v["data-age"] = data_age_label(updated)
+    stale = [name for name, health in d.get('data_health', {}).items() if health.get('stale') or not health.get('ok')]
+    if stale:
+        v['data-age'] += ' · Delayed: ' + ', '.join(stale)
     if long_date(updated):
         v["hero-data-age"] = "Dataset: " + long_date(updated)
 
@@ -116,7 +148,7 @@ def build_values(d: dict) -> dict[str, str]:
         v["gold-chg"] = chg_badge(g.get("chg1y_pct"), "% / 1yr")
         note = ("third-party local-rate reference via gold.pk" if g.get("source_type") == "local"
                 else "derived international futures and PKR/USD fallback")
-        v["gold-src"] = f"Collected {long_date(updated)} &#183; {note}"
+        v["gold-src"] = f"Collected {long_date(gold_collected) or 'date unavailable'} &#183; {note}"
 
         # gold-rates.html rate grid. 21K/18K are derived from the 24K rate.
         v["gr-tola24"] = v["gr-tola24-m"] = rs(g.get("tola_24k"))
@@ -131,16 +163,17 @@ def build_values(d: dict) -> dict[str, str]:
                 v[f"gr-tola{k}"] = rs(tola)
                 v[f"gr-10g{k}"] = rs(round(tola / TOLA_GRAMS * 10))
                 v[f"gr-gram{k}"] = rs(round(tola / TOLA_GRAMS))
-        v["gr-chg"] = chg_badge(g.get("chg1y_pct"), "% over 1 year")
+        v['tkc-gold'] = '1Y unavailable'
+        v['gold-chg'] = v['gr-chg'] = '1Y return unavailable'
         src_note = ("Source: gold.pk, a third-party local-rate publisher."
                     if g.get("source_type") == "local"
                     else "Source: a derived international futures and PKR/USD fallback.")
         v["gr-source"] = (
-            f"Collected {long_date(updated)}. {src_note} This is not a dealer quote. "
+            f"Collected {long_date(gold_collected) or 'date unavailable'}. {src_note} This is not a dealer quote. "
             "21K and 18K are derived from 24K (&#215;87.5% and &#215;75%); shop prices, "
             "spreads and making charges differ."
         )
-        v["gold-asof"] = "Collected " + long_date(updated)
+        v["gold-asof"] = "Collected " + (long_date(gold_collected) or 'date unavailable')
 
     # Homepage fuel card.
     if f:
@@ -189,6 +222,8 @@ def main() -> int:
     for path in targets:
         src = path.read_text(encoding="utf-8")
         out, hits = apply(src, values)
+        out = re.sub(r'(?<=<!-- FUND_SNAPSHOT_START -->).*?(?=<!-- FUND_SNAPSHOT_END -->)',
+                     lambda _: fund_snapshot(data), out, flags=re.S)
         if out != src:
             drift.append(path.relative_to(ROOT))
             total += hits

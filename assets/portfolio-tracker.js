@@ -7,7 +7,7 @@
   var PAL = ["#075E4B", "#0B7C5E", "#2854C5", "#B98A2F", "#0E2A22", "#0B755F", "#8A6512", "#436055", "#C24132"];
 
   function fmtPKR(n) {
-    if (!isFinite(n)) return "₨ 0";
+    if (n == null || !isFinite(n)) return "Unavailable";
     n = Math.round(n); var neg = n < 0; var s = String(Math.abs(n));
     if (s.length > 3) { var h = s.slice(0, -3), t = s.slice(-3); h = h.replace(/\B(?=(\d\d)+(?!\d))/g, ","); s = h + "," + t; }
     return (neg ? "-" : "") + "₨ " + s;
@@ -36,13 +36,13 @@
   }).catch(function () { $("pf-emptymsg").textContent = "Could not load the dated price file. Try again shortly."; });
 
   function priceOf(h) {
-    if (h.type === "stock") return (STK[h.ticker] || {}).price || 0;
-    if (h.type === "gold") return (DATA.gold && DATA.gold.gram_24k) || 0;
+    if (h.type === "stock") return (STK[h.ticker] || {}).price || null;
+    if (h.type === "gold") return (DATA.gold && DATA.gold.gram_24k) || null;
     return 1; // cash
   }
   function chgOf(h) {
-    if (h.type === "stock") return (STK[h.ticker] || {}).chg1y || 0;
-    if (h.type === "gold") return (DATA.gold && DATA.gold.chg1y_pct) || 0;
+    if (h.type === "stock") return (STK[h.ticker] || {}).chg1y ?? null;
+    if (h.type === "gold") return (DATA.gold && DATA.gold.chg1y_pct) ?? null;
     return 0;
   }
   function labelOf(h) {
@@ -55,36 +55,38 @@
   function render() {
     var hs = load();
     var rows = $("pf-rows"); rows.innerHTML = "";
-    var total = 0, weighted = 0, slices = [], labels = [], colors = [];
+    var total = 0, weighted = 0, slices = [], labels = [], colors = [], complete = true, returnsComplete = true;
     hs.forEach(function (h, i) {
-      var price = priceOf(h), val = h.qty * (h.type === "cash" ? 1 : price), chg = chgOf(h);
-      total += val; weighted += val * chg;
-      slices.push(val); labels.push(labelOf(h)); colors.push(PAL[i % PAL.length]);
+      var price = priceOf(h), val = price == null ? null : h.qty * price, chg = chgOf(h);
+      if (val == null || !Number.isFinite(val)) complete = false;
+      else { total += val; slices.push(val); labels.push(labelOf(h)); colors.push(PAL[i % PAL.length]); }
+      if (chg == null || val == null) returnsComplete = false;
+      else weighted += val * chg;
       var tr = document.createElement("tr");
       tr.innerHTML = "<td><b>" + labelOf(h) + "</b></td>"
         + "<td>" + (h.qty % 1 === 0 ? h.qty : h.qty.toFixed(2)) + " " + unit(h) + "</td>"
         + "<td>" + (h.type === "cash" ? "-" : fmtPKR(price)) + "</td>"
         + "<td>" + fmtPKR(val) + "</td>"
-        + '<td class="' + (chg >= 0 ? "pos" : "neg") + '">' + (h.type === "cash" ? "-" : (chg >= 0 ? "+" : "") + chg.toFixed(1) + "%") + "</td>"
+        + '<td class="' + (chg >= 0 ? "pos" : "neg") + '">' + (h.type === "cash" ? "-" : chg == null ? "Unavailable" : (chg >= 0 ? "+" : "") + chg.toFixed(1) + "%") + "</td>"
         + '<td><button class="pf-del" data-i="' + i + '" aria-label="Remove">&times;</button></td>';
       rows.appendChild(tr);
     });
     $("pf-emptymsg").style.display = hs.length ? "none" : "block";
     $("pf-table").style.display = hs.length ? "" : "none";
 
-    $("pf-total").textContent = fmtPKR(total);
+    $("pf-total").textContent = complete ? fmtPKR(total) : 'Incomplete: missing prices';
     $("pf-count").textContent = hs.length;
     var pc = total > 0 ? weighted / total : 0;
-    var chgEl = $("pf-chg"); chgEl.textContent = hs.length ? (pc >= 0 ? "+" : "") + pc.toFixed(1) + "%" : "-";
+    var chgEl = $("pf-chg"); chgEl.textContent = !complete || !returnsComplete ? 'Unavailable' : hs.length ? (pc >= 0 ? "+" : "") + pc.toFixed(1) + "%" : "-";
     chgEl.className = "rv " + (pc >= 0 ? "pos" : "neg");
     var top = "-";
-    if (slices.length) { var mi = slices.indexOf(Math.max.apply(null, slices)); top = labels[mi] + " " + Math.round(slices[mi] / total * 100) + "%"; }
+    if (complete && total > 0 && slices.length) { var mi = slices.indexOf(Math.max.apply(null, slices)); top = labels[mi] + " " + Math.round(slices[mi] / total * 100) + "%"; }
     $("pf-top").textContent = top;
 
     rows.querySelectorAll(".pf-del").forEach(function (b) {
       b.addEventListener("click", function () { var arr = load(); arr.splice(+b.getAttribute("data-i"), 1); save(arr); render(); });
     });
-    drawDonut(labels, slices, colors);
+    drawDonut(labels, complete ? slices : [], colors);
   }
 
   function drawDonut(labels, data, colors) {
@@ -114,8 +116,8 @@
     $("pf-type").addEventListener("change", syncType); syncType();
     $("pf-add").addEventListener("click", function () {
       var t = $("pf-type").value;
-      var qty = Number(String($("pf-qty").value).replace(/[^0-9.]/g, "")) || 0;
-      if (qty <= 0) { $("pf-qty").focus(); return; }
+      var qty = Number(String($("pf-qty").value).replace(/,/g, ""));
+      if (!Number.isFinite(qty) || qty <= 0) { $("pf-qty").focus(); return; }
       var h = { type: t, qty: qty };
       if (t === "stock") { h.ticker = $("pf-ticker").value; if (!h.ticker) return; }
       var arr = load(); arr.push(h); save(arr);

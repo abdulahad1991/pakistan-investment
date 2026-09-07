@@ -31,8 +31,7 @@ STALE_DAYS = {
     "intraday": 5,    # Fri close + a long weekend/holiday is normal
     "daily": 5,
     "weekly": 12,
-    "monthly": 70,    # monthly data is always ~1 month in arrears (May CPI is
-                      # the latest until ~1 Jul); only flag once M-2 goes missing
+    "monthly": 45,    # Month labels use day 1; flag a missed subsequent release.
     "event": 240,     # policy/savings/GDP move rarely
 }
 
@@ -100,10 +99,13 @@ def _staleness(part, today):
     limit = STALE_DAYS.get(cad, 7)
     d = _to_date(part.get("as_of"))
     if d is None:
-        # No data-date to judge — lean on the ok flag only.
-        return (not part.get("ok", True), None)
+        # A successful collection cannot remain fresh indefinitely when the
+        # publisher gives no observation date. Use collection age explicitly.
+        d = _to_date(str(part.get('fetched_at') or '')[:10])
+        if d is None:
+            return (True, None)
     age = (today - d).days
-    return (age > limit or not part.get("ok", True), age)
+    return (age < 0 or age > limit or not part.get("ok", True), age)
 
 
 def _fmt(s):
@@ -208,14 +210,27 @@ def merge():
                     s["rate_effective"] = eff
 
     # ── mutual funds (match by fund name) ────────────────────────────
-    if (p := part("funds")):
-        fmap = p["value"]
+    p = part("funds") or {}
+    if data.get('mutual_funds'):
+        fmap = p.get("value") or {}
         for f in data.get("mutual_funds", []):
             row = fmap.get(f["name"])
+            # Legacy long-period returns and product rankings were seeded,
+            # not supplied by this fetcher. Never carry them into a new build.
+            for key in ('ret_3y', 'ret_5y', 'recommended', 'verdict', 'min_pkr', 'risk', 'shariah'):
+                f.pop(key, None)
             if row:
-                f["ret_1y"] = row.get("ret_1y", f.get("ret_1y"))
+                f["ret_1y"] = row.get("ret_1y")
                 f["nav"] = row.get("nav")
                 f["return_type"] = row.get("return_type")
+                f['as_of'] = row.get('as_of')
+                f['source_url'] = p.get('source_url') or 'https://www.mufap.com.pk/Industry/IndustryStatDaily?tab=1'
+                f['available'] = bool(p.get('ok') and _to_date(row.get('as_of')) and
+                                      not _staleness({**p, 'as_of': row['as_of']}, today)[0])
+                if not f['available']:
+                    f.update(ret_1y=None, nav=None)
+            else:
+                f.update(ret_1y=None, nav=None, available=False, as_of=None)
 
     # ── gold ─────────────────────────────────────────────────────────
     if (p := part("gold")):
@@ -223,6 +238,10 @@ def merge():
         g.update(p["value"])
         if p.get("as_of"):
             g["asof"] = p["as_of"]
+    # These old, seeded fields have no dated source series in the fetcher.
+    # Today's spot quote cannot verify a multi-year history or a 1Y return.
+    data.setdefault('gold', {}).pop('history', None)
+    data['gold']['chg1y_pct'] = None
 
     # ── fuel (OGRA-notified retail petrol/HSD/kerosene/LDO, PKR/L) ────
     if (p := part("petrol")):
@@ -259,17 +278,24 @@ def merge():
             macro["stocks_asof"] = _fmt(p["as_of"]) if _to_date(p["as_of"]) else p["as_of"]
 
     # ── dividends: ttm cash + yield for stocks that pay ──────────────
-    if (p := part("dividends")):
-        dmap = p["value"]
+    p = part("dividends") or {}
+    if data.get('stocks'):
+        dmap = p.get("value") or {}
         for s in data.get("stocks", []):
             sym = (s.get("ticker") or "").strip().upper()
             row = dmap.get(sym)
+            s['div_basis_verified'] = bool(row and row.get('basis_verified') and p.get('ok')
+                                          and not _staleness(p, today)[0]
+                                          and row.get('window_end') == today.isoformat())
+            s['div'] = 0
+            s['yield'] = 0
             if row and row.get("ttm_cash") is not None:
-                s["div"] = row["ttm_cash"]
+                s["div"] = row["ttm_cash"] if s['div_basis_verified'] else 0
                 px = s.get("price")
-                s["yield"] = round(row["ttm_cash"] / px * 100, 2) if px else 0
+                s["yield"] = round(s['div'] / px * 100, 2) if px and s['div_basis_verified'] else 0
                 s["div_latest"] = row.get("latest_cash")
                 s["div_asof"] = row.get("announce")
+                s['div_window_end'] = row.get('window_end')
 
     # ── consistency asserts (fail loud, don't ship garbage) ──────────
     _assert_consistency(data)
@@ -286,6 +312,7 @@ def merge():
             "stale": stale,
             "age_days": age,
             "last_error": pp.get("last_error"),
+            "fetched_at": pp.get('fetched_at'),
         }
         # Failover provenance: which source in the crawl chain actually served
         # this value, and (when a non-primary won) that the primary was down.

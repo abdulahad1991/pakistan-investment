@@ -70,7 +70,7 @@ function initGold() {
   }
 
   // Source + date
-  const when = new Date(GDATA.updated).toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
+  const when = new Date(GDATA.data_health?.gold?.fetched_at || NaN).toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
   const note = g.source_type === "local"
     ? "Source: gold.pk, a third-party local-rate publisher."
     : "Source: a derived international futures and PKR/USD fallback.";

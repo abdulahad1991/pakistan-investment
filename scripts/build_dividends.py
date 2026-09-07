@@ -9,6 +9,8 @@ import json, re, html as _html, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+from build_data import _to_date
 SITE = "https://pakinvestlysis.com"
 SLUG = "top-dividend-stocks-pakistan"
 OG   = f"{SITE}/assets/og/blog-top-dividend-stocks-pakistan.png?v=3"
@@ -25,7 +27,7 @@ def fmt_pkr(n):
 
 def all_payers(data):
     rows = [s for s in data["stocks"]
-            if s.get("price", 0) > 0 and s.get("yield", 0) > 0]
+            if s.get("price", 0) > 0 and s.get("yield", 0) > 0 and s.get('div_basis_verified')]
     rows.sort(key=lambda s: s["yield"], reverse=True)
     return rows
 
@@ -56,7 +58,7 @@ def sparkline(values, w=150, h=36, tip=None):
     poly = " ".join(f"{x},{y}" for x, y in pts)
     title = f"<title>{_html.escape(tip)}</title>" if tip else ""
     return (f'<svg class="spark" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-            f'role="img" aria-label="3-year price trend">{title}'
+            f'role="img" aria-label="Price trend over the reviewed dates">{title}'
             f'<polyline fill="none" stroke="{col}" stroke-width="2" '
             f'stroke-linejoin="round" stroke-linecap="round" points="{poly}"/>'
             f'<circle cx="{pts[-1][0]}" cy="{pts[-1][1]}" r="2.6" fill="{col}"/></svg>')
@@ -88,19 +90,21 @@ def chart(values, labels=None, w=300, h=92, pad=6):
 def table_html(rows, hist):
     out = ['<table class="div-table"><thead><tr>'
            '<th>#</th><th>Company</th><th>Price</th><th>Div/share</th>'
-           '<th>Yield</th><th>1Y</th><th>P/E</th><th>3-yr trend</th>'
+           '<th>Yield</th><th>Source 1Y</th><th>P/E</th><th>Reviewed price history</th>'
            '</tr></thead><tbody>']
     for i, s in enumerate(rows, 1):
         chg = s.get("chg1y", 0); cls = "pos" if chg >= 0 else "neg"
         sign = "+" if chg >= 0 else ""
-        vals = (hist.get(s["ticker"]) or {}).get("values", [])
+        h = (hist.get(s['ticker']) or {}).get('performance') or {}
+        vals = h.get('values', [])
+        labs = h.get('labels', [])
         tip = (f'{s["ticker"]}: ₨{fmt_pkr(vals[0])} → ₨{fmt_pkr(vals[-1])} '
-               f'(3-yr)') if vals else None
+               f'({labs[0]} to {labs[-1]}, share-action adjusted)') if vals else None
         out.append(
             f'<tr><td class="rk">{i}</td>'
             f'<td class="co"><b>{_html.escape(s["name"])}</b><span>{s["ticker"]}</span></td>'
-            f'<td>&#8360; {fmt_pkr(s["price"])}</td>'
-            f'<td>&#8360; {fmt_pkr(s.get("div", 0))}</td>'
+            f'<td>&#8360; {s["price"]:.2f}</td>'
+            f'<td>&#8360; {s.get("div", 0):.2f}</td>'
             f'<td class="yld">{s.get("yield", 0):.2f}%</td>'
             f'<td class="{cls}">{sign}{chg:.1f}%</td>'
             f'<td>{s.get("pe", 0):.1f}</td>'
@@ -112,10 +116,12 @@ def table_html(rows, hist):
 def cards_html(rows, hist):
     out = []
     for s in rows:
-        h = hist.get(s["ticker"]) or {}
+        h = (hist.get(s["ticker"]) or {}).get('performance') or {}
         vals = h.get("values", []); labs = h.get("labels", [])
-        start = vals[0] if vals else s["price"]
-        chg = ((s["price"] - start) / start * 100) if start else 0
+        if len(vals) < 2:
+            continue
+        start, final = vals[0], vals[-1]
+        chg = (final / start - 1) * 100
         cls = "pos" if chg >= 0 else "neg"; sign = "+" if chg >= 0 else ""
         out.append(
             f'<div class="hist-card"><div class="hc-top">'
@@ -123,8 +129,9 @@ def cards_html(rows, hist):
             f'<div class="hc-yld">{s.get("yield",0):.1f}%<span>yield</span></div></div>'
             f'{chart(vals, labs)}'
             f'<div class="hc-foot"><span>&#8360; {fmt_pkr(start)}</span>'
-            f'<span class="{cls}">{sign}{chg:.1f}% 3y</span>'
-            f'<span>&#8360; {fmt_pkr(s["price"])}</span></div></div>')
+            f'<span class="{cls}">{sign}{chg:.1f}%</span>'
+            f'<span>&#8360; {fmt_pkr(final)}</span></div>'
+            f'<p class="tbl-note">{labs[0]} to {labs[-1]} · adjusted for documented share actions</p></div>')
     return "".join(out)
 
 
@@ -139,7 +146,7 @@ def glance_html(rows, total, data_date, payout_date):
         f"({top['ticker']}) at <strong>{top['yield']:.2f}%</strong> in the stored data.</li>",
         f"<li><strong>{total} observations</strong> have a positive trailing cash-dividend "
         f"value and price in the {data_date} snapshot.</li>",
-        f"<li><strong>{over8} of the first 10 rows</strong> are at least 8%; their simple "
+        f"<li><strong>{over8} of the {len(rows)} displayed rows</strong> are at least 8%; their simple "
         f"average is <strong>{avg:.1f}%</strong>. Neither statistic is a portfolio return.</li>",
         f"<li>Prices are dated <strong>{data_date}</strong>; the stored payout feed includes "
         f"announcements through <strong>{payout_date or 'an unpublished cutoff'}</strong>.</li>",
@@ -154,7 +161,7 @@ def rail_glance(rows, data_date, total):
     top = rows[0]; over8 = sum(1 for s in rows if s["yield"] >= 8)
     cells = [(top["ticker"], "First row, not a pick"),
              (str(total), "Positive-yield rows"),
-             (str(over8), "First 10 at 8%+"),
+             (str(over8), "Displayed rows at 8%+"),
              (data_date, "Price snapshot")]
     return "".join(f'<div class="gl-row"><div class="gl-n">{_html.escape(n)}</div>'
                    f'<div class="gl-l">{_html.escape(l)}</div></div>' for n, l in cells)
@@ -199,9 +206,9 @@ def changelog(existing, data_date, rows):
             f'First row after a descending trailing-yield sort: '
             f'{_html.escape(top["name"])} ({top["ticker"]}) at '
             f'{top["yield"]:.2f}%. {over8} of the first 10 rows are at least 8%.</div>') if top else ""
-    snaps = re.findall(r'<div class="snap">.*?</div>', existing, re.S)
-    snaps = [s for s in snaps if _snap_week(s) != data_date]
-    return "".join(([snap] + snaps)[:8])
+    # Earlier snapshots used unreconciled share bases. Do not retain their
+    # yields as evidence alongside the corrected, reproducible dataset.
+    return snap.replace('of the first 10 rows', f'of the {len(rows)} displayed rows')
 
 
 def _extract_changelog(html):
@@ -235,11 +242,11 @@ def build_jsonld(rows, published, today, canonical, h1):
 
 
 def render(today):
-    data = json.loads((ROOT / "data.json").read_text())
-    partition_path = ROOT / "data" / "partitions" / "dividends.json"
-    partition = json.loads(partition_path.read_text()) if partition_path.exists() else {}
-    hp = ROOT / "data" / "stock_history.json"
-    hist = json.loads(hp.read_text()) if hp.exists() else {}
+    # Reviewed research snapshots are deliberate publications. Daily quote
+    # fetches must not move their price or share-action verification cutoff.
+    snapshot = json.loads((ROOT / 'data/research/dividend-snapshot.json').read_text())
+    data, partition, hist = snapshot['data'], snapshot['payouts'], snapshot['histories']
+    today = snapshot['reviewed_on']
     full = all_payers(data)
     rows = full[:TOPN]
     tmpl = (ROOT / "scripts/templates/dividends.html").read_text()
@@ -251,7 +258,8 @@ def render(today):
         published = _extract_published(old) or today
         existing_cl = _extract_changelog(old)
 
-    data_date = (data.get("updated") or today)[:10]
+    price_date = _to_date(data.get('data_health', {}).get('stocks', {}).get('as_of'))
+    data_date = price_date.isoformat() if price_date else 'unverified'
     payout_date = partition.get("latest_announce")
     market_health = (data.get("data_health") or {}).get("stocks") or {}
     payout_health = (data.get("data_health") or {}).get("dividends") or {}
@@ -262,9 +270,12 @@ def render(today):
         f"Cash-dividend announcements included through: {_html.escape(str(payout_label))}.",
         f"Price collection status: {'successful' if market_health.get('ok') else 'failed or unavailable'}.",
         f"Payout collection status: {'successful' if payout_health.get('ok') else 'failed or unavailable'}.",
-        "A failed refresh leaves the last stored observations in place; it does not make them current.",
+        f"Announcement window: after {partition['window_start']} through {partition['as_of']} inclusive.",
+        'This is a fixed reviewed snapshot. Announced cash can include dividends not yet paid.',
     ]
     data_status = " ".join(status_bits)
+    data_status += (' Only issuers with reconciled declaration face values are included; unverified yields are withheld. '
+                    '<a href="/data/research/dividend-snapshot.json">Download prices, cash rows and adjusted histories (JSON)</a>.')
 
     h1 = "PSX trailing dividend-yield dataset"
     top = rows[0] if rows else None

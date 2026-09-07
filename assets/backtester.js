@@ -9,7 +9,7 @@
     if (s.length > 3) { var h = s.slice(0, -3), t = s.slice(-3); h = h.replace(/\B(?=(\d\d)+(?!\d))/g, ","); s = h + "," + t; }
     return (neg ? "-" : "") + "₨ " + s;
   }
-  function groupPK(s) { s = s.replace(/\D/g, ""); if (s.length <= 3) return s; var h = s.slice(0, -3), t = s.slice(-3); return h.replace(/\B(?=(\d\d)+(?!\d))/g, ",") + "," + t; }
+  function groupPK(s) { var negative = /^-/.test(s); s = s.replace(/\D/g, ""); if (s.length <= 3) return (negative ? "-" : "") + s; var h = s.slice(0, -3), t = s.slice(-3); return (negative ? "-" : "") + h.replace(/\B(?=(\d\d)+(?!\d))/g, ",") + "," + t; }
   function num(id) { return Number(String($(id).value).replace(/[^0-9.-]/g, "")) || 0; }
 
   var DATA = null, HIST = null, ASSETS = [], chart = null, periodM = 36;
@@ -37,13 +37,12 @@
 
   function buildAssets() {
     ASSETS = [];
-    if (DATA.gold && DATA.gold.history && DATA.gold.history.values.length > 3) {
-      ASSETS.push({ key: "GOLD", name: "Gold (24K, per tola)", labels: DATA.gold.history.labels, values: DATA.gold.history.values });
-    }
     var names = {}; (DATA.stocks || []).forEach(function (s) { names[s.ticker] = s.name; });
     Object.keys(HIST).sort().forEach(function (tk) {
       var h = HIST[tk];
-      if (h && h.values && h.values.length > 3) ASSETS.push({ key: tk, name: (names[tk] || tk) + " (" + tk + ")", labels: h.labels, values: h.values });
+      var p = h && h.performance;
+      if (p && p.basis === 'documented-share-actions-adjusted-price' && p.values.length > 1)
+        ASSETS.push({ key: tk, name: (names[tk] || tk) + " (" + tk + ")", labels: p.labels, values: p.values, dates:p.dates });
     });
     var sel = $("bt-asset");
     sel.innerHTML = ASSETS.map(function (a, i) { return '<option value="' + i + '">' + a.name + "</option>"; }).join("");
@@ -76,19 +75,15 @@
     var amount = num("bt-amount");
     var a = ASSETS[Math.max(0, Math.min(ASSETS.length - 1, +$("bt-asset").value))];
     var scenarioRate = Math.max(-1, Math.min(1, num("bt-ns") / 100));
-    var labels = a.labels, vals = a.values, N = vals.length;
-    var span = periodM > 0 ? Math.min(periodM + 1, N) : N;
-    var start = N - span;
-    var L = labels.slice(start), V = vals.slice(start);
-    if (amount <= 0 || V.length < 2 || !V[0]) { $("bt-note").textContent = "Enter an amount to see the result."; return; }
-
-    var units = amount / V[0];
-    var series = V.map(function (p) { return units * p; });
-    var scenario = L.map(function (_, i) { return amount * Math.pow(1 + scenarioRate, i / 12); });
-    var final = series[series.length - 1];
-    var ret = (final - amount) / amount * 100;
-    var years = (V.length - 1) / 12;
-    var cagr = years > 0 ? (Math.pow(final / amount, 1 / years) - 1) * 100 : 0;
+    var result;
+    try { result = PKFinanceMath.backtest(amount, a, periodM, scenarioRate); }
+    catch (error) {
+      ['o-final','o-ret','o-profit','o-cagr'].forEach(function (id) { $(id).textContent = '—'; });
+      if (chart) { chart.destroy(); chart = null; }
+      $('bt-note').textContent = error.message; return;
+    }
+    var L = result.labels, series = result.series, scenario = result.scenario;
+    var final = result.final, ret = result.ret, cagr = result.cagr;
 
     $("o-final").textContent = fmtPKR(final);
     var rv = $("o-ret"); rv.textContent = (ret >= 0 ? "+" : "") + ret.toFixed(1) + "%"; rv.className = "rv " + (ret >= 0 ? "pos" : "neg");
@@ -96,7 +91,9 @@
     var cv = $("o-cagr"); cv.textContent = (cagr >= 0 ? "+" : "") + cagr.toFixed(1) + "%"; cv.className = "rv " + (cagr >= 0 ? "pos" : "neg");
 
     $("bt-note").textContent = "From " + L[0] + " to " + L[L.length - 1] + ", ₨ " + groupPK(String(Math.round(amount))) + " applied to " + a.name + " becomes " + fmtPKR(final) + " (" +
-      (ret >= 0 ? "+" : "") + ret.toFixed(0) + "% price-only). The dashed line applies your " + (scenarioRate * 100).toFixed(1) + "% constant-rate assumption. Dividends, costs and tax are excluded.";
+      (ret >= 0 ? "+" : "") + ret.toFixed(1) + "% price return over the available window). " +
+      'Share prices are adjusted for documented splits and bonus issues within the reviewed window. ' +
+      "The dashed line applies your " + (scenarioRate * 100).toFixed(1) + "% constant-rate assumption. Cash dividends, costs and tax are excluded.";
 
     draw(L, series, scenario, a.name);
     if (window.pkTrack) window.pkTrack("backtest_run", { asset: a.key });

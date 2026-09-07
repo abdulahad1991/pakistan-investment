@@ -142,13 +142,16 @@ def parse_eod_monthly(json_text, months=37):
     d = json.loads(json_text)
     rows = d.get("data") if isinstance(d, dict) else d
     by_month = {}
+    dates = {}
     for r in sorted(rows or [], key=lambda x: x[0]):
         ts, close = r[0], r[3]
         key = datetime.datetime.fromtimestamp(
             ts, datetime.timezone.utc).strftime("%Y-%m")
         by_month[key] = round(float(close), 2)
+        dates[key] = datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).date().isoformat()
     keys = sorted(by_month)[-months:]
-    return {"labels": keys, "values": [by_month[k] for k in keys]}
+    return {"labels": keys, "values": [by_month[k] for k in keys],
+            "dates": [dates[k] for k in keys]}
 
 
 # ---------------------------------------------------------------------------
@@ -174,6 +177,8 @@ def fetch_history(symbols, throttle=0.3, months=37):
         if throttle and i < len(syms) - 1:
             time.sleep(throttle)
     if out:
+        from .corporate_actions import attach_performance
+        attach_performance(out)
         (ROOT / "data" / "stock_history.json").write_text(
             json.dumps(out, ensure_ascii=False), encoding="utf-8")
         print(f"  ✓ stock_history.json: {len(out)}/{len(syms)} tickers")

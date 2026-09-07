@@ -43,6 +43,8 @@ def http_get(url, headers=None, data=None, timeout=30, retries=3, backoff=2.0):
                 return r.read().decode("utf-8", "replace")
         except Exception as e:  # noqa: BLE001 - retry on any transport error
             last = e
+            if isinstance(e, urllib.error.HTTPError) and e.code in (401, 403, 404):
+                raise
             if attempt < retries - 1:
                 time.sleep(backoff * (attempt + 1))
     raise last

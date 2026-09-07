@@ -66,7 +66,7 @@
 <div class="ticker"><div class="ticker-inner"><span class="ticker-live"><span class="dot"></span>DATA</span><div class="ticker-feed">
   <span class="tk">KSE-100 <b id="tk-kse">1,75,233</b></span><span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
   <span class="tk">USD/PKR <b id="tk-pkr">&#8360;277.41</b></span><span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,56,500</b></span>
-  <span class="tk">CPI <b id="tk-inf">9.2%</b></span>
+  <span class="tk">CPI <b id="tk-inf">11.1%</b></span>
 </div></div></div>
 
 <main>
@@ -95,7 +95,7 @@
       </div>
       <div class="fld">
         <label for="sip-stepup">Yearly step-up (%)</label>
-        <div class="ip"><input type="number" id="sip-stepup" value="0" min="0" max="30" step="1"></div>
+        <div class="ip"><input type="number" id="sip-stepup" value="0" min="0" max="100" step="1"></div>
         <div class="hint">Raise your monthly amount each year (optional)</div>
       </div>
     </div>
@@ -161,6 +161,7 @@
   <div class="foot-bar"><span>© 2026 Pakinvestlysis · Karachi · Built by Abdul Ahad · Not financial advice</span><span>Sources: PSX · SBP · CDNS · MUFAP</span></div>
 </footer>
 
+<script src="/assets/finance-math.js" defer></script>
 <script src="/assets/sip-calculator.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/search.js" defer></script>

@@ -1,0 +1,32 @@
+{
+  "reviewed_on": "2026-09-07",
+  "reviewed_through": "2026-09-04",
+  "description": "Documented share-count changes. Performance is published only for the reviewed windows below; other raw histories remain available for source inspection.",
+  "issuers": {
+    "SYS": {
+      "from": "2025-01-01", "initial_face": 10,
+      "sources": ["https://dps.psx.com.pk/download/attachment/254268-1.pdf", "https://dps.psx.com.pk/download/document/254645.pdf"],
+      "events": [{"date": "2025-06-02", "kind": "split", "factor": 5, "face_after": 2}]
+    },
+    "LUCK": {
+      "from": "2025-01-01", "initial_face": 10,
+      "sources": ["https://dps.psx.com.pk/download/attachment/250915-1.pdf"],
+      "events": [{"date": "2025-04-28", "kind": "split", "factor": 5, "face_after": 2}]
+    },
+    "BAFL": {
+      "from": "2025-01-01", "initial_face": 10,
+      "sources": ["https://dps.psx.com.pk/download/attachment/273940-1.pdf", "https://dps.psx.com.pk/download/document/270184.pdf"],
+      "events": [{"date": "2026-04-20", "kind": "split", "factor": 2, "face_after": 5}]
+    },
+    "MTL": {
+      "from": "2025-06-01", "initial_face": 10,
+      "sources": ["https://dps.psx.com.pk/download/attachment/278529-1.pdf"],
+      "events": [{"date": "2026-06-22", "kind": "split", "factor": 2, "face_after": 5}]
+    },
+    "MARI": {
+      "from": "2024-08-01", "initial_face": 10,
+      "sources": ["https://dps.psx.com.pk/download/quote/2024-09-13.pdf", "https://dps.psx.com.pk/download/document/241320.pdf"],
+      "events": [{"date": "2024-09-16", "kind": "bonus", "factor": 9, "face_after": 10}]
+    }
+  }
+}

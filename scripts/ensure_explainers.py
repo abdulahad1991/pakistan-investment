@@ -44,6 +44,9 @@ def embed(html, slug):
 def main():
     made, embedded, failed = [], [], []
     for p in blogs():
+        html = p.read_text(encoding="utf-8")
+        if '<meta name="audio-summary" content="review-required">' in html:
+            continue
         slug = p.stem
         manifest = AUDIO / f"{slug}.json"
         if not manifest.exists():

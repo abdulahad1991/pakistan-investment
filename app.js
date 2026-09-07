@@ -65,7 +65,7 @@ function applyData() {
     .map(([name]) => name);
   const ageEl = document.getElementById("data-age");
   const cutoff = updated.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
-  ageEl.textContent = `Data cutoff: ${cutoff}` +
+  ageEl.textContent = `Build date: ${cutoff}; observations have separate dates` +
     (staleSources.length ? ` · ${staleSources.length} source group${staleSources.length === 1 ? "" : "s"} stale` : "");
   if (staleSources.length) ageEl.title = `Stale source groups: ${staleSources.join(", ")}`;
   setText("hero-data-age", `Dataset: ${cutoff}`);
@@ -317,29 +317,22 @@ function renderMutualFunds() {
     grid.insertAdjacentHTML("beforeend", `<div role="status" style="grid-column:1/-1;border:1px solid #D6A84B;background:#FFF8E6;padding:12px 14px;font-size:.82rem;color:#614A14"><strong>Stale fund data.</strong>${asOf} MUFAP refresh did not complete; use the linked MUFAP table for current figures.</div>`);
   }
 
-  DATA.mutual_funds.forEach(f => {
-    const full = AMOUNT > 0 ? Math.round(AMOUNT * f.ret_1y / 100) : null;
-
+  const funds = (DATA.mutual_funds || []).filter(f => {
+    const age = (Date.now() - Date.parse(f.as_of)) / 86400000;
+    return f.available === true && Number.isFinite(f.ret_1y) && Number.isFinite(f.nav) && age >= 0 && age <= 5;
+  });
+  if (!funds.length) {
+    grid.insertAdjacentHTML("beforeend", '<p style="grid-column:1/-1">Current fund comparisons are unavailable. The last feed could not be verified; historical figures are excluded from this calculator. <a href="/guides/how-to-invest-mutual-funds-pakistan.html#fund-case-study">Use the worked units-and-fees example</a> or check the fund manager’s current report.</p>');
+  }
+  funds.forEach(f => {
     const card = document.createElement("div");
     card.className = "fund-card";
-    card.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
-        <div class="fund-name">${f.name}</div>
-      </div>
-      <div class="fund-mgr">${f.manager} &nbsp;·&nbsp; ${f.type}</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
-        ${f.shariah ? '<span class="badge badge-green">Shariah</span>' : '<span class="badge badge-grey">Conventional</span>'}
-        <span class="badge badge-${riskBadge(f.risk)}">${f.risk} Risk</span>
-      </div>
-      <div class="fund-returns">
-        <div class="ret-box"><div class="ret-val">${f.ret_1y}%</div><div class="ret-lbl">1-Year</div></div>
-        <div class="ret-box"><div class="ret-val">${f.ret_3y}%</div><div class="ret-lbl">3-Year</div></div>
-        <div class="ret-box best"><div class="ret-val">${f.ret_5y}%</div><div class="ret-lbl">5-Year</div></div>
-      </div>
-      <div style="font-size:.78rem;color:var(--muted)">Min: PKR ${formatPKR(f.min_pkr)}</div>
-      <div class="fund-verdict">Reported as a ${f.return_type || "historical"} return; compare only with the same period and category.</div>
-      ${full ? `<div class="fund-earn">A ${f.ret_1y}% historical return on PKR ${formatPKR(AMOUNT)} equals PKR ${formatPKR(full)} <span style="color:var(--muted);font-weight:400">for comparison only; it is not a forecast</span></div>` : ""}
-    `;
+    card.innerHTML = `<div class="fund-name">${f.name}</div>
+      <div class="fund-mgr">${f.manager} · ${f.type}</div>
+      <div class="fund-returns"><div class="ret-box"><div class="ret-val">${f.ret_1y}%</div><div class="ret-lbl">365-day historical ${f.return_type} return</div></div>
+      <div class="ret-box"><div class="ret-val">${f.nav}</div><div class="ret-lbl">NAV · PKR per unit</div></div></div>
+      <p>Fund observation: ${f.as_of}. <a href="${f.source_url}" target="_blank" rel="noopener">Source table</a></p>
+      <p>Use the provider’s current offering document for risk classification, fees, minimums and redemption terms.</p>`;
     grid.appendChild(card);
   });
   grid.insertAdjacentHTML("beforeend", '<p style="grid-column:1/-1;font-size:.74rem;color:var(--muted);margin:6px 0 0">Return periods are not directly comparable across every fund category. Confirm the latest NAV, calculation basis, risk profile and fees on the <a href="https://www.mufap.com.pk/Industry/IndustryStatDaily?tab=1" target="_blank" rel="noopener">MUFAP daily performance table</a> before making a decision.</p>');
@@ -371,7 +364,7 @@ function renderStocks() {
   // Universe is comprehensive (~100+ names); show only priced stocks and cap
   // the homepage table to the top 15 by dividend yield to keep it readable.
   const sorted = [...DATA.stocks]
-    .filter(s => s.price > 0)
+    .filter(s => s.price > 0 && s.div_basis_verified && s.yield > 0)
     .sort((a, b) => b.yield - a.yield)
     .slice(0, 15);
   sorted.forEach(s => {
@@ -389,6 +382,8 @@ function renderStocks() {
       </tr>
     `;
   });
+
+  if (!sorted.length) tbody.insertAdjacentHTML('beforeend', '<tr><td colspan="8">Current dividend comparisons await a review of share actions and payouts. Read the <a href="/blog/top-dividend-stocks-pakistan.html">dated, reviewed dividend snapshot</a>.</td></tr>');
 
   renderStocksChart(sorted.slice(0, 8));
 }
@@ -708,7 +703,7 @@ function renderGold() {
 
   const srcEl = document.getElementById("gold-src");
   if (srcEl) {
-    const d = new Date(DATA.updated);
+    const d = new Date(DATA.data_health?.gold?.fetched_at || NaN);
     const when = d.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" });
     const note = g.source_type === "local"
       ? "third-party local-rate reference via gold.pk"

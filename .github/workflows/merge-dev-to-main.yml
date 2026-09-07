@@ -25,17 +25,35 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Merge dev into main
+      - name: Prepare dev fast-forward
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin dev main
           BEFORE=$(git rev-parse HEAD)
           git merge --ff-only origin/dev
-          git push origin main
           AFTER=$(git rev-parse HEAD)
           echo "BEFORE=$BEFORE" >> "$GITHUB_ENV"
           echo "AFTER=$AFTER" >> "$GITHUB_ENV"
+
+      - name: Set up validation runtimes
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verify investment calculations and research before publishing
+        run: |
+          python -m pip install -q pytest
+          python -m pytest tests -q
+          node --test tests/*.test.cjs
+          python scripts/validate_research.py
+
+      - name: Publish verified main
+        run: git push origin main
 
       - name: Notify IndexNow of changed pages
         env:

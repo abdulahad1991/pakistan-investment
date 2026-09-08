@@ -11,8 +11,8 @@
       "symbol": "ATLH",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 30, 2026 2:52 PM",
@@ -48,8 +48,8 @@
       "symbol": "EXIDE",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "June 29, 2026 4:06 PM",
@@ -74,8 +74,8 @@
       "symbol": "GHNI",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "September 29, 2025 4:54 PM",
@@ -100,8 +100,8 @@
       "symbol": "HCAR",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "May 19, 2026 3:47 PM",
@@ -126,8 +126,8 @@
       "symbol": "INDU",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 31, 2026 3:51 PM",
@@ -184,9 +184,9 @@
       "ttm_cash": 17.5,
       "symbol": "MTL",
       "face_value": 5,
-      "basis_verified": true,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "basis_verified": false,
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "February 17, 2026 3:48 PM",
@@ -195,9 +195,9 @@
           "pct": 200.0,
           "cash": 10.0,
           "date": "2026-02-17",
-          "basis_verified": true,
-          "face_at_declaration": 10,
-          "subsequent_share_factor": 2
+          "basis_verified": false,
+          "face_at_declaration": 5,
+          "subsequent_share_factor": 1
         },
         {
           "announce": "September 15, 2025 3:56 PM",
@@ -206,25 +206,36 @@
           "pct": 150.0,
           "cash": 7.5,
           "date": "2025-09-15",
-          "basis_verified": true,
-          "face_at_declaration": 10,
-          "subsequent_share_factor": 2
+          "basis_verified": false,
+          "face_at_declaration": 5,
+          "subsequent_share_factor": 1
         }
       ]
     },
     "THALL": {
       "latest_cash": 30.0,
       "latest_pct": 300.0,
-      "period": "31/12/2025(HYR)",
-      "announce": "February 18, 2026 3:21 PM",
-      "book_closure": "23/02/2026 - 25/02/2026",
-      "ttm_cash": 42.0,
+      "period": "30/06/2026(YR)",
+      "announce": "September 8, 2026 1:02 PM",
+      "book_closure": "-",
+      "ttm_cash": 72.0,
       "symbol": "THALL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
+        {
+          "announce": "September 8, 2026 1:02 PM",
+          "period": "30/06/2026(YR)",
+          "book_closure": "-",
+          "pct": 300.0,
+          "cash": 30.0,
+          "date": "2026-09-08",
+          "basis_verified": false,
+          "face_at_declaration": 10,
+          "subsequent_share_factor": 1
+        },
         {
           "announce": "February 18, 2026 3:21 PM",
           "period": "31/12/2025(HYR)",
@@ -259,8 +270,8 @@
       "symbol": "AKBL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "July 31, 2026 4:20 PM",
@@ -317,9 +328,9 @@
       "ttm_cash": 5.75,
       "symbol": "BAFL",
       "face_value": 5,
-      "basis_verified": true,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "basis_verified": false,
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "July 30, 2026 3:53 PM",
@@ -328,7 +339,7 @@
           "pct": 30.0,
           "cash": 1.5,
           "date": "2026-07-30",
-          "basis_verified": true,
+          "basis_verified": false,
           "face_at_declaration": 5,
           "subsequent_share_factor": 1
         },
@@ -339,7 +350,7 @@
           "pct": 30.0,
           "cash": 1.5,
           "date": "2026-04-23",
-          "basis_verified": true,
+          "basis_verified": false,
           "face_at_declaration": 5,
           "subsequent_share_factor": 1
         },
@@ -350,9 +361,9 @@
           "pct": 30.0,
           "cash": 1.5,
           "date": "2026-02-16",
-          "basis_verified": true,
-          "face_at_declaration": 10,
-          "subsequent_share_factor": 2
+          "basis_verified": false,
+          "face_at_declaration": 5,
+          "subsequent_share_factor": 1
         },
         {
           "announce": "October 23, 2025 3:27 PM",
@@ -361,9 +372,9 @@
           "pct": 25.0,
           "cash": 1.25,
           "date": "2025-10-23",
-          "basis_verified": true,
-          "face_at_declaration": 10,
-          "subsequent_share_factor": 2
+          "basis_verified": false,
+          "face_at_declaration": 5,
+          "subsequent_share_factor": 1
         }
       ]
     },
@@ -377,8 +388,8 @@
       "symbol": "BAHL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 20, 2026 3:47 PM",
@@ -436,8 +447,8 @@
       "symbol": "BOP",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 28, 2026 4:48 PM",
@@ -473,8 +484,8 @@
       "symbol": "FABL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 6, 2026 3:34 PM",
@@ -532,8 +543,8 @@
       "symbol": "HBL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 4, 2026 2:44 PM",
@@ -591,8 +602,8 @@
       "symbol": "MCB",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 6, 2026 3:39 PM",
@@ -639,8 +650,8 @@
       "symbol": "MEBL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 23, 2026 3:51 PM",
@@ -687,8 +698,8 @@
       "symbol": "NBP",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "February 25, 2026 12:26 PM",
@@ -713,8 +724,8 @@
       "symbol": "UBL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "July 22, 2026 3:47 PM",
@@ -772,8 +783,8 @@
       "symbol": "ACPL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 10, 2026 4:54 PM",
@@ -798,8 +809,8 @@
       "symbol": "BWCL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "July 23, 2026 4:18 PM",
@@ -857,8 +868,8 @@
       "symbol": "CHCC",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 21, 2026 3:52 PM",
@@ -905,8 +916,8 @@
       "symbol": "DGKC",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 27, 2026 3:20 PM",
@@ -931,8 +942,8 @@
       "symbol": "FCCL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 11, 2026 4:09 PM",
@@ -957,8 +968,8 @@
       "symbol": "GWLC",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 28, 2026 2:50 PM",
@@ -993,9 +1004,9 @@
       "ttm_cash": 5.0,
       "symbol": "LUCK",
       "face_value": 2,
-      "basis_verified": true,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "basis_verified": false,
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 10, 2026 4:15 PM",
@@ -1004,7 +1015,7 @@
           "pct": 250.0,
           "cash": 5.0,
           "date": "2026-08-10",
-          "basis_verified": true,
+          "basis_verified": false,
           "face_at_declaration": 2,
           "subsequent_share_factor": 1
         }
@@ -1020,8 +1031,8 @@
       "symbol": "PIOC",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "September 29, 2025 10:44 AM",
@@ -1046,8 +1057,8 @@
       "symbol": "ARPL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "October 29, 2025 3:22 PM",
@@ -1065,16 +1076,27 @@
     "DOL": {
       "latest_cash": 2.0,
       "latest_pct": 20.0,
-      "period": "31/12/2025(HYR)",
-      "announce": "February 25, 2026 12:30 PM",
-      "book_closure": "10/03/2025 - 12/03/2025",
-      "ttm_cash": 2.0,
+      "period": "30/06/2026(YR) - 30/06/2026(YR)",
+      "announce": "September 8, 2026 12:28 PM",
+      "book_closure": "13/10/2026 - 13/10/2026 - 20/10/2026 - 20/10/2026",
+      "ttm_cash": 4.0,
       "symbol": "DOL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
+        {
+          "announce": "September 8, 2026 12:28 PM",
+          "period": "30/06/2026(YR) - 30/06/2026(YR)",
+          "book_closure": "13/10/2026 - 13/10/2026 - 20/10/2026 - 20/10/2026",
+          "pct": 20.0,
+          "cash": 2.0,
+          "date": "2026-09-08",
+          "basis_verified": false,
+          "face_at_declaration": 10,
+          "subsequent_share_factor": 1
+        },
         {
           "announce": "February 25, 2026 12:30 PM",
           "period": "31/12/2025(HYR)",
@@ -1098,8 +1120,8 @@
       "symbol": "LOTCHEM",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "July 16, 2026 3:58 PM",
@@ -1135,8 +1157,8 @@
       "symbol": "NICL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 27, 2026 3:52 PM",
@@ -1183,8 +1205,8 @@
       "symbol": "SITC",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "September 22, 2025 3:50 PM",
@@ -1209,8 +1231,8 @@
       "symbol": "ISL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 20, 2026 3:40 PM",
@@ -1246,8 +1268,8 @@
       "symbol": "COLG",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "February 2, 2026 4:11 PM",
@@ -1272,8 +1294,8 @@
       "symbol": "FCEPL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "February 17, 2026 3:38 PM",
@@ -1298,8 +1320,8 @@
       "symbol": "NATF",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 28, 2026 4:05 PM",
@@ -1357,8 +1379,8 @@
       "symbol": "NESTLE",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "July 23, 2026 4:16 PM",
@@ -1405,8 +1427,8 @@
       "symbol": "UPFL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 27, 2026 4:00 PM",
@@ -1464,8 +1486,8 @@
       "symbol": "EFERT",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "July 30, 2026 3:50 PM",
@@ -1523,8 +1545,8 @@
       "symbol": "FATIMA",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "March 9, 2026 2:14 PM",
@@ -1549,8 +1571,8 @@
       "symbol": "FFC",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "July 29, 2026 3:23 PM",
@@ -1608,8 +1630,8 @@
       "symbol": "GHGL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 27, 2026 3:13 PM",
@@ -1678,8 +1700,8 @@
       "symbol": "TGL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "February 24, 2026 3:02 PM",
@@ -1704,8 +1726,8 @@
       "symbol": "AICL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 27, 2026 3:48 PM",
@@ -1741,8 +1763,8 @@
       "symbol": "EFUL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 21, 2026 4:59 PM",
@@ -1789,8 +1811,8 @@
       "symbol": "IGIHL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 25, 2026 3:47 PM",
@@ -1826,8 +1848,8 @@
       "symbol": "JGICL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "February 26, 2026 2:45 PM",
@@ -1851,9 +1873,9 @@
       "ttm_cash": 27.0,
       "symbol": "MARI",
       "face_value": 10,
-      "basis_verified": true,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "basis_verified": false,
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 7, 2026 4:30 PM",
@@ -1862,7 +1884,7 @@
           "pct": 187.0,
           "cash": 18.7,
           "date": "2026-08-07",
-          "basis_verified": true,
+          "basis_verified": false,
           "face_at_declaration": 10,
           "subsequent_share_factor": 1
         },
@@ -1873,25 +1895,36 @@
           "pct": 83.0,
           "cash": 8.3,
           "date": "2026-01-26",
-          "basis_verified": true,
+          "basis_verified": false,
           "face_at_declaration": 10,
           "subsequent_share_factor": 1
         }
       ]
     },
     "OGDC": {
-      "latest_cash": 3.25,
-      "latest_pct": 32.5,
-      "period": "31/03/2026(IIIQ)",
-      "announce": "April 29, 2026 3:56 PM",
-      "book_closure": "12/05/2026 - 13/05/2026",
-      "ttm_cash": 16.0,
+      "latest_cash": 6.0,
+      "latest_pct": 60.0,
+      "period": "30/06/2026(YR)",
+      "announce": "September 8, 2026 12:51 PM",
+      "book_closure": "09/10/2026 - 16/10/2026",
+      "ttm_cash": 22.0,
       "symbol": "OGDC",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
+        {
+          "announce": "September 8, 2026 12:51 PM",
+          "period": "30/06/2026(YR)",
+          "book_closure": "09/10/2026 - 16/10/2026",
+          "pct": 60.0,
+          "cash": 6.0,
+          "date": "2026-09-08",
+          "basis_verified": false,
+          "face_at_declaration": 10,
+          "subsequent_share_factor": 1
+        },
         {
           "announce": "April 29, 2026 3:56 PM",
           "period": "31/03/2026(IIIQ)",
@@ -1948,8 +1981,8 @@
       "symbol": "POL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 27, 2026 12:39 PM",
@@ -1985,8 +2018,8 @@
       "symbol": "PPL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 29, 2026 3:18 PM",
@@ -2044,8 +2077,8 @@
       "symbol": "APL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 27, 2026 11:40 AM",
@@ -2081,8 +2114,8 @@
       "symbol": "PSO",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": []
     },
     "WAFI": {
@@ -2095,8 +2128,8 @@
       "symbol": "WAFI",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "March 2, 2026 11:27 AM",
@@ -2132,8 +2165,8 @@
       "symbol": "PKGS",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "March 26, 2026 3:56 PM",
@@ -2158,8 +2191,8 @@
       "symbol": "ABOT",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "March 16, 2026 2:30 PM",
@@ -2184,8 +2217,8 @@
       "symbol": "AGP",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 24, 2026 4:08 PM",
@@ -2221,8 +2254,8 @@
       "symbol": "CPHL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "October 2, 2025 4:35 PM",
@@ -2247,8 +2280,8 @@
       "symbol": "FEROZ",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "September 23, 2025 4:40 PM",
@@ -2273,8 +2306,8 @@
       "symbol": "GLAXO",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 25, 2026 3:39 PM",
@@ -2310,8 +2343,8 @@
       "symbol": "HINOON",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 7, 2026 4:00 PM",
@@ -2336,8 +2369,8 @@
       "symbol": "HUBC",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 27, 2026 12:50 PM",
@@ -2395,8 +2428,8 @@
       "symbol": "KAPCO",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "March 2, 2026 11:32 AM",
@@ -2432,8 +2465,8 @@
       "symbol": "NCPL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 28, 2026 4:03 PM",
@@ -2458,8 +2491,8 @@
       "symbol": "NPL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 28, 2026 4:02 PM",
@@ -2484,8 +2517,8 @@
       "symbol": "ATRL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 27, 2026 12:42 PM",
@@ -2521,8 +2554,8 @@
       "symbol": "ALNRS",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "December 31, 2025 4:00 PM",
@@ -2547,8 +2580,8 @@
       "symbol": "HABSM",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "December 17, 2025 4:08 PM",
@@ -2573,8 +2606,8 @@
       "symbol": "JDWS",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "May 15, 2026 4:53 PM",
@@ -2621,8 +2654,8 @@
       "symbol": "AIRLINK",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "October 23, 2025 3:22 PM",
@@ -2658,8 +2691,8 @@
       "symbol": "AVN",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 30, 2026 2:53 PM",
@@ -2683,9 +2716,9 @@
       "ttm_cash": 2.0,
       "symbol": "SYS",
       "face_value": 2,
-      "basis_verified": true,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "basis_verified": false,
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "April 7, 2026 3:57 PM",
@@ -2694,7 +2727,7 @@
           "pct": 100.0,
           "cash": 2.0,
           "date": "2026-04-07",
-          "basis_verified": true,
+          "basis_verified": false,
           "face_at_declaration": 2,
           "subsequent_share_factor": 1
         }
@@ -2710,8 +2743,8 @@
       "symbol": "GADT",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 5, 2026 10:06 AM",
@@ -2736,8 +2769,8 @@
       "symbol": "ILP",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "February 6, 2026 4:01 PM",
@@ -2773,8 +2806,8 @@
       "symbol": "KTML",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": []
     },
     "NCL": {
@@ -2787,8 +2820,8 @@
       "symbol": "NCL",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "February 26, 2026 12:01 PM",
@@ -2824,8 +2857,8 @@
       "symbol": "NML",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "September 30, 2025 3:34 PM",
@@ -2850,8 +2883,8 @@
       "symbol": "PAKT",
       "face_value": 10,
       "basis_verified": false,
-      "window_start": "2025-09-07",
-      "window_end": "2026-09-07",
+      "window_start": "2025-09-08",
+      "window_end": "2026-09-08",
       "cash_rows": [
         {
           "announce": "August 4, 2026 2:34 PM",
@@ -2911,11 +2944,11 @@
       ]
     }
   },
-  "as_of": "2026-09-07",
+  "as_of": "2026-09-08",
   "source": "Pakistan Stock Exchange (PSX Data Portal) — company/payouts",
   "ok": true,
-  "fetched_at": "2026-09-07T16:47:19Z",
+  "fetched_at": "2026-09-08T15:25:42Z",
   "cadence": "daily",
   "count": 76,
-  "latest_announce": "2026-08-31"
+  "latest_announce": "2026-09-08"
 }

@@ -1,4863 +1,3577 @@
 {
   "name": "stocks",
   "value": {
-    "count": 492,
+    "count": 494,
     "prices": {
       "CNERGY": {
-        "price": 13.06,
-        "ldcp": 13.32,
-        "change": -0.26,
-        "pct": -1.95,
-        "volume": 65824954
-      },
-      "ASL": {
-        "price": 17.83,
-        "ldcp": 17.33,
-        "change": 0.5,
-        "pct": 2.89,
-        "volume": 28558495
-      },
-      "THCCL": {
-        "price": 83.7,
-        "ldcp": 78.65,
-        "change": 5.05,
-        "pct": 6.42,
-        "volume": 25595045
-      },
-      "PRL": {
-        "price": 86.16,
-        "ldcp": 91.16,
-        "change": -5.0,
-        "pct": -5.48,
-        "volume": 22042527
-      },
-      "BOP": {
-        "price": 34.23,
-        "ldcp": 34.63,
-        "change": -0.4,
-        "pct": -1.15,
-        "volume": 19436730
-      },
-      "MDTL": {
-        "price": 6.83,
-        "ldcp": 6.92,
-        "change": -0.09,
-        "pct": -1.3,
-        "volume": 17857272
-      },
-      "WAVESAPPR": {
-        "price": 0.31,
-        "ldcp": 0.39,
-        "change": -0.08,
-        "pct": -20.51,
-        "volume": 16000276
-      },
-      "WTL": {
-        "price": 1.12,
-        "ldcp": 1.13,
-        "change": -0.01,
-        "pct": -0.88,
-        "volume": 14201458
-      },
-      "UNITY": {
-        "price": 8.24,
-        "ldcp": 8.45,
-        "change": -0.21,
-        "pct": -2.48,
-        "volume": 13218650
-      },
-      "NCPL": {
-        "price": 57.21,
-        "ldcp": 55.99,
-        "change": 1.22,
-        "pct": 2.18,
-        "volume": 12778412
-      },
-      "DCL": {
-        "price": 10.17,
-        "ldcp": 10.57,
-        "change": -0.4,
-        "pct": -3.78,
-        "volume": 10796835
-      },
-      "HASCOL": {
-        "price": 20.41,
-        "ldcp": 20.39,
-        "change": 0.02,
-        "pct": 0.1,
-        "volume": 10166635
-      },
-      "TSBL": {
-        "price": 2.51,
-        "ldcp": 2.58,
-        "change": -0.07,
-        "pct": -2.71,
-        "volume": 9595324
+        "price": 12.69,
+        "ldcp": 13.06,
+        "change": -0.37,
+        "pct": -2.83,
+        "volume": 76610043
       },
       "TISL": {
-        "price": 3.97,
-        "ldcp": 4.13,
-        "change": -0.16,
-        "pct": -3.87,
-        "volume": 7648127
+        "price": 4.37,
+        "ldcp": 3.97,
+        "change": 0.4,
+        "pct": 10.08,
+        "volume": 33872421
       },
-      "NRSL": {
-        "price": 37.64,
-        "ldcp": 36.1,
-        "change": 1.54,
-        "pct": 4.27,
-        "volume": 6634204
-      },
-      "ZUMA": {
-        "price": 21.92,
-        "ldcp": 21.95,
-        "change": -0.03,
-        "pct": -0.14,
-        "volume": 6499089
-      },
-      "NPL": {
-        "price": 65.86,
-        "ldcp": 63.56,
-        "change": 2.3,
-        "pct": 3.62,
-        "volume": 6454129
-      },
-      "FNEL": {
-        "price": 1.15,
-        "ldcp": 1.17,
-        "change": -0.02,
-        "pct": -1.71,
-        "volume": 6060175
+      "MDTL": {
+        "price": 6.25,
+        "ldcp": 6.83,
+        "change": -0.58,
+        "pct": -8.49,
+        "volume": 21843223
       },
       "KEL": {
-        "price": 7.03,
-        "ldcp": 7.08,
+        "price": 6.86,
+        "ldcp": 7.03,
+        "change": -0.17,
+        "pct": -2.42,
+        "volume": 20248489
+      },
+      "PRL": {
+        "price": 84.78,
+        "ldcp": 86.16,
+        "change": -1.38,
+        "pct": -1.6,
+        "volume": 19920666
+      },
+      "WAVESAPPR": {
+        "price": 0.26,
+        "ldcp": 0.31,
         "change": -0.05,
-        "pct": -0.71,
-        "volume": 5711781
+        "pct": -16.13,
+        "volume": 14344564
+      },
+      "ASL": {
+        "price": 17.76,
+        "ldcp": 17.83,
+        "change": -0.07,
+        "pct": -0.39,
+        "volume": 13009360
+      },
+      "WTL": {
+        "price": 1.11,
+        "ldcp": 1.12,
+        "change": -0.01,
+        "pct": -0.89,
+        "volume": 12506891
+      },
+      "BOP": {
+        "price": 31.91,
+        "ldcp": 32.63,
+        "change": -0.72,
+        "pct": -2.21,
+        "volume": 11592516
       },
       "PIBTL": {
-        "price": 16.07,
-        "ldcp": 16.29,
-        "change": -0.22,
-        "pct": -1.35,
-        "volume": 5015206
+        "price": 15.47,
+        "ldcp": 16.07,
+        "change": -0.6,
+        "pct": -3.73,
+        "volume": 9268366
       },
-      "FPJM": {
-        "price": 18.57,
-        "ldcp": 20.63,
-        "change": -2.06,
-        "pct": -9.98,
-        "volume": 4728176
+      "FNEL": {
+        "price": 1.14,
+        "ldcp": 1.15,
+        "change": -0.01,
+        "pct": -0.87,
+        "volume": 9047083
       },
-      "TPLP": {
-        "price": 13.22,
-        "ldcp": 13.78,
-        "change": -0.56,
-        "pct": -4.06,
-        "volume": 4449758
+      "THCCL": {
+        "price": 79.99,
+        "ldcp": 83.7,
+        "change": -3.71,
+        "pct": -4.43,
+        "volume": 9027676
       },
-      "NBP": {
-        "price": 181.59,
-        "ldcp": 181.42,
-        "change": 0.17,
-        "pct": 0.09,
-        "volume": 4414842
-      },
-      "IPAK": {
-        "price": 42.21,
-        "ldcp": 40.66,
-        "change": 1.55,
-        "pct": 3.81,
-        "volume": 4098823
-      },
-      "MACFL": {
-        "price": 68.89,
-        "ldcp": 63.12,
-        "change": 5.77,
-        "pct": 9.14,
-        "volume": 4066154
-      },
-      "FCCL": {
-        "price": 52.63,
-        "ldcp": 53.63,
-        "change": -1.0,
-        "pct": -1.86,
-        "volume": 3407490
-      },
-      "GGL": {
-        "price": 22.03,
-        "ldcp": 22.35,
-        "change": -0.32,
-        "pct": -1.43,
-        "volume": 3197549
-      },
-      "WAVESAPP": {
-        "price": 8.95,
-        "ldcp": 8.57,
-        "change": 0.38,
-        "pct": 4.43,
-        "volume": 2966927
-      },
-      "PPL": {
-        "price": 219.91,
-        "ldcp": 221.37,
-        "change": -1.46,
-        "pct": -0.66,
-        "volume": 2711846
-      },
-      "SSGC": {
-        "price": 25.56,
-        "ldcp": 26.13,
-        "change": -0.57,
-        "pct": -2.18,
-        "volume": 2678144
-      },
-      "ALAC": {
-        "price": 25.21,
-        "ldcp": 23.72,
-        "change": 1.49,
-        "pct": 6.28,
-        "volume": 2662313
-      },
-      "FCSC": {
-        "price": 5.07,
-        "ldcp": 5.29,
-        "change": -0.22,
-        "pct": -4.16,
-        "volume": 2613889
-      },
-      "NRL": {
-        "price": 518.37,
-        "ldcp": 508.14,
-        "change": 10.23,
-        "pct": 2.01,
-        "volume": 2609698
-      },
-      "PACE": {
-        "price": 10.45,
-        "ldcp": 10.31,
-        "change": 0.14,
-        "pct": 1.36,
-        "volume": 2483304
-      },
-      "PSX": {
-        "price": 47.96,
-        "ldcp": 47.31,
-        "change": 0.65,
-        "pct": 1.37,
-        "volume": 2411062
+      "HASCOL": {
+        "price": 19.7,
+        "ldcp": 20.41,
+        "change": -0.71,
+        "pct": -3.48,
+        "volume": 5389467
       },
       "MLCF": {
-        "price": 97.62,
-        "ldcp": 98.68,
-        "change": -1.06,
-        "pct": -1.07,
-        "volume": 2382145
-      },
-      "TRG": {
-        "price": 51.68,
-        "ldcp": 52.1,
-        "change": -0.42,
-        "pct": -0.81,
-        "volume": 2225575
-      },
-      "LOADS": {
-        "price": 13.1,
-        "ldcp": 13.47,
-        "change": -0.37,
-        "pct": -2.75,
-        "volume": 2151614
-      },
-      "TOMCL": {
-        "price": 34.02,
-        "ldcp": 34.84,
-        "change": -0.82,
-        "pct": -2.35,
-        "volume": 2127549
-      },
-      "NICL": {
-        "price": 270.68,
-        "ldcp": 263.87,
-        "change": 6.81,
-        "pct": 2.58,
-        "volume": 2104738
-      },
-      "KOSM": {
-        "price": 5.41,
-        "ldcp": 5.4,
-        "change": 0.01,
-        "pct": 0.19,
-        "volume": 2030871
-      },
-      "GCIL": {
-        "price": 33.91,
-        "ldcp": 33.97,
-        "change": -0.06,
-        "pct": -0.18,
-        "volume": 1958895
-      },
-      "TPL": {
-        "price": 23.68,
-        "ldcp": 24.1,
-        "change": -0.42,
-        "pct": -1.74,
-        "volume": 1936391
-      },
-      "SLM": {
-        "price": 23.94,
-        "ldcp": 24.0,
-        "change": -0.06,
-        "pct": -0.25,
-        "volume": 1929014
-      },
-      "HUBC": {
-        "price": 206.05,
-        "ldcp": 205.93,
-        "change": 0.12,
-        "pct": 0.06,
-        "volume": 1860548
-      },
-      "CSIL": {
-        "price": 5.64,
-        "ldcp": 5.66,
-        "change": -0.02,
-        "pct": -0.35,
-        "volume": 1809265
-      },
-      "OGDC": {
-        "price": 322.18,
-        "ldcp": 321.04,
-        "change": 1.14,
-        "pct": 0.36,
-        "volume": 1800494
-      },
-      "PAEL": {
-        "price": 37.14,
-        "ldcp": 37.81,
-        "change": -0.67,
-        "pct": -1.77,
-        "volume": 1786449
-      },
-      "TELE": {
-        "price": 7.84,
-        "ldcp": 8.03,
-        "change": -0.19,
-        "pct": -2.37,
-        "volume": 1783624
-      },
-      "LOTCHEM": {
-        "price": 26.18,
-        "ldcp": 26.08,
-        "change": 0.1,
-        "pct": 0.38,
-        "volume": 1677135
-      },
-      "FFL": {
-        "price": 15.0,
-        "ldcp": 14.83,
-        "change": 0.17,
-        "pct": 1.15,
-        "volume": 1650052
-      },
-      "AGHA": {
-        "price": 6.76,
-        "ldcp": 6.82,
-        "change": -0.06,
-        "pct": -0.88,
-        "volume": 1581231
-      },
-      "FCL": {
-        "price": 27.5,
-        "ldcp": 27.23,
-        "change": 0.27,
-        "pct": 0.99,
-        "volume": 1572186
-      },
-      "NML": {
-        "price": 136.69,
-        "ldcp": 136.6,
-        "change": 0.09,
-        "pct": 0.07,
-        "volume": 1535273
-      },
-      "YOUW": {
-        "price": 4.98,
-        "ldcp": 5.05,
-        "change": -0.07,
-        "pct": -1.39,
-        "volume": 1504754
-      },
-      "ECOP": {
-        "price": 58.3,
-        "ldcp": 53.0,
-        "change": 5.3,
-        "pct": 10.0,
-        "volume": 1408913
-      },
-      "BECO": {
-        "price": 4.56,
-        "ldcp": 4.6,
-        "change": -0.04,
-        "pct": -0.87,
-        "volume": 1362250
-      },
-      "PTC": {
-        "price": 65.34,
-        "ldcp": 65.63,
-        "change": -0.29,
-        "pct": -0.44,
-        "volume": 1350846
-      },
-      "FABL": {
-        "price": 92.91,
-        "ldcp": 94.26,
-        "change": -1.35,
-        "pct": -1.43,
-        "volume": 1347704
-      },
-      "OBOY": {
-        "price": 17.77,
-        "ldcp": 17.95,
-        "change": -0.18,
-        "pct": -1.0,
-        "volume": 1331104
-      },
-      "ITANZ": {
-        "price": 36.9,
-        "ldcp": 39.33,
-        "change": -2.43,
-        "pct": -6.18,
-        "volume": 1322575
-      },
-      "AICL": {
-        "price": 92.91,
-        "ldcp": 93.81,
-        "change": -0.9,
-        "pct": -0.96,
-        "volume": 1321399
-      },
-      "UBL": {
-        "price": 426.07,
-        "ldcp": 423.14,
-        "change": 2.93,
-        "pct": 0.69,
-        "volume": 1288999
-      },
-      "NETSOL": {
-        "price": 124.34,
-        "ldcp": 127.18,
-        "change": -2.84,
-        "pct": -2.23,
-        "volume": 1257095
-      },
-      "PIAHCLA": {
-        "price": 24.11,
-        "ldcp": 24.29,
-        "change": -0.18,
-        "pct": -0.74,
-        "volume": 1240911
-      },
-      "PPP": {
-        "price": 164.02,
-        "ldcp": 156.82,
-        "change": 7.2,
-        "pct": 4.59,
-        "volume": 1201194
-      },
-      "LCI": {
-        "price": 223.52,
-        "ldcp": 215.95,
-        "change": 7.57,
-        "pct": 3.51,
-        "volume": 1196822
-      },
-      "SPSL": {
-        "price": 15.74,
-        "ldcp": 15.87,
-        "change": -0.13,
-        "pct": -0.82,
-        "volume": 1192346
-      },
-      "WAVES": {
-        "price": 9.63,
-        "ldcp": 9.73,
-        "change": -0.1,
-        "pct": -1.03,
-        "volume": 1188925
-      },
-      "SEARL": {
-        "price": 81.04,
-        "ldcp": 82.59,
-        "change": -1.55,
-        "pct": -1.88,
-        "volume": 1180163
-      },
-      "CLCPS": {
-        "price": 3.82,
-        "ldcp": 3.21,
-        "change": 0.61,
-        "pct": 19.0,
-        "volume": 1154824
-      },
-      "ENGROH": {
-        "price": 267.14,
-        "ldcp": 268.3,
-        "change": -1.16,
-        "pct": -0.43,
-        "volume": 1144127
-      },
-      "DSIL": {
-        "price": 9.22,
-        "ldcp": 9.37,
-        "change": -0.15,
-        "pct": -1.6,
-        "volume": 1134494
-      },
-      "IREIT": {
-        "price": 8.24,
-        "ldcp": 8.05,
-        "change": 0.19,
-        "pct": 2.36,
-        "volume": 1090618
-      },
-      "MWMP": {
-        "price": 74.5,
-        "ldcp": 70.7,
-        "change": 3.8,
-        "pct": 5.38,
-        "volume": 1071625
-      },
-      "AHCL": {
-        "price": 15.38,
-        "ldcp": 15.53,
-        "change": -0.15,
-        "pct": -0.97,
-        "volume": 1048713
-      },
-      "DGKC": {
-        "price": 198.04,
-        "ldcp": 200.54,
-        "change": -2.5,
-        "pct": -1.25,
-        "volume": 1044938
-      },
-      "FCEPL": {
-        "price": 147.08,
-        "ldcp": 146.96,
-        "change": 0.12,
-        "pct": 0.08,
-        "volume": 1037337
-      },
-      "WASL": {
-        "price": 6.2,
-        "ldcp": 6.31,
-        "change": -0.11,
-        "pct": -1.74,
-        "volume": 972643
-      },
-      "SLGL": {
-        "price": 14.73,
-        "ldcp": 14.87,
-        "change": -0.14,
-        "pct": -0.94,
-        "volume": 945510
-      },
-      "SGPL": {
-        "price": 29.14,
-        "ldcp": 30.75,
-        "change": -1.61,
-        "pct": -5.24,
-        "volume": 930917
-      },
-      "SELECT": {
-        "price": 27.65,
-        "ldcp": 27.03,
-        "change": 0.62,
-        "pct": 2.29,
-        "volume": 921987
-      },
-      "GCWL": {
-        "price": 14.94,
-        "ldcp": 15.13,
-        "change": -0.19,
-        "pct": -1.26,
-        "volume": 857978
+        "price": 95.1,
+        "ldcp": 97.62,
+        "change": -2.52,
+        "pct": -2.58,
+        "volume": 5131038
       },
       "PASL": {
-        "price": 2.53,
+        "price": 2.65,
+        "ldcp": 2.53,
+        "change": 0.12,
+        "pct": 4.74,
+        "volume": 4708366
+      },
+      "TPLP": {
+        "price": 12.35,
+        "ldcp": 13.22,
+        "change": -0.87,
+        "pct": -6.58,
+        "volume": 4555339
+      },
+      "TSBL": {
+        "price": 2.46,
         "ldcp": 2.51,
-        "change": 0.02,
+        "change": -0.05,
+        "pct": -1.99,
+        "volume": 3894801
+      },
+      "NCPL": {
+        "price": 57.67,
+        "ldcp": 57.21,
+        "change": 0.46,
         "pct": 0.8,
-        "volume": 835905
+        "volume": 3763771
+      },
+      "FCCL": {
+        "price": 51.25,
+        "ldcp": 52.63,
+        "change": -1.38,
+        "pct": -2.62,
+        "volume": 3738878
+      },
+      "NRL": {
+        "price": 505.03,
+        "ldcp": 518.37,
+        "change": -13.34,
+        "pct": -2.57,
+        "volume": 3330019
+      },
+      "MACFL": {
+        "price": 62.0,
+        "ldcp": 68.89,
+        "change": -6.89,
+        "pct": -10.0,
+        "volume": 3119143
       },
       "ILP": {
-        "price": 104.99,
-        "ldcp": 104.26,
-        "change": 0.73,
-        "pct": 0.7,
-        "volume": 806201
+        "price": 103.0,
+        "ldcp": 104.99,
+        "change": -1.99,
+        "pct": -1.9,
+        "volume": 3056989
       },
-      "DSL": {
-        "price": 4.64,
-        "ldcp": 4.65,
-        "change": -0.01,
-        "pct": -0.21,
-        "volume": 805781
+      "IPAK": {
+        "price": 40.4,
+        "ldcp": 42.21,
+        "change": -1.81,
+        "pct": -4.29,
+        "volume": 3019310
       },
-      "SYS": {
-        "price": 124.75,
-        "ldcp": 125.72,
-        "change": -0.97,
-        "pct": -0.77,
-        "volume": 793223
+      "LOTCHEM": {
+        "price": 25.82,
+        "ldcp": 26.18,
+        "change": -0.36,
+        "pct": -1.37,
+        "volume": 2885072
       },
-      "SNGP": {
-        "price": 95.35,
-        "ldcp": 96.93,
-        "change": -1.58,
-        "pct": -1.63,
-        "volume": 784330
+      "PSX": {
+        "price": 47.5,
+        "ldcp": 47.96,
+        "change": -0.46,
+        "pct": -0.96,
+        "volume": 2703914
       },
-      "BNL": {
-        "price": 6.05,
-        "ldcp": 6.09,
-        "change": -0.04,
-        "pct": -0.66,
-        "volume": 775769
+      "PAEL": {
+        "price": 36.42,
+        "ldcp": 37.14,
+        "change": -0.72,
+        "pct": -1.94,
+        "volume": 2624888
       },
-      "ASC": {
-        "price": 9.16,
-        "ldcp": 9.32,
-        "change": -0.16,
-        "pct": -1.72,
-        "volume": 758197
+      "SSGC": {
+        "price": 24.83,
+        "ldcp": 25.56,
+        "change": -0.73,
+        "pct": -2.86,
+        "volume": 2604240
       },
-      "MZNPETF": {
-        "price": 17.47,
-        "ldcp": 17.49,
-        "change": -0.02,
-        "pct": -0.11,
-        "volume": 751500
+      "PPL": {
+        "price": 216.2,
+        "ldcp": 219.91,
+        "change": -3.71,
+        "pct": -1.69,
+        "volume": 2531153
       },
-      "BLUEX": {
-        "price": 6.45,
-        "ldcp": 6.49,
-        "change": -0.04,
-        "pct": -0.62,
-        "volume": 751007
-      },
-      "TPLRF1": {
-        "price": 9.53,
-        "ldcp": 9.61,
-        "change": -0.08,
-        "pct": -0.83,
-        "volume": 750277
-      },
-      "LSECL": {
-        "price": 6.09,
-        "ldcp": 6.18,
-        "change": -0.09,
-        "pct": -1.46,
-        "volume": 749389
-      },
-      "LUCK": {
-        "price": 415.36,
-        "ldcp": 419.69,
-        "change": -4.33,
-        "pct": -1.03,
-        "volume": 682943
-      },
-      "STPL": {
-        "price": 8.36,
-        "ldcp": 8.33,
-        "change": 0.03,
-        "pct": 0.36,
-        "volume": 637705
-      },
-      "SYM": {
-        "price": 12.75,
-        "ldcp": 12.78,
-        "change": -0.03,
-        "pct": -0.23,
-        "volume": 634917
+      "FPJM": {
+        "price": 16.71,
+        "ldcp": 18.57,
+        "change": -1.86,
+        "pct": -10.02,
+        "volume": 2530200
       },
       "BAFL": {
-        "price": 55.7,
-        "ldcp": 55.85,
-        "change": -0.15,
-        "pct": -0.27,
-        "volume": 628613
+        "price": 55.05,
+        "ldcp": 55.7,
+        "change": -0.65,
+        "pct": -1.17,
+        "volume": 2430458
       },
-      "TOWL": {
-        "price": 180.31,
-        "ldcp": 200.34,
-        "change": -20.03,
-        "pct": -10.0,
-        "volume": 609132
-      },
-      "CHBL": {
-        "price": 9.92,
-        "ldcp": 8.92,
-        "change": 1.0,
-        "pct": 11.21,
-        "volume": 606192
-      },
-      "MIIETF": {
-        "price": 16.23,
-        "ldcp": 16.25,
-        "change": -0.02,
-        "pct": -0.12,
-        "volume": 604000
-      },
-      "EMCO": {
-        "price": 45.51,
-        "ldcp": 43.91,
-        "change": 1.6,
-        "pct": 3.64,
-        "volume": 580554
-      },
-      "RPL": {
-        "price": 16.2,
-        "ldcp": 16.72,
-        "change": -0.52,
+      "AGHA": {
+        "price": 6.55,
+        "ldcp": 6.76,
+        "change": -0.21,
         "pct": -3.11,
-        "volume": 576140
+        "volume": 2430399
       },
-      "CLOV": {
-        "price": 6.64,
-        "ldcp": 6.67,
+      "CSIL": {
+        "price": 5.69,
+        "ldcp": 5.64,
+        "change": 0.05,
+        "pct": 0.89,
+        "volume": 2395092
+      },
+      "UNITY": {
+        "price": 8.21,
+        "ldcp": 8.24,
         "change": -0.03,
-        "pct": -0.45,
-        "volume": 570428
+        "pct": -0.36,
+        "volume": 2334276
       },
-      "LEUL": {
-        "price": 80.38,
-        "ldcp": 89.31,
-        "change": -8.93,
-        "pct": -10.0,
-        "volume": 557492
+      "DGKC": {
+        "price": 192.89,
+        "ldcp": 198.04,
+        "change": -5.15,
+        "pct": -2.6,
+        "volume": 2332688
       },
-      "PSO": {
-        "price": 352.79,
-        "ldcp": 355.15,
-        "change": -2.36,
-        "pct": -0.66,
-        "volume": 556786
+      "TPL": {
+        "price": 23.22,
+        "ldcp": 23.68,
+        "change": -0.46,
+        "pct": -1.94,
+        "volume": 2262834
       },
-      "BAHL": {
-        "price": 155.85,
-        "ldcp": 157.37,
-        "change": -1.52,
-        "pct": -0.97,
-        "volume": 554128
+      "TRG": {
+        "price": 51.15,
+        "ldcp": 51.68,
+        "change": -0.53,
+        "pct": -1.03,
+        "volume": 2189851
       },
-      "BFAGRO": {
-        "price": 31.4,
-        "ldcp": 31.75,
-        "change": -0.35,
-        "pct": -1.1,
-        "volume": 533042
+      "KOSM": {
+        "price": 5.18,
+        "ldcp": 5.41,
+        "change": -0.23,
+        "pct": -4.25,
+        "volume": 1892947
       },
-      "PAKRI": {
-        "price": 16.0,
-        "ldcp": 16.02,
+      "PIAHCLA": {
+        "price": 22.66,
+        "ldcp": 24.11,
+        "change": -1.45,
+        "pct": -6.01,
+        "volume": 1840417
+      },
+      "BECO": {
+        "price": 4.54,
+        "ldcp": 4.56,
         "change": -0.02,
-        "pct": -0.12,
-        "volume": 531489
+        "pct": -0.44,
+        "volume": 1813354
       },
-      "CJPL": {
-        "price": 17.85,
-        "ldcp": 17.59,
-        "change": 0.26,
-        "pct": 1.48,
-        "volume": 527486
+      "SGPL": {
+        "price": 28.99,
+        "ldcp": 29.14,
+        "change": -0.15,
+        "pct": -0.51,
+        "volume": 1782817
       },
-      "TBL": {
-        "price": 9.11,
-        "ldcp": 9.16,
-        "change": -0.05,
-        "pct": -0.55,
-        "volume": 507659
+      "PACE": {
+        "price": 10.3,
+        "ldcp": 10.45,
+        "change": -0.15,
+        "pct": -1.43,
+        "volume": 1753528
       },
-      "DFML": {
-        "price": 16.47,
-        "ldcp": 16.48,
-        "change": -0.01,
-        "pct": -0.06,
-        "volume": 502100
+      "TPLRF1": {
+        "price": 9.3,
+        "ldcp": 9.53,
+        "change": -0.23,
+        "pct": -2.41,
+        "volume": 1524202
       },
-      "PREMA": {
-        "price": 34.03,
-        "ldcp": 34.25,
-        "change": -0.22,
-        "pct": -0.64,
-        "volume": 501269
-      },
-      "MEBL": {
-        "price": 556.12,
-        "ldcp": 560.06,
-        "change": -3.94,
-        "pct": -0.7,
-        "volume": 486009
-      },
-      "GDL": {
-        "price": 17.2,
-        "ldcp": 17.11,
-        "change": 0.09,
-        "pct": 0.53,
-        "volume": 484513
-      },
-      "SBL": {
-        "price": 13.51,
-        "ldcp": 13.5,
-        "change": 0.01,
-        "pct": 0.07,
-        "volume": 474724
-      },
-      "ATRL": {
-        "price": 1094.02,
-        "ldcp": 1089.93,
-        "change": 4.09,
-        "pct": 0.38,
-        "volume": 470184
-      },
-      "FDPL": {
-        "price": 4.68,
-        "ldcp": 4.8,
+      "FCSC": {
+        "price": 4.95,
+        "ldcp": 5.07,
         "change": -0.12,
-        "pct": -2.5,
-        "volume": 468071
+        "pct": -2.37,
+        "volume": 1500150
+      },
+      "SLM": {
+        "price": 23.82,
+        "ldcp": 23.94,
+        "change": -0.12,
+        "pct": -0.5,
+        "volume": 1499800
+      },
+      "TELE": {
+        "price": 7.59,
+        "ldcp": 7.84,
+        "change": -0.25,
+        "pct": -3.19,
+        "volume": 1486702
+      },
+      "NBP": {
+        "price": 180.02,
+        "ldcp": 181.59,
+        "change": -1.57,
+        "pct": -0.86,
+        "volume": 1340562
+      },
+      "UBL": {
+        "price": 424.0,
+        "ldcp": 426.07,
+        "change": -2.07,
+        "pct": -0.49,
+        "volume": 1338032
+      },
+      "PTC": {
+        "price": 64.5,
+        "ldcp": 65.34,
+        "change": -0.84,
+        "pct": -1.29,
+        "volume": 1318761
+      },
+      "NPL": {
+        "price": 65.2,
+        "ldcp": 65.86,
+        "change": -0.66,
+        "pct": -1.0,
+        "volume": 1308231
+      },
+      "TOMCL": {
+        "price": 32.4,
+        "ldcp": 34.02,
+        "change": -1.62,
+        "pct": -4.76,
+        "volume": 1305456
+      },
+      "ENGROH": {
+        "price": 265.8,
+        "ldcp": 267.14,
+        "change": -1.34,
+        "pct": -0.5,
+        "volume": 1301857
+      },
+      "OGDC": {
+        "price": 319.34,
+        "ldcp": 322.18,
+        "change": -2.84,
+        "pct": -0.88,
+        "volume": 1293297
+      },
+      "LOADS": {
+        "price": 13.07,
+        "ldcp": 13.1,
+        "change": -0.03,
+        "pct": -0.23,
+        "volume": 1290426
+      },
+      "LUCK": {
+        "price": 411.7,
+        "ldcp": 415.36,
+        "change": -3.66,
+        "pct": -0.88,
+        "volume": 1212672
+      },
+      "CLCPS": {
+        "price": 3.92,
+        "ldcp": 3.82,
+        "change": 0.1,
+        "pct": 2.62,
+        "volume": 1176726
+      },
+      "WASL": {
+        "price": 5.99,
+        "ldcp": 6.2,
+        "change": -0.21,
+        "pct": -3.39,
+        "volume": 1162959
+      },
+      "FCL": {
+        "price": 27.0,
+        "ldcp": 27.5,
+        "change": -0.5,
+        "pct": -1.82,
+        "volume": 1144760
+      },
+      "BNL": {
+        "price": 6.04,
+        "ldcp": 6.05,
+        "change": -0.01,
+        "pct": -0.16,
+        "volume": 1127681
+      },
+      "SEARL": {
+        "price": 79.75,
+        "ldcp": 81.04,
+        "change": -1.29,
+        "pct": -1.59,
+        "volume": 1119892
+      },
+      "SPSL": {
+        "price": 15.27,
+        "ldcp": 15.74,
+        "change": -0.47,
+        "pct": -2.99,
+        "volume": 1099687
+      },
+      "ZUMA": {
+        "price": 21.76,
+        "ldcp": 21.92,
+        "change": -0.16,
+        "pct": -0.73,
+        "volume": 1094135
+      },
+      "DSIL": {
+        "price": 8.98,
+        "ldcp": 9.22,
+        "change": -0.24,
+        "pct": -2.6,
+        "volume": 1068381
       },
       "JSMFETF": {
-        "price": 10.68,
+        "price": 10.42,
         "ldcp": 10.68,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 434000
+        "change": -0.26,
+        "pct": -2.43,
+        "volume": 1040500
       },
-      "CPHL": {
-        "price": 70.55,
-        "ldcp": 70.9,
-        "change": -0.35,
-        "pct": -0.49,
-        "volume": 418820
-      },
-      "FFC": {
-        "price": 541.38,
-        "ldcp": 546.25,
-        "change": -4.87,
-        "pct": -0.89,
-        "volume": 404983
-      },
-      "HICL": {
-        "price": 8.76,
-        "ldcp": 8.77,
-        "change": -0.01,
-        "pct": -0.11,
-        "volume": 401598
-      },
-      "CEPB": {
-        "price": 26.72,
-        "ldcp": 27.19,
-        "change": -0.47,
-        "pct": -1.73,
-        "volume": 399929
-      },
-      "HIRAT": {
-        "price": 5.71,
-        "ldcp": 5.88,
-        "change": -0.17,
-        "pct": -2.89,
-        "volume": 371996
-      },
-      "ITTEFAQ": {
-        "price": 8.12,
-        "ldcp": 8.29,
-        "change": -0.17,
-        "pct": -2.05,
-        "volume": 358844
-      },
-      "DFSM": {
-        "price": 12.45,
-        "ldcp": 12.93,
-        "change": -0.48,
-        "pct": -3.71,
-        "volume": 348324
-      },
-      "BERG": {
-        "price": 128.66,
-        "ldcp": 132.12,
-        "change": -3.46,
-        "pct": -2.62,
-        "volume": 344017
-      },
-      "KML": {
-        "price": 8.8,
-        "ldcp": 8.87,
-        "change": -0.07,
-        "pct": -0.79,
-        "volume": 343312
-      },
-      "QTECH": {
-        "price": 37.55,
-        "ldcp": 38.79,
-        "change": -1.24,
-        "pct": -3.2,
-        "volume": 343103
-      },
-      "LSEFSL": {
-        "price": 3.52,
-        "ldcp": 3.62,
-        "change": -0.1,
-        "pct": -2.76,
-        "volume": 341576
-      },
-      "LSEVL": {
-        "price": 12.03,
-        "ldcp": 12.02,
-        "change": 0.01,
-        "pct": 0.08,
-        "volume": 324956
-      },
-      "HMB": {
-        "price": 100.0,
-        "ldcp": 99.85,
-        "change": 0.15,
-        "pct": 0.15,
-        "volume": 322377
-      },
-      "KAPCO": {
-        "price": 26.55,
-        "ldcp": 26.91,
-        "change": -0.36,
-        "pct": -1.34,
-        "volume": 321424
-      },
-      "GATM": {
-        "price": 23.01,
-        "ldcp": 23.03,
-        "change": -0.02,
-        "pct": -0.09,
-        "volume": 318484
-      },
-      "MFL": {
-        "price": 40.3,
-        "ldcp": 40.02,
-        "change": 0.28,
-        "pct": 0.7,
-        "volume": 317577
-      },
-      "MARI": {
-        "price": 653.97,
-        "ldcp": 659.9,
-        "change": -5.93,
-        "pct": -0.9,
-        "volume": 317029
-      },
-      "AIRLINK": {
-        "price": 128.32,
-        "ldcp": 129.85,
+      "ITANZ": {
+        "price": 35.37,
+        "ldcp": 36.9,
         "change": -1.53,
-        "pct": -1.18,
-        "volume": 310644
+        "pct": -4.15,
+        "volume": 1019541
       },
-      "HBL": {
-        "price": 308.51,
-        "ldcp": 310.49,
-        "change": -1.98,
-        "pct": -0.64,
-        "volume": 304627
+      "NICL": {
+        "price": 266.0,
+        "ldcp": 270.68,
+        "change": -4.68,
+        "pct": -1.73,
+        "volume": 1000767
       },
-      "GRR": {
-        "price": 22.31,
-        "ldcp": 22.29,
-        "change": 0.02,
-        "pct": 0.09,
-        "volume": 300811
+      "FFL": {
+        "price": 14.69,
+        "ldcp": 15.0,
+        "change": -0.31,
+        "pct": -2.07,
+        "volume": 959979
       },
-      "GAL": {
-        "price": 616.68,
-        "ldcp": 616.78,
-        "change": -0.1,
-        "pct": -0.02,
-        "volume": 299502
+      "DCL": {
+        "price": 9.88,
+        "ldcp": 10.17,
+        "change": -0.29,
+        "pct": -2.85,
+        "volume": 959900
       },
-      "TRSM": {
-        "price": 14.86,
-        "ldcp": 15.1,
-        "change": -0.24,
-        "pct": -1.59,
-        "volume": 295773
+      "NRSL": {
+        "price": 36.89,
+        "ldcp": 37.64,
+        "change": -0.75,
+        "pct": -1.99,
+        "volume": 945223
       },
-      "TREET": {
-        "price": 22.12,
-        "ldcp": 22.4,
-        "change": -0.28,
-        "pct": -1.25,
-        "volume": 295508
+      "HUBC": {
+        "price": 203.9,
+        "ldcp": 206.05,
+        "change": -2.15,
+        "pct": -1.04,
+        "volume": 930523
       },
-      "AKBL": {
-        "price": 108.25,
-        "ldcp": 109.11,
-        "change": -0.86,
-        "pct": -0.79,
-        "volume": 293026
+      "MZNPETF": {
+        "price": 17.25,
+        "ldcp": 17.47,
+        "change": -0.22,
+        "pct": -1.26,
+        "volume": 926000
       },
-      "GGGL": {
-        "price": 7.78,
-        "ldcp": 7.89,
-        "change": -0.11,
-        "pct": -1.39,
-        "volume": 290188
+      "PSO": {
+        "price": 348.5,
+        "ldcp": 352.79,
+        "change": -4.29,
+        "pct": -1.22,
+        "volume": 909782
+      },
+      "WAVES": {
+        "price": 9.54,
+        "ldcp": 9.63,
+        "change": -0.09,
+        "pct": -0.93,
+        "volume": 845399
+      },
+      "SNGP": {
+        "price": 92.25,
+        "ldcp": 95.35,
+        "change": -3.1,
+        "pct": -3.25,
+        "volume": 840790
+      },
+      "ECOP": {
+        "price": 54.82,
+        "ldcp": 58.3,
+        "change": -3.48,
+        "pct": -5.97,
+        "volume": 822412
+      },
+      "MEBL": {
+        "price": 542.97,
+        "ldcp": 556.12,
+        "change": -13.15,
+        "pct": -2.36,
+        "volume": 820679
       },
       "MCB": {
-        "price": 392.6,
-        "ldcp": 398.84,
-        "change": -6.24,
-        "pct": -1.57,
-        "volume": 289435
+        "price": 390.01,
+        "ldcp": 392.6,
+        "change": -2.59,
+        "pct": -0.66,
+        "volume": 810265
       },
-      "CLVL": {
-        "price": 41.42,
-        "ldcp": 46.02,
-        "change": -4.6,
-        "pct": -10.0,
-        "volume": 286958
+      "NML": {
+        "price": 133.39,
+        "ldcp": 136.69,
+        "change": -3.3,
+        "pct": -2.41,
+        "volume": 801437
       },
-      "JVDC": {
-        "price": 143.11,
-        "ldcp": 142.01,
-        "change": 1.1,
-        "pct": 0.78,
-        "volume": 284847
-      },
-      "GWLC": {
-        "price": 51.38,
-        "ldcp": 51.33,
-        "change": 0.05,
-        "pct": 0.1,
-        "volume": 283654
-      },
-      "SNBL": {
-        "price": 20.58,
-        "ldcp": 20.81,
-        "change": -0.23,
-        "pct": -1.1,
-        "volume": 273675
-      },
-      "TPLT": {
-        "price": 32.62,
-        "ldcp": 33.95,
-        "change": -1.33,
-        "pct": -3.92,
-        "volume": 269019
-      },
-      "AVN": {
-        "price": 28.75,
-        "ldcp": 29.0,
-        "change": -0.25,
-        "pct": -0.86,
-        "volume": 267706
-      },
-      "EPCLPS": {
-        "price": 13.21,
-        "ldcp": 13.0,
-        "change": 0.21,
-        "pct": 1.62,
-        "volume": 267519
-      },
-      "PAKQATAR": {
-        "price": 18.0,
-        "ldcp": 18.21,
-        "change": -0.21,
-        "pct": -1.15,
-        "volume": 266171
-      },
-      "POWER": {
-        "price": 22.4,
-        "ldcp": 22.62,
-        "change": -0.22,
-        "pct": -0.97,
-        "volume": 266059
-      },
-      "ZAL": {
-        "price": 39.34,
-        "ldcp": 39.75,
-        "change": -0.41,
-        "pct": -1.03,
-        "volume": 265021
-      },
-      "MUGHAL": {
-        "price": 75.08,
-        "ldcp": 74.6,
-        "change": 0.48,
-        "pct": 0.64,
-        "volume": 259514
-      },
-      "BIPL": {
-        "price": 25.42,
-        "ldcp": 25.49,
-        "change": -0.07,
-        "pct": -0.27,
-        "volume": 248989
-      },
-      "HCAR": {
-        "price": 229.79,
-        "ldcp": 228.02,
-        "change": 1.77,
-        "pct": 0.78,
-        "volume": 240593
-      },
-      "BBFL": {
-        "price": 41.41,
-        "ldcp": 41.9,
-        "change": -0.49,
-        "pct": -1.17,
-        "volume": 236196
-      },
-      "BML": {
-        "price": 52.23,
-        "ldcp": 53.88,
-        "change": -1.65,
-        "pct": -3.06,
-        "volume": 228662
-      },
-      "FATIMA": {
-        "price": 152.64,
-        "ldcp": 153.0,
-        "change": -0.36,
-        "pct": -0.23,
-        "volume": 226503
-      },
-      "HUMNL": {
-        "price": 9.94,
-        "ldcp": 10.0,
-        "change": -0.06,
-        "pct": -0.6,
-        "volume": 224576
-      },
-      "IMS": {
-        "price": 19.25,
-        "ldcp": 19.5,
-        "change": -0.25,
-        "pct": -1.28,
-        "volume": 223809
-      },
-      "SHNI": {
-        "price": 8.3,
-        "ldcp": 8.32,
-        "change": -0.02,
-        "pct": -0.24,
-        "volume": 223399
-      },
-      "ASTL": {
-        "price": 14.89,
-        "ldcp": 14.85,
+      "SYM": {
+        "price": 12.79,
+        "ldcp": 12.75,
         "change": 0.04,
-        "pct": 0.27,
-        "volume": 208364
+        "pct": 0.31,
+        "volume": 778086
       },
-      "DBCI": {
-        "price": 11.09,
-        "ldcp": 11.27,
-        "change": -0.18,
-        "pct": -1.6,
-        "volume": 207992
+      "LSEFSL": {
+        "price": 3.4,
+        "ldcp": 3.52,
+        "change": -0.12,
+        "pct": -3.41,
+        "volume": 776712
       },
-      "SPAC2": {
-        "price": 13.51,
-        "ldcp": 13.7,
-        "change": -0.19,
-        "pct": -1.39,
-        "volume": 204771
+      "AHCL": {
+        "price": 15.09,
+        "ldcp": 15.38,
+        "change": -0.29,
+        "pct": -1.89,
+        "volume": 772975
       },
-      "PICT": {
-        "price": 43.57,
-        "ldcp": 43.5,
-        "change": 0.07,
-        "pct": 0.16,
-        "volume": 203164
+      "OBOY": {
+        "price": 16.99,
+        "ldcp": 17.77,
+        "change": -0.78,
+        "pct": -4.39,
+        "volume": 753895
       },
-      "JSCL": {
-        "price": 21.09,
-        "ldcp": 21.28,
-        "change": -0.19,
-        "pct": -0.89,
-        "volume": 201147
-      },
-      "SAZEW": {
-        "price": 1796.36,
-        "ldcp": 1770.51,
-        "change": 25.85,
-        "pct": 1.46,
-        "volume": 191583
-      },
-      "UBLPETF": {
-        "price": 28.55,
-        "ldcp": 28.66,
-        "change": -0.11,
-        "pct": -0.38,
-        "volume": 187000
-      },
-      "AMTEX": {
-        "price": 3.96,
-        "ldcp": 4.0,
-        "change": -0.04,
-        "pct": -1.0,
-        "volume": 186012
-      },
-      "EFERT": {
-        "price": 186.45,
-        "ldcp": 187.71,
-        "change": -1.26,
-        "pct": -0.67,
-        "volume": 185779
-      },
-      "EPCL": {
-        "price": 33.55,
-        "ldcp": 33.86,
-        "change": -0.31,
-        "pct": -0.92,
-        "volume": 179577
-      },
-      "UNIC": {
-        "price": 11.66,
-        "ldcp": 11.71,
-        "change": -0.05,
-        "pct": -0.43,
-        "volume": 176953
+      "SYS": {
+        "price": 123.9,
+        "ldcp": 124.75,
+        "change": -0.85,
+        "pct": -0.68,
+        "volume": 751228
       },
       "STL": {
-        "price": 24.57,
-        "ldcp": 24.64,
-        "change": -0.07,
-        "pct": -0.28,
-        "volume": 176619
+        "price": 24.6,
+        "ldcp": 24.57,
+        "change": 0.03,
+        "pct": 0.12,
+        "volume": 742874
       },
-      "SPAC1": {
-        "price": 15.26,
-        "ldcp": 16.12,
-        "change": -0.86,
-        "pct": -5.33,
-        "volume": 175365
+      "LEUL": {
+        "price": 79.69,
+        "ldcp": 80.38,
+        "change": -0.69,
+        "pct": -0.86,
+        "volume": 740579
       },
-      "OCTOPUS": {
-        "price": 29.16,
-        "ldcp": 29.57,
-        "change": -0.41,
-        "pct": -1.39,
-        "volume": 173730
+      "PREMA": {
+        "price": 33.15,
+        "ldcp": 34.03,
+        "change": -0.88,
+        "pct": -2.59,
+        "volume": 740268
       },
-      "AGTL": {
-        "price": 374.86,
-        "ldcp": 354.01,
-        "change": 20.85,
-        "pct": 5.89,
-        "volume": 172151
+      "BAHL": {
+        "price": 156.0,
+        "ldcp": 155.85,
+        "change": 0.15,
+        "pct": 0.1,
+        "volume": 703009
       },
-      "OLPL": {
-        "price": 47.21,
-        "ldcp": 47.57,
-        "change": -0.36,
-        "pct": -0.76,
-        "volume": 170490
+      "MIIETF": {
+        "price": 16.02,
+        "ldcp": 16.23,
+        "change": -0.21,
+        "pct": -1.29,
+        "volume": 691000
       },
-      "ALTN": {
-        "price": 6.76,
-        "ldcp": 6.89,
-        "change": -0.13,
-        "pct": -1.89,
-        "volume": 168742
-      },
-      "AGP": {
-        "price": 161.29,
-        "ldcp": 161.74,
-        "change": -0.45,
-        "pct": -0.28,
-        "volume": 168421
-      },
-      "HTL": {
-        "price": 37.52,
-        "ldcp": 38.31,
-        "change": -0.79,
-        "pct": -2.06,
-        "volume": 159209
-      },
-      "IMAGE": {
-        "price": 25.08,
-        "ldcp": 25.19,
-        "change": -0.11,
-        "pct": -0.44,
-        "volume": 156434
-      },
-      "PTL": {
-        "price": 51.0,
-        "ldcp": 51.23,
-        "change": -0.23,
-        "pct": -0.45,
-        "volume": 155856
-      },
-      "CSAP": {
-        "price": 92.08,
-        "ldcp": 93.83,
-        "change": -1.75,
-        "pct": -1.86,
-        "volume": 155810
-      },
-      "DIIL": {
-        "price": 75.62,
-        "ldcp": 76.29,
-        "change": -0.67,
-        "pct": -0.88,
-        "volume": 152970
-      },
-      "MTL": {
-        "price": 303.42,
-        "ldcp": 304.6,
-        "change": -1.18,
-        "pct": -0.39,
-        "volume": 150975
-      },
-      "SPEL": {
-        "price": 42.98,
-        "ldcp": 42.28,
-        "change": 0.7,
-        "pct": 1.66,
-        "volume": 150735
-      },
-      "UCAPM": {
-        "price": 6.07,
-        "ldcp": 6.07,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 149656
-      },
-      "CTM": {
-        "price": 6.58,
-        "ldcp": 6.7,
-        "change": -0.12,
-        "pct": -1.79,
-        "volume": 146853
-      },
-      "TCORPCPS": {
-        "price": 10.09,
-        "ldcp": 10.28,
-        "change": -0.19,
-        "pct": -1.85,
-        "volume": 145332
-      },
-      "DOL": {
-        "price": 30.01,
-        "ldcp": 30.03,
-        "change": -0.02,
-        "pct": -0.07,
-        "volume": 132460
-      },
-      "DCR": {
-        "price": 40.74,
-        "ldcp": 40.76,
-        "change": -0.02,
-        "pct": -0.05,
-        "volume": 131030
-      },
-      "CHCC": {
-        "price": 283.54,
-        "ldcp": 289.77,
-        "change": -6.23,
-        "pct": -2.15,
-        "volume": 128832
-      },
-      "GAMON": {
-        "price": 22.17,
-        "ldcp": 22.09,
-        "change": 0.08,
-        "pct": 0.36,
-        "volume": 128545
-      },
-      "BCL": {
-        "price": 69.93,
-        "ldcp": 70.95,
+      "TRSM": {
+        "price": 13.84,
+        "ldcp": 14.86,
         "change": -1.02,
-        "pct": -1.44,
-        "volume": 121050
+        "pct": -6.86,
+        "volume": 678654
       },
-      "KOHC": {
-        "price": 92.22,
-        "ldcp": 91.84,
-        "change": 0.38,
-        "pct": 0.41,
-        "volume": 119348
+      "CHBL": {
+        "price": 10.92,
+        "ldcp": 9.92,
+        "change": 1.0,
+        "pct": 10.08,
+        "volume": 675234
       },
-      "ISL": {
-        "price": 85.75,
-        "ldcp": 86.88,
-        "change": -1.13,
-        "pct": -1.3,
-        "volume": 117592
+      "BLUEX": {
+        "price": 6.28,
+        "ldcp": 6.45,
+        "change": -0.17,
+        "pct": -2.64,
+        "volume": 672856
       },
-      "PKGI": {
-        "price": 51.51,
-        "ldcp": 49.51,
-        "change": 2.0,
-        "pct": 4.04,
-        "volume": 115834
+      "TBL": {
+        "price": 9.0,
+        "ldcp": 9.11,
+        "change": -0.11,
+        "pct": -1.21,
+        "volume": 664702
       },
-      "NEXT": {
-        "price": 15.24,
-        "ldcp": 14.87,
-        "change": 0.37,
-        "pct": 2.49,
-        "volume": 114114
+      "CLOV": {
+        "price": 6.5,
+        "ldcp": 6.64,
+        "change": -0.14,
+        "pct": -2.11,
+        "volume": 658819
       },
-      "WAHDAT": {
-        "price": 15.26,
-        "ldcp": 15.36,
-        "change": -0.1,
-        "pct": -0.65,
-        "volume": 110066
+      "AKBL": {
+        "price": 105.25,
+        "ldcp": 108.25,
+        "change": -3.0,
+        "pct": -2.77,
+        "volume": 631769
       },
-      "EFUG": {
-        "price": 132.61,
-        "ldcp": 125.09,
-        "change": 7.52,
-        "pct": 6.01,
-        "volume": 109295
+      "AIRLINK": {
+        "price": 125.0,
+        "ldcp": 128.32,
+        "change": -3.32,
+        "pct": -2.59,
+        "volume": 617765
       },
-      "JSIL": {
-        "price": 40.0,
-        "ldcp": 40.99,
-        "change": -0.99,
-        "pct": -2.41,
-        "volume": 106269
+      "YOUW": {
+        "price": 4.77,
+        "ldcp": 4.98,
+        "change": -0.21,
+        "pct": -4.22,
+        "volume": 597811
       },
-      "ARUJ": {
-        "price": 10.85,
-        "ldcp": 10.43,
-        "change": 0.42,
-        "pct": 4.03,
-        "volume": 106257
+      "NETSOL": {
+        "price": 120.5,
+        "ldcp": 124.34,
+        "change": -3.84,
+        "pct": -3.09,
+        "volume": 548784
       },
-      "FPRM": {
-        "price": 10.5,
-        "ldcp": 10.48,
-        "change": 0.02,
-        "pct": 0.19,
-        "volume": 104421
+      "FCEPL": {
+        "price": 145.0,
+        "ldcp": 147.08,
+        "change": -2.08,
+        "pct": -1.41,
+        "volume": 540083
       },
-      "DNCC": {
-        "price": 16.03,
-        "ldcp": 15.83,
-        "change": 0.2,
-        "pct": 1.26,
-        "volume": 103654
-      },
-      "ANSM": {
-        "price": 25.03,
-        "ldcp": 25.99,
-        "change": -0.96,
-        "pct": -3.69,
-        "volume": 102616
-      },
-      "SRVI": {
-        "price": 180.21,
-        "ldcp": 184.16,
-        "change": -3.95,
-        "pct": -2.14,
-        "volume": 99009
-      },
-      "GHGL": {
-        "price": 42.0,
-        "ldcp": 42.03,
-        "change": -0.03,
-        "pct": -0.07,
-        "volume": 97275
-      },
-      "POL": {
-        "price": 729.58,
-        "ldcp": 727.21,
-        "change": 2.37,
-        "pct": 0.33,
-        "volume": 96419
-      },
-      "HIFA": {
-        "price": 4.97,
-        "ldcp": 4.85,
-        "change": 0.12,
-        "pct": 2.47,
-        "volume": 95876
-      },
-      "WAFI": {
-        "price": 163.94,
-        "ldcp": 161.98,
-        "change": 1.96,
-        "pct": 1.21,
-        "volume": 94465
-      },
-      "LPL": {
-        "price": 20.0,
-        "ldcp": 20.38,
-        "change": -0.38,
-        "pct": -1.86,
-        "volume": 92555
-      },
-      "GHNI": {
-        "price": 1219.59,
-        "ldcp": 1225.94,
-        "change": -6.35,
-        "pct": -0.52,
-        "volume": 89071
-      },
-      "TCORP": {
-        "price": 19.63,
-        "ldcp": 19.92,
-        "change": -0.29,
-        "pct": -1.46,
-        "volume": 87944
-      },
-      "NCL": {
-        "price": 35.92,
-        "ldcp": 35.95,
-        "change": -0.03,
-        "pct": -0.08,
-        "volume": 86739
-      },
-      "FANM": {
-        "price": 9.82,
-        "ldcp": 10.07,
-        "change": -0.25,
-        "pct": -2.48,
-        "volume": 85365
-      },
-      "FTSM": {
-        "price": 38.87,
-        "ldcp": 43.19,
-        "change": -4.32,
-        "pct": -10.0,
-        "volume": 80626
-      },
-      "SKRS": {
-        "price": 25.66,
-        "ldcp": 26.62,
-        "change": -0.96,
-        "pct": -3.61,
-        "volume": 80425
-      },
-      "HRPL": {
-        "price": 21.72,
-        "ldcp": 22.48,
-        "change": -0.76,
-        "pct": -3.38,
-        "volume": 79512
+      "GCIL": {
+        "price": 33.85,
+        "ldcp": 33.91,
+        "change": -0.06,
+        "pct": -0.18,
+        "volume": 538662
       },
       "FIBLM": {
-        "price": 15.0,
+        "price": 16.36,
         "ldcp": 15.0,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 77514
+        "change": 1.36,
+        "pct": 9.07,
+        "volume": 525922
       },
-      "ESBL": {
-        "price": 9.29,
-        "ldcp": 9.54,
-        "change": -0.25,
-        "pct": -2.62,
-        "volume": 76772
+      "BIPL": {
+        "price": 24.86,
+        "ldcp": 25.42,
+        "change": -0.56,
+        "pct": -2.2,
+        "volume": 509714
       },
-      "MSOT": {
-        "price": 173.98,
-        "ldcp": 173.4,
-        "change": 0.58,
-        "pct": 0.33,
-        "volume": 76554
+      "DSL": {
+        "price": 4.56,
+        "ldcp": 4.64,
+        "change": -0.08,
+        "pct": -1.72,
+        "volume": 506589
       },
-      "PGLC": {
-        "price": 17.3,
-        "ldcp": 17.49,
-        "change": -0.19,
-        "pct": -1.09,
-        "volume": 71844
+      "DFSM": {
+        "price": 11.55,
+        "ldcp": 12.45,
+        "change": -0.9,
+        "pct": -7.23,
+        "volume": 469805
       },
-      "JSBL": {
-        "price": 12.6,
-        "ldcp": 12.59,
-        "change": 0.01,
-        "pct": 0.08,
-        "volume": 68926
+      "GGL": {
+        "price": 21.4,
+        "ldcp": 22.03,
+        "change": -0.63,
+        "pct": -2.86,
+        "volume": 456796
       },
-      "FCEL": {
-        "price": 5.05,
-        "ldcp": 5.45,
-        "change": -0.4,
-        "pct": -7.34,
-        "volume": 68639
+      "EMCO": {
+        "price": 41.75,
+        "ldcp": 45.51,
+        "change": -3.76,
+        "pct": -8.26,
+        "volume": 452902
       },
-      "BUXL": {
-        "price": 1030.36,
-        "ldcp": 1144.84,
-        "change": -114.48,
-        "pct": -10.0,
-        "volume": 67684
+      "PAKRI": {
+        "price": 15.65,
+        "ldcp": 16.0,
+        "change": -0.35,
+        "pct": -2.19,
+        "volume": 452461
       },
-      "AHL": {
-        "price": 133.46,
-        "ldcp": 133.75,
-        "change": -0.29,
-        "pct": -0.22,
-        "volume": 65861
+      "CEPB": {
+        "price": 26.06,
+        "ldcp": 26.72,
+        "change": -0.66,
+        "pct": -2.47,
+        "volume": 450523
       },
-      "GLAXO": {
-        "price": 313.32,
-        "ldcp": 314.64,
-        "change": -1.32,
-        "pct": -0.42,
-        "volume": 62993
+      "CPHL": {
+        "price": 71.0,
+        "ldcp": 70.55,
+        "change": 0.45,
+        "pct": 0.64,
+        "volume": 441107
       },
-      "BFBIO": {
-        "price": 125.74,
-        "ldcp": 127.07,
-        "change": -1.33,
-        "pct": -1.05,
-        "volume": 62317
+      "JVDC": {
+        "price": 137.0,
+        "ldcp": 143.11,
+        "change": -6.11,
+        "pct": -4.27,
+        "volume": 438717
       },
-      "KOHE": {
-        "price": 15.45,
-        "ldcp": 15.32,
-        "change": 0.13,
-        "pct": 0.85,
-        "volume": 61897
-      },
-      "UDLI": {
-        "price": 17.43,
-        "ldcp": 17.66,
-        "change": -0.23,
-        "pct": -1.3,
-        "volume": 61800
-      },
-      "AKDSL": {
-        "price": 36.35,
-        "ldcp": 36.13,
-        "change": 0.22,
-        "pct": 0.61,
-        "volume": 60368
-      },
-      "PIOC": {
-        "price": 252.78,
-        "ldcp": 257.47,
-        "change": -4.69,
-        "pct": -1.82,
-        "volume": 60015
-      },
-      "ASTM": {
-        "price": 101.37,
-        "ldcp": 112.63,
-        "change": -11.26,
-        "pct": -10.0,
-        "volume": 57538
-      },
-      "CPPL": {
-        "price": 102.77,
-        "ldcp": 102.86,
+      "HUMNL": {
+        "price": 9.85,
+        "ldcp": 9.94,
         "change": -0.09,
-        "pct": -0.09,
-        "volume": 57538
+        "pct": -0.9,
+        "volume": 413765
       },
-      "PQGTL": {
-        "price": 12.87,
-        "ldcp": 12.92,
-        "change": -0.05,
-        "pct": -0.39,
-        "volume": 57315
-      },
-      "KOIL": {
-        "price": 38.13,
-        "ldcp": 38.58,
+      "QTECH": {
+        "price": 37.1,
+        "ldcp": 37.55,
         "change": -0.45,
-        "pct": -1.17,
-        "volume": 57218
+        "pct": -1.2,
+        "volume": 413299
       },
-      "STCL": {
-        "price": 9.71,
-        "ldcp": 9.83,
-        "change": -0.12,
-        "pct": -1.22,
-        "volume": 57204
+      "SLGL": {
+        "price": 14.35,
+        "ldcp": 14.73,
+        "change": -0.38,
+        "pct": -2.58,
+        "volume": 404118
       },
-      "KTML": {
-        "price": 42.86,
-        "ldcp": 42.79,
-        "change": 0.07,
-        "pct": 0.16,
-        "volume": 57005
+      "LSECL": {
+        "price": 6.03,
+        "ldcp": 6.09,
+        "change": -0.06,
+        "pct": -0.98,
+        "volume": 396148
       },
-      "ORM": {
-        "price": 10.55,
-        "ldcp": 11.0,
-        "change": -0.45,
-        "pct": -4.09,
-        "volume": 56237
+      "CHCC": {
+        "price": 277.0,
+        "ldcp": 283.54,
+        "change": -6.54,
+        "pct": -2.31,
+        "volume": 389197
       },
-      "ADMM": {
-        "price": 57.1,
-        "ldcp": 58.53,
-        "change": -1.43,
-        "pct": -2.44,
-        "volume": 56098
+      "DFML": {
+        "price": 15.9,
+        "ldcp": 16.47,
+        "change": -0.57,
+        "pct": -3.46,
+        "volume": 383113
       },
-      "TGL": {
-        "price": 173.6,
-        "ldcp": 173.11,
-        "change": 0.49,
-        "pct": 0.28,
-        "volume": 56096
+      "WAVESAPP": {
+        "price": 8.65,
+        "ldcp": 8.95,
+        "change": -0.3,
+        "pct": -3.35,
+        "volume": 370420
       },
-      "ANL": {
-        "price": 9.65,
-        "ldcp": 9.74,
+      "EPCL": {
+        "price": 33.81,
+        "ldcp": 33.55,
+        "change": 0.26,
+        "pct": 0.78,
+        "volume": 364931
+      },
+      "FFC": {
+        "price": 540.7,
+        "ldcp": 541.38,
+        "change": -0.68,
+        "pct": -0.13,
+        "volume": 364030
+      },
+      "GRR": {
+        "price": 22.22,
+        "ldcp": 22.31,
         "change": -0.09,
-        "pct": -0.92,
-        "volume": 54428
+        "pct": -0.4,
+        "volume": 349163
       },
-      "SHDT": {
-        "price": 54.88,
-        "ldcp": 55.39,
-        "change": -0.51,
-        "pct": -0.92,
-        "volume": 54089
+      "GDL": {
+        "price": 16.96,
+        "ldcp": 17.2,
+        "change": -0.24,
+        "pct": -1.39,
+        "volume": 347213
       },
-      "GSPM": {
-        "price": 6.41,
-        "ldcp": 6.25,
-        "change": 0.16,
-        "pct": 2.56,
-        "volume": 53117
+      "KOHC": {
+        "price": 92.0,
+        "ldcp": 92.22,
+        "change": -0.22,
+        "pct": -0.24,
+        "volume": 343718
       },
-      "QUICE": {
-        "price": 28.34,
-        "ldcp": 27.98,
-        "change": 0.36,
-        "pct": 1.29,
-        "volume": 52856
+      "FABL": {
+        "price": 92.01,
+        "ldcp": 92.91,
+        "change": -0.9,
+        "pct": -0.97,
+        "volume": 326588
       },
-      "FECTC": {
-        "price": 102.73,
-        "ldcp": 103.28,
-        "change": -0.55,
-        "pct": -0.53,
-        "volume": 51000
+      "IREIT": {
+        "price": 8.06,
+        "ldcp": 8.24,
+        "change": -0.18,
+        "pct": -2.18,
+        "volume": 311055
       },
-      "FTMM": {
-        "price": 19.9,
-        "ldcp": 20.42,
-        "change": -0.52,
-        "pct": -2.55,
-        "volume": 49632
+      "POWER": {
+        "price": 22.25,
+        "ldcp": 22.4,
+        "change": -0.15,
+        "pct": -0.67,
+        "volume": 310019
       },
-      "FEM": {
-        "price": 11.0,
-        "ldcp": 11.17,
-        "change": -0.17,
-        "pct": -1.52,
-        "volume": 49052
+      "DBCI": {
+        "price": 10.32,
+        "ldcp": 11.09,
+        "change": -0.77,
+        "pct": -6.94,
+        "volume": 309804
       },
-      "EPQL": {
-        "price": 23.75,
-        "ldcp": 23.89,
-        "change": -0.14,
-        "pct": -0.59,
-        "volume": 48239
+      "GAL": {
+        "price": 598.0,
+        "ldcp": 616.68,
+        "change": -18.68,
+        "pct": -3.03,
+        "volume": 293687
       },
-      "DWSM": {
-        "price": 6.01,
-        "ldcp": 6.18,
-        "change": -0.17,
-        "pct": -2.75,
-        "volume": 47141
+      "EFERT": {
+        "price": 184.9,
+        "ldcp": 186.45,
+        "change": -1.55,
+        "pct": -0.83,
+        "volume": 291570
       },
-      "HALEON": {
-        "price": 698.96,
-        "ldcp": 704.24,
-        "change": -5.28,
-        "pct": -0.75,
-        "volume": 46446
-      },
-      "NATF": {
-        "price": 362.54,
-        "ldcp": 360.34,
-        "change": 2.2,
-        "pct": 0.61,
-        "volume": 46432
-      },
-      "INKL": {
-        "price": 99.47,
-        "ldcp": 99.43,
-        "change": 0.04,
-        "pct": 0.04,
-        "volume": 45746
+      "STPL": {
+        "price": 8.2,
+        "ldcp": 8.36,
+        "change": -0.16,
+        "pct": -1.91,
+        "volume": 288069
       },
       "786": {
-        "price": 21.44,
-        "ldcp": 21.43,
-        "change": 0.01,
-        "pct": 0.05,
-        "volume": 44699
+        "price": 23.58,
+        "ldcp": 21.44,
+        "change": 2.14,
+        "pct": 9.98,
+        "volume": 286815
       },
-      "FLYNG": {
-        "price": 38.92,
-        "ldcp": 39.59,
-        "change": -0.67,
-        "pct": -1.69,
-        "volume": 44608
+      "ITTEFAQ": {
+        "price": 7.84,
+        "ldcp": 8.12,
+        "change": -0.28,
+        "pct": -3.45,
+        "volume": 281921
       },
-      "IBLHL": {
-        "price": 44.72,
-        "ldcp": 44.54,
-        "change": 0.18,
-        "pct": 0.4,
-        "volume": 43912
-      },
-      "KOHTM": {
-        "price": 106.61,
-        "ldcp": 109.61,
-        "change": -3.0,
-        "pct": -2.74,
-        "volume": 43718
-      },
-      "BWCL": {
-        "price": 458.15,
-        "ldcp": 469.75,
-        "change": -11.6,
-        "pct": -2.47,
-        "volume": 43300
-      },
-      "PECO": {
-        "price": 725.39,
-        "ldcp": 669.17,
-        "change": 56.22,
-        "pct": 8.4,
-        "volume": 41492
-      },
-      "FFLM": {
-        "price": 12.98,
-        "ldcp": 13.21,
-        "change": -0.23,
-        "pct": -1.74,
-        "volume": 41394
-      },
-      "SPWL": {
-        "price": 8.4,
-        "ldcp": 8.4,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 41192
-      },
-      "PSYL": {
-        "price": 134.31,
-        "ldcp": 122.14,
-        "change": 12.17,
-        "pct": 9.96,
-        "volume": 40821
-      },
-      "BGL": {
-        "price": 10.1,
-        "ldcp": 10.01,
-        "change": 0.09,
-        "pct": 0.9,
-        "volume": 40664
-      },
-      "MERIT": {
-        "price": 10.04,
-        "ldcp": 10.09,
-        "change": -0.05,
-        "pct": -0.5,
-        "volume": 39584
-      },
-      "CHAS": {
-        "price": 81.87,
-        "ldcp": 81.8,
-        "change": 0.07,
-        "pct": 0.09,
-        "volume": 39517
-      },
-      "NCML": {
-        "price": 16.09,
-        "ldcp": 15.5,
-        "change": 0.59,
-        "pct": 3.81,
-        "volume": 38186
-      },
-      "ICL": {
-        "price": 132.61,
-        "ldcp": 132.2,
-        "change": 0.41,
-        "pct": 0.31,
-        "volume": 36634
-      },
-      "AGSML": {
-        "price": 8.71,
-        "ldcp": 8.78,
-        "change": -0.07,
-        "pct": -0.8,
-        "volume": 34796
-      },
-      "ICIBL": {
-        "price": 16.82,
-        "ldcp": 16.71,
-        "change": 0.11,
-        "pct": 0.66,
-        "volume": 34099
-      },
-      "TSPL": {
-        "price": 15.22,
-        "ldcp": 15.24,
-        "change": -0.02,
-        "pct": -0.13,
-        "volume": 33978
-      },
-      "PINL": {
-        "price": 11.03,
-        "ldcp": 11.52,
-        "change": -0.49,
-        "pct": -4.25,
-        "volume": 33800
-      },
-      "PPVC": {
-        "price": 34.31,
-        "ldcp": 38.12,
-        "change": -3.81,
-        "pct": -9.99,
-        "volume": 33661
-      },
-      "GTYR": {
-        "price": 27.4,
-        "ldcp": 27.56,
-        "change": -0.16,
-        "pct": -0.58,
-        "volume": 33028
-      },
-      "MEHT": {
-        "price": 135.86,
-        "ldcp": 136.17,
-        "change": -0.31,
-        "pct": -0.23,
-        "volume": 32410
-      },
-      "ABL": {
-        "price": 170.05,
-        "ldcp": 169.21,
-        "change": 0.84,
-        "pct": 0.5,
-        "volume": 32284
-      },
-      "FCIBL": {
-        "price": 29.79,
-        "ldcp": 32.15,
-        "change": -2.36,
-        "pct": -7.34,
-        "volume": 31361
-      },
-      "PIM": {
-        "price": 62.26,
-        "ldcp": 56.6,
-        "change": 5.66,
-        "pct": 10.0,
-        "volume": 30763
-      },
-      "TATM": {
-        "price": 154.56,
-        "ldcp": 155.42,
-        "change": -0.86,
-        "pct": -0.55,
-        "volume": 30577
-      },
-      "BPL": {
-        "price": 52.55,
-        "ldcp": 53.8,
-        "change": -1.25,
-        "pct": -2.32,
-        "volume": 30179
-      },
-      "JLICL": {
-        "price": 110.36,
-        "ldcp": 110.72,
-        "change": -0.36,
-        "pct": -0.32,
-        "volume": 28627
-      },
-      "AGIL": {
-        "price": 154.28,
-        "ldcp": 156.26,
-        "change": -1.98,
-        "pct": -1.27,
-        "volume": 28593
-      },
-      "SINDM": {
-        "price": 29.4,
-        "ldcp": 30.34,
-        "change": -0.94,
-        "pct": -3.1,
-        "volume": 28552
-      },
-      "CENI": {
-        "price": 54.65,
-        "ldcp": 54.47,
-        "change": 0.18,
-        "pct": 0.33,
-        "volume": 26367
-      },
-      "STYLERS": {
-        "price": 50.46,
-        "ldcp": 51.5,
-        "change": -1.04,
-        "pct": -2.02,
-        "volume": 26145
-      },
-      "SHCM": {
-        "price": 55.07,
-        "ldcp": 50.06,
-        "change": 5.01,
-        "pct": 10.01,
-        "volume": 25393
-      },
-      "BIFO": {
-        "price": 118.28,
-        "ldcp": 118.28,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 25069
-      },
-      "INIL": {
-        "price": 164.86,
-        "ldcp": 165.83,
-        "change": -0.97,
-        "pct": -0.58,
-        "volume": 24819
-      },
-      "PIL": {
-        "price": 5.01,
-        "ldcp": 5.13,
-        "change": -0.12,
-        "pct": -2.34,
-        "volume": 24628
-      },
-      "SIBL": {
-        "price": 7.12,
-        "ldcp": 7.43,
-        "change": -0.31,
-        "pct": -4.17,
-        "volume": 21808
-      },
-      "JGICL": {
-        "price": 76.12,
-        "ldcp": 76.53,
+      "BBFL": {
+        "price": 41.0,
+        "ldcp": 41.41,
         "change": -0.41,
-        "pct": -0.54,
-        "volume": 21522
+        "pct": -0.99,
+        "volume": 281389
       },
-      "SAIF": {
-        "price": 44.63,
-        "ldcp": 43.92,
-        "change": 0.71,
-        "pct": 1.62,
-        "volume": 21328
+      "ZAL": {
+        "price": 38.69,
+        "ldcp": 39.34,
+        "change": -0.65,
+        "pct": -1.65,
+        "volume": 278684
+      },
+      "ASC": {
+        "price": 9.0,
+        "ldcp": 9.16,
+        "change": -0.16,
+        "pct": -1.75,
+        "volume": 273731
+      },
+      "AMTEX": {
+        "price": 3.88,
+        "ldcp": 3.96,
+        "change": -0.08,
+        "pct": -2.02,
+        "volume": 254286
+      },
+      "TREET": {
+        "price": 21.75,
+        "ldcp": 22.12,
+        "change": -0.37,
+        "pct": -1.67,
+        "volume": 252651
+      },
+      "HBL": {
+        "price": 307.25,
+        "ldcp": 308.51,
+        "change": -1.26,
+        "pct": -0.41,
+        "volume": 249683
+      },
+      "SELECT": {
+        "price": 26.55,
+        "ldcp": 27.65,
+        "change": -1.1,
+        "pct": -3.98,
+        "volume": 234116
+      },
+      "GLAXO": {
+        "price": 305.61,
+        "ldcp": 313.32,
+        "change": -7.71,
+        "pct": -2.46,
+        "volume": 230019
+      },
+      "ASTL": {
+        "price": 14.6,
+        "ldcp": 14.89,
+        "change": -0.29,
+        "pct": -1.95,
+        "volume": 227245
+      },
+      "MUGHAL": {
+        "price": 73.97,
+        "ldcp": 75.08,
+        "change": -1.11,
+        "pct": -1.48,
+        "volume": 225094
+      },
+      "MARI": {
+        "price": 648.09,
+        "ldcp": 653.97,
+        "change": -5.88,
+        "pct": -0.9,
+        "volume": 219575
+      },
+      "SPEL": {
+        "price": 41.91,
+        "ldcp": 42.98,
+        "change": -1.07,
+        "pct": -2.49,
+        "volume": 216698
+      },
+      "KAPCO": {
+        "price": 26.56,
+        "ldcp": 26.55,
+        "change": 0.01,
+        "pct": 0.04,
+        "volume": 215678
+      },
+      "GGGL": {
+        "price": 7.73,
+        "ldcp": 7.78,
+        "change": -0.05,
+        "pct": -0.64,
+        "volume": 214850
+      },
+      "AVN": {
+        "price": 28.17,
+        "ldcp": 28.75,
+        "change": -0.58,
+        "pct": -2.02,
+        "volume": 213864
+      },
+      "IMAGE": {
+        "price": 24.62,
+        "ldcp": 25.08,
+        "change": -0.46,
+        "pct": -1.83,
+        "volume": 213752
+      },
+      "BERG": {
+        "price": 121.5,
+        "ldcp": 128.66,
+        "change": -7.16,
+        "pct": -5.56,
+        "volume": 211127
       },
       "SRR": {
-        "price": 17.03,
-        "ldcp": 17.0,
-        "change": 0.03,
-        "pct": 0.18,
-        "volume": 21253
+        "price": 16.75,
+        "ldcp": 17.03,
+        "change": -0.28,
+        "pct": -1.64,
+        "volume": 210982
       },
-      "ZTL": {
-        "price": 16.16,
-        "ldcp": 16.73,
-        "change": -0.57,
+      "ATRL": {
+        "price": 1092.93,
+        "ldcp": 1094.02,
+        "change": -1.09,
+        "pct": -0.1,
+        "volume": 207032
+      },
+      "MSOT": {
+        "price": 178.86,
+        "ldcp": 173.98,
+        "change": 4.88,
+        "pct": 2.8,
+        "volume": 194310
+      },
+      "BIFO": {
+        "price": 119.5,
+        "ldcp": 118.28,
+        "change": 1.22,
+        "pct": 1.03,
+        "volume": 192277
+      },
+      "UNIC": {
+        "price": 11.6,
+        "ldcp": 11.66,
+        "change": -0.06,
+        "pct": -0.51,
+        "volume": 190617
+      },
+      "KML": {
+        "price": 8.5,
+        "ldcp": 8.8,
+        "change": -0.3,
         "pct": -3.41,
-        "volume": 20899
+        "volume": 180039
       },
-      "JSML": {
-        "price": 53.41,
-        "ldcp": 52.63,
-        "change": 0.78,
-        "pct": 1.48,
-        "volume": 20688
+      "FANM": {
+        "price": 9.12,
+        "ldcp": 9.82,
+        "change": -0.7,
+        "pct": -7.13,
+        "volume": 179195
+      },
+      "GCWL": {
+        "price": 14.87,
+        "ldcp": 14.94,
+        "change": -0.07,
+        "pct": -0.47,
+        "volume": 178045
+      },
+      "RPL": {
+        "price": 16.05,
+        "ldcp": 16.2,
+        "change": -0.15,
+        "pct": -0.93,
+        "volume": 177645
+      },
+      "HICL": {
+        "price": 8.65,
+        "ldcp": 8.76,
+        "change": -0.11,
+        "pct": -1.26,
+        "volume": 175732
+      },
+      "TPLT": {
+        "price": 31.95,
+        "ldcp": 32.62,
+        "change": -0.67,
+        "pct": -2.05,
+        "volume": 175040
+      },
+      "ALAC": {
+        "price": 23.85,
+        "ldcp": 25.21,
+        "change": -1.36,
+        "pct": -5.39,
+        "volume": 172041
+      },
+      "SAZEW": {
+        "price": 1799.0,
+        "ldcp": 1796.36,
+        "change": 2.64,
+        "pct": 0.15,
+        "volume": 169653
+      },
+      "AGP": {
+        "price": 157.0,
+        "ldcp": 161.29,
+        "change": -4.29,
+        "pct": -2.66,
+        "volume": 168212
+      },
+      "DCR": {
+        "price": 40.61,
+        "ldcp": 40.74,
+        "change": -0.13,
+        "pct": -0.32,
+        "volume": 167097
+      },
+      "FECTC": {
+        "price": 98.35,
+        "ldcp": 102.73,
+        "change": -4.38,
+        "pct": -4.26,
+        "volume": 166581
+      },
+      "SNBL": {
+        "price": 20.16,
+        "ldcp": 20.58,
+        "change": -0.42,
+        "pct": -2.04,
+        "volume": 166382
+      },
+      "FATIMA": {
+        "price": 150.29,
+        "ldcp": 152.64,
+        "change": -2.35,
+        "pct": -1.54,
+        "volume": 164453
+      },
+      "BAPL": {
+        "price": 37.0,
+        "ldcp": 36.84,
+        "change": 0.16,
+        "pct": 0.43,
+        "volume": 163518
+      },
+      "SBL": {
+        "price": 13.5,
+        "ldcp": 13.51,
+        "change": -0.01,
+        "pct": -0.07,
+        "volume": 162092
+      },
+      "JSCL": {
+        "price": 20.55,
+        "ldcp": 21.09,
+        "change": -0.54,
+        "pct": -2.56,
+        "volume": 161944
+      },
+      "PAKQATAR": {
+        "price": 17.56,
+        "ldcp": 18.0,
+        "change": -0.44,
+        "pct": -2.44,
+        "volume": 157557
+      },
+      "SPAC2": {
+        "price": 13.3,
+        "ldcp": 13.51,
+        "change": -0.21,
+        "pct": -1.55,
+        "volume": 153779
+      },
+      "UBLPETF": {
+        "price": 28.38,
+        "ldcp": 28.55,
+        "change": -0.17,
+        "pct": -0.6,
+        "volume": 147000
+      },
+      "ORM": {
+        "price": 10.62,
+        "ldcp": 10.55,
+        "change": 0.07,
+        "pct": 0.66,
+        "volume": 138605
+      },
+      "GATM": {
+        "price": 22.6,
+        "ldcp": 23.01,
+        "change": -0.41,
+        "pct": -1.78,
+        "volume": 137086
+      },
+      "EPQL": {
+        "price": 23.9,
+        "ldcp": 23.75,
+        "change": 0.15,
+        "pct": 0.63,
+        "volume": 135728
+      },
+      "DNCC": {
+        "price": 15.9,
+        "ldcp": 16.03,
+        "change": -0.13,
+        "pct": -0.81,
+        "volume": 134695
+      },
+      "ANL": {
+        "price": 9.6,
+        "ldcp": 9.65,
+        "change": -0.05,
+        "pct": -0.52,
+        "volume": 129701
+      },
+      "HCAR": {
+        "price": 226.99,
+        "ldcp": 229.79,
+        "change": -2.8,
+        "pct": -1.22,
+        "volume": 121465
+      },
+      "AICL": {
+        "price": 91.46,
+        "ldcp": 92.91,
+        "change": -1.45,
+        "pct": -1.56,
+        "volume": 120695
+      },
+      "FDPL": {
+        "price": 4.58,
+        "ldcp": 4.68,
+        "change": -0.1,
+        "pct": -2.14,
+        "volume": 117201
+      },
+      "GHGL": {
+        "price": 41.74,
+        "ldcp": 42.0,
+        "change": -0.26,
+        "pct": -0.62,
+        "volume": 115571
+      },
+      "NITGETF": {
+        "price": 33.09,
+        "ldcp": 33.25,
+        "change": -0.16,
+        "pct": -0.48,
+        "volume": 114500
+      },
+      "ISL": {
+        "price": 84.0,
+        "ldcp": 85.75,
+        "change": -1.75,
+        "pct": -2.04,
+        "volume": 114236
+      },
+      "BFAGRO": {
+        "price": 30.8,
+        "ldcp": 31.4,
+        "change": -0.6,
+        "pct": -1.91,
+        "volume": 112494
+      },
+      "CSAP": {
+        "price": 90.68,
+        "ldcp": 92.08,
+        "change": -1.4,
+        "pct": -1.52,
+        "volume": 109581
+      },
+      "HIRAT": {
+        "price": 5.55,
+        "ldcp": 5.71,
+        "change": -0.16,
+        "pct": -2.8,
+        "volume": 106202
+      },
+      "ALTN": {
+        "price": 6.77,
+        "ldcp": 6.76,
+        "change": 0.01,
+        "pct": 0.15,
+        "volume": 104128
+      },
+      "ACPL": {
+        "price": 229.0,
+        "ldcp": 232.21,
+        "change": -3.21,
+        "pct": -1.38,
+        "volume": 101575
+      },
+      "BML": {
+        "price": 51.1,
+        "ldcp": 52.23,
+        "change": -1.13,
+        "pct": -2.16,
+        "volume": 100136
+      },
+      "FCEL": {
+        "price": 4.96,
+        "ldcp": 5.05,
+        "change": -0.09,
+        "pct": -1.78,
+        "volume": 99760
+      },
+      "KTML": {
+        "price": 41.3,
+        "ldcp": 42.86,
+        "change": -1.56,
+        "pct": -3.64,
+        "volume": 98799
+      },
+      "MWMP": {
+        "price": 70.7,
+        "ldcp": 74.5,
+        "change": -3.8,
+        "pct": -5.1,
+        "volume": 97950
+      },
+      "BGL": {
+        "price": 9.85,
+        "ldcp": 10.1,
+        "change": -0.25,
+        "pct": -2.47,
+        "volume": 97229
+      },
+      "WAHDAT": {
+        "price": 15.1,
+        "ldcp": 15.26,
+        "change": -0.16,
+        "pct": -1.05,
+        "volume": 95975
+      },
+      "IMS": {
+        "price": 18.68,
+        "ldcp": 19.25,
+        "change": -0.57,
+        "pct": -2.96,
+        "volume": 95092
+      },
+      "MFL": {
+        "price": 39.97,
+        "ldcp": 40.3,
+        "change": -0.33,
+        "pct": -0.82,
+        "volume": 92594
+      },
+      "CPPL": {
+        "price": 98.0,
+        "ldcp": 102.77,
+        "change": -4.77,
+        "pct": -4.64,
+        "volume": 91384
+      },
+      "JSBL": {
+        "price": 12.59,
+        "ldcp": 12.6,
+        "change": -0.01,
+        "pct": -0.08,
+        "volume": 84260
+      },
+      "MTL": {
+        "price": 300.02,
+        "ldcp": 303.42,
+        "change": -3.4,
+        "pct": -1.12,
+        "volume": 83030
+      },
+      "CTM": {
+        "price": 6.4,
+        "ldcp": 6.58,
+        "change": -0.18,
+        "pct": -2.74,
+        "volume": 82366
+      },
+      "SLYT": {
+        "price": 17.92,
+        "ldcp": 16.7,
+        "change": 1.22,
+        "pct": 7.31,
+        "volume": 80396
+      },
+      "SRVI": {
+        "price": 172.01,
+        "ldcp": 180.21,
+        "change": -8.2,
+        "pct": -4.55,
+        "volume": 79285
+      },
+      "GWLC": {
+        "price": 50.5,
+        "ldcp": 51.38,
+        "change": -0.88,
+        "pct": -1.71,
+        "volume": 79121
+      },
+      "GHNI": {
+        "price": 1185.0,
+        "ldcp": 1219.59,
+        "change": -34.59,
+        "pct": -2.84,
+        "volume": 78438
+      },
+      "DIIL": {
+        "price": 78.0,
+        "ldcp": 75.62,
+        "change": 2.38,
+        "pct": 3.15,
+        "volume": 77718
+      },
+      "LSEVL": {
+        "price": 12.19,
+        "ldcp": 12.03,
+        "change": 0.16,
+        "pct": 1.33,
+        "volume": 76591
+      },
+      "GTYR": {
+        "price": 26.5,
+        "ldcp": 27.4,
+        "change": -0.9,
+        "pct": -3.28,
+        "volume": 76130
+      },
+      "UDLI": {
+        "price": 17.03,
+        "ldcp": 17.43,
+        "change": -0.4,
+        "pct": -2.3,
+        "volume": 74975
+      },
+      "PICT": {
+        "price": 42.01,
+        "ldcp": 43.57,
+        "change": -1.56,
+        "pct": -3.58,
+        "volume": 74114
       },
       "PAKL": {
-        "price": 56.31,
-        "ldcp": 51.19,
-        "change": 5.12,
-        "pct": 10.0,
-        "volume": 19868
+        "price": 57.99,
+        "ldcp": 56.31,
+        "change": 1.68,
+        "pct": 2.98,
+        "volume": 73978
       },
-      "INDU": {
-        "price": 1871.59,
-        "ldcp": 1855.5,
-        "change": 16.09,
-        "pct": 0.87,
-        "volume": 19862
+      "PTL": {
+        "price": 50.0,
+        "ldcp": 51.0,
+        "change": -1.0,
+        "pct": -1.96,
+        "volume": 73521
       },
-      "ZAHID": {
-        "price": 66.74,
-        "ldcp": 64.54,
-        "change": 2.2,
-        "pct": 3.41,
-        "volume": 19324
+      "UCAPM": {
+        "price": 5.89,
+        "ldcp": 6.07,
+        "change": -0.18,
+        "pct": -2.96,
+        "volume": 73227
+      },
+      "NCL": {
+        "price": 35.5,
+        "ldcp": 35.92,
+        "change": -0.42,
+        "pct": -1.17,
+        "volume": 72107
       },
       "HWQS": {
-        "price": 18.39,
-        "ldcp": 19.1,
-        "change": -0.71,
-        "pct": -3.72,
-        "volume": 19214
+        "price": 19.0,
+        "ldcp": 18.39,
+        "change": 0.61,
+        "pct": 3.32,
+        "volume": 70841
       },
-      "KSBP": {
-        "price": 225.31,
-        "ldcp": 226.88,
-        "change": -1.57,
-        "pct": -0.69,
-        "volume": 19081
+      "SHNI": {
+        "price": 8.16,
+        "ldcp": 8.3,
+        "change": -0.14,
+        "pct": -1.69,
+        "volume": 70162
       },
-      "STML": {
-        "price": 52.75,
-        "ldcp": 50.74,
-        "change": 2.01,
-        "pct": 3.96,
-        "volume": 19023
+      "FEM": {
+        "price": 11.39,
+        "ldcp": 11.0,
+        "change": 0.39,
+        "pct": 3.55,
+        "volume": 69630
       },
-      "HINOON": {
-        "price": 913.82,
-        "ldcp": 924.15,
-        "change": -10.33,
-        "pct": -1.12,
-        "volume": 18943
+      "AHL": {
+        "price": 129.0,
+        "ldcp": 133.46,
+        "change": -4.46,
+        "pct": -3.34,
+        "volume": 64167
       },
-      "RUBY": {
-        "price": 23.44,
-        "ldcp": 24.53,
-        "change": -1.09,
-        "pct": -4.44,
-        "volume": 18274
+      "KOHE": {
+        "price": 14.86,
+        "ldcp": 15.45,
+        "change": -0.59,
+        "pct": -3.82,
+        "volume": 63956
       },
-      "GRYL": {
-        "price": 19.23,
-        "ldcp": 20.34,
-        "change": -1.11,
-        "pct": -5.46,
-        "volume": 18186
+      "DAAG": {
+        "price": 95.49,
+        "ldcp": 91.86,
+        "change": 3.63,
+        "pct": 3.95,
+        "volume": 63667
       },
-      "KOHP": {
-        "price": 21.03,
-        "ldcp": 21.19,
-        "change": -0.16,
-        "pct": -0.75,
-        "volume": 17923
+      "KOHTM": {
+        "price": 100.0,
+        "ldcp": 106.61,
+        "change": -6.61,
+        "pct": -6.2,
+        "volume": 62152
       },
-      "SHFA": {
-        "price": 459.95,
-        "ldcp": 470.43,
-        "change": -10.48,
-        "pct": -2.23,
-        "volume": 17096
+      "SKRS": {
+        "price": 24.5,
+        "ldcp": 25.66,
+        "change": -1.16,
+        "pct": -4.52,
+        "volume": 61489
       },
-      "MQTM": {
-        "price": 27.53,
-        "ldcp": 27.01,
-        "change": 0.52,
-        "pct": 1.93,
-        "volume": 16878
+      "FFLM": {
+        "price": 12.78,
+        "ldcp": 12.98,
+        "change": -0.2,
+        "pct": -1.54,
+        "volume": 60051
       },
-      "PABC": {
-        "price": 96.54,
-        "ldcp": 95.23,
-        "change": 1.31,
-        "pct": 1.38,
-        "volume": 16487
+      "ADMM": {
+        "price": 54.85,
+        "ldcp": 57.1,
+        "change": -2.25,
+        "pct": -3.94,
+        "volume": 59769
       },
-      "DINT": {
-        "price": 56.0,
-        "ldcp": 58.0,
-        "change": -2.0,
-        "pct": -3.45,
-        "volume": 16336
+      "INIL": {
+        "price": 164.0,
+        "ldcp": 164.86,
+        "change": -0.86,
+        "pct": -0.52,
+        "volume": 58465
       },
-      "IDRT": {
-        "price": 35.09,
-        "ldcp": 35.17,
-        "change": -0.08,
-        "pct": -0.23,
-        "volume": 16263
+      "SHDT": {
+        "price": 54.49,
+        "ldcp": 54.88,
+        "change": -0.39,
+        "pct": -0.71,
+        "volume": 58330
       },
-      "PAKOXY": {
-        "price": 334.51,
-        "ldcp": 332.71,
-        "change": 1.8,
-        "pct": 0.54,
-        "volume": 16247
+      "PKGI": {
+        "price": 51.65,
+        "ldcp": 51.51,
+        "change": 0.14,
+        "pct": 0.27,
+        "volume": 58094
       },
-      "IGIHL": {
-        "price": 252.04,
-        "ldcp": 254.04,
-        "change": -2.0,
+      "OCTOPUS": {
+        "price": 28.88,
+        "ldcp": 29.16,
+        "change": -0.28,
+        "pct": -0.96,
+        "volume": 57001
+      },
+      "NBPGETF": {
+        "price": 26.6,
+        "ldcp": 26.94,
+        "change": -0.34,
+        "pct": -1.26,
+        "volume": 55000
+      },
+      "AGTL": {
+        "price": 364.88,
+        "ldcp": 374.86,
+        "change": -9.98,
+        "pct": -2.66,
+        "volume": 53979
+      },
+      "RICL": {
+        "price": 11.43,
+        "ldcp": 11.86,
+        "change": -0.43,
+        "pct": -3.63,
+        "volume": 53918
+      },
+      "FLYNG": {
+        "price": 37.0,
+        "ldcp": 38.92,
+        "change": -1.92,
+        "pct": -4.93,
+        "volume": 52530
+      },
+      "POL": {
+        "price": 729.0,
+        "ldcp": 729.58,
+        "change": -0.58,
+        "pct": -0.08,
+        "volume": 52028
+      },
+      "PSYL": {
+        "price": 138.0,
+        "ldcp": 134.31,
+        "change": 3.69,
+        "pct": 2.75,
+        "volume": 50628
+      },
+      "KOIL": {
+        "price": 37.8,
+        "ldcp": 38.13,
+        "change": -0.33,
+        "pct": -0.86,
+        "volume": 50613
+      },
+      "ACIETF": {
+        "price": 16.49,
+        "ldcp": 16.8,
+        "change": -0.31,
+        "pct": -1.85,
+        "volume": 49500
+      },
+      "AGSML": {
+        "price": 8.62,
+        "ldcp": 8.71,
+        "change": -0.09,
+        "pct": -1.03,
+        "volume": 49482
+      },
+      "HIFA": {
+        "price": 4.96,
+        "ldcp": 4.97,
+        "change": -0.01,
+        "pct": -0.2,
+        "volume": 48975
+      },
+      "PIL": {
+        "price": 4.95,
+        "ldcp": 5.01,
+        "change": -0.06,
+        "pct": -1.2,
+        "volume": 48681
+      },
+      "NCML": {
+        "price": 15.62,
+        "ldcp": 16.09,
+        "change": -0.47,
+        "pct": -2.92,
+        "volume": 48150
+      },
+      "NATF": {
+        "price": 359.66,
+        "ldcp": 362.54,
+        "change": -2.88,
         "pct": -0.79,
-        "volume": 15822
+        "volume": 47601
       },
-      "MSCL": {
-        "price": 21.74,
-        "ldcp": 22.24,
-        "change": -0.5,
-        "pct": -2.25,
-        "volume": 15762
+      "PPP": {
+        "price": 158.0,
+        "ldcp": 164.02,
+        "change": -6.02,
+        "pct": -3.67,
+        "volume": 47533
       },
-      "JATM": {
-        "price": 38.64,
-        "ldcp": 38.4,
-        "change": 0.24,
-        "pct": 0.63,
-        "volume": 15286
+      "TCORPCPS": {
+        "price": 10.0,
+        "ldcp": 10.09,
+        "change": -0.09,
+        "pct": -0.89,
+        "volume": 46936
+      },
+      "SPWL": {
+        "price": 8.31,
+        "ldcp": 8.4,
+        "change": -0.09,
+        "pct": -1.07,
+        "volume": 45826
+      },
+      "HGFA": {
+        "price": 13.85,
+        "ldcp": 14.31,
+        "change": -0.46,
+        "pct": -3.21,
+        "volume": 45496
+      },
+      "ARUJ": {
+        "price": 10.58,
+        "ldcp": 10.85,
+        "change": -0.27,
+        "pct": -2.49,
+        "volume": 44903
+      },
+      "PQGTL": {
+        "price": 12.85,
+        "ldcp": 12.87,
+        "change": -0.02,
+        "pct": -0.15,
+        "volume": 41795
+      },
+      "CJPL": {
+        "price": 17.0,
+        "ldcp": 17.85,
+        "change": -0.85,
+        "pct": -4.76,
+        "volume": 40036
+      },
+      "ICCI": {
+        "price": 14.8,
+        "ldcp": 13.51,
+        "change": 1.29,
+        "pct": 9.55,
+        "volume": 37167
+      },
+      "BRRG": {
+        "price": 44.0,
+        "ldcp": 44.01,
+        "change": -0.01,
+        "pct": -0.02,
+        "volume": 36859
+      },
+      "DOL": {
+        "price": 29.8,
+        "ldcp": 30.01,
+        "change": -0.21,
+        "pct": -0.7,
+        "volume": 36345
+      },
+      "TGL": {
+        "price": 172.54,
+        "ldcp": 173.6,
+        "change": -1.06,
+        "pct": -0.61,
+        "volume": 36169
+      },
+      "TATM": {
+        "price": 148.0,
+        "ldcp": 154.56,
+        "change": -6.56,
+        "pct": -4.24,
+        "volume": 36131
+      },
+      "BFBIO": {
+        "price": 125.0,
+        "ldcp": 125.74,
+        "change": -0.74,
+        "pct": -0.59,
+        "volume": 35469
+      },
+      "PPVC": {
+        "price": 31.6,
+        "ldcp": 34.31,
+        "change": -2.71,
+        "pct": -7.9,
+        "volume": 34223
+      },
+      "ABL": {
+        "price": 170.1,
+        "ldcp": 170.05,
+        "change": 0.05,
+        "pct": 0.03,
+        "volume": 33951
+      },
+      "SGF": {
+        "price": 111.0,
+        "ldcp": 111.66,
+        "change": -0.66,
+        "pct": -0.59,
+        "volume": 33282
       },
       "APL": {
-        "price": 573.17,
-        "ldcp": 575.2,
-        "change": -2.03,
-        "pct": -0.35,
-        "volume": 15236
+        "price": 574.87,
+        "ldcp": 573.17,
+        "change": 1.7,
+        "pct": 0.3,
+        "volume": 33147
       },
-      "SSML": {
-        "price": 20.75,
-        "ldcp": 21.28,
-        "change": -0.53,
-        "pct": -2.49,
-        "volume": 14523
+      "MSCL": {
+        "price": 21.33,
+        "ldcp": 21.74,
+        "change": -0.41,
+        "pct": -1.89,
+        "volume": 32544
       },
-      "SMCPL": {
-        "price": 40.99,
-        "ldcp": 40.97,
-        "change": 0.02,
-        "pct": 0.05,
-        "volume": 14495
+      "SCBPL": {
+        "price": 59.9,
+        "ldcp": 60.5,
+        "change": -0.6,
+        "pct": -0.99,
+        "volume": 32409
       },
-      "UVIC": {
+      "LPL": {
         "price": 19.5,
         "ldcp": 20.0,
         "change": -0.5,
         "pct": -2.5,
-        "volume": 14027
+        "volume": 32039
       },
-      "SLYT": {
-        "price": 16.7,
-        "ldcp": 17.88,
-        "change": -1.18,
-        "pct": -6.6,
-        "volume": 13998
+      "ESBL": {
+        "price": 8.61,
+        "ldcp": 9.29,
+        "change": -0.68,
+        "pct": -7.32,
+        "volume": 32032
       },
-      "LIVEN": {
-        "price": 32.38,
-        "ldcp": 32.3,
-        "change": 0.08,
-        "pct": 0.25,
-        "volume": 13550
+      "TCORP": {
+        "price": 19.5,
+        "ldcp": 19.63,
+        "change": -0.13,
+        "pct": -0.66,
+        "volume": 31580
       },
-      "BFMOD": {
-        "price": 23.06,
-        "ldcp": 23.86,
-        "change": -0.8,
-        "pct": -3.35,
-        "volume": 13420
+      "HRPL": {
+        "price": 21.93,
+        "ldcp": 21.72,
+        "change": 0.21,
+        "pct": 0.97,
+        "volume": 31119
       },
-      "SGF": {
-        "price": 111.66,
-        "ldcp": 113.55,
-        "change": -1.89,
-        "pct": -1.66,
-        "volume": 13165
-      },
-      "COLG": {
-        "price": 1189.22,
-        "ldcp": 1189.97,
-        "change": -0.75,
-        "pct": -0.06,
-        "volume": 13164
+      "FCIBL": {
+        "price": 32.39,
+        "ldcp": 29.79,
+        "change": 2.6,
+        "pct": 8.73,
+        "volume": 30219
       },
       "ARCTM": {
-        "price": 40.5,
-        "ldcp": 39.88,
-        "change": 0.62,
-        "pct": 1.56,
-        "volume": 12769
-      },
-      "SHEZ": {
-        "price": 266.99,
-        "ldcp": 268.54,
-        "change": -1.55,
-        "pct": -0.58,
-        "volume": 12716
-      },
-      "SARC": {
-        "price": 96.65,
-        "ldcp": 99.5,
-        "change": -2.85,
-        "pct": -2.86,
-        "volume": 12236
-      },
-      "IGIL": {
-        "price": 19.95,
-        "ldcp": 20.0,
-        "change": -0.05,
-        "pct": -0.25,
-        "volume": 12225
-      },
-      "ACPL": {
-        "price": 232.21,
-        "ldcp": 232.03,
-        "change": 0.18,
-        "pct": 0.08,
-        "volume": 12127
-      },
-      "SEPL": {
-        "price": 152.59,
-        "ldcp": 152.89,
-        "change": -0.3,
-        "pct": -0.2,
-        "volume": 12059
-      },
-      "RICL": {
-        "price": 11.86,
-        "ldcp": 11.92,
-        "change": -0.06,
-        "pct": -0.5,
-        "volume": 12017
-      },
-      "MRNS": {
-        "price": 58.7,
-        "ldcp": 58.5,
-        "change": 0.2,
-        "pct": 0.34,
-        "volume": 11125
-      },
-      "ALIFE": {
-        "price": 31.47,
-        "ldcp": 31.5,
-        "change": -0.03,
-        "pct": -0.09,
-        "volume": 11073
-      },
-      "NBPGETF": {
-        "price": 26.94,
-        "ldcp": 26.85,
-        "change": 0.09,
-        "pct": 0.34,
-        "volume": 11000
-      },
-      "AGL": {
-        "price": 43.05,
-        "ldcp": 42.35,
-        "change": 0.7,
-        "pct": 1.65,
-        "volume": 10908
-      },
-      "DLL": {
-        "price": 47.18,
-        "ldcp": 46.94,
-        "change": 0.24,
-        "pct": 0.51,
-        "volume": 10256
-      },
-      "FEROZ": {
-        "price": 359.41,
-        "ldcp": 360.22,
-        "change": -0.81,
-        "pct": -0.22,
-        "volume": 10230
-      },
-      "DYNO": {
-        "price": 334.73,
-        "ldcp": 342.07,
-        "change": -7.34,
-        "pct": -2.15,
-        "volume": 10200
-      },
-      "BOK": {
-        "price": 28.63,
-        "ldcp": 29.06,
-        "change": -0.43,
-        "pct": -1.48,
-        "volume": 9816
-      },
-      "SCBPL": {
-        "price": 60.5,
-        "ldcp": 60.0,
-        "change": 0.5,
-        "pct": 0.83,
-        "volume": 9679
-      },
-      "FML": {
-        "price": 50.03,
-        "ldcp": 50.31,
-        "change": -0.28,
-        "pct": -0.56,
-        "volume": 9340
-      },
-      "OML": {
-        "price": 73.41,
-        "ldcp": 74.34,
-        "change": -0.93,
-        "pct": -1.25,
-        "volume": 9283
-      },
-      "LPGL": {
-        "price": 89.51,
-        "ldcp": 89.63,
-        "change": -0.12,
-        "pct": -0.13,
-        "volume": 9078
-      },
-      "PSEL": {
-        "price": 1078.25,
-        "ldcp": 980.23,
-        "change": 98.02,
-        "pct": 10.0,
-        "volume": 9068
-      },
-      "ATBA": {
-        "price": 171.87,
-        "ldcp": 173.86,
-        "change": -1.99,
-        "pct": -1.14,
-        "volume": 8976
-      },
-      "ASHT": {
-        "price": 34.82,
-        "ldcp": 32.79,
-        "change": 2.03,
-        "pct": 6.19,
-        "volume": 8974
-      },
-      "REDCO": {
-        "price": 29.93,
-        "ldcp": 28.5,
-        "change": 1.43,
-        "pct": 5.02,
-        "volume": 8904
-      },
-      "AATM": {
-        "price": 62.97,
-        "ldcp": 58.98,
-        "change": 3.99,
-        "pct": 6.77,
-        "volume": 8810
-      },
-      "FHAM": {
-        "price": 32.1,
-        "ldcp": 32.36,
-        "change": -0.26,
-        "pct": -0.8,
-        "volume": 8603
-      },
-      "JSGBETF": {
-        "price": 39.96,
-        "ldcp": 40.05,
-        "change": -0.09,
-        "pct": -0.22,
-        "volume": 8500
-      },
-      "PAKD": {
-        "price": 122.08,
-        "ldcp": 119.93,
-        "change": 2.15,
-        "pct": 1.79,
-        "volume": 8436
-      },
-      "PASM": {
-        "price": 8.51,
-        "ldcp": 8.79,
-        "change": -0.28,
-        "pct": -3.19,
-        "volume": 8323
-      },
-      "GATI": {
-        "price": 87.34,
-        "ldcp": 87.14,
-        "change": 0.2,
-        "pct": 0.23,
-        "volume": 8133
-      },
-      "RUPL": {
-        "price": 29.53,
-        "ldcp": 30.17,
-        "change": -0.64,
-        "pct": -2.12,
-        "volume": 8060
-      },
-      "TRIPF": {
-        "price": 135.57,
-        "ldcp": 136.54,
-        "change": -0.97,
-        "pct": -0.71,
-        "volume": 7434
-      },
-      "SPL": {
-        "price": 48.5,
-        "ldcp": 49.08,
-        "change": -0.58,
-        "pct": -1.18,
-        "volume": 7242
-      },
-      "GFIL": {
-        "price": 27.26,
-        "ldcp": 28.29,
-        "change": -1.03,
-        "pct": -3.64,
-        "volume": 7227
-      },
-      "PNSC": {
-        "price": 505.25,
-        "ldcp": 502.51,
-        "change": 2.74,
-        "pct": 0.55,
-        "volume": 7208
-      },
-      "DAAG": {
-        "price": 91.86,
-        "ldcp": 93.35,
-        "change": -1.49,
-        "pct": -1.6,
-        "volume": 7185
-      },
-      "THALL": {
-        "price": 551.23,
-        "ldcp": 551.23,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 7169
-      },
-      "DEL": {
-        "price": 18.99,
-        "ldcp": 18.86,
-        "change": 0.13,
-        "pct": 0.69,
-        "volume": 7143
-      },
-      "PAKT": {
-        "price": 1355.76,
-        "ldcp": 1363.86,
-        "change": -8.1,
-        "pct": -0.59,
-        "volume": 6544
-      },
-      "ACIETF": {
-        "price": 16.8,
-        "ldcp": 16.88,
-        "change": -0.08,
-        "pct": -0.47,
-        "volume": 6500
-      },
-      "NITGETF": {
-        "price": 33.25,
-        "ldcp": 33.25,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 6500
-      },
-      "PRET": {
-        "price": 536.25,
-        "ldcp": 557.62,
-        "change": -21.37,
-        "pct": -3.83,
-        "volume": 6340
-      },
-      "MACTER": {
-        "price": 251.04,
-        "ldcp": 255.66,
-        "change": -4.62,
-        "pct": -1.81,
-        "volume": 5901
-      },
-      "IML": {
-        "price": 22.22,
-        "ldcp": 22.27,
-        "change": -0.05,
-        "pct": -0.22,
-        "volume": 5715
-      },
-      "TSMF": {
-        "price": 16.4,
-        "ldcp": 16.0,
-        "change": 0.4,
-        "pct": 2.5,
-        "volume": 5713
-      },
-      "ABOT": {
-        "price": 921.51,
-        "ldcp": 926.49,
-        "change": -4.98,
-        "pct": -0.54,
-        "volume": 5675
-      },
-      "GOC": {
-        "price": 189.23,
-        "ldcp": 180.0,
-        "change": 9.23,
-        "pct": 5.13,
-        "volume": 5611
-      },
-      "ARPAK": {
-        "price": 126.89,
-        "ldcp": 125.4,
-        "change": 1.49,
-        "pct": 1.19,
-        "volume": 5583
-      },
-      "SZTM": {
-        "price": 88.57,
-        "ldcp": 90.14,
-        "change": -1.57,
-        "pct": -1.74,
-        "volume": 5367
-      },
-      "TPLI": {
-        "price": 53.93,
-        "ldcp": 55.05,
-        "change": -1.12,
-        "pct": -2.03,
-        "volume": 5168
-      },
-      "BWHL": {
-        "price": 229.37,
-        "ldcp": 227.33,
-        "change": 2.04,
-        "pct": 0.9,
-        "volume": 4957
-      },
-      "FECM": {
-        "price": 25.8,
-        "ldcp": 25.54,
-        "change": 0.26,
-        "pct": 1.02,
-        "volume": 4777
-      },
-      "MUGHALC": {
-        "price": 62.0,
-        "ldcp": 62.0,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 4601
-      },
-      "MIRKS": {
-        "price": 32.19,
-        "ldcp": 32.5,
-        "change": -0.31,
-        "pct": -0.95,
-        "volume": 4562
-      },
-      "PRWM": {
-        "price": 64.5,
-        "ldcp": 64.59,
-        "change": -0.09,
-        "pct": -0.14,
-        "volume": 4520
-      },
-      "JDMT": {
-        "price": 126.02,
-        "ldcp": 123.11,
-        "change": 2.91,
-        "pct": 2.36,
-        "volume": 4477
-      },
-      "BNWM": {
-        "price": 63.57,
-        "ldcp": 64.11,
-        "change": -0.54,
-        "pct": -0.84,
-        "volume": 4458
-      },
-      "SNAI": {
-        "price": 35.98,
-        "ldcp": 36.53,
-        "change": -0.55,
-        "pct": -1.51,
-        "volume": 4357
-      },
-      "SITC": {
-        "price": 750.0,
-        "ldcp": 759.89,
-        "change": -9.89,
-        "pct": -1.3,
-        "volume": 4242
-      },
-      "GUSM": {
-        "price": 9.58,
-        "ldcp": 9.67,
-        "change": -0.09,
-        "pct": -0.93,
-        "volume": 4235
-      },
-      "HUSI": {
-        "price": 53.03,
-        "ldcp": 52.94,
-        "change": 0.09,
-        "pct": 0.17,
-        "volume": 4165
-      },
-      "GADT": {
-        "price": 310.98,
-        "ldcp": 312.19,
-        "change": -1.21,
-        "pct": -0.39,
-        "volume": 4075
-      },
-      "KSTM": {
-        "price": 12.84,
-        "ldcp": 12.85,
-        "change": -0.01,
-        "pct": -0.08,
-        "volume": 4055
-      },
-      "MCBIM": {
-        "price": 166.96,
-        "ldcp": 167.64,
-        "change": -0.68,
-        "pct": -0.41,
-        "volume": 4039
-      },
-      "PKGP": {
-        "price": 38.2,
-        "ldcp": 38.0,
-        "change": 0.2,
-        "pct": 0.53,
-        "volume": 4031
-      },
-      "PCAL": {
-        "price": 160.05,
-        "ldcp": 161.35,
-        "change": -1.3,
-        "pct": -0.81,
-        "volume": 3904
-      },
-      "UBDL": {
-        "price": 26.72,
-        "ldcp": 27.74,
-        "change": -1.02,
-        "pct": -3.68,
-        "volume": 3844
-      },
-      "SERT": {
-        "price": 42.7,
-        "ldcp": 42.46,
-        "change": 0.24,
-        "pct": 0.57,
-        "volume": 3804
-      },
-      "NONS": {
-        "price": 83.06,
-        "ldcp": 82.32,
-        "change": 0.74,
-        "pct": 0.9,
-        "volume": 3527
-      },
-      "JUBS": {
-        "price": 43.18,
-        "ldcp": 42.76,
-        "change": 0.42,
-        "pct": 0.98,
-        "volume": 3501
-      },
-      "HBLTETF": {
-        "price": 105.8,
-        "ldcp": 105.9,
-        "change": -0.1,
-        "pct": -0.09,
-        "volume": 3500
-      },
-      "FIL": {
-        "price": 330.17,
-        "ldcp": 316.9,
-        "change": 13.27,
-        "pct": 4.19,
-        "volume": 3369
-      },
-      "ELCM": {
-        "price": 209.19,
-        "ldcp": 190.17,
-        "change": 19.02,
-        "pct": 10.0,
-        "volume": 3257
-      },
-      "SEL": {
-        "price": 26.95,
-        "ldcp": 26.47,
-        "change": 0.48,
-        "pct": 1.81,
-        "volume": 3219
-      },
-      "SSOM": {
-        "price": 427.72,
-        "ldcp": 434.5,
-        "change": -6.78,
-        "pct": -1.56,
-        "volume": 3193
-      },
-      "QUET": {
-        "price": 15.39,
-        "ldcp": 15.19,
-        "change": 0.2,
-        "pct": 1.32,
-        "volume": 2906
-      },
-      "SUTM": {
-        "price": 110.51,
-        "ldcp": 110.1,
-        "change": 0.41,
-        "pct": 0.37,
-        "volume": 2738
-      },
-      "UDPL": {
-        "price": 118.75,
-        "ldcp": 116.37,
-        "change": 2.38,
-        "pct": 2.05,
-        "volume": 2738
-      },
-      "ICCI": {
-        "price": 13.51,
-        "ldcp": 13.73,
-        "change": -0.22,
-        "pct": -1.6,
-        "volume": 2649
-      },
-      "HAEL": {
-        "price": 24.2,
-        "ldcp": 24.28,
-        "change": -0.08,
-        "pct": -0.33,
-        "volume": 2498
-      },
-      "JSRR": {
-        "price": 10.61,
-        "ldcp": 10.52,
-        "change": 0.09,
-        "pct": 0.86,
-        "volume": 2427
-      },
-      "IDYM": {
-        "price": 130.88,
-        "ldcp": 132.09,
-        "change": -1.21,
-        "pct": -0.92,
-        "volume": 2260
-      },
-      "BAPL": {
-        "price": 36.84,
-        "ldcp": 37.3,
-        "change": -0.46,
-        "pct": -1.23,
-        "volume": 2110
+        "price": 38.49,
+        "ldcp": 40.5,
+        "change": -2.01,
+        "pct": -4.96,
+        "volume": 29770
+      },
+      "LCI": {
+        "price": 220.45,
+        "ldcp": 223.52,
+        "change": -3.07,
+        "pct": -1.37,
+        "volume": 29356
+      },
+      "TOWL": {
+        "price": 162.28,
+        "ldcp": 180.31,
+        "change": -18.03,
+        "pct": -10.0,
+        "volume": 29184
+      },
+      "WAFI": {
+        "price": 163.0,
+        "ldcp": 163.94,
+        "change": -0.94,
+        "pct": -0.57,
+        "volume": 28937
       },
       "HABSM": {
-        "price": 79.93,
-        "ldcp": 79.22,
-        "change": 0.71,
-        "pct": 0.9,
-        "volume": 1928
-      },
-      "ASLCPS": {
-        "price": 92.55,
-        "ldcp": 89.73,
-        "change": 2.82,
-        "pct": 3.14,
-        "volume": 1921
-      },
-      "HGFA": {
-        "price": 14.31,
-        "ldcp": 14.44,
-        "change": -0.13,
-        "pct": -0.9,
-        "volume": 1860
-      },
-      "EXIDE": {
-        "price": 455.46,
-        "ldcp": 458.71,
-        "change": -3.25,
-        "pct": -0.71,
-        "volume": 1785
-      },
-      "PKGS": {
-        "price": 745.07,
-        "ldcp": 751.71,
-        "change": -6.64,
-        "pct": -0.88,
-        "volume": 1741
-      },
-      "SUHJ": {
-        "price": 181.39,
-        "ldcp": 171.76,
-        "change": 9.63,
-        "pct": 5.61,
-        "volume": 1697
-      },
-      "ANTM": {
-        "price": 79.99,
-        "ldcp": 79.48,
-        "change": 0.51,
-        "pct": 0.64,
-        "volume": 1638
-      },
-      "CRTM": {
-        "price": 68.01,
-        "ldcp": 68.0,
-        "change": 0.01,
-        "pct": 0.02,
-        "volume": 1565
-      },
-      "HINO": {
-        "price": 330.99,
-        "ldcp": 332.29,
-        "change": -1.3,
-        "pct": -0.39,
-        "volume": 1564
-      },
-      "BRRG": {
-        "price": 44.01,
-        "ldcp": 43.94,
+        "price": 80.0,
+        "ldcp": 79.93,
         "change": 0.07,
-        "pct": 0.16,
-        "volume": 1550
+        "pct": 0.09,
+        "volume": 28707
       },
-      "DADX": {
-        "price": 108.08,
-        "ldcp": 106.54,
-        "change": 1.54,
-        "pct": 1.44,
-        "volume": 1546
+      "RUPL": {
+        "price": 28.0,
+        "ldcp": 29.53,
+        "change": -1.53,
+        "pct": -5.18,
+        "volume": 28574
       },
-      "KPUS": {
-        "price": 809.76,
-        "ldcp": 813.66,
-        "change": -3.9,
-        "pct": -0.48,
-        "volume": 1449
+      "MERIT": {
+        "price": 9.89,
+        "ldcp": 10.04,
+        "change": -0.15,
+        "pct": -1.49,
+        "volume": 28518
       },
-      "KHTC": {
-        "price": 293.22,
-        "ldcp": 302.31,
-        "change": -9.09,
-        "pct": -3.01,
-        "volume": 1431
+      "SAIF": {
+        "price": 43.19,
+        "ldcp": 44.63,
+        "change": -1.44,
+        "pct": -3.23,
+        "volume": 27834
       },
-      "TPLL": {
-        "price": 20.55,
-        "ldcp": 20.15,
-        "change": 0.4,
-        "pct": 1.99,
-        "volume": 1404
+      "SURC": {
+        "price": 141.0,
+        "ldcp": 144.7,
+        "change": -3.7,
+        "pct": -2.56,
+        "volume": 27753
       },
-      "OTSU": {
-        "price": 360.6,
-        "ldcp": 366.55,
-        "change": -5.95,
-        "pct": -1.62,
-        "volume": 1389
+      "HTL": {
+        "price": 37.79,
+        "ldcp": 37.52,
+        "change": 0.27,
+        "pct": 0.72,
+        "volume": 27692
       },
-      "ALNRS": {
-        "price": 123.17,
-        "ldcp": 124.07,
-        "change": -0.9,
-        "pct": -0.73,
-        "volume": 1353
+      "INDU": {
+        "price": 1850.0,
+        "ldcp": 1871.59,
+        "change": -21.59,
+        "pct": -1.15,
+        "volume": 27438
       },
-      "POWERPS": {
-        "price": 28.27,
-        "ldcp": 25.7,
-        "change": 2.57,
-        "pct": 10.0,
-        "volume": 1247
+      "DWSM": {
+        "price": 5.8,
+        "ldcp": 6.01,
+        "change": -0.21,
+        "pct": -3.49,
+        "volume": 26643
       },
-      "AMBL": {
-        "price": 19.99,
-        "ldcp": 19.15,
-        "change": 0.84,
-        "pct": 4.39,
-        "volume": 1241
+      "SPAC1": {
+        "price": 15.73,
+        "ldcp": 15.26,
+        "change": 0.47,
+        "pct": 3.08,
+        "volume": 23823
       },
-      "AKGL": {
-        "price": 57.9,
-        "ldcp": 58.46,
-        "change": -0.56,
-        "pct": -0.96,
-        "volume": 1170
+      "PKGP": {
+        "price": 37.21,
+        "ldcp": 38.2,
+        "change": -0.99,
+        "pct": -2.59,
+        "volume": 23758
       },
-      "FSWL": {
-        "price": 153.38,
-        "ldcp": 155.0,
-        "change": -1.62,
-        "pct": -1.04,
-        "volume": 1161
+      "BFMOD": {
+        "price": 23.09,
+        "ldcp": 23.06,
+        "change": 0.03,
+        "pct": 0.13,
+        "volume": 22494
       },
-      "CCM": {
-        "price": 42.0,
-        "ldcp": 42.18,
-        "change": -0.18,
-        "pct": -0.43,
-        "volume": 1045
+      "SERT": {
+        "price": 41.88,
+        "ldcp": 42.7,
+        "change": -0.82,
+        "pct": -1.92,
+        "volume": 22437
       },
-      "TICL": {
-        "price": 990.96,
-        "ldcp": 1029.99,
-        "change": -39.03,
-        "pct": -3.79,
-        "volume": 976
+      "STYLERS": {
+        "price": 50.0,
+        "ldcp": 50.46,
+        "change": -0.46,
+        "pct": -0.91,
+        "volume": 21739
       },
-      "STJT": {
-        "price": 166.14,
-        "ldcp": 161.34,
-        "change": 4.8,
-        "pct": 2.97,
-        "volume": 959
+      "JLICL": {
+        "price": 108.51,
+        "ldcp": 110.36,
+        "change": -1.85,
+        "pct": -1.68,
+        "volume": 21517
+      },
+      "ZAHID": {
+        "price": 66.4,
+        "ldcp": 66.74,
+        "change": -0.34,
+        "pct": -0.51,
+        "volume": 21243
+      },
+      "KOHP": {
+        "price": 20.75,
+        "ldcp": 21.03,
+        "change": -0.28,
+        "pct": -1.33,
+        "volume": 21189
+      },
+      "IBLHL": {
+        "price": 44.1,
+        "ldcp": 44.72,
+        "change": -0.62,
+        "pct": -1.39,
+        "volume": 20707
+      },
+      "PECO": {
+        "price": 672.95,
+        "ldcp": 725.39,
+        "change": -52.44,
+        "pct": -7.23,
+        "volume": 19443
+      },
+      "AGIL": {
+        "price": 153.0,
+        "ldcp": 154.28,
+        "change": -1.28,
+        "pct": -0.83,
+        "volume": 19338
+      },
+      "FHAM": {
+        "price": 30.95,
+        "ldcp": 32.1,
+        "change": -1.15,
+        "pct": -3.58,
+        "volume": 18608
+      },
+      "GFIL": {
+        "price": 26.5,
+        "ldcp": 27.26,
+        "change": -0.76,
+        "pct": -2.79,
+        "volume": 18290
+      },
+      "MEHT": {
+        "price": 134.0,
+        "ldcp": 135.86,
+        "change": -1.86,
+        "pct": -1.37,
+        "volume": 18251
+      },
+      "FML": {
+        "price": 48.0,
+        "ldcp": 50.03,
+        "change": -2.03,
+        "pct": -4.06,
+        "volume": 17920
+      },
+      "RUBY": {
+        "price": 23.9,
+        "ldcp": 23.44,
+        "change": 0.46,
+        "pct": 1.96,
+        "volume": 17585
+      },
+      "FTSM": {
+        "price": 35.51,
+        "ldcp": 38.87,
+        "change": -3.36,
+        "pct": -8.64,
+        "volume": 17357
+      },
+      "JATM": {
+        "price": 37.5,
+        "ldcp": 38.64,
+        "change": -1.14,
+        "pct": -2.95,
+        "volume": 17111
+      },
+      "SHCM": {
+        "price": 60.0,
+        "ldcp": 55.07,
+        "change": 4.93,
+        "pct": 8.95,
+        "volume": 16832
+      },
+      "DLL": {
+        "price": 47.5,
+        "ldcp": 47.18,
+        "change": 0.32,
+        "pct": 0.68,
+        "volume": 16815
+      },
+      "TSMF": {
+        "price": 15.11,
+        "ldcp": 16.4,
+        "change": -1.29,
+        "pct": -7.87,
+        "volume": 16723
+      },
+      "SMCPL": {
+        "price": 40.5,
+        "ldcp": 40.99,
+        "change": -0.49,
+        "pct": -1.19,
+        "volume": 16707
+      },
+      "PAKD": {
+        "price": 122.0,
+        "ldcp": 122.08,
+        "change": -0.08,
+        "pct": -0.07,
+        "volume": 16632
+      },
+      "QUICE": {
+        "price": 27.57,
+        "ldcp": 28.34,
+        "change": -0.77,
+        "pct": -2.72,
+        "volume": 16532
+      },
+      "HMB": {
+        "price": 99.89,
+        "ldcp": 100.0,
+        "change": -0.11,
+        "pct": -0.11,
+        "volume": 16310
       },
       "ARPL": {
-        "price": 426.03,
-        "ldcp": 430.0,
-        "change": -3.97,
-        "pct": -0.92,
-        "volume": 909
+        "price": 412.0,
+        "ldcp": 426.03,
+        "change": -14.03,
+        "pct": -3.29,
+        "volume": 16231
+      },
+      "MIRKS": {
+        "price": 31.99,
+        "ldcp": 32.19,
+        "change": -0.2,
+        "pct": -0.62,
+        "volume": 15725
+      },
+      "ICL": {
+        "price": 131.98,
+        "ldcp": 132.61,
+        "change": -0.63,
+        "pct": -0.47,
+        "volume": 15714
+      },
+      "PIM": {
+        "price": 68.49,
+        "ldcp": 62.26,
+        "change": 6.23,
+        "pct": 10.01,
+        "volume": 15605
+      },
+      "PAKOXY": {
+        "price": 335.5,
+        "ldcp": 334.51,
+        "change": 0.99,
+        "pct": 0.3,
+        "volume": 15280
+      },
+      "HBLTETF": {
+        "price": 105.99,
+        "ldcp": 105.8,
+        "change": 0.19,
+        "pct": 0.18,
+        "volume": 15200
+      },
+      "BWHL": {
+        "price": 225.5,
+        "ldcp": 229.37,
+        "change": -3.87,
+        "pct": -1.69,
+        "volume": 14788
+      },
+      "BWCL": {
+        "price": 451.99,
+        "ldcp": 458.15,
+        "change": -6.16,
+        "pct": -1.34,
+        "volume": 14352
+      },
+      "SHFA": {
+        "price": 453.9,
+        "ldcp": 459.95,
+        "change": -6.05,
+        "pct": -1.31,
+        "volume": 14333
+      },
+      "BCL": {
+        "price": 69.0,
+        "ldcp": 69.93,
+        "change": -0.93,
+        "pct": -1.33,
+        "volume": 13901
+      },
+      "CLVL": {
+        "price": 37.28,
+        "ldcp": 41.42,
+        "change": -4.14,
+        "pct": -9.99,
+        "volume": 13849
+      },
+      "IGIHL": {
+        "price": 250.0,
+        "ldcp": 252.04,
+        "change": -2.04,
+        "pct": -0.81,
+        "volume": 13835
+      },
+      "HAEL": {
+        "price": 24.1,
+        "ldcp": 24.2,
+        "change": -0.1,
+        "pct": -0.41,
+        "volume": 13465
+      },
+      "SEPL": {
+        "price": 151.9,
+        "ldcp": 152.59,
+        "change": -0.69,
+        "pct": -0.45,
+        "volume": 12632
+      },
+      "JSGBETF": {
+        "price": 39.2,
+        "ldcp": 39.96,
+        "change": -0.76,
+        "pct": -1.9,
+        "volume": 12500
+      },
+      "PSEL": {
+        "price": 1134.0,
+        "ldcp": 1078.25,
+        "change": 55.75,
+        "pct": 5.17,
+        "volume": 12394
+      },
+      "OLPL": {
+        "price": 48.0,
+        "ldcp": 47.21,
+        "change": 0.79,
+        "pct": 1.67,
+        "volume": 12260
+      },
+      "ICIBL": {
+        "price": 16.83,
+        "ldcp": 16.82,
+        "change": 0.01,
+        "pct": 0.06,
+        "volume": 12004
+      },
+      "KPUS": {
+        "price": 831.01,
+        "ldcp": 809.76,
+        "change": 21.25,
+        "pct": 2.62,
+        "volume": 11990
+      },
+      "NEXT": {
+        "price": 15.4,
+        "ldcp": 15.24,
+        "change": 0.16,
+        "pct": 1.05,
+        "volume": 11970
+      },
+      "REDCO": {
+        "price": 30.0,
+        "ldcp": 29.93,
+        "change": 0.07,
+        "pct": 0.23,
+        "volume": 11624
+      },
+      "AKDSL": {
+        "price": 35.99,
+        "ldcp": 36.35,
+        "change": -0.36,
+        "pct": -0.99,
+        "volume": 11452
+      },
+      "STCL": {
+        "price": 9.65,
+        "ldcp": 9.71,
+        "change": -0.06,
+        "pct": -0.62,
+        "volume": 11317
+      },
+      "TSPL": {
+        "price": 14.75,
+        "ldcp": 15.22,
+        "change": -0.47,
+        "pct": -3.09,
+        "volume": 11221
+      },
+      "HALEON": {
+        "price": 696.98,
+        "ldcp": 698.96,
+        "change": -1.98,
+        "pct": -0.28,
+        "volume": 11181
+      },
+      "PGLC": {
+        "price": 16.61,
+        "ldcp": 17.3,
+        "change": -0.69,
+        "pct": -3.99,
+        "volume": 10977
+      },
+      "PABC": {
+        "price": 94.7,
+        "ldcp": 96.54,
+        "change": -1.84,
+        "pct": -1.91,
+        "volume": 10880
+      },
+      "SARC": {
+        "price": 92.0,
+        "ldcp": 96.65,
+        "change": -4.65,
+        "pct": -4.81,
+        "volume": 10714
       },
       "GVGL": {
-        "price": 54.26,
-        "ldcp": 54.87,
-        "change": -0.61,
-        "pct": -1.11,
-        "volume": 737
+        "price": 54.5,
+        "ldcp": 54.26,
+        "change": 0.24,
+        "pct": 0.44,
+        "volume": 10511
       },
-      "ELSM": {
-        "price": 149.87,
-        "ldcp": 147.51,
-        "change": 2.36,
-        "pct": 1.6,
-        "volume": 735
+      "CENI": {
+        "price": 54.0,
+        "ldcp": 54.65,
+        "change": -0.65,
+        "pct": -1.19,
+        "volume": 10181
+      },
+      "GSPM": {
+        "price": 6.38,
+        "ldcp": 6.41,
+        "change": -0.03,
+        "pct": -0.47,
+        "volume": 10138
+      },
+      "MCBIM": {
+        "price": 161.7,
+        "ldcp": 166.96,
+        "change": -5.26,
+        "pct": -3.15,
+        "volume": 10126
+      },
+      "OML": {
+        "price": 68.0,
+        "ldcp": 73.41,
+        "change": -5.41,
+        "pct": -7.37,
+        "volume": 9866
+      },
+      "PIOC": {
+        "price": 249.8,
+        "ldcp": 252.78,
+        "change": -2.98,
+        "pct": -1.18,
+        "volume": 9853
+      },
+      "THALL": {
+        "price": 555.0,
+        "ldcp": 551.23,
+        "change": 3.77,
+        "pct": 0.68,
+        "volume": 9848
+      },
+      "CHAS": {
+        "price": 78.28,
+        "ldcp": 81.87,
+        "change": -3.59,
+        "pct": -4.38,
+        "volume": 9720
+      },
+      "BPL": {
+        "price": 52.98,
+        "ldcp": 52.55,
+        "change": 0.43,
+        "pct": 0.82,
+        "volume": 9686
+      },
+      "FTMM": {
+        "price": 19.11,
+        "ldcp": 19.9,
+        "change": -0.79,
+        "pct": -3.97,
+        "volume": 9434
+      },
+      "IDRT": {
+        "price": 34.74,
+        "ldcp": 35.09,
+        "change": -0.35,
+        "pct": -1.0,
+        "volume": 9284
+      },
+      "DEL": {
+        "price": 18.49,
+        "ldcp": 18.99,
+        "change": -0.5,
+        "pct": -2.63,
+        "volume": 8948
+      },
+      "PAKT": {
+        "price": 1320.0,
+        "ldcp": 1355.76,
+        "change": -35.76,
+        "pct": -2.64,
+        "volume": 8206
+      },
+      "ANSM": {
+        "price": 24.5,
+        "ldcp": 25.03,
+        "change": -0.53,
+        "pct": -2.12,
+        "volume": 8159
+      },
+      "AGL": {
+        "price": 42.39,
+        "ldcp": 43.05,
+        "change": -0.66,
+        "pct": -1.53,
+        "volume": 7748
+      },
+      "PASM": {
+        "price": 7.85,
+        "ldcp": 8.51,
+        "change": -0.66,
+        "pct": -7.76,
+        "volume": 7628
+      },
+      "LPGL": {
+        "price": 89.48,
+        "ldcp": 89.51,
+        "change": -0.03,
+        "pct": -0.03,
+        "volume": 7502
+      },
+      "PINL": {
+        "price": 11.19,
+        "ldcp": 11.03,
+        "change": 0.16,
+        "pct": 1.45,
+        "volume": 7302
+      },
+      "BUXL": {
+        "price": 927.32,
+        "ldcp": 1030.36,
+        "change": -103.04,
+        "pct": -10.0,
+        "volume": 6998
+      },
+      "GADT": {
+        "price": 300.03,
+        "ldcp": 310.98,
+        "change": -10.95,
+        "pct": -3.52,
+        "volume": 6809
+      },
+      "COLG": {
+        "price": 1178.0,
+        "ldcp": 1189.22,
+        "change": -11.22,
+        "pct": -0.94,
+        "volume": 6707
+      },
+      "GRYL": {
+        "price": 18.8,
+        "ldcp": 19.23,
+        "change": -0.43,
+        "pct": -2.24,
+        "volume": 6689
+      },
+      "SINDM": {
+        "price": 29.06,
+        "ldcp": 29.4,
+        "change": -0.34,
+        "pct": -1.16,
+        "volume": 6585
+      },
+      "PRWM": {
+        "price": 63.51,
+        "ldcp": 64.5,
+        "change": -0.99,
+        "pct": -1.53,
+        "volume": 6500
+      },
+      "JDMT": {
+        "price": 126.0,
+        "ldcp": 126.02,
+        "change": -0.02,
+        "pct": -0.02,
+        "volume": 6462
+      },
+      "QUET": {
+        "price": 15.02,
+        "ldcp": 15.39,
+        "change": -0.37,
+        "pct": -2.4,
+        "volume": 6241
+      },
+      "MQTM": {
+        "price": 27.2,
+        "ldcp": 27.53,
+        "change": -0.33,
+        "pct": -1.2,
+        "volume": 5616
+      },
+      "ARMG": {
+        "price": 54.0,
+        "ldcp": 56.95,
+        "change": -2.95,
+        "pct": -5.18,
+        "volume": 5559
+      },
+      "ALIFE": {
+        "price": 31.57,
+        "ldcp": 31.47,
+        "change": 0.1,
+        "pct": 0.32,
+        "volume": 5524
+      },
+      "EFUG": {
+        "price": 132.98,
+        "ldcp": 132.61,
+        "change": 0.37,
+        "pct": 0.28,
+        "volume": 5517
+      },
+      "KSBP": {
+        "price": 224.0,
+        "ldcp": 225.31,
+        "change": -1.31,
+        "pct": -0.58,
+        "volume": 5186
+      },
+      "HINOON": {
+        "price": 917.0,
+        "ldcp": 913.82,
+        "change": 3.18,
+        "pct": 0.35,
+        "volume": 5170
+      },
+      "MACTER": {
+        "price": 252.25,
+        "ldcp": 251.04,
+        "change": 1.21,
+        "pct": 0.48,
+        "volume": 5142
+      },
+      "GAMON": {
+        "price": 21.01,
+        "ldcp": 22.17,
+        "change": -1.16,
+        "pct": -5.23,
+        "volume": 5017
+      },
+      "STML": {
+        "price": 50.99,
+        "ldcp": 52.75,
+        "change": -1.76,
+        "pct": -3.34,
+        "volume": 4985
+      },
+      "ANTM": {
+        "price": 75.99,
+        "ldcp": 79.99,
+        "change": -4.0,
+        "pct": -5.0,
+        "volume": 4975
+      },
+      "SSML": {
+        "price": 19.8,
+        "ldcp": 20.75,
+        "change": -0.95,
+        "pct": -4.58,
+        "volume": 4967
+      },
+      "JGICL": {
+        "price": 76.76,
+        "ldcp": 76.12,
+        "change": 0.64,
+        "pct": 0.84,
+        "volume": 4934
+      },
+      "ASHT": {
+        "price": 35.89,
+        "ldcp": 34.82,
+        "change": 1.07,
+        "pct": 3.07,
+        "volume": 4898
+      },
+      "MRNS": {
+        "price": 59.49,
+        "ldcp": 58.7,
+        "change": 0.79,
+        "pct": 1.35,
+        "volume": 4814
+      },
+      "AATM": {
+        "price": 58.0,
+        "ldcp": 62.97,
+        "change": -4.97,
+        "pct": -7.89,
+        "volume": 4793
+      },
+      "ASTM": {
+        "price": 91.23,
+        "ldcp": 101.37,
+        "change": -10.14,
+        "pct": -10.0,
+        "volume": 4761
+      },
+      "GATI": {
+        "price": 86.02,
+        "ldcp": 87.34,
+        "change": -1.32,
+        "pct": -1.51,
+        "volume": 4662
+      },
+      "NONS": {
+        "price": 81.1,
+        "ldcp": 83.06,
+        "change": -1.96,
+        "pct": -2.36,
+        "volume": 4376
+      },
+      "JSIL": {
+        "price": 40.8,
+        "ldcp": 40.0,
+        "change": 0.8,
+        "pct": 2.0,
+        "volume": 4198
+      },
+      "AKGL": {
+        "price": 54.9,
+        "ldcp": 57.9,
+        "change": -3.0,
+        "pct": -5.18,
+        "volume": 4190
+      },
+      "SZTM": {
+        "price": 87.69,
+        "ldcp": 88.57,
+        "change": -0.88,
+        "pct": -0.99,
+        "volume": 4005
+      },
+      "TRIPF": {
+        "price": 135.3,
+        "ldcp": 135.57,
+        "change": -0.27,
+        "pct": -0.2,
+        "volume": 3905
+      },
+      "LIVEN": {
+        "price": 32.34,
+        "ldcp": 32.38,
+        "change": -0.04,
+        "pct": -0.12,
+        "volume": 3901
+      },
+      "POWERPS": {
+        "price": 30.25,
+        "ldcp": 28.27,
+        "change": 1.98,
+        "pct": 7.0,
+        "volume": 3419
+      },
+      "BOK": {
+        "price": 28.85,
+        "ldcp": 28.63,
+        "change": 0.22,
+        "pct": 0.77,
+        "volume": 3305
+      },
+      "TPLI": {
+        "price": 53.0,
+        "ldcp": 53.93,
+        "change": -0.93,
+        "pct": -1.72,
+        "volume": 3203
+      },
+      "DYNO": {
+        "price": 328.99,
+        "ldcp": 334.73,
+        "change": -5.74,
+        "pct": -1.71,
+        "volume": 3002
+      },
+      "SPL": {
+        "price": 48.45,
+        "ldcp": 48.5,
+        "change": -0.05,
+        "pct": -0.1,
+        "volume": 2990
+      },
+      "ZTL": {
+        "price": 16.2,
+        "ldcp": 16.16,
+        "change": 0.04,
+        "pct": 0.25,
+        "volume": 2900
+      },
+      "ELCM": {
+        "price": 230.11,
+        "ldcp": 209.19,
+        "change": 20.92,
+        "pct": 10.0,
+        "volume": 2881
+      },
+      "ABOT": {
+        "price": 920.0,
+        "ldcp": 921.51,
+        "change": -1.51,
+        "pct": -0.16,
+        "volume": 2865
+      },
+      "DWTM": {
+        "price": 10.0,
+        "ldcp": 10.54,
+        "change": -0.54,
+        "pct": -5.12,
+        "volume": 2840
+      },
+      "JSML": {
+        "price": 52.26,
+        "ldcp": 53.41,
+        "change": -1.15,
+        "pct": -2.15,
+        "volume": 2835
+      },
+      "ATBA": {
+        "price": 171.98,
+        "ldcp": 171.87,
+        "change": 0.11,
+        "pct": 0.06,
+        "volume": 2810
+      },
+      "DADX": {
+        "price": 108.0,
+        "ldcp": 108.08,
+        "change": -0.08,
+        "pct": -0.07,
+        "volume": 2724
+      },
+      "DINT": {
+        "price": 54.43,
+        "ldcp": 56.0,
+        "change": -1.57,
+        "pct": -2.8,
+        "volume": 2553
+      },
+      "UDPL": {
+        "price": 118.88,
+        "ldcp": 118.75,
+        "change": 0.13,
+        "pct": 0.11,
+        "volume": 2172
+      },
+      "EFUL": {
+        "price": 155.0,
+        "ldcp": 159.72,
+        "change": -4.72,
+        "pct": -2.95,
+        "volume": 2138
+      },
+      "JSRR": {
+        "price": 10.51,
+        "ldcp": 10.61,
+        "change": -0.1,
+        "pct": -0.94,
+        "volume": 2110
+      },
+      "ATLH": {
+        "price": 1570.0,
+        "ldcp": 1592.45,
+        "change": -22.45,
+        "pct": -1.41,
+        "volume": 2104
+      },
+      "HUSI": {
+        "price": 53.0,
+        "ldcp": 53.03,
+        "change": -0.03,
+        "pct": -0.06,
+        "volume": 2045
+      },
+      "HINO": {
+        "price": 329.99,
+        "ldcp": 330.99,
+        "change": -1.0,
+        "pct": -0.3,
+        "volume": 2039
+      },
+      "TPLL": {
+        "price": 19.8,
+        "ldcp": 20.55,
+        "change": -0.75,
+        "pct": -3.65,
+        "volume": 2033
+      },
+      "SSOM": {
+        "price": 420.11,
+        "ldcp": 427.72,
+        "change": -7.61,
+        "pct": -1.78,
+        "volume": 1981
+      },
+      "IML": {
+        "price": 22.0,
+        "ldcp": 22.22,
+        "change": -0.22,
+        "pct": -0.99,
+        "volume": 1977
+      },
+      "EXIDE": {
+        "price": 445.0,
+        "ldcp": 455.46,
+        "change": -10.46,
+        "pct": -2.3,
+        "volume": 1937
+      },
+      "PNSC": {
+        "price": 509.89,
+        "ldcp": 505.25,
+        "change": 4.64,
+        "pct": 0.92,
+        "volume": 1776
+      },
+      "PCAL": {
+        "price": 159.5,
+        "ldcp": 160.05,
+        "change": -0.55,
+        "pct": -0.34,
+        "volume": 1717
+      },
+      "SIBL": {
+        "price": 7.4,
+        "ldcp": 7.12,
+        "change": 0.28,
+        "pct": 3.93,
+        "volume": 1710
+      },
+      "HPL": {
+        "price": 3901.1,
+        "ldcp": 3961.02,
+        "change": -59.92,
+        "pct": -1.51,
+        "volume": 1671
+      },
+      "MFFL": {
+        "price": 167.0,
+        "ldcp": 165.32,
+        "change": 1.68,
+        "pct": 1.02,
+        "volume": 1561
+      },
+      "FRSM": {
+        "price": 40.0,
+        "ldcp": 41.49,
+        "change": -1.49,
+        "pct": -3.59,
+        "volume": 1528
+      },
+      "UBDL": {
+        "price": 26.12,
+        "ldcp": 26.72,
+        "change": -0.6,
+        "pct": -2.25,
+        "volume": 1501
+      },
+      "ARPAK": {
+        "price": 127.99,
+        "ldcp": 126.89,
+        "change": 1.1,
+        "pct": 0.87,
+        "volume": 1448
+      },
+      "SUTM": {
+        "price": 110.0,
+        "ldcp": 110.51,
+        "change": -0.51,
+        "pct": -0.46,
+        "volume": 1288
+      },
+      "SUHJ": {
+        "price": 196.98,
+        "ldcp": 181.39,
+        "change": 15.59,
+        "pct": 8.6,
+        "volume": 1261
+      },
+      "FIL": {
+        "price": 301.0,
+        "ldcp": 330.17,
+        "change": -29.17,
+        "pct": -8.83,
+        "volume": 1218
+      },
+      "CRTM": {
+        "price": 67.8,
+        "ldcp": 68.01,
+        "change": -0.21,
+        "pct": -0.31,
+        "volume": 1149
+      },
+      "ASLPS": {
+        "price": 26.85,
+        "ldcp": 25.42,
+        "change": 1.43,
+        "pct": 5.63,
+        "volume": 1090
+      },
+      "CCM": {
+        "price": 42.6,
+        "ldcp": 42.0,
+        "change": 0.6,
+        "pct": 1.43,
+        "volume": 1039
+      },
+      "IDEAL": {
+        "price": 53.75,
+        "ldcp": 48.99,
+        "change": 4.76,
+        "pct": 9.72,
+        "volume": 989
       },
       "DWAE": {
-        "price": 22.91,
-        "ldcp": 22.82,
-        "change": 0.09,
-        "pct": 0.39,
-        "volume": 717
+        "price": 23.23,
+        "ldcp": 22.91,
+        "change": 0.32,
+        "pct": 1.4,
+        "volume": 979
       },
-      "GEMMEL": {
-        "price": 35.71,
-        "ldcp": 35.0,
+      "WAHN": {
+        "price": 272.4,
+        "ldcp": 268.72,
+        "change": 3.68,
+        "pct": 1.37,
+        "volume": 967
+      },
+      "SITC": {
+        "price": 754.0,
+        "ldcp": 750.0,
+        "change": 4.0,
+        "pct": 0.53,
+        "volume": 965
+      },
+      "ADAMS": {
+        "price": 66.69,
+        "ldcp": 65.98,
         "change": 0.71,
-        "pct": 2.03,
-        "volume": 700
+        "pct": 1.08,
+        "volume": 876
+      },
+      "FEROZ": {
+        "price": 359.78,
+        "ldcp": 359.41,
+        "change": 0.37,
+        "pct": 0.1,
+        "volume": 861
+      },
+      "FECM": {
+        "price": 25.0,
+        "ldcp": 25.8,
+        "change": -0.8,
+        "pct": -3.1,
+        "volume": 854
+      },
+      "SEL": {
+        "price": 26.5,
+        "ldcp": 26.95,
+        "change": -0.45,
+        "pct": -1.67,
+        "volume": 779
+      },
+      "FPRM": {
+        "price": 10.25,
+        "ldcp": 10.5,
+        "change": -0.25,
+        "pct": -2.38,
+        "volume": 763
+      },
+      "GUSM": {
+        "price": 9.13,
+        "ldcp": 9.58,
+        "change": -0.45,
+        "pct": -4.7,
+        "volume": 662
+      },
+      "JUBS": {
+        "price": 45.75,
+        "ldcp": 43.18,
+        "change": 2.57,
+        "pct": 5.95,
+        "volume": 652
+      },
+      "OTSU": {
+        "price": 355.0,
+        "ldcp": 360.6,
+        "change": -5.6,
+        "pct": -1.55,
+        "volume": 622
+      },
+      "ATIL": {
+        "price": 75.5,
+        "ldcp": 74.06,
+        "change": 1.44,
+        "pct": 1.94,
+        "volume": 601
+      },
+      "GOC": {
+        "price": 181.99,
+        "ldcp": 189.23,
+        "change": -7.24,
+        "pct": -3.83,
+        "volume": 580
+      },
+      "AGIC": {
+        "price": 38.62,
+        "ldcp": 39.0,
+        "change": -0.38,
+        "pct": -0.97,
+        "volume": 553
+      },
+      "FSWL": {
+        "price": 145.0,
+        "ldcp": 153.38,
+        "change": -8.38,
+        "pct": -5.46,
+        "volume": 547
+      },
+      "JVDCPS": {
+        "price": 52.2,
+        "ldcp": 57.91,
+        "change": -5.71,
+        "pct": -9.86,
+        "volume": 546
+      },
+      "IDYM": {
+        "price": 129.5,
+        "ldcp": 130.88,
+        "change": -1.38,
+        "pct": -1.05,
+        "volume": 540
+      },
+      "SANSM": {
+        "price": 116.0,
+        "ldcp": 116.87,
+        "change": -0.87,
+        "pct": -0.74,
+        "volume": 496
+      },
+      "SHEZ": {
+        "price": 265.0,
+        "ldcp": 266.99,
+        "change": -1.99,
+        "pct": -0.74,
+        "volume": 491
+      },
+      "TICL": {
+        "price": 1000.0,
+        "ldcp": 990.96,
+        "change": 9.04,
+        "pct": 0.91,
+        "volume": 459
+      },
+      "AMBL": {
+        "price": 19.88,
+        "ldcp": 19.99,
+        "change": -0.11,
+        "pct": -0.55,
+        "volume": 400
       },
       "BATA": {
         "price": 865.0,
-        "ldcp": 870.94,
-        "change": -5.94,
-        "pct": -0.68,
-        "volume": 658
-      },
-      "EWIC": {
-        "price": 60.23,
-        "ldcp": 62.65,
-        "change": -2.42,
-        "pct": -3.86,
-        "volume": 644
-      },
-      "AGIC": {
-        "price": 39.0,
-        "ldcp": 38.92,
-        "change": 0.08,
-        "pct": 0.21,
-        "volume": 638
-      },
-      "OLPM": {
-        "price": 24.64,
-        "ldcp": 25.0,
-        "change": -0.36,
-        "pct": -1.44,
-        "volume": 625
-      },
-      "DMC": {
-        "price": 170.0,
-        "ldcp": 170.62,
-        "change": -0.62,
-        "pct": -0.36,
-        "volume": 618
-      },
-      "ATLH": {
-        "price": 1592.45,
-        "ldcp": 1588.14,
-        "change": 4.31,
-        "pct": 0.27,
-        "volume": 583
-      },
-      "EFUL": {
-        "price": 159.72,
-        "ldcp": 160.0,
-        "change": -0.28,
-        "pct": -0.18,
-        "volume": 473
-      },
-      "WAHN": {
-        "price": 268.72,
-        "ldcp": 270.97,
-        "change": -2.25,
-        "pct": -0.83,
-        "volume": 404
-      },
-      "MFFL": {
-        "price": 165.32,
-        "ldcp": 162.14,
-        "change": 3.18,
-        "pct": 1.96,
-        "volume": 395
-      },
-      "MUREB": {
-        "price": 917.09,
-        "ldcp": 915.01,
-        "change": 2.08,
-        "pct": 0.23,
-        "volume": 377
-      },
-      "SHJS": {
-        "price": 140.76,
-        "ldcp": 138.12,
-        "change": 2.64,
-        "pct": 1.91,
-        "volume": 371
-      },
-      "AHTM": {
-        "price": 101.76,
-        "ldcp": 99.4,
-        "change": 2.36,
-        "pct": 2.37,
-        "volume": 364
-      },
-      "ASIC": {
-        "price": 38.41,
-        "ldcp": 36.58,
-        "change": 1.83,
-        "pct": 5.0,
-        "volume": 360
-      },
-      "SML": {
-        "price": 95.76,
-        "ldcp": 95.76,
+        "ldcp": 865.0,
         "change": 0.0,
         "pct": 0.0,
-        "volume": 275
+        "volume": 380
       },
-      "FZCM": {
-        "price": 259.03,
-        "ldcp": 254.83,
-        "change": 4.2,
-        "pct": 1.65,
-        "volume": 274
-      },
-      "NESTLE": {
-        "price": 7431.67,
-        "ldcp": 7498.75,
-        "change": -67.08,
-        "pct": -0.89,
-        "volume": 261
-      },
-      "FIMM": {
-        "price": 215.99,
-        "ldcp": 219.15,
-        "change": -3.16,
-        "pct": -1.44,
-        "volume": 210
-      },
-      "SURC": {
-        "price": 144.7,
-        "ldcp": 144.7,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 195
-      },
-      "KCL": {
-        "price": 157.75,
-        "ldcp": 144.13,
-        "change": 13.62,
-        "pct": 9.45,
-        "volume": 188
-      },
-      "DWTM": {
-        "price": 10.54,
-        "ldcp": 10.54,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 186
-      },
-      "ZIL": {
-        "price": 330.0,
-        "ldcp": 326.57,
-        "change": 3.43,
-        "pct": 1.05,
-        "volume": 173
-      },
-      "SIEM": {
-        "price": 1650.0,
-        "ldcp": 1633.6,
-        "change": 16.4,
-        "pct": 1.0,
-        "volume": 165
-      },
-      "HPL": {
-        "price": 3961.02,
-        "ldcp": 3978.1,
-        "change": -17.08,
-        "pct": -0.43,
-        "volume": 158
-      },
-      "REWM": {
-        "price": 160.38,
-        "ldcp": 160.38,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 151
-      },
-      "BAFS": {
-        "price": 468.58,
-        "ldcp": 472.97,
-        "change": -4.39,
-        "pct": -0.93,
-        "volume": 146
-      },
-      "FRSM": {
-        "price": 41.49,
-        "ldcp": 41.49,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 137
-      },
-      "SFL": {
-        "price": 1134.89,
-        "ldcp": 1138.33,
-        "change": -3.44,
-        "pct": -0.3,
-        "volume": 132
-      },
-      "POML": {
-        "price": 155.81,
-        "ldcp": 155.81,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 123
-      },
-      "ATIL": {
-        "price": 74.06,
-        "ldcp": 74.06,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 111
+      "BNWM": {
+        "price": 63.99,
+        "ldcp": 63.57,
+        "change": 0.42,
+        "pct": 0.66,
+        "volume": 375
       },
       "NAGC": {
         "price": 77.0,
         "ldcp": 77.0,
         "change": 0.0,
         "pct": 0.0,
-        "volume": 110
+        "volume": 356
       },
-      "KHYT": {
-        "price": 1869.9,
-        "ldcp": 1785.06,
-        "change": 84.84,
-        "pct": 4.75,
-        "volume": 100
+      "UVIC": {
+        "price": 19.22,
+        "ldcp": 19.5,
+        "change": -0.28,
+        "pct": -1.44,
+        "volume": 315
       },
-      "HAFL": {
-        "price": 430.06,
-        "ldcp": 434.67,
-        "change": -4.61,
-        "pct": -1.06,
-        "volume": 95
+      "OLPM": {
+        "price": 24.76,
+        "ldcp": 24.64,
+        "change": 0.12,
+        "pct": 0.49,
+        "volume": 308
       },
-      "SANSM": {
-        "price": 116.87,
-        "ldcp": 116.87,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 80
+      "POML": {
+        "price": 150.0,
+        "ldcp": 155.81,
+        "change": -5.81,
+        "pct": -3.73,
+        "volume": 300
       },
-      "PMRS": {
-        "price": 412.26,
-        "ldcp": 412.26,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 72
+      "ANLNV": {
+        "price": 7.54,
+        "ldcp": 7.59,
+        "change": -0.05,
+        "pct": -0.66,
+        "volume": 300
       },
-      "ADAMS": {
-        "price": 65.98,
-        "ldcp": 65.98,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 65
+      "AHTM": {
+        "price": 99.0,
+        "ldcp": 101.76,
+        "change": -2.76,
+        "pct": -2.71,
+        "volume": 237
+      },
+      "CFL": {
+        "price": 61.77,
+        "ldcp": 65.91,
+        "change": -4.14,
+        "pct": -6.28,
+        "volume": 235
+      },
+      "ASLCPS": {
+        "price": 94.35,
+        "ldcp": 92.55,
+        "change": 1.8,
+        "pct": 1.94,
+        "volume": 221
+      },
+      "PKGS": {
+        "price": 745.0,
+        "ldcp": 745.07,
+        "change": -0.07,
+        "pct": -0.01,
+        "volume": 216
+      },
+      "KCL": {
+        "price": 173.0,
+        "ldcp": 157.75,
+        "change": 15.25,
+        "pct": 9.67,
+        "volume": 214
       },
       "FASM": {
-        "price": 322.5,
+        "price": 315.0,
         "ldcp": 322.5,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 64
+        "change": -7.5,
+        "pct": -2.33,
+        "volume": 212
+      },
+      "KSTM": {
+        "price": 12.21,
+        "ldcp": 12.84,
+        "change": -0.63,
+        "pct": -4.91,
+        "volume": 208
+      },
+      "INKL": {
+        "price": 97.1,
+        "ldcp": 99.47,
+        "change": -2.37,
+        "pct": -2.38,
+        "volume": 190
+      },
+      "SHSML": {
+        "price": 352.01,
+        "ldcp": 369.39,
+        "change": -17.38,
+        "pct": -4.7,
+        "volume": 188
+      },
+      "SFL": {
+        "price": 1125.0,
+        "ldcp": 1134.89,
+        "change": -9.89,
+        "pct": -0.87,
+        "volume": 173
       },
       "UPFL": {
-        "price": 24500.0,
-        "ldcp": 24849.5,
-        "change": -349.5,
-        "pct": -1.41,
-        "volume": 62
+        "price": 24499.0,
+        "ldcp": 24500.0,
+        "change": -1.0,
+        "pct": 0.0,
+        "volume": 173
       },
-      "ASLPS": {
-        "price": 25.42,
-        "ldcp": 25.42,
+      "DMC": {
+        "price": 170.0,
+        "ldcp": 170.0,
         "change": 0.0,
         "pct": 0.0,
-        "volume": 61
+        "volume": 164
       },
-      "TSML": {
-        "price": 500.0,
-        "ldcp": 500.0,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 50
+      "FZCM": {
+        "price": 253.0,
+        "ldcp": 259.03,
+        "change": -6.03,
+        "pct": -2.33,
+        "volume": 157
+      },
+      "NESTLE": {
+        "price": 7405.75,
+        "ldcp": 7431.67,
+        "change": -25.92,
+        "pct": -0.35,
+        "volume": 143
       },
       "JKSM": {
-        "price": 344.07,
+        "price": 320.0,
         "ldcp": 344.07,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 41
+        "change": -24.07,
+        "pct": -7.0,
+        "volume": 134
       },
-      "JSGCL": {
-        "price": 151.31,
-        "ldcp": 151.31,
+      "KHTC": {
+        "price": 296.0,
+        "ldcp": 293.22,
+        "change": 2.78,
+        "pct": 0.95,
+        "volume": 128
+      },
+      "SIEM": {
+        "price": 1619.0,
+        "ldcp": 1650.0,
+        "change": -31.0,
+        "pct": -1.88,
+        "volume": 119
+      },
+      "GCWLPRS": {
+        "price": 119.0,
+        "ldcp": 131.99,
+        "change": -12.99,
+        "pct": -9.84,
+        "volume": 117
+      },
+      "SML": {
+        "price": 97.35,
+        "ldcp": 95.76,
+        "change": 1.59,
+        "pct": 1.66,
+        "volume": 117
+      },
+      "MUREB": {
+        "price": 910.0,
+        "ldcp": 917.09,
+        "change": -7.09,
+        "pct": -0.77,
+        "volume": 115
+      },
+      "ZIL": {
+        "price": 325.0,
+        "ldcp": 330.0,
+        "change": -5.0,
+        "pct": -1.51,
+        "volume": 113
+      },
+      "PRET": {
+        "price": 543.92,
+        "ldcp": 536.25,
+        "change": 7.67,
+        "pct": 1.43,
+        "volume": 109
+      },
+      "ELSM": {
+        "price": 136.55,
+        "ldcp": 149.87,
+        "change": -13.32,
+        "pct": -8.89,
+        "volume": 100
+      },
+      "GEMPAPL": {
+        "price": 11.0,
+        "ldcp": 11.0,
         "change": 0.0,
         "pct": 0.0,
-        "volume": 40
+        "volume": 100
+      },
+      "FRCL": {
+        "price": 88.0,
+        "ldcp": 86.82,
+        "change": 1.18,
+        "pct": 1.36,
+        "volume": 98
+      },
+      "KHYT": {
+        "price": 1900.0,
+        "ldcp": 1869.9,
+        "change": 30.1,
+        "pct": 1.61,
+        "volume": 68
+      },
+      "EWIC": {
+        "price": 63.95,
+        "ldcp": 60.23,
+        "change": 3.72,
+        "pct": 6.18,
+        "volume": 64
+      },
+      "AKDHL": {
+        "price": 145.01,
+        "ldcp": 148.32,
+        "change": -3.31,
+        "pct": -2.23,
+        "volume": 56
+      },
+      "BAFS": {
+        "price": 435.0,
+        "ldcp": 468.58,
+        "change": -33.58,
+        "pct": -7.17,
+        "volume": 37
       },
       "BELA": {
-        "price": 57.25,
+        "price": 56.9,
         "ldcp": 57.25,
+        "change": -0.35,
+        "pct": -0.61,
+        "volume": 31
+      },
+      "TSML": {
+        "price": 503.04,
+        "ldcp": 500.0,
+        "change": 3.04,
+        "pct": 0.61,
+        "volume": 29
+      },
+      "JDWS": {
+        "price": 899.99,
+        "ldcp": 883.83,
+        "change": 16.16,
+        "pct": 1.83,
+        "volume": 28
+      },
+      "SASML": {
+        "price": 333.96,
+        "ldcp": 333.96,
         "change": 0.0,
         "pct": 0.0,
-        "volume": 38
+        "volume": 20
       },
-      "NATM": {
-        "price": 79.85,
-        "ldcp": 79.85,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 24
-      },
-      "RMPL": {
-        "price": 9199.0,
-        "ldcp": 9214.0,
-        "change": -15.0,
-        "pct": -0.16,
+      "AABS": {
+        "price": 819.77,
+        "ldcp": 812.69,
+        "change": 7.08,
+        "pct": 0.87,
         "volume": 20
       },
       "SAPT": {
-        "price": 1479.42,
-        "ldcp": 1440.0,
-        "change": 39.42,
-        "pct": 2.74,
-        "volume": 20
-      },
-      "PIAHCLB": {
-        "price": 17450.0,
-        "ldcp": 16881.98,
-        "change": 568.02,
-        "pct": 3.37,
-        "volume": 19
-      },
-      "ANLNV": {
-        "price": 7.59,
-        "ldcp": 7.59,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 15
-      },
-      "ISIL": {
-        "price": 1822.33,
-        "ldcp": 1822.33,
-        "change": 0.0,
-        "pct": 0.0,
+        "price": 1470.0,
+        "ldcp": 1479.42,
+        "change": -9.42,
+        "pct": -0.64,
         "volume": 13
       },
-      "GCWLPRS": {
-        "price": 131.99,
-        "ldcp": 131.99,
-        "change": 0.0,
-        "pct": 0.0,
+      "HAFL": {
+        "price": 435.0,
+        "ldcp": 430.06,
+        "change": 4.94,
+        "pct": 1.15,
+        "volume": 12
+      },
+      "EPCLPS": {
+        "price": 13.4,
+        "ldcp": 13.21,
+        "change": 0.19,
+        "pct": 1.44,
+        "volume": 11
+      },
+      "GEMPACRA": {
+        "price": 36.99,
+        "ldcp": 37.4,
+        "change": -0.41,
+        "pct": -1.1,
         "volume": 10
       },
-      "NSRM": {
-        "price": 233.75,
-        "ldcp": 233.75,
-        "change": 0.0,
-        "pct": 0.0,
+      "STJT": {
+        "price": 165.99,
+        "ldcp": 166.14,
+        "change": -0.15,
+        "pct": -0.09,
         "volume": 10
       },
-      "AABS": {
-        "price": 812.69,
-        "ldcp": 812.69,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 7
+      "SHJS": {
+        "price": 140.75,
+        "ldcp": 140.76,
+        "change": -0.01,
+        "pct": -0.01,
+        "volume": 10
       },
-      "IBFL": {
-        "price": 263.67,
-        "ldcp": 263.67,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 5
-      },
-      "IDEAL": {
-        "price": 48.99,
-        "ldcp": 48.99,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 5
-      },
-      "JDWS": {
-        "price": 883.83,
-        "ldcp": 883.83,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 5
+      "ASIC": {
+        "price": 35.0,
+        "ldcp": 38.41,
+        "change": -3.41,
+        "pct": -8.88,
+        "volume": 8
       },
       "BTL": {
-        "price": 900.6,
+        "price": 815.2,
         "ldcp": 900.6,
-        "change": 0.0,
-        "pct": 0.0,
+        "change": -85.4,
+        "pct": -9.48,
+        "volume": 7
+      },
+      "RMPL": {
+        "price": 9196.16,
+        "ldcp": 9199.0,
+        "change": -2.84,
+        "pct": -0.03,
+        "volume": 7
+      },
+      "PIAHCLB": {
+        "price": 16402.0,
+        "ldcp": 17450.0,
+        "change": -1048.0,
+        "pct": -6.01,
+        "volume": 6
+      },
+      "NATM": {
+        "price": 72.21,
+        "ldcp": 79.85,
+        "change": -7.64,
+        "pct": -9.57,
+        "volume": 5
+      },
+      "JSGCL": {
+        "price": 147.01,
+        "ldcp": 151.31,
+        "change": -4.3,
+        "pct": -2.84,
+        "volume": 5
+      },
+      "NSRM": {
+        "price": 220.0,
+        "ldcp": 233.75,
+        "change": -13.75,
+        "pct": -5.88,
         "volume": 4
       },
-      "CFL": {
-        "price": 65.91,
-        "ldcp": 65.91,
-        "change": 0.0,
-        "pct": 0.0,
+      "ISIL": {
+        "price": 1810.0,
+        "ldcp": 1822.33,
+        "change": -12.33,
+        "pct": -0.68,
+        "volume": 4
+      },
+      "FIMM": {
+        "price": 201.02,
+        "ldcp": 215.99,
+        "change": -14.97,
+        "pct": -6.93,
         "volume": 3
       },
-      "ARMG": {
-        "price": 56.95,
-        "ldcp": 56.95,
-        "change": 0.0,
-        "pct": 0.0,
+      "GEMMEL": {
+        "price": 34.01,
+        "ldcp": 35.71,
+        "change": -1.7,
+        "pct": -4.76,
+        "volume": 3
+      },
+      "IBFL": {
+        "price": 250.2,
+        "ldcp": 263.67,
+        "change": -13.47,
+        "pct": -5.11,
         "volume": 2
+      },
+      "SNAI": {
+        "price": 33.55,
+        "ldcp": 35.98,
+        "change": -2.43,
+        "pct": -6.75,
+        "volume": 1
       }
     },
     "headlines": {
-      "AGTL": {
-        "price": 374.86,
-        "ldcp": 354.01,
-        "change": 20.85,
-        "pct": 5.89,
-        "volume": 172151,
-        "pe_ttm": 8.31,
-        "eps": 22.44,
-        "wk52_low": 288.0,
-        "wk52_high": 497.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "ATBA": {
-        "price": 171.87,
-        "ldcp": 173.86,
-        "change": -1.99,
-        "pct": -1.14,
-        "volume": 8976,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 169.02,
-        "wk52_high": 290.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:41 PM"
-      },
-      "ATLH": {
-        "price": 1592.45,
-        "ldcp": 1588.14,
-        "change": 4.31,
-        "pct": 0.27,
-        "volume": 583,
-        "pe_ttm": 8.85,
-        "eps": 170.21,
-        "wk52_low": 1201.0,
-        "wk52_high": 1931.0,
-        "chg1y": 29.47,
-        "as_of": "Wed, Sep 9, 2026 3:42 PM"
-      },
-      "EXIDE": {
-        "price": 455.46,
-        "ldcp": 458.71,
-        "change": -3.25,
-        "pct": -0.71,
-        "volume": 1785,
-        "pe_ttm": 10.54,
-        "eps": 55.57,
-        "wk52_low": 365.0,
-        "wk52_high": 745.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:44 PM"
-      },
-      "GHNI": {
-        "price": 1219.59,
-        "ldcp": 1225.94,
-        "change": -6.35,
-        "pct": -0.52,
-        "volume": 89071,
-        "pe_ttm": 7.51,
-        "eps": 107.58,
-        "wk52_low": 590.0,
-        "wk52_high": 1371.99,
-        "chg1y": 51.9,
-        "as_of": "Wed, Sep 9, 2026 3:47 PM"
-      },
-      "HCAR": {
-        "price": 229.79,
-        "ldcp": 228.02,
-        "change": 1.77,
-        "pct": 0.78,
-        "volume": 240593,
-        "pe_ttm": 6.71,
-        "eps": 22.64,
-        "wk52_low": 147.5,
-        "wk52_high": 318.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:44 PM"
-      },
-      "INDU": {
-        "price": 1871.59,
-        "ldcp": 1855.5,
-        "change": 16.09,
-        "pct": 0.87,
-        "volume": 19862,
-        "pe_ttm": 5.77,
-        "eps": 324.5,
-        "wk52_low": 1695.0,
-        "wk52_high": 2300.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:42 PM"
-      },
-      "LOADS": {
-        "price": 13.1,
-        "ldcp": 13.47,
-        "change": -0.37,
-        "pct": -2.75,
-        "volume": 2151614,
-        "pe_ttm": 5.7,
-        "eps": 1.97,
-        "wk52_low": 10.93,
-        "wk52_high": 22.6,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:42 PM"
-      },
-      "MTL": {
-        "price": 303.42,
-        "ldcp": 304.6,
-        "change": -1.18,
-        "pct": -0.39,
-        "volume": 150975,
-        "pe_ttm": 8.37,
-        "eps": 31.94,
-        "wk52_low": 232.5,
-        "wk52_high": 318.495,
-        "chg1y": 6.7,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "THALL": {
-        "price": 551.23,
-        "ldcp": 551.23,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 7169,
-        "pe_ttm": 5.34,
-        "eps": 103.14,
-        "wk52_low": 501.25,
-        "wk52_high": 730.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "AKBL": {
-        "price": 108.25,
-        "ldcp": 109.11,
-        "change": -0.86,
-        "pct": -0.79,
-        "volume": 293026,
-        "pe_ttm": 6.15,
-        "eps": 15.73,
-        "wk52_low": 73.22,
-        "wk52_high": 127.9,
-        "chg1y": 29.8,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "BAFL": {
-        "price": 55.7,
-        "ldcp": 55.85,
-        "change": -0.15,
-        "pct": -0.27,
-        "volume": 628613,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 49.505,
-        "wk52_high": 68.5,
-        "chg1y": 5.53,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "BAHL": {
-        "price": 155.85,
-        "ldcp": 157.37,
-        "change": -1.52,
-        "pct": -0.97,
-        "volume": 554128,
-        "pe_ttm": 6.76,
-        "eps": 27.57,
-        "wk52_low": 144.9,
-        "wk52_high": 230.01,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "BOP": {
-        "price": 34.23,
-        "ldcp": 34.63,
-        "change": -0.4,
-        "pct": -1.15,
-        "volume": 19436730,
-        "pe_ttm": 6.01,
-        "eps": 4.87,
-        "wk52_low": 17.42,
-        "wk52_high": 44.17,
-        "chg1y": 74.11,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "FABL": {
-        "price": 92.91,
-        "ldcp": 94.26,
-        "change": -1.35,
-        "pct": -1.43,
-        "volume": 1347704,
-        "pe_ttm": 6.49,
-        "eps": 14.3,
-        "wk52_low": 75.5,
-        "wk52_high": 106.0,
-        "chg1y": 20.35,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "HBL": {
-        "price": 308.51,
-        "ldcp": 310.49,
-        "change": -1.98,
-        "pct": -0.64,
-        "volume": 304627,
-        "pe_ttm": 7.0,
-        "eps": 42.6,
-        "wk52_low": 235.55,
-        "wk52_high": 369.99,
-        "chg1y": 16.82,
-        "as_of": "Wed, Sep 9, 2026 3:47 PM"
-      },
-      "MCB": {
-        "price": 392.6,
-        "ldcp": 398.84,
-        "change": -6.24,
-        "pct": -1.57,
-        "volume": 289435,
-        "pe_ttm": 8.72,
-        "eps": 45.73,
-        "wk52_low": 317.63,
-        "wk52_high": 452.0,
-        "chg1y": 10.03,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "MEBL": {
-        "price": 556.12,
-        "ldcp": 560.06,
-        "change": -3.94,
-        "pct": -0.7,
-        "volume": 486009,
-        "pe_ttm": 10.94,
-        "eps": 49.54,
-        "wk52_low": 398.8,
-        "wk52_high": 605.0,
-        "chg1y": 36.86,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "NBP": {
-        "price": 181.59,
-        "ldcp": 181.42,
-        "change": 0.17,
-        "pct": 0.09,
-        "volume": 4414842,
-        "pe_ttm": 5.16,
-        "eps": 40.38,
-        "wk52_low": 152.4,
-        "wk52_high": 287.8,
-        "chg1y": 3.21,
-        "as_of": "Wed, Sep 9, 2026 3:46 PM"
-      },
-      "UBL": {
-        "price": 426.07,
-        "ldcp": 423.14,
-        "change": 2.93,
-        "pct": 0.69,
-        "volume": 1288999,
-        "pe_ttm": 7.16,
-        "eps": 51.33,
-        "wk52_low": 293.25,
-        "wk52_high": 517.0,
-        "chg1y": 12.54,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "ACPL": {
-        "price": 232.21,
-        "ldcp": 232.03,
-        "change": 0.18,
-        "pct": 0.08,
-        "volume": 12127,
-        "pe_ttm": 9.34,
-        "eps": 24.86,
-        "wk52_low": 205.0,
-        "wk52_high": 325.01,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "BWCL": {
-        "price": 458.15,
-        "ldcp": 469.75,
-        "change": -11.6,
-        "pct": -2.47,
-        "volume": 43300,
-        "pe_ttm": 10.61,
-        "eps": 43.2,
-        "wk52_low": 386.0,
-        "wk52_high": 687.61,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "CHCC": {
-        "price": 283.54,
-        "ldcp": 289.77,
-        "change": -6.23,
-        "pct": -2.15,
-        "volume": 128832,
-        "pe_ttm": 7.59,
-        "eps": 37.34,
-        "wk52_low": 225.0,
-        "wk52_high": 379.5,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "DGKC": {
-        "price": 198.04,
-        "ldcp": 200.54,
-        "change": -2.5,
-        "pct": -1.25,
-        "volume": 1044938,
-        "pe_ttm": 7.59,
-        "eps": 26.08,
-        "wk52_low": 145.1,
-        "wk52_high": 275.75,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:45 PM"
-      },
-      "FCCL": {
-        "price": 52.63,
-        "ldcp": 53.63,
-        "change": -1.0,
-        "pct": -1.86,
-        "volume": 3407490,
-        "pe_ttm": 7.97,
-        "eps": 6.6,
-        "wk52_low": 36.26,
-        "wk52_high": 62.84,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "GWLC": {
-        "price": 51.38,
-        "ldcp": 51.33,
-        "change": 0.05,
-        "pct": 0.1,
-        "volume": 283654,
-        "pe_ttm": 7.61,
-        "eps": 5.51,
-        "wk52_low": 38.75,
-        "wk52_high": 77.96,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:45 PM"
-      },
-      "KOHC": {
-        "price": 92.22,
-        "ldcp": 91.84,
-        "change": 0.38,
-        "pct": 0.41,
-        "volume": 119348,
-        "pe_ttm": 8.7,
-        "eps": 11.97,
-        "wk52_low": 74.0,
-        "wk52_high": 126.6,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:38 PM"
+      "OGDC": {
+        "price": 319.34,
+        "ldcp": 322.18,
+        "change": -2.84,
+        "pct": -0.88,
+        "volume": 1293297,
+        "pe_ttm": 5.67,
+        "eps": 56.35,
+        "wk52_low": 238.2,
+        "wk52_high": 352.0,
+        "chg1y": 17.01,
+        "as_of": "Thu, Sep 10, 2026 2:05 PM"
       },
       "LUCK": {
-        "price": 415.36,
-        "ldcp": 419.69,
-        "change": -4.33,
-        "pct": -1.03,
-        "volume": 682943,
-        "pe_ttm": 13.05,
+        "price": 411.7,
+        "ldcp": 415.36,
+        "change": -3.66,
+        "pct": -0.88,
+        "volume": 1212672,
+        "pe_ttm": 12.93,
         "eps": 31.83,
         "wk52_low": 339.0,
         "wk52_high": 529.5,
         "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
+        "as_of": "Thu, Sep 10, 2026 2:05 PM"
       },
-      "MLCF": {
-        "price": 97.62,
-        "ldcp": 98.68,
-        "change": -1.06,
-        "pct": -1.07,
-        "volume": 2382145,
-        "pe_ttm": 12.11,
-        "eps": 8.06,
-        "wk52_low": 71.0,
-        "wk52_high": 132.99,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "PIOC": {
-        "price": 252.78,
-        "ldcp": 257.47,
-        "change": -4.69,
-        "pct": -1.82,
-        "volume": 60015,
-        "pe_ttm": 8.71,
-        "eps": 29.03,
-        "wk52_low": 200.01,
-        "wk52_high": 427.5,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:47 PM"
-      },
-      "ARPL": {
-        "price": 426.03,
-        "ldcp": 430.0,
-        "change": -3.97,
-        "pct": -0.92,
-        "volume": 909,
-        "pe_ttm": 9.17,
-        "eps": 34.05,
-        "wk52_low": 325.0,
-        "wk52_high": 490.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "DOL": {
-        "price": 30.01,
-        "ldcp": 30.03,
-        "change": -0.02,
-        "pct": -0.07,
-        "volume": 132460,
-        "pe_ttm": 17.35,
-        "eps": 1.73,
-        "wk52_low": 25.36,
-        "wk52_high": 41.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "EPCL": {
-        "price": 33.55,
-        "ldcp": 33.86,
-        "change": -0.31,
-        "pct": -0.92,
-        "volume": 179577,
-        "pe_ttm": 20.46,
-        "eps": 1.33,
-        "wk52_low": 27.01,
-        "wk52_high": 39.32,
-        "chg1y": 10.98,
-        "as_of": "Wed, Sep 9, 2026 3:45 PM"
-      },
-      "LOTCHEM": {
-        "price": 26.18,
-        "ldcp": 26.08,
-        "change": 0.1,
-        "pct": 0.38,
-        "volume": 1677135,
-        "pe_ttm": 8.47,
-        "eps": 0.74,
-        "wk52_low": 18.41,
-        "wk52_high": 34.3,
-        "chg1y": 13.04,
-        "as_of": "Wed, Sep 9, 2026 3:46 PM"
-      },
-      "NICL": {
-        "price": 270.68,
-        "ldcp": 263.87,
-        "change": 6.81,
-        "pct": 2.58,
-        "volume": 2104738,
-        "pe_ttm": 14.83,
-        "eps": 18.29,
-        "wk52_low": 146.0,
-        "wk52_high": 281.0,
-        "chg1y": 64.07,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "SITC": {
-        "price": 750.0,
-        "ldcp": 759.89,
-        "change": -9.89,
-        "pct": -1.3,
-        "volume": 4242,
-        "pe_ttm": 11.47,
-        "eps": 43.83,
-        "wk52_low": 682.0,
-        "wk52_high": 1060.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "AGHA": {
-        "price": 6.76,
-        "ldcp": 6.82,
-        "change": -0.06,
-        "pct": -0.88,
-        "volume": 1581231,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 5.85,
-        "wk52_high": 10.85,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:40 PM"
-      },
-      "ASTL": {
-        "price": 14.89,
-        "ldcp": 14.85,
-        "change": 0.04,
-        "pct": 0.27,
-        "volume": 208364,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 13.84,
-        "wk52_high": 30.27,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:39 PM"
-      },
-      "DSL": {
-        "price": 4.64,
-        "ldcp": 4.65,
-        "change": -0.01,
-        "pct": -0.21,
-        "volume": 805781,
-        "pe_ttm": 6.82,
-        "eps": 0.68,
-        "wk52_low": 4.51,
-        "wk52_high": 10.8,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:47 PM"
-      },
-      "ISL": {
-        "price": 85.75,
-        "ldcp": 86.88,
-        "change": -1.13,
-        "pct": -1.3,
-        "volume": 117592,
-        "pe_ttm": 10.16,
-        "eps": 8.44,
-        "wk52_low": 65.45,
-        "wk52_high": 135.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "ITTEFAQ": {
-        "price": 8.12,
-        "ldcp": 8.29,
-        "change": -0.17,
-        "pct": -2.05,
-        "volume": 358844,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 5.75,
-        "wk52_high": 12.64,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "MUGHAL": {
-        "price": 75.08,
-        "ldcp": 74.6,
-        "change": 0.48,
-        "pct": 0.64,
-        "volume": 259514,
-        "pe_ttm": 10.38,
-        "eps": 2.83,
-        "wk52_low": 59.0,
-        "wk52_high": 113.99,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "COLG": {
-        "price": 1189.22,
-        "ldcp": 1189.97,
-        "change": -0.75,
-        "pct": -0.06,
-        "volume": 13164,
-        "pe_ttm": 15.5,
-        "eps": 76.74,
-        "wk52_low": 1050.0,
-        "wk52_high": 1313.96,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:43 PM"
-      },
-      "FCEPL": {
-        "price": 147.08,
-        "ldcp": 146.96,
-        "change": 0.12,
-        "pct": 0.08,
-        "volume": 1037337,
-        "pe_ttm": 21.79,
-        "eps": 3.51,
-        "wk52_low": 63.86,
-        "wk52_high": 158.5,
-        "chg1y": 68.69,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "NATF": {
-        "price": 362.54,
-        "ldcp": 360.34,
-        "change": 2.2,
-        "pct": 0.61,
-        "volume": 46432,
-        "pe_ttm": 15.29,
-        "eps": 13.65,
-        "wk52_low": 322.31,
-        "wk52_high": 439.0,
-        "chg1y": 4.6,
-        "as_of": "Wed, Sep 9, 2026 3:47 PM"
-      },
-      "NESTLE": {
-        "price": 7431.67,
-        "ldcp": 7498.75,
-        "change": -67.08,
-        "pct": -0.89,
-        "volume": 261,
-        "pe_ttm": 20.09,
-        "eps": 380.24,
-        "wk52_low": 7000.0,
-        "wk52_high": 8700.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:45 PM"
-      },
-      "PREMA": {
-        "price": 34.03,
-        "ldcp": 34.25,
-        "change": -0.22,
-        "pct": -0.64,
-        "volume": 501269,
-        "pe_ttm": 12.79,
-        "eps": 2.42,
-        "wk52_low": 23.0,
-        "wk52_high": 56.38,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:39 PM"
-      },
-      "TREET": {
-        "price": 22.12,
-        "ldcp": 22.4,
-        "change": -0.28,
-        "pct": -1.25,
-        "volume": 295508,
-        "pe_ttm": 9.33,
-        "eps": 2.82,
-        "wk52_low": 19.55,
-        "wk52_high": 37.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "UPFL": {
-        "price": 24500.0,
-        "ldcp": 24849.5,
-        "change": -349.5,
-        "pct": -1.41,
-        "volume": 62,
-        "pe_ttm": 21.69,
-        "eps": null,
-        "wk52_low": 22562.78,
-        "wk52_high": 33700.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "AGL": {
-        "price": 43.05,
-        "ldcp": 42.35,
-        "change": 0.7,
-        "pct": 1.65,
-        "volume": 10908,
-        "pe_ttm": null,
-        "eps": 5.36,
-        "wk52_low": 38.68,
-        "wk52_high": 85.25,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:37 PM"
-      },
-      "EFERT": {
-        "price": 186.45,
-        "ldcp": 187.71,
+      "HBL": {
+        "price": 307.25,
+        "ldcp": 308.51,
         "change": -1.26,
-        "pct": -0.67,
-        "volume": 185779,
-        "pe_ttm": 12.08,
-        "eps": 17.8,
-        "wk52_low": 180.01,
-        "wk52_high": 263.3,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
+        "pct": -0.41,
+        "volume": 249683,
+        "pe_ttm": 6.98,
+        "eps": 42.6,
+        "wk52_low": 235.55,
+        "wk52_high": 369.99,
+        "chg1y": 17.34,
+        "as_of": "Thu, Sep 10, 2026 2:05 PM"
       },
-      "FATIMA": {
-        "price": 152.64,
-        "ldcp": 153.0,
-        "change": -0.36,
-        "pct": -0.23,
-        "volume": 226503,
-        "pe_ttm": 11.44,
-        "eps": 14.51,
-        "wk52_low": 120.0,
-        "wk52_high": 192.8,
-        "chg1y": 22.34,
-        "as_of": "Wed, Sep 9, 2026 3:46 PM"
-      },
-      "FFC": {
-        "price": 541.38,
-        "ldcp": 546.25,
-        "change": -4.87,
-        "pct": -0.89,
-        "volume": 404983,
-        "pe_ttm": 10.07,
-        "eps": 51.69,
-        "wk52_low": 441.7,
-        "wk52_high": 685.0,
-        "chg1y": 18.44,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "GHGL": {
-        "price": 42.0,
-        "ldcp": 42.03,
-        "change": -0.03,
-        "pct": -0.07,
-        "volume": 97275,
-        "pe_ttm": 5.81,
-        "eps": 7.23,
-        "wk52_low": 27.78,
-        "wk52_high": 49.6,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:42 PM"
-      },
-      "STCL": {
-        "price": 9.71,
-        "ldcp": 9.83,
-        "change": -0.12,
-        "pct": -1.22,
-        "volume": 57204,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 8.55,
-        "wk52_high": 19.4,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "TGL": {
-        "price": 173.6,
-        "ldcp": 173.11,
-        "change": 0.49,
-        "pct": 0.28,
-        "volume": 56096,
-        "pe_ttm": 7.09,
-        "eps": 27.75,
-        "wk52_low": 128.0,
-        "wk52_high": 276.5,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "AICL": {
-        "price": 92.91,
-        "ldcp": 93.81,
-        "change": -0.9,
-        "pct": -0.96,
-        "volume": 1321399,
-        "pe_ttm": 6.32,
-        "eps": 14.66,
-        "wk52_low": 60.2,
-        "wk52_high": 124.89,
-        "chg1y": 26.68,
-        "as_of": "Wed, Sep 9, 2026 3:36 PM"
-      },
-      "EFUL": {
-        "price": 159.72,
-        "ldcp": 160.0,
-        "change": -0.28,
-        "pct": -0.18,
-        "volume": 473,
-        "pe_ttm": 6.67,
-        "eps": 23.26,
-        "wk52_low": 136.1,
-        "wk52_high": 185.5,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:42 PM"
-      },
-      "IGIHL": {
-        "price": 252.04,
-        "ldcp": 254.04,
-        "change": -2.0,
-        "pct": -0.79,
-        "volume": 15822,
-        "pe_ttm": 21.71,
-        "eps": 12.7,
-        "wk52_low": 165.0,
-        "wk52_high": 327.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "JGICL": {
-        "price": 76.12,
-        "ldcp": 76.53,
-        "change": -0.41,
-        "pct": -0.54,
-        "volume": 21522,
-        "pe_ttm": 3.9,
-        "eps": 20.25,
-        "wk52_low": 59.26,
-        "wk52_high": 91.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "TPLI": {
-        "price": 53.93,
-        "ldcp": 55.05,
-        "change": -1.12,
-        "pct": -2.03,
-        "volume": 5168,
-        "pe_ttm": 59.26,
-        "eps": 0.24,
-        "wk52_low": 16.26,
-        "wk52_high": 97.4,
-        "chg1y": 156.69,
-        "as_of": "Wed, Sep 9, 2026 3:36 PM"
-      },
-      "MARI": {
-        "price": 653.97,
-        "ldcp": 659.9,
-        "change": -5.93,
-        "pct": -0.9,
-        "volume": 317029,
-        "pe_ttm": 9.02,
-        "eps": 72.52,
-        "wk52_low": 544.56,
-        "wk52_high": 795.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "OGDC": {
-        "price": 322.18,
-        "ldcp": 321.04,
-        "change": 1.14,
-        "pct": 0.36,
-        "volume": 1800494,
-        "pe_ttm": 5.72,
-        "eps": 56.35,
-        "wk52_low": 238.2,
-        "wk52_high": 352.0,
-        "chg1y": 17.95,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "POL": {
-        "price": 729.58,
-        "ldcp": 727.21,
-        "change": 2.37,
-        "pct": 0.33,
-        "volume": 96419,
-        "pe_ttm": 6.49,
-        "eps": 112.45,
-        "wk52_low": 584.76,
-        "wk52_high": 765.0,
-        "chg1y": 7.24,
-        "as_of": "Wed, Sep 9, 2026 3:46 PM"
-      },
-      "PPL": {
-        "price": 219.91,
-        "ldcp": 221.37,
-        "change": -1.46,
-        "pct": -0.66,
-        "volume": 2711846,
-        "pe_ttm": 7.46,
-        "eps": 33.82,
-        "wk52_low": 178.9,
-        "wk52_high": 284.6,
-        "chg1y": 14.19,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "APL": {
-        "price": 573.17,
-        "ldcp": 575.2,
-        "change": -2.03,
-        "pct": -0.35,
-        "volume": 15236,
-        "pe_ttm": 4.2,
-        "eps": 136.31,
-        "wk52_low": 485.0,
-        "wk52_high": 646.0,
-        "chg1y": 9.45,
-        "as_of": "Wed, Sep 9, 2026 3:45 PM"
+      "MEBL": {
+        "price": 542.97,
+        "ldcp": 556.12,
+        "change": -13.15,
+        "pct": -2.36,
+        "volume": 820679,
+        "pe_ttm": 10.68,
+        "eps": 49.54,
+        "wk52_low": 398.8,
+        "wk52_high": 605.0,
+        "chg1y": 34.3,
+        "as_of": "Thu, Sep 10, 2026 2:05 PM"
       },
       "PSO": {
-        "price": 352.79,
-        "ldcp": 355.15,
-        "change": -2.36,
-        "pct": -0.66,
-        "volume": 556786,
-        "pe_ttm": 3.78,
+        "price": 348.5,
+        "ldcp": 352.79,
+        "change": -4.29,
+        "pct": -1.22,
+        "volume": 909782,
+        "pe_ttm": 3.74,
         "eps": 44.54,
         "wk52_low": 320.11,
         "wk52_high": 506.75,
         "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
+        "as_of": "Thu, Sep 10, 2026 2:05 PM"
       },
-      "WAFI": {
-        "price": 163.94,
-        "ldcp": 161.98,
-        "change": 1.96,
-        "pct": 1.21,
-        "volume": 94465,
-        "pe_ttm": 9.26,
-        "eps": 16.56,
-        "wk52_low": 160.0,
-        "wk52_high": 260.0,
+      "FFC": {
+        "price": 540.7,
+        "ldcp": 541.38,
+        "change": -0.68,
+        "pct": -0.13,
+        "volume": 364030,
+        "pe_ttm": 10.06,
+        "eps": 51.69,
+        "wk52_low": 441.7,
+        "wk52_high": 685.0,
+        "chg1y": 18.61,
+        "as_of": "Thu, Sep 10, 2026 2:05 PM"
+      },
+      "MARI": {
+        "price": 648.09,
+        "ldcp": 653.97,
+        "change": -5.88,
+        "pct": -0.9,
+        "volume": 219575,
+        "pe_ttm": 8.94,
+        "eps": 72.52,
+        "wk52_low": 544.56,
+        "wk52_high": 795.0,
         "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
+        "as_of": "Thu, Sep 10, 2026 2:05 PM"
       },
-      "CEPB": {
-        "price": 26.72,
-        "ldcp": 27.19,
-        "change": -0.47,
-        "pct": -1.73,
-        "volume": 399929,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 24.59,
-        "wk52_high": 46.7,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:44 PM"
-      },
-      "PKGS": {
-        "price": 745.07,
-        "ldcp": 751.71,
-        "change": -6.64,
-        "pct": -0.88,
-        "volume": 1741,
-        "pe_ttm": 22.15,
-        "eps": 34.17,
-        "wk52_low": 626.02,
-        "wk52_high": 855.0,
-        "chg1y": 6.25,
-        "as_of": "Wed, Sep 9, 2026 3:41 PM"
-      },
-      "ABOT": {
-        "price": 921.51,
-        "ldcp": 926.49,
-        "change": -4.98,
-        "pct": -0.54,
-        "volume": 5675,
-        "pe_ttm": 10.54,
-        "eps": 81.37,
-        "wk52_low": 821.0,
-        "wk52_high": 1304.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:39 PM"
-      },
-      "AGP": {
-        "price": 161.29,
-        "ldcp": 161.74,
-        "change": -0.45,
-        "pct": -0.28,
-        "volume": 168421,
-        "pe_ttm": 21.06,
-        "eps": 8.43,
-        "wk52_low": 158.85,
-        "wk52_high": 258.67,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "BFBIO": {
-        "price": 125.74,
-        "ldcp": 127.07,
-        "change": -1.33,
-        "pct": -1.05,
-        "volume": 62317,
-        "pe_ttm": 19.99,
-        "eps": 5.52,
-        "wk52_low": 120.08,
-        "wk52_high": 177.99,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:47 PM"
-      },
-      "CPHL": {
-        "price": 70.55,
-        "ldcp": 70.9,
-        "change": -0.35,
+      "UBL": {
+        "price": 424.0,
+        "ldcp": 426.07,
+        "change": -2.07,
         "pct": -0.49,
-        "volume": 418820,
-        "pe_ttm": 14.67,
-        "eps": 3.9,
-        "wk52_low": 69.25,
-        "wk52_high": 104.25,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:47 PM"
-      },
-      "FEROZ": {
-        "price": 359.41,
-        "ldcp": 360.22,
-        "change": -0.81,
-        "pct": -0.22,
-        "volume": 10230,
-        "pe_ttm": 24.35,
-        "eps": 12.15,
-        "wk52_low": 293.01,
-        "wk52_high": 475.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:36 PM"
-      },
-      "GLAXO": {
-        "price": 313.32,
-        "ldcp": 314.64,
-        "change": -1.32,
-        "pct": -0.42,
-        "volume": 62993,
-        "pe_ttm": 9.58,
-        "eps": 31.48,
-        "wk52_low": 293.09,
-        "wk52_high": 459.94,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "HINOON": {
-        "price": 913.82,
-        "ldcp": 924.15,
-        "change": -10.33,
-        "pct": -1.12,
-        "volume": 18943,
-        "pe_ttm": 11.61,
-        "eps": 77.75,
-        "wk52_low": 755.56,
-        "wk52_high": 1224.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:47 PM"
-      },
-      "SEARL": {
-        "price": 81.04,
-        "ldcp": 82.59,
-        "change": -1.55,
-        "pct": -1.88,
-        "volume": 1180163,
-        "pe_ttm": 17.81,
-        "eps": 0.85,
-        "wk52_low": 76.37,
-        "wk52_high": 137.44,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "HUBC": {
-        "price": 206.05,
-        "ldcp": 205.93,
-        "change": 0.12,
-        "pct": 0.06,
-        "volume": 1860548,
-        "pe_ttm": 10.93,
-        "eps": 18.86,
-        "wk52_low": 186.6,
-        "wk52_high": 249.99,
-        "chg1y": 5.39,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "KAPCO": {
-        "price": 26.55,
-        "ldcp": 26.91,
-        "change": -0.36,
-        "pct": -1.34,
-        "volume": 321424,
-        "pe_ttm": 14.2,
-        "eps": 2.88,
-        "wk52_low": 24.01,
-        "wk52_high": 41.04,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:40 PM"
-      },
-      "KEL": {
-        "price": 7.03,
-        "ldcp": 7.08,
-        "change": -0.05,
-        "pct": -0.71,
-        "volume": 5711781,
-        "pe_ttm": 703.0,
-        "eps": 0.15,
-        "wk52_low": 4.97,
-        "wk52_high": 9.58,
-        "chg1y": 22.26,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "NCPL": {
-        "price": 57.21,
-        "ldcp": 55.99,
-        "change": 1.22,
-        "pct": 2.18,
-        "volume": 12778412,
-        "pe_ttm": 13.75,
-        "eps": 1.85,
-        "wk52_low": 22.49,
-        "wk52_high": 89.48,
-        "chg1y": 100.39,
-        "as_of": "Wed, Sep 9, 2026 3:44 PM"
-      },
-      "NPL": {
-        "price": 65.86,
-        "ldcp": 63.56,
-        "change": 2.3,
-        "pct": 3.62,
-        "volume": 6454129,
-        "pe_ttm": 7.71,
-        "eps": 1.95,
-        "wk52_low": 33.3,
-        "wk52_high": 100.45,
-        "chg1y": 56.55,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "ATRL": {
-        "price": 1094.02,
-        "ldcp": 1089.93,
-        "change": 4.09,
-        "pct": 0.38,
-        "volume": 470184,
-        "pe_ttm": 5.28,
-        "eps": 207.32,
-        "wk52_low": 597.1,
-        "wk52_high": 1232.0,
-        "chg1y": 66.07,
-        "as_of": "Wed, Sep 9, 2026 3:44 PM"
-      },
-      "CNERGY": {
-        "price": 13.06,
-        "ldcp": 13.32,
-        "change": -0.26,
-        "pct": -1.95,
-        "volume": 65824954,
-        "pe_ttm": 4.52,
-        "eps": 2.68,
-        "wk52_low": 5.87,
-        "wk52_high": 15.75,
-        "chg1y": 82.66,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "NRL": {
-        "price": 518.37,
-        "ldcp": 508.14,
-        "change": 10.23,
-        "pct": 2.01,
-        "volume": 2609698,
-        "pe_ttm": 6.72,
-        "eps": 77.09,
-        "wk52_low": 259.0,
-        "wk52_high": 580.98,
-        "chg1y": 38.69,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "PRL": {
-        "price": 86.16,
-        "ldcp": 91.16,
-        "change": -5.0,
-        "pct": -5.48,
-        "volume": 22042527,
-        "pe_ttm": 3.44,
-        "eps": 25.05,
-        "wk52_low": 23.2,
-        "wk52_high": 108.8,
-        "chg1y": 166.42,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "ALNRS": {
-        "price": 123.17,
-        "ldcp": 124.07,
-        "change": -0.9,
-        "pct": -0.73,
-        "volume": 1353,
-        "pe_ttm": 14.91,
-        "eps": 5.25,
-        "wk52_low": 85.16,
-        "wk52_high": 144.0,
-        "chg1y": 23.17,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "HABSM": {
-        "price": 79.93,
-        "ldcp": 79.22,
-        "change": 0.71,
-        "pct": 0.9,
-        "volume": 1928,
-        "pe_ttm": 5.73,
-        "eps": 11.52,
-        "wk52_low": 59.1,
-        "wk52_high": 96.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:36 PM"
-      },
-      "JDWS": {
-        "price": 883.83,
-        "ldcp": 883.83,
-        "change": 0.0,
-        "pct": 0.0,
-        "volume": 5,
-        "pe_ttm": 5.07,
-        "eps": 110.99,
-        "wk52_low": 780.0,
-        "wk52_high": 999.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "MIRKS": {
-        "price": 32.19,
-        "ldcp": 32.5,
-        "change": -0.31,
-        "pct": -0.95,
-        "volume": 4562,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 22.28,
-        "wk52_high": 44.25,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "AIRLINK": {
-        "price": 128.32,
-        "ldcp": 129.85,
-        "change": -1.53,
-        "pct": -1.18,
-        "volume": 310644,
-        "pe_ttm": 13.46,
-        "eps": 8.76,
-        "wk52_low": 118.0,
-        "wk52_high": 199.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "AVN": {
-        "price": 28.75,
-        "ldcp": 29.0,
-        "change": -0.25,
-        "pct": -0.86,
-        "volume": 267706,
-        "pe_ttm": null,
-        "eps": 0.14,
-        "wk52_low": 26.5,
-        "wk52_high": 54.3,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "NETSOL": {
-        "price": 124.34,
-        "ldcp": 127.18,
-        "change": -2.84,
-        "pct": -2.23,
-        "volume": 1257095,
-        "pe_ttm": 5.58,
-        "eps": 11.89,
-        "wk52_low": 87.66,
-        "wk52_high": 164.59,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "OCTOPUS": {
-        "price": 29.16,
-        "ldcp": 29.57,
-        "change": -0.41,
-        "pct": -1.39,
-        "volume": 173730,
-        "pe_ttm": 69.43,
-        "eps": 0.55,
-        "wk52_low": 24.35,
-        "wk52_high": 56.55,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:43 PM"
-      },
-      "PTC": {
-        "price": 65.34,
-        "ldcp": 65.63,
-        "change": -0.29,
-        "pct": -0.44,
-        "volume": 1350846,
-        "pe_ttm": 40.33,
-        "eps": 0.27,
-        "wk52_low": 23.3,
-        "wk52_high": 75.5,
-        "chg1y": 170.56,
-        "as_of": "Wed, Sep 9, 2026 3:43 PM"
-      },
-      "SYS": {
-        "price": 124.75,
-        "ldcp": 125.72,
-        "change": -0.97,
-        "pct": -0.77,
-        "volume": 793223,
-        "pe_ttm": 24.8,
-        "eps": 5.46,
-        "wk52_low": 105.98,
-        "wk52_high": 174.4,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "TRG": {
-        "price": 51.68,
-        "ldcp": 52.1,
-        "change": -0.42,
-        "pct": -0.81,
-        "volume": 2225575,
-        "pe_ttm": null,
-        "eps": 7.19,
-        "wk52_low": 40.12,
-        "wk52_high": 84.39,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "WTL": {
-        "price": 1.12,
-        "ldcp": 1.13,
-        "change": -0.01,
-        "pct": -0.88,
-        "volume": 14201458,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 1.1,
-        "wk52_high": 2.41,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:49 PM"
-      },
-      "FML": {
-        "price": 50.03,
-        "ldcp": 50.31,
-        "change": -0.28,
-        "pct": -0.56,
-        "volume": 9340,
-        "pe_ttm": 24.89,
-        "eps": 2.01,
-        "wk52_low": 34.05,
-        "wk52_high": 80.5,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "GADT": {
-        "price": 310.98,
-        "ldcp": 312.19,
-        "change": -1.21,
-        "pct": -0.39,
-        "volume": 4075,
-        "pe_ttm": 3.32,
-        "eps": 93.78,
-        "wk52_low": 215.0,
-        "wk52_high": 441.08,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "GATM": {
-        "price": 23.01,
-        "ldcp": 23.03,
-        "change": -0.02,
-        "pct": -0.09,
-        "volume": 318484,
-        "pe_ttm": 10.96,
-        "eps": 5.44,
-        "wk52_low": 16.5,
-        "wk52_high": 40.7,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:43 PM"
-      },
-      "ILP": {
-        "price": 104.99,
-        "ldcp": 104.26,
-        "change": 0.73,
-        "pct": 0.7,
-        "volume": 806201,
-        "pe_ttm": 12.25,
-        "eps": 3.84,
-        "wk52_low": 67.4,
-        "wk52_high": 110.5,
-        "chg1y": 48.61,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "KTML": {
-        "price": 42.86,
-        "ldcp": 42.79,
-        "change": 0.07,
-        "pct": 0.16,
-        "volume": 57005,
-        "pe_ttm": 11.46,
-        "eps": 3.74,
-        "wk52_low": 37.02,
-        "wk52_high": 77.8,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:39 PM"
-      },
-      "NCL": {
-        "price": 35.92,
-        "ldcp": 35.95,
-        "change": -0.03,
-        "pct": -0.08,
-        "volume": 86739,
-        "pe_ttm": 7.27,
-        "eps": 3.29,
-        "wk52_low": 31.18,
-        "wk52_high": 61.41,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
-      },
-      "NML": {
-        "price": 136.69,
-        "ldcp": 136.6,
-        "change": 0.09,
-        "pct": 0.07,
-        "volume": 1535273,
-        "pe_ttm": 9.49,
-        "eps": 17.1,
-        "wk52_low": 120.0,
-        "wk52_high": 208.4,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:48 PM"
-      },
-      "SLYT": {
-        "price": 16.7,
-        "ldcp": 17.88,
-        "change": -1.18,
-        "pct": -6.6,
-        "volume": 13998,
-        "pe_ttm": null,
-        "eps": null,
-        "wk52_low": 10.01,
-        "wk52_high": 20.74,
-        "chg1y": 3.28,
-        "as_of": "Wed, Sep 9, 2026 3:42 PM"
-      },
-      "PAKT": {
-        "price": 1355.76,
-        "ldcp": 1363.86,
-        "change": -8.1,
-        "pct": -0.59,
-        "volume": 6544,
-        "pe_ttm": 10.15,
-        "eps": 116.85,
-        "wk52_low": 1135.0,
-        "wk52_high": 1720.0,
-        "chg1y": null,
-        "as_of": "Wed, Sep 9, 2026 3:35 PM"
+        "volume": 1338032,
+        "pe_ttm": 7.12,
+        "eps": 51.33,
+        "wk52_low": 293.25,
+        "wk52_high": 517.0,
+        "chg1y": 12.91,
+        "as_of": "Thu, Sep 10, 2026 2:05 PM"
       }
     }
   },
-  "as_of": "Wed, Sep 9, 2026 3:49 PM",
+  "as_of": "Thu, Sep 10, 2026 2:05 PM",
   "source": "https://dps.psx.com.pk/market-watch",
   "ok": true,
-  "fetched_at": "2026-09-09T15:20:25Z",
+  "fetched_at": "2026-09-10T09:06:50Z",
   "cadence": "intraday"
 }

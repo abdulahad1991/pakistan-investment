@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11T15:19:22Z",
+  "updated": "2026-09-12T08:46:50Z",
   "macro": {
     "pkr_usd": 277.32,
     "sbp_rate": 11.5,
@@ -2284,11 +2284,11 @@
     "chg1y_pct": null
   },
   "fuel": {
-    "petrol": 370.8,
-    "hsd": 398.04,
+    "petrol": 375.82,
+    "hsd": 403.32,
     "kerosene": 289.95,
     "ldo": 199.98,
-    "asof": "11 Sep 2026",
+    "asof": "12 Sep 2026",
     "source": "PakWheels (OGRA-notified rates)"
   },
   "data_health": {
@@ -2298,7 +2298,7 @@
       "source": "Pakistan Stock Exchange (PSX Data Portal) — company/payouts",
       "cadence": "daily",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
       "fetched_at": "2026-09-11T15:19:01Z"
     },
@@ -2308,9 +2308,9 @@
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
-      "fetched_at": "2026-09-11T15:11:49Z",
+      "fetched_at": "2026-09-12T08:46:48Z",
       "via": "sbp-m2m"
     },
     "funds": {
@@ -2319,7 +2319,7 @@
       "source": "Mutual Funds Association of Pakistan (MUFAP)",
       "cadence": "daily",
       "stale": true,
-      "age_days": 49,
+      "age_days": 50,
       "last_error": "HTTPError: HTTP Error 403: Forbidden",
       "fetched_at": "2026-07-24T13:14:31Z"
     },
@@ -2331,7 +2331,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-11T15:11:51Z"
+      "fetched_at": "2026-09-12T08:46:50Z"
     },
     "inflation": {
       "ok": true,
@@ -2339,7 +2339,7 @@
       "source": "Pakistan Bureau of Statistics (PBS), reviewed monthly report",
       "cadence": "monthly",
       "stale": false,
-      "age_days": 41,
+      "age_days": 42,
       "last_error": null,
       "fetched_at": "2026-09-07T00:00:00Z",
       "via": "pbs-reviewed-report"
@@ -2350,7 +2350,7 @@
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
       "fetched_at": "2026-09-11T15:11:54Z"
     },
@@ -2360,19 +2360,19 @@
       "source": "Pakistan Bureau of Statistics (PBS) + IMF",
       "cadence": "event",
       "stale": false,
-      "age_days": 73,
+      "age_days": 74,
       "last_error": null,
       "fetched_at": "2026-09-11T15:19:22Z"
     },
     "petrol": {
       "ok": true,
-      "as_of": "2026-09-11",
+      "as_of": "2026-09-12",
       "source": "PakWheels (OGRA-notified rates)",
       "cadence": "daily",
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-11T15:19:22Z",
+      "fetched_at": "2026-09-12T08:46:50Z",
       "via": "pakwheels"
     },
     "policy": {
@@ -2381,7 +2381,7 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "event",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
       "fetched_at": "2026-09-11T15:19:12Z",
       "via": "sbp-m2m"
@@ -2392,7 +2392,7 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "weekly",
       "stale": false,
-      "age_days": 7,
+      "age_days": 8,
       "last_error": null,
       "fetched_at": "2026-09-11T15:19:05Z",
       "via": "sbp-m2m"
@@ -2403,7 +2403,7 @@
       "source": "Central Directorate of National Savings (CDNS)",
       "cadence": "event",
       "stale": true,
-      "age_days": 55,
+      "age_days": 56,
       "last_error": "ValueError: CDNS 'Latest profit rates:' banner not found",
       "fetched_at": "2026-09-04T15:13:58Z"
     },
@@ -2413,7 +2413,7 @@
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
       "fetched_at": "2026-09-11T15:15:53Z"
     }

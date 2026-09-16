@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-16T09:28:55Z",
+  "updated": "2026-09-16T15:49:58Z",
   "macro": {
-    "pkr_usd": 277.3,
+    "pkr_usd": 277.27,
     "sbp_rate": 11.5,
     "sbp_direction": "Holding",
     "inflation_cpi": 11.1,
@@ -19,7 +19,7 @@
     "pkr_usd_source": "State Bank of Pakistan (SBP) interbank M2M",
     "inflation_cpi_asof": "Aug 2026",
     "fx_reserves_asof": "4 Sep 2026",
-    "pkr_usd_asof": "15 Sep 2026",
+    "pkr_usd_asof": "16 Sep 2026",
     "kse100_asof": "15 Sep 2026",
     "stocks_asof": "16 Sep 2026"
   },
@@ -2278,12 +2278,12 @@
   "gold": {
     "source": "gold.pk",
     "source_type": "local",
-    "tola_24k": 449500,
-    "tola_22k": 412042,
-    "g10_24k": 385380,
-    "g10_22k": 353266,
-    "gram_24k": 38538,
-    "gram_22k": 35327,
+    "tola_24k": 449700,
+    "tola_22k": 412225,
+    "g10_24k": 385552,
+    "g10_22k": 353423,
+    "gram_24k": 38555,
+    "gram_22k": 35342,
     "chg1y_pct": null
   },
   "fuel": {
@@ -2296,24 +2296,24 @@
   },
   "data_health": {
     "dividends": {
-      "ok": true,
+      "ok": false,
       "as_of": "2026-09-15",
       "source": "Pakistan Stock Exchange (PSX Data Portal) — company/payouts",
       "cadence": "daily",
-      "stale": false,
+      "stale": true,
       "age_days": 1,
-      "last_error": null,
+      "last_error": "ValueError: no payouts parsed for any requested symbol",
       "fetched_at": "2026-09-15T15:48:25Z"
     },
     "forex": {
       "ok": true,
-      "as_of": "Sep 15, 2026",
+      "as_of": "Sep 16, 2026",
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-16T09:28:28Z",
+      "fetched_at": "2026-09-16T15:32:28Z",
       "via": "sbp-m2m"
     },
     "funds": {
@@ -2334,7 +2334,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-16T09:28:30Z"
+      "fetched_at": "2026-09-16T15:32:30Z"
     },
     "inflation": {
       "ok": true,
@@ -2348,13 +2348,13 @@
       "via": "pbs-reviewed-report"
     },
     "kse": {
-      "ok": true,
+      "ok": false,
       "as_of": "2026-09-15",
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
-      "stale": false,
+      "stale": true,
       "age_days": 1,
-      "last_error": null,
+      "last_error": "RemoteDisconnected: Remote end closed connection without response",
       "fetched_at": "2026-09-16T09:28:33Z"
     },
     "macro": {
@@ -2365,7 +2365,7 @@
       "stale": false,
       "age_days": 78,
       "last_error": null,
-      "fetched_at": "2026-09-15T15:48:43Z"
+      "fetched_at": "2026-09-16T15:49:57Z"
     },
     "petrol": {
       "ok": true,
@@ -2375,7 +2375,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-16T09:28:55Z",
+      "fetched_at": "2026-09-16T15:49:58Z",
       "via": "pakwheels"
     },
     "policy": {
@@ -2384,9 +2384,9 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "event",
       "stale": false,
-      "age_days": 1,
+      "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-15T15:48:33Z",
+      "fetched_at": "2026-09-16T15:49:49Z",
       "via": "sbp-m2m"
     },
     "reserves": {
@@ -2397,7 +2397,7 @@
       "stale": false,
       "age_days": 12,
       "last_error": null,
-      "fetched_at": "2026-09-15T15:48:28Z",
+      "fetched_at": "2026-09-16T15:49:43Z",
       "via": "sbp-m2m"
     },
     "savings": {
@@ -2411,13 +2411,13 @@
       "fetched_at": "2026-09-04T15:13:58Z"
     },
     "stocks": {
-      "ok": true,
+      "ok": false,
       "as_of": "Wed, Sep 16, 2026 2:23 PM",
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
-      "stale": false,
+      "stale": true,
       "age_days": 0,
-      "last_error": null,
+      "last_error": "RemoteDisconnected: Remote end closed connection without response",
       "fetched_at": "2026-09-16T09:28:55Z"
     }
   }

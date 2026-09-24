@@ -1,13 +1,13 @@
 {
-  "updated": "2026-09-24T09:28:39Z",
+  "updated": "2026-09-24T15:58:14Z",
   "macro": {
-    "pkr_usd": 277.2,
+    "pkr_usd": 277.17,
     "sbp_rate": 11.5,
     "sbp_direction": "Holding",
     "inflation_cpi": 11.1,
     "kse100_level": 171844,
-    "fx_reserves_bn_usd": 21.39,
-    "fx_reserves_total_bn_usd": 26.79,
+    "fx_reserves_bn_usd": 21.4,
+    "fx_reserves_total_bn_usd": 26.81,
     "gdp_growth_pct": 3.7,
     "gdp_growth_fy": "2025-26",
     "imf_status": "Active — $7B Extended Fund Facility + $1.4B Resilience & Sustainability Facility; 3rd EFF / 2nd RSF review completed 8 May 2026 (~$4.8B disbursed)",
@@ -18,8 +18,8 @@
     "pkr_usd_approx": false,
     "pkr_usd_source": "State Bank of Pakistan (SBP) interbank M2M",
     "inflation_cpi_asof": "Aug 2026",
-    "fx_reserves_asof": "11 Sep 2026",
-    "pkr_usd_asof": "23 Sep 2026",
+    "fx_reserves_asof": "18 Sep 2026",
+    "pkr_usd_asof": "24 Sep 2026",
     "kse100_asof": "23 Sep 2026",
     "stocks_asof": "24 Sep 2026"
   },
@@ -2279,12 +2279,12 @@
   "gold": {
     "source": "gold.pk",
     "source_type": "local",
-    "tola_24k": 449500,
-    "tola_22k": 412042,
-    "g10_24k": 385380,
-    "g10_22k": 353266,
-    "gram_24k": 38538,
-    "gram_22k": 35327,
+    "tola_24k": 448300,
+    "tola_22k": 410942,
+    "g10_24k": 384352,
+    "g10_22k": 352323,
+    "gram_24k": 38435,
+    "gram_22k": 35232,
     "chg1y_pct": null
   },
   "fuel": {
@@ -2297,24 +2297,24 @@
   },
   "data_health": {
     "dividends": {
-      "ok": true,
+      "ok": false,
       "as_of": "2026-09-23",
       "source": "Pakistan Stock Exchange (PSX Data Portal) — company/payouts",
       "cadence": "daily",
-      "stale": false,
+      "stale": true,
       "age_days": 1,
-      "last_error": null,
+      "last_error": "ValueError: no payouts parsed for any requested symbol",
       "fetched_at": "2026-09-23T15:42:39Z"
     },
     "forex": {
       "ok": true,
-      "as_of": "Sep 23, 2026",
+      "as_of": "Sep 24, 2026",
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-24T09:28:12Z",
+      "fetched_at": "2026-09-24T15:54:45Z",
       "via": "sbp-m2m"
     },
     "funds": {
@@ -2335,7 +2335,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-24T09:28:14Z"
+      "fetched_at": "2026-09-24T15:54:47Z"
     },
     "inflation": {
       "ok": true,
@@ -2349,13 +2349,13 @@
       "via": "pbs-reviewed-report"
     },
     "kse": {
-      "ok": true,
+      "ok": false,
       "as_of": "2026-09-23",
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
-      "stale": false,
+      "stale": true,
       "age_days": 1,
-      "last_error": null,
+      "last_error": "HTTPError: HTTP Error 404: Not Found",
       "fetched_at": "2026-09-24T09:28:18Z"
     },
     "macro": {
@@ -2366,7 +2366,7 @@
       "stale": false,
       "age_days": 86,
       "last_error": null,
-      "fetched_at": "2026-09-23T15:42:58Z"
+      "fetched_at": "2026-09-24T15:58:14Z"
     },
     "petrol": {
       "ok": true,
@@ -2376,7 +2376,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-24T09:28:39Z",
+      "fetched_at": "2026-09-24T15:58:14Z",
       "via": "pakwheels"
     },
     "policy": {
@@ -2385,20 +2385,20 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "event",
       "stale": false,
-      "age_days": 1,
+      "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-23T15:42:48Z",
+      "fetched_at": "2026-09-24T15:58:05Z",
       "via": "sbp-m2m"
     },
     "reserves": {
       "ok": true,
-      "as_of": "September 11, 2026",
+      "as_of": "September 18, 2026",
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "weekly",
-      "stale": true,
-      "age_days": 13,
+      "stale": false,
+      "age_days": 6,
       "last_error": null,
-      "fetched_at": "2026-09-23T15:42:43Z",
+      "fetched_at": "2026-09-24T15:58:01Z",
       "via": "sbp-m2m"
     },
     "savings": {
@@ -2412,13 +2412,13 @@
       "fetched_at": "2026-09-04T15:13:58Z"
     },
     "stocks": {
-      "ok": true,
+      "ok": false,
       "as_of": "Thu, Sep 24, 2026 2:26 PM",
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
-      "stale": false,
+      "stale": true,
       "age_days": 0,
-      "last_error": null,
+      "last_error": "HTTPError: HTTP Error 404: Not Found",
       "fetched_at": "2026-09-24T09:28:39Z"
     }
   }

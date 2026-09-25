@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-25T09:45:57Z",
+  "updated": "2026-09-25T15:58:56Z",
   "macro": {
-    "pkr_usd": 277.17,
+    "pkr_usd": 277.16,
     "sbp_rate": 11.5,
     "sbp_direction": "Holding",
     "inflation_cpi": 11.1,
@@ -19,7 +19,7 @@
     "pkr_usd_source": "State Bank of Pakistan (SBP) interbank M2M",
     "inflation_cpi_asof": "Aug 2026",
     "fx_reserves_asof": "18 Sep 2026",
-    "pkr_usd_asof": "24 Sep 2026",
+    "pkr_usd_asof": "25 Sep 2026",
     "kse100_asof": "23 Sep 2026",
     "stocks_asof": "24 Sep 2026"
   },
@@ -2279,12 +2279,12 @@
   "gold": {
     "source": "gold.pk",
     "source_type": "local",
-    "tola_24k": 449500,
-    "tola_22k": 412042,
-    "g10_24k": 385380,
-    "g10_22k": 353266,
-    "gram_24k": 38538,
-    "gram_22k": 35327,
+    "tola_24k": 450500,
+    "tola_22k": 412958,
+    "g10_24k": 386238,
+    "g10_22k": 354051,
+    "gram_24k": 38624,
+    "gram_22k": 35405,
     "chg1y_pct": null
   },
   "fuel": {
@@ -2308,13 +2308,13 @@
     },
     "forex": {
       "ok": true,
-      "as_of": "Sep 24, 2026",
+      "as_of": "Sep 25, 2026",
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-25T09:45:49Z",
+      "fetched_at": "2026-09-25T15:55:27Z",
       "via": "sbp-m2m"
     },
     "funds": {
@@ -2335,7 +2335,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-25T09:45:53Z"
+      "fetched_at": "2026-09-25T15:55:31Z"
     },
     "inflation": {
       "ok": true,
@@ -2366,7 +2366,7 @@
       "stale": false,
       "age_days": 87,
       "last_error": null,
-      "fetched_at": "2026-09-24T15:58:14Z"
+      "fetched_at": "2026-09-25T15:58:56Z"
     },
     "petrol": {
       "ok": true,
@@ -2376,7 +2376,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-25T09:45:57Z",
+      "fetched_at": "2026-09-25T15:58:56Z",
       "via": "pakwheels"
     },
     "policy": {
@@ -2385,9 +2385,9 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "event",
       "stale": false,
-      "age_days": 1,
+      "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-09-24T15:58:05Z",
+      "fetched_at": "2026-09-25T15:58:46Z",
       "via": "sbp-m2m"
     },
     "reserves": {
@@ -2398,7 +2398,7 @@
       "stale": false,
       "age_days": 7,
       "last_error": null,
-      "fetched_at": "2026-09-24T15:58:01Z",
+      "fetched_at": "2026-09-25T15:58:41Z",
       "via": "sbp-m2m"
     },
     "savings": {

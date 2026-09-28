@@ -91,6 +91,13 @@ def test_staleness_rejects_future_and_expires_undated_collections():
     assert build_data._staleness({'ok': True, 'cadence': 'monthly', 'as_of': '2026-07'}, today)[0]
 
 
+def test_monthly_observation_ages_from_period_end_not_first_day():
+    part = {'ok': True, 'cadence': 'monthly', 'as_of': '2026-08'}
+    assert build_data._staleness(part, dt.date(2026, 9, 28)) == (False, 28)
+    assert build_data._staleness(part, dt.date(2026, 10, 6)) == (True, 36)
+    assert build_data._staleness(part, dt.date(2026, 8, 15))[0]
+
+
 def test_cpi_reviewed_release_prevents_month_regression_but_allows_new_data():
     reviewed = json.loads((ROOT / 'data/research/cpi-verified.json').read_text())
     assert choose_latest({'as_of': '2026-07', 'value': 9.2}, reviewed)['value'] == 11.1
@@ -104,6 +111,9 @@ def test_completed_cases_reconcile_cash_and_share_units():
     assert out['bafl']['dividend_adjusted'] == 5.25
     assert out['ssc']['coupons'] == [5600] * 5 + [6300]
     assert out['ssc']['total_profit'] == 34300
+    assert out['ssc_revision']['coupons'] == [5450] * 5 + [6000]
+    assert out['ssc_revision']['total_profit'] == 33250
+    assert out['ssc_revision']['difference'] == -1050
     assert out['fund']['units'] == 980
     assert out['fund']['values'] == [88200, 98000, 107800]
 

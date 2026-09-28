@@ -20,7 +20,8 @@ import time
 import datetime
 import html as _html
 
-from .base import http_get, partition, run, in_band, ROOT
+from .base import partition, run, in_band, ROOT
+from .psx_http import get as http_get
 
 NAME = "stocks"
 

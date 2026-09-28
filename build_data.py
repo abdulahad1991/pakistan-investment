@@ -20,6 +20,7 @@ data.json value untouched — the overlay is additive, never destructive.
 import json
 import re
 import datetime
+import calendar
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -31,7 +32,7 @@ STALE_DAYS = {
     "intraday": 5,    # Fri close + a long weekend/holiday is normal
     "daily": 5,
     "weekly": 12,
-    "monthly": 45,    # Month labels use day 1; flag a missed subsequent release.
+    "monthly": 35,    # Age a monthly observation from period end, allowing release lag.
     "event": 240,     # policy/savings/GDP move rarely
 }
 
@@ -98,6 +99,8 @@ def _staleness(part, today):
     cad = part.get("cadence", "daily")
     limit = STALE_DAYS.get(cad, 7)
     d = _to_date(part.get("as_of"))
+    if d and cad == 'monthly' and re.fullmatch(r'\d{4}-\d{2}', part.get('as_of', '')):
+        d = d.replace(day=calendar.monthrange(d.year, d.month)[1])
     if d is None:
         # A successful collection cannot remain fresh indefinitely when the
         # publisher gives no observation date. Use collection age explicitly.
@@ -314,6 +317,9 @@ def merge():
             "last_error": pp.get("last_error"),
             "fetched_at": pp.get('fetched_at'),
         }
+        for field in ('source_url', 'reviewed_on', 'verification', 'last_attempt'):
+            if pp.get(field):
+                health[name][field] = pp[field]
         # Failover provenance: which source in the crawl chain actually served
         # this value, and (when a non-primary won) that the primary was down.
         if pp.get("via"):

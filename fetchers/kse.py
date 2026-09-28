@@ -15,7 +15,8 @@ calendar-month history (~last 72 months) for the homepage chart.
 import json
 from datetime import datetime, timezone
 
-from .base import http_get, partition, run, in_band
+from .base import partition, run, in_band
+from .psx_http import get as http_get
 
 NAME = "kse"
 KSE_URL = "https://dps.psx.com.pk/timeseries/eod/KSE100"

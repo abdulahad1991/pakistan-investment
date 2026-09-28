@@ -115,6 +115,10 @@ gtag('config', 'G-4T2H0KH9H7');
   .guide-link{font-family:var(--display);font-size:.82rem;font-weight:700;color:var(--green);border-bottom:2px solid var(--acid);align-self:flex-start;padding-bottom:1px}
   .guide-card:hover .guide-link{color:var(--mint)}
 
+  .desk-readout .ticker-cell{display:block}
+  .desk-readout p{font-size:.9rem;line-height:1.55;margin:8px 0 0;color:var(--ink2)}
+  .desk-readout a{text-decoration:underline;text-underline-offset:3px;color:var(--green)}
+
   /* empty state */
   .filter-empty{display:none;padding:48px var(--pad);text-align:center;font-family:var(--body);font-size:1rem;color:var(--ink2);border-top:1px solid var(--line);background:var(--mint)}
   .filter-empty a{color:var(--green);border-bottom:1px solid var(--acid)}
@@ -164,7 +168,7 @@ gtag('config', 'G-4T2H0KH9H7');
   <div class="ticker-inner">
     <span class="ticker-live"><span class="dot"></span>DATA</span>
     <div class="ticker-feed">
-      <span class="tk">KSE-100 <b id="tk-kse">1,71,844</b></span>
+      <span class="tk">KSE-100 <b id="tk-kse">1,70,665</b></span>
       <span class="tk">POLICY <b id="tk-sbp">11.5%</b></span>
       <span class="tk">USD/PKR <b id="tk-pkr">&#8360;277.16</b></span>
       <span class="tk">GOLD/TOLA <b id="tk-gold">&#8360;4,47,700</b> <span class="up" id="tkc-gold">1Y unavailable</span></span>
@@ -192,30 +196,40 @@ gtag('config', 'G-4T2H0KH9H7');
     <div class="blog-hero-copy">
       <div class="blog-eyebrow">Dated research notes</div>
       <h1>Methods, sources &amp;<span class="mark"> datasets.</span></h1>
-      <p>Long-form reviews of Pakistan-specific public documents and market datasets. Each retained article states its cutoff, calculation method and limits.</p>
+      <p>Long-form reviews of Pakistan-specific public documents and market datasets. Each article states its cutoff, calculation method and limits. Start with a completed calculation, then inspect the source documents and downloadable inputs.</p>
       <div id="manifest-stamp"></div>
     </div>
 
-    <div class="desk-readout" aria-label="Market readout">
-      <div class="desk-head">
-        <span class="dh-k">DESK READOUT</span>
-        <span class="dh-t">Dataset cutoff shown below</span>
+    <aside class="desk-readout" aria-label="Completed calculations">
+      <div class="desk-head"><span class="dh-k">START WITH THE NUMBERS</span></div>
+      <div class="ticker-cell">
+        <a href="/guides/national-savings-vs-mutual-funds.html#ssc-rate-change-case"><strong>September SSC rates: calculate the change in cash</strong></a>
+        <p>Compare all six payments under the July and September schedules, with a downloadable calculation. Reviewed 28 September 2026.</p>
       </div>
-      <div class="ticker-row">
-        <div class="ticker-cell"><span class="tk-lbl">KSE-100</span><span class="tk-val" id="t-kse">-</span></div>
-        <div class="ticker-cell"><span class="tk-lbl">SBP Rate</span><span class="tk-val" id="t-sbp">-</span></div>
-        <div class="ticker-cell"><span class="tk-lbl">Inflation (CPI)</span><span class="tk-val" id="t-inf">-</span></div>
-        <div class="ticker-cell"><span class="tk-lbl">PKR / USD</span><span class="tk-val" id="t-pkr">-</span></div>
-        <div class="ticker-cell"><span class="tk-lbl">Data Date</span><span class="tk-val" id="t-date">-</span></div>
+      <div class="ticker-cell">
+        <a href="/backtester.html#split-case-study"><strong>Systems: a split changes the share count</strong></a>
+        <p>Trace two recorded prices through the five-for-one adjustment. The worksheet shows why comparing the raw prices alone gives the wrong return.</p>
       </div>
-    </div>
+      <div class="ticker-cell">
+        <a href="/blog/how-to-value-bank-stocks-pakistan.html#bafl-case-study"><strong>Bank Alfalah: match the per-share basis</strong></a>
+        <p>Reconcile reported earnings and dividends before interpreting growth or a valuation multiple.</p>
+      </div>
+      <div class="ticker-cell">
+        <a href="/guides/national-savings-vs-mutual-funds.html#ssc-case-study"><strong>Special Savings: account for every coupon</strong></a>
+        <p>Follow six separate cash flows under the dated certificate schedule, including the higher final coupon and early-exit examples.</p>
+      </div>
+      <div class="ticker-cell">
+        <a href="/guides/how-to-invest-mutual-funds-pakistan.html#fund-case-study"><strong>Fund fees: an unchanged NAV can still mean a loss</strong></a>
+        <p>Use an explicitly hypothetical sales load to calculate units, break-even NAV and three possible outcomes.</p>
+      </div>
+    </aside>
   </div>
 
   <!-- search -->
   <div class="list-search">
     <span class="ls-ic" aria-hidden="true"></span>
-    <input type="text" id="card-filter" placeholder="Search analysis - budget, tax, housing, PSX…" autocomplete="off" aria-label="Search blog posts">
-    <span class="ls-count">3 RETAINED ARTICLES</span>
+    <input type="text" id="card-filter" placeholder="Search research - budget, tax, dividends, PSX…" autocomplete="off" aria-label="Search blog posts">
+    <span class="ls-count">3 RESEARCH ARTICLES</span>
   </div>
 
   <!-- grid (cards injected/filtered by listing.js) -->

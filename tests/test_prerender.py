@@ -66,6 +66,27 @@ class TestBuildValues:
         assert "gr-tola24" not in v
         assert "f-petrol" not in v
 
+    def test_library_readout_is_static_and_preserves_source_dates(self):
+        data = {**self.DATA, 'data_health': {
+            'kse': {'as_of': '2026-07-15', 'ok': False},
+            'policy': {'fetched_at': '2026-07-18T12:00:00Z', 'ok': True},
+            'inflation': {'as_of': '2026-06', 'ok': True},
+            'forex': {'as_of': '2026-07-17', 'ok': True},
+        }}
+        values = prerender.build_values(data)
+        assert values['t-kse'] == '1,78,185'
+        assert values['t-pkr'] == '&#8360;277.96'
+        assert values['t-date'] == '19 July 2026'
+        note = values['t-source-status']
+        assert 'KSE-100: 2026-07-15; collection failed' in note
+        assert 'Policy rate: collected 2026-07-18' in note
+        assert 'CPI: 2026-06' in note
+        assert '19 July 2026' not in note
+        assert values['snapshot-date'] == note
+
+    def test_observation_note_does_not_invent_dates(self):
+        assert prerender.observation_note({}).count('date unavailable') == 4
+
 
 class TestApply:
     def test_fills_and_is_idempotent(self):

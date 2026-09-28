@@ -5,13 +5,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ── Live ticker ──────────────────────────────────────── */
   fetch('/data.json').then(function (r) { return r.json(); }).then(function (d) {
-    var m = d.macro;
+    var m = d.macro || {};
     var set = function (id, v) { var e = document.getElementById(id); if (e) e.textContent = v; };
-    set('t-kse', m.kse100_level.toLocaleString());
-    set('t-sbp', m.sbp_rate + '%');
-    set('t-inf', m.inflation_cpi + '%');
-    set('t-pkr', m.pkr_usd);
-    set('t-date', (d.updated || '').slice(0, 10));
+    if (m.kse100_level != null) set('t-kse', m.kse100_level.toLocaleString('en-IN'));
+    if (m.sbp_rate != null) set('t-sbp', m.sbp_rate + '%');
+    if (m.inflation_cpi != null) set('t-inf', m.inflation_cpi + '%');
+    if (m.pkr_usd != null) set('t-pkr', '₨' + m.pkr_usd);
+    set('t-date', (d.updated || '').slice(0, 10) || 'unavailable');
+    var health = d.data_health || {};
+    set('t-source-status', [['kse', 'KSE-100'], ['policy', 'Policy rate'], ['inflation', 'CPI'], ['forex', 'USD/PKR']].map(function (item) {
+      var row = health[item[0]] || {};
+      var when = row.as_of || (row.fetched_at ? 'collected ' + row.fetched_at.slice(0, 10) : 'date unavailable');
+      var status = row.ok === false ? '; collection failed' : row.stale ? '; delayed' : '';
+      return item[1] + ': ' + when + status;
+    }).join(' · '));
   }).catch(function () {});
 
   /* ── Manifest: auto-append new pages, badge the newest ── */

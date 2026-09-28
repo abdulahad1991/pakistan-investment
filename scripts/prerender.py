@@ -73,6 +73,21 @@ def data_age_label(iso: str) -> str:
     return f"Build date: {when}; observations have separate dates" if when else "Build date unavailable"
 
 
+def observation_note(data):
+    """Keep observation dates visible instead of substituting the build date."""
+    health = data.get('data_health') or {}
+    notes = []
+    for key, label in [('kse', 'KSE-100'), ('policy', 'Policy rate'),
+                       ('inflation', 'CPI'), ('forex', 'USD/PKR')]:
+        row = health.get(key) or {}
+        when = row.get('as_of') or ('collected ' + str(row['fetched_at'])[:10]
+                                   if row.get('fetched_at') else 'date unavailable')
+        status = ('; collection failed' if row.get('ok') is False else
+                  '; delayed' if row.get('stale') else '')
+        notes.append(f'{label}: {when}{status}')
+    return ' · '.join(notes)
+
+
 def fund_snapshot(data, today=None):
     today = today or datetime.now().date()
     def fresh(row):
@@ -132,12 +147,19 @@ def build_values(d: dict) -> dict[str, str]:
     v["m-sbp"] = v["h-sbp"] = v["tk-sbp"]
     v["m-pkr"] = v["h-pkr"] = v["tk-pkr"]
     v["m-inf"] = v["h-inf"] = v["tk-inf"]
+    # Guide/library readout: useful without JavaScript, with each source date.
+    v['t-kse'] = v['tk-kse']
+    v['t-sbp'] = v['tk-sbp']
+    v['t-inf'] = v['tk-inf']
+    v['t-pkr'] = v['tk-pkr']
+    v['t-date'] = long_date(updated) or 'unavailable'
+    v['t-source-status'] = v['snapshot-date'] = html_lib.escape(observation_note(d))
     v["data-age"] = data_age_label(updated)
     stale = [name for name, health in d.get('data_health', {}).items() if health.get('stale') or not health.get('ok')]
     if stale:
         v['data-age'] += ' · Delayed: ' + ', '.join(stale)
     if long_date(updated):
-        v["hero-data-age"] = "Dataset: " + long_date(updated)
+        v["hero-data-age"] = "Build: " + long_date(updated)
 
     # Homepage gold card.
     if g:

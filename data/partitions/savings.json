@@ -1,20 +1,21 @@
 {
   "name": "savings",
   "value": {
-    "Behbood Savings Certificate": 12.96,
-    "Defence Savings Certificate": 10.24,
-    "Regular Income Certificate": 11.52,
+    "Behbood Savings Certificate": 12.6,
+    "Defence Savings Certificate": 11.61,
+    "Regular Income Certificate": 11.16,
     "Savings Account": 10.0,
-    "Special Savings Certificate": 11.2,
-    "Special Savings Certificate 6th": 12.6
+    "Special Savings Certificate": 10.9,
+    "Special Savings Certificate 6th": 12.0
   },
-  "as_of": "18-07-2026",
+  "as_of": "04-09-2026",
   "source": "Central Directorate of National Savings (CDNS)",
-  "ok": false,
-  "fetched_at": "2026-09-04T15:13:58Z",
+  "ok": true,
+  "fetched_at": "2026-09-28T06:39:13Z",
   "cadence": "event",
-  "effective": "18-07-2026",
+  "effective": "04-09-2026",
   "source_url": "https://savings.gov.pk/latest-profit-rates/",
-  "last_error": "ValueError: CDNS 'Latest profit rates:' banner not found",
-  "last_attempt": "2026-09-25T15:58:52Z"
+  "via": "cdns-reviewed-notice",
+  "reviewed_on": "2026-09-28",
+  "verification": "Current notice date, links and document SHA-256 hashes match the reviewed schedule"
 }

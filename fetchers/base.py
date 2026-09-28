@@ -24,10 +24,11 @@ def utcnow_iso():
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def http_get(url, headers=None, data=None, timeout=30, retries=3, backoff=2.0):
+def http_get(url, headers=None, data=None, timeout=30, retries=3, backoff=2.0, binary=False):
     """GET, or POST when ``data`` is given, with browser UA + linear backoff.
 
-    Returns the decoded body text. Raises the last exception after ``retries``.
+    Returns decoded text, or original bytes for a document integrity check
+    when binary=True. Raises the last exception after ``retries``.
     """
     hdrs = {"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9",
             "Accept": "text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*/*;q=0.8"}
@@ -40,7 +41,8 @@ def http_get(url, headers=None, data=None, timeout=30, retries=3, backoff=2.0):
         try:
             req = urllib.request.Request(url, data=body, headers=hdrs, method=method)
             with urllib.request.urlopen(req, timeout=timeout) as r:
-                return r.read().decode("utf-8", "replace")
+                raw = r.read()
+                return raw if binary else raw.decode("utf-8", "replace")
         except Exception as e:  # noqa: BLE001 - retry on any transport error
             last = e
             if isinstance(e, urllib.error.HTTPError) and e.code in (401, 403, 404):

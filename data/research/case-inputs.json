@@ -2,19 +2,24 @@
   "reviewed_on": "2026-09-07",
   "sys": {
     "amount": 100000,
-    "before_date": "2025-05-27", "before_price": 539.94,
-    "after_date": "2025-06-30", "after_price": 107.00,
-    "share_factor": 5, "effective_date": "2025-06-02",
+    "before_date": "2025-05-27",
+    "before_price": 539.94,
+    "after_date": "2025-06-30",
+    "after_price": 107.0,
+    "share_factor": 5,
+    "effective_date": "2025-06-02",
     "prices_source": "https://dps.psx.com.pk/timeseries/eod/SYS",
     "action_source": "https://dps.psx.com.pk/download/attachment/254268-1.pdf",
     "credit_source": "https://dps.psx.com.pk/download/document/254645.pdf"
   },
   "bafl": {
     "fy2025_eps_old_share": 17.97,
-    "fy2025_dividend_old_share": 10.50,
-    "split_factor": 2, "split_date": "2026-04-20",
-    "hy2025_eps_restated": 4.84, "hy2026_eps": 6.76,
-    "hy2026_dividend": 3.00,
+    "fy2025_dividend_old_share": 10.5,
+    "split_factor": 2,
+    "split_date": "2026-04-20",
+    "hy2025_eps_restated": 4.84,
+    "hy2026_eps": 6.76,
+    "hy2026_dividend": 3.0,
     "fy_source": "https://www.bankalfalah.com/news-room/annual-results-for-2025-and-2-for-1-stock-split/",
     "hy_source": "https://www.bankalfalah.com/news-room/bank-alfalah-reports-39-rise-in-half-year-2026-profit-after-tax/",
     "action_source": "https://dps.psx.com.pk/download/attachment/273940-1.pdf"
@@ -22,14 +27,43 @@
   "ssc": {
     "principal": 100000,
     "rate_effective": "2026-07-18",
-    "annual_rates_percent": [11.2, 11.2, 11.2, 11.2, 11.2, 12.6],
-    "source": "https://savings.gov.pk/special-savings-certificates/",
-    "basis": "Gross hypothetical purchase under the stated rate schedule. Six-month coupons withdrawn, no reinvestment, tax or Zakat calculation."
+    "annual_rates_percent": [
+      11.2,
+      11.2,
+      11.2,
+      11.2,
+      11.2,
+      12.6
+    ],
+    "source": "https://savings.gov.pk/wp-content/uploads/2026/09/SSA_SSC_040926.pdf",
+    "basis": "Gross hypothetical purchase under the stated rate schedule. Six-month coupons withdrawn, no reinvestment, tax or Zakat calculation.",
+    "source_location": "Page 3, purchase-date row 18-Jul-26 through 03-Sep-26"
   },
   "fund": {
-    "contribution": 100000, "assumed_load_percent_of_contribution": 2,
-    "initial_nav": 100, "ending_nav_scenarios": [90, 100, 110],
+    "contribution": 100000,
+    "assumed_load_percent_of_contribution": 2,
+    "initial_nav": 100,
+    "ending_nav_scenarios": [
+      90,
+      100,
+      110
+    ],
     "months": 6,
     "basis": "Explicit arithmetic assumptions, not an actual fund quote or observed investor result. Load is defined as a deduction from gross contribution; actual offer-price formulas may differ. NAV already reflects recurring fund expenses; no separate TER subtraction. No distributions, back-end load, tax or settlement adjustment."
+  },
+  "ssc_revision": {
+    "reviewed_on": "2026-09-28",
+    "rate_effective": "2026-09-04",
+    "annual_rates_percent": [
+      10.9,
+      10.9,
+      10.9,
+      10.9,
+      10.9,
+      12.0
+    ],
+    "source": "https://savings.gov.pk/wp-content/uploads/2026/09/SSA_SSC_040926.pdf",
+    "source_location": "Page 3, adjacent 18-Jul-26 and 04-Sep-26 rows",
+    "basis": "Two hypothetical PKR 100,000 purchases under the separate schedules, held to maturity with coupons withdrawn. No reinvestment, taxes, Zakat or claim that an earlier certificate is repriced."
   }
 }

@@ -24,6 +24,12 @@ def blogs():
         n = p.name
         if "index" in n or "v1-backup" in n:
             continue
+        html = p.read_text(encoding="utf-8")
+        # Retired articles and redirect destinations are not audio publications.
+        if re.search(r'<meta\b[^>]*\bcontent=["\'][^"\']*noindex', html, re.I):
+            continue
+        if re.search(r'<meta\b[^>]*http-equiv=["\']refresh', html, re.I):
+            continue
         yield p
 
 

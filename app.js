@@ -68,7 +68,7 @@ function applyData() {
   ageEl.textContent = `Build date: ${cutoff}; observations have separate dates` +
     (staleSources.length ? ` · ${staleSources.length} source group${staleSources.length === 1 ? "" : "s"} stale` : "");
   if (staleSources.length) ageEl.title = `Stale source groups: ${staleSources.join(", ")}`;
-  setText("hero-data-age", `Dataset: ${cutoff}`);
+  setText("hero-data-age", `Build: ${cutoff}`);
 
   // Macro pills
   const m = DATA.macro;
@@ -100,10 +100,12 @@ function applyData() {
 
   const snap = document.getElementById("snapshot-date");
   if (snap) {
-    const d = new Date(DATA.updated);
-    snap.textContent =
-      "As of " + d.toLocaleDateString("en-PK", { day: "numeric", month: "long", year: "numeric" }) +
-      " · Sources: PBS, SBP, PSX, MUFAP, National Savings";
+    snap.textContent = [['kse', 'KSE-100'], ['policy', 'Policy rate'], ['inflation', 'CPI'], ['forex', 'USD/PKR']].map(([key, label]) => {
+      const row = (DATA.data_health || {})[key] || {};
+      const when = row.as_of || (row.fetched_at ? 'collected ' + row.fetched_at.slice(0, 10) : 'date unavailable');
+      const status = row.ok === false ? '; collection failed' : row.stale ? '; delayed' : '';
+      return `${label}: ${when}${status}`;
+    }).join(' · ');
   }
 
   // Dated ticker tape, best-effort and only if present.

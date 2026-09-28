@@ -23,7 +23,8 @@ import time
 import html as _html
 import datetime
 
-from .base import http_get, partition, run, in_band
+from .base import partition, run, in_band
+from .psx_http import get as http_get
 from .corporate_actions import load_ledger, dividend_basis
 
 NAME = "dividends"

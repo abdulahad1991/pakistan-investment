@@ -21,7 +21,7 @@ def calculations(d):
     adjusted = raw * s['share_factor']
     coupons = [c['principal'] * rate / 100 / 2 for rate in c['annual_rates_percent']]
     units = f['contribution'] * (1 - f['assumed_load_percent_of_contribution'] / 100) / f['initial_nav']
-    return {
+    out = {
         'sys': {'before_units': before_units, 'after_units': before_units * s['share_factor'],
                 'raw_final': raw, 'adjusted_final': adjusted,
                 'raw_return': (raw / s['amount'] - 1) * 100,
@@ -35,6 +35,11 @@ def calculations(d):
         'fund': {'units': units, 'break_even_nav': f['contribution'] / units,
                  'values': [units * nav for nav in f['ending_nav_scenarios']]},
     }
+    if 'ssc_revision' in d:
+        new = [c['principal'] * rate / 100 / 2 for rate in d['ssc_revision']['annual_rates_percent']]
+        out['ssc_revision'] = {'coupons': new, 'total_profit': sum(new),
+                               'difference': sum(new) - sum(coupons)}
+    return out
 
 
 def write_csv(name, header, rows):
@@ -54,11 +59,11 @@ def table(headers, rows):
             '</tbody></table></div>')
 
 
-def publish(file, anchor, title, body, download):
+def publish(file, anchor, title, body, download, reviewed_on='7 September 2026'):
     page = ROOT / file
     html = page.read_text()
     section = (f'<section class="research-case" id="{anchor}">'
-               '<p class="research-meta">Original calculation · Reviewed 7 September 2026 · Abdul Ahad, publisher</p>'
+               f'<p class="research-meta">Original calculation · Reviewed {reviewed_on} · Abdul Ahad, publisher</p>'
                f'<h2>{title}</h2>{body}'
                f'<p><a href="/data/research/{download}" download>Download the calculation (CSV)</a> · '
                '<a href="/data/research/case-inputs.json">Dated inputs and sources (JSON)</a></p></section>')
@@ -154,7 +159,41 @@ def build():
              '<p>For a matched six-month fund comparison, use the <a href="/guides/how-to-invest-mutual-funds-pakistan.html#fund-case-study">'
              'units-and-fees scenario</a>. Its outcome depends on an assumed future NAV; it is not interchangeable '
              'with this stated coupon schedule. Apply personal tax and access constraints before comparing net amounts.</p>')
+    body = '<p><strong>Historical July schedule.</strong> The September schedule is compared in the next case. This example retains the earlier purchase-date terms.</p>' + body
     publish('guides/national-savings-vs-mutual-funds.html', 'ssc-case-study', 'Completed cash-flow case: PKR 100,000 in SSCs', body, 'ssc-cash-flows.csv')
+
+    revision, revised = d['ssc_revision'], out['ssc_revision']
+    csv_rows = []
+    for n, (old_rate, new_rate, old_coupon, new_coupon) in enumerate(zip(
+            c['annual_rates_percent'], revision['annual_rates_percent'],
+            out['ssc']['coupons'], revised['coupons']), 1):
+        csv_rows.append([n * 6, old_rate, new_rate, old_coupon, new_coupon,
+                         new_coupon - old_coupon, revision['source']])
+    write_csv('ssc-rate-change.csv', ['month', 'july_annual_rate_percent', 'september_annual_rate_percent',
+              'july_coupon_pkr', 'september_coupon_pkr', 'difference_pkr', 'source'], csv_rows)
+    body = (f'<p>The <a href="{revision["source"]}">official CDNS historical schedule, page 3</a> '
+            'shows two adjacent purchase-date bands: 18 July–3 September 2026 and 4 September 2026 onward. '
+            'Compare a hypothetical PKR 100,000 purchase under each schedule, held for three years. '
+            'Coupons are withdrawn; amounts exclude tax and any applicable Zakat.</p>')
+    body += table(['Payment timing', 'July schedule', 'September schedule', 'Change'], [
+        ['Months 6, 12, 18, 24 and 30 (each)', 'PKR 5,600', 'PKR 5,450', '−PKR 150 each'],
+        ['Month 36', 'PKR 6,300', 'PKR 6,000', '−PKR 300'],
+        ['Total gross coupons', f'PKR {out["ssc"]["total_profit"]:,.0f}', f'PKR {revised["total_profit"]:,.0f}',
+         f'−PKR {abs(revised["difference"]):,.0f}']])
+    body += (f'<p class="research-result">The September schedule produces PKR {abs(revised["difference"]):,.0f} '
+             'less gross profit over three years for the same principal: five reductions of PKR 150 plus one of PKR 300.</p>'
+             '<p>Reproduce the new total as 5 × (100,000 × 10.90% ÷ 2) + (100,000 × 12.00% ÷ 2) = PKR 33,250. '
+             'The PKR 100,000 principal is returned separately at maturity, making total gross cash receipts PKR 133,250. '
+             'Neither the three-year cash profit nor its simple annual average is a compounded return.</p>'
+             '<p>The current summary image rounds the average annual rate to 11.08%. Using that rounded headline '
+             'for all three years gives PKR 33,240, ten rupees below the coupon schedule. Using the coupon table '
+             'also preserves the timing of the higher last payment. At month 12, for example, two new-schedule '
+             'coupons total PKR 10,900; no part of the higher sixth coupon has been received.</p>'
+             '<p>This compares two purchase assumptions. It does not claim that a certificate bought under the '
+             'earlier schedule is repriced, or that a future purchaser will receive these rates. Match the actual '
+             'purchase date and product terms to the issuer’s applicable schedule.</p>')
+    publish('guides/national-savings-vs-mutual-funds.html', 'ssc-rate-change-case',
+            'September SSC rate change: follow all six payments', body, 'ssc-rate-change.csv', '28 September 2026')
 
     f, r = d['fund'], out['fund']
     write_csv('fund-units-and-fees.csv', ['ending_nav_assumption', 'units', 'ending_value_pkr', 'gain_on_gross_contribution_pkr', 'return_on_gross_contribution_percent'], [
@@ -183,4 +222,4 @@ def build():
 
 if __name__ == '__main__':
     build()
-    print('Built four dated case studies and calculation CSVs.')
+    print('Built five dated case studies and calculation CSVs.')

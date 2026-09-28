@@ -2132,16 +2132,28 @@
     "PSO": {
       "latest_cash": 10.0,
       "latest_pct": 100.0,
-      "period": "30/06/2025(YR)",
-      "announce": "August 19, 2025 4:17 PM",
-      "book_closure": "17/10/2025 - 24/10/2025",
-      "ttm_cash": 0,
+      "period": "30/06/2026(YR)",
+      "announce": "September 25, 2026 5:06 PM",
+      "book_closure": "21/10/2026 - 28/10/2026",
+      "ttm_cash": 10.0,
       "symbol": "PSO",
       "face_value": 10,
       "basis_verified": false,
       "window_start": "2025-09-28",
       "window_end": "2026-09-28",
-      "cash_rows": []
+      "cash_rows": [
+        {
+          "announce": "September 25, 2026 5:06 PM",
+          "period": "30/06/2026(YR)",
+          "book_closure": "21/10/2026 - 28/10/2026",
+          "pct": 100.0,
+          "cash": 10.0,
+          "date": "2026-09-25",
+          "basis_verified": false,
+          "face_at_declaration": 10,
+          "subsequent_share_factor": 1
+        }
+      ]
     },
     "WAFI": {
       "latest_cash": 4.0,
@@ -2372,6 +2384,32 @@
         }
       ]
     },
+    "SEARL": {
+      "latest_cash": 1.0,
+      "latest_pct": 10.0,
+      "period": "30/06/2026(YR)",
+      "announce": "September 25, 2026 4:56 PM",
+      "book_closure": "15/10/2026 - 22/10/2026",
+      "ttm_cash": 1.0,
+      "symbol": "SEARL",
+      "face_value": 10,
+      "basis_verified": false,
+      "window_start": "2025-09-28",
+      "window_end": "2026-09-28",
+      "cash_rows": [
+        {
+          "announce": "September 25, 2026 4:56 PM",
+          "period": "30/06/2026(YR)",
+          "book_closure": "15/10/2026 - 22/10/2026",
+          "pct": 10.0,
+          "cash": 1.0,
+          "date": "2026-09-25",
+          "basis_verified": false,
+          "face_at_declaration": 10,
+          "subsequent_share_factor": 1
+        }
+      ]
+    },
     "HUBC": {
       "latest_cash": 5.0,
       "latest_pct": 50.0,
@@ -2480,18 +2518,29 @@
       ]
     },
     "NCPL": {
-      "latest_cash": 1.5,
-      "latest_pct": 15.0,
-      "period": "31/03/2026(IIIQ)",
-      "announce": "April 28, 2026 4:03 PM",
-      "book_closure": "11/05/2026 - 12/05/2026",
-      "ttm_cash": 1.5,
+      "latest_cash": 1.0,
+      "latest_pct": 10.0,
+      "period": "30/06/2026(YR)",
+      "announce": "September 28, 2026 4:02 PM",
+      "book_closure": "09/10/2026 - 23/10/2026",
+      "ttm_cash": 2.5,
       "symbol": "NCPL",
       "face_value": 10,
       "basis_verified": false,
       "window_start": "2025-09-28",
       "window_end": "2026-09-28",
       "cash_rows": [
+        {
+          "announce": "September 28, 2026 4:02 PM",
+          "period": "30/06/2026(YR)",
+          "book_closure": "09/10/2026 - 23/10/2026",
+          "pct": 10.0,
+          "cash": 1.0,
+          "date": "2026-09-28",
+          "basis_verified": false,
+          "face_at_declaration": 10,
+          "subsequent_share_factor": 1
+        },
         {
           "announce": "April 28, 2026 4:03 PM",
           "period": "31/03/2026(IIIQ)",
@@ -2506,18 +2555,29 @@
       ]
     },
     "NPL": {
-      "latest_cash": 1.5,
-      "latest_pct": 15.0,
-      "period": "31/03/2026(IIIQ)",
-      "announce": "April 28, 2026 4:02 PM",
-      "book_closure": "11/05/2026 - 12/05/2026",
-      "ttm_cash": 1.5,
+      "latest_cash": 1.0,
+      "latest_pct": 10.0,
+      "period": "30/06/2026(YR)",
+      "announce": "September 28, 2026 4:00 PM",
+      "book_closure": "16/10/2026 - 23/10/2026",
+      "ttm_cash": 2.5,
       "symbol": "NPL",
       "face_value": 10,
       "basis_verified": false,
       "window_start": "2025-09-28",
       "window_end": "2026-09-28",
       "cash_rows": [
+        {
+          "announce": "September 28, 2026 4:00 PM",
+          "period": "30/06/2026(YR)",
+          "book_closure": "16/10/2026 - 23/10/2026",
+          "pct": 10.0,
+          "cash": 1.0,
+          "date": "2026-09-28",
+          "basis_verified": false,
+          "face_at_declaration": 10,
+          "subsequent_share_factor": 1
+        },
         {
           "announce": "April 28, 2026 4:02 PM",
           "period": "31/03/2026(IIIQ)",
@@ -2960,8 +3020,8 @@
   "as_of": "2026-09-28",
   "source": "Pakistan Stock Exchange (PSX Data Portal) — company/payouts",
   "ok": true,
-  "fetched_at": "2026-09-28T06:42:39Z",
+  "fetched_at": "2026-09-28T18:50:42Z",
   "cadence": "daily",
-  "count": 77,
-  "latest_announce": "2026-09-18"
+  "count": 78,
+  "latest_announce": "2026-09-28"
 }

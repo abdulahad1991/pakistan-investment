@@ -10,12 +10,14 @@
   },
   "as_of": "04-09-2026",
   "source": "Central Directorate of National Savings (CDNS)",
-  "ok": true,
+  "ok": false,
   "fetched_at": "2026-10-01T17:37:11Z",
   "cadence": "event",
   "effective": "04-09-2026",
   "source_url": "https://savings.gov.pk/latest-profit-rates/",
   "via": "cdns-reviewed-notice",
   "reviewed_on": "2026-09-28",
-  "verification": "Current notice date, links and document SHA-256 hashes match the reviewed schedule"
+  "verification": "Current notice date, links and document SHA-256 hashes match the reviewed schedule",
+  "last_error": "HTTPError: HTTP Error 404: Not Found",
+  "last_attempt": "2026-10-02T16:57:08Z"
 }

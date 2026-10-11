@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10T16:23:02Z",
+  "updated": "2026-10-11T10:58:58Z",
   "macro": {
     "pkr_usd": 277.0,
     "sbp_rate": 11.5,
@@ -2308,7 +2308,7 @@
       "source": "Pakistan Stock Exchange (PSX Data Portal) — company/payouts",
       "cadence": "daily",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null,
       "fetched_at": "2026-10-09T17:40:45Z"
     },
@@ -2318,9 +2318,9 @@
       "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null,
-      "fetched_at": "2026-10-10T16:23:00Z",
+      "fetched_at": "2026-10-11T10:58:56Z",
       "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp",
       "via": "sbp-m2m"
     },
@@ -2330,7 +2330,7 @@
       "source": "Mutual Funds Association of Pakistan (MUFAP)",
       "cadence": "daily",
       "stale": true,
-      "age_days": 78,
+      "age_days": 79,
       "last_error": "HTTPError: HTTP Error 403: Forbidden",
       "fetched_at": "2026-07-24T13:14:31Z",
       "source_url": "https://www.mufap.com.pk/Industry/IndustryStatDaily?tab=1",
@@ -2344,7 +2344,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-10-10T16:23:02Z",
+      "fetched_at": "2026-10-11T10:58:58Z",
       "source_url": "https://gold.pk/"
     },
     "inflation": {
@@ -2353,7 +2353,7 @@
       "source": "Pakistan Bureau of Statistics (PBS), reviewed monthly report",
       "cadence": "monthly",
       "stale": true,
-      "age_days": 40,
+      "age_days": 41,
       "last_error": null,
       "fetched_at": "2026-09-07T00:00:00Z",
       "source_url": "https://www.pbs.gov.pk/wp-content/uploads/2020/07/Monthly-Review-August-2026.pdf",
@@ -2366,7 +2366,7 @@
       "source": "Pakistan Stock Exchange (PSX Data Portal)",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null,
       "fetched_at": "2026-10-09T17:33:05Z",
       "source_url": "https://dps.psx.com.pk/timeseries/eod/KSE100"
@@ -2377,7 +2377,7 @@
       "source": "Pakistan Bureau of Statistics (PBS) + IMF",
       "cadence": "event",
       "stale": false,
-      "age_days": 102,
+      "age_days": 103,
       "last_error": null,
       "fetched_at": "2026-10-09T17:41:07Z",
       "source_url": "https://www.pbs.gov.pk/national-accounts-2"
@@ -2388,9 +2388,9 @@
       "source": "PakWheels (OGRA-notified rates)",
       "cadence": "daily",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
-      "fetched_at": "2026-10-10T16:23:02Z",
+      "fetched_at": "2026-10-11T10:58:58Z",
       "source_url": "https://www.pakwheels.com/petroleum-prices-in-pakistan",
       "via": "pakwheels"
     },
@@ -2400,7 +2400,7 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "event",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null,
       "fetched_at": "2026-10-09T17:40:53Z",
       "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp",
@@ -2412,7 +2412,7 @@
       "source": "State Bank of Pakistan (SBP)",
       "cadence": "weekly",
       "stale": false,
-      "age_days": 8,
+      "age_days": 9,
       "last_error": null,
       "fetched_at": "2026-10-09T17:40:48Z",
       "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp",
@@ -2424,7 +2424,7 @@
       "source": "Central Directorate of National Savings (CDNS)",
       "cadence": "event",
       "stale": true,
-      "age_days": 36,
+      "age_days": 37,
       "last_error": "HTTPError: HTTP Error 404: Not Found",
       "fetched_at": "2026-10-01T17:37:11Z",
       "source_url": "https://savings.gov.pk/latest-profit-rates/",
@@ -2439,7 +2439,7 @@
       "source": "https://dps.psx.com.pk/market-watch",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 1,
+      "age_days": 2,
       "last_error": null,
       "fetched_at": "2026-10-09T17:37:07Z"
     }

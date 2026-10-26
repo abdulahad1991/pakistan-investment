@@ -1,16 +1,16 @@
 {
   "name": "policy",
   "value": {
-    "rate": 11.5,
-    "floor": 10.5,
-    "ceiling": 12.5
+    "rate": 12.0,
+    "floor": 11.0,
+    "ceiling": 13.0
   },
   "as_of": null,
   "source": "State Bank of Pakistan (SBP)",
   "ok": true,
-  "fetched_at": "2026-10-23T16:02:47Z",
+  "fetched_at": "2026-10-26T17:46:11Z",
   "cadence": "event",
   "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp",
   "via": "sbp-m2m",
-  "sbp_direction": "Holding"
+  "sbp_direction": "Tightening"
 }

@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-07T11:16:29Z",
+  "updated": "2026-11-07T16:59:17Z",
   "macro": {
-    "pkr_usd": 276.46,
+    "pkr_usd": 276.66,
     "sbp_rate": 12.0,
     "sbp_direction": "Tightening",
     "inflation_cpi": 9.6,
@@ -15,11 +15,11 @@
     "sbp_ceiling": 13.0,
     "kse100_change": -144.53,
     "kse100_change_pct": -0.08,
-    "pkr_usd_approx": true,
-    "pkr_usd_source": "open.er-api.com (reference rate — SBP unavailable)",
+    "pkr_usd_approx": false,
+    "pkr_usd_source": "State Bank of Pakistan (SBP) interbank M2M",
     "inflation_cpi_asof": "Oct 2026",
     "fx_reserves_asof": "30 Oct 2026",
-    "pkr_usd_asof": "7 Nov 2026",
+    "pkr_usd_asof": "6 Nov 2026",
     "kse100_asof": "6 Nov 2026",
     "stocks_asof": "6 Nov 2026"
   },
@@ -2285,12 +2285,12 @@
   "gold": {
     "source": "gold.pk",
     "source_type": "local",
-    "tola_24k": 428500,
-    "tola_22k": 392792,
-    "g10_24k": 367376,
-    "g10_22k": 336762,
-    "gram_24k": 36738,
-    "gram_22k": 33676,
+    "tola_24k": 428700,
+    "tola_22k": 392975,
+    "g10_24k": 367547,
+    "g10_22k": 336918,
+    "gram_24k": 36755,
+    "gram_22k": 33692,
     "chg1y_pct": null
   },
   "fuel": {
@@ -2314,20 +2314,15 @@
     },
     "forex": {
       "ok": true,
-      "as_of": "Nov 07, 2026",
-      "source": "open.er-api.com (reference rate — SBP unavailable)",
+      "as_of": "Nov 06, 2026",
+      "source": "State Bank of Pakistan (SBP) interbank M2M",
       "cadence": "intraday",
       "stale": false,
-      "age_days": 0,
+      "age_days": 1,
       "last_error": null,
-      "fetched_at": "2026-11-07T11:16:26Z",
-      "source_url": "https://open.er-api.com/v6/latest/USD",
-      "via": "er-api",
-      "failover": true,
-      "primary_errors": [
-        "[sbp-m2m] HTTPError: HTTP Error 404: Not Found",
-        "[sbp-home] ValueError: no interbank USD/PKR (200-400) figure found on SBP M2M page"
-      ]
+      "fetched_at": "2026-11-07T16:59:15Z",
+      "source_url": "https://www.sbp.org.pk/ecodata/rates/m2m/m2m-current.asp",
+      "via": "sbp-m2m"
     },
     "funds": {
       "ok": false,
@@ -2349,7 +2344,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-11-07T11:16:28Z",
+      "fetched_at": "2026-11-07T16:59:17Z",
       "source_url": "https://gold.pk/"
     },
     "inflation": {
@@ -2394,7 +2389,7 @@
       "stale": false,
       "age_days": 0,
       "last_error": null,
-      "fetched_at": "2026-11-07T11:16:29Z",
+      "fetched_at": "2026-11-07T16:59:17Z",
       "source_url": "https://www.pakwheels.com/petroleum-prices-in-pakistan",
       "via": "pakwheels"
     },
